@@ -1,0 +1,172 @@
+= 0.7 =
+
+== Highlights ==
+
+  * Printing functions
+  * Improved table browser
+  * Searching action
+  * Help tooltips
+  * HTML export
+
+== Improvements ==
+
+  * Global refactoring
+  * Multithreading in order to prevent freezes
+  * Host completer in the new connection wizard
+  * Connection management threaded
+  * Db tooltip in the tree view
+  * Clear editor after success option added
+  * Desktop integration improved on Linux
+  * Status bar interacts with the logging system
+  * Connect button in DbDialog
+  * Queries status label in the main window
+
+== Bugfixes ==
+
+  * No freeze when executing large queries
+  * No freeze when attempting to connect to an overloaded server
+  * Fixed bug when opening queries with long file name
+  * Db are named correctly when the hostname is empty (SQLite)
+  * Export progress dialog differed for very little exports
+  * Error message in case of error when connecting
+
+
+= 0.6.1 =
+
+== Bugfixes ==
+
+  * Removed old dependencies
+  * Memory leaks fixed
+  * Windows support improved
+  * Semantic analysis is back
+  * Homepage links work
+
+
+= 0.6 =
+
+== Highlights ==
+
+  * Fully operationnal logging system
+  * Page system in the query editor to scroll large query results
+
+== Improvements ==
+
+  * Better preferences storing/loading
+  * Better SQLite support
+  * Main window is restored as last use
+  * Global UI enhancement
+  * Recent files history
+  * Compatible with MS Windows
+  * Compatible with Qt 4.4 & 4.6
+
+== Bugfixes ==
+
+  * Won't add a connection if it's already registered
+  * Many completer bugs fixed
+  * Defaults preferences now works at the first launch
+  * Export wizard works correctly
+  * Query editor doesn't crash because of an empty connexion list
+  * Code cleanup
+  * Qt official common translation added
+
+
+= 0.5 =
+
+== Highlights ==
+
+  * Autocompletion for query editor
+  * Code cleanup to make DbMaster lighter and faster
+  * You may run sub-queries only by selecting them
+
+== Improvements ==
+
+  * You can choice the encoding
+  * Auto-save option before running a query is available
+  * Syntax highlighting includes tables and fields
+  * Much more options available
+
+== Bugfixes ==
+
+  * New db wizard showed the wrong default driver when it was just modified
+
+
+= 0.4 =
+
+== Highlights ==
+
+  * First launch assistant
+  * New connection wizard
+  * You can now install DbMaster
+
+== Improvements ==
+
+  * Toolbars are enabled/disabled depending on the current tab
+  * The database combobox automatically choices the default DBMS
+  * make install available
+  * Query editors store the last used database
+  * Automatically scrolls down when adding a new line in a table
+  * Support for SQL types
+  * Includes default preferences
+
+== Bugfixes ==
+
+  * Fixed bug in DbComboBox DBMS names
+  * Fixed wrong tab order in ndw_secondpage
+  * Shows a MessageBox if the connection to the database failed
+  * Fixed crash when removing an openned database
+  * Fixed indices errors in DbManager
+  * Fixed crash when getting selected item in DbTreeWidget
+  * Fixed ignored strings color in syntax highlighting
+  * Fixed number support in syntax highlighting
+  * Fixed comment highlighting
+  * Fixed several tabs bugs
+
+
+= 0.3 =
+
+== Highlights ==
+
+  * Syntax highlighting
+  * Support for translations
+
+== Improvements ==
+
+  * Passwords may be saved or not
+  * Syntax highlighting may be configured in the preferences dialog
+  * DbMaster auto-detects available drivers
+  * src folder better organized
+  * Integrates QColorButton (thanks to Florian Becker)
+  * French translation added
+  * DbDialog redrawn / more usefull
+
+
+== Bugfixes ==
+
+  * Some bugs on closing the main window
+  * A single table can be openned several times
+  * Close a database doesn't close its openned tables
+  * TableWidget was not a AbstractTabWidget child
+
+
+
+= 0.2 =
+
+== Highlights ==
+
+  * DbMaster won't close if you didn't save some file
+  * A preferences dialog is available
+  * Query editor stabilized and improved
+
+
+== Improvements ==
+
+  * Modifications on tables are saved automatically
+  * You can now remove a connection
+  * You can choice the query editor's font
+  * Many supplementary actions
+
+== Bugfixes ===
+
+  * Many indices bugs fixed on DbManager
+  * Saving a query file added a new line at the end of the file
+  * The connections list was closable
