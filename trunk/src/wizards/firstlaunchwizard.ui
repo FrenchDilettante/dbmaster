@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>FirstLaunchWizard</class>
+ <widget class="QWizard" name="FirstLaunchWizard">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>501</width>
+    <height>360</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Welcome on DbMaster !</string>
+  </property>
+  <widget class="QWizardPage" name="wizardPage">
+   <property name="title">
+    <string>Welcome !</string>
+   </property>
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="0" column="0">
+     <widget class="QLabel" name="label_2">
+      <property name="text">
+       <string>DbMaster is a database management software.
+
+As you launch DbMaster for the first time, you need to fill some information. Clic on Next to continue.</string>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWizardPage" name="firstPage">
+   <property name="title">
+    <string>Default database software</string>
+   </property>
+   <property name="subTitle">
+    <string>When you add a new database, DbMaster selects the default DBMS. You can change it in the Preferences dialog box.</string>
+   </property>
+   <layout class="QFormLayout" name="formLayout">
+    <property name="fieldGrowthPolicy">
+     <enum>QFormLayout::ExpandingFieldsGrow</enum>
+    </property>
+    <item row="0" column="0">
+     <widget class="QLabel" name="label">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>First, please select the default DBMS DbMaster will use :</string>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="DbComboBox" name="dbComboBox"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWizardPage" name="wizardPage_2">
+   <property name="title">
+    <string>DbMaster is ready</string>
+   </property>
+   <property name="subTitle">
+    <string>Congratulations ! Now you can click on Finish to use DbMaster.</string>
+   </property>
+   <layout class="QGridLayout" name="gridLayout_3"/>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>DbComboBox</class>
+   <extends>QComboBox</extends>
+   <header>../src/widgets/dbcombobox.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,0 +1,57 @@
+/*
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation; version 3 of the License.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ */
+
+
+#ifndef DBDIALOG_H
+#define DBDIALOG_H
+
+#include "ui_dbdialog.h"
+
+#include "../wizards/newdbwizard.h"
+
+#include <QDialog>
+#include <QModelIndex>
+#include <QSqlDatabase>
+#include <QWidget>
+
+class DbDialog: public QDialog, private Ui::DbDialog
+{
+Q_OBJECT
+public:
+  DbDialog(QWidget* =0);
+
+
+public slots:
+  void setDatabase(QModelIndex index);
+
+signals:
+
+private:
+  void reload();
+  void setupConnections();
+  void setupWidgets();
+
+  NewDbWizard *addWzd;
+  // link to the current db
+  QSqlDatabase *db;
+  // current db's id
+  int id;
+
+private slots:
+  void accept();
+  void forwardAccept();
+  void refresh(QModelIndex index);
+  void removeCurrent();
+  void testConnection();
+  void toggleConnection();
+};
+
+#endif // DBDIALOG_H
