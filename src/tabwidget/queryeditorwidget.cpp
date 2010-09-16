@@ -303,6 +303,7 @@ void QueryEditorWidget::run()
   tabWidget->setTabEnabled(1, false);
   tabWidget->setCurrentIndex(0);
   debugText->clear();
+  runButton->setEnabled(false);
 
   statusBar->showMessage(tr("Running..."));
 
@@ -487,6 +488,8 @@ void QueryEditorWidget::validateToken(QSqlError err)
     statusBar->showMessage(tr("Unable to run query"));
     break;
   }
+
+  runButton->setEnabled(true);
 
   debugText->append(QString("<b>[%1]</b>%2")
                     .arg(QTime::currentTime().toString())
