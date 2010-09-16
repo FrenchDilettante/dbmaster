@@ -233,8 +233,8 @@ void QueryEditorWidget::print()
 {
   QPainter painter;
   painter.begin(&m_printer);
+  editor->document()->drawContents(&painter);
   painter.end();
-  //editor->print(&m_printer);
 }
 
 QPrinter *QueryEditorWidget::printer()
@@ -418,7 +418,7 @@ void QueryEditorWidget::setupWidgets()
   optionsMenu->addAction(actionClearOnSuccess);
   toolButton->setMenu(optionsMenu);
 
-  baseActions = Copy | Cut | Paste | SaveAs | Search | SelectAll;
+  baseActions = Copy | Cut | Paste | Print | SaveAs | Search | SelectAll;
 
   dbChooser->setModel(DbManager::model());
   dbChooser->setCurrentIndex(DbManager::lastIndex);

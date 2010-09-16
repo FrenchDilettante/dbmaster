@@ -4,8 +4,7 @@
 
   * Printing functions
   * Improved table browser
-  * Searching action
-  * Help tooltips
+  * Research action
   * HTML export
 
 == Improvements ==
@@ -13,6 +12,7 @@
   * Global refactoring
   * Multithreading in order to prevent freezes
   * Host completer in the new connection wizard
+  * Help tooltips
   * Connection management threaded
   * Db tooltip in the tree view
   * Clear editor after success option added
