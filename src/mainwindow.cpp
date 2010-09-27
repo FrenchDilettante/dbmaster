@@ -428,7 +428,7 @@ void MainWindow::saveQuery()
 
 void MainWindow::saveQueryAs()
 {
-  if(currentTab() != 0)
+  if(currentTab())
     currentTab()->saveAs();
 }
 

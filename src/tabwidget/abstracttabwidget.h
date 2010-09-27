@@ -68,7 +68,7 @@ public slots:
   virtual void refresh()              {};
   virtual void reload()               {};
   virtual bool save()                 { return true; };
-  virtual void saveAs(QString =0)     {};
+  virtual void saveAs(QString =QString::null)     {};
   virtual void selectAll()            {};
   virtual void undo()                 {};
 
