@@ -154,12 +154,12 @@ void QueryEditorWidget::copy()
 
 void QueryEditorWidget::cut()
 {
-	editor->cut();
+  editor->cut();
 }
 
 QString QueryEditorWidget::file()
 {
-	return filePath;
+  return filePath;
 }
 
 /**
@@ -168,14 +168,6 @@ QString QueryEditorWidget::file()
 void QueryEditorWidget::forwardChanged(bool changed)
 {
   emit modificationChanged(changed);
-}
-
-void QueryEditorWidget::handleLink(QUrl link)
-{
-  QString str = link.toString();
-  if(str.startsWith("table"))
-    emit tableRequested(DbManager::getDatabase(dbChooser->currentIndex()),
-                        str.split("://")[1]);
 }
 
 QIcon QueryEditorWidget::icon()
@@ -293,7 +285,6 @@ void QueryEditorWidget::reloadFile()
 
   editor->document()->setModified(false);
 
-  emit titleChanged(title());
   emit fileChanged(filePath);
 }
 
@@ -361,7 +352,7 @@ bool QueryEditorWidget::save()
   editor->setEnabled(true);
   setCursor(Qt::ArrowCursor);
 
-  emit titleChanged(title());
+  emit modificationChanged(editor->document()->isModified());
   return true;
 }
 

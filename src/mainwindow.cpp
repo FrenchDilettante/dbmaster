@@ -250,15 +250,8 @@ QueryEditorWidget* MainWindow::newQuery()
   connect(w, SIGNAL(modificationChanged(bool)), this, SLOT(refreshTab()));
   connect(w, SIGNAL(tableRequested(QSqlDatabase*,QString)),
           this, SLOT(openTable(QSqlDatabase*,QString)));
-  connect(w, SIGNAL(titleChanged(QString)), this, SLOT(setTabText(QString)));
 
   return w;
-}
-
-void MainWindow::keyPressEvent(QKeyEvent *event)
-{
-  if(event->modifiers() && Qt::ControlModifier && event->key() == Qt::Key_W)
-    closeCurrentTab();
 }
 
 void MainWindow::nextTab()
@@ -387,13 +380,24 @@ void MainWindow::redo()
  */
 void MainWindow::refreshTab()
 {
-  // toolbar's actions
-  AbstractTabWidget::Actions acts;
-  if(currentTab())
-    acts = currentTab()->availableActions();
+  AbstractTabWidget *tab = dynamic_cast<AbstractTabWidget*>(sender());
 
-  foreach(AbstractTabWidget::Action a, actionMap.keys())
-    actionMap[a]->setEnabled(acts.testFlag(a));
+  if(tab)
+  {
+    QString text = tab->title();
+    if(!tab->isSaved())
+      text.prepend("* ");
+    tabWidget->setTabText(tabWidget->indexOf(tab), text);
+  }
+
+  // toolbar's actions
+  if(currentTab())
+  {
+    AbstractTabWidget::Actions acts;
+    acts = currentTab()->availableActions();
+    foreach(AbstractTabWidget::Action a, actionMap.keys())
+      actionMap[a]->setEnabled(acts.testFlag(a));
+  }
 }
 
 void MainWindow::refreshRecent()
@@ -453,16 +457,6 @@ void MainWindow::setQueryCount(int count)
                               .arg(QString::number(count)));
   if(count == 0)
     QTimer::singleShot(3000, queriesStatusLabel, SLOT(clear()));
-}
-
-void MainWindow::setTabText(QString title)
-{
-  int i = tabWidget->indexOf((QWidget*)sender());
-  if(!((AbstractTabWidget*)tabWidget->widget(i))->isSaved())
-    title.prepend("* ");
-  if(i < 0)
-    return;
-  tabWidget->setTabText(i, title);
 }
 
 void MainWindow::setupConnections()

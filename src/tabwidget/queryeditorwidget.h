@@ -57,7 +57,6 @@ public slots:
 
 signals:
   void fileChanged(QString);
-  void titleChanged(QString);
 
 private:
   void closeEvent(QCloseEvent *event);
@@ -84,7 +83,6 @@ private slots:
   void acceptToken();
   void checkDbOpen();
   void forwardChanged(bool changed);
-  void handleLink(QUrl link);
   void rejectToken();
   void startToken();
   void validateToken(QSqlError err);
