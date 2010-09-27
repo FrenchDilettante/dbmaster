@@ -439,7 +439,7 @@ void MainWindow::search()
   if(currentTab() && currentTab()->textEdit())
   {
     searchDialog->setEditor(currentTab()->textEdit());
-    searchDialog->exec();
+    searchDialog->show();
   }
 }
 

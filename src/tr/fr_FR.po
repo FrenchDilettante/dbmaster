@@ -11,22 +11,22 @@ msgstr ""
 "X-Source-Language: C\n"
 
 #. ts-context AboutDialog
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/aboutdialog.ui:14
+#: /home/manu/programmation/dbmaster/src/dialogs/aboutdialog.ui:14
 msgid "About DbMaster"
 msgstr "À propos de DbMaster"
 
 #. ts-context AboutDialog
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/aboutdialog.ui:20
+#: /home/manu/programmation/dbmaster/src/dialogs/aboutdialog.ui:20
 msgid "DbMaster 0.6"
 msgstr "DbMaster 0.6"
 
 #. ts-context AboutDialog
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/aboutdialog.ui:31
+#: /home/manu/programmation/dbmaster/src/dialogs/aboutdialog.ui:31
 msgid "Project"
 msgstr "Projet"
 
 #. ts-context AboutDialog
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/aboutdialog.ui:37
+#: /home/manu/programmation/dbmaster/src/dialogs/aboutdialog.ui:37
 msgid ""
 "DbMaster is a database management tool. It is delivered under the GNU GPLv3 "
 "licence."
@@ -35,17 +35,17 @@ msgstr ""
 "licence GNU GPLv3."
 
 #. ts-context AboutDialog
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/aboutdialog.ui:74
+#: /home/manu/programmation/dbmaster/src/dialogs/aboutdialog.ui:74
 msgid "Licence"
 msgstr "Licence"
 
 #. ts-context AboutDialog
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/aboutdialog.ui:314
+#: /home/manu/programmation/dbmaster/src/dialogs/aboutdialog.ui:314
 msgid "Authors"
 msgstr "Auteurs"
 
 #. ts-context AboutDialog
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/aboutdialog.ui:320
+#: /home/manu/programmation/dbmaster/src/dialogs/aboutdialog.ui:320
 msgid ""
 "Developper :\n"
 "   - Emmanuel BOURGERIE\n"
@@ -66,88 +66,88 @@ msgstr ""
 "   - QColorButton : Florian BECKER"
 
 #. ts-context AboutDialog
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/aboutdialog.cpp:23
+#: /home/manu/programmation/dbmaster/src/dialogs/aboutdialog.cpp:23
 msgid "Compiled with Qt %1"
 msgstr "Compilé avec Qt %1"
 
 #. ts-context AboutDialog
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/aboutdialog.cpp:24
+#: /home/manu/programmation/dbmaster/src/dialogs/aboutdialog.cpp:24
 msgid "DbMaster %1"
 msgstr "DbMaster %1"
 
 #. ts-context ConfigDialogClass
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/configdialogclass.ui:14
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:14
 msgid "DbMaster - Preferences"
 msgstr "DbMaster - Préférences"
 
 #. ts-context ConfigDialogClass
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/configdialogclass.ui:44
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/configdialogclass.ui:110
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:44
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:110
 msgid "General"
 msgstr "Général"
 
 #. ts-context ConfigDialogClass
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/configdialogclass.ui:53
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:53
 msgid "Query editor"
 msgstr "Éditeur de requêtes"
 
 #. ts-context ConfigDialogClass
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/configdialogclass.ui:85
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:85
 msgid "Default database"
 msgstr "Base par défaut"
 
 #. ts-context ConfigDialogClass
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/configdialogclass.ui:116
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:116
 msgid "Save query before execute it"
 msgstr "Enregistrer la requête avant de l'exécuter"
 
 #. ts-context ConfigDialogClass
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/configdialogclass.ui:123
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:123
 msgid "Enable semantic analysis"
 msgstr "Activer l'analyse sémantique"
 
 #. ts-context ConfigDialogClass
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/configdialogclass.ui:133
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:133
 msgid "Default encoding"
 msgstr "Encodage par défaut"
 
 #. ts-context ConfigDialogClass
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/configdialogclass.ui:150
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:150
 msgid "latin1"
 msgstr "latin1"
 
 #. ts-context ConfigDialogClass
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/configdialogclass.ui:155
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:155
 msgid "utf8"
 msgstr "utf8"
 
 #. ts-context ConfigDialogClass
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/configdialogclass.ui:164
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:164
 msgid "Font && Size"
 msgstr "Police && taille"
 
 #. ts-context ConfigDialogClass
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/configdialogclass.ui:170
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:170
 msgid "Editor's font"
 msgstr "Police de l'éditeur"
 
 #. ts-context ConfigDialogClass
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/configdialogclass.ui:182
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:182
 msgid "&Font"
 msgstr "&Police"
 
 #. ts-context ConfigDialogClass
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/configdialogclass.ui:208
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:208
 msgid "S&ize"
 msgstr "Ta&ille"
 
 #. ts-context ConfigDialogClass
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/configdialogclass.ui:231
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:231
 msgid "You can type some text here :"
 msgstr "Vous pouvez tester les paramètres ici :"
 
 #. ts-context ConfigDialogClass
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/configdialogclass.ui:241
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:241
 #, fuzzy
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" "
@@ -173,98 +173,98 @@ msgid ""
 msgstr ""
 
 #. ts-context ConfigDialogClass
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/configdialogclass.ui:256
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:256
 msgid "Syntax highlighting"
 msgstr "Coloration syntaxique"
 
 #. ts-context ConfigDialogClass
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/configdialogclass.ui:262
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:262
 msgid "Enable Syntax highlighting"
 msgstr "Activer la coloration syntaxique"
 
 #. ts-context ConfigDialogClass
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/configdialogclass.ui:275
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:275
 msgid "Basic SQL keywords"
 msgstr "Mots clés SQL"
 
 #. ts-context ConfigDialogClass
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/configdialogclass.ui:280
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:280
 msgid "SQL functions"
 msgstr "Fonctions SQL"
 
 #. ts-context ConfigDialogClass
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/configdialogclass.ui:285
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:285
 msgid "SQL types"
 msgstr "Types SQL"
 
 #. ts-context ConfigDialogClass
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/configdialogclass.ui:290
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:290
 msgid "Strings"
 msgstr "Chaînes"
 
 #. ts-context ConfigDialogClass
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/configdialogclass.ui:295
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:295
 msgid "Numbers"
 msgstr "Nombres"
 
 #. ts-context ConfigDialogClass
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/configdialogclass.ui:300
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:300
 msgid "Comments"
 msgstr "Commentaires"
 
 #. ts-context ConfigDialogClass
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/configdialogclass.ui:305
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:305
 msgid "Table name"
 msgstr "Nom de table"
 
 #. ts-context ConfigDialogClass
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/configdialogclass.ui:310
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:310
 msgid "Field name"
 msgstr "Nom de colonne"
 
 #. ts-context ConfigDialogClass
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/configdialogclass.ui:330
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:330
 msgid "Color"
 msgstr "Couleur"
 
 #. ts-context ConfigDialogClass
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/configdialogclass.ui:343
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:343
 msgid "Bold"
 msgstr "Gras"
 
 #. ts-context ConfigDialogClass
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/configdialogclass.ui:355
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:355
 msgid "Italic"
 msgstr "Italique"
 
 #. ts-context ConfigDialogClass
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/configdialogclass.ui:375
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:375
 #, fuzzy
 msgid "PushButton"
 msgstr ""
 
 #. ts-context ConfigDialogClass
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/configdialogclass.ui:392
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:392
 msgid "Auto-completion"
 msgstr "Auto-complément"
 
 #. ts-context ConfigDialogClass
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/configdialogclass.ui:398
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:398
 msgid "Enable auto-completion"
 msgstr "Activer l'auto-complément"
 
 #. ts-context ConfigDialogClass
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/configdialogclass.ui:413
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:413
 msgid "Show completion popup after"
 msgstr "Afficher le complément après"
 
 #. ts-context ConfigDialogClass
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/configdialogclass.ui:438
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:438
 msgid "characters"
 msgstr "caractères"
 
 #. ts-context ConfigDialogClass
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/configdialogclass.ui:454
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:454
 msgid ""
 "<b>Warning !</b> All modifications concerning the editor will work after "
 "restarting DbMaster."
@@ -273,632 +273,636 @@ msgstr ""
 "compte qu'après avoir redémarré DbMaster."
 
 #. ts-context DbDialog
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/dbdialog.ui:17
+#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.ui:17
 msgid "Connection Manager"
 msgstr "Gestionnaire de connexions"
 
 #. ts-context DbDialog
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/dbdialog.ui:164
+#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.ui:164
 msgid "Add"
 msgstr "Ajouter"
 
 #. ts-context DbDialog
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/dbdialog.ui:178
+#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.ui:178
 msgid "Remove"
 msgstr "Supprimer"
 
 #. ts-context DbDialog
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/dbdialog.ui:188
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/dbdialog.cpp:80
+#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.ui:188
+#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.cpp:80
 msgid "Connect"
 msgstr "Connecter"
 
 #. ts-context DbDialog
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/dbdialog.ui:26
+#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.ui:26
 msgid "Clic on a database to edit it."
 msgstr "Cliquer sur une base de données pour l'éditer."
 
 #. ts-context DbDialog
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/dbdialog.ui:36
+#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.ui:36
 msgid "Database settings"
 msgstr "Paramètres de connexion"
 
 #. ts-context DbDialog
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/dbdialog.ui:45
+#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.ui:45
 msgid "Host"
 msgstr "Hôte"
 
 #. ts-context DbDialog
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/dbdialog.ui:58
+#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.ui:58
 msgid "Username"
 msgstr "Nom d'utilisateur"
 
 #. ts-context DbDialog
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/dbdialog.ui:81
+#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.ui:81
 msgid "Password"
 msgstr "Mot de passe"
 
 #. ts-context DbDialog
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/dbdialog.ui:98
+#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.ui:98
 msgid "Database"
 msgstr "Base de données"
 
 #. ts-context DbDialog
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/dbdialog.ui:119
+#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.ui:119
 msgid "Database type"
 msgstr "Driver"
 
 #. ts-context DbDialog
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/dbdialog.ui:71
+#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.ui:71
 msgid "Save password"
 msgstr "Enregistrer le mot de passe"
 
 #. ts-context DbDialog
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/dbdialog.ui:133
+#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.ui:133
 msgid "Test connection"
 msgstr "Tester la connexion"
 
 #. ts-context DbDialog
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/dbdialog.ui:146
+#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.ui:146
 msgid "<- Clic to test"
 msgstr "<- Cliquer pour tester"
 
 #. ts-context DbDialog
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/dbdialog.ui:110
+#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.ui:110
 msgid "..."
 msgstr "..."
 
 #. ts-context DbDialog
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/dbdialog.cpp:75
+#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.cpp:75
 msgid "Disconnect"
 msgstr "Déconnecter"
 
 #. ts-context DbDialog
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/dbdialog.cpp:94
+#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.cpp:94
 msgid "<- Click to test"
 msgstr "<- Cliquer pour tester"
 
 #. ts-context DbDialog
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/dbdialog.cpp:103
+#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.cpp:103
 msgid "Cannot remove"
 msgstr "Impossible de supprimer"
 
 #. ts-context DbDialog
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/dbdialog.cpp:104
+#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.cpp:104
 msgid "You must close the database before remove it."
 msgstr "Vous devez fermer la connexion avant de la supprimer."
 
 #. ts-context DbDialog
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/dbdialog.cpp:175
+#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.cpp:175
 msgid "Connection succeded"
 msgstr "Connexion réussie"
 
 #. ts-context DbDialog
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/dbdialog.cpp:179
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/dbdialog.cpp:181
+#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.cpp:179
+#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.cpp:181
 msgid "Connection failed"
 msgstr "Connexion échouée"
 
 #. ts-context LogDialogClass
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/logdialogclass.ui:14
+#: /home/manu/programmation/dbmaster/src/dialogs/logdialogclass.ui:14
 msgid "Logs"
 msgstr "Journaux"
 
 #. ts-context LogDialogClass
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/logdialogclass.ui:20
+#: /home/manu/programmation/dbmaster/src/dialogs/logdialogclass.ui:20
 msgid "F&ilter"
 msgstr "F&iltre"
 
 #. ts-context LogDialogClass
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/logdialogclass.ui:58
+#: /home/manu/programmation/dbmaster/src/dialogs/logdialogclass.ui:58
 msgid "Time"
 msgstr "Heure"
 
 #. ts-context LogDialogClass
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/logdialogclass.ui:63
+#: /home/manu/programmation/dbmaster/src/dialogs/logdialogclass.ui:63
 msgid "Message"
 msgstr "Message"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:14
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:14
 msgid "DbMaster"
 msgstr "DbMaster"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:30
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:30
 msgid "Welcome"
 msgstr "Bienvenue"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:66
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:66
 msgid "Did you know ?"
 msgstr "Le saviez-vous ?"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:103
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:103
 #| msgid "Tools"
 msgid "&Tools"
 msgstr "Ou&tils"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:114
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:114
 msgid "&Edit"
 msgstr "&Édition"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:127
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:128
 #| msgid "Help"
 msgid "&Help"
 msgstr "A&ide"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:133
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:134
 #| msgid "File"
 msgid "&File"
 msgstr "&Fichier"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:137
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:138
 #| msgid "New"
 msgid "&New"
 msgstr "&Nouvelle"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:145
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:146
 msgid "Recent files"
 msgstr "Fichiers récents"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:167
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:168
 msgid "Main toolbar"
 msgstr "Barre d'outils principale"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:213
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:216
 msgid "Connection"
 msgstr "Connexion"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:216
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:219
 msgid "Ctrl+Shift+A"
 msgstr "Ctrl+Shift+A"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:221
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:224
 msgid "Query"
 msgstr "Requête"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:224
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:227
 msgid "Ctrl+N"
 msgstr "Ctrl+N"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:229
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:232
 #| msgid "Open"
 msgid "&Open"
 msgstr "&Ouvrir"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:232
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:235
 msgid "Ctrl+O"
 msgstr "Ctrl+O"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:240
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:243
 msgid "Save"
 msgstr "Enregistrer"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:243
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:246
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:251
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:254
 msgid "Save as"
 msgstr "Enregistrer sous"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:256
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:259
 #| msgid "Exit"
 msgid "E&xit"
 msgstr "&Quitter"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:259
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:262
 msgid "Ctrl+Q"
 msgstr "Ctrl+Q"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:264
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:267
 msgid "Preferences"
 msgstr "Préférences"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:272
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:275
 msgid "&Undo"
 msgstr "Ann&uler"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:275
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:278
 msgid "Ctrl+Z"
 msgstr "Ctrl+Z"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:283
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:286
 msgid "&Redo"
 msgstr "&Refaire"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:286
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:289
 msgid "Ctrl+Shift+Z"
 msgstr "Ctrl+Shift+Z"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:294
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:297
 msgid "&Cut"
 msgstr "&Couper"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:297
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:300
 msgid "Ctrl+X"
 msgstr "Ctrl+X"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:305
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:308
 msgid "C&opy"
 msgstr "C&opier"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:308
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:311
 msgid "Ctrl+C"
 msgstr "Ctrl+C"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:316
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:319
 msgid "&Paste"
 msgstr "Co&ller"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:319
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:322
 msgid "Ctrl+V"
 msgstr "Ctrl+V"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:327
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:330
 msgid "Select all"
 msgstr "Tout sélectionner"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:330
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:333
 msgid "Ctrl+A"
 msgstr "Ctrl+A"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:335
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:338
 msgid "Logs"
 msgstr "Journaux"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:340
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:343
 msgid "About DbMaster"
 msgstr "À propos de DbMaster"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:345
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:348
 msgid "Database manager"
 msgstr "Gestionnaire de connexion"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:350
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:353
 msgid "Close tab"
 msgstr "Fermer l'onglet"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:353
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:356
 msgid "Close the current tab"
 msgstr "Ferme l'onglet courant"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:380
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:383
 msgid "Print"
 msgstr "Imprimer"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:383
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:386
 msgid "Ctrl+P"
 msgstr "Ctrl+P"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:388
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:391
 msgid "Plugins"
 msgstr ""
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:393
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:396
 msgid "Next tab"
 msgstr "Onglet suivant"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:396
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:399
 #, fuzzy
 msgid "Ctrl+PgDown"
 msgstr ""
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:401
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:404
 msgid "Previous tab"
 msgstr "Onglet précédent"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:404
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:407
 #, fuzzy
 msgid "Ctrl+PgUp"
 msgstr ""
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:364
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:415
+msgid "Search"
+msgstr "Rechercher"
+
+#. ts-context MainWindowClass
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:418
+msgid "Ctrl+F"
+msgstr "Ctrl+F"
+
+#. ts-context MainWindowClass
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:367
 msgid "Connection panel"
 msgstr "Panneau de connexion"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:369
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:372
 msgid "Clear"
 msgstr "Effacer"
 
 #. ts-context MainWindowClass
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.ui:372
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:375
 msgid "Clear recent files"
 msgstr "Efface la liste des fichiers récents"
 
 #. ts-context QueryEditorWidgetClass
-#: /home/manu/programmation/dbmaster/trunk/src/tabwidget/queryeditorwidgetclass.ui:14
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidgetclass.ui:14
 #, fuzzy
 msgid "Form"
 msgstr ""
 
 #. ts-context QueryEditorWidgetClass
-#: /home/manu/programmation/dbmaster/trunk/src/tabwidget/queryeditorwidgetclass.ui:42
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidgetclass.ui:42
 msgid "R&un"
 msgstr "Éxéc&uter"
 
 #. ts-context QueryEditorWidgetClass
-#: /home/manu/programmation/dbmaster/trunk/src/tabwidget/queryeditorwidgetclass.ui:55
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidgetclass.ui:55
 msgid "F5"
 msgstr "F5"
 
 #. ts-context QueryEditorWidgetClass
-#: /home/manu/programmation/dbmaster/trunk/src/tabwidget/queryeditorwidgetclass.ui:78
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidgetclass.ui:78
 msgid "Debug"
 msgstr "Débogage"
 
 #. ts-context QueryEditorWidgetClass
-#: /home/manu/programmation/dbmaster/trunk/src/tabwidget/queryeditorwidgetclass.ui:107
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidgetclass.ui:107
 msgid "Result"
 msgstr "Résultat"
 
 #. ts-context QueryEditorWidgetClass
-#: /home/manu/programmation/dbmaster/trunk/src/tabwidget/queryeditorwidgetclass.ui:131
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidgetclass.ui:131
 msgid "..."
 msgstr "..."
 
 #. ts-context QueryEditorWidgetClass
-#: /home/manu/programmation/dbmaster/trunk/src/tabwidget/queryeditorwidgetclass.ui:144
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidgetclass.ui:144
 #, fuzzy
 msgid "Threaded query"
 msgstr ""
 
 #. ts-context QueryEditorWidgetClass
-#: /home/manu/programmation/dbmaster/trunk/src/tabwidget/queryeditorwidgetclass.ui:147
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidgetclass.ui:147
 #, fuzzy
 msgid "Runs the query in a separated thread"
 msgstr ""
 
 #. ts-context QueryEditorWidgetClass
-#: /home/manu/programmation/dbmaster/trunk/src/tabwidget/queryeditorwidgetclass.ui:158
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidgetclass.ui:158
 msgid "Log query"
 msgstr "Inscrire dans le journal"
 
 #. ts-context QueryEditorWidgetClass
-#: /home/manu/programmation/dbmaster/trunk/src/tabwidget/queryeditorwidgetclass.ui:166
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidgetclass.ui:166
 #, fuzzy
 msgid "Clear if success"
 msgstr ""
 
 #. ts-context QueryEditorWidgetClass
-#: /home/manu/programmation/dbmaster/trunk/src/tabwidget/queryeditorwidgetclass.ui:169
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidgetclass.ui:169
 #, fuzzy
 msgid "Clears the query if it is runned with success"
 msgstr ""
 
 #. ts-context TableWidgetClass
-#: /home/manu/programmation/dbmaster/trunk/src/tabwidget/tablewidgetclass.ui:14
+#: /home/manu/programmation/dbmaster/src/tabwidget/tablewidgetclass.ui:14
 #, fuzzy
 msgid "Form"
 msgstr ""
 
 #. ts-context EwCsvPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ew_csvpage.ui:14
+#: /home/manu/programmation/dbmaster/src/wizards/ew_csvpage.ui:14
 #, fuzzy
 msgid "WizardPage"
 msgstr ""
 
 #. ts-context EwCsvPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ew_csvpage.ui:17
+#: /home/manu/programmation/dbmaster/src/wizards/ew_csvpage.ui:17
 msgid "CSV parameters"
 msgstr "Paramètres CSV"
 
 #. ts-context EwCsvPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ew_csvpage.ui:20
+#: /home/manu/programmation/dbmaster/src/wizards/ew_csvpage.ui:20
 msgid "These options are optionnal"
 msgstr "Ces options sont optionnelles"
 
 #. ts-context EwCsvPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ew_csvpage.ui:34
+#: /home/manu/programmation/dbmaster/src/wizards/ew_csvpage.ui:34
 msgid "Se&parator"
 msgstr "Sé&parator"
 
 #. ts-context EwCsvPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ew_csvpage.ui:56
+#: /home/manu/programmation/dbmaster/src/wizards/ew_csvpage.ui:56
 msgid ";"
 msgstr ";"
 
 #. ts-context EwCsvPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ew_csvpage.ui:63
+#: /home/manu/programmation/dbmaster/src/wizards/ew_csvpage.ui:63
 msgid "Delimiter"
 msgstr "Délimiteur"
 
 #. ts-context EwCsvPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ew_csvpage.ui:82
+#: /home/manu/programmation/dbmaster/src/wizards/ew_csvpage.ui:82
 msgid "\""
 msgstr "\""
 
 #. ts-context EwCsvPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ew_csvpage.ui:97
+#: /home/manu/programmation/dbmaster/src/wizards/ew_csvpage.ui:97
 msgid "Write &headers"
 msgstr "Écrire l'&en-tête"
 
 #. ts-context EwExportPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ew_exportpage.ui:14
+#: /home/manu/programmation/dbmaster/src/wizards/ew_exportpage.ui:14
 msgid "Export finished"
 msgstr "Export fini"
 
 #. ts-context EwExportPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ew_exportpage.ui:17
+#: /home/manu/programmation/dbmaster/src/wizards/ew_exportpage.ui:17
 msgid "Export complete"
 msgstr "Export achevé"
 
 #. ts-context EwExportPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ew_exportpage.ui:20
+#: /home/manu/programmation/dbmaster/src/wizards/ew_exportpage.ui:20
 msgid "The export process is finished."
 msgstr "Le processus d'export est terminé."
 
 #. ts-context EwExportPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/exportwizard.cpp:159
+#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:196
 msgid "Export running..."
 msgstr "Export en cours..."
 
 #. ts-context EwExportPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/exportwizard.cpp:172
+#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:209
 msgid "Openning error"
 msgstr "Erreur d'ouverture"
 
 #. ts-context EwExportPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/exportwizard.cpp:173
+#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:210
 msgid "Unable to open the file %1."
 msgstr "Impossible d'ouvrir %1."
 
 #. ts-context EwFirstPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ew_firstpage.ui:14
+#: /home/manu/programmation/dbmaster/src/wizards/ew_firstpage.ui:14
 #, fuzzy
 msgid "WizardPage"
 msgstr ""
 
 #. ts-context EwFirstPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ew_firstpage.ui:17
+#: /home/manu/programmation/dbmaster/src/wizards/ew_firstpage.ui:17
 msgid "Format & options"
 msgstr "Format & options"
 
 #. ts-context EwFirstPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ew_firstpage.ui:20
+#: /home/manu/programmation/dbmaster/src/wizards/ew_firstpage.ui:20
 msgid "Choose the export format and path"
 msgstr "Choisir le format d'export et le chemin"
 
 #. ts-context EwFirstPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ew_firstpage.ui:32
+#: /home/manu/programmation/dbmaster/src/wizards/ew_firstpage.ui:32
 msgid "Path :"
 msgstr "Chemin :"
 
 #. ts-context EwFirstPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ew_firstpage.ui:44
+#: /home/manu/programmation/dbmaster/src/wizards/ew_firstpage.ui:44
 msgid "..."
 msgstr "..."
 
 #. ts-context EwFirstPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ew_firstpage.ui:53
+#: /home/manu/programmation/dbmaster/src/wizards/ew_firstpage.ui:53
 msgid "Format"
 msgstr "Format"
 
 #. ts-context EwFirstPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ew_firstpage.ui:59
+#: /home/manu/programmation/dbmaster/src/wizards/ew_firstpage.ui:59
 msgid "&CSV"
 msgstr "&CSV"
 
 #. ts-context EwFirstPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ew_firstpage.ui:72
+#: /home/manu/programmation/dbmaster/src/wizards/ew_firstpage.ui:72
 msgid "S&QL"
 msgstr "S&QL"
 
 #. ts-context EwFirstPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ew_firstpage.ui:79
+#: /home/manu/programmation/dbmaster/src/wizards/ew_firstpage.ui:79
 msgid "HTML"
 msgstr ""
 
 #. ts-context EwFirstPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/exportwizard.cpp:60
+#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:65
 msgid "CSV file (*.csv)"
 msgstr "Fichier CSV (*.csv)"
 
 #. ts-context EwFirstPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/exportwizard.cpp:61
+#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:66
 msgid "HTML file (*.html)"
 msgstr "Fichier HTML (*.html)"
 
 #. ts-context EwFirstPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/exportwizard.cpp:62
+#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:67
 msgid "SQL file (*.sql)"
 msgstr "Fichier SQL (*.sql)"
 
 #. ts-context EwFirstPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/exportwizard.cpp:66
+#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:71
 msgid "Output file"
 msgstr "Fichier de sortie"
 
 #. ts-context EwSqlPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ew_sqlpage.ui:14
+#: /home/manu/programmation/dbmaster/src/wizards/ew_sqlpage.ui:14
 #, fuzzy
 msgid "WizardPage"
 msgstr ""
 
 #. ts-context EwSqlPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ew_sqlpage.ui:17
+#: /home/manu/programmation/dbmaster/src/wizards/ew_sqlpage.ui:17
 msgid "SQL options"
 msgstr "Options SQL"
 
 #. ts-context EwSqlPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ew_sqlpage.ui:20
+#: /home/manu/programmation/dbmaster/src/wizards/ew_sqlpage.ui:20
 msgid "Please check the following options."
 msgstr "Verifier les options suivantes."
 
 #. ts-context EwSqlPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ew_sqlpage.ui:26
+#: /home/manu/programmation/dbmaster/src/wizards/ew_sqlpage.ui:26
 msgid "INSERT prefix :"
 msgstr "Préfix INSERT :"
 
 #. ts-context EwSqlPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ew_sqlpage.ui:33
+#: /home/manu/programmation/dbmaster/src/wizards/ew_sqlpage.ui:33
 msgid "INSERT INTO <table> VALUES"
 msgstr "INSERT INTO <table> VALUES"
 
-#. ts-context ExportWizard
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/exportwizard.ui:14
-#, fuzzy
-msgid "Wizard"
-msgstr ""
-
 #. ts-context FirstLaunchWizard
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/firstlaunchwizard.ui:14
+#: /home/manu/programmation/dbmaster/src/wizards/firstlaunchwizard.ui:14
 msgid "Welcome on DbMaster !"
 msgstr "Bienvenue sur DbMaster !"
 
 #. ts-context FirstLaunchWizard
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/firstlaunchwizard.ui:18
+#: /home/manu/programmation/dbmaster/src/wizards/firstlaunchwizard.ui:18
 msgid "Welcome !"
 msgstr "Bienvenue !"
 
 #. ts-context FirstLaunchWizard
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/firstlaunchwizard.ui:24
+#: /home/manu/programmation/dbmaster/src/wizards/firstlaunchwizard.ui:24
 msgid ""
 "DbMaster is a database management software.\n"
 "\n"
@@ -911,12 +915,12 @@ msgstr ""
 "certaines informations. Cliquez sur Suivant pour continuer."
 
 #. ts-context FirstLaunchWizard
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/firstlaunchwizard.ui:37
+#: /home/manu/programmation/dbmaster/src/wizards/firstlaunchwizard.ui:37
 msgid "Default database software"
 msgstr "SGBD par défaut"
 
 #. ts-context FirstLaunchWizard
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/firstlaunchwizard.ui:40
+#: /home/manu/programmation/dbmaster/src/wizards/firstlaunchwizard.ui:40
 msgid ""
 "When you add a new database, DbMaster selects the default DBMS. You can "
 "change it in the Preferences dialog box."
@@ -925,224 +929,230 @@ msgstr ""
 "pourrez le changer dans la fenêtre de configuration."
 
 #. ts-context FirstLaunchWizard
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/firstlaunchwizard.ui:55
+#: /home/manu/programmation/dbmaster/src/wizards/firstlaunchwizard.ui:55
 msgid "First, please select the default DBMS DbMaster will use :"
 msgstr "Tout d'abord sélectionner le SGBD que DbMaster utilisera par défaut :"
 
 #. ts-context FirstLaunchWizard
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/firstlaunchwizard.ui:69
+#: /home/manu/programmation/dbmaster/src/wizards/firstlaunchwizard.ui:69
 msgid "DbMaster is ready"
 msgstr "DbMaster est prêt"
 
 #. ts-context FirstLaunchWizard
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/firstlaunchwizard.ui:72
+#: /home/manu/programmation/dbmaster/src/wizards/firstlaunchwizard.ui:72
 msgid "Congratulations ! Now you can click on Finish to use DbMaster."
 msgstr ""
 "Félicitations ! Vous pouvez maintenant cliquer sur Finir pour utiliser "
 "DbMaster."
 
 #. ts-context NdwFirstPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ndw_firstpage.ui:14
+#: /home/manu/programmation/dbmaster/src/wizards/ndw_firstpage.ui:14
 #, fuzzy
 msgid "WizardPage"
 msgstr ""
 
 #. ts-context NdwFirstPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ndw_firstpage.ui:17
+#: /home/manu/programmation/dbmaster/src/wizards/ndw_firstpage.ui:17
 msgid "DBMS information"
 msgstr "Informations du SGBD"
 
 #. ts-context NdwFirstPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ndw_firstpage.ui:20
+#: /home/manu/programmation/dbmaster/src/wizards/ndw_firstpage.ui:20
 msgid "Please fill the DBMS information"
 msgstr "Veuillez remplir les informations du SGBD"
 
 #. ts-context NdwFirstPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ndw_firstpage.ui:35
+#: /home/manu/programmation/dbmaster/src/wizards/ndw_firstpage.ui:35
 msgid "DBMS"
 msgstr "SGBD"
 
 #. ts-context NdwFirstPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ndw_firstpage.ui:51
+#: /home/manu/programmation/dbmaster/src/wizards/ndw_firstpage.ui:51
 msgid "Host IP or DNS adress"
 msgstr "Adresse IP ou DNS de l'hôte"
 
 #. ts-context NdwSecondPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ndw_secondpage.ui:14
+#: /home/manu/programmation/dbmaster/src/wizards/ndw_secondpage.ui:14
 #, fuzzy
 msgid "WizardPage"
 msgstr ""
 
 #. ts-context NdwSecondPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ndw_secondpage.ui:17
+#: /home/manu/programmation/dbmaster/src/wizards/ndw_secondpage.ui:17
 msgid "Database informations"
 msgstr "Informations de connexion"
 
 #. ts-context NdwSecondPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ndw_secondpage.ui:20
+#: /home/manu/programmation/dbmaster/src/wizards/ndw_secondpage.ui:20
 msgid "Database name and authentication"
 msgstr "Nom de la base de données et authentification"
 
 #. ts-context NdwSecondPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ndw_secondpage.ui:32
+#: /home/manu/programmation/dbmaster/src/wizards/ndw_secondpage.ui:32
 msgid "Database"
 msgstr "Base de données"
 
 #. ts-context NdwSecondPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ndw_secondpage.ui:44
+#: /home/manu/programmation/dbmaster/src/wizards/ndw_secondpage.ui:44
 msgid "..."
 msgstr "..."
 
 #. ts-context NdwSecondPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ndw_secondpage.ui:59
+#: /home/manu/programmation/dbmaster/src/wizards/ndw_secondpage.ui:59
 msgid "Username"
 msgstr "Nom d'utilisateur"
 
 #. ts-context NdwSecondPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ndw_secondpage.ui:85
+#: /home/manu/programmation/dbmaster/src/wizards/ndw_secondpage.ui:85
 msgid "Password"
 msgstr "Mot de passe"
 
 #. ts-context NdwSecondPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ndw_secondpage.ui:69
+#: /home/manu/programmation/dbmaster/src/wizards/ndw_secondpage.ui:69
 msgid "Remember password"
 msgstr "Enregistrer le mot de passe"
 
 #. ts-context NdwSecondPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ndw_secondpage.ui:105
+#: /home/manu/programmation/dbmaster/src/wizards/ndw_secondpage.ui:105
 msgid "Test connection"
 msgstr "Tester la connexion"
 
 #. ts-context NdwSecondPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ndw_secondpage.ui:118
+#: /home/manu/programmation/dbmaster/src/wizards/ndw_secondpage.ui:118
 msgid "<- Clic to test"
 msgstr "<- Cliquer pour tester"
 
 #. ts-context NdwSecondPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/newdbwizard.cpp:100
+#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:102
 msgid "Open Database"
 msgstr "Ouvrir la base de données"
 
 #. ts-context NdwSecondPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/newdbwizard.cpp:102
+#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:104
 msgid "Database file (*.*)"
 msgstr "Fichier de base de données (*.*)"
 
 #. ts-context NdwSecondPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/newdbwizard.cpp:122
+#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:124
 msgid "Connection succeded"
 msgstr "Connexion réussie"
 
 #. ts-context NdwSecondPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/newdbwizard.cpp:125
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/newdbwizard.cpp:127
+#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:127
+#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:129
 msgid "Connection failed"
 msgstr "Connexion échouée"
 
 #. ts-context NewDbWizard
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/newdbwizard.ui:14
+#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.ui:14
 msgid "Add a connection"
 msgstr "Ajouter une connexion"
 
 #. ts-context QObject
-#: /home/manu/programmation/dbmaster/trunk/src/dbmanager.cpp:47
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:48
 #, fuzzy
 msgid "Attempting to add an existing connection."
 msgstr ""
 
 #. ts-context QObject
-#: /home/manu/programmation/dbmaster/trunk/src/dbmanager.cpp:484
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:489
 msgid "%1 on %2"
 msgstr "%1 sur %2"
 
 #. ts-context QObject
-#: /home/manu/programmation/dbmaster/trunk/src/dbmanager.cpp:68
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:69
 msgid "Database %1 on %2 added."
 msgstr "Base %1 sur %2 ajoutée."
 
 #. ts-context QObject
-#: /home/manu/programmation/dbmaster/trunk/src/main.cpp:33
+#: /home/manu/programmation/dbmaster/src/main.cpp:34
 msgid "Loading translations..."
 msgstr "Chargement des traductions..."
 
 #. ts-context QObject
-#: /home/manu/programmation/dbmaster/trunk/src/main.cpp:57
+#: /home/manu/programmation/dbmaster/src/main.cpp:58
 msgid "Initialization..."
 msgstr "Initialisation..."
 
 #. ts-context ConfigDialog
-#: /home/manu/programmation/dbmaster/trunk/src/dialogs/configdialog.cpp:134
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialog.cpp:134
 msgid "Invalid color"
 msgstr "Couleur invalide"
 
 #. ts-context MainWindow
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.cpp:42
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:42
 msgid "Starting DbMaster"
 msgstr "Démarrage de DbMaster"
 
 #. ts-context MainWindow
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.cpp:65
-#, fuzzy
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:68
 msgid "Error !"
-msgstr ""
+msgstr "Erreur"
 
 #. ts-context MainWindow
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.cpp:66
-#, fuzzy
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:69
 msgid ""
 "Unable to connect :\n"
 "%1"
 msgstr ""
+"Impossible de se connecter :\n"
+"%1"
 
 #. ts-context MainWindow
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.cpp:301
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:124
+msgid "Unsaved files"
+msgstr "Fichiers non enregistrés"
+
+#. ts-context MainWindow
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:125
+msgid "Some files are not saved. Are you sure to want to quit ?"
+msgstr ""
+"Certains fichiers n'ont pas été enregistrés. Êtes-vous sûr de vouloir "
+"quitter ?"
+
+#. ts-context MainWindow
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:292
 msgid "Select a query to open"
 msgstr "Ouvrir une requête"
 
 #. ts-context MainWindow
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.cpp:303
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:294
 msgid "Query file (*.sql);;All files (*.*)"
 msgstr "Fichier de requête (*.sql);;Tous fichiers (*.*)"
 
 #. ts-context MainWindow
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.cpp:410
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:412
 msgid "No recent file"
 msgstr "Pas de fichier récent"
 
 #. ts-context MainWindow
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.cpp:412
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:414
 msgid "Clear"
 msgstr "Effacer"
 
 #. ts-context MainWindow
-#: /home/manu/programmation/dbmaster/trunk/src/mainwindow.cpp:443
-#, fuzzy
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:454
 msgid "%1 queries pending..."
-msgstr ""
-
-#. ts-context AbstractTabWidget
-#: /home/manu/programmation/dbmaster/trunk/src/tabwidget/abstracttabwidget.cpp:21
-msgid "Ctrl+F"
-msgstr "Ctrl+F"
+msgstr "%1 requête en attente..."
 
 #. ts-context QueryEditorWidget
-#: /home/manu/programmation/dbmaster/trunk/src/tabwidget/queryeditorwidget.cpp:49
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:47
 #| msgid "Query pending"
 msgid "<b>[%1]</b>Query pending"
 msgstr "<b>[%1]</b>Requête en attente"
 
 #. ts-context QueryEditorWidget
-#: /home/manu/programmation/dbmaster/trunk/src/tabwidget/queryeditorwidget.cpp:110
-#: /home/manu/programmation/dbmaster/trunk/src/tabwidget/queryeditorwidget.cpp:139
-#: /home/manu/programmation/dbmaster/trunk/src/tabwidget/queryeditorwidget.cpp:267
-#: /home/manu/programmation/dbmaster/trunk/src/tabwidget/queryeditorwidget.cpp:369
-#: /home/manu/programmation/dbmaster/trunk/src/tabwidget/queryeditorwidget.cpp:381
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:113
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:141
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:272
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:318
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:330
 msgid "DbMaster"
 msgstr "DbMaster"
 
 #. ts-context QueryEditorWidget
-#: /home/manu/programmation/dbmaster/trunk/src/tabwidget/queryeditorwidget.cpp:111
-#: /home/manu/programmation/dbmaster/trunk/src/tabwidget/queryeditorwidget.cpp:133
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:114
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:136
 #| msgid ""
 #| "Warning ! All your modifications will be lost.\n"
 #| "Do you really want to close ?"
@@ -1154,7 +1164,7 @@ msgstr ""
 "Voulez-vous enregistrer ?"
 
 #. ts-context QueryEditorWidget
-#: /home/manu/programmation/dbmaster/trunk/src/tabwidget/queryeditorwidget.cpp:136
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:138
 #| msgid ""
 #| "Warning ! %1 hasn't been saved\n"
 #| "Do you really want to close ?"
@@ -1166,137 +1176,137 @@ msgstr ""
 "Voulez-vous l'enregistrer ?"
 
 #. ts-context QueryEditorWidget
-#: /home/manu/programmation/dbmaster/trunk/src/tabwidget/queryeditorwidget.cpp:268
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:273
 msgid "Unable to open the file !"
 msgstr "Impossible d'ouvrir le fichier !"
 
 #. ts-context QueryEditorWidget
-#: /home/manu/programmation/dbmaster/trunk/src/tabwidget/queryeditorwidget.cpp:301
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:299
 msgid "Running..."
 msgstr "Exécution..."
 
 #. ts-context QueryEditorWidget
-#: /home/manu/programmation/dbmaster/trunk/src/tabwidget/queryeditorwidget.cpp:547
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:469
 msgid "Query executed with success in %2secs (%1 lines concerned)"
 msgstr "Requête exécutée avec succès en %2secs (%1 lignes retournées)"
 
 #. ts-context QueryEditorWidget
-#: /home/manu/programmation/dbmaster/trunk/src/tabwidget/queryeditorwidget.cpp:551
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:473
 msgid "Query executed with success"
 msgstr "Requête exécutée avec succès"
 
 #. ts-context QueryEditorWidget
-#: /home/manu/programmation/dbmaster/trunk/src/tabwidget/queryeditorwidget.cpp:557
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:479
 msgid "Unable to run query"
 msgstr "Impossible d'exécuter la requête"
 
 #. ts-context QueryEditorWidget
-#: /home/manu/programmation/dbmaster/trunk/src/tabwidget/queryeditorwidget.cpp:370
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:319
 msgid "Query file (*.sql);;All files (*.*)"
 msgstr "Fichier de requête (*.sql);;Tous fichiers (*.*)"
 
 #. ts-context QueryEditorWidget
-#: /home/manu/programmation/dbmaster/trunk/src/tabwidget/queryeditorwidget.cpp:381
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:330
 msgid "Unable to save the file !"
 msgstr "Impossible d'enregistrer le fichier !"
 
 #. ts-context QueryEditorWidget
-#: /home/manu/programmation/dbmaster/trunk/src/tabwidget/queryeditorwidget.cpp:507
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:432
 msgid "Query editor"
 msgstr "Éditeur de requêtes"
 
 #. ts-context ResultView
-#: /home/manu/programmation/dbmaster/trunk/src/widgets/resultview.cpp:184
-#: /home/manu/programmation/dbmaster/trunk/src/widgets/resultview.cpp:250
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:187
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:253
 #, fuzzy
 msgid "Error"
 msgstr ""
 
 #. ts-context ResultView
-#: /home/manu/programmation/dbmaster/trunk/src/widgets/resultview.cpp:185
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:188
 msgid "The specified table doesn't exist"
 msgstr "La table n'existe pas"
 
 #. ts-context ResultView
-#: /home/manu/programmation/dbmaster/trunk/src/widgets/resultview.cpp:224
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:227
 msgid "Alternate row colors"
 msgstr "Alterner les lignes"
 
 #. ts-context ResultView
-#: /home/manu/programmation/dbmaster/trunk/src/widgets/resultview.cpp:229
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:232
 msgid "Export"
 msgstr "Exporter"
 
 #. ts-context ResultView
-#: /home/manu/programmation/dbmaster/trunk/src/widgets/resultview.cpp:250
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:253
 msgid "Unable to submit new data"
 msgstr "Impossible d'envoyer les données"
 
 #. ts-context ResultView
-#: /home/manu/programmation/dbmaster/trunk/src/widgets/resultview.cpp:282
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:285
 msgid "Page %1/%2"
 msgstr "Page %1/%2"
 
 #. ts-context ResultView
-#: /home/manu/programmation/dbmaster/trunk/src/widgets/resultview.ui:14
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:14
 #, fuzzy
 msgid "Form"
 msgstr ""
 
 #. ts-context ResultView
-#: /home/manu/programmation/dbmaster/trunk/src/widgets/resultview.ui:35
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:35
 msgid "Page 0/0"
 msgstr "Page 0/0"
 
 #. ts-context ResultView
-#: /home/manu/programmation/dbmaster/trunk/src/widgets/resultview.ui:42
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:42
 msgid "<<"
 msgstr "<<"
 
 #. ts-context ResultView
-#: /home/manu/programmation/dbmaster/trunk/src/widgets/resultview.ui:59
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:59
 msgid "<"
 msgstr "<"
 
 #. ts-context ResultView
-#: /home/manu/programmation/dbmaster/trunk/src/widgets/resultview.ui:76
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:76
 msgid ">"
 msgstr ">"
 
 #. ts-context ResultView
-#: /home/manu/programmation/dbmaster/trunk/src/widgets/resultview.ui:93
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:93
 msgid ">>"
 msgstr ">>"
 
 #. ts-context ResultView
-#: /home/manu/programmation/dbmaster/trunk/src/widgets/resultview.ui:117
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:117
 msgid "..."
 msgstr "..."
 
 #. ts-context ResultView
-#: /home/manu/programmation/dbmaster/trunk/src/widgets/resultview.ui:150
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:150
 msgid "Show"
 msgstr "Montrer"
 
 #. ts-context ResultView
-#: /home/manu/programmation/dbmaster/trunk/src/widgets/resultview.ui:179
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:179
 msgid "results"
 msgstr "résultats"
 
 #. ts-context ResultView
-#: /home/manu/programmation/dbmaster/trunk/src/widgets/resultview.ui:202
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:202
 #, fuzzy
 msgid "+"
 msgstr ""
 
 #. ts-context ResultView
-#: /home/manu/programmation/dbmaster/trunk/src/widgets/resultview.ui:209
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:209
 #, fuzzy
 msgid "-"
 msgstr ""
 
 #. ts-context ResultView
-#: /home/manu/programmation/dbmaster/trunk/src/widgets/resultview.ui:238
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:238
 #, fuzzy
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" "
@@ -1316,182 +1326,182 @@ msgid ""
 msgstr ""
 
 #. ts-context DbManagerPrivate
-#: /home/manu/programmation/dbmaster/trunk/src/dbmanager.cpp:475
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:480
 msgid "Database"
 msgstr "Base de données"
 
 #. ts-context DbManagerPrivate
-#: /home/manu/programmation/dbmaster/trunk/src/dbmanager.cpp:292
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:294
 msgid "Tables (%1)"
 msgstr "Tables (%1)"
 
 #. ts-context DbManagerPrivate
-#: /home/manu/programmation/dbmaster/trunk/src/dbmanager.cpp:88
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:89
 msgid "%1 (local)"
 msgstr "%1 (locale)"
 
 #. ts-context DbManagerPrivate
-#: /home/manu/programmation/dbmaster/trunk/src/dbmanager.cpp:90
-#: /home/manu/programmation/dbmaster/trunk/src/dbmanager.cpp:102
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:91
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:103
 msgid "%1 on %2"
 msgstr "%1 sur %2"
 
 #. ts-context DbManagerPrivate
-#: /home/manu/programmation/dbmaster/trunk/src/dbmanager.cpp:113
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:114
 msgid "Openned"
 msgstr "Ouverte"
 
 #. ts-context DbManagerPrivate
-#: /home/manu/programmation/dbmaster/trunk/src/dbmanager.cpp:115
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:116
 msgid "Closed"
 msgstr "Fermée"
 
 #. ts-context DbManagerPrivate
-#: /home/manu/programmation/dbmaster/trunk/src/dbmanager.cpp:117
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:118
 msgid "Status"
 msgstr "Statut"
 
 #. ts-context DbManagerPrivate
-#: /home/manu/programmation/dbmaster/trunk/src/dbmanager.cpp:122
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:123
 msgid "DBMS"
 msgstr "SGBD"
 
 #. ts-context DbManagerPrivate
-#: /home/manu/programmation/dbmaster/trunk/src/dbmanager.cpp:124
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:125
 msgid "Generic (%1)"
 msgstr "Générique (%1)"
 
 #. ts-context DbManagerPrivate
-#: /home/manu/programmation/dbmaster/trunk/src/dbmanager.cpp:128
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:129
 msgid "Host"
 msgstr "Hôte"
 
 #. ts-context DbManagerPrivate
-#: /home/manu/programmation/dbmaster/trunk/src/dbmanager.cpp:307
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:309
 msgid "Views (%1)"
 msgstr "Vues (%1)"
 
 #. ts-context DbManagerPrivate
-#: /home/manu/programmation/dbmaster/trunk/src/dbmanager.cpp:323
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:325
 msgid "System tables (%1)"
 msgstr "Tables système (%1)"
 
 #. ts-context DbManagerPrivate
-#: /home/manu/programmation/dbmaster/trunk/src/dbmanager.cpp:380
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:382
 msgid "Connected to %1"
 msgstr "Connecté à %1"
 
 #. ts-context DbManagerPrivate
-#: /home/manu/programmation/dbmaster/trunk/src/dbmanager.cpp:383
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:385
 msgid "Unable to connect to %1"
 msgstr "Impossible de se connecter à %1"
 
 #. ts-context DbManagerPrivate
-#: /home/manu/programmation/dbmaster/trunk/src/dbmanager.cpp:394
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:396
 msgid "Disconnected from %1"
 msgstr "Déconnecté de %1*"
 
 #. ts-context DbManagerPrivate
-#: /home/manu/programmation/dbmaster/trunk/src/dbmanager.cpp:448
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:453
 msgid "Driver"
 msgstr "Pilote"
 
 #. ts-context DbManagerPrivate
-#: /home/manu/programmation/dbmaster/trunk/src/dbmanager.cpp:450
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:455
 msgid "Interbase/Firebird"
 msgstr "Interbase/Firebird"
 
 #. ts-context DbManagerPrivate
-#: /home/manu/programmation/dbmaster/trunk/src/dbmanager.cpp:451
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:456
 msgid "MySql"
 msgstr "MySql"
 
 #. ts-context DbManagerPrivate
-#: /home/manu/programmation/dbmaster/trunk/src/dbmanager.cpp:452
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:457
 msgid "MySql 3"
 msgstr "MySql 3"
 
 #. ts-context DbManagerPrivate
-#: /home/manu/programmation/dbmaster/trunk/src/dbmanager.cpp:453
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:458
 msgid "ODBC"
 msgstr "ODBC"
 
 #. ts-context DbManagerPrivate
-#: /home/manu/programmation/dbmaster/trunk/src/dbmanager.cpp:454
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:459
 msgid "ODBC 3"
 msgstr "ODBC 3"
 
 #. ts-context DbManagerPrivate
-#: /home/manu/programmation/dbmaster/trunk/src/dbmanager.cpp:455
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:460
 msgid "PostGreSQL"
 msgstr "PostGreSQL"
 
 #. ts-context DbManagerPrivate
-#: /home/manu/programmation/dbmaster/trunk/src/dbmanager.cpp:456
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:461
 msgid "PostGreSQL 7"
 msgstr "PostGreSQL 7"
 
 #. ts-context DbManagerPrivate
-#: /home/manu/programmation/dbmaster/trunk/src/dbmanager.cpp:457
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:462
 msgid "SQLite"
 msgstr "SQLite"
 
 #. ts-context DbManagerPrivate
-#: /home/manu/programmation/dbmaster/trunk/src/dbmanager.cpp:458
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:463
 msgid "SQLite 2"
 msgstr "SQLite 2"
 
 #. ts-context DbTreeView
-#: /home/manu/programmation/dbmaster/trunk/src/widgets/dbtreeview.cpp:52
+#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:52
 msgid "Disconnect"
 msgstr "Déconnecter"
 
 #. ts-context DbTreeView
-#: /home/manu/programmation/dbmaster/trunk/src/widgets/dbtreeview.cpp:55
-#: /home/manu/programmation/dbmaster/trunk/src/widgets/dbtreeview.cpp:180
+#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:55
+#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:180
 msgid "Connect"
 msgstr "Connecter"
 
 #. ts-context DbTreeView
-#: /home/manu/programmation/dbmaster/trunk/src/widgets/dbtreeview.cpp:166
+#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:166
 msgid "New connection"
 msgstr "Nouvelle connexion"
 
 #. ts-context DbTreeView
-#: /home/manu/programmation/dbmaster/trunk/src/widgets/dbtreeview.cpp:171
+#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:171
 msgid "Edit"
 msgstr "Modifier"
 
 #. ts-context DbTreeView
-#: /home/manu/programmation/dbmaster/trunk/src/widgets/dbtreeview.cpp:175
+#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:175
 msgid "Remove"
 msgstr "Supprimer"
 
 #. ts-context TooltipFrame
-#: /home/manu/programmation/dbmaster/trunk/src/widgets/tooltipframe.ui:14
+#: /home/manu/programmation/dbmaster/src/widgets/tooltipframe.ui:14
 #, fuzzy
 msgid "Frame"
 msgstr ""
 
 #. ts-context TooltipFrame
-#: /home/manu/programmation/dbmaster/trunk/src/widgets/tooltipframe.ui:32
+#: /home/manu/programmation/dbmaster/src/widgets/tooltipframe.ui:32
 msgid "Did you know ?"
 msgstr "Le saviez-vous ?"
 
 #. ts-context TooltipFrame
-#: /home/manu/programmation/dbmaster/trunk/src/widgets/tooltipframe.cpp:26
+#: /home/manu/programmation/dbmaster/src/widgets/tooltipframe.cpp:28
 msgid "Press Ctrl+Espace in the query editor to display the completer."
 msgstr ""
 "Pressez Ctrl+Espace dans l'éditeur de requête pour afficher "
 "l'auto-complément."
 
 #. ts-context TooltipFrame
-#: /home/manu/programmation/dbmaster/trunk/src/widgets/tooltipframe.cpp:27
+#: /home/manu/programmation/dbmaster/src/widgets/tooltipframe.cpp:29
 msgid "While a query is executed, you can edit an another one."
 msgstr "Pendant qu'une requête s'exécute, vous pouvez en éditer une autre."
 
 #. ts-context TooltipFrame
-#: /home/manu/programmation/dbmaster/trunk/src/widgets/tooltipframe.cpp:28
+#: /home/manu/programmation/dbmaster/src/widgets/tooltipframe.cpp:30
 msgid ""
 "You can export a table or a query's content in a CSV file by right-clicking "
 "on the spreadsheet."
@@ -1500,99 +1510,154 @@ msgstr ""
 "CSV en cliquant sur le tableau."
 
 #. ts-context TooltipFrame
-#: /home/manu/programmation/dbmaster/trunk/src/widgets/tooltipframe.cpp:29
+#: /home/manu/programmation/dbmaster/src/widgets/tooltipframe.cpp:31
 msgid "While it is connected, a database cannot be edited."
 msgstr "Tout pendant qu'elle est active, une connexion ne peut être éditée."
 
 #. ts-context TooltipFrame
-#: /home/manu/programmation/dbmaster/trunk/src/widgets/tooltipframe.cpp:61
+#: /home/manu/programmation/dbmaster/src/widgets/tooltipframe.cpp:63
 msgid "Did you know ? #%1/%2"
 msgstr "Le saviez-vous ? #%1/%2"
 
 #. ts-context PluginDialog
-#: /home/manu/programmation/dbmaster/trunk/src/plugins/plugindialog.ui:14
+#: /home/manu/programmation/dbmaster/src/plugins/plugindialog.ui:14
 #, fuzzy
 msgid "Dialog"
 msgstr ""
 
 #. ts-context PluginDialog
-#: /home/manu/programmation/dbmaster/trunk/src/plugins/plugindialog.ui:23
+#: /home/manu/programmation/dbmaster/src/plugins/plugindialog.ui:23
 msgid "Add"
 msgstr "Ajouter"
 
 #. ts-context PluginDialog
-#: /home/manu/programmation/dbmaster/trunk/src/plugins/plugindialog.ui:40
+#: /home/manu/programmation/dbmaster/src/plugins/plugindialog.ui:40
 msgid "Remove"
 msgstr "Supprimer"
 
 #. ts-context PluginDialog
-#: /home/manu/programmation/dbmaster/trunk/src/plugins/plugindialog.ui:47
+#: /home/manu/programmation/dbmaster/src/plugins/plugindialog.ui:47
 msgid "Configure"
 msgstr "Configurer"
 
 #. ts-context PluginDialog
-#: /home/manu/programmation/dbmaster/trunk/src/plugins/plugindialog.cpp:29
+#: /home/manu/programmation/dbmaster/src/plugins/plugindialog.cpp:29
 #, fuzzy
 msgid "Choose a plugin file"
 msgstr ""
 
 #. ts-context EwHtmlPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ew_htmlpage.ui:14
+#: /home/manu/programmation/dbmaster/src/wizards/ew_htmlpage.ui:14
 #, fuzzy
 msgid "WizardPage"
 msgstr ""
 
 #. ts-context EwHtmlPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ew_htmlpage.ui:17
+#: /home/manu/programmation/dbmaster/src/wizards/ew_htmlpage.ui:17
 msgid "HTML options"
 msgstr "Options HTML"
 
 #. ts-context EwHtmlPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ew_htmlpage.ui:23
+#: /home/manu/programmation/dbmaster/src/wizards/ew_htmlpage.ui:23
 msgid "Export query"
 msgstr "Exporter la requête"
 
 #. ts-context EwHtmlPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ew_htmlpage.ui:32
+#: /home/manu/programmation/dbmaster/src/wizards/ew_htmlpage.ui:35
 msgid "Apply syntax coloring"
 msgstr "Appliquer la coloration syntaxique"
 
 #. ts-context EwHtmlPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ew_htmlpage.ui:42
+#: /home/manu/programmation/dbmaster/src/wizards/ew_htmlpage.ui:45
 msgid "Result"
 msgstr "Résultat"
 
 #. ts-context EwHtmlPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ew_htmlpage.ui:48
+#: /home/manu/programmation/dbmaster/src/wizards/ew_htmlpage.ui:51
 msgid "Whole result"
 msgstr "Résultat entier"
 
 #. ts-context EwHtmlPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ew_htmlpage.ui:58
+#: /home/manu/programmation/dbmaster/src/wizards/ew_htmlpage.ui:61
 msgid "Limit result to"
 msgstr "Limiter le résultat à"
 
 #. ts-context EwHtmlPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ew_htmlpage.ui:84
+#: /home/manu/programmation/dbmaster/src/wizards/ew_htmlpage.ui:87
 msgid "firsts"
 msgstr "premières"
 
 #. ts-context EwHtmlPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ew_htmlpage.ui:89
+#: /home/manu/programmation/dbmaster/src/wizards/ew_htmlpage.ui:92
 msgid "lasts"
 msgstr "dernières"
 
 #. ts-context EwHtmlPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ew_htmlpage.ui:94
+#: /home/manu/programmation/dbmaster/src/wizards/ew_htmlpage.ui:97
 msgid "firsts & lasts"
 msgstr "premières & dernières"
 
 #. ts-context EwHtmlPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ew_htmlpage.ui:102
+#: /home/manu/programmation/dbmaster/src/wizards/ew_htmlpage.ui:105
 msgid "lines"
 msgstr "lignes"
 
 #. ts-context EwHtmlPage
-#: /home/manu/programmation/dbmaster/trunk/src/wizards/ew_htmlpage.ui:111
+#: /home/manu/programmation/dbmaster/src/wizards/ew_htmlpage.ui:114
 msgid "Print column names"
 msgstr "Inscrire les noms de colonnes"
+
+#. ts-context SearchDialog
+#: /home/manu/programmation/dbmaster/src/dialogs/searchdialog.ui:14
+msgid "Search..."
+msgstr "Rechercher..."
+
+#. ts-context SearchDialog
+#: /home/manu/programmation/dbmaster/src/dialogs/searchdialog.ui:20
+msgid "&Search"
+msgstr "Re&chercher"
+
+#. ts-context SearchDialog
+#: /home/manu/programmation/dbmaster/src/dialogs/searchdialog.ui:50
+msgid "R&eplace"
+msgstr "R&emplacer"
+
+#. ts-context SearchDialog
+#: /home/manu/programmation/dbmaster/src/dialogs/searchdialog.ui:86
+msgid "Search backward"
+msgstr "En arrière"
+
+#. ts-context SearchDialog
+#: /home/manu/programmation/dbmaster/src/dialogs/searchdialog.ui:93
+msgid "Whole words"
+msgstr "Mots entiers"
+
+#. ts-context SearchDialog
+#: /home/manu/programmation/dbmaster/src/dialogs/searchdialog.ui:100
+msgid "Use regular e&xpressions"
+msgstr "Utiliser des e&xpressions régulières"
+
+#. ts-context SearchDialog
+#: /home/manu/programmation/dbmaster/src/dialogs/searchdialog.ui:107
+msgid "Case sensitive"
+msgstr "Sensible à la casse"
+
+#. ts-context SearchDialog
+#: /home/manu/programmation/dbmaster/src/dialogs/searchdialog.cpp:80
+msgid "Search has reached the end of the document."
+msgstr "La recherche a atteint la fin du document."
+
+#. ts-context SearchDialog
+#: /home/manu/programmation/dbmaster/src/dialogs/searchdialog.cpp:97
+msgid "Search"
+msgstr "Rechercher"
+
+#. ts-context SearchDialog
+#: /home/manu/programmation/dbmaster/src/dialogs/searchdialog.cpp:99
+msgid "Replace"
+msgstr "Remplacer"
+
+#. ts-context ExportWizard
+#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.ui:14
+msgid "Export"
+msgstr "Exporter"
