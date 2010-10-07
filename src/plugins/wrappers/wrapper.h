@@ -17,12 +17,40 @@
 
 #include <QList>
 #include <QSqlDatabase>
+#include <QSqlDriver>
 #include <QString>
 #include <QStringList>
 
-class Wrapper : public Plugin
+struct SqlType {
+  QString name;
+  bool hasSize;
+  int size;
+};
+
+struct SqlColumn {
+  SqlType type;
+  bool permitsNull;
+};
+
+struct SqlTable {
+  QString name;
+  QList<SqlColumn> columns;
+};
+
+class SqlWrapper : public Plugin, private QSqlDriver
 {
 public:
+  enum ColumnFamily {
+    Blob,
+    Char,
+    Date,
+    Float,
+    Integer,
+    Time,
+    Timestamp,
+    Varchar
+  };
+
   enum DbType {
     FileDb,
     IndexedDb,
@@ -30,21 +58,20 @@ public:
     RemoteDb
   };
 
-  Wrapper();
+  enum WrapperFeature {
+    CustomTypes,
+    Dumps,
+    ForeignKeys,
+    Indexes,
+    Schemas,
+    StoredProcedures,
+    Triggers,
+    Views
+  };
 
-  virtual void            close()       =0;
-  virtual QStringList     tables()      =0;
-  virtual bool            open()        =0;
-
-//  static QList<Wrapper*>  availableFor(QString driver);
-
-protected:
-  virtual QString         driver()      =0;
-
-  QSqlDatabase           *db;
-  static QList<Wrapper*>  wrappers;
+  SqlWrapper();
 };
 
-Q_DECLARE_INTERFACE(Wrapper, "dbmaster.Wrapper")
+Q_DECLARE_INTERFACE(SqlWrapper, "dbmaster.Wrapper")
 
 #endif // WRAPPER_H

@@ -27,6 +27,10 @@ public:
     QueryMode, TableMode
   };
 
+  enum Action {
+    Browse, Update, Insert
+  };
+
   ResultView(QWidget *parent=0);
 
   void setTable(QString table, QSqlDatabase *db);
@@ -59,10 +63,10 @@ private:
   QAction              *actionAlternateColor;
   QAction              *actionExport;
   QMenu                *contextMenu;
+  Action                currentAction;
   ExportWizard         *exportWizard;
   QList<void*>          garbageCollector;
   int                   lastEditedRow;
-  bool                  inserting;
   QStandardItemModel   *shortModel;
   Mode                  m_mode;
   QSqlQueryModel       *model;
@@ -74,7 +78,7 @@ private slots:
   void deleteCurrentRow();
   void exportContent();
   void forwardReload();
-  void prepareInsertRow();
+  void on_insertButton_clicked();
   void updateItem(QStandardItem *item);
   void updateView();
 };
