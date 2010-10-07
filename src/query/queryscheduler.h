@@ -31,6 +31,7 @@ signals:
   void countChanged(int);
 
 private:
+  void run(QueryToken *token, QueryThread *th);
   int                 queryCount;
   QList<QueryThread*> threads;
 
