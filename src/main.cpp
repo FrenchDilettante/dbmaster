@@ -17,6 +17,7 @@
 #include "mainwindow.h"
 #include "plugins/pluginmanager.h"
 #include "sqlhighlighter.h"
+#include "tabwidget/abstracttabwidget.h"
 #include "widgets/querytextedit.h"
 
 int main(int argc, char *argv[])

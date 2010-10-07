@@ -29,6 +29,7 @@
   * Db are named correctly when the hostname is empty (SQLite)
   * Export progress dialog differed for very little exports
   * Error message in case of error when connecting
+  * Many bugfixes when closing DbMaster
 
 
 = 0.6.1 =

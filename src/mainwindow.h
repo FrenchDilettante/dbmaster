@@ -54,7 +54,6 @@ public slots:
 private:
   void                closeEvent(QCloseEvent*);
   AbstractTabWidget*  currentTab();
-  void                keyPressEvent(QKeyEvent *event);
   void                setupConnections();
   void                setupWidgets();
 
@@ -85,7 +84,6 @@ private slots:
   void search();
   void selectAll();
   void setQueryCount(int count);
-  void setTabText(QString title);
   void undo();
 };
 

@@ -15,8 +15,10 @@
 
 #include "ui_searchdialog.h"
 
+#include <QCloseEvent>
 #include <QDialog>
 #include <QPushButton>
+#include <QStringList>
 #include <QTextDocument>
 #include <QTextEdit>
 
@@ -30,14 +32,19 @@ public:
   void setEditor(QTextEdit *edit) { m_textEdit = edit; };
 
 private:
+  void closeEvent(QCloseEvent *event);
   void setupWidgets();
 
   QTextEdit *m_textEdit;
   QPushButton *replaceButton;
   QPushButton *searchButton;
 
+  static QStringList replaceHistory;
+  static QStringList searchHistory;
+
 private slots:
-  void search();
+  void replace();
+  QTextCursor search();
 };
 
 #endif // SEARCHDIALOG_H

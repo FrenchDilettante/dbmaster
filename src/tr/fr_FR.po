@@ -1065,12 +1065,12 @@ msgid "Database %1 on %2 added."
 msgstr "Base %1 sur %2 ajoutée."
 
 #. ts-context QObject
-#: /home/manu/programmation/dbmaster/src/main.cpp:33
+#: /home/manu/programmation/dbmaster/src/main.cpp:34
 msgid "Loading translations..."
 msgstr "Chargement des traductions..."
 
 #. ts-context QObject
-#: /home/manu/programmation/dbmaster/src/main.cpp:57
+#: /home/manu/programmation/dbmaster/src/main.cpp:58
 msgid "Initialization..."
 msgstr "Initialisation..."
 
@@ -1085,44 +1085,55 @@ msgid "Starting DbMaster"
 msgstr "Démarrage de DbMaster"
 
 #. ts-context MainWindow
-#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:65
-#, fuzzy
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:68
 msgid "Error !"
-msgstr ""
+msgstr "Erreur"
 
 #. ts-context MainWindow
-#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:66
-#, fuzzy
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:69
 msgid ""
 "Unable to connect :\n"
 "%1"
 msgstr ""
+"Impossible de se connecter :\n"
+"%1"
 
 #. ts-context MainWindow
-#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:301
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:124
+msgid "Unsaved files"
+msgstr "Fichiers non enregistrés"
+
+#. ts-context MainWindow
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:125
+msgid "Some files are not saved. Are you sure to want to quit ?"
+msgstr ""
+"Certains fichiers n'ont pas été enregistrés. Êtes-vous sûr de vouloir "
+"quitter ?"
+
+#. ts-context MainWindow
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:292
 msgid "Select a query to open"
 msgstr "Ouvrir une requête"
 
 #. ts-context MainWindow
-#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:303
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:294
 msgid "Query file (*.sql);;All files (*.*)"
 msgstr "Fichier de requête (*.sql);;Tous fichiers (*.*)"
 
 #. ts-context MainWindow
-#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:410
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:412
 msgid "No recent file"
 msgstr "Pas de fichier récent"
 
 #. ts-context MainWindow
-#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:412
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:414
 msgid "Clear"
 msgstr "Effacer"
 
 #. ts-context MainWindow
-#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:452
-#, fuzzy
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:454
 msgid "%1 queries pending..."
-msgstr ""
+msgstr "%1 requête en attente..."
 
 #. ts-context QueryEditorWidget
 #: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:47
@@ -1133,9 +1144,9 @@ msgstr "<b>[%1]</b>Requête en attente"
 #. ts-context QueryEditorWidget
 #: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:113
 #: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:141
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:280
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:327
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:339
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:272
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:318
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:330
 msgid "DbMaster"
 msgstr "DbMaster"
 
@@ -1165,74 +1176,80 @@ msgstr ""
 "Voulez-vous l'enregistrer ?"
 
 #. ts-context QueryEditorWidget
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:281
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:273
 msgid "Unable to open the file !"
 msgstr "Impossible d'ouvrir le fichier !"
 
 #. ts-context QueryEditorWidget
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:308
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:299
 msgid "Running..."
 msgstr "Exécution..."
 
 #. ts-context QueryEditorWidget
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:478
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:469
 msgid "Query executed with success in %2secs (%1 lines concerned)"
 msgstr "Requête exécutée avec succès en %2secs (%1 lignes retournées)"
 
 #. ts-context QueryEditorWidget
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:482
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:473
 msgid "Query executed with success"
 msgstr "Requête exécutée avec succès"
 
 #. ts-context QueryEditorWidget
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:488
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:479
 msgid "Unable to run query"
 msgstr "Impossible d'exécuter la requête"
 
 #. ts-context QueryEditorWidget
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:328
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:319
 msgid "Query file (*.sql);;All files (*.*)"
 msgstr "Fichier de requête (*.sql);;Tous fichiers (*.*)"
 
 #. ts-context QueryEditorWidget
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:339
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:330
 msgid "Unable to save the file !"
 msgstr "Impossible d'enregistrer le fichier !"
 
 #. ts-context QueryEditorWidget
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:441
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:432
 msgid "Query editor"
 msgstr "Éditeur de requêtes"
 
 #. ts-context ResultView
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:192
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:258
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:129
+#, fuzzy
+msgid "Apply"
+msgstr ""
+
+#. ts-context ResultView
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:130
+#, fuzzy
+msgid "Cancel"
+msgstr ""
+
+#. ts-context ResultView
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:222
 #, fuzzy
 msgid "Error"
 msgstr ""
 
 #. ts-context ResultView
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:193
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:223
 msgid "The specified table doesn't exist"
 msgstr "La table n'existe pas"
 
 #. ts-context ResultView
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:232
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:261
 msgid "Alternate row colors"
 msgstr "Alterner les lignes"
 
 #. ts-context ResultView
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:237
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:266
 msgid "Export"
 msgstr "Exporter"
 
 #. ts-context ResultView
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:258
-msgid "Unable to submit new data"
-msgstr "Impossible d'envoyer les données"
-
-#. ts-context ResultView
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:290
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:319
 msgid "Page %1/%2"
 msgstr "Page %1/%2"
 
@@ -1284,12 +1301,14 @@ msgstr "résultats"
 
 #. ts-context ResultView
 #: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:202
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:108
 #, fuzzy
 msgid "+"
 msgstr ""
 
 #. ts-context ResultView
 #: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:209
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:109
 #, fuzzy
 msgid "-"
 msgstr ""
@@ -1478,19 +1497,19 @@ msgid "Did you know ?"
 msgstr "Le saviez-vous ?"
 
 #. ts-context TooltipFrame
-#: /home/manu/programmation/dbmaster/src/widgets/tooltipframe.cpp:26
+#: /home/manu/programmation/dbmaster/src/widgets/tooltipframe.cpp:28
 msgid "Press Ctrl+Espace in the query editor to display the completer."
 msgstr ""
 "Pressez Ctrl+Espace dans l'éditeur de requête pour afficher "
 "l'auto-complément."
 
 #. ts-context TooltipFrame
-#: /home/manu/programmation/dbmaster/src/widgets/tooltipframe.cpp:27
+#: /home/manu/programmation/dbmaster/src/widgets/tooltipframe.cpp:29
 msgid "While a query is executed, you can edit an another one."
 msgstr "Pendant qu'une requête s'exécute, vous pouvez en éditer une autre."
 
 #. ts-context TooltipFrame
-#: /home/manu/programmation/dbmaster/src/widgets/tooltipframe.cpp:28
+#: /home/manu/programmation/dbmaster/src/widgets/tooltipframe.cpp:30
 msgid ""
 "You can export a table or a query's content in a CSV file by right-clicking "
 "on the spreadsheet."
@@ -1499,12 +1518,12 @@ msgstr ""
 "CSV en cliquant sur le tableau."
 
 #. ts-context TooltipFrame
-#: /home/manu/programmation/dbmaster/src/widgets/tooltipframe.cpp:29
+#: /home/manu/programmation/dbmaster/src/widgets/tooltipframe.cpp:31
 msgid "While it is connected, a database cannot be edited."
 msgstr "Tout pendant qu'elle est active, une connexion ne peut être éditée."
 
 #. ts-context TooltipFrame
-#: /home/manu/programmation/dbmaster/src/widgets/tooltipframe.cpp:61
+#: /home/manu/programmation/dbmaster/src/widgets/tooltipframe.cpp:63
 msgid "Did you know ? #%1/%2"
 msgstr "Le saviez-vous ? #%1/%2"
 
@@ -1613,9 +1632,8 @@ msgstr "R&emplacer"
 
 #. ts-context SearchDialog
 #: /home/manu/programmation/dbmaster/src/dialogs/searchdialog.ui:86
-#, fuzzy
 msgid "Search backward"
-msgstr ""
+msgstr "En arrière"
 
 #. ts-context SearchDialog
 #: /home/manu/programmation/dbmaster/src/dialogs/searchdialog.ui:93
@@ -1633,17 +1651,17 @@ msgid "Case sensitive"
 msgstr "Sensible à la casse"
 
 #. ts-context SearchDialog
-#: /home/manu/programmation/dbmaster/src/dialogs/searchdialog.cpp:44
+#: /home/manu/programmation/dbmaster/src/dialogs/searchdialog.cpp:80
 msgid "Search has reached the end of the document."
 msgstr "La recherche a atteint la fin du document."
 
 #. ts-context SearchDialog
-#: /home/manu/programmation/dbmaster/src/dialogs/searchdialog.cpp:55
+#: /home/manu/programmation/dbmaster/src/dialogs/searchdialog.cpp:97
 msgid "Search"
 msgstr "Rechercher"
 
 #. ts-context SearchDialog
-#: /home/manu/programmation/dbmaster/src/dialogs/searchdialog.cpp:57
+#: /home/manu/programmation/dbmaster/src/dialogs/searchdialog.cpp:99
 msgid "Replace"
 msgstr "Remplacer"
 
