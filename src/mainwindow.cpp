@@ -23,6 +23,8 @@
 #include "tabwidget/tablewidget.h"
 #include "widgets/dbtreeview.h"
 
+#include <QDesktopServices>
+
 DbDialog     *MainWindow::dbDialog;
 NewDbWizard  *MainWindow::dbWizard;
 PluginDialog *MainWindow::pluginDialog;
@@ -449,6 +451,9 @@ void MainWindow::selectAll()
     currentTab()->selectAll();
 }
 
+/**
+ * Affiche le nombre de requêtes en cour dans la statusBar
+ */
 void MainWindow::setQueryCount(int count)
 {
   queriesStatusLabel->setText(tr("%1 queries pending...")
@@ -635,4 +640,19 @@ void MainWindow::undo()
 {
   if(currentTab())
     currentTab()->undo();
+}
+
+/**
+ * Ouvre la doc. utilisateur
+ */
+void MainWindow::userManual() {
+  QString url = "";
+#if defined(Q_WS_X11)
+  QString lang = QLocale::system().name().left(2).toLower();
+  url = QString("share/doc/%1/index.html").arg(lang);
+
+  if(!QFile::exists(url))
+    url = QString(QString(PREFIX) + "/share/en/index.html");
+#endif
+  QDesktopServices::openUrl(url);
 }

@@ -95,7 +95,7 @@
      <x>0</x>
      <y>0</y>
      <width>840</width>
-     <height>21</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuTools">
@@ -127,6 +127,7 @@
     <property name="title">
      <string>&amp;Help</string>
     </property>
+    <addaction name="actionUserManual"/>
     <addaction name="actionAbout"/>
    </widget>
    <widget class="QMenu" name="menuFile">
@@ -416,6 +417,11 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+F</string>
+   </property>
+  </action>
+  <action name="actionUserManual">
+   <property name="text">
+    <string>User manual</string>
    </property>
   </action>
  </widget>
