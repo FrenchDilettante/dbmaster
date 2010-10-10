@@ -104,26 +104,22 @@ void ResultView::on_insertButton_clicked()
   if(m_mode != TableMode)
     return;
 
-  if (currentAction == Insert) {
+  if (currentAction == Insert || currentAction == Update) {
     insertButton->setText(tr("+"));
     deleteButton->setText(tr("-"));
 
     QSqlTableModel *tmodel = (QSqlTableModel*) model;
 
-    QSqlRecord record = tmodel->record();
-    QModelIndex index;
-    int lastRow = shortModel->rowCount() - 1;
-    for (int i=0; i<model->columnCount(); i++) {
-      index = shortModel->index(lastRow, i);
-      record.setValue(i, shortModel->data(index));
+    foreach (int row, modifiedRecords.keys()) {
+      tmodel->setRecord(row, modifiedRecords[row]);
     }
 
-    tmodel->setRecord(model->rowCount() - 1, record);
-    if (tmodel->submitAll()) {
+    if (!tmodel->submitAll()) {
       QMessageBox::critical(this, "Error", tmodel->lastError().text());
     }
 
     currentAction = Browse;
+    tmodel->select();
     updateView();
   } else {
     insertButton->setText(tr("Apply"));
@@ -275,33 +271,26 @@ void ResultView::setupMenus()
  */
 void ResultView::updateItem(QStandardItem *item)
 {
-//  model->setItemData(model->index(item->row() + offset, item->column()),
-//                     shortModel->itemData(item->index()));
+  if (currentAction == Browse) {
+    currentAction = Update;
+    insertButton->setText(tr("Apply"));
+    deleteButton->setText(tr("Cancel"));
+  }
 
-//  /// @todo migrate it as a class member
-//  QSqlTableModel *tmodel = dynamic_cast<QSqlTableModel*>(model);
-//  if(tmodel && (lastEditedRow != item->row() + offset
-//                || item->column() == model->columnCount()))
-//  {
-//    if(!tmodel->submitAll())
-//      QMessageBox::critical(this, tr("Error"), tr("Unable to submit new data"));
-//    else
-//      lastEditedRow = item->row() + offset;
-//  }
-
-//  updateView();
+  QSqlRecord record;
+  int row = item->row() + offset;
+  if (modifiedRecords.contains(row)) {
+    record = modifiedRecords[row];
+  } else {
+    record = model->record(row);
+  }
+  record.setValue(item->column(), item->data(Qt::DisplayRole));
+  modifiedRecords[row] = record;
 }
 
 void ResultView::updateView()
 {
-  for(int x=0; x<shortModel->rowCount(); x++)
-    for(int y=0; y<shortModel->columnCount(); y++)
-      garbageCollector << shortModel->item(x, y);
-
   shortModel->clear();
-
-//  foreach(void *item, garbageCollector)
-//    delete item;
 
   if(model->rowCount() == 0)
     return;

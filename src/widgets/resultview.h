@@ -65,7 +65,7 @@ private:
   QMenu                *contextMenu;
   Action                currentAction;
   ExportWizard         *exportWizard;
-  QList<void*>          garbageCollector;
+  QMap<int, QSqlRecord> modifiedRecords;
   int                   lastEditedRow;
   QStandardItemModel   *shortModel;
   Mode                  m_mode;
