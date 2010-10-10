@@ -12,19 +12,7 @@
 
 #include "wrapper.h"
 
-QList<Wrapper*> Wrapper::wrappers;
-
-Wrapper::Wrapper()
+SqlWrapper::SqlWrapper()
   : Plugin()
 {
 }
-
-//QList<Wrapper*> Wrapper::availableFor(QString driver)
-//{
-//  QList<Wrapper*> ret;
-//  foreach(Wrapper *w, wrappers)
-//    if(w->driver() == driver)
-//      ret << w;
-
-//  return ret;
-//}

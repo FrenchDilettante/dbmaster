@@ -18,6 +18,7 @@ ResultView::ResultView(QWidget *parent)
 {
   setupUi(this);
   table->setModel(0);
+  currentAction = Browse;
   offset = 0;
   m_mode = QueryMode;
   shortModel = new QStandardItemModel(this);
@@ -55,19 +56,23 @@ void ResultView::deleteCurrentRow()
   if(m_mode != TableMode)
     return;
 
+  QSqlTableModel *tmodel = (QSqlTableModel*) model;
+
+  QSqlTableModel::EditStrategy strat = tmodel->editStrategy();
+  tmodel->setEditStrategy(QSqlTableModel::OnManualSubmit);
+
   // getting all concerned rows
   QList<int> rows;
-  foreach(QModelIndex i, table->selectionModel()->selection().indexes())
-    rows << i.row() + offset;
+  foreach(QModelIndex i, table->selectionModel()->selectedRows())
+    rows << (i.row() + offset);
 
   qSort(rows.begin(), rows.end());
 
-  for(int i=0; i<(rows.size()-1); i++)
-    while(i<(rows.size()-1) && rows[i] == rows[i+1])
-      rows.removeAt(i+1);
-
   foreach(int r, rows)
     model->removeRow(r);
+
+  tmodel->submitAll();
+  tmodel->setEditStrategy(strat);
 
   updateView();
 }
@@ -90,15 +95,41 @@ void ResultView::forwardReload()
   emit reloadRequested();
 }
 
-void ResultView::prepareInsertRow()
+/**
+ * Clic sur le bouton d'insertion : peut passer en mode insertion ou valider un
+ * ajout/modif.
+ */
+void ResultView::on_insertButton_clicked()
 {
   if(m_mode != TableMode)
     return;
 
-  model->insertRow(model->rowCount());
-  inserting = true;
-  updateView();
-  table->scrollToBottom();
+  if (currentAction == Insert || currentAction == Update) {
+    insertButton->setText(tr("+"));
+    deleteButton->setText(tr("-"));
+
+    QSqlTableModel *tmodel = (QSqlTableModel*) model;
+
+    foreach (int row, modifiedRecords.keys()) {
+      tmodel->setRecord(row, modifiedRecords[row]);
+    }
+
+    if (!tmodel->submitAll()) {
+      QMessageBox::critical(this, "Error", tmodel->lastError().text());
+    }
+
+    currentAction = Browse;
+    tmodel->select();
+    updateView();
+  } else {
+    insertButton->setText(tr("Apply"));
+    deleteButton->setText(tr("Cancel"));
+
+    model->insertRow(model->rowCount());
+    currentAction = Insert;
+    updateView();
+    table->scrollToBottom();
+  }
 }
 
 void ResultView::resizeColumnsToContents()
@@ -214,7 +245,6 @@ void ResultView::setupConnections()
   connect(resultSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateView()));
 
   connect(deleteButton, SIGNAL(clicked()), this, SLOT(deleteCurrentRow()));
-  connect(insertButton, SIGNAL(clicked()), this, SLOT(prepareInsertRow()));
 
   connect(shortModel, SIGNAL(itemChanged(QStandardItem*)),
           this, SLOT(updateItem(QStandardItem*)));
@@ -241,33 +271,26 @@ void ResultView::setupMenus()
  */
 void ResultView::updateItem(QStandardItem *item)
 {
-  model->setItemData(model->index(item->row() + offset, item->column()),
-                     shortModel->itemData(item->index()));
-
-  /// @todo migrate it as a class member
-  QSqlTableModel *tmodel = dynamic_cast<QSqlTableModel*>(model);
-  if(tmodel && (lastEditedRow != item->row() + offset
-                || item->column() == model->columnCount()))
-  {
-    if(!tmodel->submitAll())
-      QMessageBox::critical(this, tr("Error"), tr("Unable to submit new data"));
-    else
-      lastEditedRow = item->row() + offset;
+  if (currentAction == Browse) {
+    currentAction = Update;
+    insertButton->setText(tr("Apply"));
+    deleteButton->setText(tr("Cancel"));
   }
 
-  updateView();
+  QSqlRecord record;
+  int row = item->row() + offset;
+  if (modifiedRecords.contains(row)) {
+    record = modifiedRecords[row];
+  } else {
+    record = model->record(row);
+  }
+  record.setValue(item->column(), item->data(Qt::DisplayRole));
+  modifiedRecords[row] = record;
 }
 
 void ResultView::updateView()
 {
-  for(int x=0; x<shortModel->rowCount(); x++)
-    for(int y=0; y<shortModel->columnCount(); y++)
-      garbageCollector << shortModel->item(x, y);
-
   shortModel->clear();
-
-//  foreach(void *item, garbageCollector)
-//    delete item;
 
   if(model->rowCount() == 0)
     return;
@@ -317,7 +340,7 @@ void ResultView::updateView()
     shortModel->appendRow(row);
     vlabels << QString::number(i+1);
   }
-  if(inserting)
+  if(currentAction == Insert)
   {
     vlabels.removeLast();
     vlabels << "*";

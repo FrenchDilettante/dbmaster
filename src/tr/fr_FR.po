@@ -1216,34 +1216,40 @@ msgid "Query editor"
 msgstr "Éditeur de requêtes"
 
 #. ts-context ResultView
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:187
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:253
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:129
+#, fuzzy
+msgid "Apply"
+msgstr ""
+
+#. ts-context ResultView
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:130
+#, fuzzy
+msgid "Cancel"
+msgstr ""
+
+#. ts-context ResultView
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:222
 #, fuzzy
 msgid "Error"
 msgstr ""
 
 #. ts-context ResultView
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:188
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:223
 msgid "The specified table doesn't exist"
 msgstr "La table n'existe pas"
 
 #. ts-context ResultView
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:227
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:261
 msgid "Alternate row colors"
 msgstr "Alterner les lignes"
 
 #. ts-context ResultView
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:232
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:266
 msgid "Export"
 msgstr "Exporter"
 
 #. ts-context ResultView
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:253
-msgid "Unable to submit new data"
-msgstr "Impossible d'envoyer les données"
-
-#. ts-context ResultView
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:285
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:319
 msgid "Page %1/%2"
 msgstr "Page %1/%2"
 
@@ -1295,12 +1301,14 @@ msgstr "résultats"
 
 #. ts-context ResultView
 #: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:202
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:108
 #, fuzzy
 msgid "+"
 msgstr ""
 
 #. ts-context ResultView
 #: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:209
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:109
 #, fuzzy
 msgid "-"
 msgstr ""
@@ -1635,7 +1643,7 @@ msgstr "Mots entiers"
 #. ts-context SearchDialog
 #: /home/manu/programmation/dbmaster/src/dialogs/searchdialog.ui:100
 msgid "Use regular e&xpressions"
-msgstr "Utiliser des e&xpressions régulières"
+msgstr "E&xpressions régulières"
 
 #. ts-context SearchDialog
 #: /home/manu/programmation/dbmaster/src/dialogs/searchdialog.ui:107
