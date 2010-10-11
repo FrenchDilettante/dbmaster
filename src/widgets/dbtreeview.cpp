@@ -16,10 +16,13 @@
 #include "../iconmanager.h"
 #include "../mainwindow.h"
 
-DbTreeView::DbTreeView(QWidget *parent) :
-    QTreeView(parent)
+DbTreeView::DbTreeView(QWidget *parent)
+  : QTreeView(parent)
 {
-  setModel(DbManager::model());
+  model = DbManager::model();
+  connect(model, SIGNAL(dataChanged(QModelIndex,QModelIndex)),
+          this, SLOT(on_model_dataChanged(QModelIndex,QModelIndex)));
+  setModel(model);
 
   setupActions();
 }
@@ -136,6 +139,17 @@ void DbTreeView::mouseDoubleClickEvent(QMouseEvent *event)
         break;
       }
     }
+  }
+}
+
+/**
+ * Prise en charge de la modification du modèle
+ */
+void DbTreeView::on_model_dataChanged(const QModelIndex &topLeft,
+                                      const QModelIndex &bottomRight) {
+  QSqlDatabase *_db = parentDb(topLeft);
+  if (_db && _db->isOpen()) {
+    expand(topLeft);
   }
 }
 

@@ -65,7 +65,7 @@ void MainWindow::addRecentFile(QString file)
  */
 void MainWindow::checkDb(QSqlDatabase *db)
 {
-  if(db->lastError().type() != QSqlError::NoError)
+  if(db->isOpenError() && db->lastError().type() != QSqlError::NoError)
     QMessageBox::critical(this,
                           tr("Error !"),
                           tr("Unable to connect :\n%1")
