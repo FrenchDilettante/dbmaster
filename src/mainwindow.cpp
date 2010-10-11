@@ -166,7 +166,8 @@ void MainWindow::closeEvent(QCloseEvent *event) {
   // tooltips activés ou non
   s.setValue("tooltips", tooltipButton->isChecked());
   // où se situe le dock de connexion
-  s.setValue("dock_area", dockWidgetArea(dockWidget));
+  s.setValue("maindock_area", dockWidgetArea(dockWidget));
+  s.setValue("maindock_size", dockWidget->size());
   s.endGroup();
 
   // fichiers récents
@@ -565,8 +566,28 @@ void MainWindow::setupWidgets()
     setWindowState(Qt::WindowMaximized);
 
 //  removeDockWidget(dockWidget);
-//  addDockWidget(s.value("dock_area", Qt::LeftDockWidgetArea).toInt(),
-//                dockWidget);
+  int corner = s.value("maindock_area", 1).toInt();
+  switch (corner) {
+  case 1:
+    addDockWidget(Qt::LeftDockWidgetArea, dockWidget);
+    break;
+
+  case 2:
+    addDockWidget(Qt::RightDockWidgetArea, dockWidget);
+    break;
+
+  case 4:
+    addDockWidget(Qt::TopDockWidgetArea, dockWidget);
+    break;
+
+  case 8:
+    addDockWidget(Qt::BottomDockWidgetArea, dockWidget);
+    break;
+  }
+
+  if (s.contains("maindock_size")) {
+    dockWidget->resize(s.value("maindock_size").toSize());
+  }
 
   queriesStatusLabel = new QLabel("", this);
   QMainWindow::statusBar()->addPermanentWidget(queriesStatusLabel);
@@ -610,7 +631,8 @@ void MainWindow::setupWidgets()
   // ensures compatibility with Qt 4.4
   tabWidget->setMovable(true);
   tabWidget->setTabsClosable(true);
-  actionCloseTab->setVisible(false);
+//  actionCloseTab->setVisible(false);
+  mainToolBar->removeAction(actionCloseTab);
 #endif
 
   // loading icons from current theme

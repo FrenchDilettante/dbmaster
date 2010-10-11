@@ -367,6 +367,9 @@
    <property name="text">
     <string>Connection panel</string>
    </property>
+   <property name="shortcut">
+    <string>F9</string>
+   </property>
   </action>
   <action name="actionClearRecent">
    <property name="text">
