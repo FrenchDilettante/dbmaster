@@ -12,10 +12,33 @@
 
 #include "iconmanager.h"
 
+#include <QApplication>
 #include <QPainter>
 #include <QPixmap>
+#include <QStyle>
 
 QMap<QString, QIcon> IconManager::m_icons;
+
+/**
+ * Créé une icône de dossier personnalisée.
+ *
+ * @param over
+ *    L'icône à superposer
+ */
+QIcon IconManager::customFolder(QIcon over) {
+  QPixmap baseIcon = ((QApplication*) QApplication::instance())->style()
+                   ->standardIcon(QStyle::SP_DirIcon).pixmap(16, 16);
+
+  QSize overSize = QSize(12, 12);
+  QPoint topLeft = QPoint(16 - overSize.width(), 16 - overSize.height());
+  QPainter painter;
+  painter.begin(&baseIcon);
+  painter.drawPixmap(QRect(topLeft, overSize),
+                     over.pixmap(overSize));
+  painter.end();
+
+  return QIcon(baseIcon);
+}
 
 QIcon IconManager::get(QString name)
 {
@@ -42,49 +65,11 @@ void IconManager::init()
   m_icons["connect_established"]  = fromRessources("connect_established");
   m_icons["connect_no"]           = fromRessources("connect_no");
 
-  QPainter painter;
   if(QIcon::hasThemeIcon("gtk-preferences"))
     m_icons["preferences"] = QIcon::fromTheme("gtk-preferences");
 
-  if(QIcon::hasThemeIcon("stock_database"))
-  {
-    QPixmap db_add(32, 32);
-    painter.begin(&db_add);
-//    painter.drawImage(QRect(0, 0, 32, 32),
-//                      QIcon::fromTheme("stock_database").pixmap(32, 32)
-//                      .toImage());
-    painter.setBrush(Qt::NoBrush);
-    painter.drawRect(db_add.rect());
-    painter.drawLine(0, 0, 32, 32);
-    painter.end();
-
-//    m_icons["db_add"] = QIcon(db_add);
-  }
-
-  if(QIcon::hasThemeIcon("folder"))
-  {
-    QPixmap folder_tables(16, 16);
-    painter.begin(&folder_tables);
-    painter.drawImage(QRect(0, 0, 16, 16),
-                      QIcon::fromTheme("folder").pixmap(16, 16)
-                      .toImage());
-    painter.end();
-
-//    m_icons["folder_tables"] = QIcon(folder_tables);
-
-    QPixmap folder_views(16, 16);
-    painter.begin(&folder_views);
-    painter.drawImage(QRect(0, 0, 16, 16),
-                      QIcon::fromTheme("folder").pixmap(16, 16)
-                      .toImage());
-    painter.drawText(QRect(8, 8, 8, 8), "V");
-    painter.end();
-  } else {
-    m_icons["folder_tables"] = IconManager::get("folder");
-  }
-
-  QPixmap folder_view(16, 16);
-  painter.begin(&folder_view);
-  painter.end();
+  m_icons["folder_tables"] = QIcon(":/img/table.png");
+  m_icons["folder_views"] = QIcon(":/img/table_lightning.png");
+  m_icons["folder_systemtables"] = QIcon(":/img/table_gear.png");
 #endif
 }

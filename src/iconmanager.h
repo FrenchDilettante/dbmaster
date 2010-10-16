@@ -25,6 +25,7 @@ public:
 
 private:
   static QIcon fromRessources(QString name);
+  static QIcon customFolder(QIcon over);
 
   static QMap<QString, QIcon> m_icons;
 };
