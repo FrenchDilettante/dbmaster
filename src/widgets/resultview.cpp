@@ -33,6 +33,8 @@ ResultView::ResultView(QWidget *parent)
   nextPageButton->setIcon(IconManager::get("go-next"));
   prevPageButton->setIcon(IconManager::get("go-previous"));
   reloadButton->setIcon(IconManager::get("view-refresh"));
+  insertButton->setIcon(IconManager::get("list-add"));
+  deleteButton->setIcon(IconManager::get("list-remove"));
 }
 
 void ResultView::contextMenuEvent(QContextMenuEvent *e)
@@ -49,32 +51,6 @@ void ResultView::contextMenuEvent(QContextMenuEvent *e)
 
   contextMenu->move(e->globalPos());
   contextMenu->exec();
-}
-
-void ResultView::deleteCurrentRow()
-{
-  if(m_mode != TableMode)
-    return;
-
-  QSqlTableModel *tmodel = (QSqlTableModel*) model;
-
-  QSqlTableModel::EditStrategy strat = tmodel->editStrategy();
-  tmodel->setEditStrategy(QSqlTableModel::OnManualSubmit);
-
-  // getting all concerned rows
-  QList<int> rows;
-  foreach(QModelIndex i, table->selectionModel()->selectedRows())
-    rows << (i.row() + offset);
-
-  qSort(rows.begin(), rows.end());
-
-  foreach(int r, rows)
-    model->removeRow(r);
-
-  tmodel->submitAll();
-  tmodel->setEditStrategy(strat);
-
-  updateView();
 }
 
 void ResultView::exportContent()
@@ -96,6 +72,39 @@ void ResultView::forwardReload()
 }
 
 /**
+ * Clic sur le bouton supprimer : peut annuler l'opération en cours ou supprimer
+ * la ligne en cours.
+ */
+void ResultView::on_deleteButton_clicked()
+{
+  if(m_mode != TableMode)
+    return;
+
+  QSqlTableModel *tmodel = (QSqlTableModel*) model;
+
+  if (currentAction != Browse) {
+    // Annulation de l'opération en cours
+    insertButton->setIcon(IconManager::get("list-add"));
+    deleteButton->setIcon(IconManager::get("list-remove"));
+
+    currentAction = Browse;
+    tmodel->revertAll();
+  } else {
+    // suppression des lignes sélectionnées
+    QSet<int> rows;
+    foreach(QModelIndex i, table->selectionModel()->selectedIndexes())
+      rows << (i.row() + offset);
+
+    foreach(int r, rows)
+      model->removeRow(r);
+
+    tmodel->submitAll();
+  }
+
+  updateView();
+}
+
+/**
  * Clic sur le bouton d'insertion : peut passer en mode insertion ou valider un
  * ajout/modif.
  */
@@ -105,8 +114,8 @@ void ResultView::on_insertButton_clicked()
     return;
 
   if (currentAction == Insert || currentAction == Update) {
-    insertButton->setText(tr("+"));
-    deleteButton->setText(tr("-"));
+    insertButton->setIcon(IconManager::get("list-add"));
+    deleteButton->setIcon(IconManager::get("list-remove"));
 
     QSqlTableModel *tmodel = (QSqlTableModel*) model;
 
@@ -122,7 +131,9 @@ void ResultView::on_insertButton_clicked()
     tmodel->select();
     updateView();
   } else {
+    insertButton->setIcon(QIcon());
     insertButton->setText(tr("Apply"));
+    deleteButton->setIcon(QIcon());
     deleteButton->setText(tr("Cancel"));
 
     model->insertRow(model->rowCount());
@@ -244,7 +255,7 @@ void ResultView::setupConnections()
   connect(reloadButton, SIGNAL(clicked()), this, SLOT(forwardReload()));
   connect(resultSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateView()));
 
-  connect(deleteButton, SIGNAL(clicked()), this, SLOT(deleteCurrentRow()));
+  connect(deleteButton, SIGNAL(clicked()), this, SLOT(on_deleteButton_clicked()));
 
   connect(shortModel, SIGNAL(itemChanged(QStandardItem*)),
           this, SLOT(updateItem(QStandardItem*)));

@@ -75,7 +75,7 @@ private:
   int                   offset;
 
 private slots:
-  void deleteCurrentRow();
+  void on_deleteButton_clicked();
   void exportContent();
   void forwardReload();
   void on_insertButton_clicked();
