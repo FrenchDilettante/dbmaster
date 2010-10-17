@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>540</width>
-    <height>133</height>
+    <width>508</width>
+    <height>100</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -49,7 +49,7 @@
    <item row="0" column="3">
     <widget class="QToolButton" name="nextButton">
      <property name="icon">
-      <iconset resource="../icons.qrc">
+      <iconset>
        <normaloff>:/img/1rightarrow.png</normaloff>:/img/1rightarrow.png</iconset>
      </property>
     </widget>
@@ -63,7 +63,7 @@
       </sizepolicy>
      </property>
      <property name="pixmap">
-      <pixmap resource="../icons.qrc">:/img/info.png</pixmap>
+      <pixmap>:/img/info.png</pixmap>
      </property>
      <property name="alignment">
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -81,16 +81,13 @@
      <property name="maximumSize">
       <size>
        <width>16777215</width>
-       <height>75</height>
+       <height>50</height>
       </size>
      </property>
     </widget>
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="../icons.qrc"/>
-  <include location="../icons.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
