@@ -49,7 +49,7 @@ private slots:
   void on_model_dataChanged(const QModelIndex & topLeft,
                             const QModelIndex & bottomRight);
   void editCurrent();
-  void removeCurrentDb();
+  void on_removeDbAct_triggered();
   void toggleCurrentDb();
 };
 
