@@ -66,11 +66,6 @@ void ResultView::exportContent()
   exportWizard->exec();
 }
 
-void ResultView::forwardReload()
-{
-  emit reloadRequested();
-}
-
 /**
  * Clic sur le bouton supprimer : peut annuler l'opération en cours ou supprimer
  * la ligne en cours.
@@ -140,6 +135,20 @@ void ResultView::on_insertButton_clicked()
     currentAction = Insert;
     updateView();
     table->scrollToBottom();
+  }
+}
+
+void ResultView::on_reloadButton_clicked()
+{
+  switch (m_mode) {
+  case QueryMode:
+    emit reloadRequested();
+    break;
+
+  case TableMode:
+    ((QSqlTableModel*) model)->select();
+    updateView();
+    break;
   }
 }
 
@@ -252,7 +261,7 @@ void ResultView::setupConnections()
   connect(nextPageButton, SIGNAL(clicked()), this, SLOT(scrollDown()));
   connect(lastPageButton, SIGNAL(clicked()), this, SLOT(scrollEnd()));
 
-  connect(reloadButton, SIGNAL(clicked()), this, SLOT(forwardReload()));
+  connect(reloadButton, SIGNAL(clicked()), this, SLOT(on_reloadButton_clicked()));
   connect(resultSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateView()));
 
   connect(deleteButton, SIGNAL(clicked()), this, SLOT(on_deleteButton_clicked()));

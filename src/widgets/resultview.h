@@ -77,7 +77,7 @@ private:
 private slots:
   void on_deleteButton_clicked();
   void exportContent();
-  void forwardReload();
+  void on_reloadButton_clicked();
   void on_insertButton_clicked();
   void updateItem(QStandardItem *item);
   void updateView();
