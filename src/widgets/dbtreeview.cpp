@@ -16,10 +16,13 @@
 #include "../iconmanager.h"
 #include "../mainwindow.h"
 
-DbTreeView::DbTreeView(QWidget *parent) :
-    QTreeView(parent)
+DbTreeView::DbTreeView(QWidget *parent)
+  : QTreeView(parent)
 {
-  setModel(DbManager::model());
+  model = DbManager::model();
+  connect(model, SIGNAL(dataChanged(QModelIndex,QModelIndex)),
+          this, SLOT(on_model_dataChanged(QModelIndex,QModelIndex)));
+  setModel(model);
 
   setupActions();
 }
@@ -139,6 +142,34 @@ void DbTreeView::mouseDoubleClickEvent(QMouseEvent *event)
   }
 }
 
+/**
+ * Prise en charge de la modification du modèle
+ */
+void DbTreeView::on_model_dataChanged(const QModelIndex &topLeft,
+                                      const QModelIndex &bottomRight) {
+  QSqlDatabase *_db = parentDb(topLeft);
+  if (_db && _db->isOpen()) {
+    expand(topLeft);
+  }
+}
+
+/**
+ * Suppression de la connexion sélectionnée. Ne fait rien si elle est ouverte.
+ */
+void DbTreeView::on_removeDbAct_triggered() {
+  if(selectedIndexes().size() == 1) {
+    QModelIndex index = selectedIndexes()[0];
+    if (DbManager::getDatabase(index.row())->isOpen()) {
+      QMessageBox::warning(this,
+                           tr("Cannot remove"),
+                           tr("You must close the database before remove it."));
+      return;
+    }
+
+    DbManager::removeDatabase(index.row());
+  }
+}
+
 QSqlDatabase *DbTreeView::parentDb(QModelIndex index)
 {
   while(index != QModelIndex())
@@ -149,15 +180,6 @@ QSqlDatabase *DbTreeView::parentDb(QModelIndex index)
   }
 
   return NULL;
-}
-
-void DbTreeView::removeCurrentDb()
-{
-  if(selectedIndexes().size() == 1)
-  {
-    QModelIndex index = selectedIndexes()[0];
-    DbManager::removeDatabase(index.row());
-  }
 }
 
 void DbTreeView::setupActions()
@@ -174,7 +196,8 @@ void DbTreeView::setupActions()
   removeDbAct = new QAction(this);
   removeDbAct->setText(tr("Remove"));
   removeDbAct->setIcon(IconManager::get("list-remove"));
-  connect(removeDbAct, SIGNAL(triggered()), this, SLOT(removeCurrentDb()));
+  connect(removeDbAct, SIGNAL(triggered()),
+          this, SLOT(on_removeDbAct_triggered()));
 
   toggleAct = new QAction(this);
   toggleAct->setText(tr("Connect"));

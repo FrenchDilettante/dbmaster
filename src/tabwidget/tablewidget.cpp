@@ -34,7 +34,7 @@ TableWidget::TableWidget(QString table, QSqlDatabase *db, QWidget *parent)
 
 QIcon TableWidget::icon()
 {
-  return IconManager::get("x-office-spreadsheet");
+  return IconManager::get("table");
 }
 
 QString TableWidget::id()

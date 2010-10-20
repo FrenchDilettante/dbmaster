@@ -298,7 +298,7 @@ void DbManagerPrivate::refreshModelItem(QSqlDatabase *db)
 
       foreach(QString table, db->tables(QSql::Tables))
       {
-        i = new QStandardItem(QIcon(":/img/table.png"), table);
+        i = new QStandardItem(IconManager::get("table"), table);
         i->setData(DbManager::TableItem, Qt::UserRole);
         tablesItem->appendRow(i);
       }
@@ -310,11 +310,11 @@ void DbManagerPrivate::refreshModelItem(QSqlDatabase *db)
                             .arg(QString::number(db->tables(QSql::Views)
                                                  .size())));
 
-      viewsItem->setIcon(QIcon(":/img/folder_documents.png"));
+      viewsItem->setIcon(IconManager::get("folder_views"));
 
       foreach(QString view, db->tables(QSql::Views))
       {
-        i = new QStandardItem(QIcon(":/img/view.png"), view);
+        i = new QStandardItem(IconManager::get("table_lightning"), view);
         i->setData(DbManager::ViewItem, Qt::UserRole);
         viewsItem->appendRow(i);
       }
@@ -326,11 +326,11 @@ void DbManagerPrivate::refreshModelItem(QSqlDatabase *db)
                             .arg(QString::number(db->tables(QSql::Views)
                                                  .size())));
 
-      sysTablesItem->setIcon(QIcon(":/img/folder_grey.png"));
+      sysTablesItem->setIcon(IconManager::get("folder_systemtables"));
 
       foreach(QString sysTable, db->tables(QSql::Views))
       {
-        i = new QStandardItem(sysTable);
+        i = new QStandardItem(IconManager::get("folder_gear"), sysTable);
         i->setData(DbManager::SysTableItem, Qt::UserRole);
         sysTablesItem->appendRow(i);
       }
@@ -398,7 +398,9 @@ void DbManagerPrivate::run()
       if(!closingAll)
       {
         emit statusChanged(db);
-        emit statusChanged(dbMap[db]->index());
+        if (dbMap.contains(db)) {
+          emit statusChanged(dbMap[db]->index());
+        }
       }
 
       if(!dbList.contains(db))

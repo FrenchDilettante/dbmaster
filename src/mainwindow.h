@@ -85,6 +85,7 @@ private slots:
   void selectAll();
   void setQueryCount(int count);
   void undo();
+  void userManual();
 };
 
 #endif // MAINWINDOW_H

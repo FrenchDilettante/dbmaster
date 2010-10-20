@@ -65,5 +65,8 @@
         <file>img/edit-undo.png</file>
         <file>img/edit-redo.png</file>
         <file>img/accessories-text-editor.png</file>
+        <file>img/table.png</file>
+        <file>img/table_lightning.png</file>
+        <file>img/table_gear.png</file>
     </qresource>
 </RCC>

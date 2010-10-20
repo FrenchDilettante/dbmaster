@@ -20,6 +20,7 @@
   * Status bar interacts with the logging system
   * Connect button in DbDialog
   * Queries status label in the main window
+  * Connexion dock stores its position on closing
 
 == Bugfixes ==
 

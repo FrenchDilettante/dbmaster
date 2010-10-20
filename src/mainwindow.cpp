@@ -23,6 +23,8 @@
 #include "tabwidget/tablewidget.h"
 #include "widgets/dbtreeview.h"
 
+#include <QDesktopServices>
+
 DbDialog     *MainWindow::dbDialog;
 NewDbWizard  *MainWindow::dbWizard;
 PluginDialog *MainWindow::pluginDialog;
@@ -63,7 +65,7 @@ void MainWindow::addRecentFile(QString file)
  */
 void MainWindow::checkDb(QSqlDatabase *db)
 {
-  if(db->lastError().type() != QSqlError::NoError)
+  if(db->isOpenError() && db->lastError().type() != QSqlError::NoError)
     QMessageBox::critical(this,
                           tr("Error !"),
                           tr("Unable to connect :\n%1")
@@ -164,7 +166,8 @@ void MainWindow::closeEvent(QCloseEvent *event) {
   // tooltips activés ou non
   s.setValue("tooltips", tooltipButton->isChecked());
   // où se situe le dock de connexion
-  s.setValue("dock_area", dockWidgetArea(dockWidget));
+  s.setValue("maindock_area", dockWidgetArea(dockWidget));
+  s.setValue("maindock_size", dockWidget->size());
   s.endGroup();
 
   // fichiers récents
@@ -449,6 +452,9 @@ void MainWindow::selectAll()
     currentTab()->selectAll();
 }
 
+/**
+ * Affiche le nombre de requêtes en cour dans la statusBar
+ */
 void MainWindow::setQueryCount(int count)
 {
   queriesStatusLabel->setText(tr("%1 queries pending...")
@@ -560,8 +566,28 @@ void MainWindow::setupWidgets()
     setWindowState(Qt::WindowMaximized);
 
 //  removeDockWidget(dockWidget);
-//  addDockWidget(s.value("dock_area", Qt::LeftDockWidgetArea).toInt(),
-//                dockWidget);
+  int corner = s.value("maindock_area", 1).toInt();
+  switch (corner) {
+  case 1:
+    addDockWidget(Qt::LeftDockWidgetArea, dockWidget);
+    break;
+
+  case 2:
+    addDockWidget(Qt::RightDockWidgetArea, dockWidget);
+    break;
+
+  case 4:
+    addDockWidget(Qt::TopDockWidgetArea, dockWidget);
+    break;
+
+  case 8:
+    addDockWidget(Qt::BottomDockWidgetArea, dockWidget);
+    break;
+  }
+
+  if (s.contains("maindock_size")) {
+    dockWidget->resize(s.value("maindock_size").toSize());
+  }
 
   queriesStatusLabel = new QLabel("", this);
   QMainWindow::statusBar()->addPermanentWidget(queriesStatusLabel);
@@ -605,7 +631,8 @@ void MainWindow::setupWidgets()
   // ensures compatibility with Qt 4.4
   tabWidget->setMovable(true);
   tabWidget->setTabsClosable(true);
-  actionCloseTab->setVisible(false);
+//  actionCloseTab->setVisible(false);
+  mainToolBar->removeAction(actionCloseTab);
 #endif
 
   // loading icons from current theme
@@ -635,4 +662,19 @@ void MainWindow::undo()
 {
   if(currentTab())
     currentTab()->undo();
+}
+
+/**
+ * Ouvre la doc. utilisateur
+ */
+void MainWindow::userManual() {
+  QString url = "";
+#if defined(Q_WS_X11)
+  QString lang = QLocale::system().name().left(2).toLower();
+  url = QString("share/doc/%1/index.html").arg(lang);
+
+  if(!QFile::exists(url))
+    url = QString(QString(PREFIX) + "/share/en/index.html");
+#endif
+  QDesktopServices::openUrl(url);
 }

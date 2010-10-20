@@ -46,7 +46,12 @@ int main(int argc, char *argv[])
   transdir = "share/tr";
 #endif
 
-  QString path = transdir.append("/%1.qm").arg(lang);
+  QString path;
+  /* on teste d'abord si le .qm est dans le dossier courant -> alors on est en
+   * dev, on le charge, sinon il est dans le répertoire d'installation. */
+  path = QDir::currentPath() + QString("/tr/%1.qm").arg(lang);
+  if (!QFile::exists(path))
+    path = transdir.append("/%1.qm").arg(lang);
   translator.load(path);
   a.installTranslator(&translator);
   

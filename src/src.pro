@@ -144,3 +144,5 @@ unix:!macx {
     icon.files = img/dbmaster.png
     INSTALLS += icon
 }
+
+include(../updateqm.pri)
