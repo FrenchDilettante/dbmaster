@@ -66,7 +66,7 @@ int DbManagerPrivate::addDatabase(QString driver, QString host, QString user,
   if(save)
   {
     saveList();
-    LogDialog::instance()->append(QObject::tr("Database %1 on %2 added.")
+    LogDialog::instance()->append(QObject::tr("Database %1 on %2 added")
             .arg(dbnm)
             .arg(host));
   }
@@ -79,6 +79,7 @@ void DbManagerPrivate::close(QSqlDatabase* db)
   if (!dbList.contains(db))
     return;
 
+  qDebug() << "close" << db->hostName() << db->databaseName();
   closeStack.push(db);
 }
 
@@ -362,37 +363,48 @@ void DbManagerPrivate::removeDatabase(QSqlDatabase *db)
   dbMap.remove(db);
   dbList.removeAll(db);
   saveList();
+
+  if(!isRunning())
+    start();
 }
 
+/**
+ * Thread de gestion des connexions
+ */
 void DbManagerPrivate::run()
 {
   QSqlDatabase *db;
 
-  while(dbMap.size() > 0)
+  while(dbList.size() > 0)
   {
+    // traitement des connexions à ouvrir
     while(openStack.size() > 0)
     {
       foreach(QSqlDatabase *d, closeStack)
       {
+        // on supprime les doublons éventuels
         while(openStack.contains(d))
           openStack.remove(openStack.indexOf(d));
       }
       db = openStack.pop();
-      if(db->open())
+      if(db->open()) {
         LogDialog::instance()->append(tr("Connected to %1")
                                       .arg(db->hostName()));
-      else
+      } else {
         LogDialog::instance()->append(tr("Unable to connect to %1")
                                       .arg(db->hostName()));
+      }
 
       emit statusChanged(db);
       emit statusChanged(dbMap[db]->index());
     }
 
+    // traitement des connexions à fermer
     while(closeStack.size() > 0)
     {
       db = closeStack.pop();
       db->close();
+      qDebug() << "prout" << db->databaseName();
       LogDialog::instance()->append(tr("Disconnected from %1")
                                     .arg(db->hostName()));
       if(!closingAll)

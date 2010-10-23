@@ -1423,7 +1423,7 @@ msgstr "Impossible de se connecter à %1"
 #, qt-format
 msgctxt "DbManagerPrivate|"
 msgid "Disconnected from %1"
-msgstr "Déconnecté de %1*"
+msgstr "Déconnecté de %1"
 
 #: /home/manu/programmation/dbmaster/src/dbmanager.cpp:455
 msgctxt "DbManagerPrivate|"
