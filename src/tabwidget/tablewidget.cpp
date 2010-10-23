@@ -55,7 +55,9 @@ void TableWidget::reload()
   if(!m_db->isOpen())
     return;
 
-  if(!m_db->tables().contains(m_table))
+  if(!m_db->tables(QSql::Tables).contains(m_table)
+    && !m_db->tables(QSql::Views).contains(m_table)
+    && !m_db->tables(QSql::SystemTables).contains(m_table))
   {
     qDebug("Unknown table !");
     return;
