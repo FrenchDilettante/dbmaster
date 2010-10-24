@@ -49,6 +49,9 @@ MainWindow::~MainWindow()
 {
 }
 
+/**
+ * Ajoute le nom de fichier passé en paramètre à la liste des fichiers récents.
+ */
 void MainWindow::addRecentFile(QString file)
 {
   if(recentFiles.indexOf(file) >= 0)
@@ -210,7 +213,7 @@ void MainWindow::copy()
 }
 
 /**
- * Launch the new db wizard
+ * Affiche l'assistant de nouvelle connexion
  */
 void MainWindow::createDatabase()
 {
@@ -524,6 +527,9 @@ void MainWindow::setupConnections()
 
 void MainWindow::setupWidgets()
 {
+  // ligne à supprimer lorsque la doc util sera disponible
+  actionUserManual->setVisible(false);
+
   aboutDial     = new AboutDialog(this);
   confDial      = new ConfigDialog(this);
   logDial       = LogDialog::instance();
