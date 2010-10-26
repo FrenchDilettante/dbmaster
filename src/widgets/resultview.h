@@ -13,12 +13,24 @@
 #ifndef RESULTVIEW_H
 #define RESULTVIEW_H
 
-#include <QtGui>
-
 #include "../query/querytoken.h"
 #include "../wizards/exportwizard.h"
 #include "ui_resultview.h"
 
+#include <QAction>
+#include <QContextMenuEvent>
+#include <QSqlRecord>
+#include <QSqlQueryModel>
+#include <QSqlTableModel>
+#include <QStandardItem>
+#include <QStandardItemModel>
+#include <QWidget>
+
+/**
+ * Fournit un paliatif à QTableView en ajoutant une pagination, un menu
+ * contextuel pour l'export et l'ajout/suppression de lignes dans les tables.
+ * Prend en charge les jetons de requête et les tables.
+ */
 class ResultView : public QWidget, Ui::ResultView
 {
 Q_OBJECT

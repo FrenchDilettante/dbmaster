@@ -15,9 +15,17 @@
 
 #include "querytoken.h"
 
-#include <QtCore>
-#include <QtSql>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QStack>
+#include <QThread>
 
+/**
+ * Thread de traitement de jetons de requêtes : on y place les jetons via push,
+ * ils seront exécutés dans l'ordre FIFO.
+ * Afin de faciliter l'ordonancement, un thread est affecté à une seule
+ * connexion.
+ */
 class QueryThread : public QThread
 {
 Q_OBJECT
