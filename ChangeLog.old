@@ -90,3 +90,85 @@
 == Bugfixes ==
 
   * New db wizard showed the wrong default driver when it was just modified
+
+
+= 0.4 =
+
+== Highlights ==
+
+  * First launch assistant
+  * New connection wizard
+  * You can now install DbMaster
+
+== Improvements ==
+
+  * Toolbars are enabled/disabled depending on the current tab
+  * The database combobox automatically choices the default DBMS
+  * make install available
+  * Query editors store the last used database
+  * Automatically scrolls down when adding a new line in a table
+  * Support for SQL types
+  * Includes default preferences
+
+== Bugfixes ==
+
+  * Fixed bug in DbComboBox DBMS names
+  * Fixed wrong tab order in ndw_secondpage
+  * Shows a MessageBox if the connection to the database failed
+  * Fixed crash when removing an openned database
+  * Fixed indices errors in DbManager
+  * Fixed crash when getting selected item in DbTreeWidget
+  * Fixed ignored strings color in syntax highlighting
+  * Fixed number support in syntax highlighting
+  * Fixed comment highlighting
+  * Fixed several tabs bugs
+
+
+= 0.3 =
+
+== Highlights ==
+
+  * Syntax highlighting
+  * Support for translations
+
+== Improvements ==
+
+  * Passwords may be saved or not
+  * Syntax highlighting may be configured in the preferences dialog
+  * DbMaster auto-detects available drivers
+  * src folder better organized
+  * Integrates QColorButton (thanks to Florian Becker)
+  * French translation added
+  * DbDialog redrawn / more usefull
+
+
+== Bugfixes ==
+
+  * Some bugs on closing the main window
+  * A single table can be openned several times
+  * Close a database doesn't close its openned tables
+  * TableWidget was not a AbstractTabWidget child
+
+
+
+= 0.2 =
+
+== Highlights ==
+
+  * DbMaster won't close if you didn't save some file
+  * A preferences dialog is available
+  * Query editor stabilized and improved
+
+
+== Improvements ==
+
+  * Modifications on tables are saved automatically
+  * You can now remove a connection
+  * You can choice the query editor's font
+  * Many supplementary actions
+
+== Bugfixes ===
+
+  * Many indices bugs fixed on DbManager
+  * Saving a query file added a new line at the end of the file
+  * The connections list was closable
