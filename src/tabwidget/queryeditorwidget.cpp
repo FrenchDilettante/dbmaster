@@ -466,23 +466,29 @@ void QueryEditorWidget::validateToken(QSqlError err)
     }
 
     statusBar->showMessage(
-        tr("Query executed with success in %2secs (%1 lines concerned)")
+        tr("Query executed with success in %2secs (%1 lines returned)")
         .arg(token->model()->rowCount())
         .arg(token->duration()));
 
     logMsg = tr("Query executed with success");
     logData["query"] = token->query();
     LogDialog::instance()->append(logMsg, logData);
+
+    debugText->append(QString("<b>[%1]</b>%2")
+                      .arg(QTime::currentTime().toString())
+                      .arg(tr("Query executed with success in %2secs (%1 lines returned)")
+                           .arg(token->model()->rowCount())
+                           .arg(token->duration())));
     break;
 
   default:
     statusBar->showMessage(tr("Unable to run query"));
+
+    debugText->append(QString("<b>[%1]</b>%2")
+                      .arg(QTime::currentTime().toString())
+                      .arg(err.text()));
     break;
   }
 
   runButton->setEnabled(true);
-
-  debugText->append(QString("<b>[%1]</b>%2")
-                    .arg(QTime::currentTime().toString())
-                    .arg(err.text()));
 }
