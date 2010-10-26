@@ -5,7 +5,7 @@ Needed to compile DbMaster :
   * make
   * g++
 
-Linux is recommended, but DbMaster compiles on MS Window too.
+Windows users should download precompiled binaries.
 
 = Compilation =
 
