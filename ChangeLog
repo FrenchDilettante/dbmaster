@@ -21,6 +21,7 @@
   * Connect button in DbDialog
   * Queries status label in the main window
   * Connexion dock stores its position on closing
+  * Reload button for tables
 
 == Bugfixes ==
 
