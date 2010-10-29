@@ -28,6 +28,22 @@ DbManagerPrivate::DbManagerPrivate()
   setupConnections();
 }
 
+/**
+ * Ajoute une base au pool de connexions.
+ *
+ * @param driver
+ *    Voir doc Qt
+ * @param host
+ *    Hôte distant ou local
+ * @param user
+ *    Nom d'utilisateur
+ * @param pswd
+ *    Mot de passe
+ * @param dbnm
+ *    Base de données
+ * @param save
+ *    Déclenche l'enregistrement de la liste ou non
+ */
 int DbManagerPrivate::addDatabase(QString driver, QString host, QString user,
                             QString pswd, QString dbnm, bool save)
 {
@@ -39,6 +55,7 @@ int DbManagerPrivate::addDatabase(QString driver, QString host, QString user,
 
   foreach(QSqlDatabase *d, dbList)
   {
+    // on contrôle les éventuels doublons
     if (d->hostName() == db.hostName() &&
             d->userName() == db.userName() &&
             d->password() == db.password() &&
@@ -59,8 +76,8 @@ int DbManagerPrivate::addDatabase(QString driver, QString host, QString user,
   dbMap[newDb]->setIcon(IconManager::get("connect_no"));
   dbMap[newDb]->setToolTip(dbToolTip(newDb));
 
-  if(!isRunning())
-    start();
+//  if(!isRunning())
+//    start();
 
   m_model->appendRow(dbMap[newDb]);
   if(save)
@@ -79,8 +96,10 @@ void DbManagerPrivate::close(QSqlDatabase* db)
   if (!dbList.contains(db))
     return;
 
-  qDebug() << "close" << db->hostName() << db->databaseName();
   closeStack.push(db);
+
+  if (!isRunning())
+    start();
 }
 
 QString DbManagerPrivate::dbTitle(QSqlDatabase *db)
@@ -245,6 +264,9 @@ void DbManagerPrivate::open(QSqlDatabase *db, QString pswd)
   openStack.push(db);
   while(closeStack.contains(db))
     closeStack.remove(closeStack.indexOf(db));
+
+  if (!isRunning())
+    start();
 }
 
 void DbManagerPrivate::openList()
@@ -404,7 +426,6 @@ void DbManagerPrivate::run()
     {
       db = closeStack.pop();
       db->close();
-      qDebug() << "prout" << db->databaseName();
       LogDialog::instance()->append(tr("Disconnected from %1")
                                     .arg(db->hostName()));
       if(!closingAll)
