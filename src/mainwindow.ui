@@ -222,9 +222,9 @@
        <property name="selectionMode">
         <enum>QAbstractItemView::ExtendedSelection</enum>
        </property>
-       <attribute name="headerVisible">
-        <bool>false</bool>
-       </attribute>
+       <property name="headerHidden">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
     </layout>
@@ -373,6 +373,9 @@
    </property>
    <property name="toolTip">
     <string>Close the current tab</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+W</string>
    </property>
   </action>
   <action name="actionLeftPanel">

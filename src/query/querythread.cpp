@@ -38,9 +38,10 @@ void QueryThread::run()
     if(token->db() != m_db)
       continue;
 
-    query = QSqlQuery(token->query(), *m_db);
+//    query = QSqlQuery(token->query(), *m_db);
+    query = QSqlQuery(*m_db);
     startTime = time(NULL);
-    exec = query.exec();
+    exec = query.exec(token->query());
     token->validate(query.lastError(), time(NULL) - startTime);
 
     if(exec)

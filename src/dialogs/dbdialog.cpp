@@ -29,8 +29,21 @@ DbDialog::DbDialog(QWidget *parent)
 
 void DbDialog::accept()
 {
-  if(db->isOpen())
-    db->close();
+  if(db->isOpen()) {
+    close();
+    return;
+  }
+
+  apply();
+
+  QDialog::accept();
+  close();
+}
+
+void DbDialog::apply() {
+  if(db->isOpen()) {
+    return;
+  }
 
   db->setHostName(hostEdit->text());
   db->setUserName(userEdit->text());
@@ -38,8 +51,6 @@ void DbDialog::accept()
   db->setDatabaseName(dbEdit->text());
 
   DbManager::update(db);
-  QDialog::accept();
-  close();
 }
 
 /**
@@ -128,6 +139,10 @@ void DbDialog::setupConnections()
   connect(remButton,    SIGNAL(clicked()), this,    SLOT(removeCurrent()));
   connect(testButton,   SIGNAL(clicked()), this,    SLOT(testConnection()));
   connect(toggleButton, SIGNAL(clicked()), this,    SLOT(toggleConnection()));
+  connect(buttonBox->button(QDialogButtonBox::Apply), SIGNAL(clicked()),
+          this, SLOT(apply()));
+  connect(buttonBox->button(QDialogButtonBox::Reset), SIGNAL(clicked()),
+          this, SLOT(reload()));
 
   // list view
   connect(dbListView, SIGNAL(clicked(QModelIndex)),

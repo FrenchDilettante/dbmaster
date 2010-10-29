@@ -35,7 +35,6 @@ public slots:
 signals:
 
 private:
-  void reload();
   void setupConnections();
   void setupWidgets();
 
@@ -47,8 +46,10 @@ private:
 
 private slots:
   void accept();
+  void apply();
   void forwardAccept();
   void refresh(QModelIndex index);
+  void reload();
   void removeCurrent();
   void testConnection();
   void toggleConnection();

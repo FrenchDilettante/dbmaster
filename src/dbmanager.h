@@ -22,6 +22,10 @@
 #include <QString>
 #include <QThread>
 
+/**
+ * Classe interne, instance de DbManager.
+ * ! À ne pas appeler en direct !
+ */
 class DbManagerPrivate : public QThread
 {
 Q_OBJECT
@@ -87,6 +91,9 @@ private slots:
   void                    refreshModelItem(QSqlDatabase *db);
 };
 
+/**
+ * Classe statique pour l'accès aux connexions.
+ */
 class DbManager
 {
 public:

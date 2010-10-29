@@ -13,8 +13,11 @@
 #ifndef QUERYTOKEN_H
 #define QUERYTOKEN_H
 
-#include <QtCore>
-#include <QtSql>
+#include <QObject>
+#include <QSqlDatabase>
+#include <QSqlError>
+#include <QSqlQueryModel>
+#include <QString>
 
 class QueryToken : public QObject
 {
