@@ -619,10 +619,10 @@ void MainWindow::setupWidgets()
 
 #if defined(Q_WS_WIN)
   QString lang = QLocale::system().name().left(2).toLower();
-  QString url = PREFIX + QString("\\share\\index_%1.html").arg(lang);
+  QString url = QString("share\\index_%1.html").arg(lang);
 
   if(!QFile::exists(url))
-    url = QString(QString(PREFIX) + "\\share\\index_en.html");
+    url = QString("share\\index_en.html");
 
   textBrowser->setSource(url);
 #endif
