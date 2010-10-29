@@ -213,7 +213,7 @@ void SqlHighlighter::reloadKeywords()
   prefix = QString( PREFIX ).append( "/share/dbmaster/sqlsyntax/" );
 #endif
 #if defined(Q_WS_WIN)
-  prefix = "share/sqlsyntax/";
+  prefix = QString(PREFIX).append("\\share\\sqlsyntax\\");
 #endif
   files << "sql_basics"
         << "sql_functions"
