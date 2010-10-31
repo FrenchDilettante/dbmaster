@@ -23,8 +23,8 @@
 int main(int argc, char *argv[])
 {
   QApplication::setApplicationName("dbmaster");
-  QApplication::setApplicationVersion("0.7");
-  QApplication::setOrganizationDomain("dbmaster.sourceforge.net");
+  QApplication::setApplicationVersion("0.8");
+  QApplication::setOrganizationDomain("dbmaster.org");
   QApplication a(argc, argv);
 
   QSplashScreen splash(QPixmap(":/img/splash.png"));
