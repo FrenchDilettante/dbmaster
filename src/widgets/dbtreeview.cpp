@@ -182,6 +182,14 @@ QSqlDatabase *DbTreeView::parentDb(QModelIndex index)
   return NULL;
 }
 
+void DbTreeView::refreshCurrent()
+{
+  if (selectedIndexes().size()==0)
+    return;
+
+  DbManager::refreshModelItem(parentDb(selectedIndexes()[0]));
+}
+
 void DbTreeView::setupActions()
 {
   addDbAct = new QAction(this);
@@ -192,6 +200,10 @@ void DbTreeView::setupActions()
   editDbAct = new QAction(this);
   editDbAct->setText(tr("Edit"));
   connect(editDbAct, SIGNAL(triggered()), this, SLOT(editCurrent()));
+
+  refreshAct = new QAction(this);
+  refreshAct->setText(tr("Refresh"));
+  connect(refreshAct, SIGNAL(triggered()), this, SLOT(refreshCurrent()));
 
   removeDbAct = new QAction(this);
   removeDbAct->setText(tr("Remove"));
@@ -206,6 +218,7 @@ void DbTreeView::setupActions()
 
   contextMenu = new QMenu(this);
   contextMenu->addAction(toggleAct);
+  contextMenu->addAction(refreshAct);
   contextMenu->addAction(addDbAct);
   contextMenu->addAction(editDbAct);
   contextMenu->addAction(removeDbAct);
