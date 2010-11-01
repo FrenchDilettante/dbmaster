@@ -23,7 +23,7 @@
    <item row="0" column="0">
     <widget class="QLabel" name="label_11">
      <property name="text">
-      <string>Clic on a database to edit it.</string>
+      <string>Clic on a connection to edit it</string>
      </property>
      <property name="wordWrap">
       <bool>true</bool>
@@ -33,7 +33,7 @@
    <item row="0" column="1" rowspan="3">
     <widget class="QGroupBox" name="groupBox">
      <property name="title">
-      <string>Database settings</string>
+      <string>Connection settings</string>
      </property>
      <layout class="QFormLayout" name="formLayout_2">
       <property name="fieldGrowthPolicy">

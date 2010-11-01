@@ -16,6 +16,8 @@
 
 #include "dbdialog.h"
 
+#include <QMessageBox>
+
 DbDialog::DbDialog(QWidget *parent)
   : QDialog(parent)
 {
@@ -112,7 +114,7 @@ void DbDialog::removeCurrent()
   {
     QMessageBox::critical(this,
                           tr("Cannot remove"),
-                          tr("You must close the database before remove it.")
+                          tr("You must close the connexion before remove it.")
                           );
     return;
   }

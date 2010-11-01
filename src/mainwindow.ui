@@ -364,7 +364,7 @@
   </action>
   <action name="actionDbManager">
    <property name="text">
-    <string>Database manager</string>
+    <string>Connection manager</string>
    </property>
   </action>
   <action name="actionCloseTab">

@@ -82,7 +82,7 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>Default database</string>
+           <string>Default driver</string>
           </property>
          </widget>
         </item>
