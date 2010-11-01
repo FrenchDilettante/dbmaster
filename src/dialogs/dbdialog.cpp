@@ -185,7 +185,7 @@ void DbDialog::testConnection()
   db.setPassword(passEdit->text());
   db.setDatabaseName(dbEdit->text());
 
-  if(db.lastError().type() == QSqlError::NoError)
+  if(db.open())
   {
     resultLabel->setText(tr("Connection succeded"));
   }
