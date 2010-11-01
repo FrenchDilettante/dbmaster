@@ -20,7 +20,7 @@ QMap<QString,QColor>            ConfigDialog::shColor;
 QMap<QString,QTextCharFormat>   ConfigDialog::shFormat;
 
 ConfigDialog::ConfigDialog(QWidget *parent)
-  : QDialog( parent )
+  : QDialog(parent)
 {
   setupUi(this);
 
@@ -67,26 +67,23 @@ void ConfigDialog::handleClick(QAbstractButton *button)
 /**
  * Set the parameters with the current font
  */
-void ConfigDialog::refreshSyntaxFont( int index )
+void ConfigDialog::refreshSyntaxFont(int index)
 {
-  if( index == -1 && index >= Config::shGroupList.size() )
+  if(index == -1 && index >= Config::shGroupList.size())
     return;
 	
-  QListWidgetItem *item = shListWidget->item( index );
+  QListWidgetItem *item = shListWidget->item(index);
   QFont font = item->font();
 
   QColor color = item->foreground().color();
-  shColorButton->setCurrentColor( color );
+  shColorButton->setCurrentColor(color);
 
-  shBoldButton->setChecked( font.weight() == QFont::Bold );
-  shItalicButton->setChecked( font.italic() );
+  shBoldButton->setChecked(font.weight() == QFont::Bold);
+  shItalicButton->setChecked(font.italic());
 }
 
 void ConfigDialog::reload()
 {
-  // Starting depreciation
-  //defaultDbCombo->setCurrentDriver(Config::defaultDriver);
-
   /*
    * Editor's properties
    */
@@ -152,21 +149,21 @@ void ConfigDialog::reload()
 /**
  * Reloads the keywords list for the selected item
  */
-void ConfigDialog::reloadKeywords( int index )
+void ConfigDialog::reloadKeywords(int index)
 {
   shKeywordsListWidget->clear();
-  switch( index )
+  switch(index)
   {
   case 0:
     // SQL keywords
-    shKeywordsListWidget->addItems( SqlHighlighter::sqlKeywordList() );
+    shKeywordsListWidget->addItems(SqlHighlighter::sqlKeywordList());
     break;
   case 1:
     // SQL functions
-    shKeywordsListWidget->addItems( SqlHighlighter::sqlFunctionList() );
+    shKeywordsListWidget->addItems(SqlHighlighter::sqlFunctionList());
     break;
   case 2:
-    shKeywordsListWidget->addItems( SqlHighlighter::sqlTypeList() );
+    shKeywordsListWidget->addItems(SqlHighlighter::sqlTypeList());
     break;
   }
 }
@@ -227,9 +224,9 @@ void ConfigDialog::setupConnections()
 void ConfigDialog::updateEditorFont()
 {
   editorTestArea->selectAll();
-  editorFont.setFamily( editorFontCombo->currentText() );
-  editorFont.setPointSize( editorFontSizeSpin->value() );
-  editorTestArea->setFont( editorFont );
+  editorFont.setFamily(editorFontCombo->currentText());
+  editorFont.setPointSize(editorFontSizeSpin->value());
+  editorTestArea->setFont(editorFont);
 }
 
 void ConfigDialog::updateSyntaxFont()

@@ -14,7 +14,7 @@
    <string>DbMaster - Preferences</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../icons.qrc">
+   <iconset>
     <normaloff>:/img/configure.png</normaloff>:/img/configure.png</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
@@ -32,8 +32,8 @@
       </property>
       <property name="iconSize">
        <size>
-        <width>32</width>
-        <height>32</height>
+        <width>24</width>
+        <height>24</height>
        </size>
       </property>
       <property name="currentRow">
@@ -44,7 +44,7 @@
         <string>General</string>
        </property>
        <property name="icon">
-        <iconset resource="../icons.qrc">
+        <iconset>
          <normaloff>:/img/configure.png</normaloff>:/img/configure.png</iconset>
        </property>
       </item>
@@ -53,7 +53,7 @@
         <string>Query editor</string>
        </property>
        <property name="icon">
-        <iconset resource="../icons.qrc">
+        <iconset>
          <normaloff>:/img/edit.png</normaloff>:/img/edit.png</iconset>
        </property>
       </item>
@@ -490,9 +490,7 @@ p, li { white-space: pre-wrap; }
    <header>../src/third/QColorButton.h</header>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="../icons.qrc"/>
- </resources>
+ <resources/>
  <connections>
   <connection>
    <sender>listWidget</sender>
