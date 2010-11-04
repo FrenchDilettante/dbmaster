@@ -2,8 +2,6 @@
 # Project created by QtCreator 2009-06-01T16:44:04
 # -------------------------------------------------
 
-include(../updateqm.pri)
-
 QT += sql
 TARGET = ../bin/dbmaster
 TEMPLATE = app
