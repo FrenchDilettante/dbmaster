@@ -70,7 +70,7 @@ void MainWindow::checkDb(QSqlDatabase *db)
 {
   if(db->isOpenError() && db->lastError().type() != QSqlError::NoError)
     QMessageBox::critical(this,
-                          tr("Error !"),
+                          tr("Error"),
                           tr("Unable to connect :\n%1")
                           .arg(db->lastError().text()));
 }

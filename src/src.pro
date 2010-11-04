@@ -2,8 +2,6 @@
 # Project created by QtCreator 2009-06-01T16:44:04
 # -------------------------------------------------
 
-include(../updateqm.pri)
-
 QT += sql
 TARGET = ../bin/dbmaster
 TEMPLATE = app
@@ -97,7 +95,7 @@ TRANSLATIONS += tr/fr_FR.po
 
 # ##
 # Common
-translations.files = tr/fr_FR.qm
+trs.files = tr/fr_FR.qm
 sqlsyntax.files = share/sql_basics \
     share/sql_functions \
     share/sql_operators \
@@ -118,8 +116,8 @@ win32: {
     DEFINES += PREFIX=\\\"$${PREFIX}\\\"
     target.path = $${PREFIX}
     INSTALLS = target
-    translations.path = $${PREFIX}\\share\\tr
-    INSTALLS += translations
+    trs.path = $${PREFIX}\\share\\tr
+    INSTALLS += trs
     sqlsyntax.path = $${PREFIX}\\share\\sqlsyntax
     INSTALLS += sqlsyntax
     share.path = $${PREFIX}\\share
@@ -134,8 +132,8 @@ unix:!macx {
     DEFINES += PREFIX=\\\"$${PREFIX}\\\"
     target.path = $${PREFIX}/bin
     INSTALLS = target
-    translations.path = $${PREFIX}/share/dbmaster/tr
-    INSTALLS += translations
+    trs.path = $${PREFIX}/share/dbmaster/tr
+    INSTALLS += trs
     sqlsyntax.path = $${PREFIX}/share/dbmaster/sqlsyntax
     INSTALLS += sqlsyntax
     share.path = $${PREFIX}/share/dbmaster
