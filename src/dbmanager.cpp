@@ -343,12 +343,11 @@ void DbManagerPrivate::refreshModelItem(QSqlDatabase *db)
       i->setData(DbManager::ViewItem, Qt::UserRole);
       viewsItem->appendRow(i);
     }
-
     item->appendRow(viewsItem);
 
     QStandardItem *sysTablesItem =
         new QStandardItem(tr("System tables (%1)")
-                          .arg(QString::number(db->tables(QSql::Views)
+                          .arg(QString::number(db->tables(QSql::SystemTables)
                                                .size())));
 
     sysTablesItem->setIcon(IconManager::get("folder_systemtables"));
