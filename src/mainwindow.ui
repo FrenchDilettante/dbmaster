@@ -217,6 +217,9 @@
    </attribute>
    <widget class="QWidget" name="dockWidgetContents">
     <layout class="QGridLayout" name="gridLayout">
+     <property name="topMargin">
+      <number>0</number>
+     </property>
      <item row="0" column="0">
       <widget class="DbTreeView" name="dbTreeView">
        <property name="selectionMode">

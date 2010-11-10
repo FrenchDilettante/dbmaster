@@ -656,7 +656,7 @@ void MainWindow::setupWidgets()
   actionPrint->setIcon(         IconManager::get("document-print"));
   actionRedo->setIcon(          IconManager::get("edit-redo"));
   actionSaveQuery->setIcon(     IconManager::get("document-save"));
-  actionSaveQueryAs->setIcon(   IconManager::get("document-save-as"));
+//  actionSaveQueryAs->setIcon(   IconManager::get("document-save-as"));
   actionSearch->setIcon(        IconManager::get("edit-find"));
   actionUndo->setIcon(          IconManager::get("edit-undo"));
 
