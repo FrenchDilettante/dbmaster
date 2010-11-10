@@ -648,6 +648,11 @@ void DbManager::openList()
   m_instance->openList();
 }
 
+void DbManager::refreshModelItem(QSqlDatabase *db)
+{
+  m_instance->refreshModelItem(db);
+}
+
 void DbManager::removeDatabase(int index)
 {
   m_instance->removeDatabase(index);
