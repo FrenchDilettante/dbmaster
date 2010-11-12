@@ -234,11 +234,8 @@
             </item>
             <item row="2" column="0">
              <widget class="QueryTextEdit" name="editorTestArea">
-              <property name="plainText">
-               <string notr="true"/>
-              </property>
               <property name="html" stdset="0">
-               <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+               <string notr="true">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
@@ -370,11 +367,7 @@ p, li { white-space: pre-wrap; }
                    </spacer>
                   </item>
                   <item row="0" column="1">
-                   <widget class="QColorButton" name="shColorButton">
-                    <property name="text">
-                     <string>PushButton</string>
-                    </property>
-                   </widget>
+                   <widget class="QColorButton" name="shColorButton"/>
                   </item>
                  </layout>
                 </widget>
@@ -475,14 +468,14 @@ p, li { white-space: pre-wrap; }
  </widget>
  <customwidgets>
   <customwidget>
-   <class>QueryTextEdit</class>
-   <extends>QPlainTextEdit</extends>
-   <header>../src/widgets/querytextedit.h</header>
-  </customwidget>
-  <customwidget>
    <class>DbComboBox</class>
    <extends>QComboBox</extends>
    <header>../src/widgets/dbcombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QueryTextEdit</class>
+   <extends>QPlainTextEdit</extends>
+   <header>../src/widgets/querytextedit.h</header>
   </customwidget>
   <customwidget>
    <class>QColorButton</class>

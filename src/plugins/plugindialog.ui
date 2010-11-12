@@ -10,9 +10,6 @@
     <height>300</height>
    </rect>
   </property>
-  <property name="windowTitle">
-   <string>Dialog</string>
-  </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0" rowspan="4">
     <widget class="QListView" name="listView"/>
@@ -23,7 +20,7 @@
       <string>Add</string>
      </property>
      <property name="icon">
-      <iconset resource="../icons.qrc">
+      <iconset>
        <normaloff>:/img/edit_add.png</normaloff>:/img/edit_add.png</iconset>
      </property>
      <property name="iconSize">
@@ -73,9 +70,7 @@
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="../icons.qrc"/>
- </resources>
+ <resources/>
  <connections>
   <connection>
    <sender>buttonBox</sender>
