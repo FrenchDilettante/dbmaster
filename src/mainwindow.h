@@ -19,7 +19,6 @@
 #include "dialogs/logdialog.h"
 #include "dialogs/searchdialog.h"
 #include "ui_mainwindow.h"
-#include "plugins/plugindialog.h"
 #include "tabwidget/queryeditorwidget.h"
 #include "wizards/newdbwizard.h"
 
@@ -37,7 +36,6 @@ public:
 
   static DbDialog      *dbDialog;
   static NewDbWizard   *dbWizard;
-  static PluginDialog  *pluginDialog;
 
 public slots:
   void addRecentFile(QString file);
