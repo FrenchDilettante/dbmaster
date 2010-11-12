@@ -60,7 +60,9 @@ public:
   void                    update(QSqlDatabase *db);
 
 public slots:
+
   void                    refreshModel();
+  void                    refreshModelItem(QSqlDatabase *db);
   void                    terminate();
 
 signals:
@@ -87,8 +89,6 @@ private:
   QStack<QSqlDatabase*>   closeStack;
   QStack<QSqlDatabase*>   openStack;
 
-private slots:
-  void                    refreshModelItem(QSqlDatabase *db);
 };
 
 /**
@@ -132,7 +132,7 @@ public:
   static void           open(int, QString=QString::null);
   static void           open(QSqlDatabase *db, QString pswd=QString::null);
   static void           openList();
-  static void           refreshModel();
+  static void           refreshModelItem(QSqlDatabase *db);
   static void           removeDatabase(int);
   static void           saveList();
   static void           setDatabase(int, QSqlDatabase);

@@ -311,55 +311,55 @@ void DbManagerPrivate::refreshModelItem(QSqlDatabase *db)
   if(db->isOpen())
   {
     item->setIcon(IconManager::get("connect_established"));
-    if(m_model->rowCount(index) == 0)
-    {
-      QStandardItem *tablesItem =
-          new QStandardItem(tr("Tables (%1)")
-                            .arg(QString::number(db->tables(QSql::Tables)
-                                                 .size())));
-      tablesItem->setIcon(IconManager::get("folder_tables"));
-
-      foreach(QString table, db->tables(QSql::Tables))
-      {
-        i = new QStandardItem(IconManager::get("table"), table);
-        i->setData(DbManager::TableItem, Qt::UserRole);
-        tablesItem->appendRow(i);
-      }
-
-      item->appendRow(tablesItem);
-
-      QStandardItem *viewsItem =
-          new QStandardItem(tr("Views (%1)")
-                            .arg(QString::number(db->tables(QSql::Views)
-                                                 .size())));
-
-      viewsItem->setIcon(IconManager::get("folder_views"));
-
-      foreach(QString view, db->tables(QSql::Views))
-      {
-        i = new QStandardItem(IconManager::get("table_lightning"), view);
-        i->setData(DbManager::ViewItem, Qt::UserRole);
-        viewsItem->appendRow(i);
-      }
-
-      item->appendRow(viewsItem);
-
-      QStandardItem *sysTablesItem =
-          new QStandardItem(tr("System tables (%1)")
-                            .arg(QString::number(db->tables(QSql::Views)
-                                                 .size())));
-
-      sysTablesItem->setIcon(IconManager::get("folder_systemtables"));
-
-      foreach(QString sysTable, db->tables(QSql::Views))
-      {
-        i = new QStandardItem(IconManager::get("folder_gear"), sysTable);
-        i->setData(DbManager::SysTableItem, Qt::UserRole);
-        sysTablesItem->appendRow(i);
-      }
-
-      item->appendRow(sysTablesItem);
+    while (m_model->rowCount(index) > 0) {
+      m_model->removeRow(0, index);
     }
+
+    QStandardItem *tablesItem =
+        new QStandardItem(tr("Tables (%1)")
+                          .arg(QString::number(db->tables(QSql::Tables)
+                                               .size())));
+    tablesItem->setIcon(IconManager::get("folder_tables"));
+
+    foreach(QString table, db->tables(QSql::Tables))
+    {
+      i = new QStandardItem(IconManager::get("table"), table);
+      i->setData(DbManager::TableItem, Qt::UserRole);
+      tablesItem->appendRow(i);
+    }
+
+    item->appendRow(tablesItem);
+
+    QStandardItem *viewsItem =
+        new QStandardItem(tr("Views (%1)")
+                          .arg(QString::number(db->tables(QSql::Views)
+                                               .size())));
+
+    viewsItem->setIcon(IconManager::get("folder_views"));
+
+    foreach(QString view, db->tables(QSql::Views))
+    {
+      i = new QStandardItem(IconManager::get("table_lightning"), view);
+      i->setData(DbManager::ViewItem, Qt::UserRole);
+      viewsItem->appendRow(i);
+    }
+    item->appendRow(viewsItem);
+
+    QStandardItem *sysTablesItem =
+        new QStandardItem(tr("System tables (%1)")
+                          .arg(QString::number(db->tables(QSql::SystemTables)
+                                               .size())));
+
+    sysTablesItem->setIcon(IconManager::get("folder_systemtables"));
+
+    foreach(QString sysTable, db->tables(QSql::Views))
+    {
+      i = new QStandardItem(IconManager::get("folder_gear"), sysTable);
+      i->setData(DbManager::SysTableItem, Qt::UserRole);
+      sysTablesItem->appendRow(i);
+    }
+
+    item->appendRow(sysTablesItem);
   } else {
     item->setIcon(IconManager::get("connect_no"));
     while(m_model->rowCount(index) > 0)
@@ -646,6 +646,11 @@ void DbManager::open(QSqlDatabase *db, QString pswd)
 void DbManager::openList()
 {
   m_instance->openList();
+}
+
+void DbManager::refreshModelItem(QSqlDatabase *db)
+{
+  m_instance->refreshModelItem(db);
 }
 
 void DbManager::removeDatabase(int index)
