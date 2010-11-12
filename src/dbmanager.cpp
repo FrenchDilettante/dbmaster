@@ -346,7 +346,7 @@ void DbManagerPrivate::refreshModelItem(QSqlDatabase *db)
 
       QStandardItem *sysTablesItem =
           new QStandardItem(tr("System tables (%1)")
-                            .arg(QString::number(db->tables(QSql::Views)
+                            .arg(QString::number(db->tables(QSql::SystemTables)
                                                  .size())));
 
       sysTablesItem->setIcon(IconManager::get("folder_systemtables"));
