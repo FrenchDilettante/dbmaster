@@ -633,14 +633,6 @@ void MainWindow::setupWidgets()
   textBrowser->setSource(url);
 #endif
 
-#if QT_VERSION >= 0x040500
-  // ensures compatibility with Qt 4.4
-  tabWidget->setMovable(true);
-  tabWidget->setTabsClosable(true);
-//  actionCloseTab->setVisible(false);
-  mainToolBar->removeAction(actionCloseTab);
-#endif
-
   // loading icons from current theme
   actionAbout->setIcon(         IconManager::get("help-about"));
   actionAddDb->setIcon(         IconManager::get("db_add"));
@@ -656,7 +648,6 @@ void MainWindow::setupWidgets()
   actionPrint->setIcon(         IconManager::get("document-print"));
   actionRedo->setIcon(          IconManager::get("edit-redo"));
   actionSaveQuery->setIcon(     IconManager::get("document-save"));
-//  actionSaveQueryAs->setIcon(   IconManager::get("document-save-as"));
   actionSearch->setIcon(        IconManager::get("edit-find"));
   actionUndo->setIcon(          IconManager::get("edit-undo"));
 

@@ -44,10 +44,8 @@ QIcon IconManager::get(QString name)
 {
   if(m_icons.contains(name))
     return m_icons[name];
-#if QT_VERSION >= 0x040600
   if(QIcon::hasThemeIcon(name))
     return QIcon::fromTheme(name);
-#endif
 
   return fromRessources(name);
 }
@@ -59,8 +57,6 @@ QIcon IconManager::fromRessources(QString name)
 
 void IconManager::init()
 {
-#if QT_VERSION >= 0x040600
-
   m_icons["connect_creating"]     = fromRessources("connect_creating");
   m_icons["connect_established"]  = fromRessources("connect_established");
   m_icons["connect_no"]           = fromRessources("connect_no");
@@ -71,5 +67,4 @@ void IconManager::init()
   m_icons["folder_tables"] = customFolder(QIcon(":/img/table.png"));
   m_icons["folder_views"] = customFolder(QIcon(":/img/table_lightning.png"));
   m_icons["folder_systemtables"] = customFolder(QIcon(":/img/table_gear.png"));
-#endif
 }

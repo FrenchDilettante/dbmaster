@@ -186,9 +186,7 @@ void SqlHighlighter::reloadContext(QStringList tables,
   }
 
   QStringList l = fields.values();
-#if QT_VERSION >= 0x040500
   l.removeDuplicates();
-#endif
 
   foreach( QString f, l )
   {

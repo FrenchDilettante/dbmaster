@@ -181,9 +181,7 @@ void QueryTextEdit::reloadContext(QStringList tables,
   items << SqlHighlighter::sqlTypeList();
 
   // cleaning and sorting
-#if QT_VERSION >= 0x040500
   items.removeDuplicates();
-#endif
 
   QMap<QString, QString> m;
   foreach(QString i, items)
