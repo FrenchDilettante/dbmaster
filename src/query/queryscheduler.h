@@ -25,7 +25,7 @@ Q_OBJECT
 public:
   QuerySchedulerPrivate();
 
-  void push(QueryToken *token);
+  void enqueue(QueryToken *token);
 
 signals:
   void countChanged(int);
@@ -42,8 +42,10 @@ private slots:
 class QueryScheduler
 {
 public:
+  static void enqueue(QueryToken *token);
+
+
   static QuerySchedulerPrivate *instance()  { return d;   };
-  static void push(QueryToken *token);
 
 private:
   static QuerySchedulerPrivate *d;

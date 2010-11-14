@@ -18,16 +18,10 @@ QuerySchedulerPrivate::QuerySchedulerPrivate()
   queryCount = 0;
 }
 
-void QuerySchedulerPrivate::forwardExec(bool exec)
-{
-  queryCount--;
-  emit countChanged(queryCount);
-}
-
 /**
  * Place le jeton en attente
  */
-void QuerySchedulerPrivate::push(QueryToken *token) {
+void QuerySchedulerPrivate::enqueue(QueryToken *token) {
   if(!token->db()->isOpen())
     token->reject();
 
@@ -54,6 +48,12 @@ void QuerySchedulerPrivate::push(QueryToken *token) {
   run(token, th);
 }
 
+void QuerySchedulerPrivate::forwardExec(bool exec)
+{
+  queryCount--;
+  emit countChanged(queryCount);
+}
+
 /**
  * Place la requête dans la pile du thread.
  *
@@ -61,7 +61,7 @@ void QuerySchedulerPrivate::push(QueryToken *token) {
  * @param th Thread sur lequel le jeton sera placé
  */
 void QuerySchedulerPrivate::run(QueryToken *token, QueryThread *th) {
-  th->push(token);
+  th->enqueue(token);
   queryCount++;
   token->accept();
   emit countChanged(queryCount);
@@ -76,6 +76,6 @@ void QuerySchedulerPrivate::run(QueryToken *token, QueryThread *th) {
 
 QuerySchedulerPrivate *QueryScheduler::d = new QuerySchedulerPrivate();
 
-void QueryScheduler::push(QueryToken *token) {
-  d->push(token);
+void QueryScheduler::enqueue(QueryToken *token) {
+  d->enqueue(token);
 }
