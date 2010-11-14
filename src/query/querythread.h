@@ -15,9 +15,9 @@
 
 #include "querytoken.h"
 
+#include <QQueue>
 #include <QSqlDatabase>
 #include <QSqlQuery>
-#include <QStack>
 #include <QThread>
 
 /**
@@ -32,7 +32,7 @@ Q_OBJECT
 public:
   QueryThread(QSqlDatabase *_db, QObject *parent = 0);
 
-  void push(QueryToken *token);
+  void enqueue(QueryToken *token);
 
   QSqlDatabase *db()            { return m_db;    };
   void setDb(QSqlDatabase *db)  { m_db = db;      };
@@ -48,7 +48,7 @@ private:
   void run();
 
   QSqlDatabase       *m_db;
-  QStack<QueryToken*> tokenStack;
+  QQueue<QueryToken*> tokenQueue;
 };
 
 #endif // QUERYTHREAD_H

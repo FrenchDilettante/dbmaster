@@ -301,7 +301,7 @@ void QueryEditorWidget::run()
   oldToken = token;
   token = prepareToken();
 
-  QueryScheduler::push(token);
+  QueryScheduler::enqueue(token);
 }
 
 /**

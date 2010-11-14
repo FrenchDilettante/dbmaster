@@ -20,9 +20,9 @@ QueryThread::QueryThread(QSqlDatabase *_db, QObject *parent)
   this->m_db = _db;
 }
 
-void QueryThread::push(QueryToken *token)
+void QueryThread::enqueue(QueryToken *token)
 {
-  tokenStack.push(token);
+  tokenQueue.enqueue(token);
 }
 
 void QueryThread::run()
@@ -32,9 +32,9 @@ void QueryThread::run()
   time_t          startTime;
   QueryToken     *token;
 
-  while(!tokenStack.isEmpty())
+  while(!tokenQueue.isEmpty())
   {
-    token = tokenStack.pop();
+    token = tokenQueue.dequeue();
     if(token->db() != m_db)
       continue;
 
