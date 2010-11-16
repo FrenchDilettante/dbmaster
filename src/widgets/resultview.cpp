@@ -293,7 +293,9 @@ void ResultView::updateItem(QStandardItem *item)
 {
   if (currentAction == Browse) {
     currentAction = Update;
+    insertButton->setIcon(QIcon());
     insertButton->setText(tr("Apply"));
+    deleteButton->setIcon(QIcon());
     deleteButton->setText(tr("Cancel"));
   }
 
