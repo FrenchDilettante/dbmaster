@@ -27,12 +27,14 @@
 
 DbDialog     *MainWindow::dbDialog;
 NewDbWizard  *MainWindow::dbWizard;
+PluginDialog *MainWindow::pluginDialog;
 
 MainWindow::MainWindow(QWidget *parent)
   : QMainWindow(parent)
 {
   dbDialog      = new DbDialog(this);
   dbWizard      = new NewDbWizard(this);
+  pluginDialog  = new PluginDialog(this);
 
   setupUi(this);
 
@@ -481,6 +483,7 @@ void MainWindow::setupConnections()
   connect(actionNextTab,      SIGNAL(triggered()),  this,          SLOT(nextTab()));
   connect(actionOpenQuery,    SIGNAL(triggered()),  this,          SLOT(openQuery()));
   connect(actionPaste,        SIGNAL(triggered()),  this,          SLOT(paste()));
+  connect(actionPlugins,      SIGNAL(triggered()),  pluginDialog,  SLOT(exec()));
   connect(actionPreferences,  SIGNAL(triggered()),  confDial,      SLOT(exec()));
   connect(actionPreviousTab,  SIGNAL(triggered()),  this,          SLOT(previousTab()));
   connect(actionPrint,        SIGNAL(triggered()),  this,          SLOT(print()));
@@ -531,6 +534,7 @@ void MainWindow::setupWidgets()
   confDial      = new ConfigDialog(this);
   logDial       = LogDialog::instance();
   searchDialog  = new SearchDialog(this);
+  //printDialog = new QPrintDialog(this);
 
   QAction *a;
   recentActions.clear();
@@ -544,6 +548,8 @@ void MainWindow::setupWidgets()
   menuRecent_files->addActions(recentActions);
   menuRecent_files->addSeparator();
   menuRecent_files->addAction(actionClearRecent);
+
+  actionPlugins->setVisible(false);
 
   actionMap[AbstractTabWidget::Copy]        = actionCopy;
   actionMap[AbstractTabWidget::Cut]         = actionCut;

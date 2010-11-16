@@ -95,7 +95,7 @@
      <x>0</x>
      <y>0</y>
      <width>840</width>
-     <height>23</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuTools">
@@ -104,6 +104,7 @@
     </property>
     <addaction name="actionDbManager"/>
     <addaction name="separator"/>
+    <addaction name="actionPlugins"/>
     <addaction name="actionLogs"/>
     <addaction name="actionPreferences"/>
    </widget>
@@ -411,6 +412,11 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+P</string>
+   </property>
+  </action>
+  <action name="actionPlugins">
+   <property name="text">
+    <string>Plugins</string>
    </property>
   </action>
   <action name="actionNextTab">

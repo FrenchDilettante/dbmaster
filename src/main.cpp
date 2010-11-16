@@ -15,6 +15,7 @@
 #include "dbmanager.h"
 #include "iconmanager.h"
 #include "mainwindow.h"
+#include "plugins/pluginmanager.h"
 #include "sqlhighlighter.h"
 #include "tabwidget/abstracttabwidget.h"
 #include "widgets/querytextedit.h"
@@ -22,8 +23,8 @@
 int main(int argc, char *argv[])
 {
   QApplication::setApplicationName("dbmaster");
-  QApplication::setApplicationVersion("0.7");
-  QApplication::setOrganizationDomain("dbmaster.sourceforge.net");
+  QApplication::setApplicationVersion("0.8");
+  QApplication::setOrganizationDomain("dbmaster.org");
   QApplication a(argc, argv);
 
   QSplashScreen splash(QPixmap(":/img/splash.png"));
@@ -64,6 +65,7 @@ int main(int argc, char *argv[])
   IconManager::init();
   DbManager::init();
   Config::init();
+  //PluginManager::init();
   QueryTextEdit::reloadCompleter();
 
   MainWindow *w = new MainWindow();

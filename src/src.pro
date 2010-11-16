@@ -32,7 +32,12 @@ SOURCES += main.cpp \
     query/querythread.cpp \
     query/querytoken.cpp \
     widgets/tooltipframe.cpp \
+    plugins/wrappers/wrapper.cpp \
+    plugins/plugindialog.cpp \
+    plugins/pluginmanager.cpp \
+    plugins/plugin.cpp \
     iconmanager.cpp \
+    plugins/exportengines/exportengine.cpp \
     dialogs/searchdialog.cpp
 HEADERS += mainwindow.h \
     dbmanager.h \
@@ -57,7 +62,12 @@ HEADERS += mainwindow.h \
     query/querythread.h \
     query/querytoken.h \
     widgets/tooltipframe.h \
+    plugins/wrappers/wrapper.h \
+    plugins/plugindialog.h \
+    plugins/plugin.h \
+    plugins/pluginmanager.h \
     iconmanager.h \
+    plugins/exportengines/exportengine.h \
     dialogs/searchdialog.h
 FORMS += mainwindow.ui \
     dialogs/dbdialog.ui \
@@ -77,6 +87,7 @@ FORMS += mainwindow.ui \
     wizards/ew_csvpage.ui \
     widgets/resultview.ui \
     widgets/tooltipframe.ui \
+    plugins/plugindialog.ui \
     wizards/ew_htmlpage.ui \
     dialogs/searchdialog.ui
 RESOURCES += icons.qrc

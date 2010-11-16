@@ -3,4 +3,4 @@
 ###########################
 
 TEMPLATE=subdirs
-SUBDIRS=src
+SUBDIRS=src #src/plugins/wrappers/mysql

@@ -41,6 +41,7 @@ private:
   QAction *editDbAct;
   QAction *openTableAct;
   QAbstractItemModel *model;
+  QAction *refreshAct;
   QAction *removeDbAct;
   QAction *toggleAct;
 
@@ -49,6 +50,7 @@ private slots:
   void on_model_dataChanged(const QModelIndex & topLeft,
                             const QModelIndex & bottomRight);
   void editCurrent();
+  void refreshCurrent();
   void on_removeDbAct_triggered();
   void toggleCurrentDb();
 };
