@@ -13,7 +13,3 @@
 #include "plugin.h"
 #include "pluginmanager.h"
 
-Plugin::Plugin()
-{
-  PluginManager::registerPlugin(this);
-}

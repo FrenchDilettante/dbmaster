@@ -18,6 +18,11 @@ class ExportEngine : public Plugin
 {
 public:
   ExportEngine();
+
+  /**
+   * Nom du format, par ex. CSV, HTML, PDF, etc.
+   */
+  virtual QString formatName() =0;
 };
 
 Q_DECLARE_INTERFACE(ExportEngine, "dbmaster.ExportEngine")

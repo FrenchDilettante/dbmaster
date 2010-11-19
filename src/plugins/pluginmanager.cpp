@@ -71,7 +71,6 @@ void PluginManager::init()
   instance->check();
 }
 
-void PluginManager::registerPlugin(Plugin *p)
-{
+void PluginManager::registerPlugin(Plugin *p) {
 
 }

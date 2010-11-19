@@ -19,9 +19,26 @@
 class Plugin
 {
 public:
-  Plugin();
+  /**
+   * Nom de code (ou identifiant) unique du plugin, par ex. DBM.MYSQL.WRAPPER.
+   *
+   * Doit respecter le format suivant :
+   *   [Nom du fournisseur/éditeur][Spécificité du plugin][Catégorie]
+   *   DBM.                        MYSQL.                 WRAPPER
+   *   DBM.                        CSV.                   EXPORTENGINE
+   * Ne doit contenir que des caractères alphanumériques et '_' ou '.'
+   */
+  virtual QString plid()    =0;
 
+  /**
+   * Nom à afficher (traduisible), par ex. "Export au format CSV" ou "Adaptateur
+   * MySQL"
+   */
   virtual QString title()   =0;
+
+  /**
+   * Laissée à l'appreciation du développeur.
+   */
   virtual QString version() =0;
 };
 
