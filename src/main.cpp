@@ -56,7 +56,12 @@ int main(int argc, char *argv[])
   
   QTranslator qtTranslator;
   qtTranslator.load("qt_" + lang,
+#if defined (Q_WS_X11)
                     QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+#endif
+#if defined (Q_WS_WIN)
+                    QDir::currentPath());
+#endif
   a.installTranslator(&qtTranslator);
 
   splash.showMessage(QObject::tr("Initialization..."), Qt::AlignBottom);
