@@ -357,6 +357,7 @@ void ResultView::updateView()
     {
       item = new QStandardItem();
       item->setData( r.value( j ), Qt::DisplayRole );
+      item->setEditable(m_mode == TableMode);
       row << item;
     }
     shortModel->appendRow(row);
