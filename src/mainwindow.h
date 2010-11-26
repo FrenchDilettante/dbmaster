@@ -44,6 +44,7 @@ public slots:
   void createDatabase();
   QueryEditorWidget*  newQuery();
   void openQuery();
+  void openQuery(QString file);
   void openTable(QSqlDatabase *db, QString table);
   void refreshTab();
   void refreshRecent();

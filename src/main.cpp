@@ -76,5 +76,10 @@ int main(int argc, char *argv[])
   MainWindow *w = new MainWindow();
   w->show();
   splash.finish(w);
+
+  if (a.arguments().size() == 2) {
+    w->openQuery(a.arguments()[1]);
+  }
+
   return a.exec();
 }

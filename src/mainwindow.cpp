@@ -304,11 +304,13 @@ void MainWindow::openQuery()
 
   if(f.isNull())
     return;
+}
 
+void MainWindow::openQuery(QString file) {
   QueryEditorWidget *w = newQuery();
-  w->open(f);
+  w->open(file);
 
-  QFileInfo fi = QFileInfo(f);
+  QFileInfo fi = QFileInfo(file);
   AbstractTabWidget::lastDir = fi.absoluteDir();
 }
 
