@@ -105,10 +105,10 @@ void NdwSecondPage::browse()
                                                     ) );
 }
 
-void NdwSecondPage::initializePage()
-{
-  dbBrowseButton->setVisible( field( "driver" ).toString()
-                              .startsWith( "QSQLITE" ) );
+void NdwSecondPage::initializePage() {
+  dbBrowseButton->setVisible(field("driver").toString()
+                             .startsWith("QSQLITE"));
+  resultLabel->setText("");
 }
 
 void NdwSecondPage::test()
