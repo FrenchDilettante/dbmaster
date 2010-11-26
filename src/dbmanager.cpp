@@ -83,9 +83,13 @@ int DbManagerPrivate::addDatabase(QString driver, QString host, QString user,
   if(save)
   {
     saveList();
-    LogDialog::instance()->append(QObject::tr("Database %1 on %2 added")
-            .arg(dbnm)
-            .arg(host));
+    if (db.hostName().length() > 0) {
+      LogDialog::instance()->append(QObject::tr("Database %1 on %2 added")
+              .arg(dbnm)
+              .arg(host));
+    } else {
+      LogDialog::instance()->append(QObject::tr("Database %1 added").arg(dbnm));
+    }
   }
 
   return dbList.size() - 1;
