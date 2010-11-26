@@ -164,9 +164,12 @@ void MainWindow::closeEvent(QCloseEvent *event) {
     s.setValue("position", pos());
     s.remove("maximized");
   }
+
   // tooltips activés ou non
   s.setValue("tooltips", tooltipButton->isChecked());
+
   // où se situe le dock de connexion
+  s.setValue("maindock_visible", dockWidget->isVisible());
   s.setValue("maindock_area", dockWidgetArea(dockWidget));
   s.setValue("maindock_size", dockWidget->size());
   s.endGroup();
@@ -476,6 +479,7 @@ void MainWindow::setupConnections()
   connect(actionCopy,         SIGNAL(triggered()),  this,          SLOT(copy()));
   connect(actionCut,          SIGNAL(triggered()),  this,          SLOT(cut()));
   connect(actionDbManager,    SIGNAL(triggered()),  dbDialog,      SLOT(exec()));
+  connect(actionLeftPanel,    SIGNAL(triggered()),  this,          SLOT(toggleLeftPanel()));
   connect(actionLogs,         SIGNAL(triggered()),  logDial,       SLOT(exec()));
   connect(actionNewQuery,     SIGNAL(triggered()),  this,          SLOT(newQuery()));
   connect(actionNextTab,      SIGNAL(triggered()),  this,          SLOT(nextTab()));
@@ -565,7 +569,6 @@ void MainWindow::setupWidgets()
   if(s.value("maximized", false).toBool())
     setWindowState(Qt::WindowMaximized);
 
-//  removeDockWidget(dockWidget);
   int corner = s.value("maindock_area", 1).toInt();
   switch (corner) {
   case 1:
@@ -588,6 +591,8 @@ void MainWindow::setupWidgets()
   if (s.contains("maindock_size")) {
     dockWidget->resize(s.value("maindock_size").toSize());
   }
+
+  dockWidget->setVisible(s.value("maindock_visible", true).toBool());
 
   queriesStatusLabel = new QLabel("", this);
   QMainWindow::statusBar()->addPermanentWidget(queriesStatusLabel);
@@ -656,6 +661,10 @@ void MainWindow::setupWidgets()
 
   tooltipButton->setIcon(       IconManager::get("help-faq"));
   tabWidget->setTabIcon(0,      IconManager::get("go-home"));
+}
+
+void MainWindow::toggleLeftPanel() {
+  dockWidget->setVisible(!dockWidget->isVisible());
 }
 
 void MainWindow::undo()

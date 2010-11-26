@@ -95,7 +95,7 @@
      <x>0</x>
      <y>0</y>
      <width>840</width>
-     <height>23</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuTools">
@@ -381,11 +381,8 @@
    </property>
   </action>
   <action name="actionLeftPanel">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
    <property name="checked">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="text">
     <string>Connections</string>
@@ -483,38 +480,6 @@
     <hint type="destinationlabel">
      <x>352</x>
      <y>212</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>actionLeftPanel</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>dockWidget</receiver>
-   <slot>setVisible(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>136</x>
-     <y>304</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>dockWidget</sender>
-   <signal>visibilityChanged(bool)</signal>
-   <receiver>actionLeftPanel</receiver>
-   <slot>setChecked(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>136</x>
-     <y>304</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>-1</x>
-     <y>-1</y>
     </hint>
    </hints>
   </connection>

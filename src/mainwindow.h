@@ -48,6 +48,7 @@ public slots:
   void reloadDbList();
   void saveQuery();
   void saveQueryAs();
+  void toggleLeftPanel();
 
 private:
   void                closeEvent(QCloseEvent*);
