@@ -555,8 +555,6 @@ void MainWindow::setupWidgets()
   menuRecent_files->addSeparator();
   menuRecent_files->addAction(actionClearRecent);
 
-  actionPlugins->setVisible(false);
-
   actionMap[AbstractTabWidget::Copy]        = actionCopy;
   actionMap[AbstractTabWidget::Cut]         = actionCut;
   actionMap[AbstractTabWidget::Paste]       = actionPaste;
