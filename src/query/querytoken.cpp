@@ -12,28 +12,26 @@
 
 #include "querytoken.h"
 
-QueryToken::QueryToken(QString query, QSqlDatabase *db, QObject *parent)
-  : QObject(parent)
-{
+QueryToken::QueryToken(QString query, QSqlDatabase *db, bool enqueue,
+                       QObject *parent)
+  : QObject(parent) {
   qRegisterMetaType<QSqlError>("QSqlError");
   m_db = db;
   m_duration = 0;
+  m_enqueue = enqueue;
   m_model = new QSqlQueryModel(this);
   m_query = query;
 }
 
-void QueryToken::accept()
-{
+void QueryToken::accept() {
   emit accepted();
 }
 
-void QueryToken::reject()
-{
+void QueryToken::reject() {
   emit rejected();
 }
 
-void QueryToken::validate(QSqlError err, unsigned int duration)
-{
+void QueryToken::validate(QSqlError err, unsigned int duration) {
   m_duration = duration;
   m_error = err;
 

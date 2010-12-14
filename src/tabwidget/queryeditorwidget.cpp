@@ -183,13 +183,11 @@ QString QueryEditorWidget::id()
   return ret;
 }
 
-bool QueryEditorWidget::isSaved()
-{
+bool QueryEditorWidget::isSaved() {
   return !editor->document()->isModified();
 }
 
-void QueryEditorWidget::open(QString path)
-{
+void QueryEditorWidget::open(QString path) {
   if(!confirmClose())
     return;
 
@@ -197,9 +195,8 @@ void QueryEditorWidget::open(QString path)
   reloadFile();
 }
 
-void QueryEditorWidget::paste()
-{
-	editor->paste();
+void QueryEditorWidget::paste() {
+  editor->paste();
 }
 
 QueryToken *QueryEditorWidget::prepareToken()
@@ -211,6 +208,7 @@ QueryToken *QueryEditorWidget::prepareToken()
   QueryToken *token =
       new QueryToken(qtext,
                      DbManager::getDatabase(dbChooser->currentIndex()),
+                     actionEnqueue->isChecked(),
                      this);
 
   connect(token, SIGNAL(accepted()), this, SLOT(acceptToken()));
@@ -288,8 +286,8 @@ void QueryEditorWidget::reloadFile()
   emit fileChanged(filePath);
 }
 
-void QueryEditorWidget::run()
-{
+void QueryEditorWidget::run() {
+
   tabWidget->setVisible(true);
   tabWidget->setTabEnabled(1, false);
   tabWidget->setCurrentIndex(0);
@@ -404,7 +402,7 @@ void QueryEditorWidget::setupWidgets()
   statusBar->addWidget(statusLabel, 200);
 
   optionsMenu = new QMenu(this);
-  // optionsMenu->addAction(actionThreaded_query);
+  optionsMenu->addAction(actionEnqueue);
   optionsMenu->addAction(actionLogQuery);
   optionsMenu->addAction(actionClearOnSuccess);
   toolButton->setMenu(optionsMenu);

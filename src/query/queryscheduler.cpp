@@ -22,17 +22,24 @@ QuerySchedulerPrivate::QuerySchedulerPrivate()
  * Place le jeton en attente
  */
 void QuerySchedulerPrivate::enqueue(QueryToken *token) {
+
   if(!token->db()->isOpen())
     token->reject();
 
+  // à quel thread sera affecté le jeton (-1 = nouveau thread)
   int index = -1;
-  for(int i=0; index<0 && i<threads.size(); i++) {
-    if(threads[i]->isRunning() && threads[i]->db() == token->db())
-      index = i;
 
-    if(!threads[i]->isRunning()) {
-      threads[i]->setDb(token->db());
-      index = i;
+  // si le jeton doit être placé en file (comportement par défaut)
+  if (token->enqueue()) {
+    // on cherche le thread associé à sa connexion
+    for(int i=0; index<0 && i<threads.size(); i++) {
+      if(threads[i]->isRunning() && threads[i]->db() == token->db())
+        index = i;
+
+      if(!threads[i]->isRunning()) {
+        threads[i]->setDb(token->db());
+        index = i;
+      }
     }
   }
 

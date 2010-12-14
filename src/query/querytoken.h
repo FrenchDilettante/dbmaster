@@ -19,26 +19,31 @@
 #include <QSqlQueryModel>
 #include <QString>
 
+/**
+ * Jeton de requête : contient toutes les informations nécessaires pour son
+ * exécution.
+ */
 class QueryToken : public QObject
 {
 Q_OBJECT
 public:
-  QueryToken(QString query, QSqlDatabase *db, QObject *parent = 0);
+  QueryToken(QString query, QSqlDatabase *db, bool enqueue =true,
+             QObject *parent = 0);
 
 
   QSqlDatabase       *db()          { return m_db;        };
   unsigned int        duration()    { return m_duration;  };
   QString             query()       { return m_query;     };
+  bool                enqueue()     { return m_enqueue;   };
   QSqlError           error()       { return m_error;     };
   QSqlQueryModel     *model()       { return m_model;     };
   void setDb(QSqlDatabase *db)      { m_db = db;          };
   void setDuration(unsigned int d)  { m_duration = d;     };
-  void setModel(QSqlQueryModel *m)  { m_model = m;        };
   void setQuery(QString q)          { m_query = q;        };
 
   Q_PROPERTY(QSqlDatabase*    db      READ db         WRITE setDb)
   Q_PROPERTY(QSqlError        error   READ error)
-  Q_PROPERTY(QSqlQueryModel*  model   READ model      WRITE setModel)
+  Q_PROPERTY(QSqlQueryModel*  model   READ model)
   Q_PROPERTY(QString          query   READ query      WRITE setQuery)
 
 signals:
@@ -55,6 +60,7 @@ public slots:
 private:
   QSqlDatabase     *m_db;
   unsigned int      m_duration;
+  bool              m_enqueue;
   QSqlError         m_error;
   QSqlQueryModel   *m_model;
   QString           m_query;
