@@ -30,6 +30,7 @@ QueryEditorWidget::QueryEditorWidget(QWidget *parent)
 
   model       = new QSqlQueryModel(this);
   shortModel  = new QStandardItemModel(this);
+//  oldToken    = NULL;
   token       = NULL;
 }
 
@@ -205,8 +206,8 @@ void QueryEditorWidget::paste()
 QueryToken *QueryEditorWidget::prepareToken()
 {
   QString qtext = editor->textCursor().selectedText();
-  if( qtext.isEmpty() )
-  qtext = editor->toPlainText();
+  if(qtext.isEmpty())
+    qtext = editor->toPlainText();
 
   QueryToken *token =
       new QueryToken(qtext,
@@ -298,7 +299,7 @@ void QueryEditorWidget::run()
 
   statusBar->showMessage(tr("Running..."));
 
-  oldToken = token;
+//  oldToken = token;
   token = prepareToken();
 
   QueryScheduler::enqueue(token);
@@ -459,11 +460,11 @@ void QueryEditorWidget::validateToken(QSqlError err)
     if(actionClearOnSuccess->isChecked())
       editor->clear();
 
-    if(oldToken)
-    {
-      oldToken->disconnect();
-      delete oldToken;
-    }
+//    if(oldToken)
+//    {
+//      oldToken->disconnect();
+//      delete oldToken;
+//    }
 
     statusBar->showMessage(
         tr("Query executed with success in %2secs (%1 lines returned)")

@@ -70,7 +70,7 @@ private:
   QString               filePath;
   QSqlQueryModel       *model;
   int                   oldCount;
-  QueryToken           *oldToken;
+//  QueryToken           *oldToken;
   QMenu                *optionsMenu;
   int                   page;
   QSqlQuery             query;
