@@ -14,8 +14,14 @@
 
 #include "../plugin.h"
 
-class ExportEngine : public Plugin
+#include <QAbstractItemModel>
+#include <QFile>
+#include <QWizard>
+
+class ExportEngine : public QObject, Plugin
 {
+Q_OBJECT
+Q_INTERFACES(Plugin)
 public:
   ExportEngine();
 
@@ -23,6 +29,23 @@ public:
    * Nom du format, par ex. CSV, HTML, PDF, etc.
    */
   virtual QString formatName() =0;
+
+  void setModel(QAbstractItemModel *m) { model = m; };
+  void setWizard(QWizard *w) { wizard = w; };
+  QWizardPage *wizardPage() { return m_wizardPage; };
+
+signals:
+  void progress(int);
+
+protected:
+  /**
+   * Traitement de l'export : fonction threadée.
+   */
+  virtual void process(QFile &f) =0;
+
+  QAbstractItemModel *model;
+  QWizard *wizard;
+  QWizardPage *m_wizardPage;
 };
 
 Q_DECLARE_INTERFACE(ExportEngine, "dbmaster.ExportEngine")

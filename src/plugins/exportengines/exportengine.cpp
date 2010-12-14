@@ -12,6 +12,8 @@
 #include "exportengine.h"
 
 ExportEngine::ExportEngine()
-  : Plugin()
-{
+  : Plugin() {
+
+  this->model = NULL;
+  this->wizard = NULL;
 }
