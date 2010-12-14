@@ -15,10 +15,11 @@
 #include "../plugin.h"
 
 #include <QAbstractItemModel>
+#include <QApplication>
 #include <QFile>
 #include <QWizard>
 
-class ExportEngine : public QObject, Plugin
+class ExportEngine : public QObject, public Plugin
 {
 Q_OBJECT
 Q_INTERFACES(Plugin)
@@ -48,6 +49,6 @@ protected:
   QWizardPage *m_wizardPage;
 };
 
-Q_DECLARE_INTERFACE(ExportEngine, "dbmaster.ExportEngine")
+Q_DECLARE_INTERFACE(ExportEngine, "dbmaster.ExportEngine/0.8")
 
 #endif // EXPORTENGINE_H

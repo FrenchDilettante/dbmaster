@@ -42,6 +42,6 @@ public:
   virtual QString version() =0;
 };
 
-Q_DECLARE_INTERFACE(Plugin, "dbmaster.Plugin")
+Q_DECLARE_INTERFACE(Plugin, "dbmaster.Plugin/0.8")
 
 #endif // PLUGIN_H
