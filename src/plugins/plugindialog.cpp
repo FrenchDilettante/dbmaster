@@ -26,6 +26,7 @@ PluginDialog::PluginDialog(QWidget *parent)
 
 void PluginDialog::add()
 {
-  QString p = QFileDialog::getOpenFileName(this, tr("Choose a plugin file"), QDir::homePath());
+  QString p = QFileDialog::getOpenFileName(this, tr("Choose a plugin file"),
+                                           QDir::homePath());
   PluginManager::add(p);
 }

@@ -40,7 +40,10 @@ void PluginManagerPrivate::add(QString path)
       qDebug() << "dynamic_cast<>()";
     }
   } else {
-    qDebug() << "load()" << loader.errorString();
+    QMessageBox::critical(NULL,
+                          tr("Incorrect plugin file"),
+                          tr("Unable to load the plugin. Specified error : \n")
+                            + loader.errorString());
   }
 }
 

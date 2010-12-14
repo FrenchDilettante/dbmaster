@@ -10,6 +10,9 @@
     <height>300</height>
    </rect>
   </property>
+  <property name="windowTitle">
+   <string>Plugin center</string>
+  </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0" rowspan="4">
     <widget class="QListView" name="listView"/>
