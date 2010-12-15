@@ -429,6 +429,10 @@ void QueryEditorWidget::setupWidgets()
   refresh();
 }
 
+void QueryEditorWidget::showEvent(QShowEvent *event) {
+  editor->setFocus();
+}
+
 void QueryEditorWidget::startToken()
 {
 }
