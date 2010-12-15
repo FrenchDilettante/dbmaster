@@ -65,6 +65,7 @@ private:
   void setFilePath(QString);
   void setupConnections();
   void setupWidgets();
+  void showEvent(QShowEvent *event);
 
   Actions               baseActions;
   QString               filePath;
