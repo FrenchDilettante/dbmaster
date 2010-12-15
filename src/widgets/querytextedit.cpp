@@ -24,8 +24,12 @@ QueryTextEdit::QueryTextEdit(QWidget *parent)
 
   setupCompleter();
 
+  QFont f = Config::editorFont;
+  f.setPointSize(Config::editorFont.pointSize());
   setFont(Config::editorFont);
   setFontPointSize(Config::editorFont.pointSize());
+  QFontMetrics metrics(f);
+  setTabStopWidth(Config::editorTabSize * metrics.width(' '));
 //  setOpenExternalLinks(true);
 //  setOpenLinks(true);
 //  setReadOnly(false);

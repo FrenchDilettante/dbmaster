@@ -15,15 +15,16 @@
 #include "widgets/dbcombobox.h"
 #include "wizards/firstlaunchwizard.h"
 
-int                           Config::compCharCount  = 3;
-QString                       Config::defaultDriver  = "";
-bool                          Config::editorAutoSave = false;
-QString                       Config::editorEncoding = "utf8";
-QFont                         Config::editorFont;
-bool                          Config::editorSemantic = true;
-QMap<QString,QColor>          Config::shColor;
+int             Config::compCharCount   = 3;
+QString         Config::defaultDriver   = "";
+bool            Config::editorAutoSave  = false;
+QString         Config::editorEncoding  = "utf8";
+QFont           Config::editorFont;
+bool            Config::editorSemantic  = true;
+QMap<QString,QColor> Config::shColor;
 QMap<QString,QTextCharFormat> Config::shFormat;
-QStringList                   Config::shGroupList;
+QStringList     Config::shGroupList;
+int             Config::editorTabSize   = 4;
 
 void Config::init()
 {
@@ -49,13 +50,14 @@ void Config::reload()
    * Editor's properties
    */
   s.beginGroup("editor");
-  editorAutoSave = s.value("autosave").toBool();
-  compCharCount = s.value("comp_count").toInt();
-  editorEncoding = s.value("encoding").toString();
+  editorAutoSave    = s.value("autosave").toBool();
+  compCharCount     = s.value("comp_count").toInt();
+  editorTabSize     = s.value("tabsize").toInt();
+  editorEncoding    = s.value("encoding").toString();
   editorFont.setFamily(s.value("font_name").toString());
   if(s.value("font_size").toInt() > 0)
     editorFont.setPointSize(s.value("font_size").toInt());
-  editorSemantic = s.value("semantic").toBool();
+  editorSemantic    = s.value("semantic").toBool();
   s.endGroup();
 
   /*
@@ -92,6 +94,7 @@ void Config::save()
   s.setValue("font_size", editorFont.pointSize());
   s.setValue("autosave", editorAutoSave);
   s.setValue("comp_count", compCharCount);
+  s.setValue("tabsize", editorTabSize);
   s.setValue("encoding", editorEncoding);
   s.setValue("semantic", editorSemantic);
   s.endGroup();

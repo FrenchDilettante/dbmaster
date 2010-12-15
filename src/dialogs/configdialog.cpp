@@ -96,7 +96,7 @@ void ConfigDialog::reload()
     editorFont.setFamily( editorFontCombo->currentText() );
   }
 
-	// Query editor font size
+  // Query editor font size
   if( Config::editorFont.pointSize() > 0 )
     editorFontSizeSpin->setValue( Config::editorFont.pointSize() );
 
@@ -107,6 +107,8 @@ void ConfigDialog::reload()
       Config::editorEncoding ) );
   if( Config::compCharCount > 0 )
     acSpinBox->setValue( Config::compCharCount );
+
+  tabsizeSpin->setValue(Config::editorTabSize);
 
 
   /*
@@ -175,6 +177,7 @@ void ConfigDialog::save()
   Config::editorEncoding  = encodingComboBox->currentText().toLower();
   Config::editorFont      = editorFontCombo->currentFont();
   Config::editorSemantic  = editorSemanticCheckBox->isChecked();
+  Config::editorTabSize   = tabsizeSpin->value();
   if( compGroubBox->isEnabled() )
     Config::compCharCount = acSpinBox->value();
   else
