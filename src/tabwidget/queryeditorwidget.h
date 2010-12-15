@@ -45,6 +45,7 @@ public:
 public slots:
   void copy();
   void cut();
+  void lowerCase();
   void open( QString );
   void paste();
   void redo();
@@ -54,6 +55,7 @@ public slots:
   bool save();
   void selectAll();
   void undo();
+  void upperCase();
 
 signals:
   void fileChanged(QString);

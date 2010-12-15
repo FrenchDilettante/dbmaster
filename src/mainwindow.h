@@ -77,6 +77,7 @@ private slots:
   void closeTab(int nb);
   void copy();
   void cut();
+  void lowerCase();
   void nextTab();
   void openRecent();
   void paste();
@@ -87,6 +88,7 @@ private slots:
   void selectAll();
   void setQueryCount(int count);
   void undo();
+  void upperCase();
   void userManual();
 };
 

@@ -118,6 +118,13 @@
     <property name="title">
      <string>&amp;Edit</string>
     </property>
+    <widget class="QMenu" name="menuCase">
+     <property name="title">
+      <string>Case</string>
+     </property>
+     <addaction name="actionUpperCase"/>
+     <addaction name="actionLowerCase"/>
+    </widget>
     <addaction name="actionUndo"/>
     <addaction name="actionRedo"/>
     <addaction name="separator"/>
@@ -127,6 +134,8 @@
     <addaction name="separator"/>
     <addaction name="actionSearch"/>
     <addaction name="actionSelect_all"/>
+    <addaction name="separator"/>
+    <addaction name="menuCase"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -451,6 +460,28 @@
   <action name="actionUserManual">
    <property name="text">
     <string>User manual</string>
+   </property>
+  </action>
+  <action name="actionUpperCase">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Upper</string>
+   </property>
+   <property name="toolTip">
+    <string>Change the selection case to upper</string>
+   </property>
+  </action>
+  <action name="actionLowerCase">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Lower</string>
+   </property>
+   <property name="toolTip">
+    <string>Change the selection case to lower</string>
    </property>
   </action>
  </widget>

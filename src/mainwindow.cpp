@@ -240,6 +240,12 @@ void MainWindow::cut()
     currentTab()->cut();
 }
 
+void MainWindow::lowerCase() {
+  if (currentTab() != 0) {
+    currentTab()->lowerCase();
+  }
+}
+
 /**
  * Create a query tab and connect it.
  *
@@ -484,6 +490,7 @@ void MainWindow::setupConnections()
   connect(actionCut,          SIGNAL(triggered()),  this,          SLOT(cut()));
   connect(actionDbManager,    SIGNAL(triggered()),  dbDialog,      SLOT(exec()));
   connect(actionLeftPanel,    SIGNAL(triggered()),  this,          SLOT(toggleLeftPanel()));
+  connect(actionLowerCase,    SIGNAL(triggered()),  this,          SLOT(lowerCase()));
   connect(actionLogs,         SIGNAL(triggered()),  logDial,       SLOT(exec()));
   connect(actionNewQuery,     SIGNAL(triggered()),  this,          SLOT(newQuery()));
   connect(actionNextTab,      SIGNAL(triggered()),  this,          SLOT(nextTab()));
@@ -499,6 +506,7 @@ void MainWindow::setupConnections()
   connect(actionSearch,       SIGNAL(triggered()),  this,          SLOT(search()));
   connect(actionSelect_all,   SIGNAL(triggered()),  this,          SLOT(selectAll()));
   connect(actionUndo,         SIGNAL(triggered()),  this,          SLOT(undo()));
+  connect(actionUpperCase,    SIGNAL(triggered()),  this,          SLOT(upperCase()));
 
   /*
    * DbTreeView
@@ -555,6 +563,8 @@ void MainWindow::setupWidgets()
   menuRecent_files->addSeparator();
   menuRecent_files->addAction(actionClearRecent);
 
+  actionMap[AbstractTabWidget::CaseLower]   = actionLowerCase;
+  actionMap[AbstractTabWidget::CaseUpper]   = actionUpperCase;
   actionMap[AbstractTabWidget::Copy]        = actionCopy;
   actionMap[AbstractTabWidget::Cut]         = actionCut;
   actionMap[AbstractTabWidget::Paste]       = actionPaste;
@@ -664,10 +674,15 @@ void MainWindow::toggleLeftPanel() {
   dockWidget->setVisible(!dockWidget->isVisible());
 }
 
-void MainWindow::undo()
-{
+void MainWindow::undo() {
   if(currentTab())
     currentTab()->undo();
+}
+
+void MainWindow::upperCase() {
+  if (currentTab() != 0) {
+    currentTab()->upperCase();
+  }
 }
 
 /**

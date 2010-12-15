@@ -23,21 +23,23 @@
 #include <QTextEdit>
 #include <QWidget>
 
-class AbstractTabWidget: public QWidget
-{
+class AbstractTabWidget: public QWidget {
+
 Q_OBJECT
 public:
   enum Action {
-    Copy        = 0x0001,
-    Cut         = 0x0002,
-    Paste       = 0x0004,
-    Redo        = 0x0008,
-    Print       = 0x0010,
-    Save        = 0x0020,
-    SaveAs      = 0x0040,
-    Search      = 0x0080,
-    SelectAll   = 0x0100,
-    Undo        = 0x0200
+    CaseLower   = 0x00001,
+    CaseUpper   = 0x00002,
+    Copy        = 0x00004,
+    Cut         = 0x00008,
+    Paste       = 0x00010,
+    Redo        = 0x00020,
+    Print       = 0x00040,
+    Save        = 0x00080,
+    SaveAs      = 0x00100,
+    Search      = 0x00200,
+    SelectAll   = 0x00400,
+    Undo        = 0x00800
   };
   Q_DECLARE_FLAGS(Actions, Action)
 
@@ -62,6 +64,7 @@ signals:
 public slots:
   virtual void copy()                 {};
   virtual void cut()                  {};
+  virtual void lowerCase()            {};
   virtual void open(QString)          {};
   virtual void paste()                {};
   virtual void redo()                 {};
@@ -71,6 +74,7 @@ public slots:
   virtual void saveAs(QString =QString::null)     {};
   virtual void selectAll()            {};
   virtual void undo()                 {};
+  virtual void upperCase()            {};
 
 protected:
   QPrinter    m_printer;

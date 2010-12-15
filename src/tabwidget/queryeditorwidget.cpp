@@ -188,6 +188,16 @@ bool QueryEditorWidget::isSaved() {
   return !editor->document()->isModified();
 }
 
+void QueryEditorWidget::lowerCase() {
+
+  QTextCursor tc = editor->textCursor();
+  if (tc.selectedText().size() > 0) {
+    QString txt = tc.selectedText();
+    tc.removeSelectedText();
+    tc.insertText(txt.toLower());
+  }
+}
+
 void QueryEditorWidget::open(QString path) {
   if(!confirmClose())
     return;
@@ -408,7 +418,8 @@ void QueryEditorWidget::setupWidgets()
   optionsMenu->addAction(actionClearOnSuccess);
   toolButton->setMenu(optionsMenu);
 
-  baseActions = Copy | Cut | Paste | Print | SaveAs | Search | SelectAll;
+  baseActions = CaseLower | CaseUpper | Copy | Cut | Paste | Print | SaveAs
+              | Search | SelectAll;
 
   dbChooser->setModel(DbManager::model());
   dbChooser->setCurrentIndex(DbManager::lastIndex);
@@ -438,13 +449,21 @@ QTextEdit* QueryEditorWidget::textEdit()
   return editor;
 }
 
-void QueryEditorWidget::undo()
-{
+void QueryEditorWidget::undo() {
   editor->undo();
 }
 
-void QueryEditorWidget::validateToken(QSqlError err)
-{
+void QueryEditorWidget::upperCase() {
+
+  QTextCursor tc = editor->textCursor();
+  if (tc.selectedText().size() > 0) {
+    QString txt = tc.selectedText();
+    tc.removeSelectedText();
+    tc.insertText(txt.toUpper());
+  }
+}
+
+void QueryEditorWidget::validateToken(QSqlError err) {
   QString                 logMsg;
   QMap<QString, QVariant> logData;
   tabWidget->setTabEnabled(1, false);

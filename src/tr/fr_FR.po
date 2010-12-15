@@ -396,264 +396,289 @@ msgctxt "MainWindowClass|"
 msgid "&Edit"
 msgstr "É&dition"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:133
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:142
 #| msgid "Help"
 msgctxt "MainWindowClass|"
 msgid "&Help"
 msgstr "Aid&e"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:140
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:149
 #| msgid "File"
 msgctxt "MainWindowClass|"
 msgid "&File"
 msgstr "&Fichier"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:144
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:153
 #| msgid "New"
 msgctxt "MainWindowClass|"
 msgid "&New"
 msgstr "&Nouvelle"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:152
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:161
 msgctxt "MainWindowClass|"
 msgid "Recent files"
 msgstr "Fichiers récents"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:169
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:178
 msgctxt "MainWindowClass|"
 msgid "&View"
 msgstr "&Affichage"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:173
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:182
 msgctxt "MainWindowClass|"
 msgid "Panels"
 msgstr "Panneaux"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:216
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:222
 msgctxt "MainWindowClass|"
 msgid "Main toolbar"
 msgstr "Barre d'outils principale"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:191
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:394
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:200
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:400
 msgctxt "MainWindowClass|"
 msgid "Connections"
 msgstr "Connexions"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:243
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:123
+msgctxt "MainWindowClass|"
+msgid "Case"
+msgstr "Casse"
+
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:249
 msgctxt "MainWindowClass|"
 msgid "Connection"
 msgstr "Connexion"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:246
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:252
 msgctxt "MainWindowClass|"
 msgid "Ctrl+Shift+A"
 msgstr "Ctrl+Shift+A"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:251
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:257
 msgctxt "MainWindowClass|"
 msgid "Query"
 msgstr "Requête"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:254
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:260
 msgctxt "MainWindowClass|"
 msgid "Ctrl+N"
 msgstr "Ctrl+N"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:259
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:265
 #| msgid "Open"
 msgctxt "MainWindowClass|"
 msgid "&Open"
 msgstr "&Ouvrir"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:262
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:268
 msgctxt "MainWindowClass|"
 msgid "Ctrl+O"
 msgstr "Ctrl+O"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:270
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:276
 msgctxt "MainWindowClass|"
 msgid "Save"
 msgstr "Enregistrer"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:273
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:279
 msgctxt "MainWindowClass|"
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:281
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:287
 msgctxt "MainWindowClass|"
 msgid "Save as"
 msgstr "Enregistrer sous"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:286
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:292
 #| msgid "Exit"
 msgctxt "MainWindowClass|"
 msgid "E&xit"
 msgstr "&Quitter"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:289
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:295
 msgctxt "MainWindowClass|"
 msgid "Ctrl+Q"
 msgstr "Ctrl+Q"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:294
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:300
 msgctxt "MainWindowClass|"
 msgid "Preferences"
 msgstr "Préférences"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:302
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:308
 msgctxt "MainWindowClass|"
 msgid "&Undo"
 msgstr "Ann&uler"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:305
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:311
 msgctxt "MainWindowClass|"
 msgid "Ctrl+Z"
 msgstr "Ctrl+Z"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:313
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:319
 msgctxt "MainWindowClass|"
 msgid "&Redo"
 msgstr "&Refaire"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:316
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:322
 msgctxt "MainWindowClass|"
 msgid "Ctrl+Shift+Z"
 msgstr "Ctrl+Shift+Z"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:324
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:330
 msgctxt "MainWindowClass|"
 msgid "&Cut"
 msgstr "&Couper"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:327
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:333
 msgctxt "MainWindowClass|"
 msgid "Ctrl+X"
 msgstr "Ctrl+X"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:335
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:341
 msgctxt "MainWindowClass|"
 msgid "C&opy"
 msgstr "C&opier"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:338
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:344
 msgctxt "MainWindowClass|"
 msgid "Ctrl+C"
 msgstr "Ctrl+C"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:346
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:352
 msgctxt "MainWindowClass|"
 msgid "&Paste"
 msgstr "Co&ller"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:349
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:355
 msgctxt "MainWindowClass|"
 msgid "Ctrl+V"
 msgstr "Ctrl+V"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:357
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:363
 msgctxt "MainWindowClass|"
 msgid "Select all"
 msgstr "Tout sélectionner"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:360
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:366
 msgctxt "MainWindowClass|"
 msgid "Ctrl+A"
 msgstr "Ctrl+A"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:365
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:371
 msgctxt "MainWindowClass|"
 msgid "Logs"
 msgstr "Journaux"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:370
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:376
 msgctxt "MainWindowClass|"
 msgid "About DbMaster"
 msgstr "À propos de DbMaster"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:375
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:381
 #| msgid "Database manager"
 msgctxt "MainWindowClass|"
 msgid "Connection manager"
 msgstr "Gestionnaire de connexions"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:380
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:386
 msgctxt "MainWindowClass|"
 msgid "Close"
 msgstr "Fermer"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:421
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:427
 msgctxt "MainWindowClass|"
 msgid "Plugins"
 msgstr "Plugins"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:453
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:459
 msgctxt "MainWindowClass|"
 msgid "User manual"
 msgstr "Documentation"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:383
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:467
+msgctxt "MainWindowClass|"
+msgid "Upper"
+msgstr "Majuscule"
+
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:470
+msgctxt "MainWindowClass|"
+msgid "Change the selection case to upper"
+msgstr "Passe la sélection en majuscule"
+
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:478
+msgctxt "MainWindowClass|"
+msgid "Lower"
+msgstr "Minuscule"
+
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:481
+msgctxt "MainWindowClass|"
+msgid "Change the selection case to lower"
+msgstr "Passe la sélection en minuscule"
+
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:389
 msgctxt "MainWindowClass|"
 msgid "Close the current tab"
 msgstr "Ferme l'onglet courant"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:397
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:403
 msgctxt "MainWindowClass|"
 msgid "F9"
 msgstr "F9"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:413
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:419
 msgctxt "MainWindowClass|"
 msgid "Print"
 msgstr "Imprimer"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:416
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:422
 msgctxt "MainWindowClass|"
 msgid "Ctrl+P"
 msgstr "Ctrl+P"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:426
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:432
 msgctxt "MainWindowClass|"
 msgid "Next tab"
 msgstr "Onglet suivant"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:429
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:435
 msgctxt "MainWindowClass|"
 msgid "Ctrl+PgDown"
 msgstr "Ctrl+PgSuiv"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:434
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:440
 msgctxt "MainWindowClass|"
 msgid "Previous tab"
 msgstr "Onglet précédent"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:437
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:443
 msgctxt "MainWindowClass|"
 msgid "Ctrl+PgUp"
 msgstr "Ctrl+PgPréc"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:445
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:451
 msgctxt "MainWindowClass|"
 msgid "Search"
 msgstr "Rechercher"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:448
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:454
 msgctxt "MainWindowClass|"
 msgid "Ctrl+F"
 msgstr "Ctrl+F"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:402
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:408
 msgctxt "MainWindowClass|"
 msgid "Clear"
 msgstr "Effacer"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:405
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:411
 msgctxt "MainWindowClass|"
 msgid "Clear recent files"
 msgstr "Efface la liste des fichiers récents"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:386
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:392
 msgctxt "MainWindowClass|"
 msgid "Ctrl+W"
 msgstr "Ctrl+W"
@@ -1000,13 +1025,13 @@ msgctxt "QObject|"
 msgid "Attempting to add an existing connection."
 msgstr "Tentative d'ajouter une connexion déjà présente."
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:91
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:98
 #, qt-format
 msgctxt "QObject|"
 msgid "Database %1 added"
 msgstr "Base %1 ajoutée"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:528
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:535
 #, qt-format
 msgctxt "QObject|"
 msgid "%1 on %2"
@@ -1022,7 +1047,7 @@ msgctxt "QObject|"
 msgid "Initialization..."
 msgstr "Initialisation..."
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:87
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:94
 #, qt-format
 msgctxt "QObject|"
 msgid "Database %1 on %2 added"
@@ -1066,50 +1091,50 @@ msgstr ""
 "Certains fichiers n'ont pas été enregistrés. Êtes-vous sûr de vouloir "
 "quitter ?"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:301
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:307
 msgctxt "MainWindow|"
 msgid "Select a query to open"
 msgstr "Ouvrir une requête"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:303
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:309
 msgctxt "MainWindow|"
 msgid "Query file (*.sql);;All files (*.*)"
 msgstr "Fichier de requête (*.sql);;Tous fichiers (*.*)"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:423
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:429
 msgctxt "MainWindow|"
 msgid "No recent file"
 msgstr "Pas de fichier récent"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:425
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:431
 msgctxt "MainWindow|"
 msgid "Clear"
 msgstr "Effacer"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:468
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:474
 #, qt-format
 msgctxt "MainWindow|"
 msgid "%1 queries pending..."
 msgstr "%1 requête en attente..."
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:47
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:48
 #, qt-format
 #| msgid "Query pending"
 msgctxt "QueryEditorWidget|"
 msgid "<b>[%1]</b>Query pending"
 msgstr "<b>[%1]</b>Requête en attente"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:113
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:141
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:270
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:316
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:328
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:114
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:142
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:281
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:327
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:339
 msgctxt "QueryEditorWidget|"
 msgid "DbMaster"
 msgstr "DbMaster"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:114
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:136
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:115
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:137
 #| msgid ""
 #| "Warning ! All your modifications will be lost.\n"
 #| "Do you really want to close ?"
@@ -1121,7 +1146,7 @@ msgstr ""
 "Attention ! Toutes les modifications seront perdues.\n"
 "Voulez-vous enregistrer ?"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:138
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:139
 #, qt-format
 #| msgid ""
 #| "Warning ! %1 hasn't been saved\n"
@@ -1134,43 +1159,43 @@ msgstr ""
 "Attention ! %1 a été modifié.\n"
 "Voulez-vous l'enregistrer ?"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:271
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:282
 msgctxt "QueryEditorWidget|"
 msgid "Unable to open the file !"
 msgstr "Impossible d'ouvrir le fichier !"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:297
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:308
 msgctxt "QueryEditorWidget|"
 msgid "Running..."
 msgstr "Exécution..."
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:471
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:491
 msgctxt "QueryEditorWidget|"
 msgid "Query executed with success"
 msgstr "Requête exécutée avec succès"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:483
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:503
 msgctxt "QueryEditorWidget|"
 msgid "Unable to run query"
 msgstr "Impossible d'exécuter la requête"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:317
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:328
 msgctxt "QueryEditorWidget|"
 msgid "Query file (*.sql);;All files (*.*)"
 msgstr "Fichier de requête (*.sql);;Tous fichiers (*.*)"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:328
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:339
 msgctxt "QueryEditorWidget|"
 msgid "Unable to save the file !"
 msgstr "Impossible d'enregistrer le fichier !"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:430
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:442
 msgctxt "QueryEditorWidget|"
 msgid "Query editor"
 msgstr "Éditeur de requêtes"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:467
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:477
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:487
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:497
 #, qt-format
 msgctxt "QueryEditorWidget|"
 msgid "Query executed with success in %2secs (%1 lines returned)"
@@ -1269,178 +1294,178 @@ msgctxt "ResultView|"
 msgid "Fetching..."
 msgstr "Récupération..."
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:519
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:526
 msgctxt "DbManagerPrivate|"
 msgid "Database"
 msgstr "Base de données"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:323
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:330
 #, qt-format
 msgctxt "DbManagerPrivate|"
 msgid "Tables (%1)"
 msgstr "Tables (%1)"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:113
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:120
 #, qt-format
 msgctxt "DbManagerPrivate|"
 msgid "%1 (local)"
 msgstr "%1 (locale)"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:115
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:127
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:122
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:134
 #, qt-format
 msgctxt "DbManagerPrivate|"
 msgid "%1 on %2"
 msgstr "%1 sur %2"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:138
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:145
 msgctxt "DbManagerPrivate|"
 msgid "Openned"
 msgstr "Ouverte"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:140
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:147
 msgctxt "DbManagerPrivate|"
 msgid "Closed"
 msgstr "Fermée"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:142
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:149
 msgctxt "DbManagerPrivate|"
 msgid "Status"
 msgstr "Statut"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:147
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:154
 msgctxt "DbManagerPrivate|"
 msgid "DBMS"
 msgstr "SGBD"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:149
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:156
 #, qt-format
 msgctxt "DbManagerPrivate|"
 msgid "Generic (%1)"
 msgstr "Générique (%1)"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:153
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:160
 msgctxt "DbManagerPrivate|"
 msgid "Host"
 msgstr "Hôte"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:338
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:345
 #, qt-format
 msgctxt "DbManagerPrivate|"
 msgid "Views (%1)"
 msgstr "Vues (%1)"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:353
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:360
 #, qt-format
 msgctxt "DbManagerPrivate|"
 msgid "System tables (%1)"
 msgstr "Tables système (%1)"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:417
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:424
 #, qt-format
 msgctxt "DbManagerPrivate|"
 msgid "Connected to %1"
 msgstr "Connecté à %1"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:420
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:427
 #, qt-format
 msgctxt "DbManagerPrivate|"
 msgid "Unable to connect to %1"
 msgstr "Impossible de se connecter à %1"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:433
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:440
 #, qt-format
 msgctxt "DbManagerPrivate|"
 msgid "Disconnected from %1"
 msgstr "Déconnecté de %1"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:492
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:499
 msgctxt "DbManagerPrivate|"
 msgid "Driver"
 msgstr "Pilote"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:494
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:501
 msgctxt "DbManagerPrivate|"
 msgid "Interbase/Firebird"
 msgstr "Interbase/Firebird"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:495
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:502
 msgctxt "DbManagerPrivate|"
 msgid "MySql"
 msgstr "MySql"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:496
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:503
 msgctxt "DbManagerPrivate|"
 msgid "MySql 3"
 msgstr "MySql 3"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:497
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:504
 msgctxt "DbManagerPrivate|"
 msgid "ODBC"
 msgstr "ODBC"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:498
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:505
 msgctxt "DbManagerPrivate|"
 msgid "ODBC 3"
 msgstr "ODBC 3"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:499
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:506
 msgctxt "DbManagerPrivate|"
 msgid "PostGreSQL"
 msgstr "PostGreSQL"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:500
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:507
 msgctxt "DbManagerPrivate|"
 msgid "PostGreSQL 7"
 msgstr "PostGreSQL 7"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:501
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:508
 msgctxt "DbManagerPrivate|"
 msgid "SQLite"
 msgstr "SQLite"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:502
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:509
 msgctxt "DbManagerPrivate|"
 msgid "SQLite 2"
 msgstr "SQLite 2"
 
-#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:55
+#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:57
 msgctxt "DbTreeView|"
 msgid "Disconnect"
 msgstr "Déconnecter"
 
-#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:58
-#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:215
+#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:60
+#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:217
 msgctxt "DbTreeView|"
 msgid "Connect"
 msgstr "Connecter"
 
-#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:164
+#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:166
 msgctxt "DbTreeView|"
 msgid "Cannot remove"
 msgstr "Impossible de supprimer"
 
-#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:165
+#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:167
 msgctxt "DbTreeView|"
 msgid "You must close the database before remove it."
 msgstr "Vous devez fermer la connexion avant de la supprimer."
 
-#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:196
+#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:198
 msgctxt "DbTreeView|"
 msgid "New connection"
 msgstr "Nouvelle connexion"
 
-#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:201
+#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:203
 msgctxt "DbTreeView|"
 msgid "Edit"
 msgstr "Modifier"
 
-#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:205
+#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:207
 msgctxt "DbTreeView|"
 msgid "Refresh"
 msgstr "Rafraîchir"
 
-#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:209
+#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:211
 msgctxt "DbTreeView|"
 msgid "Remove"
 msgstr "Supprimer"

@@ -15,6 +15,5 @@
 QDir AbstractTabWidget::lastDir = QDir::home();
 
 AbstractTabWidget::AbstractTabWidget(QWidget *parent)
-  : QWidget(parent)
-{
+  : QWidget(parent) {
 }
