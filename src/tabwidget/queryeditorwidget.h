@@ -81,11 +81,13 @@ private:
   QStatusBar           *statusBar;
   QLabel               *statusLabel;
   QueryToken           *token;
+  QFileSystemWatcher   *watcher;
 
 private slots:
   void acceptToken();
   void checkDbOpen();
   void forwardChanged(bool changed);
+  void on_watcher_fileChanged(QString path);
   void rejectToken();
   void startToken();
   void validateToken(QSqlError err);

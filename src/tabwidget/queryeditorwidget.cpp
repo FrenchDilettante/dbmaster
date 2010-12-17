@@ -32,6 +32,7 @@ QueryEditorWidget::QueryEditorWidget(QWidget *parent)
   shortModel  = new QStandardItemModel(this);
 //  oldToken    = NULL;
   token       = NULL;
+  watcher     = new QFileSystemWatcher(this);
 }
 
 QueryEditorWidget::~QueryEditorWidget()
@@ -195,6 +196,15 @@ void QueryEditorWidget::lowerCase() {
     QString txt = tc.selectedText();
     tc.removeSelectedText();
     tc.insertText(txt.toLower());
+  }
+}
+
+void QueryEditorWidget::on_watcher_fileChanged(QString path) {
+
+  if (QFile::exists(path)) {
+    // Le fichier a été modifié
+  } else {
+    // Le fichier a été supprimé
   }
 }
 
@@ -379,12 +389,14 @@ void QueryEditorWidget::selectAll()
 
 void QueryEditorWidget::setFilePath( QString path )
 {
+  watcher->removePath(this->filePath);
   this->filePath = path;
 
   if(path.size() > 30)
     path = QFileInfo(path).fileName();
 
   pathLabel->setText(path);
+  watcher->addPath(path);
 }
 
 void QueryEditorWidget::setupConnections()
