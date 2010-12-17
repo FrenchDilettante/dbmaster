@@ -47,13 +47,16 @@ Auteurs
 -------
 
 Développement :
-   - Emmanuel BOURGERIE
+
+- Emmanuel BOURGERIE
 
 Traduction :
+
 [fr] - Emmanuel BOURGERIE
 
 Outils tiers :
-  - QColorButton : Florian BECKER
+
+- QColorButton : Florian BECKER
 
 Soutenir le projet
 ------------------
