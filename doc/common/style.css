@@ -1,0 +1,31 @@
+a {
+	color: #3d5270;
+}
+
+h2 {
+	background-color: #3d5270;
+	color: white;
+	font-size: 12pt;
+	padding: 2px;
+}
+
+h3 {
+	background-color: #5e799f;
+	color: white;
+	font-size: 12pt;
+	margin-left: 30px;
+	padding: 2px;
+}
+
+p {
+	margin-left: 50px;
+}
+
+#doc-content {
+	margin-left: 250px;
+}
+
+#toc {
+	float: left;
+}
+
