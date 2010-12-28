@@ -9,7 +9,7 @@ Actuellement en plein développement, il est avant tout destiné aux développeu
 Compatibilité SGBD
 ------------------
 
-DbMaster est bâti sur la technologie Qt, qui offre un framework pour la connexion aux base de données relationnelles : [QtSql](http://doc.qt.nokia.com/latest/qtsql.html).
+DbMaster est bâti sur la technologie Qt, qui offre un framework pour la connexion aux base de données relationnelles : [QtSql](http://doc.qt.nokia.com/4.7/qtsql.html).
 Nokia fournit les drivers pour les SGBD suivants :
 
 * IBM DB2
