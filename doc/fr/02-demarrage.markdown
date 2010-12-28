@@ -10,7 +10,7 @@ Il vous sera demandé quel driver par défaut utiliser pour les nouvelles connex
 Ajouter une connexion
 ---------------------
 
-Le premier bouton de la barre d'outil (accessible aussi dans Fichier->Nouvelle->Connexion) lance l'assistant d'ajout de connexion.
+Le premier bouton de la barre d'outil (accessible aussi dans Fichier→Nouvelle→Connexion) lance l'assistant d'ajout de connexion.
 La liste déroulante du SGBD permet de choisir entre l'usage d'un driver natif ou une connexion ODBC. L'adresse n'est pas obligatoire à renseigner pour certains SGBD (SQLite notamment).
 Sur la page suivante, vous pouvez tester les informations saisies.
 
@@ -19,4 +19,4 @@ Lors de la validation de l'ajout, la connexion est disponible dans le volet de g
 Connexion
 ---------
 
-Une fois la connexion enregistrée, vous pouvez vous connecter en double-cliquant dessus ou par un clic-droit->Connecter.
+Une fois la connexion enregistrée, vous pouvez vous connecter en double-cliquant dessus ou par un clic-droit→Connecter.

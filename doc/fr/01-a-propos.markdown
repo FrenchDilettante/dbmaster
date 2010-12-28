@@ -61,4 +61,4 @@ Outils tiers :
 Soutenir le projet
 ------------------
 
-DbMaster est un projet libre développé bénévolement. Si vous souhaitez participer au projet, rendez-vous sur le site (http://projets.developpez.com/projects/dbmaster).
+DbMaster est un projet libre développé bénévolement. Si vous souhaitez participer au projet, rendez-vous sur le [site](http://projets.developpez.com/projects/dbmaster).
