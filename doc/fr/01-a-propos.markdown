@@ -46,11 +46,11 @@ Développement :
 
 - Emmanuel BOURGERIE
 
-Traduction :
+Documentation & traduction :
 
-[fr] - Emmanuel BOURGERIE
+**`[FR]`** Emmanuel BOURGERIE
 
-Outils tiers :
+Code tiers :
 
 - QColorButton : Florian BECKER
 
