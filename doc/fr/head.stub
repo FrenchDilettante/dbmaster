@@ -6,14 +6,7 @@
 <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
-<div id="toc">
-<ol> 
-<li><a href="01-a-propos.html">À propos de DbMaster</a></li> 
-<li><a href="02-demarrage.html">Démarrage</a></li> 
-<li><a href="03-connexions.html">Gestion des connexions</a></li> 
-<li><a href="04-editeur-sql.html">Édition de requêtes SQL</a></li> 
-<li><a href="05-tables.html">Visualisation des tables</a></li> 
-<li><a href="06-options.html">Options</a></li> 
-</ol>
+<div id="header">
+
 </div>
-<div id="doc-content">
+<div id="toc">

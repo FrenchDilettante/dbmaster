@@ -2,14 +2,29 @@ a {
 	color: #3d5270;
 }
 
-h2 {
+#copyright {
+	border-top: 1px solid gray;
+	color: gray;
+	text-align: center;
+}
+
+#doc-content {
+	margin-left: 250px;
+	min-height: 500px;
+}
+
+#doc-content p {
+	margin-left: 70px;
+}
+
+#doc-content h2 {
 	background-color: #3d5270;
 	color: white;
 	font-size: 12pt;
 	padding: 2px;
 }
 
-h3 {
+#doc-content h3 {
 	background-color: #5e799f;
 	color: white;
 	font-size: 12pt;
@@ -17,15 +32,23 @@ h3 {
 	padding: 2px;
 }
 
-p {
-	margin-left: 50px;
+#doc-content h4 {
+	margin-left: 35px;
 }
 
-#doc-content {
-	margin-left: 250px;
+#doc-content ul li {
+	margin-left: 70px;
+}
+
+#header {
+	border-bottom: 1px solid gray;
 }
 
 #toc {
 	float: left;
+}
+
+#toc h1 {
+	font-size: 12pt;
 }
 

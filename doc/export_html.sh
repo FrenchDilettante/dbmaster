@@ -8,16 +8,24 @@ do
 	rm -rf html
 	mkdir html
 	cp ../common/* html/
+	cp *.stub html/
 	
 	for elem in *.markdown
 	do
+		if [ "$elem" == "00-index.markdown" ];
+		then
+			markdown $elem >> html/head.stub
+			cat html/content.stub >> html/head.stub
+		else
+			length=${#elem}-9
+			output=html/${elem:0:$length}.html
+			echo "  $elem > $lng/$output"
 		
-		length=${#elem}-9
-		output=html/${elem:0:$length}.html
-		echo "  $elem > $lng/$output"
-		
-		cat head.stub > $output
-		markdown $elem >> $output
-		cat foot.stub >> $output
+			cat html/head.stub > $output
+			markdown $elem >> $output
+			cat html/foot.stub >> $output
+		fi
 	done
+	
+	rm html/*.stub
 done
