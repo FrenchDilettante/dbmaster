@@ -30,6 +30,15 @@ Les SGBD suivants ont été testés et validés :
 
 Les autres n'ont pu être testés.
 
+
+Licence
+-------
+
+DbMaster est fourni sous licence GNU GPL v3.
+
+Cette documentation est fournie sous licence Creative Commons BY-SA.
+
+
 Auteurs
 -------
 

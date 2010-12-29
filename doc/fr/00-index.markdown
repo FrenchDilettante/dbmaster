@@ -13,6 +13,8 @@ Autres
 ======
 
 * [Notes de version](release-notes.html)
+* [Licence GNU GPLv3](gnu-gpl.html)
+* [Licence CC BY-SA](cc-by-sa.html)
 
 
 Liens
