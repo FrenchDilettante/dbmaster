@@ -30,19 +30,6 @@ Les SGBD suivants ont été testés et validés :
 
 Les autres n'ont pu être testés.
 
-Installation
-------------
-
-### Linux ###
-
-#### Debian & dérivées (Ubuntu) ####
-
-L'installation du paquet .deb est entièrement automatique.
-
-### Windows ###
-
-L'archive binaire dbmaster-0.7.zip contient tout ce qui est nécessaire pour utiliser DbMaster. Une fois extraite, vous pouvez exécuter dbmaster.exe.
-
 Auteurs
 -------
 
