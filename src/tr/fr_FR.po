@@ -1087,24 +1087,24 @@ msgctxt "MainWindow|"
 msgid "%1 queries pending..."
 msgstr "%1 requête en attente..."
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:47
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:48
 #, qt-format
 #| msgid "Query pending"
 msgctxt "QueryEditorWidget|"
 msgid "<b>[%1]</b>Query pending"
 msgstr "<b>[%1]</b>Requête en attente"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:113
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:141
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:272
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:318
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:330
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:114
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:142
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:273
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:319
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:331
 msgctxt "QueryEditorWidget|"
 msgid "DbMaster"
 msgstr "DbMaster"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:114
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:136
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:115
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:137
 #| msgid ""
 #| "Warning ! All your modifications will be lost.\n"
 #| "Do you really want to close ?"
@@ -1116,7 +1116,7 @@ msgstr ""
 "Attention ! Toutes les modifications seront perdues.\n"
 "Voulez-vous enregistrer ?"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:138
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:139
 #, qt-format
 #| msgid ""
 #| "Warning ! %1 hasn't been saved\n"
@@ -1129,43 +1129,43 @@ msgstr ""
 "Attention ! %1 a été modifié.\n"
 "Voulez-vous l'enregistrer ?"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:273
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:274
 msgctxt "QueryEditorWidget|"
 msgid "Unable to open the file !"
 msgstr "Impossible d'ouvrir le fichier !"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:299
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:300
 msgctxt "QueryEditorWidget|"
 msgid "Running..."
 msgstr "Exécution..."
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:473
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:478
 msgctxt "QueryEditorWidget|"
 msgid "Query executed with success"
 msgstr "Requête exécutée avec succès"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:485
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:490
 msgctxt "QueryEditorWidget|"
 msgid "Unable to run query"
 msgstr "Impossible d'exécuter la requête"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:319
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:320
 msgctxt "QueryEditorWidget|"
 msgid "Query file (*.sql);;All files (*.*)"
 msgstr "Fichier de requête (*.sql);;Tous fichiers (*.*)"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:330
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:331
 msgctxt "QueryEditorWidget|"
 msgid "Unable to save the file !"
 msgstr "Impossible d'enregistrer le fichier !"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:432
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:437
 msgctxt "QueryEditorWidget|"
 msgid "Query editor"
 msgstr "Éditeur de requêtes"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:469
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:479
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:474
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:484
 #, qt-format
 msgctxt "QueryEditorWidget|"
 msgid "Query executed with success in %2secs (%1 lines returned)"
@@ -1214,52 +1214,52 @@ msgctxt "ResultView|"
 msgid "Page 0/0"
 msgstr "Page 0/0"
 
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:39
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:55
 msgctxt "ResultView|"
 msgid "<<"
 msgstr "<<"
 
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:56
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:75
 msgctxt "ResultView|"
 msgid "<"
 msgstr "<"
 
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:73
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:95
 msgctxt "ResultView|"
 msgid ">"
 msgstr ">"
 
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:90
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:115
 msgctxt "ResultView|"
 msgid ">>"
 msgstr ">>"
 
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:114
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:142
 msgctxt "ResultView|"
 msgid "..."
 msgstr "..."
 
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:147
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:178
 msgctxt "ResultView|"
 msgid "Show"
 msgstr "Montrer"
 
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:176
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:207
 msgctxt "ResultView|"
-msgid "results"
-msgstr "résultats"
+msgid "results per page"
+msgstr "résultats par page"
 
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:199
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:230
 msgctxt "ResultView|"
 msgid "+"
 msgstr "+"
 
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:212
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:246
 msgctxt "ResultView|"
 msgid "-"
 msgstr "-"
 
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:247
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:284
 msgctxt "ResultView|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" "
