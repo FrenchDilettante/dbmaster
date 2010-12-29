@@ -64,9 +64,31 @@ Par défaut, il se déclenche à partir de trois caractères saisis. Vous pouvez
 Affichage du résultat
 ---------------------
 
+**Note :** DbMaster utilise le même mécanisme pour afficher le résultat d'une requête et d'une table.
 
-### Export ###
+Afin de faciliter la lecture, les résultats sont "paginés", c'est à dire qu'une requête retournant 100 lignes sera découpée en 3 pages de 30 lignes et une de 10 lignes.
 
-#### CSV ####
+Le nombre de lignes par page est réglable.
 
-#### HTML ####
+Les quatres boutons de parcours permettent, dans l'ordre, d'accéder à :
+
+* La première page
+* La page précédente
+* La page suivante
+* La dernière page
+
+Le dernier bouton permet de relancer l'exécution de la requête (pour prendre en compte d'éventuelles modifications dans la base).
+
+
+Export
+------
+
+
+### CSV ###
+
+
+
+
+### HTML ###
+
+
