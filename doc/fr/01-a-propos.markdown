@@ -28,7 +28,7 @@ Les SGBD suivants ont été testés et validés :
 * PostgreSQL
 * SQLite
 
-Les autres n'ont pu être testés.
+Les autres n'ont pas été testés.
 
 
 Licence
