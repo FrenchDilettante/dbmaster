@@ -83,10 +83,29 @@ Le dernier bouton permet de relancer l'exécution de la requête (pour prendre e
 Export
 ------
 
+Afin de pouvoir réutiliser le résultat d'une requête dans d'autres logiciels, DbMaster permet de l'exporter directement aux formats `CSV` ou `HTML`.
+
+L'assistant est disponible en faisant un clic droit sur le tableau des résultats, puis "Exporter".
+
+Voici les spécificités pour chaque format :
+
 
 ### CSV ###
 
+Quelques mots de vocabulaires sont à connaître. Une valeur est encadrée par le *délimiteur*, puis un *séparateur* est placé entre chaque valeur.
 
+Exemple :
+
+	SELECT usr_id, usr_name
+	FROM utilisateur
+
+Donnera :
+
+	"3";"jdupond";
+
+Ici, le délimiteur est `"`, le séparateur `;`.
+
+La ligne d'en-tête ne fait que reprendre les noms de colonnes.
 
 
 ### HTML ###
