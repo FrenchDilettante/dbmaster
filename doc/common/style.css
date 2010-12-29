@@ -17,6 +17,10 @@ a {
 	margin-left: 70px;
 }
 
+#doc-content pre {
+	margin-left: 70px;
+}
+
 #doc-content h2 {
 	background-color: #3d5270;
 	color: white;
