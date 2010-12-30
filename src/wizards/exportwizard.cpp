@@ -20,6 +20,8 @@ ExportWizard::ExportWizard(QueryToken *token, QWidget *parent)
 {
   setupUi(this);
 
+  this->token = token;
+
   setWindowIcon(IconManager::get("filesaveas"));
 
   setPage(FirstPage,  new EwFirstPage(this));
