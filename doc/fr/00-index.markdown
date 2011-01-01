@@ -17,8 +17,8 @@ Autres
 * [Licence CC BY-SA](cc-by-sa.html)
 
 
-Liens
-=====
+Liens externes
+==============
 
 * [Site de DbMaster](http://dbmaster.sf.net)
 * [Bug tracker](http://projets.developpez.com/projects/dbmaster)
