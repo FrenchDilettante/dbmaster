@@ -105,9 +105,13 @@ Donnera :
 
 Ici, le délimiteur est `"`, le séparateur `;`.
 
-La ligne d'en-tête ne fait que reprendre les noms de colonnes.
+La ligne d'en-tête ne fait que reprendre les noms de colonnes (`usr_id`, `usr_name`).
 
 
 ### HTML ###
 
+L'export au format HTML a un but de présentation, il inclut donc deux options dans ce sens.
 
+"Exporter la requête" inclura la requête avant le résultat.
+
+Vous pouvez aussi n'exporter qu'une partie du résultat s'il est long.
