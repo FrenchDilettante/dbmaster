@@ -20,6 +20,8 @@ ExportWizard::ExportWizard(QueryToken *token, QWidget *parent)
 {
   setupUi(this);
 
+  this->token = token;
+
   setWindowIcon(IconManager::get("filesaveas"));
 
   setPage(FirstPage,  new EwFirstPage(this));
@@ -64,25 +66,39 @@ void EwFirstPage::browse()
   QMap<ExportWizard::Format, QString> formats;
   formats[ExportWizard::CsvFormat]  = tr("CSV file (*.csv)");
   formats[ExportWizard::HtmlFormat] = tr("HTML file (*.html)");
-  formats[ExportWizard::SqlFormat]  = tr("SQL file (*.sql)");
+//  formats[ExportWizard::SqlFormat]  = tr("SQL file (*.sql)");
 
-  pathLineEdit->setText(
-      QFileDialog::getSaveFileName(this,
-                                   tr("Output file"),
-                                   QDir::homePath(),
-                                   QStringList(formats.values()).join(";;"),
-                                   &formats[selectedFormat()]
-                                   ));
-  lastPath = pathLineEdit->text();
+  lastPath = QFileDialog::getSaveFileName(this,
+                                          tr("Output file"),
+                                          QDir::homePath(),
+                                          QStringList(formats.values()).join(";;"),
+                                          &formats[selectedFormat()]
+                                          );
 
-  if(pathLineEdit->text().endsWith("csv", Qt::CaseInsensitive))
+  QString extension = QFileInfo(lastPath).suffix().toLower();
+  // Si le nom de fichier contient une extension, on met à jour l'option choisie
+  if (extension == "csv") {
     csvRadioButton->setChecked(true);
-
-  if(pathLineEdit->text().endsWith("html", Qt::CaseInsensitive))
+  } else if(extension == "html") {
     htmlRadioButton->setChecked(true);
-
-  if(pathLineEdit->text().endsWith("sql", Qt::CaseInsensitive))
+  } else if(extension == "sql") {
     sqlRadioButton->setChecked(true);
+  } else {
+    // L'extension n'a pas été reconnue : on va l'ajouter
+    if (lastPath.endsWith(".")) {
+      lastPath = lastPath.left(lastPath.length()-1);
+    }
+
+    if (csvRadioButton->isChecked()) {
+      lastPath += ".csv";
+    } else if (htmlRadioButton->isChecked()) {
+      lastPath += ".html";
+    } else if (sqlRadioButton->isChecked()) {
+      lastPath += ".sql";
+    }
+  }
+
+  pathLineEdit->setText(lastPath);
 }
 
 int EwFirstPage::nextId() const
