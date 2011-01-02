@@ -75,6 +75,7 @@ private slots:
   void copy();
   void cut();
   void nextTab();
+  void on_actionUserManual_triggered();
   void openRecent();
   void paste();
   void previousTab();
