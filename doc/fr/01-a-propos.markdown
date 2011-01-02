@@ -9,5 +9,52 @@ Actuellement en plein développement, il est avant tout destiné aux développeu
 Compatibilité SGBD
 ------------------
 
-Installation
-------------
+DbMaster est bâti sur la technologie Qt, qui offre un framework pour la connexion aux base de données relationnelles : [QtSql](http://doc.qt.nokia.com/4.7/qtsql.html).
+Nokia fournit les drivers pour les SGBD suivants :
+
+* IBM DB2
+* Borland InterBase (compatible Firebird)
+* MySQL
+* Oracle Call Interface Driver
+* Open Database Connectivity (ODBC) (driver générique)
+* PostgreSQL
+* SQLite
+* Sybase Adaptive Server (obsolète)
+
+Les SGBD suivants ont été testés et validés :
+
+* Firebird
+* MySQL
+* PostgreSQL
+* SQLite
+
+Les autres n'ont pas été testés.
+
+
+Licence
+-------
+
+DbMaster est fourni sous licence GNU GPL v3.
+
+Cette documentation est fournie sous licence Creative Commons BY-SA.
+
+
+Auteurs
+-------
+
+Développement :
+
+- Emmanuel BOURGERIE
+
+Documentation & traduction :
+
+**`[FR]`** Emmanuel BOURGERIE
+
+Code tiers :
+
+- QColorButton : Florian BECKER
+
+Soutenir le projet
+------------------
+
+DbMaster est un projet libre développé bénévolement. Si vous souhaitez participer au projet, rendez-vous sur le [site](http://projets.developpez.com/projects/dbmaster).

@@ -79,6 +79,7 @@ private slots:
   void cut();
   void lowerCase();
   void nextTab();
+  void on_actionUserManual_triggered();
   void openRecent();
   void paste();
   void previousTab();

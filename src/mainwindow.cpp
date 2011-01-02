@@ -276,6 +276,11 @@ void MainWindow::nextTab()
     tabWidget->setCurrentIndex(index+1);
 }
 
+void MainWindow::on_actionUserManual_triggered() {
+  QDesktopServices::openUrl(
+        QUrl("http://dbmaster.sourceforge.net/userdoc/0.7/01-a-propos.html"));
+}
+
 void MainWindow::openRecent()
 {
   int index = recentActions.indexOf((QAction*)sender());
@@ -541,9 +546,6 @@ void MainWindow::setupConnections()
 
 void MainWindow::setupWidgets()
 {
-  // ligne à supprimer lorsque la doc util sera disponible
-  actionUserManual->setVisible(false);
-
   aboutDial     = new AboutDialog(this);
   confDial      = new ConfigDialog(this);
   logDial       = LogDialog::instance();
