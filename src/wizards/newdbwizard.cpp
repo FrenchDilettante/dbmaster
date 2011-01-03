@@ -100,10 +100,6 @@ NdwSecondPage::NdwSecondPage(QWizard *parent)
 
   connect(dbLineEdit, SIGNAL(textChanged(QString)),
           this, SLOT(updateAlias()));
-  connect(userLineEdit, SIGNAL(textChanged(QString)),
-          this, SLOT(updateAlias()));
-  connect(aliasLineEdit, SIGNAL(textChanged(QString)),
-          this, SLOT(updateAlias()));
 }
 
 void NdwSecondPage::browse()
