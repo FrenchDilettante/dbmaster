@@ -35,6 +35,7 @@ public:
   int                     addDatabase(QString driver, QString host,
                                       QString user, QString pswd, QString dbnm,
                                       QString alias, bool save = true);
+  QString                 alias(QSqlDatabase *db);
   void                    close(QSqlDatabase *db);
   void                    closeAll();
   QStandardItemModel     *driverModel();
@@ -57,7 +58,7 @@ public:
   void                    swapDatabase(QSqlDatabase *oldDb,
                                        QSqlDatabase *newDb);
   void                    toggle(QSqlDatabase *db);
-  void                    update(QSqlDatabase *db);
+  void                    update(QSqlDatabase *db, QString alias);
 
   static QString          dbTitle(QSqlDatabase *db);
 
@@ -111,6 +112,7 @@ public:
                                     QString pswd, QString dbnm, QString alias);
   static int            addDatabase(QString driver, QString host, QString user,
                                     QString dbnm, QString alias);
+  static QString        alias(QSqlDatabase *db);
   static void           close(QSqlDatabase *db);
   static void           closeAll();
   static QString        dbTitle(QSqlDatabase *db);
@@ -140,7 +142,7 @@ public:
   static void           setDatabase(int, QSqlDatabase);
   static void           terminate();
   static void           toggle(QSqlDatabase *db);
-  static void           update(QSqlDatabase *db);
+  static void           update(QSqlDatabase *db, QString alias);
 
 private:
   static DbManagerPrivate *m_instance;

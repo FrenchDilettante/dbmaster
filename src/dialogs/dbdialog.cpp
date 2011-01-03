@@ -19,8 +19,7 @@
 #include <QMessageBox>
 
 DbDialog::DbDialog(QWidget *parent)
-  : QDialog(parent)
-{
+  : QDialog(parent) {
   setupUi(this);
   setupWidgets();
   setupConnections();
@@ -52,7 +51,7 @@ void DbDialog::apply() {
   db->setPassword(passEdit->text());
   db->setDatabaseName(dbEdit->text());
 
-  DbManager::update(db);
+  DbManager::update(db, aliasEdit->text());
 }
 
 /**
@@ -71,8 +70,7 @@ void DbDialog::refresh(QModelIndex index)
 /**
  * Re-fills all fields and enables/disables widgets
  */
-void DbDialog::reload()
-{
+void DbDialog::reload() {
   bool emptyList = DbManager::getDbList().size() == 0;
   bool selected = !emptyList
                   && dbListView->selectionModel()->selection().size() > 0;
@@ -82,36 +80,31 @@ void DbDialog::reload()
   toggleButton->setEnabled(selected);
   remButton->setEnabled(selected);
 
-  if(open)
-  {
+  if (open) {
     toggleButton->setIcon(IconManager::get("connect_no"));
     toggleButton->setText(tr("Disconnect"));
-  }
-  else
-  {
+  } else {
     toggleButton->setIcon(IconManager::get("connect_creating"));
     toggleButton->setText(tr("Connect"));
   }
 
-  if(DbManager::getDbList().size() > 0 && db)
-  {
+  if (DbManager::getDbList().size() > 0 && db) {
     hostEdit->setText(db->hostName());
     userEdit->setText(db->userName());
     saveCheckBox->setChecked(!open && !db->password().isEmpty());
     passEdit->setText(db->password());
     dbTypeComboBox->setCurrentDriver(db->driverName());
     dbEdit->setText(db->databaseName());
+    aliasEdit->setText(DbManager::alias(db));
   }
 
   dbBrowseButton->setVisible(false);
   resultLabel->setText(tr("<- Click to test"));
 }
 
-void DbDialog::removeCurrent()
-{
+void DbDialog::removeCurrent() {
   int index = dbListView->currentIndex().row();
-  if(DbManager::getDatabase(index)->isOpen())
-  {
+  if(DbManager::getDatabase(index)->isOpen()) {
     QMessageBox::critical(this,
                           tr("Cannot remove"),
                           tr("You must close the connexion before remove it.")
