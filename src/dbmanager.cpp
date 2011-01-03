@@ -461,6 +461,7 @@ void DbManagerPrivate::saveList()
     if (!db->password().isNull())
       s.setValue("password", db->password());
     s.setValue("database", db->databaseName());
+    s.setValue("alias", dbMap[db]->text());
   }
   s.endArray();
   s.sync();
