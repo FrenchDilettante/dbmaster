@@ -55,6 +55,7 @@ public slots:
 
 protected slots:
   void test();
+  void updateAlias();
 };
 
 #endif // NEWDBWIZARD_H

@@ -45,7 +45,8 @@ DbManagerPrivate::DbManagerPrivate()
  *    Déclenche l'enregistrement de la liste ou non
  */
 int DbManagerPrivate::addDatabase(QString driver, QString host, QString user,
-                            QString pswd, QString dbnm, bool save)
+                                  QString pswd, QString dbnm, QString alias,
+                                  bool save)
 {
   QSqlDatabase db = QSqlDatabase::addDatabase(driver, genConnectionName());
   db.setHostName(host);
@@ -53,14 +54,12 @@ int DbManagerPrivate::addDatabase(QString driver, QString host, QString user,
   db.setPassword(pswd);
   db.setDatabaseName(dbnm);
 
-  foreach(QSqlDatabase *d, dbList)
-  {
+  foreach(QSqlDatabase *d, dbList) {
     // on contrôle les éventuels doublons
     if (d->hostName() == db.hostName() &&
             d->userName() == db.userName() &&
             d->password() == db.password() &&
-            d->databaseName() == db.databaseName())
-    {
+            d->databaseName() == db.databaseName()) {
       LogDialog::instance()->append(
               QObject::tr("Attempting to add an existing connection."));
       return indexOf(d);
@@ -69,27 +68,25 @@ int DbManagerPrivate::addDatabase(QString driver, QString host, QString user,
 
   QSqlDatabase *newDb = new QSqlDatabase(db);
   dbList.append(newDb);
-  dbMap[newDb] = new QStandardItem(dbTitle(newDb));
+  QString title;
+  if (alias.isEmpty()) {
+    title = dbTitle(newDb);
+  } else {
+    title = alias;
+  }
+  dbMap[newDb] = new QStandardItem(title);
   dbMap[newDb]->setEditable(false);
 
   dbMap[newDb]->setData(DbManager::DbItem, Qt::UserRole);
   dbMap[newDb]->setIcon(IconManager::get("connect_no"));
   dbMap[newDb]->setToolTip(dbToolTip(newDb));
 
-//  if(!isRunning())
-//    start();
-
   m_model->appendRow(dbMap[newDb]);
   if(save)
   {
     saveList();
-    if (db.hostName().length() > 0) {
-      LogDialog::instance()->append(QObject::tr("Database %1 on %2 added")
-              .arg(dbnm)
-              .arg(host));
-    } else {
-      LogDialog::instance()->append(QObject::tr("Database %1 added").arg(dbnm));
-    }
+    LogDialog::instance()->append(QObject::tr("Connection %1 added")
+            .arg(title));
   }
 
   return dbList.size() - 1;
@@ -567,15 +564,15 @@ DbManagerPrivate   *DbManager::m_instance = new DbManagerPrivate();
 int                 DbManager::lastIndex = 0;
 
 int DbManager::addDatabase(QString driver, QString host, QString user,
-                           QString pswd, QString dbnm)
+                           QString pswd, QString alias, QString dbnm)
 {
-  return m_instance->addDatabase(driver, host, user, pswd, dbnm);
+  return m_instance->addDatabase(driver, host, user, pswd, alias, dbnm);
 }
 
 int DbManager::addDatabase(QString driver, QString host, QString user,
-                           QString dbnm)
+                           QString dbnm, QString alias)
 {
-  return addDatabase(driver, host, user, QString::null, dbnm);
+  return addDatabase(driver, host, user, QString::null, dbnm, alias);
 }
 
 void DbManager::close(QSqlDatabase *db)
@@ -588,12 +585,8 @@ void DbManager::closeAll()
   m_instance->closeAll();
 }
 
-int DbManager::defaultPort(QString driver)
-{
-  if (driver == "QMYSQL")
-    return 3306;
-
-  return -1;
+QString DbManager::dbTitle(QSqlDatabase *db) {
+  return DbManagerPrivate::dbTitle(db);
 }
 
 QStandardItemModel *DbManager::driverModel()
@@ -621,7 +614,6 @@ QStringList DbManager::getDbNames(bool showHosts)
   return m_instance->getDbNames(showHosts);
 }
 
-/// DEPRECATED
 int DbManager::indexOf(QSqlDatabase *db)
 {
   return m_instance->indexOf(db);

@@ -37,14 +37,16 @@ void NewDbWizard::accept()
                            field("host").toString(),
                            field("user").toString(),
                            field("pswd").toString(),
-                           field("name").toString());
+                           field("name").toString(),
+                           field("alias").toString());
   }
   else
   {
     DbManager::addDatabase(field("driver").toString(),
                            field("host").toString(),
                            field("user").toString(),
-                           field("name").toString());
+                           field("name").toString(),
+                           field("alias").toString());
   }
 
   emit(accepted());
@@ -87,13 +89,21 @@ NdwSecondPage::NdwSecondPage(QWizard *parent)
 {
   setupUi(this);
 
-  registerField( "name*", dbLineEdit );
-  registerField( "user", userLineEdit );
-  registerField( "savepswd", pswdCheckBox );
-  registerField( "pswd", pswdLineEdit );
+  registerField("name*", dbLineEdit);
+  registerField("user", userLineEdit);
+  registerField("savepswd", pswdCheckBox);
+  registerField("pswd", pswdLineEdit);
+  registerField("alias", aliasLineEdit);
 
-  connect( dbBrowseButton, SIGNAL(clicked()), this, SLOT(browse() ) );
-  connect( testButton, SIGNAL(clicked()), this, SLOT(test()) );
+  connect(dbBrowseButton, SIGNAL(clicked()), this, SLOT(browse()));
+  connect(testButton, SIGNAL(clicked()), this, SLOT(test()));
+
+  connect(dbLineEdit, SIGNAL(textChanged(QString)),
+          this, SLOT(updateAlias()));
+  connect(userLineEdit, SIGNAL(textChanged(QString)),
+          this, SLOT(updateAlias()));
+  connect(aliasLineEdit, SIGNAL(textChanged(QString)),
+          this, SLOT(updateAlias()));
 }
 
 void NdwSecondPage::browse()
@@ -109,26 +119,35 @@ void NdwSecondPage::initializePage() {
   dbBrowseButton->setVisible(field("driver").toString()
                              .startsWith("QSQLITE"));
   resultLabel->setText("");
+  updateAlias();
 }
 
-void NdwSecondPage::test()
-{
-  QSqlDatabase db = QSqlDatabase::addDatabase( field( "driver" ).toString(),
-                                               "testdb" );
-  db.setHostName( field( "host" ).toString() );
-  db.setUserName( field( "user" ).toString() );
-  db.setPassword( field( "pswd" ).toString() );
-  db.setDatabaseName( field( "name" ).toString() );
+void NdwSecondPage::test() {
+  QSqlDatabase db =
+      QSqlDatabase::addDatabase(field("driver").toString(), "testdb");
+  db.setHostName(field("host").toString());
+  db.setUserName(field("user").toString());
+  db.setPassword(field("pswd").toString());
+  db.setDatabaseName(field("name").toString());
 
-  if( db.open() )
-    resultLabel->setText( tr( "Connection succeded" ) );
-  else
-  {
-    resultLabel->setText( tr( "Connection failed" ) );
-    QMessageBox::critical( this,
-                           tr( "Connection failed" ),
-                           db.lastError().text() );
+  if(db.open()) {
+    resultLabel->setText(tr("Connection succeded"));
+  } else {
+    resultLabel->setText(tr("Connection failed"));
+    QMessageBox::critical(this,
+                          tr("Connection failed"),
+                          db.lastError().text());
   }
 
-  QSqlDatabase::removeDatabase( "testdb" );
+  QSqlDatabase::removeDatabase("testdb");
+}
+
+void NdwSecondPage::updateAlias() {
+  if (field("host").toString().isEmpty()) {
+    aliasLineEdit->setText(tr("%1 (local)").arg(dbLineEdit->text()));
+  } else {
+    aliasLineEdit->setText(tr("%1 on %2")
+                           .arg(dbLineEdit->text())
+                           .arg(field("host").toString()));
+  }
 }

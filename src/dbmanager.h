@@ -34,7 +34,7 @@ public:
 
   int                     addDatabase(QString driver, QString host,
                                       QString user, QString pswd, QString dbnm,
-                                      bool save = true);
+                                      QString alias, bool save = true);
   void                    close(QSqlDatabase *db);
   void                    closeAll();
   QStandardItemModel     *driverModel();
@@ -59,6 +59,8 @@ public:
   void                    toggle(QSqlDatabase *db);
   void                    update(QSqlDatabase *db);
 
+  static QString          dbTitle(QSqlDatabase *db);
+
 public slots:
 
   void                    refreshModel();
@@ -70,7 +72,6 @@ signals:
   void statusChanged(QSqlDatabase*);
 
 private:
-  QString                 dbTitle(QSqlDatabase *db);
   QString                 dbToolTip(QSqlDatabase *db);
   void                    setupConnections();
   void                    setupModels();
@@ -107,12 +108,12 @@ public:
   };
 
   static int            addDatabase(QString driver, QString host, QString user,
-                                    QString pswd, QString dbnm);
+                                    QString pswd, QString dbnm, QString alias);
   static int            addDatabase(QString driver, QString host, QString user,
-                                    QString dbnm);
+                                    QString dbnm, QString alias);
   static void           close(QSqlDatabase *db);
   static void           closeAll();
-  static int            defaultPort(QString);
+  static QString        dbTitle(QSqlDatabase *db);
   static QStandardItemModel*
                         driverModel();
   static QString        genConnectionName();
@@ -121,6 +122,7 @@ public:
   static QList<QSqlDatabase*>
                         getDbList();
   static QStringList    getDbNames(bool);
+  /// @deprecated
   static int            indexOf(QSqlDatabase *db);
   static void           init();
   static DbManagerPrivate *instance()   { return m_instance;    };
