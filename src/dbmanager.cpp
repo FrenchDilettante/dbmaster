@@ -554,8 +554,10 @@ void DbManagerPrivate::toggle(QSqlDatabase *db)
 
 void DbManagerPrivate::update(QSqlDatabase *db)
 {
-  if(dbList.contains(db))
+  if(dbList.contains(db)) {
     refreshModelItem(db);
+    saveList();
+  }
 }
 
 /*
