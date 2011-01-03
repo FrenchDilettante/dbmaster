@@ -46,8 +46,7 @@ DbManagerPrivate::DbManagerPrivate()
  */
 int DbManagerPrivate::addDatabase(QString driver, QString host, QString user,
                                   QString pswd, QString dbnm, QString alias,
-                                  bool save)
-{
+                                  bool save) {
   QSqlDatabase db = QSqlDatabase::addDatabase(driver, genConnectionName());
   db.setHostName(host);
   db.setUserName(user);
@@ -92,8 +91,7 @@ int DbManagerPrivate::addDatabase(QString driver, QString host, QString user,
   return dbList.size() - 1;
 }
 
-void DbManagerPrivate::close(QSqlDatabase* db)
-{
+void DbManagerPrivate::close(QSqlDatabase* db) {
   if (!dbList.contains(db))
     return;
 
@@ -103,8 +101,7 @@ void DbManagerPrivate::close(QSqlDatabase* db)
     start();
 }
 
-QString DbManagerPrivate::dbTitle(QSqlDatabase *db)
-{
+QString DbManagerPrivate::dbTitle(QSqlDatabase *db) {
   QString title;
   if(db->hostName().isEmpty())
     title = tr("%1 (local)").arg(db->databaseName());
@@ -117,8 +114,7 @@ QString DbManagerPrivate::dbTitle(QSqlDatabase *db)
 /**
  * Returns a rich-texted tooltip for the database.
  */
-QString DbManagerPrivate::dbToolTip(QSqlDatabase *db)
-{
+QString DbManagerPrivate::dbToolTip(QSqlDatabase *db) {
   QString ret;
 
   ret += tr("%1 on %2").prepend("<h3>").append("</h3>")
@@ -275,7 +271,7 @@ void DbManagerPrivate::openList()
   QSettings s;
 
   int size = s.beginReadArray("dblist");
-  QString driver, host, user, pswd, name;
+  QString driver, host, user, pswd, name, alias;
   for (int i = 1; i <= size; i++)
   {
     s.setArrayIndex(i);
@@ -284,7 +280,8 @@ void DbManagerPrivate::openList()
     user = s.value("username").toString();
     name = s.value("database").toString();
     pswd = s.value("password", QVariant(QString::null)).toString();
-    addDatabase(driver, host, user, pswd, name, false);
+    alias = s.value("alias", "").toString();
+    addDatabase(driver, host, user, pswd, name, alias, false);
   }
   s.endArray();
 }
