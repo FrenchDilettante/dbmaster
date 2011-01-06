@@ -117,7 +117,7 @@ win32: {
 # All unix-like
 unix:!macx { 
     isEmpty( PREFIX ):PREFIX = /usr
-    isEmpty( DESKTOPDIR ):DESKTOPDIR = /usr/share/applications
+    isEmpty( DESKTOPDIR ):DESKTOPDIR = $${PREFIX}/share/applications
     DEFINES += PREFIX=\\\"$${PREFIX}\\\"
     target.path = $${PREFIX}/bin
     INSTALLS = target
