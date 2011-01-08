@@ -43,6 +43,7 @@ private:
   QSqlDatabase *db;
   // current db's id
   int id;
+  bool aliasOnCurrent;
 
 private slots:
   void accept();
@@ -53,6 +54,7 @@ private slots:
   void removeCurrent();
   void testConnection();
   void toggleConnection();
+  void updateAlias();
 };
 
 #endif // DBDIALOG_H

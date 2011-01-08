@@ -50,7 +50,6 @@ void DbDialog::apply() {
   db->setUserName(userEdit->text());
   db->setPassword(passEdit->text());
   db->setDatabaseName(dbEdit->text());
-
   DbManager::update(db, aliasEdit->text());
 }
 
@@ -75,6 +74,9 @@ void DbDialog::reload() {
   bool selected = !emptyList
                   && dbListView->selectionModel()->selection().size() > 0;
   bool open = selected && db->isOpen();
+
+  aliasOnCurrent = selected &&
+      (DbManager::alias(db) != DbManager::dbTitle(db));
 
   groupBox->setEnabled(selected && !open);
   toggleButton->setEnabled(selected);
@@ -139,6 +141,9 @@ void DbDialog::setupConnections()
   connect(buttonBox->button(QDialogButtonBox::Reset), SIGNAL(clicked()),
           this, SLOT(reload()));
 
+  connect(hostEdit, SIGNAL(textChanged(QString)), this, SLOT(updateAlias()));
+  connect(dbEdit, SIGNAL(textChanged(QString)), this, SLOT(updateAlias()));
+
   // list view
   connect(dbListView, SIGNAL(clicked(QModelIndex)),
           this, SLOT(setDatabase(QModelIndex)));
@@ -171,8 +176,7 @@ void DbDialog::setupWidgets()
   toggleButton->setIcon(IconManager::get("connect_creating"));
 }
 
-void DbDialog::testConnection()
-{
+void DbDialog::testConnection() {
   QSqlDatabase db = QSqlDatabase::addDatabase(
       dbTypeComboBox->currentDriverName(), "testdb");
   db.setHostName(hostEdit->text());
@@ -195,8 +199,19 @@ void DbDialog::testConnection()
   QSqlDatabase::removeDatabase("testdb");
 }
 
-void DbDialog::toggleConnection()
-{
+void DbDialog::toggleConnection() {
   DbManager::toggle(DbManager::getDatabase(
       dbListView->selectionModel()->selectedIndexes()[0].row()));
+}
+
+void DbDialog::updateAlias() {
+  if (!aliasOnCurrent && db != NULL) {
+    QString title;
+    if(hostEdit->text().isEmpty())
+      title = tr("%1 (local)").arg(dbEdit->text());
+    else
+      title = tr("%1 on %2").arg(dbEdit->text()).arg(hostEdit->text());
+
+    aliasEdit->setText(title);
+  }
 }

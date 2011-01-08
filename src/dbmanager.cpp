@@ -580,6 +580,7 @@ int DbManager::addDatabase(QString driver, QString host, QString user,
 }
 
 QString DbManager::alias(QSqlDatabase *db) {
+  /// @todo check null
   return m_instance->alias(db);
 }
 
@@ -592,6 +593,7 @@ void DbManager::closeAll() {
 }
 
 QString DbManager::dbTitle(QSqlDatabase *db) {
+  /// @todo check null
   return DbManagerPrivate::dbTitle(db);
 }
 
