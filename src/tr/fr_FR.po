@@ -749,17 +749,17 @@ msgctxt "EwExportPage|"
 msgid "The export process is finished."
 msgstr "Le processus d'export est terminé."
 
-#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:196
+#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:212
 msgctxt "EwExportPage|"
 msgid "Export running..."
 msgstr "Export en cours..."
 
-#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:209
+#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:225
 msgctxt "EwExportPage|"
 msgid "Openning error"
 msgstr "Erreur d'ouverture"
 
-#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:210
+#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:226
 #, qt-format
 msgctxt "EwExportPage|"
 msgid "Unable to open the file %1."
@@ -805,22 +805,17 @@ msgctxt "EwFirstPage|"
 msgid "HTML"
 msgstr "HTML"
 
-#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:65
+#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:67
 msgctxt "EwFirstPage|"
 msgid "CSV file (*.csv)"
 msgstr "Fichier CSV (*.csv)"
 
-#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:66
+#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:68
 msgctxt "EwFirstPage|"
 msgid "HTML file (*.html)"
 msgstr "Fichier HTML (*.html)"
 
-#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:67
-msgctxt "EwFirstPage|"
-msgid "SQL file (*.sql)"
-msgstr "Fichier SQL (*.sql)"
-
-#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:71
+#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:72
 msgctxt "EwFirstPage|"
 msgid "Output file"
 msgstr "Fichier de sortie"
@@ -1061,27 +1056,27 @@ msgstr ""
 "Certains fichiers n'ont pas été enregistrés. Êtes-vous sûr de vouloir "
 "quitter ?"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:299
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:304
 msgctxt "MainWindow|"
 msgid "Select a query to open"
 msgstr "Ouvrir une requête"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:301
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:306
 msgctxt "MainWindow|"
 msgid "Query file (*.sql);;All files (*.*)"
 msgstr "Fichier de requête (*.sql);;Tous fichiers (*.*)"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:419
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:424
 msgctxt "MainWindow|"
 msgid "No recent file"
 msgstr "Pas de fichier récent"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:421
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:426
 msgctxt "MainWindow|"
 msgid "Clear"
 msgstr "Effacer"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:464
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:469
 #, qt-format
 msgctxt "MainWindow|"
 msgid "%1 queries pending..."
@@ -1259,24 +1254,10 @@ msgctxt "ResultView|"
 msgid "-"
 msgstr "-"
 
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:284
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:290
 msgctxt "ResultView|"
-msgid ""
-"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" "
-"\"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style "
-"type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'Sans'; font-size:9pt; "
-"font-weight:400; font-style:normal;\">\n"
-"<table style=\"-qt-table-type: root; margin-top:4px; margin-bottom:4px; "
-"margin-left:4px; margin-right:4px;\">\n"
-"<tr>\n"
-"<td style=\"border: none;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
-"margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" "
-"font-weight:600;\">Fetching...</span></p></td></tr></table></body></html>"
-msgstr ""
+msgid "Fetching..."
+msgstr "Exécution..."
 
 #: /home/manu/programmation/dbmaster/src/dbmanager.cpp:519
 msgctxt "DbManagerPrivate|"
