@@ -18,7 +18,7 @@ PluginDialog::PluginDialog(QWidget *parent)
   : QDialog(parent) {
   setupUi(this);
 
-  listView->setModel(PluginManager::model());
+  pluginTree->setModel(PluginManager::model());
 
   connect(addButton, SIGNAL(clicked()), this, SLOT(add()));
 }

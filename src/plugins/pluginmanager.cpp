@@ -30,15 +30,11 @@ void PluginManagerPrivate::add(QString path)
   {
     Plugin *p = dynamic_cast<Plugin*>(loader.instance());
     if(p) {
-      QStandardItem *item = new QStandardItem();
-      item->setText(QString("<b>%1</b> <i>%2</i>")
-                    .arg(p->title())
-                    .arg(p->version()));
-      item->setData(path, Qt::UserRole);
-      m_plugins[p] = item;
-      m_model->appendRow(item);
+      registerPlugin(p);
     } else {
-      qDebug() << "dynamic_cast<>()";
+      QMessageBox::critical(NULL,
+                            tr("Incorrect plugin file"),
+                            tr("This file contains no DbMaster plugin."));
     }
   } else {
     QMessageBox::critical(NULL,
@@ -54,10 +50,27 @@ void PluginManagerPrivate::init() {
   int size = s.beginReadArray("list");
   for(int i=0; i<size; i++) {
     s.setArrayIndex(i);
-    add(s.value("path").toString());
   }
   s.endArray();
   s.endGroup();
+}
+
+void PluginManagerPrivate::registerPlugin(Plugin *plugin) {
+  foreach (Plugin *p, m_plugins) {
+    if (plugin->plid() == p->plid()) {
+      QMessageBox::warning(NULL,
+                           tr("Add a plugin"),
+                           tr("This plugin is already registered"));
+      return;
+    }
+  }
+
+  QStandardItem *item = new QStandardItem();
+  item->setText(plugin->title());
+  item->appendRow(new QStandardItem(plugin->version()));
+  m_plugins << plugin;
+  pluginsMap[plugin] = item;
+  m_model->appendRow(item);
 }
 
 void PluginManagerPrivate::save() {
@@ -66,7 +79,6 @@ void PluginManagerPrivate::save() {
   s.beginWriteArray("list");
   for (int i=0; i<m_model->rowCount(); i++) {
     s.setArrayIndex(i);
-    s.setValue("path", m_model->item(i, 0)->data(Qt::UserRole));
   }
   s.endArray();
   s.endGroup();
@@ -91,7 +103,7 @@ QString PluginManager::pluginDirectory() {
 }
 
 void PluginManager::registerPlugin(Plugin *p) {
-
+  instance->registerPlugin(p);
 }
 
 void PluginManager::save() {

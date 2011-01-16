@@ -15,10 +15,10 @@
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0" rowspan="4">
-    <widget class="QListView" name="listView">
-     <property name="selectionMode">
-      <enum>QAbstractItemView::ExtendedSelection</enum>
-     </property>
+    <widget class="QTreeView" name="pluginTree">
+     <attribute name="headerVisible">
+      <bool>false</bool>
+     </attribute>
     </widget>
    </item>
    <item row="0" column="1">

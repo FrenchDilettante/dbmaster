@@ -25,7 +25,10 @@ public:
   PluginManagerPrivate();
 
   void add(QString path);
+  void registerPlugin(Plugin *plugin);
+
   QStandardItemModel *model()   { return m_model;   };
+  QList<Plugin*> plugins() { return m_plugins; };
 
 public slots:
   void init();
@@ -33,7 +36,8 @@ public slots:
 
 private:
   QStandardItemModel             *m_model;
-  QMap<Plugin*, QStandardItem*>   m_plugins;
+  QList<Plugin*>                  m_plugins;
+  QMap<Plugin*, QStandardItem*>   pluginsMap;
 };
 
 class PluginManager
