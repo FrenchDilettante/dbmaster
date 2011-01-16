@@ -37,7 +37,6 @@ SOURCES += main.cpp \
     plugins/pluginmanager.cpp \
     plugins/plugin.cpp \
     iconmanager.cpp \
-    plugins/exportengines/exportengine.cpp \
     dialogs/searchdialog.cpp
 HEADERS += mainwindow.h \
     dbmanager.h \

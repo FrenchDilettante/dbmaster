@@ -14,11 +14,17 @@
 #define PLUGIN_H
 
 #include <QString>
+#include <QStringList>
 #include <QtPlugin>
 
-class Plugin
-{
+class Plugin {
 public:
+  /**
+   * Liste des fichiers accompagnant le plugin.
+   * Il est vivement recommandé de ne mettre que des noms de fichiers relatifs.
+   */
+  virtual QStringList files() { return QStringList(); };
+
   /**
    * Nom de code (ou identifiant) unique du plugin, par ex. DBM.MYSQL.WRAPPER.
    *

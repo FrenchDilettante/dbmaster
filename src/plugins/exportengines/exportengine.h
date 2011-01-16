@@ -19,24 +19,16 @@
 #include <QFile>
 #include <QWizard>
 
-class ExportEngine : public QObject, public Plugin
-{
-Q_OBJECT
-Q_INTERFACES(Plugin)
+class ExportEngine : public Plugin {
 public:
-  ExportEngine();
-
   /**
    * Nom du format, par ex. CSV, HTML, PDF, etc.
    */
   virtual QString formatName() =0;
 
-  void setModel(QAbstractItemModel *m) { model = m; };
-  void setWizard(QWizard *w) { wizard = w; };
-  QWizardPage *wizardPage() { return m_wizardPage; };
-
-signals:
-  void progress(int);
+  virtual void setModel(QAbstractItemModel *m) =0;
+  virtual void setWizard(QWizard *w) =0;
+  virtual QWizardPage *wizardPage() =0;
 
 protected:
   /**
