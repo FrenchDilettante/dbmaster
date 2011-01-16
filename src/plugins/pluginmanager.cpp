@@ -29,10 +29,8 @@ void PluginManagerPrivate::add(QString path)
   QPluginLoader loader(path);
   if(loader.load())
   {
-    if(dynamic_cast<Plugin*>(loader.instance()))
-    {
-      Plugin *p = (Plugin*)loader.instance();
-      qDebug() << p->title();
+    Plugin *p = dynamic_cast<Plugin*>(loader.instance());
+    if(p) {
       QStandardItem *item = new QStandardItem(p->title());
       m_plugins[p] = item;
       m_model->appendRow(item);
