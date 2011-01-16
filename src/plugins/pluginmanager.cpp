@@ -17,11 +17,10 @@
  */
 
 PluginManagerPrivate::PluginManagerPrivate()
-  : QObject()
-{
+  : QObject() {
   m_model = new QStandardItemModel(this);
 
-  check();
+  init();
 }
 
 void PluginManagerPrivate::add(QString path)
@@ -31,7 +30,11 @@ void PluginManagerPrivate::add(QString path)
   {
     Plugin *p = dynamic_cast<Plugin*>(loader.instance());
     if(p) {
-      QStandardItem *item = new QStandardItem(p->title());
+      QStandardItem *item = new QStandardItem();
+      item->setText(QString("<b>%1</b> <i>%2</i>")
+                    .arg(p->title())
+                    .arg(p->version()));
+      item->setData(path, Qt::UserRole);
       m_plugins[p] = item;
       m_model->appendRow(item);
     } else {
@@ -45,33 +48,52 @@ void PluginManagerPrivate::add(QString path)
   }
 }
 
-void PluginManagerPrivate::check()
-{
+void PluginManagerPrivate::init() {
   QSettings s;
   s.beginGroup("plugins");
   int size = s.beginReadArray("list");
-  for(int i=0; i<size; i++)
-  {
+  for(int i=0; i<size; i++) {
+    s.setArrayIndex(i);
     add(s.value("path").toString());
   }
+  s.endArray();
+  s.endGroup();
+}
+
+void PluginManagerPrivate::save() {
+  QSettings s;
+  s.beginGroup("plugins");
+  s.beginWriteArray("list");
+  for (int i=0; i<m_model->rowCount(); i++) {
+    s.setArrayIndex(i);
+    s.setValue("path", m_model->item(i, 0)->data(Qt::UserRole));
+  }
+  s.endArray();
+  s.endGroup();
 }
 
 /*
  * PluginManager
  */
 
-PluginManagerPrivate *PluginManager::instance = new PluginManagerPrivate();
+PluginManagerPrivate *PluginManager::instance = NULL;
 
-void PluginManager::add(QString path)
-{
+void PluginManager::add(QString path) {
   instance->add(path);
 }
 
-void PluginManager::init()
-{
-  instance->check();
+void PluginManager::init() {
+  instance = new PluginManagerPrivate();
+}
+
+QString PluginManager::pluginDirectory() {
+  return QDir::homePath();
 }
 
 void PluginManager::registerPlugin(Plugin *p) {
 
+}
+
+void PluginManager::save() {
+  instance->save();
 }

@@ -17,6 +17,7 @@
 #include "iconmanager.h"
 
 #include "dialogs/dbdialog.h"
+#include "plugins/pluginmanager.h"
 #include "query/queryscheduler.h"
 #include "tabwidget/abstracttabwidget.h"
 #include "tabwidget/queryeditorwidget.h"
@@ -178,8 +179,7 @@ void MainWindow::closeEvent(QCloseEvent *event) {
 
   // fichiers récents
   s.beginWriteArray("recentfiles", recentFiles.size());
-  for(int i=0; i<recentFiles.size(); i++)
-  {
+  for(int i=0; i<recentFiles.size(); i++) {
     s.setArrayIndex(i);
     s.setValue("entry", recentFiles[i]);
   }
@@ -187,6 +187,9 @@ void MainWindow::closeEvent(QCloseEvent *event) {
 
   // on prend le soin de fermer toutes les connexions
   DbManager::closeAll();
+
+  // et d'enregistrer les plugins
+  PluginManager::save();
 
   event->accept();
 }

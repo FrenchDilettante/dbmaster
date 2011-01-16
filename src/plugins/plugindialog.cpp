@@ -15,8 +15,7 @@
 #include "ui_plugindialog.h"
 
 PluginDialog::PluginDialog(QWidget *parent)
-  : QDialog(parent)
-{
+  : QDialog(parent) {
   setupUi(this);
 
   listView->setModel(PluginManager::model());
@@ -24,9 +23,19 @@ PluginDialog::PluginDialog(QWidget *parent)
   connect(addButton, SIGNAL(clicked()), this, SLOT(add()));
 }
 
-void PluginDialog::add()
-{
+void PluginDialog::add() {
   QString p = QFileDialog::getOpenFileName(this, tr("Choose a plugin file"),
                                            QDir::homePath());
+  if (p == "") {
+    return;
+  }
+
+  if (!QFile::exists(p)) {
+    QMessageBox::warning(this,
+                         tr("Add a plugin"),
+                         tr("The file doesn't exist."));
+    return;
+  }
+
   PluginManager::add(p);
 }

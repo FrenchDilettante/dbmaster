@@ -70,7 +70,7 @@ int main(int argc, char *argv[])
   IconManager::init();
   DbManager::init();
   Config::init();
-  //PluginManager::init();
+  PluginManager::init();
   QueryTextEdit::reloadCompleter();
 
   MainWindow *w = new MainWindow();
