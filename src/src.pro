@@ -66,7 +66,7 @@ HEADERS += mainwindow.h \
     plugins/plugin.h \
     plugins/pluginmanager.h \
     iconmanager.h \
-    plugins/exportengines/exportengine.h \
+    plugins/exportengine.h \
     dialogs/searchdialog.h
 FORMS += mainwindow.ui \
     dialogs/dbdialog.ui \

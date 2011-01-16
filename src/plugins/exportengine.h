@@ -12,7 +12,7 @@
 #ifndef EXPORTENGINE_H
 #define EXPORTENGINE_H
 
-#include "../plugin.h"
+#include "plugin.h"
 
 #include <QAbstractItemModel>
 #include <QApplication>

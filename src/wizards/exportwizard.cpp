@@ -41,6 +41,8 @@ EwFirstPage::EwFirstPage(QWizard *parent)
 {
   setupUi(this);
 
+
+
   formatMap[csvRadioButton]   = ExportWizard::CsvFormat;
   formatMap[htmlRadioButton]  = ExportWizard::HtmlFormat;
   formatMap[sqlRadioButton]   = ExportWizard::SqlFormat;
