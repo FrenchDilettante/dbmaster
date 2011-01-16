@@ -13,6 +13,7 @@
 #ifndef PLUGINMANAGER_H
 #define PLUGINMANAGER_H
 
+#include "exportengine.h"
 #include "plugin.h"
 
 #include <QtCore>
@@ -25,6 +26,7 @@ public:
   PluginManagerPrivate();
 
   void add(QString path);
+  QList<ExportEngine*> exportEngines();
   void registerPlugin(Plugin *plugin);
 
   QStandardItemModel *model()   { return m_model;   };
@@ -44,6 +46,7 @@ class PluginManager
 {
 public:
   static void add(QString path);
+  static QList<ExportEngine*> exportEngines();
   static void init();
   static QStandardItemModel *model()    { return instance->model();   };
   static QString pluginDirectory();

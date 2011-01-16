@@ -11,6 +11,7 @@
 
 
 #include "pluginmanager.h"
+#include "exportengine.h"
 
 /*
  * PluginManagerPrivate
@@ -42,6 +43,22 @@ void PluginManagerPrivate::add(QString path)
                           tr("Unable to load the plugin. Specified error : \n")
                             + loader.errorString());
   }
+}
+
+/**
+ * Extrait les moteurs d'export
+ */
+QList<ExportEngine*> PluginManagerPrivate::exportEngines() {
+  QList<ExportEngine*> engines;
+
+  foreach (Plugin *p, m_plugins) {
+    ExportEngine *en = dynamic_cast<ExportEngine*>(p);
+    if (en) {
+      engines << en;
+    }
+  }
+
+  return engines;
 }
 
 void PluginManagerPrivate::init() {
@@ -92,6 +109,10 @@ PluginManagerPrivate *PluginManager::instance = NULL;
 
 void PluginManager::add(QString path) {
   instance->add(path);
+}
+
+QList<ExportEngine*> PluginManager::exportEngines() {
+  return instance->exportEngines();
 }
 
 void PluginManager::init() {
