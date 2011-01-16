@@ -79,15 +79,10 @@ FORMS += mainwindow.ui \
     wizards/ndw_firstpage.ui \
     wizards/ndw_secondpage.ui \
     wizards/firstlaunchwizard.ui \
-    wizards/exportwizard.ui \
-    wizards/ew_sqlpage.ui \
     wizards/ew_firstpage.ui \
-    wizards/ew_exportpage.ui \
-    wizards/ew_csvpage.ui \
     widgets/resultview.ui \
     widgets/tooltipframe.ui \
     plugins/plugindialog.ui \
-    wizards/ew_htmlpage.ui \
     dialogs/searchdialog.ui
 RESOURCES += icons.qrc
 TRANSLATIONS += tr/fr_FR.po
