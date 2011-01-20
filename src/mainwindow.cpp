@@ -315,6 +315,8 @@ void MainWindow::openQuery()
 
   if(f.isNull())
     return;
+
+  openQuery(f);
 }
 
 void MainWindow::openQuery(QString file) {
