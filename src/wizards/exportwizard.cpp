@@ -35,6 +35,9 @@ EwFirstPage::EwFirstPage(QWizard *parent)
 {
   setupUi(this);
 
+  formatLayout = new QGridLayout(formatGroupBox);
+  formatGroupBox->setLayout(formatLayout);
+
   /* Objectif : buter la formatMap et en générer une dynamiquement dans
    * initialisePage. */
 
@@ -67,6 +70,20 @@ void EwFirstPage::browse()
 
 
   pathLineEdit->setText(lastPath);
+}
+
+void EwFirstPage::initializePage() {
+  // Nettoyage liste formats
+  for (int i=formatLayout->count() - 1; i>=0; i--) {
+    QWidget *w = formatLayout->itemAt(i)->widget();
+    if (w) {
+      w->disconnect();
+      formatLayout->removeWidget(w);
+      delete w;
+    }
+  }
+
+
 }
 
 int EwFirstPage::nextId() const {

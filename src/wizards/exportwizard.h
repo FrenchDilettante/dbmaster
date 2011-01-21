@@ -34,6 +34,7 @@ Q_OBJECT
 public:
   EwFirstPage(QWizard *parent=0);
 
+  void initializePage();
   int nextId() const;
 
 public slots:
@@ -41,6 +42,7 @@ public slots:
 
 private:
   static QString lastPath;
+  QGridLayout *formatLayout;
 };
 
 
