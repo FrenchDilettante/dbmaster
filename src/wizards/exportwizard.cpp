@@ -11,7 +11,6 @@
 
 
 #include "exportwizard.h"
-#include "ui_exportwizard.h"
 
 #include "../iconmanager.h"
 

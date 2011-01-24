@@ -35,7 +35,7 @@ SOURCES += main.cpp \
     plugins/plugindialog.cpp \
     plugins/pluginmanager.cpp \
     iconmanager.cpp \
-    dialogs/searchdialog.cpp \
+    dialogs/searchdialog.cpp
 HEADERS += mainwindow.h \
     dbmanager.h \
     tabwidget/tablewidget.h \
@@ -65,7 +65,7 @@ HEADERS += mainwindow.h \
     plugins/pluginmanager.h \
     iconmanager.h \
     plugins/exportengine.h \
-    dialogs/searchdialog.h \
+    dialogs/searchdialog.h
 FORMS += mainwindow.ui \
     dialogs/dbdialog.ui \
     tabwidget/queryeditorwidgetclass.ui \
@@ -78,10 +78,11 @@ FORMS += mainwindow.ui \
     wizards/ndw_secondpage.ui \
     wizards/firstlaunchwizard.ui \
     wizards/ew_firstpage.ui \
+    wizards/ew_exportpage.ui \
     widgets/resultview.ui \
     widgets/tooltipframe.ui \
     plugins/plugindialog.ui \
-    dialogs/searchdialog.ui \
+    dialogs/searchdialog.ui
 RESOURCES += icons.qrc
 TRANSLATIONS += tr/fr_FR.po
 
