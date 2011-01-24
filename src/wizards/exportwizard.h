@@ -16,6 +16,7 @@
 #include <QtGui>
 
 #include "../query/querytoken.h"
+#include "../plugins/exportengine.h"
 
 #include "ui_ew_firstpage.h"
 #include "ui_ew_exportpage.h"
@@ -36,12 +37,14 @@ public:
 
   void initializePage();
   int nextId() const;
+  bool validatePage();
 
 public slots:
   void browse();
 
 private:
   static QString lastPath;
+  QMap<QRadioButton*, ExportEngine*> formatMap;
   QGridLayout *formatLayout;
 };
 

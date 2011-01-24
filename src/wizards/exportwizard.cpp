@@ -25,7 +25,8 @@ ExportWizard::ExportWizard(QueryToken *token, QWidget *parent)
 
   setWindowIcon(IconManager::get("filesaveas"));
 
-  addPage(new EwFirstPage(this));
+  setPage(0, new EwFirstPage(this));
+  setPage(2, new EwExportPage(token, this));
 }
 
 /**
@@ -77,20 +78,20 @@ void EwFirstPage::browse()
 
 void EwFirstPage::initializePage() {
   // Nettoyage liste formats
-  for (int i=formatLayout->count() - 1; i>=0; i--) {
-    QWidget *w = formatLayout->itemAt(i)->widget();
-    if (w) {
-      w->disconnect();
-      formatLayout->removeWidget(w);
-      delete w;
-    }
+  foreach (QRadioButton *r, formatMap.keys()) {
+    r->disconnect();
+    formatLayout->removeWidget(r);
+    delete r;
   }
+  formatMap.clear();
 
   QList<ExportEngine*> engines = PluginManager::exportEngines();
   bool left = false;
   int x = -1, y = 0;
   foreach (ExportEngine *e, engines) {
+    e->setWizard(wizard());
     QRadioButton *btn = new QRadioButton(e->displayName());
+    formatMap[btn] = e;
     if (x == -1) {
       btn->setChecked(true);
     }
@@ -109,7 +110,34 @@ void EwFirstPage::initializePage() {
 }
 
 int EwFirstPage::nextId() const {
-  return 0;
+  foreach (QRadioButton *r, formatMap.keys()) {
+    if (r->isChecked()) {
+      if (formatMap[r]->wizardPage()) {
+        return 1;
+      } else {
+        return 2;
+      }
+
+      break;
+    }
+  }
+  return 2;
+}
+
+bool EwFirstPage::validatePage() {
+  foreach (QRadioButton *r, formatMap.keys()) {
+    if (r->isChecked()) {
+      if (formatMap[r]->wizardPage()) {
+        if (wizard()->page(1)) {
+          wizard()->removePage(1);
+        }
+        wizard()->setPage(1, formatMap[r]->wizardPage());
+      }
+
+      break;
+    }
+  }
+  return true;
 }
 
 
