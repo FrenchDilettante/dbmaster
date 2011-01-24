@@ -88,6 +88,8 @@ public:
    * @return une liste vide si la fonctionnalité n'est pas supportée.
    */
   virtual QList<SqlSchema> schemas(bool fillTables =true) =0;
+
+  virtual QStringList supportedDrivers() =0;
 };
 
 Q_DECLARE_INTERFACE(SqlWrapper, "dbmaster.Wrapper")
