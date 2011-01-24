@@ -32,7 +32,7 @@ SOURCES += main.cpp \
     query/querythread.cpp \
     query/querytoken.cpp \
     widgets/tooltipframe.cpp \
-    plugins/wrappers/wrapper.cpp \
+    plugins/wrapper.cpp \
     plugins/plugindialog.cpp \
     plugins/pluginmanager.cpp \
     plugins/plugin.cpp \
@@ -61,7 +61,7 @@ HEADERS += mainwindow.h \
     query/querythread.h \
     query/querytoken.h \
     widgets/tooltipframe.h \
-    plugins/wrappers/wrapper.h \
+    plugins/wrapper.h \
     plugins/plugindialog.h \
     plugins/plugin.h \
     plugins/pluginmanager.h \

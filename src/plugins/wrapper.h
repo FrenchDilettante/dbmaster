@@ -13,7 +13,7 @@
 #ifndef WRAPPER_H
 #define WRAPPER_H
 
-#include "../plugin.h"
+#include "plugin.h"
 
 #include <QList>
 #include <QSqlDatabase>
