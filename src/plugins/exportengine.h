@@ -29,6 +29,7 @@ public:
    * L'extention du fichier qui sera généré (csv, html, etc.)
    */
   virtual QString extension() =0;
+  virtual QString displayIconCode() { return ""; };
 
   virtual void setModel(QAbstractItemModel *m) =0;
   virtual void setWizard(QWizard *w) =0;

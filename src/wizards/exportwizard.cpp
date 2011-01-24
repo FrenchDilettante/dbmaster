@@ -91,6 +91,12 @@ void EwFirstPage::initializePage() {
   int x = -1, y = 0;
   foreach (ExportEngine *e, engines) {
     QRadioButton *btn = new QRadioButton(e->displayName());
+    if (x == -1) {
+      btn->setChecked(true);
+    }
+    if (e->displayIconCode().length() > 0) {
+      btn->setIcon(IconManager::get(e->displayIconCode()));
+    }
     if (left) {
       y = 1;
     } else {
