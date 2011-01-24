@@ -32,18 +32,17 @@ struct SqlColumn {
   bool permitsNull;
 };
 
-struct SqlSchema {
-  QString name;
-  QList<SqlTable> tables;
-};
-
 struct SqlTable {
   QString name;
   QList<SqlColumn> columns;
 };
 
-class SqlWrapper : public Plugin, private QSqlDriver
-{
+struct SqlSchema {
+  QString name;
+  QList<SqlTable> tables;
+};
+
+class SqlWrapper : public Plugin {
 public:
   enum ColumnFamily {
     Blob,

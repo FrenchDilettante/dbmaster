@@ -59,7 +59,7 @@ HEADERS += mainwindow.h \
     query/querythread.h \
     query/querytoken.h \
     widgets/tooltipframe.h \
-    plugins/wrapper.h \
+    plugins/sqlwrapper.h \
     plugins/plugindialog.h \
     plugins/plugin.h \
     plugins/pluginmanager.h \
