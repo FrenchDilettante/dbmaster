@@ -20,6 +20,7 @@
 PluginManagerPrivate::PluginManagerPrivate()
   : QObject() {
   m_model = new QStandardItemModel(this);
+  startupDialog = NULL;
 
   init();
 }
@@ -50,18 +51,18 @@ QList<ExportEngine*> PluginManagerPrivate::exportEngines() {
 
 void PluginManagerPrivate::init() {
 
+  // Grâce au filtre, on va lister les fichiers présents au démarrage
   QString filter;
 #ifdef Q_OS_LINUX
   filter = "*.so";
 #endif
 
   QStringList pluginsInFolder = QDir().entryList(QStringList(filter));
-  foreach (QString f, pluginsInFolder) {
-    add(f);
-  }
-
   QStringList registeredPlugins;
+  QStringList unavailablePlugins;
+  QList<Plugin*> unregisteredPlugins;
 
+  // Liste des plugins enregistrés
   QSettings s;
   s.beginGroup("plugins");
   int size = s.beginReadArray("list");
@@ -73,7 +74,56 @@ void PluginManagerPrivate::init() {
   s.endArray();
   s.endGroup();
 
-  qDebug() << registeredPlugins;
+  // On trie sur le volet les plugins qui ne sont pas enregistrés
+  foreach (QString f, pluginsInFolder) {
+    if (!registeredPlugins.contains(f)) {
+      Plugin *p = load(f);
+      if (p) {
+        unregisteredPlugins << p;
+      }
+    }
+  }
+
+  // On fait le tri dans ces déjà enregistrés
+  foreach (QString f, registeredPlugins) {
+    if (QFile::exists(f)) {
+      // Ceux qui ne sont pas valides
+      Plugin *p = load(f);
+      if (p) {
+        // Bon lui par exemple il est bon.
+        registerPlugin(p);
+      } else {
+        unavailablePlugins << f;
+      }
+    } else {
+      // On met de côté ceux qui n'existent plus
+      unavailablePlugins << f;
+    }
+  }
+
+  if (unregisteredPlugins.size() > 0) {
+    startupDialog = new PluginStartupDialog();
+    startupDialog->setPlugins(unregisteredPlugins);
+
+    QList<Plugin*> validatedPlugins;
+    switch (startupDialog->exec()) {
+    case QDialogButtonBox::NoToAll:
+      break;
+
+    case QDialogButtonBox::YesToAll:
+      validatedPlugins = unregisteredPlugins;
+      break;
+
+    default:
+      validatedPlugins = startupDialog->selectedPlugins();
+      break;
+    }
+
+    foreach (Plugin *p, validatedPlugins) {
+      registerPlugin(p);
+      save();
+    }
+  }
 }
 
 void PluginManagerPrivate::registerPlugin(Plugin *plugin) {

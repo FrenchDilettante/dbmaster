@@ -15,6 +15,7 @@
 
 #include "exportengine.h"
 #include "plugin.h"
+#include "../dialogs/pluginstartupdialog.h"
 
 #include <QtCore>
 #include <QtGui>
@@ -41,6 +42,7 @@ private:
   QStandardItemModel             *m_model;
   QList<Plugin*>                  m_plugins;
   QMap<Plugin*, QStandardItem*>   pluginsMap;
+  PluginStartupDialog            *startupDialog;
 };
 
 class PluginManager
