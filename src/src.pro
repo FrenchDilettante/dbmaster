@@ -32,10 +32,8 @@ SOURCES += main.cpp \
     query/querythread.cpp \
     query/querytoken.cpp \
     widgets/tooltipframe.cpp \
-    plugins/wrapper.cpp \
     plugins/plugindialog.cpp \
     plugins/pluginmanager.cpp \
-    plugins/plugin.cpp \
     iconmanager.cpp \
     dialogs/searchdialog.cpp
 HEADERS += mainwindow.h \
