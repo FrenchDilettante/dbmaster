@@ -27,6 +27,7 @@ public:
 
   void add(QString path);
   QList<ExportEngine*> exportEngines();
+  Plugin *load(QString path);
   void registerPlugin(Plugin *plugin);
 
   QStandardItemModel *model()   { return m_model;   };

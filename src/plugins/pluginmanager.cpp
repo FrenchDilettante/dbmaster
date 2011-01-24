@@ -26,22 +26,9 @@ PluginManagerPrivate::PluginManagerPrivate()
 
 void PluginManagerPrivate::add(QString path)
 {
-  QPluginLoader loader(path);
-  if(loader.load())
-  {
-    Plugin *p = dynamic_cast<Plugin*>(loader.instance());
-    if(p) {
-      registerPlugin(p);
-    } else {
-      QMessageBox::critical(NULL,
-                            tr("Incorrect plugin file"),
-                            tr("This file contains no DbMaster plugin."));
-    }
-  } else {
-    QMessageBox::critical(NULL,
-                          tr("Incorrect plugin file"),
-                          tr("Unable to load the plugin. Specified error : \n")
-                            + loader.errorString());
+  Plugin *p = load(path);
+  if (p) {
+    registerPlugin(p);
   }
 }
 
@@ -62,14 +49,31 @@ QList<ExportEngine*> PluginManagerPrivate::exportEngines() {
 }
 
 void PluginManagerPrivate::init() {
+
+  QString filter;
+#ifdef Q_OS_LINUX
+  filter = "*.so";
+#endif
+
+  QStringList pluginsInFolder = QDir().entryList(QStringList(filter));
+  foreach (QString f, pluginsInFolder) {
+    add(f);
+  }
+
+  QStringList registeredPlugins;
+
   QSettings s;
   s.beginGroup("plugins");
   int size = s.beginReadArray("list");
   for(int i=0; i<size; i++) {
     s.setArrayIndex(i);
+
+    registeredPlugins << s.value("path").toString();
   }
   s.endArray();
   s.endGroup();
+
+  qDebug() << registeredPlugins;
 }
 
 void PluginManagerPrivate::registerPlugin(Plugin *plugin) {
@@ -88,6 +92,26 @@ void PluginManagerPrivate::registerPlugin(Plugin *plugin) {
   m_plugins << plugin;
   pluginsMap[plugin] = item;
   m_model->appendRow(item);
+}
+
+Plugin *PluginManagerPrivate::load(QString path) {
+  Plugin *p = NULL;
+  QPluginLoader loader(path);
+  if(loader.load())   {
+    p = dynamic_cast<Plugin*>(loader.instance());
+    if(!p) {
+      QMessageBox::critical(NULL,
+                            tr("Incorrect plugin file"),
+                            tr("This file contains no DbMaster plugin."));
+    }
+  } else {
+    QMessageBox::critical(NULL,
+                          tr("Incorrect plugin file"),
+                          tr("Unable to load the plugin. Specified error : \n")
+                            + loader.errorString());
+  }
+
+  return p;
 }
 
 void PluginManagerPrivate::save() {
