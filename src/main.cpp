@@ -65,12 +65,15 @@ int main(int argc, char *argv[])
 #endif
   a.installTranslator(&qtTranslator);
 
+  // Ajout des plugins
+  splash.showMessage(QObject::tr("Loading plugins..."), Qt::AlignBottom);
+  PluginManager::init();
+
   splash.showMessage(QObject::tr("Initialization..."), Qt::AlignBottom);
 
   IconManager::init();
   DbManager::init();
   Config::init();
-  PluginManager::init();
   QueryTextEdit::reloadCompleter();
 
   MainWindow *w = new MainWindow();
