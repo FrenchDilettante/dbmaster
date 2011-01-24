@@ -20,7 +20,6 @@
 PluginManagerPrivate::PluginManagerPrivate()
   : QObject() {
   m_model = new QStandardItemModel(this);
-  startupDialog = NULL;
 
   init();
 }
@@ -102,27 +101,7 @@ void PluginManagerPrivate::init() {
   }
 
   if (unregisteredPlugins.size() > 0) {
-    startupDialog = new PluginStartupDialog();
-    startupDialog->setPlugins(unregisteredPlugins);
 
-    QList<Plugin*> validatedPlugins;
-    switch (startupDialog->exec()) {
-    case QDialogButtonBox::NoToAll:
-      break;
-
-    case QDialogButtonBox::YesToAll:
-      validatedPlugins = unregisteredPlugins;
-      break;
-
-    default:
-      validatedPlugins = startupDialog->selectedPlugins();
-      break;
-    }
-
-    foreach (Plugin *p, validatedPlugins) {
-      registerPlugin(p);
-      save();
-    }
   }
 }
 
