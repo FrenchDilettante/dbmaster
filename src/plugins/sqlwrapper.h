@@ -63,15 +63,19 @@ public:
   };
 
   enum WrapperFeature {
-    CustomTypes,
-    Dumps,
-    ForeignKeys,
-    Indexes,
-    Schemas,
-    StoredProcedures,
-    Triggers,
-    Views
+    BasicFeatures     = 0x0000,
+    CustomTypes       = 0x0001,
+    Dumps             = 0x0002,
+    ForeignKeys       = 0x0004,
+    Indexes           = 0x0008,
+    Schemas           = 0x0010,
+    StoredProcedures  = 0x0020,
+    Triggers          = 0x0040,
+    Views             = 0x0080
   };
+  Q_DECLARE_FLAGS(WrapperFeatures, WrapperFeature)
+
+  virtual WrapperFeatures features() =0;
 
   /**
    * Retourne la liste des schémas disponibles sur cette connexion.
@@ -87,5 +91,6 @@ public:
 };
 
 Q_DECLARE_INTERFACE(SqlWrapper, "dbmaster.Wrapper")
+Q_DECLARE_OPERATORS_FOR_FLAGS(SqlWrapper::WrapperFeatures)
 
 #endif // WRAPPER_H
