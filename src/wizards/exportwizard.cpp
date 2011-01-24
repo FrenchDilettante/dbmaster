@@ -13,6 +13,8 @@
 #include "exportwizard.h"
 
 #include "../iconmanager.h"
+#include "../plugins/exportengine.h"
+#include "../plugins/pluginmanager.h"
 
 ExportWizard::ExportWizard(QueryToken *token, QWidget *parent)
   : QWizard(parent)
@@ -22,6 +24,8 @@ ExportWizard::ExportWizard(QueryToken *token, QWidget *parent)
   this->token = token;
 
   setWindowIcon(IconManager::get("filesaveas"));
+
+  addPage(new EwFirstPage(this));
 }
 
 /**
@@ -82,7 +86,20 @@ void EwFirstPage::initializePage() {
     }
   }
 
-
+  QList<ExportEngine*> engines = PluginManager::exportEngines();
+  bool left = false;
+  int x = -1, y = 0;
+  foreach (ExportEngine *e, engines) {
+    QRadioButton *btn = new QRadioButton(e->displayName());
+    if (left) {
+      y = 1;
+    } else {
+      x++;
+      y = 0;
+    }
+    left = !left;
+    formatLayout->addWidget(btn, x, y);
+  }
 }
 
 int EwFirstPage::nextId() const {

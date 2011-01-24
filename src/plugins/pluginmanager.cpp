@@ -101,7 +101,9 @@ void PluginManagerPrivate::init() {
   }
 
   if (unregisteredPlugins.size() > 0) {
-
+    foreach (Plugin *p, unregisteredPlugins) {
+      registerPlugin(p);
+    }
   }
 }
 
