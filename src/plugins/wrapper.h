@@ -32,6 +32,11 @@ struct SqlColumn {
   bool permitsNull;
 };
 
+struct SqlSchema {
+  QString name;
+  QList<SqlTable> tables;
+};
+
 struct SqlTable {
   QString name;
   QList<SqlColumn> columns;
@@ -69,7 +74,17 @@ public:
     Views
   };
 
-  SqlWrapper();
+  /**
+   * Retourne la liste des schémas disponibles sur cette connexion.
+   *
+   * @param fillTables
+   *    Cette option permet à l'adaptateur de remplir la liste des tables pour
+   *    chaque schéma. Voir la variable tables du type SqlSchema.
+   *    Noter que cette option est par défaut à vrai.
+   *
+   * @return une liste vide si la fonctionnalité n'est pas supportée.
+   */
+  virtual QList<SqlSchema> schemas(bool fillTables =true) =0;
 };
 
 Q_DECLARE_INTERFACE(SqlWrapper, "dbmaster.Wrapper")
