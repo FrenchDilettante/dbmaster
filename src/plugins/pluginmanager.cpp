@@ -12,6 +12,7 @@
 
 #include "pluginmanager.h"
 #include "exportengine.h"
+#include "sqlwrapper.h"
 
 /*
  * PluginManagerPrivate
@@ -20,6 +21,9 @@
 PluginManagerPrivate::PluginManagerPrivate()
   : QObject() {
   m_model = new QStandardItemModel(this);
+  QStringList labels;
+  labels << tr("Plugin") << tr("Type") << tr("Vendor") << tr("Version");
+  m_model->setHorizontalHeaderLabels(labels);
 
   init();
 }
@@ -119,14 +123,23 @@ void PluginManagerPrivate::registerPlugin(Plugin *plugin) {
 
   QStandardItem *item = new QStandardItem();
   item->setText(plugin->title());
+
+  QString type = tr("Other");
+
+  if (dynamic_cast<ExportEngine*>(plugin)) {
+    type = tr("Export engine");
+  } else if (dynamic_cast<SqlWrapper*>(plugin)) {
+    type = tr("Adaptateur SQL");
+  }
+
   QList<QStandardItem*> l;
-  l << new QStandardItem(tr("Version"));
+  l << item;
+  l << new QStandardItem(type);
+  l << new QStandardItem(plugin->vendor());
   l << new QStandardItem(plugin->version());
-  item->appendRow(l);
   m_plugins << plugin;
   pluginsMap[plugin] = item;
-  m_model->appendRow(item);
-  m_model->setColumnCount(2);
+  m_model->appendRow(l);
 }
 
 Plugin *PluginManagerPrivate::load(QString path) {
