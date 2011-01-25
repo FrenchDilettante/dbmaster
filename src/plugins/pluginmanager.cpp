@@ -173,6 +173,19 @@ void PluginManagerPrivate::save() {
   s.endGroup();
 }
 
+QList<SqlWrapper*> PluginManagerPrivate::wrappers() {
+  QList<SqlWrapper*> wrappers;
+
+  foreach (Plugin *p, m_plugins) {
+    SqlWrapper *wp = dynamic_cast<SqlWrapper*>(p);
+    if (wp) {
+      wrappers << wp;
+    }
+  }
+
+  return wrappers;
+}
+
 /*
  * PluginManager
  */
@@ -201,4 +214,8 @@ void PluginManager::registerPlugin(Plugin *p) {
 
 void PluginManager::save() {
   instance->save();
+}
+
+QList<SqlWrapper*> PluginManager::wrappers() {
+  return instance->wrappers();
 }

@@ -15,6 +15,7 @@
 
 #include "exportengine.h"
 #include "plugin.h"
+#include "sqlwrapper.h"
 
 #include <QtCore>
 #include <QtGui>
@@ -29,6 +30,7 @@ public:
   QList<ExportEngine*> exportEngines();
   Plugin *load(QString path);
   void registerPlugin(Plugin *plugin);
+  QList<SqlWrapper*> wrappers();
 
   QStandardItemModel *model()   { return m_model;   };
   QList<Plugin*> plugins() { return m_plugins; };
@@ -53,6 +55,7 @@ public:
   static QString pluginDirectory();
   static void registerPlugin(Plugin *p);
   static void save();
+  static QList<SqlWrapper*> wrappers();
 
 private:
   static PluginManagerPrivate *instance;
