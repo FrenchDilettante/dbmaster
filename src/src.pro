@@ -20,7 +20,6 @@ SOURCES += main.cpp \
     sqlhighlighter.cpp \
     dialogs/logdialog.cpp \
     dialogs/aboutdialog.cpp \
-    third/QColorButton.cpp \
     wizards/newdbwizard.cpp \
     config.cpp \
     widgets/querytextedit.cpp \
@@ -38,7 +37,8 @@ SOURCES += main.cpp \
     plugins/plugin.cpp \
     iconmanager.cpp \
     plugins/exportengines/exportengine.cpp \
-    dialogs/searchdialog.cpp
+    dialogs/searchdialog.cpp \
+    widgets/colorbutton.cpp
 HEADERS += mainwindow.h \
     dbmanager.h \
     tabwidget/tablewidget.h \
@@ -50,7 +50,6 @@ HEADERS += mainwindow.h \
     sqlhighlighter.h \
     dialogs/logdialog.h \
     dialogs/aboutdialog.h \
-    third/QColorButton.h \
     wizards/newdbwizard.h \
     config.h \
     widgets/querytextedit.h \
@@ -68,7 +67,8 @@ HEADERS += mainwindow.h \
     plugins/pluginmanager.h \
     iconmanager.h \
     plugins/exportengines/exportengine.h \
-    dialogs/searchdialog.h
+    dialogs/searchdialog.h \
+    widgets/colorbutton.h
 FORMS += mainwindow.ui \
     dialogs/dbdialog.ui \
     tabwidget/queryeditorwidgetclass.ui \

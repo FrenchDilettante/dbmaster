@@ -396,7 +396,11 @@ p, li { white-space: pre-wrap; }
                    </spacer>
                   </item>
                   <item row="0" column="1">
-                   <widget class="QColorButton" name="shColorButton"/>
+                   <widget class="ColorButton" name="shColorButton">
+                    <property name="text">
+                     <string/>
+                    </property>
+                   </widget>
                   </item>
                  </layout>
                 </widget>
@@ -507,9 +511,9 @@ p, li { white-space: pre-wrap; }
    <header>../src/widgets/querytextedit.h</header>
   </customwidget>
   <customwidget>
-   <class>QColorButton</class>
-   <extends>QPushButton</extends>
-   <header>../src/third/QColorButton.h</header>
+   <class>ColorButton</class>
+   <extends>QToolButton</extends>
+   <header>../src/widgets/colorbutton.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

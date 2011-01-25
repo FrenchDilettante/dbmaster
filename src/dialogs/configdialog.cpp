@@ -76,7 +76,7 @@ void ConfigDialog::refreshSyntaxFont(int index)
   QFont font = item->font();
 
   QColor color = item->foreground().color();
-  shColorButton->setCurrentColor(color);
+  shColorButton->setColor(color);
 
   shBoldButton->setChecked(font.weight() == QFont::Bold);
   shItalicButton->setChecked(font.italic());
@@ -201,8 +201,7 @@ void ConfigDialog::save()
   Config::save();
 }
 
-void ConfigDialog::setupConnections()
-{
+void ConfigDialog::setupConnections() {
   connect(buttonBox, SIGNAL(clicked(QAbstractButton*)),
           this, SLOT(handleClick(QAbstractButton*)));
 
@@ -224,16 +223,14 @@ void ConfigDialog::setupConnections()
           this, SLOT(reloadKeywords(int)));
 }
 
-void ConfigDialog::updateEditorFont()
-{
+void ConfigDialog::updateEditorFont() {
   editorTestArea->selectAll();
   editorFont.setFamily(editorFontCombo->currentText());
   editorFont.setPointSize(editorFontSizeSpin->value());
   editorTestArea->setFont(editorFont);
 }
 
-void ConfigDialog::updateSyntaxFont()
-{
+void ConfigDialog::updateSyntaxFont() {
   QListWidgetItem *item = shListWidget->currentItem();
   QFont font;
   if(shBoldButton->isChecked())
@@ -242,5 +239,5 @@ void ConfigDialog::updateSyntaxFont()
     font.setItalic(true);
   item->setFont(font);
 
-  item->setForeground(shColorButton->currentColor());
+  item->setForeground(shColorButton->color());
 }
