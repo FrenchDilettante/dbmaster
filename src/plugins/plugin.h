@@ -42,6 +42,8 @@ public:
    */
   virtual QString title()   =0;
 
+  virtual QString vendor()  =0;
+
   /**
    * Laissée à l'appreciation du développeur.
    */
