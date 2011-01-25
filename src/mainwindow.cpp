@@ -554,6 +554,10 @@ void MainWindow::setupWidgets()
   searchDialog  = new SearchDialog(this);
   //printDialog = new QPrintDialog(this);
 
+#ifdef Q_OS_WIN32
+  mainToolBar->setIconSize(QSize(16, 16));
+#endif
+
   QAction *a;
   recentActions.clear();
   for(int i=0; i<10; i++)
