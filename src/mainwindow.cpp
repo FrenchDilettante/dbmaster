@@ -205,6 +205,12 @@ void MainWindow::closeTab(int nb)
 
   // then remove the widget
   tabWidget->removeTab(nb);
+
+  if (tabWidget->count() == 0) {
+    foreach (QAction *a, actionMap.values()) {
+      a->setEnabled(false);
+    }
+  }
 }
 
 void MainWindow::copy()
@@ -370,7 +376,7 @@ void MainWindow::previousTab()
 
 void MainWindow::print()
 {
-  if(currentTab()->availableActions() && AbstractTabWidget::Print)
+  if (currentTab() && currentTab()->availableActions() && AbstractTabWidget::Print)
   {
     QPrinter *printer = currentTab()->printer();
     QPrintDialog *printDialog = new QPrintDialog(printer, this);
