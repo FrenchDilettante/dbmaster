@@ -119,10 +119,14 @@ void PluginManagerPrivate::registerPlugin(Plugin *plugin) {
 
   QStandardItem *item = new QStandardItem();
   item->setText(plugin->title());
-  item->appendRow(new QStandardItem(plugin->version()));
+  QList<QStandardItem*> l;
+  l << new QStandardItem(tr("Version"));
+  l << new QStandardItem(plugin->version());
+  item->appendRow(l);
   m_plugins << plugin;
   pluginsMap[plugin] = item;
   m_model->appendRow(item);
+  m_model->setColumnCount(2);
 }
 
 Plugin *PluginManagerPrivate::load(QString path) {

@@ -117,8 +117,6 @@ int EwFirstPage::nextId() const {
       } else {
         return 2;
       }
-
-      break;
     }
   }
   return 2;
@@ -131,6 +129,8 @@ bool EwFirstPage::validatePage() {
         if (wizard()->page(1)) {
           wizard()->removePage(1);
         }
+        formatMap[r]->setWizard(wizard());
+        formatMap[r]->setModel(((ExportWizard*) wizard())->model());
         wizard()->setPage(1, formatMap[r]->wizardPage());
       }
 
@@ -145,15 +145,13 @@ bool EwFirstPage::validatePage() {
  * Export page
  */
 EwExportPage::EwExportPage(QueryToken *token, QWizard *parent)
-  : QWizardPage(parent)
-{
+  : QWizardPage(parent) {
   setupUi(this);
 
   this->token = token;
 }
 
-void EwExportPage::checkProgress()
-{
+void EwExportPage::checkProgress() {
   if(!finished)
     dial->show();
 }

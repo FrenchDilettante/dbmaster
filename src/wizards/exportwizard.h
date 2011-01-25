@@ -27,6 +27,8 @@ public:
   ExportWizard(QueryToken *token, QWidget *parent =0);
 
   QueryToken *token;
+
+  QAbstractItemModel *model() { return token->model(); };
 };
 
 
