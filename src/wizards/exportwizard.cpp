@@ -17,8 +17,7 @@
 #include "../plugins/pluginmanager.h"
 
 ExportWizard::ExportWizard(QueryToken *token, QWidget *parent)
-  : QWizard(parent)
-{
+  : QWizard(parent) {
   setWindowTitle(tr("Export"));
 
   this->token = token;
@@ -29,14 +28,24 @@ ExportWizard::ExportWizard(QueryToken *token, QWidget *parent)
   setPage(2, new EwExportPage(token, this));
 }
 
+void ExportWizard::setEngine(ExportEngine *e) {
+  if (e->wizardPage()) {
+    if (page(1)) {
+      removePage(1);
+    }
+    e->setWizard(this);
+    e->setModel(token->model());
+    setPage(1, e->wizardPage());
+  }
+}
+
 /**
  * First page
  */
 QString EwFirstPage::lastPath;
 
 EwFirstPage::EwFirstPage(QWizard *parent)
-    : QWizardPage(parent)
-{
+    : QWizardPage(parent) {
   setupUi(this);
 
   formatLayout = new QGridLayout(formatGroupBox);
@@ -57,8 +66,7 @@ EwFirstPage::EwFirstPage(QWizard *parent)
   pathLineEdit->setText(lastPath);
 }
 
-void EwFirstPage::browse()
-{
+void EwFirstPage::browse() {
   lastPath = QFileDialog::getSaveFileName(this,
                                           tr("Output file"),
                                           QDir::homePath()
@@ -125,15 +133,7 @@ int EwFirstPage::nextId() const {
 bool EwFirstPage::validatePage() {
   foreach (QRadioButton *r, formatMap.keys()) {
     if (r->isChecked()) {
-      if (formatMap[r]->wizardPage()) {
-        if (wizard()->page(1)) {
-          wizard()->removePage(1);
-        }
-        formatMap[r]->setWizard(wizard());
-        formatMap[r]->setModel(((ExportWizard*) wizard())->model());
-        wizard()->setPage(1, formatMap[r]->wizardPage());
-      }
-
+      ((ExportWizard*) wizard())->setEngine(formatMap[r]);
       break;
     }
   }
@@ -160,8 +160,7 @@ void EwExportPage::checkProgress() {
  * This is a common function to all formats. The conversion must obey to some
  * rules, see the documentation for more information.
  */
-void EwExportPage::initializePage()
-{
+void EwExportPage::initializePage() {
   finished = false;
   dial = new QProgressDialog(this);
   dial->setWindowTitle(tr("Export running..."));
@@ -171,8 +170,7 @@ void EwExportPage::initializePage()
   run();
 }
 
-void EwExportPage::run()
-{
+void EwExportPage::run() {
   QFile f(field("path").toString());
   if( !f.open( QFile::WriteOnly ) )
   {

@@ -28,7 +28,12 @@ public:
 
   QueryToken *token;
 
+  ExportEngine *engine() { return m_engine; };
   QAbstractItemModel *model() { return token->model(); };
+  void setEngine(ExportEngine *e);
+
+private:
+  ExportEngine *m_engine;
 };
 
 
