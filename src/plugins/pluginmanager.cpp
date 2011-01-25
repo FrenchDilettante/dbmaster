@@ -28,12 +28,27 @@ PluginManagerPrivate::PluginManagerPrivate()
   init();
 }
 
-void PluginManagerPrivate::add(QString path)
-{
+void PluginManagerPrivate::add(QString path) {
   Plugin *p = load(path);
   if (p) {
     registerPlugin(p);
   }
+}
+
+/**
+ * Extrait la liste des wrappers disponibles pour le driver spécifié
+ */
+QList<SqlWrapper*> PluginManagerPrivate::availableWrappers(QString driver) {
+  QList<SqlWrapper*> wrappers;
+
+  foreach (Plugin *p, m_plugins) {
+    SqlWrapper *w = dynamic_cast<SqlWrapper*>(p);
+    if (w && w->supportedDrivers().contains(driver)) {
+      wrappers << w;
+    }
+  }
+
+  return wrappers;
 }
 
 /**

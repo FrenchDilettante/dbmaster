@@ -27,6 +27,7 @@ public:
   PluginManagerPrivate();
 
   void add(QString path);
+  QList<SqlWrapper*> availableWrappers(QString driver);
   QList<ExportEngine*> exportEngines();
   Plugin *load(QString path);
   void registerPlugin(Plugin *plugin);
