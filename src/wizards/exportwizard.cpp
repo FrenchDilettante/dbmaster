@@ -29,6 +29,7 @@ ExportWizard::ExportWizard(QueryToken *token, QWidget *parent)
 }
 
 void ExportWizard::setEngine(ExportEngine *e) {
+  m_engine = e;
   if (e->wizardPage()) {
     if (page(1)) {
       removePage(1);
@@ -156,10 +157,6 @@ void EwExportPage::checkProgress() {
     dial->show();
 }
 
-/**
- * This is a common function to all formats. The conversion must obey to some
- * rules, see the documentation for more information.
- */
 void EwExportPage::initializePage() {
   finished = false;
   dial = new QProgressDialog(this);
@@ -172,17 +169,19 @@ void EwExportPage::initializePage() {
 
 void EwExportPage::run() {
   QFile f(field("path").toString());
-  if( !f.open( QFile::WriteOnly ) )
-  {
-    QMessageBox::critical( this,
-                           tr( "Openning error" ),
-                           tr( "Unable to open the file %1." )
-                             .arg( field( "path" ).toString() ),
-                           QMessageBox::Ok );
+  if (!f.open(QFile::WriteOnly)) {
+    QMessageBox::critical(this,
+                          tr("Openning error"),
+                          tr("Unable to open the file %1.")
+                            .arg(field("path").toString()),
+                          QMessageBox::Ok);
     return;
   }
 
-  // Ici, mettre l'appel vers le moteur d'export.
+  ExportEngine *engine = ((ExportWizard*) wizard())->engine();
+  connect(dynamic_cast<QObject*>(engine), SIGNAL(progress(int)),
+          dial, SLOT(setValue(int)));
+  engine->process(&f);
 
   f.close();
   finished = true;

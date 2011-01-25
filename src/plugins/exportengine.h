@@ -30,16 +30,16 @@ public:
    */
   virtual QString extension() =0;
   virtual QString displayIconCode() { return ""; };
+  /**
+   * Traitement de l'export : fonction threadée.
+   */
+  virtual void process(QFile *f) =0;
 
   virtual void setModel(QAbstractItemModel *m) =0;
   virtual void setWizard(QWizard *w) =0;
   virtual QWizardPage *wizardPage() =0;
 
 protected:
-  /**
-   * Traitement de l'export : fonction threadée.
-   */
-  virtual void process(QFile *f) =0;
 
   QAbstractItemModel *model;
   QWizard *wizard;
