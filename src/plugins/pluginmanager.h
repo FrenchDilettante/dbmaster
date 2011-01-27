@@ -30,7 +30,9 @@ public:
   QList<SqlWrapper*> availableWrappers(QString driver);
   QList<ExportEngine*> exportEngines();
   Plugin *load(QString path);
+  Plugin *plugin(QString plid);
   void registerPlugin(Plugin *plugin);
+  SqlWrapper *wrapper(QString plid);
   QList<SqlWrapper*> wrappers();
 
   QStandardItemModel *model()   { return m_model;   };
@@ -53,9 +55,11 @@ public:
   static QList<ExportEngine*> exportEngines();
   static void init();
   static QStandardItemModel *model()    { return instance->model();   };
+  static Plugin *plugin(QString plid);
   static QString pluginDirectory();
   static void registerPlugin(Plugin *p);
   static void save();
+  static SqlWrapper *wrapper(QString plid);
   static QList<SqlWrapper*> wrappers();
 
 private:

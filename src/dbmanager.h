@@ -13,8 +13,9 @@
 #ifndef DBMANAGER_H
 #define DBMANAGER_H
 
+#include "plugins/sqlwrapper.h"
+
 #include <QList>
-//#include <QPixmap>
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QStack>
@@ -23,7 +24,7 @@
 #include <QThread>
 
 /**
- * Classe interne, instance de DbManager.
+ * Classe interne, singleton de DbManager.
  * ! À ne pas appeler en direct !
  */
 class DbManagerPrivate : public QThread
@@ -34,7 +35,8 @@ public:
 
   int                     addDatabase(QString driver, QString host,
                                       QString user, QString pswd, QString dbnm,
-                                      QString alias, bool save = true);
+                                      QString alias, QString wrapper ="",
+                                      bool save =true);
   QString                 alias(QSqlDatabase *db);
   void                    close(QSqlDatabase *db);
   void                    closeAll();
@@ -84,6 +86,7 @@ private:
   QStandardItemModel     *m_driverModel;
   QList<QSqlDatabase*>    dbList;
   QMap<QSqlDatabase*, QStandardItem*> dbMap;
+  QMap<QSqlDatabase*, SqlWrapper*> dbWrappers;
   QStandardItemModel     *m_model;
   int                     nconn;
   QString                 lastErr;

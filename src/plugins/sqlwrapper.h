@@ -75,6 +75,9 @@ public:
   };
   Q_DECLARE_FLAGS(WrapperFeatures, WrapperFeature)
 
+
+  virtual SqlWrapper* newInstance(QSqlDatabase *db) =0;
+
   virtual WrapperFeatures features() =0;
 
   /**
@@ -90,6 +93,11 @@ public:
   virtual QList<SqlSchema> schemas(bool fillTables =true) =0;
 
   virtual QStringList supportedDrivers() =0;
+
+  QSqlDatabase* db() { return m_db; };
+
+protected:
+  QSqlDatabase *m_db;
 };
 
 Q_DECLARE_INTERFACE(SqlWrapper, "dbmaster.Wrapper")

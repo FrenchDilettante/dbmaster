@@ -15,6 +15,7 @@
 #include "mainwindow.h"
 
 #include "dialogs/logdialog.h"
+#include "plugins/pluginmanager.h"
 #include "tabwidget/abstracttabwidget.h"
 
 DbManagerPrivate::DbManagerPrivate()
@@ -45,7 +46,7 @@ DbManagerPrivate::DbManagerPrivate()
  */
 int DbManagerPrivate::addDatabase(QString driver, QString host, QString user,
                                   QString pswd, QString dbnm, QString alias,
-                                  bool save) {
+                                  QString wrapper, bool save) {
   QSqlDatabase db = QSqlDatabase::addDatabase(driver, genConnectionName());
   db.setHostName(host);
   db.setUserName(user);
@@ -80,11 +81,15 @@ int DbManagerPrivate::addDatabase(QString driver, QString host, QString user,
   dbMap[newDb]->setToolTip(dbToolTip(newDb));
 
   m_model->appendRow(dbMap[newDb]);
-  if(save)
-  {
+  if(save) {
     saveList();
     LogDialog::instance()->append(QObject::tr("Connection %1 added")
             .arg(title));
+  }
+
+  SqlWrapper *w = PluginManager::wrapper(wrapper);
+  if (w) {
+    dbWrappers[newDb] = w->newInstance(newDb);
   }
 
   return dbList.size() - 1;
@@ -278,7 +283,7 @@ void DbManagerPrivate::openList()
   QSettings s;
 
   int size = s.beginReadArray("dblist");
-  QString driver, host, user, pswd, name, alias;
+  QString driver, host, user, pswd, name, alias, wrapper;
   for (int i = 1; i <= size; i++)
   {
     s.setArrayIndex(i);
@@ -288,7 +293,8 @@ void DbManagerPrivate::openList()
     name = s.value("database").toString();
     pswd = s.value("password", QVariant(QString::null)).toString();
     alias = s.value("alias", "").toString();
-    addDatabase(driver, host, user, pswd, name, alias, false);
+    wrapper = s.value("wrapper", "").toString();
+    addDatabase(driver, host, user, pswd, name, alias, wrapper, false);
   }
   s.endArray();
 }
@@ -312,11 +318,16 @@ void DbManagerPrivate::refreshModelItem(QSqlDatabase *db)
 
   QStandardItem *i;
   QModelIndex index = m_model->indexFromItem(item);
-  if(db->isOpen())
-  {
+  if(db->isOpen())   {
     item->setIcon(IconManager::get("connect_established"));
     while (m_model->rowCount(index) > 0) {
       m_model->removeRow(0, index);
+    }
+
+    SqlWrapper *wrapper = dbWrappers.value(db, NULL);
+    if (wrapper && wrapper->features().testFlag(SqlWrapper::Schemas)) {
+      item = new QStandardItem(tr("Schemas"));
+      dbMap[db]->appendRow(item);
     }
 
     QStandardItem *tablesItem =

@@ -177,6 +177,19 @@ Plugin *PluginManagerPrivate::load(QString path) {
   return p;
 }
 
+Plugin *PluginManagerPrivate::plugin(QString plid) {
+  if (plid.size() == 0) {
+    return NULL;
+  }
+  foreach (Plugin *p, m_plugins) {
+    if (p->plid() == plid) {
+      return p;
+    }
+  }
+
+  return NULL;
+}
+
 void PluginManagerPrivate::save() {
   QSettings s;
   s.beginGroup("plugins");
@@ -186,6 +199,10 @@ void PluginManagerPrivate::save() {
   }
   s.endArray();
   s.endGroup();
+}
+
+SqlWrapper* PluginManagerPrivate::wrapper(QString plid) {
+  return dynamic_cast<SqlWrapper*>(plugin(plid));
 }
 
 QList<SqlWrapper*> PluginManagerPrivate::wrappers() {
@@ -219,6 +236,10 @@ void PluginManager::init() {
   instance = new PluginManagerPrivate();
 }
 
+Plugin* PluginManager::plugin(QString plid) {
+  return instance->plugin(plid);
+}
+
 QString PluginManager::pluginDirectory() {
   return QDir::homePath();
 }
@@ -229,6 +250,10 @@ void PluginManager::registerPlugin(Plugin *p) {
 
 void PluginManager::save() {
   instance->save();
+}
+
+SqlWrapper* PluginManager::wrapper(QString plid) {
+  return instance->wrapper(plid);
 }
 
 QList<SqlWrapper*> PluginManager::wrappers() {
