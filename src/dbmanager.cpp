@@ -356,6 +356,26 @@ void DbManagerPrivate::refreshModelItem(QSqlDatabase *db)
       }
 
       item->appendRow(tablesItem(tables));
+
+      QList<SqlTable> views;
+      foreach (QString s, db->tables(QSql::Views)) {
+        SqlTable t;
+        t.name = s;
+        t.type = ViewTable;
+        views << t;
+      }
+
+      item->appendRow(viewsItem(views));
+
+      QList<SqlTable> sysTables;
+      foreach (QString s, db->tables(QSql::SystemTables)) {
+        SqlTable t;
+        t.name = s;
+        t.type = SysTable;
+        sysTables << t;
+      }
+
+      item->appendRow(sysTablesItem(sysTables));
     }
 
 
