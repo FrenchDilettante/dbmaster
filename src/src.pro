@@ -65,7 +65,8 @@ HEADERS += mainwindow.h \
     plugins/pluginmanager.h \
     iconmanager.h \
     plugins/exportengine.h \
-    dialogs/searchdialog.h
+    dialogs/searchdialog.h \
+    db_enum.h
 FORMS += mainwindow.ui \
     dialogs/dbdialog.ui \
     tabwidget/queryeditorwidgetclass.ui \

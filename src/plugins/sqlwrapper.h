@@ -14,6 +14,7 @@
 #define WRAPPER_H
 
 #include "plugin.h"
+#include "../db_enum.h"
 
 #include <QList>
 #include <QSqlDatabase>
@@ -21,47 +22,8 @@
 #include <QString>
 #include <QStringList>
 
-struct SqlType {
-  QString name;
-  bool hasSize;
-  int size;
-};
-
-struct SqlColumn {
-  SqlType type;
-  bool permitsNull;
-};
-
-struct SqlTable {
-  QString name;
-  QList<SqlColumn> columns;
-};
-
-struct SqlSchema {
-  QString name;
-  QList<SqlTable> tables;
-};
-
 class SqlWrapper : public Plugin {
 public:
-  enum ColumnFamily {
-    Blob,
-    Char,
-    Date,
-    Float,
-    Integer,
-    Time,
-    Timestamp,
-    Varchar
-  };
-
-  enum DbType {
-    FileDb,
-    IndexedDb,
-    LocalDb,
-    RemoteDb
-  };
-
   enum WrapperFeature {
     BasicFeatures     = 0x0000,
     CustomTypes       = 0x0001,

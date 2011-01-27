@@ -64,7 +64,8 @@ void IconManager::init()
   if(QIcon::hasThemeIcon("gtk-preferences"))
     m_icons["preferences"] = QIcon::fromTheme("gtk-preferences");
 
+  m_icons["folder_schemas"] = customFolder(QIcon(":/img/schema.png"));
+  m_icons["folder_systemtables"] = customFolder(QIcon(":/img/table_gear.png"));
   m_icons["folder_tables"] = customFolder(QIcon(":/img/table.png"));
   m_icons["folder_views"] = customFolder(QIcon(":/img/table_lightning.png"));
-  m_icons["folder_systemtables"] = customFolder(QIcon(":/img/table_gear.png"));
 }
