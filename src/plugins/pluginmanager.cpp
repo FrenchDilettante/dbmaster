@@ -153,6 +153,10 @@ void PluginManagerPrivate::registerPlugin(Plugin *plugin) {
   l << new QStandardItem(plugin->vendor());
   l << new QStandardItem(plugin->version());
   m_plugins << plugin;
+  foreach (QStandardItem *i, l) {
+    i->setEditable(false);
+  }
+
   pluginsMap[plugin] = item;
   m_model->appendRow(l);
 }
