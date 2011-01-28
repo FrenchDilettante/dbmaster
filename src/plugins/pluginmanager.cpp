@@ -144,7 +144,7 @@ void PluginManagerPrivate::registerPlugin(Plugin *plugin) {
   if (dynamic_cast<ExportEngine*>(plugin)) {
     type = tr("Export engine");
   } else if (dynamic_cast<SqlWrapper*>(plugin)) {
-    type = tr("Adaptateur SQL");
+    type = tr("SQL Wrapper");
   }
 
   QList<QStandardItem*> l;

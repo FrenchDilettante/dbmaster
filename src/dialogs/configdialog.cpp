@@ -32,7 +32,7 @@ ConfigDialog::ConfigDialog(QWidget *parent)
   setWindowIcon(                IconManager::get("preferences"));
   listWidget->item(0)->setIcon( IconManager::get("preferences"));
   listWidget->item(1)->setIcon( IconManager::get("accessories-text-editor"));
-  listWidget->item(2)->setIcon( IconManager::get("plugin"));
+  listWidget->item(2)->setIcon( IconManager::get("plugins"));
 
   listWidget->takeItem(2);
 }
