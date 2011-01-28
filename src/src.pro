@@ -31,12 +31,9 @@ SOURCES += main.cpp \
     query/querythread.cpp \
     query/querytoken.cpp \
     widgets/tooltipframe.cpp \
-    plugins/wrappers/wrapper.cpp \
     plugins/plugindialog.cpp \
     plugins/pluginmanager.cpp \
-    plugins/plugin.cpp \
     iconmanager.cpp \
-    plugins/exportengines/exportengine.cpp \
     dialogs/searchdialog.cpp \
     widgets/colorbutton.cpp
 HEADERS += mainwindow.h \
@@ -61,14 +58,15 @@ HEADERS += mainwindow.h \
     query/querythread.h \
     query/querytoken.h \
     widgets/tooltipframe.h \
-    plugins/wrappers/wrapper.h \
+    plugins/sqlwrapper.h \
     plugins/plugindialog.h \
     plugins/plugin.h \
     plugins/pluginmanager.h \
     iconmanager.h \
-    plugins/exportengines/exportengine.h \
     dialogs/searchdialog.h \
-    widgets/colorbutton.h
+    widgets/colorbutton.h \
+    plugins/exportengine.h \
+    db_enum.h
 FORMS += mainwindow.ui \
     dialogs/dbdialog.ui \
     tabwidget/queryeditorwidgetclass.ui \
@@ -80,15 +78,11 @@ FORMS += mainwindow.ui \
     wizards/ndw_firstpage.ui \
     wizards/ndw_secondpage.ui \
     wizards/firstlaunchwizard.ui \
-    wizards/exportwizard.ui \
-    wizards/ew_sqlpage.ui \
     wizards/ew_firstpage.ui \
     wizards/ew_exportpage.ui \
-    wizards/ew_csvpage.ui \
     widgets/resultview.ui \
     widgets/tooltipframe.ui \
     plugins/plugindialog.ui \
-    wizards/ew_htmlpage.ui \
     dialogs/searchdialog.ui
 RESOURCES += icons.qrc
 TRANSLATIONS += tr/fr_FR.po

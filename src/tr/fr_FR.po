@@ -251,18 +251,23 @@ msgctxt "DbDialog|"
 msgid "Connection Manager"
 msgstr "Gestionnaire de connexions"
 
-#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.ui:164
+#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.ui:156
+msgctxt "DbDialog|"
+msgid "Alias"
+msgstr ""
+
+#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.ui:174
 msgctxt "DbDialog|"
 msgid "Add"
 msgstr "Ajouter"
 
-#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.ui:178
+#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.ui:188
 msgctxt "DbDialog|"
 msgid "Remove"
 msgstr "Supprimer"
 
-#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.ui:188
-#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.cpp:93
+#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.ui:198
+#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.cpp:90
 msgctxt "DbDialog|"
 msgid "Connect"
 msgstr "Connecter"
@@ -324,33 +329,45 @@ msgctxt "DbDialog|"
 msgid "..."
 msgstr "..."
 
-#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.cpp:88
+#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.cpp:87
 msgctxt "DbDialog|"
 msgid "Disconnect"
 msgstr "Déconnecter"
 
-#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.cpp:107
+#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.cpp:104
 msgctxt "DbDialog|"
 msgid "<- Click to test"
 msgstr "<- Cliquer pour tester"
 
-#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.cpp:116
+#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.cpp:111
 msgctxt "DbDialog|"
 msgid "Cannot remove"
 msgstr "Impossible de supprimer"
 
-#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.cpp:192
+#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.cpp:189
 msgctxt "DbDialog|"
 msgid "Connection succeded"
 msgstr "Connexion réussie"
 
-#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.cpp:196
-#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.cpp:198
+#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.cpp:193
+#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.cpp:195
 msgctxt "DbDialog|"
 msgid "Connection failed"
 msgstr "Connexion échouée"
 
-#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.cpp:117
+#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.cpp:211
+#, fuzzy, qt-format
+msgctxt "DbDialog|"
+msgid "%1 (local)"
+msgstr "%1 (locale)"
+
+#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.cpp:213
+#, fuzzy, qt-format
+msgctxt "DbDialog|"
+msgid "%1 on %2"
+msgstr "%1 sur %2"
+
+#: /home/manu/programmation/dbmaster/src/dialogs/dbdialog.cpp:112
 msgctxt "DbDialog|"
 msgid "You must close the connexion before remove it."
 msgstr "Vous devez fermer la connexion avant de la supprimer."
@@ -738,63 +755,54 @@ msgctxt "QueryEditorWidgetClass|"
 msgid "Clears the query if it is runned with success"
 msgstr "Efface la requête si elle est exécutée avec succès"
 
-#: /home/manu/programmation/dbmaster/src/wizards/ew_csvpage.ui:14
-msgctxt "EwCsvPage|"
-msgid "CSV parameters"
-msgstr "Paramètres CSV"
+#~ msgctxt "EwCsvPage|"
+#~ msgid "CSV parameters"
+#~ msgstr "Paramètres CSV"
 
-#: /home/manu/programmation/dbmaster/src/wizards/ew_csvpage.ui:17
-msgctxt "EwCsvPage|"
-msgid "These options are optionnal"
-msgstr "Ces options sont optionnelles"
+#~ msgctxt "EwCsvPage|"
+#~ msgid "These options are optionnal"
+#~ msgstr "Ces options sont optionnelles"
 
-#: /home/manu/programmation/dbmaster/src/wizards/ew_csvpage.ui:31
-msgctxt "EwCsvPage|"
-msgid "Se&parator"
-msgstr "Sé&parator"
+#~ msgctxt "EwCsvPage|"
+#~ msgid "Se&parator"
+#~ msgstr "Sé&parator"
 
-#: /home/manu/programmation/dbmaster/src/wizards/ew_csvpage.ui:53
-msgctxt "EwCsvPage|"
-msgid ";"
-msgstr ";"
+#~ msgctxt "EwCsvPage|"
+#~ msgid ";"
+#~ msgstr ";"
 
-#: /home/manu/programmation/dbmaster/src/wizards/ew_csvpage.ui:60
-msgctxt "EwCsvPage|"
-msgid "Delimiter"
-msgstr "Délimiteur"
+#~ msgctxt "EwCsvPage|"
+#~ msgid "Delimiter"
+#~ msgstr "Délimiteur"
 
-#: /home/manu/programmation/dbmaster/src/wizards/ew_csvpage.ui:79
-msgctxt "EwCsvPage|"
-msgid "\""
-msgstr "\""
+#~ msgctxt "EwCsvPage|"
+#~ msgid "\""
+#~ msgstr "\""
 
-#: /home/manu/programmation/dbmaster/src/wizards/ew_csvpage.ui:94
-msgctxt "EwCsvPage|"
-msgid "Write &headers"
-msgstr "Écrire l'&en-tête"
+#~ msgctxt "EwCsvPage|"
+#~ msgid "Write &headers"
+#~ msgstr "Écrire l'&en-tête"
 
-#: /home/manu/programmation/dbmaster/src/wizards/ew_exportpage.ui:14
 #| msgid "Export finished"
-msgctxt "EwExportPage|"
-msgid "Export complete"
-msgstr "Export fini"
+#~ msgctxt "EwExportPage|"
+#~ msgid "Export complete"
+#~ msgstr "Export fini"
 
-#: /home/manu/programmation/dbmaster/src/wizards/ew_exportpage.ui:17
-msgctxt "EwExportPage|"
-msgid "The export process is finished."
-msgstr "Le processus d'export est terminé."
+#~ msgctxt "EwExportPage|"
+#~ msgid "The export process is finished."
+#~ msgstr "Le processus d'export est terminé."
 
-#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:212
+#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:102
 msgctxt "EwExportPage|"
 msgid "Export running..."
 msgstr "Export en cours..."
 
-#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:225
+#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:115
 msgctxt "EwExportPage|"
 msgid "Openning error"
 msgstr "Erreur d'ouverture"
 
-#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:226
+#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:116
 #, qt-format
 msgctxt "EwExportPage|"
 msgid "Unable to open the file %1."
@@ -840,47 +848,34 @@ msgctxt "EwFirstPage|"
 msgid "HTML"
 msgstr "HTML"
 
-#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:67
-msgctxt "EwFirstPage|"
-msgid "CSV file (*.csv)"
-msgstr "Fichier CSV (*.csv)"
+#~ msgctxt "EwFirstPage|"
+#~ msgid "CSV file (*.csv)"
+#~ msgstr "Fichier CSV (*.csv)"
 
-#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:68
-msgctxt "EwFirstPage|"
-msgid "HTML file (*.html)"
-msgstr "Fichier HTML (*.html)"
+#~ msgctxt "EwFirstPage|"
+#~ msgid "HTML file (*.html)"
+#~ msgstr "Fichier HTML (*.html)"
 
-#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:67
-#, fuzzy
-#| msgid "SQL file (*.sql)"
-msgctxt "EwFirstPage|"
-msgid "CSV file (*.csv)"
-msgstr "Fichier SQL (*.sql)"
-
-#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:72
+#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:56
 msgctxt "EwFirstPage|"
 msgid "Output file"
 msgstr "Fichier de sortie"
 
-#: /home/manu/programmation/dbmaster/src/wizards/ew_sqlpage.ui:14
-msgctxt "EwSqlPage|"
-msgid "SQL options"
-msgstr "Options SQL"
+#~ msgctxt "EwSqlPage|"
+#~ msgid "SQL options"
+#~ msgstr "Options SQL"
 
-#: /home/manu/programmation/dbmaster/src/wizards/ew_sqlpage.ui:17
-msgctxt "EwSqlPage|"
-msgid "Please check the following options."
-msgstr "Verifier les options suivantes."
+#~ msgctxt "EwSqlPage|"
+#~ msgid "Please check the following options."
+#~ msgstr "Verifier les options suivantes."
 
-#: /home/manu/programmation/dbmaster/src/wizards/ew_sqlpage.ui:23
-msgctxt "EwSqlPage|"
-msgid "INSERT prefix :"
-msgstr "Préfix INSERT :"
+#~ msgctxt "EwSqlPage|"
+#~ msgid "INSERT prefix :"
+#~ msgstr "Préfix INSERT :"
 
-#: /home/manu/programmation/dbmaster/src/wizards/ew_sqlpage.ui:30
-msgctxt "EwSqlPage|"
-msgid "INSERT INTO <table> VALUES"
-msgstr "INSERT INTO <table> VALUES"
+#~ msgctxt "EwSqlPage|"
+#~ msgid "INSERT INTO <table> VALUES"
+#~ msgstr "INSERT INTO <table> VALUES"
 
 #: /home/manu/programmation/dbmaster/src/wizards/firstlaunchwizard.ui:14
 msgctxt "FirstLaunchWizard|"
@@ -986,6 +981,11 @@ msgctxt "NdwSecondPage|"
 msgid "Password"
 msgstr "Mot de passe"
 
+#: /home/manu/programmation/dbmaster/src/wizards/ndw_secondpage.ui:122
+msgctxt "NdwSecondPage|"
+msgid "Connection name"
+msgstr ""
+
 #: /home/manu/programmation/dbmaster/src/wizards/ndw_secondpage.ui:66
 msgctxt "NdwSecondPage|"
 msgid "Remember password"
@@ -1001,42 +1001,59 @@ msgctxt "NdwSecondPage|"
 msgid "<- Clic to test"
 msgstr "<- Cliquer pour tester"
 
-#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:102
+#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:108
 msgctxt "NdwSecondPage|"
 msgid "Open Database"
 msgstr "Ouvrir la base de données"
 
-#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:104
+#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:110
 msgctxt "NdwSecondPage|"
 msgid "Database file (*.*)"
 msgstr "Fichier de base de données (*.*)"
 
-#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:124
+#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:130
 msgctxt "NdwSecondPage|"
 msgid "Connection succeded"
 msgstr "Connexion réussie"
 
-#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:127
-#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:129
+#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:132
+#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:134
 msgctxt "NdwSecondPage|"
 msgid "Connection failed"
 msgstr "Connexion échouée"
+
+#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:143
+#, fuzzy, qt-format
+msgctxt "NdwSecondPage|"
+msgid "%1 (local)"
+msgstr "%1 (locale)"
+
+#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:145
+#, fuzzy, qt-format
+msgctxt "NdwSecondPage|"
+msgid "%1 on %2"
+msgstr "%1 sur %2"
 
 #: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.ui:14
 msgctxt "NewDbWizard|"
 msgid "Add a connection"
 msgstr "Ajouter une connexion"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:65
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:62
 msgctxt "QObject|"
 msgid "Attempting to add an existing connection."
 msgstr "Tentative d'ajouter une connexion déjà présente."
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:91
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:86
 #, qt-format
 msgctxt "QObject|"
-msgid "Database %1 added"
-msgstr "Base %1 ajoutée"
+msgid "Connection %1 added"
+msgstr ""
+
+#, qt-format
+#~ msgctxt "QObject|"
+#~ msgid "Database %1 added"
+#~ msgstr "Base %1 ajoutée"
 
 #: /home/manu/programmation/dbmaster/src/dbmanager.cpp:528
 #, qt-format
@@ -1054,29 +1071,28 @@ msgctxt "QObject|"
 msgid "Initialization..."
 msgstr "Initialisation..."
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:87
 #, qt-format
-msgctxt "QObject|"
-msgid "Database %1 on %2 added"
-msgstr "Base %1 sur %2 ajoutée"
+#~ msgctxt "QObject|"
+#~ msgid "Database %1 on %2 added"
+#~ msgstr "Base %1 sur %2 ajoutée"
 
 #: /home/manu/programmation/dbmaster/src/dialogs/configdialog.cpp:133
 msgctxt "ConfigDialog|"
 msgid "Invalid color"
 msgstr "Couleur invalide"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:44
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:45
 msgctxt "MainWindow|"
 msgid "Starting DbMaster"
 msgstr "Démarrage de DbMaster"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:73
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:74
 #| msgid "Error !"
 msgctxt "MainWindow|"
 msgid "Error"
 msgstr "Erreur"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:74
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:75
 #, qt-format
 msgctxt "MainWindow|"
 msgid ""
@@ -1086,39 +1102,39 @@ msgstr ""
 "Impossible de se connecter :\n"
 "%1"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:129
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:130
 msgctxt "MainWindow|"
 msgid "Unsaved files"
 msgstr "Fichiers non enregistrés"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:130
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:131
 msgctxt "MainWindow|"
 msgid "Some files are not saved. Are you sure to want to quit ?"
 msgstr ""
 "Certains fichiers n'ont pas été enregistrés. Êtes-vous sûr de vouloir "
 "quitter ?"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:312
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:315
 msgctxt "MainWindow|"
 msgid "Select a query to open"
 msgstr "Ouvrir une requête"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:314
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:317
 msgctxt "MainWindow|"
 msgid "Query file (*.sql);;All files (*.*)"
 msgstr "Fichier de requête (*.sql);;Tous fichiers (*.*)"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:434
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:437
 msgctxt "MainWindow|"
 msgid "No recent file"
 msgstr "Pas de fichier récent"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:436
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:439
 msgctxt "MainWindow|"
 msgid "Clear"
 msgstr "Effacer"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:479
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:482
 #, qt-format
 msgctxt "MainWindow|"
 msgid "%1 queries pending..."
@@ -1312,13 +1328,13 @@ msgctxt "DbManagerPrivate|"
 msgid "Tables (%1)"
 msgstr "Tables (%1)"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:113
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:114
 #, qt-format
 msgctxt "DbManagerPrivate|"
 msgid "%1 (local)"
 msgstr "%1 (locale)"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:115
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:116
 #: /home/manu/programmation/dbmaster/src/dbmanager.cpp:127
 #, qt-format
 msgctxt "DbManagerPrivate|"
@@ -1356,31 +1372,31 @@ msgctxt "DbManagerPrivate|"
 msgid "Host"
 msgstr "Hôte"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:338
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:337
 #, qt-format
 msgctxt "DbManagerPrivate|"
 msgid "Views (%1)"
 msgstr "Vues (%1)"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:353
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:352
 #, qt-format
 msgctxt "DbManagerPrivate|"
 msgid "System tables (%1)"
 msgstr "Tables système (%1)"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:417
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:416
 #, qt-format
 msgctxt "DbManagerPrivate|"
 msgid "Connected to %1"
 msgstr "Connecté à %1"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:420
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:419
 #, qt-format
 msgctxt "DbManagerPrivate|"
 msgid "Unable to connect to %1"
 msgstr "Impossible de se connecter à %1"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:433
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:432
 #, qt-format
 msgctxt "DbManagerPrivate|"
 msgid "Disconnected from %1"
@@ -1514,60 +1530,49 @@ msgctxt "TooltipFrame|"
 msgid "Did you know ? #%1/%2"
 msgstr "Le saviez-vous ? #%1/%2"
 
-#: /home/manu/programmation/dbmaster/src/wizards/ew_htmlpage.ui:14
-msgctxt "EwHtmlPage|"
-msgid "HTML options"
-msgstr "Options HTML"
+#~ msgctxt "EwHtmlPage|"
+#~ msgid "HTML options"
+#~ msgstr "Options HTML"
 
-#: /home/manu/programmation/dbmaster/src/wizards/ew_htmlpage.ui:20
-msgctxt "EwHtmlPage|"
-msgid "Export query"
-msgstr "Exporter la requête"
+#~ msgctxt "EwHtmlPage|"
+#~ msgid "Export query"
+#~ msgstr "Exporter la requête"
 
-#: /home/manu/programmation/dbmaster/src/wizards/ew_htmlpage.ui:32
-msgctxt "EwHtmlPage|"
-msgid "Apply syntax coloring"
-msgstr "Appliquer la coloration syntaxique"
+#~ msgctxt "EwHtmlPage|"
+#~ msgid "Apply syntax coloring"
+#~ msgstr "Appliquer la coloration syntaxique"
 
-#: /home/manu/programmation/dbmaster/src/wizards/ew_htmlpage.ui:42
-msgctxt "EwHtmlPage|"
-msgid "Result"
-msgstr "Résultat"
+#~ msgctxt "EwHtmlPage|"
+#~ msgid "Result"
+#~ msgstr "Résultat"
 
-#: /home/manu/programmation/dbmaster/src/wizards/ew_htmlpage.ui:48
-msgctxt "EwHtmlPage|"
-msgid "Whole result"
-msgstr "Résultat entier"
+#~ msgctxt "EwHtmlPage|"
+#~ msgid "Whole result"
+#~ msgstr "Résultat entier"
 
-#: /home/manu/programmation/dbmaster/src/wizards/ew_htmlpage.ui:58
-msgctxt "EwHtmlPage|"
-msgid "Limit result to"
-msgstr "Limiter le résultat à"
+#~ msgctxt "EwHtmlPage|"
+#~ msgid "Limit result to"
+#~ msgstr "Limiter le résultat à"
 
-#: /home/manu/programmation/dbmaster/src/wizards/ew_htmlpage.ui:84
-msgctxt "EwHtmlPage|"
-msgid "firsts"
-msgstr "premières"
+#~ msgctxt "EwHtmlPage|"
+#~ msgid "firsts"
+#~ msgstr "premières"
 
-#: /home/manu/programmation/dbmaster/src/wizards/ew_htmlpage.ui:89
-msgctxt "EwHtmlPage|"
-msgid "lasts"
-msgstr "dernières"
+#~ msgctxt "EwHtmlPage|"
+#~ msgid "lasts"
+#~ msgstr "dernières"
 
-#: /home/manu/programmation/dbmaster/src/wizards/ew_htmlpage.ui:94
-msgctxt "EwHtmlPage|"
-msgid "firsts & lasts"
-msgstr "premières & dernières"
+#~ msgctxt "EwHtmlPage|"
+#~ msgid "firsts & lasts"
+#~ msgstr "premières & dernières"
 
-#: /home/manu/programmation/dbmaster/src/wizards/ew_htmlpage.ui:102
-msgctxt "EwHtmlPage|"
-msgid "lines"
-msgstr "lignes"
+#~ msgctxt "EwHtmlPage|"
+#~ msgid "lines"
+#~ msgstr "lignes"
 
-#: /home/manu/programmation/dbmaster/src/wizards/ew_htmlpage.ui:111
-msgctxt "EwHtmlPage|"
-msgid "Print column names"
-msgstr "Inscrire les noms de colonnes"
+#~ msgctxt "EwHtmlPage|"
+#~ msgid "Print column names"
+#~ msgstr "Inscrire les noms de colonnes"
 
 #: /home/manu/programmation/dbmaster/src/dialogs/searchdialog.ui:14
 msgctxt "SearchDialog|"
@@ -1619,7 +1624,7 @@ msgctxt "SearchDialog|"
 msgid "Replace"
 msgstr "Remplacer"
 
-#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.ui:14
+#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:21
 msgctxt "ExportWizard|"
 msgid "Export"
 msgstr "Exporter"
@@ -1629,32 +1634,58 @@ msgctxt "PluginDialog|"
 msgid "Plugin center"
 msgstr ""
 
-#: /home/manu/programmation/dbmaster/src/plugins/plugindialog.ui:23
+#: /home/manu/programmation/dbmaster/src/plugins/plugindialog.ui:27
 msgctxt "PluginDialog|"
 msgid "Add"
 msgstr "Ajouter"
 
-#: /home/manu/programmation/dbmaster/src/plugins/plugindialog.ui:40
+#: /home/manu/programmation/dbmaster/src/plugins/plugindialog.ui:44
 msgctxt "PluginDialog|"
 msgid "Remove"
 msgstr "Supprimer"
 
-#: /home/manu/programmation/dbmaster/src/plugins/plugindialog.ui:47
+#: /home/manu/programmation/dbmaster/src/plugins/plugindialog.ui:51
 msgctxt "PluginDialog|"
 msgid "Configure"
 msgstr "Configurer"
 
-#: /home/manu/programmation/dbmaster/src/plugins/plugindialog.cpp:29
+#: /home/manu/programmation/dbmaster/src/plugins/plugindialog.cpp:27
 msgctxt "PluginDialog|"
 msgid "Choose a plugin file"
 msgstr "Choisir un fichier de plugin"
 
-#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:44
+#: /home/manu/programmation/dbmaster/src/plugins/plugindialog.cpp:35
+msgctxt "PluginDialog|"
+msgid "Add a plugin"
+msgstr ""
+
+#: /home/manu/programmation/dbmaster/src/plugins/plugindialog.cpp:36
+msgctxt "PluginDialog|"
+msgid "The file doesn't exist."
+msgstr ""
+
+#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:37
+#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:42
 msgctxt "PluginManagerPrivate|"
 msgid "Incorrect plugin file"
 msgstr "Fichier de plugin incorrect"
 
-#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:45
+#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:38
+msgctxt "PluginManagerPrivate|"
+msgid "This file contains no DbMaster plugin."
+msgstr ""
+
+#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:43
 msgctxt "PluginManagerPrivate|"
 msgid "Unable to load the plugin. Specified error : \n"
 msgstr "Impossible de charger le plugin. Erreur retournée :\n"
+
+#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:79
+msgctxt "PluginManagerPrivate|"
+msgid "Add a plugin"
+msgstr ""
+
+#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:80
+msgctxt "PluginManagerPrivate|"
+msgid "This plugin is already registered"
+msgstr ""

@@ -16,81 +16,43 @@
 #include <QtGui>
 
 #include "../query/querytoken.h"
+#include "../plugins/exportengine.h"
 
-#include "ui_exportwizard.h"
 #include "ui_ew_firstpage.h"
-#include "ui_ew_csvpage.h"
-#include "ui_ew_htmlpage.h"
-#include "ui_ew_sqlpage.h"
 #include "ui_ew_exportpage.h"
 
-class ExportWizard : public QWizard, Ui::ExportWizard
-{
+class ExportWizard : public QWizard {
 Q_OBJECT
 public:
-  enum Pages {
-    FirstPage,
-    CsvPage,
-    HtmlPage,
-    SqlPage,
-    ExportPage
-  };
-
-  enum Format {
-    CsvFormat   = 0,
-    HtmlFormat  = 1,
-    SqlFormat   = 2
-  };
-
   ExportWizard(QueryToken *token, QWidget *parent =0);
 
   QueryToken *token;
+
+  ExportEngine *engine() { return m_engine; };
+  QAbstractItemModel *model() { return token->model(); };
+  void setEngine(ExportEngine *e);
+
+private:
+  ExportEngine *m_engine;
 };
 
 
-class EwFirstPage : public QWizardPage, Ui::EwFirstPage
-{
+class EwFirstPage : public QWizardPage, Ui::EwFirstPage {
 Q_OBJECT
 public:
   EwFirstPage(QWizard *parent=0);
 
+  void initializePage();
   int nextId() const;
+  bool validatePage();
 
 public slots:
   void browse();
 
 private:
-  ExportWizard::Format selectedFormat();
-  QMap<QRadioButton*, ExportWizard::Format> formatMap;
-
   static QString lastPath;
-};
-
-
-class EwCsvPage : public QWizardPage, Ui::EwCsvPage
-{
-Q_OBJECT
-public:
-  EwCsvPage(QWizard *parent=0);
-  int nextId() const;
-};
-
-class EwHtmlPage : public QWizardPage, Ui::EwHtmlPage
-{
-Q_OBJECT
-public:
-  EwHtmlPage(QWizard *parent=0);
-  void initializePage();
-  int nextId() const;
-};
-
-
-class EwSqlPage : public QWizardPage, Ui::EwSqlPage
-{
-Q_OBJECT
-public:
-  EwSqlPage(QWizard *parent=0);
-  int nextId() const;
+  QMap<QRadioButton*, ExportEngine*> formatMap;
+  QGridLayout *formatLayout;
 };
 
 

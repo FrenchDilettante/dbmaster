@@ -49,35 +49,6 @@
      <property name="title">
       <string>Format</string>
      </property>
-     <layout class="QGridLayout" name="gridLayout_2">
-      <item row="0" column="0">
-       <widget class="QRadioButton" name="csvRadioButton">
-        <property name="text">
-         <string>&amp;CSV</string>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QRadioButton" name="sqlRadioButton">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="text">
-         <string>S&amp;QL</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QRadioButton" name="htmlRadioButton">
-        <property name="text">
-         <string>HTML</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
     </widget>
    </item>
   </layout>
@@ -85,9 +56,6 @@
  <tabstops>
   <tabstop>pathLineEdit</tabstop>
   <tabstop>browseButton</tabstop>
-  <tabstop>csvRadioButton</tabstop>
-  <tabstop>sqlRadioButton</tabstop>
-  <tabstop>htmlRadioButton</tabstop>
  </tabstops>
  <resources/>
  <connections/>

@@ -12,37 +12,34 @@
 #ifndef EXPORTENGINE_H
 #define EXPORTENGINE_H
 
-#include "../plugin.h"
+#include "plugin.h"
 
 #include <QAbstractItemModel>
 #include <QApplication>
 #include <QFile>
 #include <QWizard>
 
-class ExportEngine : public QObject, public Plugin
-{
-Q_OBJECT
-Q_INTERFACES(Plugin)
+class ExportEngine : public Plugin {
 public:
-  ExportEngine();
-
   /**
-   * Nom du format, par ex. CSV, HTML, PDF, etc.
+   * Nom du format à afficher, par ex. CSV, HTML, Document PDF, etc.
    */
-  virtual QString formatName() =0;
-
-  void setModel(QAbstractItemModel *m) { model = m; };
-  void setWizard(QWizard *w) { wizard = w; };
-  QWizardPage *wizardPage() { return m_wizardPage; };
-
-signals:
-  void progress(int);
-
-protected:
+  virtual QString displayName() =0;
+  /**
+   * L'extention du fichier qui sera généré (csv, html, etc.)
+   */
+  virtual QString extension() =0;
+  virtual QString displayIconCode() { return ""; };
   /**
    * Traitement de l'export : fonction threadée.
    */
-  virtual void process(QFile &f) =0;
+  virtual void process(QFile *f) =0;
+
+  virtual void setModel(QAbstractItemModel *m) =0;
+  virtual void setWizard(QWizard *w) =0;
+  virtual QWizardPage *wizardPage() =0;
+
+protected:
 
   QAbstractItemModel *model;
   QWizard *wizard;

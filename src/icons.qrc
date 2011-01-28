@@ -67,5 +67,7 @@
         <file>img/table.png</file>
         <file>img/table_lightning.png</file>
         <file>img/table_gear.png</file>
+        <file>img/schema.png</file>
+        <file>img/plugin.png</file>
     </qresource>
 </RCC>

@@ -13,7 +13,9 @@
 #ifndef PLUGINMANAGER_H
 #define PLUGINMANAGER_H
 
+#include "exportengine.h"
 #include "plugin.h"
+#include "sqlwrapper.h"
 
 #include <QtCore>
 #include <QtGui>
@@ -25,23 +27,40 @@ public:
   PluginManagerPrivate();
 
   void add(QString path);
+  QList<SqlWrapper*> availableWrappers(QString driver);
+  QList<ExportEngine*> exportEngines();
+  Plugin *load(QString path);
+  Plugin *plugin(QString plid);
+  void registerPlugin(Plugin *plugin);
+  SqlWrapper *wrapper(QString plid);
+  QList<SqlWrapper*> wrappers();
+
   QStandardItemModel *model()   { return m_model;   };
+  QList<Plugin*> plugins() { return m_plugins; };
 
 public slots:
-  void check();
+  void init();
+  void save();
 
 private:
-  QMap<Plugin*, QStandardItem*>   m_plugins;
   QStandardItemModel             *m_model;
+  QList<Plugin*>                  m_plugins;
+  QMap<Plugin*, QStandardItem*>   pluginsMap;
 };
 
 class PluginManager
 {
 public:
   static void add(QString path);
+  static QList<ExportEngine*> exportEngines();
   static void init();
   static QStandardItemModel *model()    { return instance->model();   };
+  static Plugin *plugin(QString plid);
+  static QString pluginDirectory();
   static void registerPlugin(Plugin *p);
+  static void save();
+  static SqlWrapper *wrapper(QString plid);
+  static QList<SqlWrapper*> wrappers();
 
 private:
   static PluginManagerPrivate *instance;

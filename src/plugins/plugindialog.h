@@ -16,6 +16,7 @@
 #include "ui_plugindialog.h"
 
 #include <QDialog>
+#include <QItemDelegate>
 
 class PluginDialog : public QDialog, Ui::PluginDialog
 {

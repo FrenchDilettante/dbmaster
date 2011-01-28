@@ -11,33 +11,165 @@
 
 
 #include "pluginmanager.h"
+#include "exportengine.h"
+#include "sqlwrapper.h"
 
 /*
  * PluginManagerPrivate
  */
 
 PluginManagerPrivate::PluginManagerPrivate()
-  : QObject()
-{
+  : QObject() {
   m_model = new QStandardItemModel(this);
+  QStringList labels;
+  labels << tr("Plugin") << tr("Type") << tr("Vendor") << tr("Version");
+  m_model->setHorizontalHeaderLabels(labels);
 
-  check();
+  init();
 }
 
-void PluginManagerPrivate::add(QString path)
-{
-  QPluginLoader loader(path);
-  if(loader.load())
-  {
-    if(dynamic_cast<Plugin*>(loader.instance()))
-    {
-      Plugin *p = (Plugin*)loader.instance();
-      qDebug() << p->title();
-      QStandardItem *item = new QStandardItem(p->title());
-      m_plugins[p] = item;
-      m_model->appendRow(item);
+void PluginManagerPrivate::add(QString path) {
+  Plugin *p = load(path);
+  if (p) {
+    registerPlugin(p);
+  }
+}
+
+/**
+ * Extrait la liste des wrappers disponibles pour le driver spécifié
+ */
+QList<SqlWrapper*> PluginManagerPrivate::availableWrappers(QString driver) {
+  QList<SqlWrapper*> wrappers;
+
+  foreach (Plugin *p, m_plugins) {
+    SqlWrapper *w = dynamic_cast<SqlWrapper*>(p);
+    if (w && w->supportedDrivers().contains(driver)) {
+      wrappers << w;
+    }
+  }
+
+  return wrappers;
+}
+
+/**
+ * Extrait les moteurs d'export
+ */
+QList<ExportEngine*> PluginManagerPrivate::exportEngines() {
+  QList<ExportEngine*> engines;
+
+  foreach (Plugin *p, m_plugins) {
+    ExportEngine *en = dynamic_cast<ExportEngine*>(p);
+    if (en) {
+      engines << en;
+    }
+  }
+
+  return engines;
+}
+
+void PluginManagerPrivate::init() {
+
+  // Grâce au filtre, on va lister les fichiers présents au démarrage
+  QString filter;
+#ifdef Q_OS_LINUX
+  filter = "*.so";
+#endif
+
+  QStringList pluginsInFolder = QDir().entryList(QStringList(filter));
+  QStringList registeredPlugins;
+  QStringList unavailablePlugins;
+  QList<Plugin*> unregisteredPlugins;
+
+  // Liste des plugins enregistrés
+  QSettings s;
+  s.beginGroup("plugins");
+  int size = s.beginReadArray("list");
+  for(int i=0; i<size; i++) {
+    s.setArrayIndex(i);
+
+    registeredPlugins << s.value("path").toString();
+  }
+  s.endArray();
+  s.endGroup();
+
+  // On trie sur le volet les plugins qui ne sont pas enregistrés
+  foreach (QString f, pluginsInFolder) {
+    if (!registeredPlugins.contains(f)) {
+      Plugin *p = load(f);
+      if (p) {
+        unregisteredPlugins << p;
+      }
+    }
+  }
+
+  // On fait le tri dans ces déjà enregistrés
+  foreach (QString f, registeredPlugins) {
+    if (QFile::exists(f)) {
+      // Ceux qui ne sont pas valides
+      Plugin *p = load(f);
+      if (p) {
+        // Bon lui par exemple il est bon.
+        registerPlugin(p);
+      } else {
+        unavailablePlugins << f;
+      }
     } else {
-      qDebug() << "dynamic_cast<>()";
+      // On met de côté ceux qui n'existent plus
+      unavailablePlugins << f;
+    }
+  }
+
+  if (unregisteredPlugins.size() > 0) {
+    foreach (Plugin *p, unregisteredPlugins) {
+      registerPlugin(p);
+    }
+  }
+}
+
+void PluginManagerPrivate::registerPlugin(Plugin *plugin) {
+  foreach (Plugin *p, m_plugins) {
+    if (plugin->plid() == p->plid()) {
+      QMessageBox::warning(NULL,
+                           tr("Add a plugin"),
+                           tr("This plugin is already registered"));
+      return;
+    }
+  }
+
+  QStandardItem *item = new QStandardItem();
+  item->setText(plugin->title());
+
+  QString type = tr("Other");
+
+  if (dynamic_cast<ExportEngine*>(plugin)) {
+    type = tr("Export engine");
+  } else if (dynamic_cast<SqlWrapper*>(plugin)) {
+    type = tr("Adaptateur SQL");
+  }
+
+  QList<QStandardItem*> l;
+  l << item;
+  l << new QStandardItem(type);
+  l << new QStandardItem(plugin->vendor());
+  l << new QStandardItem(plugin->version());
+  m_plugins << plugin;
+  foreach (QStandardItem *i, l) {
+    i->setEditable(false);
+  }
+
+  pluginsMap[plugin] = item;
+  m_model->appendRow(l);
+}
+
+Plugin *PluginManagerPrivate::load(QString path) {
+  Plugin *p = NULL;
+  QPluginLoader loader(path);
+  if(loader.load())   {
+    p = dynamic_cast<Plugin*>(loader.instance());
+    if(!p) {
+      QMessageBox::critical(NULL,
+                            tr("Incorrect plugin file"),
+                            tr("This file contains no DbMaster plugin."));
     }
   } else {
     QMessageBox::critical(NULL,
@@ -45,35 +177,89 @@ void PluginManagerPrivate::add(QString path)
                           tr("Unable to load the plugin. Specified error : \n")
                             + loader.errorString());
   }
+
+  return p;
 }
 
-void PluginManagerPrivate::check()
-{
+Plugin *PluginManagerPrivate::plugin(QString plid) {
+  if (plid.size() == 0) {
+    return NULL;
+  }
+  foreach (Plugin *p, m_plugins) {
+    if (p->plid() == plid) {
+      return p;
+    }
+  }
+
+  return NULL;
+}
+
+void PluginManagerPrivate::save() {
   QSettings s;
   s.beginGroup("plugins");
-  int size = s.beginReadArray("list");
-  for(int i=0; i<size; i++)
-  {
-    add(s.value("path").toString());
+  s.beginWriteArray("list");
+  for (int i=0; i<m_model->rowCount(); i++) {
+    s.setArrayIndex(i);
   }
+  s.endArray();
+  s.endGroup();
+}
+
+SqlWrapper* PluginManagerPrivate::wrapper(QString plid) {
+  return dynamic_cast<SqlWrapper*>(plugin(plid));
+}
+
+QList<SqlWrapper*> PluginManagerPrivate::wrappers() {
+  QList<SqlWrapper*> wrappers;
+
+  foreach (Plugin *p, m_plugins) {
+    SqlWrapper *wp = dynamic_cast<SqlWrapper*>(p);
+    if (wp) {
+      wrappers << wp;
+    }
+  }
+
+  return wrappers;
 }
 
 /*
  * PluginManager
  */
 
-PluginManagerPrivate *PluginManager::instance = new PluginManagerPrivate();
+PluginManagerPrivate *PluginManager::instance = NULL;
 
-void PluginManager::add(QString path)
-{
+void PluginManager::add(QString path) {
   instance->add(path);
 }
 
-void PluginManager::init()
-{
-  instance->check();
+QList<ExportEngine*> PluginManager::exportEngines() {
+  return instance->exportEngines();
+}
+
+void PluginManager::init() {
+  instance = new PluginManagerPrivate();
+}
+
+Plugin* PluginManager::plugin(QString plid) {
+  return instance->plugin(plid);
+}
+
+QString PluginManager::pluginDirectory() {
+  return QDir::homePath();
 }
 
 void PluginManager::registerPlugin(Plugin *p) {
+  instance->registerPlugin(p);
+}
 
+void PluginManager::save() {
+  instance->save();
+}
+
+SqlWrapper* PluginManager::wrapper(QString plid) {
+  return instance->wrapper(plid);
+}
+
+QList<SqlWrapper*> PluginManager::wrappers() {
+  return instance->wrappers();
 }

@@ -11,24 +11,33 @@
 
 
 #include "exportwizard.h"
-#include "ui_exportwizard.h"
 
 #include "../iconmanager.h"
+#include "../plugins/exportengine.h"
+#include "../plugins/pluginmanager.h"
 
 ExportWizard::ExportWizard(QueryToken *token, QWidget *parent)
-  : QWizard(parent)
-{
-  setupUi(this);
+  : QWizard(parent) {
+  setWindowTitle(tr("Export"));
 
   this->token = token;
 
   setWindowIcon(IconManager::get("filesaveas"));
 
-  setPage(FirstPage,  new EwFirstPage(this));
-  setPage(CsvPage,    new EwCsvPage(this));
-  setPage(HtmlPage,   new EwHtmlPage(this));
-  setPage(SqlPage,    new EwSqlPage(this));
-  setPage(ExportPage, new EwExportPage(token, this));
+  setPage(0, new EwFirstPage(this));
+  setPage(2, new EwExportPage(token, this));
+}
+
+void ExportWizard::setEngine(ExportEngine *e) {
+  m_engine = e;
+  if (e->wizardPage()) {
+    if (page(1)) {
+      removePage(1);
+    }
+    e->setWizard(this);
+    e->setModel(token->model());
+    setPage(1, e->wizardPage());
+  }
 }
 
 /**
@@ -37,19 +46,16 @@ ExportWizard::ExportWizard(QueryToken *token, QWidget *parent)
 QString EwFirstPage::lastPath;
 
 EwFirstPage::EwFirstPage(QWizard *parent)
-    : QWizardPage(parent)
-{
+    : QWizardPage(parent) {
   setupUi(this);
 
-  formatMap[csvRadioButton]   = ExportWizard::CsvFormat;
-  formatMap[htmlRadioButton]  = ExportWizard::HtmlFormat;
-  formatMap[sqlRadioButton]   = ExportWizard::SqlFormat;
+  formatLayout = new QGridLayout(formatGroupBox);
+  formatGroupBox->setLayout(formatLayout);
 
-  csvRadioButton->setIcon(IconManager::get("spreadsheet"));
-  htmlRadioButton->setIcon(IconManager::get("html"));
+  /* Objectif : buter la formatMap et en générer une dynamiquement dans
+   * initialisePage. */
 
   registerField("path*", pathLineEdit);
-  sqlRadioButton->setVisible(false);
   connect(browseButton, SIGNAL(clicked()), this, SLOT(browse()));
 
   pathLineEdit->setCompleter(new QCompleter(
@@ -61,126 +67,78 @@ EwFirstPage::EwFirstPage(QWizard *parent)
   pathLineEdit->setText(lastPath);
 }
 
-void EwFirstPage::browse()
-{
-  QMap<ExportWizard::Format, QString> formats;
-  formats[ExportWizard::CsvFormat]  = tr("CSV file (*.csv)");
-  formats[ExportWizard::HtmlFormat] = tr("HTML file (*.html)");
-//  formats[ExportWizard::SqlFormat]  = tr("SQL file (*.sql)");
-
+void EwFirstPage::browse() {
   lastPath = QFileDialog::getSaveFileName(this,
                                           tr("Output file"),
-                                          QDir::homePath(),
-                                          QStringList(formats.values()).join(";;"),
-                                          &formats[selectedFormat()]
+                                          QDir::homePath()
                                           );
 
   QString extension = QFileInfo(lastPath).suffix().toLower();
   // Si le nom de fichier contient une extension, on met à jour l'option choisie
-  if (extension == "csv") {
-    csvRadioButton->setChecked(true);
-  } else if(extension == "html") {
-    htmlRadioButton->setChecked(true);
-  } else if(extension == "sql") {
-    sqlRadioButton->setChecked(true);
-  } else {
+
     // L'extension n'a pas été reconnue : on va l'ajouter
     if (lastPath.endsWith(".")) {
       lastPath = lastPath.left(lastPath.length()-1);
     }
 
-    if (csvRadioButton->isChecked()) {
-      lastPath += ".csv";
-    } else if (htmlRadioButton->isChecked()) {
-      lastPath += ".html";
-    } else if (sqlRadioButton->isChecked()) {
-      lastPath += ".sql";
-    }
-  }
 
   pathLineEdit->setText(lastPath);
 }
 
-int EwFirstPage::nextId() const
-{
-  if(csvRadioButton->isChecked())
-    return ExportWizard::CsvPage;
+void EwFirstPage::initializePage() {
+  // Nettoyage liste formats
+  foreach (QRadioButton *r, formatMap.keys()) {
+    r->disconnect();
+    formatLayout->removeWidget(r);
+    delete r;
+  }
+  formatMap.clear();
 
-  if(htmlRadioButton->isChecked())
-    return ExportWizard::HtmlPage;
-
-  if(sqlRadioButton->isChecked())
-    return ExportWizard::SqlPage;
+  QList<ExportEngine*> engines = PluginManager::exportEngines();
+  bool left = false;
+  int x = -1, y = 0;
+  foreach (ExportEngine *e, engines) {
+    e->setWizard(wizard());
+    QRadioButton *btn = new QRadioButton(e->displayName());
+    formatMap[btn] = e;
+    if (x == -1) {
+      btn->setChecked(true);
+    }
+    if (e->displayIconCode().length() > 0) {
+      btn->setIcon(IconManager::get(e->displayIconCode()));
+    }
+    if (left) {
+      y = 1;
+    } else {
+      x++;
+      y = 0;
+    }
+    left = !left;
+    formatLayout->addWidget(btn, x, y);
+  }
 }
 
-ExportWizard::Format EwFirstPage::selectedFormat()
-{
-  foreach(QRadioButton *b, formatMap.keys())
-    if(b->isChecked())
-      return formatMap[b];
-
-  return ExportWizard::CsvFormat;
+int EwFirstPage::nextId() const {
+  foreach (QRadioButton *r, formatMap.keys()) {
+    if (r->isChecked()) {
+      if (formatMap[r]->wizardPage()) {
+        return 1;
+      } else {
+        return 2;
+      }
+    }
+  }
+  return 2;
 }
 
-
-/**
- * CSV page
- */
-EwCsvPage::EwCsvPage( QWizard *parent )
-    : QWizardPage( parent )
-{
-  setupUi( this );
-
-  registerField( "csvdelimiter", delimiterLineEdit );
-  registerField( "csvheader"   , headerCheckBox );
-  registerField( "csvseparator", separatorLineEdit );
-}
-
-int EwCsvPage::nextId() const
-{
-  return ExportWizard::ExportPage;
-}
-
-/**
- * HTML page
- */
-EwHtmlPage::EwHtmlPage(QWizard *parent)
-  : QWizardPage(parent)
-{
-  setupUi(this);
-
-  registerField("htmlexportquery",  queryGroupBox,
-                "checked", SIGNAL(toggled(bool)));
-  registerField("htmlsyntax",       shCheckBox);
-  registerField("htmlwholeresult",  wholeResultRadioButton);
-  registerField("htmllimit",        limitSpinBox);
-  registerField("htmllimitto",      limitComboBox);
-}
-
-void EwHtmlPage::initializePage()
-{
-  limitResultRadioButton->setChecked(
-      ((ExportWizard*)wizard())->token->model()->rowCount() >= 100);
-}
-
-int EwHtmlPage::nextId() const
-{
-  return ExportWizard::ExportPage;
-}
-
-
-/**
- * SQL page
- */
-EwSqlPage::EwSqlPage( QWizard *parent )
-    : QWizardPage( parent )
-{
-  setupUi( this );
-}
-
-int EwSqlPage::nextId() const
-{
-  return ExportWizard::ExportPage;
+bool EwFirstPage::validatePage() {
+  foreach (QRadioButton *r, formatMap.keys()) {
+    if (r->isChecked()) {
+      ((ExportWizard*) wizard())->setEngine(formatMap[r]);
+      break;
+    }
+  }
+  return true;
 }
 
 
@@ -188,25 +146,18 @@ int EwSqlPage::nextId() const
  * Export page
  */
 EwExportPage::EwExportPage(QueryToken *token, QWizard *parent)
-  : QWizardPage(parent)
-{
+  : QWizardPage(parent) {
   setupUi(this);
 
   this->token = token;
 }
 
-void EwExportPage::checkProgress()
-{
+void EwExportPage::checkProgress() {
   if(!finished)
     dial->show();
 }
 
-/**
- * This is a common function to all formats. The conversion must obey to some
- * rules, see the documentation for more information.
- */
-void EwExportPage::initializePage()
-{
+void EwExportPage::initializePage() {
   finished = false;
   dial = new QProgressDialog(this);
   dial->setWindowTitle(tr("Export running..."));
@@ -216,114 +167,21 @@ void EwExportPage::initializePage()
   run();
 }
 
-void EwExportPage::run()
-{
+void EwExportPage::run() {
   QFile f(field("path").toString());
-  if( !f.open( QFile::WriteOnly ) )
-  {
-    QMessageBox::critical( this,
-                           tr( "Openning error" ),
-                           tr( "Unable to open the file %1." )
-                             .arg( field( "path" ).toString() ),
-                           QMessageBox::Ok );
+  if (!f.open(QFile::WriteOnly)) {
+    QMessageBox::critical(this,
+                          tr("Openning error"),
+                          tr("Unable to open the file %1.")
+                            .arg(field("path").toString()),
+                          QMessageBox::Ok);
     return;
   }
 
-  /*
-   * CSV exporting
-   */
-  if(wizard()->hasVisitedPage(ExportWizard::CsvPage))
-  {
-    QString del = field( "csvdelimiter" ).toString(); // delimiter (default ;)
-    QString sep = field( "csvseparator" ).toString(); // separator (default ")
-
-    emit progress(-1);
-
-    // columns name (= header)
-    if( field( "csvheader" ).toBool() )
-    {
-      QStringList columns;
-      for( int i=0; i<token->model()->columnCount(); i++ )
-        columns << token->model()->headerData( i, Qt::Horizontal ).toString()
-                    .prepend( del ).append( del );
-
-      f.write(columns.join(sep).append(sep).toAscii());
-      f.write("\n");
-    }
-
-
-    /*
-     * Writing data
-     */
-    QModelIndex idx;
-    for( int y=0; y<token->model()->rowCount(); y++ )       // each row
-    {
-      for( int x=0; x<token->model()->columnCount(); x++ )  // each piece of data
-      {
-        idx = token->model()->index( y, x );
-        if( idx.data().canConvert( QVariant::String ) )
-          f.write( idx.data().toString()
-                   .prepend( del ).append( del + sep )
-                   .toAscii() );
-      }
-      f.write( "\n" );
-
-      emit progress(y);
-    }
-  }
-
-  /*
-   * HTML exporting
-   */
-  if(wizard()->hasVisitedPage(ExportWizard::HtmlPage))
-  {
-    emit progress(-1);
-    f.write("<html>\n<head>\n<title></title>\n</head>\n<body>\n");
-
-    /*
-     * Writing query
-     */
-    if(field("htmlexportquery").toBool())
-    {
-      f.write("<p>");
-      f.write(token->query().replace("\n", "<br />").toAscii());
-      f.write("</p>\n");
-    }
-
-    /*
-     * Writing header
-     */
-    f.write("<table border=\"1\">\n");
-    f.write("<tr>");
-    for(int i=0; i<token->model()->columnCount(); i++)
-      f.write(token->model()->headerData(i, Qt::Horizontal).toString()
-              .prepend("<th>").append("</th>").toAscii());
-
-    f.write("</tr>\n");
-
-    /*
-     * Writing data
-     */
-    QModelIndex idx;
-    for(int y=0; y<token->model()->rowCount(); y++)
-    {
-      f.write("<tr>");
-      for(int x=0; x<token->model()->columnCount(); x++)
-      {
-        idx = token->model()->index(y, x);
-        if(idx.data().canConvert(QVariant::String))
-          f.write(idx.data().toString()
-                  .prepend("<td>").append("</td>")
-                  .toAscii());
-      }
-      f.write("</tr>\n");
-
-      emit progress(y);
-    }
-
-    f.write("</table>\n");
-    f.write("</body></html>");
-  }
+  ExportEngine *engine = ((ExportWizard*) wizard())->engine();
+  connect(dynamic_cast<QObject*>(engine), SIGNAL(progress(int)),
+          dial, SLOT(setValue(int)));
+  engine->process(&f);
 
   f.close();
   finished = true;
