@@ -37,7 +37,7 @@
        </size>
       </property>
       <property name="currentRow">
-       <number>0</number>
+       <number>-1</number>
       </property>
       <item>
        <property name="text">
@@ -55,6 +55,11 @@
        <property name="icon">
         <iconset>
          <normaloff>:/img/edit.png</normaloff>:/img/edit.png</iconset>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Plugins</string>
        </property>
       </item>
      </widget>
