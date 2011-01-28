@@ -129,9 +129,8 @@ void DbTreeView::mouseDoubleClickEvent(QMouseEvent *event)
       case DbManager::TableItem:
       case DbManager::ViewItem:
         _db = parentDb(index)->connectionName();
-        _tb = index.data(Qt::DisplayRole).toString();
-        emit tableSelected(parentDb(index),
-                           index.data(Qt::DisplayRole).toString());
+        _tb = index.data(Qt::ToolTipRole).toString();
+        emit tableSelected(parentDb(index), _tb);
         break;
 
       case DbManager::DisplayItem:

@@ -78,9 +78,12 @@ private:
   QString                 dbToolTip(QSqlDatabase *db);
   void                    setupConnections();
   void                    setupModels();
-  QStandardItem*          sysTablesItem(QList<SqlTable> tables);
-  QStandardItem*          tablesItem(QList<SqlTable> tables);
-  QStandardItem*          viewsItem(QList<SqlTable> tables);
+  QStandardItem*          sysTablesItem(QList<SqlTable> tables,
+                                        QString schema ="");
+  QStandardItem*          tablesItem(QList<SqlTable> tables,
+                                     QString schema ="");
+  QStandardItem*          viewsItem(QList<SqlTable> tables,
+                                    QString schema ="");
 
   QMap<QString, QString>  driverAlias;
   QMap<QString, QIcon>    driverIcon;

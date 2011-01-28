@@ -340,9 +340,14 @@ void DbManagerPrivate::refreshModelItem(QSqlDatabase *db)
         sitem->setIcon(IconManager::get("schema"));
         schemaItem->appendRow(sitem);
 
-        sitem->appendRow(tablesItem(s.tables));
-        sitem->appendRow(viewsItem(s.tables));
-        sitem->appendRow(sysTablesItem(s.tables));
+        QString prefix;
+        if (!s.defaultSchema) {
+          prefix = s.name;
+        }
+
+        sitem->appendRow(tablesItem(s.tables, prefix));
+        sitem->appendRow(viewsItem(s.tables, prefix));
+        sitem->appendRow(sysTablesItem(s.tables, prefix));
       }
 
       item->appendRow(schemaItem);
@@ -554,7 +559,8 @@ void DbManagerPrivate::swapDatabase(QSqlDatabase *oldDb, QSqlDatabase *newDb)
   saveList();
 }
 
-QStandardItem *DbManagerPrivate::sysTablesItem(QList<SqlTable> tables) {
+QStandardItem *DbManagerPrivate::sysTablesItem(QList<SqlTable> tables,
+                                               QString schema) {
   QStandardItem *sysTablesItem = new QStandardItem();
 
   sysTablesItem->setIcon(IconManager::get("folder_systemtables"));
@@ -564,6 +570,11 @@ QStandardItem *DbManagerPrivate::sysTablesItem(QList<SqlTable> tables) {
       QStandardItem *i = new QStandardItem(IconManager::get("folder_gear"),
                                            table.name);
       i->setData(DbManager::SysTableItem, Qt::UserRole);
+      if (schema.length() == 0) {
+        i->setData(table.name, Qt::ToolTipRole);
+      } else {
+        i->setData(QString(schema + "." + table.name), Qt::ToolTipRole);
+      }
       sysTablesItem->appendRow(i);
     }
   }
@@ -574,7 +585,8 @@ QStandardItem *DbManagerPrivate::sysTablesItem(QList<SqlTable> tables) {
   return sysTablesItem;
 }
 
-QStandardItem *DbManagerPrivate::tablesItem(QList<SqlTable> tables) {
+QStandardItem *DbManagerPrivate::tablesItem(QList<SqlTable> tables,
+                                            QString schema) {
   QStandardItem *tablesItem = new QStandardItem();
   tablesItem->setIcon(IconManager::get("folder_tables"));
 
@@ -583,6 +595,11 @@ QStandardItem *DbManagerPrivate::tablesItem(QList<SqlTable> tables) {
       QStandardItem *i = new QStandardItem(IconManager::get("table"),
                                            table.name);
       i->setData(DbManager::TableItem, Qt::UserRole);
+      if (schema.length() == 0) {
+        i->setData(table.name, Qt::ToolTipRole);
+      } else {
+        i->setData(QString(schema + "." + table.name), Qt::ToolTipRole);
+      }
       tablesItem->appendRow(i);
     }
   }
@@ -593,7 +610,8 @@ QStandardItem *DbManagerPrivate::tablesItem(QList<SqlTable> tables) {
   return tablesItem;
 }
 
-QStandardItem *DbManagerPrivate::viewsItem(QList<SqlTable> tables) {
+QStandardItem *DbManagerPrivate::viewsItem(QList<SqlTable> tables,
+                                           QString schema) {
   QStandardItem *viewsItem = new QStandardItem();
 
   viewsItem->setIcon(IconManager::get("folder_views"));
@@ -603,6 +621,11 @@ QStandardItem *DbManagerPrivate::viewsItem(QList<SqlTable> tables) {
       QStandardItem *i = new QStandardItem(IconManager::get("table_lightning"),
                                            table.name);
       i->setData(DbManager::ViewItem, Qt::UserRole);
+      if (schema.length() == 0) {
+        i->setData(table.name, Qt::ToolTipRole);
+      } else {
+        i->setData(QString(schema + "." + table.name), Qt::ToolTipRole);
+      }
       viewsItem->appendRow(i);
     }
   }
