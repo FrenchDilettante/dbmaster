@@ -47,6 +47,7 @@ struct SqlTable {
 };
 
 struct SqlSchema {
+  bool defaultSchema;
   QString name;
   QList<SqlTable> tables;
 };
