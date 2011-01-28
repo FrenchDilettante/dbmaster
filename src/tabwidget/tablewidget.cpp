@@ -50,16 +50,19 @@ void TableWidget::refresh()
     close();
 }
 
-void TableWidget::reload()
-{
+void TableWidget::reload() {
   if(!m_db->isOpen())
     return;
 
   if(!m_db->tables(QSql::Tables).contains(m_table)
     && !m_db->tables(QSql::Views).contains(m_table)
-    && !m_db->tables(QSql::SystemTables).contains(m_table))
-  {
-    qDebug("Unknown table !");
+    && !m_db->tables(QSql::SystemTables).contains(m_table))   {
+    QMessageBox::critical(this,
+                          tr("Error"),
+                          tr("Unable to open the table %1.\n").append(
+                            tr("Check you have the necessary permissions."))
+                          .arg(m_table));
+    emit closeRequested();
     return;
   }
 
@@ -71,7 +74,7 @@ void TableWidget::setTable( QString table, QSqlDatabase *db )
   this->m_table = table;
   this->m_db = db;
 
-  reload();
+//  reload();
 }
 
 void TableWidget::setupWidgets()
