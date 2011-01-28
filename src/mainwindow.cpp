@@ -670,6 +670,7 @@ void MainWindow::setupWidgets()
   actionNewQuery->setIcon(      IconManager::get("document-new"));
   actionOpenQuery->setIcon(     IconManager::get("document-open"));
   actionPaste->setIcon(         IconManager::get("edit-paste"));
+  actionPlugins->setIcon(       IconManager::get("plugins"));
   actionPreferences->setIcon(   IconManager::get("preferences"));
   actionPrint->setIcon(         IconManager::get("document-print"));
   actionRedo->setIcon(          IconManager::get("edit-redo"));
