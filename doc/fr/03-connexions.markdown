@@ -38,7 +38,7 @@ Il y a deux restrictions : vous ne pouvez ni modifier une connexion active, ni c
 
 Comme pour la modification, par le menu contextuel ou le gestionnaire.
 
-Vous ne pouvez supprimer une connexion active.
+Vous ne pouvez pas supprimer une connexion active.
 
 
 ### Tester une connexion ###
@@ -51,4 +51,4 @@ Gestionnaire de connexions
 
 Le gestionnaire est disponible dans le menu Outils. Toutes les opérations possibles sur les connexions y sont intégrées.
 
-Vous pouvez aussi activer ou désactiver une connexion pour la modifier par exemple.
+Vous pouvez aussi activer ou désactiver une connexion (rappel : elle doit être inactive pour être éditée).

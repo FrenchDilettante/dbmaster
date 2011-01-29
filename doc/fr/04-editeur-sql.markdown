@@ -12,11 +12,9 @@ Ouvrez un nouvel onglet d'édition (Ctrl+N) et saisissez la requête suivante :
 	SELECT nom FROM utilisateur
 	WHERE dateinscription = CURRENT_DATE
 
-Les mots clés `SELECT`, `FROM` et `WHERE` sont en noir, tandis que `CURRENT_DATE` est en violet ; c'est la coloration syntaxique. Vous aurez noté qu'au fûr et à mesure de la saisie, une petite boîte proposait des mots en fonction de ce que vous tapiez (par exemple `SELECT` pour `SEL` ; c'est l'auto-complément.
+Les mots clés `SELECT`, `FROM` et `WHERE` sont en noir, tandis que `CURRENT_DATE` est en violet ; c'est la coloration syntaxique. Vous aurez noté qu'au fûr et à mesure de la saisie, une petite boîte propose des mots en fonction de ce que vous tapez (par exemple `SELECT` pour `SEL` ; c'est l'auto-complément.
 
-Avant d'exécuter cette requête, vous devez sélectionner une connexion active dans la liste de sélection à la gauche de l'onglet.
-
-Il est fort propable que la requête échoue, à moins que vous ayez une table nommée `utilisateur` avec une colonne `dateinscription`.
+Avant d'exécuter cette requête, vous devez sélectionner une connexion active dans la liste de sélection à la gauche de l'onglet. Il est fort propable que la requête échoue, à moins que vous ayez une table nommée `utilisateur` avec une colonne `dateinscription`.
 
 Saisissez une autre requête avec des noms de table et de colonne que vous auriez, afin d'avoir un résultat.
 
@@ -34,7 +32,7 @@ Concrêtement, DbMaster compile les noms de table et de colonne de la connexion 
 Coloration syntaxique
 ---------------------
 
-La coloration syntaxique prend en compte les mots clés SQL standards. DbMaster ne gère par les syntaxes particulières, par exemple le mot clé `AUTO_INCREMENT` utilisé par MySQL.
+La coloration syntaxique prend en compte les mots clés SQL standards. DbMaster ne gère par les syntaxes particulières, par exemple le mot clé `AUTO_INCREMENT` utilisé uniquement par MySQL.
 
 Vous pouvez visualiser les mots-clés et régler les couleurs associées dans les préférences (voir dans la section associée).
 
@@ -42,7 +40,7 @@ Vous pouvez visualiser les mots-clés et régler les couleurs associées dans le
 
 ### Ajouter manuellement des mots-clés ###
 
-Les mots-clés sont stockés dans les fichiers en texte plain. Dans le code source, ils sont disponibles dans le dossier `src/share/`.
+Les mots-clés sont stockés dans les fichiers texte. Dans le code source, ils sont disponibles dans le dossier `src/share/`.
 Sur Windows, dans le dossier `share\sqlsyntax\`, sur Linux `/usr/share/dbmaster/sqlsyntax/` par défaut.
 
 Vous y trouverez 4 fichiers :

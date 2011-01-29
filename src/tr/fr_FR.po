@@ -1049,27 +1049,27 @@ msgstr ""
 "Certains fichiers n'ont pas été enregistrés. Êtes-vous sûr de vouloir "
 "quitter ?"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:315
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:326
 msgctxt "MainWindow|"
 msgid "Select a query to open"
 msgstr "Ouvrir une requête"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:317
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:328
 msgctxt "MainWindow|"
 msgid "Query file (*.sql);;All files (*.*)"
 msgstr "Fichier de requête (*.sql);;Tous fichiers (*.*)"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:439
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:449
 msgctxt "MainWindow|"
 msgid "No recent file"
 msgstr "Pas de fichier récent"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:441
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:451
 msgctxt "MainWindow|"
 msgid "Clear"
 msgstr "Effacer"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:484
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:494
 #, qt-format
 msgctxt "MainWindow|"
 msgid "%1 queries pending..."
@@ -1250,7 +1250,7 @@ msgstr "-"
 #: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:291
 msgctxt "ResultView|"
 msgid "Fetching..."
-msgstr "Récupération..."
+msgstr "Exécution..."
 
 #: /home/manu/programmation/dbmaster/src/dbmanager.cpp:542
 msgctxt "DbManagerPrivate|"
@@ -1621,3 +1621,20 @@ msgstr "Moteur d'export"
 msgctxt "PluginManagerPrivate|"
 msgid "SQL Wrapper"
 msgstr "Adaptateur SQL"
+
+#: /home/manu/programmation/dbmaster/src/tabwidget/tablewidget.cpp:61
+#, fuzzy
+msgctxt "TableWidget|"
+msgid "Error"
+msgstr "Erreur"
+
+#: /home/manu/programmation/dbmaster/src/tabwidget/tablewidget.cpp:62
+#, qt-format
+msgctxt "TableWidget|"
+msgid "Unable to open the table %1.\n"
+msgstr ""
+
+#: /home/manu/programmation/dbmaster/src/tabwidget/tablewidget.cpp:63
+msgctxt "TableWidget|"
+msgid "Check you have the necessary permissions."
+msgstr ""

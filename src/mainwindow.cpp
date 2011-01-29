@@ -194,13 +194,18 @@ void MainWindow::closeEvent(QCloseEvent *event) {
   event->accept();
 }
 
-void MainWindow::closeCurrentTab()
-{
+void MainWindow::closeCurrentTab() {
   closeTab(tabWidget->currentIndex());
 }
 
-void MainWindow::closeTab(int nb)
-{
+void MainWindow::closeSender() {
+  QWidget *w = dynamic_cast<QWidget*>(sender());
+  if (w && tabWidget->indexOf(w) > -1) {
+    tabWidget->removeTab(tabWidget->indexOf(w));
+  }
+}
+
+void MainWindow::closeTab(int nb) {
   if(nb < 0 || nb >= tabWidget->count())
     return;
 
@@ -210,6 +215,12 @@ void MainWindow::closeTab(int nb)
 
   // then remove the widget
   tabWidget->removeTab(nb);
+
+  if (tabWidget->count() == 0) {
+    foreach (QAction *a, actionMap.values()) {
+      a->setEnabled(false);
+    }
+  }
 }
 
 void MainWindow::copy()
@@ -356,15 +367,14 @@ void MainWindow::openTable(QSqlDatabase *db, QString table)
 
   /* If the index is >= 0, then a table browser is already openned with the same
      ID. */
-  if(index >= 0)
-  {
+  if (index >= 0) {
     tabWidget->setCurrentIndex(index);
-  }
-  else
-  {
+  } else {
     TableWidget *view = new TableWidget(table, db, this);
     index = tabWidget->addTab(view, view->icon(), table);
     tabWidget->setCurrentIndex(index);
+    connect(view, SIGNAL(closeRequested()), this, SLOT(closeSender()));
+    view->reload();
   }
 }
 
@@ -385,7 +395,7 @@ void MainWindow::previousTab()
 
 void MainWindow::print()
 {
-  if(currentTab()->availableActions() && AbstractTabWidget::Print)
+  if (currentTab() && currentTab()->availableActions() && AbstractTabWidget::Print)
   {
     QPrinter *printer = currentTab()->printer();
     QPrintDialog *printDialog = new QPrintDialog(printer, this);

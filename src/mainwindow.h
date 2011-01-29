@@ -74,6 +74,7 @@ private slots:
   void checkDb(QSqlDatabase *db);
   void clearRecent();
   void closeCurrentTab();
+  void closeSender();
   void closeTab(int nb);
   void copy();
   void cut();
