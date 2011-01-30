@@ -117,15 +117,18 @@ void DbManagerPrivate::close(QSqlDatabase* db) {
 
 QStandardItem* DbManagerPrivate::columnsItem(QList<SqlColumn> columns) {
   QStandardItem *cItem =
-      new QStandardItem(IconManager::get("folder"),
+      new QStandardItem(IconManager::get("folder_columns"),
                         tr("Columns (%1)")
                         .arg(columns.size()));
 
   foreach (SqlColumn c, columns) {
     QStandardItem *i = new QStandardItem();
-    QString text;
-    text = c.name.append(" ").append(c.type.name.toUpper());
     i->setText(c.name);
+    if (c.primaryKey) {
+      i->setIcon(IconManager::get("column_key"));
+    } else {
+      i->setIcon(IconManager::get("column"));
+    }
     cItem->appendRow(i);
   }
 

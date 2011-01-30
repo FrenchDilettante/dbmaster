@@ -39,6 +39,7 @@ struct SqlColumn {
   QString name;
   SqlType type;
   bool permitsNull;
+  bool primaryKey;
 };
 
 struct SqlTable {
