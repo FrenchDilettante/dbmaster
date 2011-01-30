@@ -91,6 +91,7 @@ int DbManagerPrivate::addDatabase(QString driver, QString host, QString user,
   SqlWrapper *w = PluginManager::wrapper(wrapper);
   if (w) {
     dbWrappers[newDb] = w->newInstance(newDb);
+    qDebug() << dbWrappers[newDb]->title();
   }
 
   return dbList.size() - 1;
@@ -112,6 +113,23 @@ void DbManagerPrivate::close(QSqlDatabase* db) {
 
   if (!isRunning())
     start();
+}
+
+QStandardItem* DbManagerPrivate::columnsItem(QList<SqlColumn> columns) {
+  QStandardItem *cItem =
+      new QStandardItem(IconManager::get("folder"),
+                        tr("Columns (%1)")
+                        .arg(columns.size()));
+
+  foreach (SqlColumn c, columns) {
+    QStandardItem *i = new QStandardItem();
+    QString text;
+    text = c.name.append(" ").append(c.type.name.toUpper());
+    i->setText(c.name);
+    cItem->appendRow(i);
+  }
+
+  return cItem;
 }
 
 QString DbManagerPrivate::dbTitle(QSqlDatabase *db) {
@@ -328,29 +346,37 @@ void DbManagerPrivate::refreshModelItem(QSqlDatabase *db)
 
     SqlWrapper *wrapper = dbWrappers.value(db, NULL);
 
-    if (wrapper && wrapper->features().testFlag(SqlWrapper::Schemas)) {
-      QList<SqlSchema> schemas = wrapper->schemas();
+    if (wrapper) {
+      if (wrapper->features().testFlag(SqlWrapper::Schemas)) {
+        QList<SqlSchema> schemas = wrapper->schemas();
 
-      schemaItem = new QStandardItem(tr("Schemas (%1)")
-                                     .arg(schemas.size()));
-      schemaItem->setIcon(IconManager::get("folder_schemas"));
+        schemaItem = new QStandardItem(tr("Schemas (%1)")
+                                       .arg(schemas.size()));
+        schemaItem->setIcon(IconManager::get("folder_schemas"));
 
-      foreach (SqlSchema s, schemas) {
-        QStandardItem *sitem = new QStandardItem(s.name);
-        sitem->setIcon(IconManager::get("schema"));
-        schemaItem->appendRow(sitem);
+        foreach (SqlSchema s, schemas) {
+          QStandardItem *sitem = new QStandardItem(s.name);
+          sitem->setIcon(IconManager::get("schema"));
+          schemaItem->appendRow(sitem);
 
-        QString prefix;
-        if (!s.defaultSchema) {
-          prefix = s.name;
+          QString prefix;
+          if (!s.defaultSchema) {
+            prefix = s.name;
+          }
+
+          sitem->appendRow(tablesItem(s.tables, prefix));
+          sitem->appendRow(viewsItem(s.tables, prefix));
+          sitem->appendRow(sysTablesItem(s.tables, prefix));
         }
 
-        sitem->appendRow(tablesItem(s.tables, prefix));
-        sitem->appendRow(viewsItem(s.tables, prefix));
-        sitem->appendRow(sysTablesItem(s.tables, prefix));
-      }
+        item->appendRow(schemaItem);
+      } else {
+        QList<SqlTable> tables = wrapper->tables();
 
-      item->appendRow(schemaItem);
+        item->appendRow(tablesItem(tables));
+        item->appendRow(viewsItem(tables));
+        item->appendRow(sysTablesItem(tables));
+      }
     } else {
       QList<SqlTable> tables;
       foreach (QString s, db->tables(QSql::Tables)) {
@@ -599,6 +625,9 @@ QStandardItem *DbManagerPrivate::tablesItem(QList<SqlTable> tables,
         i->setData(table.name, Qt::ToolTipRole);
       } else {
         i->setData(QString(schema + "." + table.name), Qt::ToolTipRole);
+      }
+      if (table.columns.size() > 0) {
+        i->appendRow(columnsItem(table.columns));
       }
       tablesItem->appendRow(i);
     }

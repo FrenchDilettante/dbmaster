@@ -55,6 +55,8 @@ public:
   virtual QList<SqlSchema> schemas(bool fillTables =true)
                             { return QList<SqlSchema>(); };
 
+  virtual QList<SqlTable> tables() =0;
+
   virtual QStringList supportedDrivers() =0;
 
   QSqlDatabase* db() { return m_db; };
