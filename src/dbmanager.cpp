@@ -91,7 +91,6 @@ int DbManagerPrivate::addDatabase(QString driver, QString host, QString user,
   SqlWrapper *w = PluginManager::wrapper(wrapper);
   if (w) {
     dbWrappers[newDb] = w->newInstance(newDb);
-    qDebug() << dbWrappers[newDb]->title();
   }
 
   return dbList.size() - 1;
