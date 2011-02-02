@@ -35,7 +35,8 @@ SOURCES += main.cpp \
     plugins/pluginmanager.cpp \
     iconmanager.cpp \
     dialogs/searchdialog.cpp \
-    widgets/colorbutton.cpp
+    widgets/colorbutton.cpp \
+    tabwidget/schemawidget.cpp
 HEADERS += mainwindow.h \
     dbmanager.h \
     tabwidget/tablewidget.h \
@@ -66,7 +67,8 @@ HEADERS += mainwindow.h \
     dialogs/searchdialog.h \
     widgets/colorbutton.h \
     plugins/exportengine.h \
-    db_enum.h
+    db_enum.h \
+    tabwidget/schemawidget.h
 FORMS += mainwindow.ui \
     dialogs/dbdialog.ui \
     tabwidget/queryeditorwidgetclass.ui \
@@ -83,7 +85,8 @@ FORMS += mainwindow.ui \
     widgets/resultview.ui \
     widgets/tooltipframe.ui \
     plugins/plugindialog.ui \
-    dialogs/searchdialog.ui
+    dialogs/searchdialog.ui \
+    tabwidget/schemawidget.ui
 RESOURCES += icons.qrc
 TRANSLATIONS += tr/fr_FR.po
 
