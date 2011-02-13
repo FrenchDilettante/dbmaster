@@ -368,7 +368,6 @@ void DbManagerPrivate::refreshModelItem(QSqlDatabase *db)
 
           sitem->appendRow(tablesItem(s.tables, prefix));
           sitem->appendRow(viewsItem(s.tables, prefix));
-          sitem->appendRow(sysTablesItem(s.tables, prefix));
         }
 
         item->appendRow(schemaItem);
@@ -377,7 +376,6 @@ void DbManagerPrivate::refreshModelItem(QSqlDatabase *db)
 
         item->appendRow(tablesItem(tables));
         item->appendRow(viewsItem(tables));
-        item->appendRow(sysTablesItem(tables));
       }
     } else {
       QList<SqlTable> tables;
