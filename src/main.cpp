@@ -80,8 +80,10 @@ int main(int argc, char *argv[])
   w->show();
   splash.finish(w);
 
-  if (a.arguments().size() == 2) {
-    w->openQuery(a.arguments()[1]);
+  if (a.arguments().size() >= 2) {
+    for (int i=1; i<a.arguments().size(); i++) {
+      w->openQuery(a.arguments()[i]);
+    }
   }
 
   return a.exec();
