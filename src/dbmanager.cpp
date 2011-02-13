@@ -340,8 +340,8 @@ void DbManagerPrivate::refreshModelItem(QSqlDatabase *db)
   QStandardItem *schemaItem = NULL;
 
   QModelIndex index = m_model->indexFromItem(item);
-  if(db->isOpen())   {
-    item->setIcon(IconManager::get("connect_established"));
+  if(db->isOpen()) {
+
     while (m_model->rowCount(index) > 0) {
       m_model->removeRow(0, index);
     }
@@ -411,8 +411,7 @@ void DbManagerPrivate::refreshModelItem(QSqlDatabase *db)
       item->appendRow(sysTablesItem(sysTables));
     }
 
-
-
+    item->setIcon(IconManager::get("connect_established"));
 
   } else {
     item->setIcon(IconManager::get("connect_no"));
@@ -473,6 +472,7 @@ void DbManagerPrivate::run()
 
       emit statusChanged(db);
       emit statusChanged(dbMap[db]->index());
+      refreshModelItem(db);
     }
 
     // traitement des connexions à fermer
@@ -488,6 +488,7 @@ void DbManagerPrivate::run()
         if (dbMap.contains(db)) {
           emit statusChanged(dbMap[db]->index());
         }
+        refreshModelItem(db);
       }
 
       if(!dbList.contains(db))
@@ -534,8 +535,8 @@ void DbManagerPrivate::setDatabase(int nb, QSqlDatabase db)
 
 void DbManagerPrivate::setupConnections()
 {
-  connect(this, SIGNAL(statusChanged(QSqlDatabase*)),
-          this, SLOT(refreshModelItem(QSqlDatabase*)));
+//  connect(this, SIGNAL(statusChanged(QSqlDatabase*)),
+//          this, SLOT(refreshModelItem(QSqlDatabase*)));
 }
 
 void DbManagerPrivate::setupModels()
