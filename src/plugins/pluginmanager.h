@@ -29,7 +29,7 @@ public:
   void add(QString path);
   QList<SqlWrapper*> availableWrappers(QString driver);
   QList<ExportEngine*> exportEngines();
-  Plugin *load(QString path);
+  Plugin *load(QFileInfo path);
   Plugin *plugin(QString plid);
   void registerPlugin(Plugin *plugin);
   SqlWrapper *wrapper(QString plid);

@@ -29,10 +29,10 @@ PluginManagerPrivate::PluginManagerPrivate()
 }
 
 void PluginManagerPrivate::add(QString path) {
-  Plugin *p = load(path);
-  if (p) {
-    registerPlugin(p);
-  }
+//  Plugin *p = load(path);
+//  if (p) {
+//    registerPlugin(p);
+//  }
 }
 
 /**
@@ -73,9 +73,17 @@ void PluginManagerPrivate::init() {
   QString filter;
 #ifdef Q_OS_LINUX
   filter = "*.so";
+#else
+  filter = "*.dll";
 #endif
 
-  QStringList pluginsInFolder = QDir().entryList(QStringList(filter));
+  QFileInfoList pluginsInFolder;
+#ifdef Q_OS_LINUX
+  pluginsInFolder = QDir().entryInfoList(QStringList(filter));
+#else
+  pluginsInFolder = QDir("plugins").entryInfoList(QStringList(filter));
+  qDebug() << pluginsInFolder.size();
+#endif
   QStringList registeredPlugins;
   QStringList unavailablePlugins;
   QList<Plugin*> unregisteredPlugins;
@@ -93,31 +101,32 @@ void PluginManagerPrivate::init() {
   s.endGroup();
 
   // On trie sur le volet les plugins qui ne sont pas enregistrés
-  foreach (QString f, pluginsInFolder) {
-    if (!registeredPlugins.contains(f)) {
+  foreach (QFileInfo f, pluginsInFolder) {
+    qDebug() << f.absoluteFilePath();
+//    if (!registeredPlugins.contains(f)) {
       Plugin *p = load(f);
       if (p) {
         unregisteredPlugins << p;
       }
-    }
+//    }
   }
 
   // On fait le tri dans ces déjà enregistrés
-  foreach (QString f, registeredPlugins) {
-    if (QFile::exists(f)) {
-      // Ceux qui ne sont pas valides
-      Plugin *p = load(f);
-      if (p) {
-        // Bon lui par exemple il est bon.
-        registerPlugin(p);
-      } else {
-        unavailablePlugins << f;
-      }
-    } else {
-      // On met de côté ceux qui n'existent plus
-      unavailablePlugins << f;
-    }
-  }
+//  foreach (QString f, registeredPlugins) {
+//    if (QFile::exists(f)) {
+//      // Ceux qui ne sont pas valides
+//      Plugin *p = load(f);
+//      if (p) {
+//        // Bon lui par exemple il est bon.
+//        registerPlugin(p);
+//      } else {
+//        unavailablePlugins << f;
+//      }
+//    } else {
+//      // On met de côté ceux qui n'existent plus
+//      unavailablePlugins << f;
+//    }
+//  }
 
   if (unregisteredPlugins.size() > 0) {
     foreach (Plugin *p, unregisteredPlugins) {
@@ -161,9 +170,9 @@ void PluginManagerPrivate::registerPlugin(Plugin *plugin) {
   m_model->appendRow(l);
 }
 
-Plugin *PluginManagerPrivate::load(QString path) {
+Plugin *PluginManagerPrivate::load(QFileInfo info) {
   Plugin *p = NULL;
-  QPluginLoader loader(path);
+  QPluginLoader loader(info.absoluteFilePath());
   if(loader.load())   {
     p = dynamic_cast<Plugin*>(loader.instance());
     if(!p) {
