@@ -3,3 +3,12 @@
 *.qm
 *.so
 doc/*/html
+dbmaster-*.*
+src/bin
+src/debug
+src/install
+src/Makefile
+src/Makefile.*
+src/release
+build/
+Makefile
