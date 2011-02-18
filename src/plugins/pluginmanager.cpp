@@ -36,19 +36,17 @@ void PluginManagerPrivate::add(QString path) {
 }
 
 /**
- * Extrait la liste des wrappers disponibles pour le driver spécifié
+ * Extrait le wrapper disponible pour le driver spécifié
  */
-QList<SqlWrapper*> PluginManagerPrivate::availableWrappers(QString driver) {
-  QList<SqlWrapper*> wrappers;
-
+SqlWrapper* PluginManagerPrivate::availableWrapper(QString driver) {
   foreach (Plugin *p, m_plugins) {
     SqlWrapper *w = dynamic_cast<SqlWrapper*>(p);
-    if (w && w->supportedDrivers().contains(driver)) {
-      wrappers << w;
+    if (w && w->driver() == driver) {
+      return w;
     }
   }
 
-  return wrappers;
+  return NULL;
 }
 
 /**
@@ -82,7 +80,6 @@ void PluginManagerPrivate::init() {
   pluginsInFolder = QDir().entryInfoList(QStringList(filter));
 #else
   pluginsInFolder = QDir("plugins").entryInfoList(QStringList(filter));
-  qDebug() << pluginsInFolder.size();
 #endif
   QStringList registeredPlugins;
   QStringList unavailablePlugins;
@@ -102,7 +99,6 @@ void PluginManagerPrivate::init() {
 
   // On trie sur le volet les plugins qui ne sont pas enregistrés
   foreach (QFileInfo f, pluginsInFolder) {
-    qDebug() << f.absoluteFilePath();
 //    if (!registeredPlugins.contains(f)) {
       Plugin *p = load(f);
       if (p) {
@@ -239,6 +235,10 @@ PluginManagerPrivate *PluginManager::instance = NULL;
 
 void PluginManager::add(QString path) {
   instance->add(path);
+}
+
+SqlWrapper* PluginManager::availableWrapper(QString driver) {
+  return instance->availableWrapper(driver);
 }
 
 QList<ExportEngine*> PluginManager::exportEngines() {

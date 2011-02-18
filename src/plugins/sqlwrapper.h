@@ -40,6 +40,8 @@ public:
 
   virtual SqlWrapper* newInstance(QSqlDatabase *db) =0;
 
+  virtual QString driver() =0;
+
   virtual WrapperFeatures features() =0;
 
   /**
@@ -57,7 +59,7 @@ public:
 
   virtual QList<SqlTable> tables() { return QList<SqlTable>(); };
 
-  virtual QStringList supportedDrivers() =0;
+  virtual bool supportsOdbc() { return true; };
 
   QSqlDatabase* db() { return m_db; };
 

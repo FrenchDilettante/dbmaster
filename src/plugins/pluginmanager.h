@@ -27,7 +27,7 @@ public:
   PluginManagerPrivate();
 
   void add(QString path);
-  QList<SqlWrapper*> availableWrappers(QString driver);
+  SqlWrapper* availableWrapper(QString driver);
   QList<ExportEngine*> exportEngines();
   Plugin *load(QFileInfo path);
   Plugin *plugin(QString plid);
@@ -52,6 +52,7 @@ class PluginManager
 {
 public:
   static void add(QString path);
+  static SqlWrapper* availableWrapper(QString driver);
   static QList<ExportEngine*> exportEngines();
   static void init();
   static QStandardItemModel *model()    { return instance->model();   };

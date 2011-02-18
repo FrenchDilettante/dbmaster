@@ -17,8 +17,7 @@
 #include "ui_ndw_firstpage.h"
 #include "ui_ndw_secondpage.h"
 
-class NewDbWizard : public QWizard, Ui::NewDbWizard
-{
+class NewDbWizard : public QWizard, Ui::NewDbWizard {
 Q_OBJECT
 public:
   enum Pages {
@@ -35,23 +34,24 @@ protected:
   void setupPages();
 };
 
-class NdwFirstPage : public QWizardPage, Ui::NdwFirstPage
-{
+class NdwFirstPage : public QWizardPage, Ui::NdwFirstPage {
 Q_OBJECT
 public:
   NdwFirstPage(QWizard *parent=0);
   void initializePage();
+
+private slots:
+  void on_dbTypeComboBox_currentIndexChanged(int index);
 };
 
-class NdwSecondPage : public QWizardPage, Ui::NdwSecondPage
-{
+class NdwSecondPage : public QWizardPage, Ui::NdwSecondPage {
 Q_OBJECT
 public:
-	NdwSecondPage(QWizard *parent=0);
-	void initializePage();
+  NdwSecondPage(QWizard *parent=0);
+  void initializePage();
 
 public slots:
-	void browse();
+  void browse();
 
 protected slots:
   void test();

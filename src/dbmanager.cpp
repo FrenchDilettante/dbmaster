@@ -520,8 +520,7 @@ void DbManagerPrivate::saveList()
 }
 
 
-void DbManagerPrivate::setDatabase(int nb, QSqlDatabase db)
-{
+void DbManagerPrivate::setDatabase(int nb, QSqlDatabase db) {
   if (dbList.size() >= nb)
     return;
 
@@ -531,21 +530,19 @@ void DbManagerPrivate::setDatabase(int nb, QSqlDatabase db)
   swapDatabase(oldDb, newDb);
 }
 
-void DbManagerPrivate::setupConnections()
-{
+void DbManagerPrivate::setupConnections() {
 //  connect(this, SIGNAL(statusChanged(QSqlDatabase*)),
 //          this, SLOT(refreshModelItem(QSqlDatabase*)));
 }
 
-void DbManagerPrivate::setupModels()
-{
+void DbManagerPrivate::setupModels() {
   m_driverModel->setHorizontalHeaderItem(0, new QStandardItem(tr("Driver")));
 
   driverAlias["QIBASE"]   = tr("Interbase/Firebird");
   driverAlias["QMYSQL"]   = tr("MySql");
   driverAlias["QMYSQL3"]  = tr("MySql 3");
-  driverAlias["QODBC"]    = tr("ODBC");
-  driverAlias["QODBC3"]   = tr("ODBC 3");
+  driverAlias["QODBC"]    = tr("Generic (ODBC)");
+  driverAlias["QODBC3"]   = tr("Generic (ODBC 3)");
   driverAlias["QPSQL"]    = tr("PostGreSQL");
   driverAlias["QPSQL7"]   = tr("PostGreSQL 7");
   driverAlias["QSQLITE"]  = tr("SQLite");
@@ -556,8 +553,7 @@ void DbManagerPrivate::setupModels()
   driverIcon["QPSQL"]     = QIcon(":/img/db_postgresql.png");
 
   QStandardItem *item;
-  foreach(QString driver, QSqlDatabase::drivers())
-  {
+  foreach(QString driver, QSqlDatabase::drivers()) {
     item = new QStandardItem();
     item->setData(driver, Qt::UserRole);
     item->setText(driverAlias.value(driver, driver));
@@ -569,8 +565,7 @@ void DbManagerPrivate::setupModels()
   m_model->setHorizontalHeaderItem(0, new QStandardItem(tr("Database")));
 }
 
-void DbManagerPrivate::swapDatabase(QSqlDatabase *oldDb, QSqlDatabase *newDb)
-{
+void DbManagerPrivate::swapDatabase(QSqlDatabase *oldDb, QSqlDatabase *newDb) {
   if (!dbMap.contains(oldDb))
     return;
 
