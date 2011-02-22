@@ -63,6 +63,7 @@ signals:
 private:
   void closeEvent(QCloseEvent *event);
   bool confirmClose();
+  void keyPressEvent(QKeyEvent *event);
   void reloadFile();
   void setFilePath(QString);
   void setupConnections();

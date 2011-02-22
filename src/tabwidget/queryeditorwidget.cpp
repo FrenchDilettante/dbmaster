@@ -189,6 +189,15 @@ bool QueryEditorWidget::isSaved() {
   return !editor->document()->isModified();
 }
 
+void QueryEditorWidget::keyPressEvent(QKeyEvent *event) {
+  if (event->key() == Qt::Key_Escape) {
+    // Appui touche échap = masque le panel de résultat
+    tabWidget->hide();
+  } else {
+    QWidget::keyPressEvent(event);
+  }
+}
+
 void QueryEditorWidget::lowerCase() {
 
   QTextCursor tc = editor->textCursor();
