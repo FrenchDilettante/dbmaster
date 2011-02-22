@@ -75,6 +75,7 @@ signals:
   void statusChanged(QSqlDatabase*);
 
 private:
+  QStandardItem*          columnsItem(QList<SqlColumn> columns);
   QString                 dbToolTip(QSqlDatabase *db);
   void                    setupConnections();
   void                    setupModels();

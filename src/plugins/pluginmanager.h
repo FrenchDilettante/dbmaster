@@ -20,16 +20,15 @@
 #include <QtCore>
 #include <QtGui>
 
-class PluginManagerPrivate : QObject
-{
+class PluginManagerPrivate : QObject {
 Q_OBJECT
 public:
   PluginManagerPrivate();
 
   void add(QString path);
-  QList<SqlWrapper*> availableWrappers(QString driver);
+  SqlWrapper* availableWrapper(QString driver);
   QList<ExportEngine*> exportEngines();
-  Plugin *load(QString path);
+  Plugin *load(QFileInfo path);
   Plugin *plugin(QString plid);
   void registerPlugin(Plugin *plugin);
   SqlWrapper *wrapper(QString plid);
@@ -48,10 +47,9 @@ private:
   QMap<Plugin*, QStandardItem*>   pluginsMap;
 };
 
-class PluginManager
-{
+class PluginManager {
 public:
-  static void add(QString path);
+  static SqlWrapper* availableWrapper(QString driver);
   static QList<ExportEngine*> exportEngines();
   static void init();
   static QStandardItemModel *model()    { return instance->model();   };

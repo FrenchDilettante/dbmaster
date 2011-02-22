@@ -19,23 +19,4 @@ PluginDialog::PluginDialog(QWidget *parent)
   setupUi(this);
 
   pluginTree->setModel(PluginManager::model());
-
-  connect(addButton, SIGNAL(clicked()), this, SLOT(add()));
-}
-
-void PluginDialog::add() {
-  QString p = QFileDialog::getOpenFileName(this, tr("Choose a plugin file"),
-                                           QDir::homePath());
-  if (p == "") {
-    return;
-  }
-
-  if (!QFile::exists(p)) {
-    QMessageBox::warning(this,
-                         tr("Add a plugin"),
-                         tr("The file doesn't exist."));
-    return;
-  }
-
-  PluginManager::add(p);
 }

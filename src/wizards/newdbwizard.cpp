@@ -12,10 +12,13 @@
 
 #include "newdbwizard.h"
 
-#include <QSqlDatabase>
 #include "../config.h"
 #include "../dbmanager.h"
 #include "../iconmanager.h"
+#include "../plugins/pluginmanager.h"
+#include "../plugins/sqlwrapper.h"
+
+#include <QSqlDatabase>
 
 /*
  * Wizard
@@ -64,8 +67,7 @@ void NewDbWizard::setupPages()
  * First page
  */
 NdwFirstPage::NdwFirstPage(QWizard *parent)
-  : QWizardPage(parent)
-{
+  : QWizardPage(parent) {
   setupUi(this);
 
   registerField("host", hostLineEdit);
@@ -76,17 +78,27 @@ NdwFirstPage::NdwFirstPage(QWizard *parent)
   hostLineEdit->setCompleter(c);
 }
 
-void NdwFirstPage::initializePage()
-{
+void NdwFirstPage::initializePage() {
   dbTypeComboBox->setCurrentDriver(Config::defaultDriver);
+  on_dbTypeComboBox_currentIndexChanged(0);
+}
+
+void NdwFirstPage::on_dbTypeComboBox_currentIndexChanged(int index) {
+  SqlWrapper *wrapper =
+      PluginManager::availableWrapper(dbTypeComboBox->currentDriverName());
+
+  if (wrapper) {
+    odbcCheckBox->setEnabled(wrapper->supportsOdbc());
+  } else {
+    odbcCheckBox->setEnabled(false);
+  }
 }
 
 /*
  * Second page
  */
 NdwSecondPage::NdwSecondPage(QWizard *parent)
-  : QWizardPage(parent)
-{
+  : QWizardPage(parent) {
   setupUi(this);
 
   registerField("name*", dbLineEdit);

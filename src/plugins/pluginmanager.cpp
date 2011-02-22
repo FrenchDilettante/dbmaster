@@ -28,27 +28,18 @@ PluginManagerPrivate::PluginManagerPrivate()
   init();
 }
 
-void PluginManagerPrivate::add(QString path) {
-  Plugin *p = load(path);
-  if (p) {
-    registerPlugin(p);
-  }
-}
-
 /**
- * Extrait la liste des wrappers disponibles pour le driver spécifié
+ * Extrait le wrapper disponible pour le driver spécifié
  */
-QList<SqlWrapper*> PluginManagerPrivate::availableWrappers(QString driver) {
-  QList<SqlWrapper*> wrappers;
-
+SqlWrapper* PluginManagerPrivate::availableWrapper(QString driver) {
   foreach (Plugin *p, m_plugins) {
     SqlWrapper *w = dynamic_cast<SqlWrapper*>(p);
-    if (w && w->supportedDrivers().contains(driver)) {
-      wrappers << w;
+    if (w && w->driver() == driver) {
+      return w;
     }
   }
 
-  return wrappers;
+  return NULL;
 }
 
 /**
@@ -73,54 +64,21 @@ void PluginManagerPrivate::init() {
   QString filter;
 #ifdef Q_OS_LINUX
   filter = "*.so";
+#else
+  filter = "*.dll";
 #endif
 
-  QStringList pluginsInFolder = QDir().entryList(QStringList(filter));
-  QStringList registeredPlugins;
-  QStringList unavailablePlugins;
-  QList<Plugin*> unregisteredPlugins;
-
-  // Liste des plugins enregistrés
-  QSettings s;
-  s.beginGroup("plugins");
-  int size = s.beginReadArray("list");
-  for(int i=0; i<size; i++) {
-    s.setArrayIndex(i);
-
-    registeredPlugins << s.value("path").toString();
-  }
-  s.endArray();
-  s.endGroup();
+  QFileInfoList pluginsInFolder;
+#ifdef Q_OS_LINUX
+  pluginsInFolder = QDir().entryInfoList(QStringList(filter));
+#else
+  pluginsInFolder = QDir("plugins").entryInfoList(QStringList(filter));
+#endif
 
   // On trie sur le volet les plugins qui ne sont pas enregistrés
-  foreach (QString f, pluginsInFolder) {
-    if (!registeredPlugins.contains(f)) {
-      Plugin *p = load(f);
-      if (p) {
-        unregisteredPlugins << p;
-      }
-    }
-  }
-
-  // On fait le tri dans ces déjà enregistrés
-  foreach (QString f, registeredPlugins) {
-    if (QFile::exists(f)) {
-      // Ceux qui ne sont pas valides
-      Plugin *p = load(f);
-      if (p) {
-        // Bon lui par exemple il est bon.
-        registerPlugin(p);
-      } else {
-        unavailablePlugins << f;
-      }
-    } else {
-      // On met de côté ceux qui n'existent plus
-      unavailablePlugins << f;
-    }
-  }
-
-  if (unregisteredPlugins.size() > 0) {
-    foreach (Plugin *p, unregisteredPlugins) {
+  foreach (QFileInfo f, pluginsInFolder) {
+    Plugin *p = load(f);
+    if (p) {
       registerPlugin(p);
     }
   }
@@ -161,9 +119,9 @@ void PluginManagerPrivate::registerPlugin(Plugin *plugin) {
   m_model->appendRow(l);
 }
 
-Plugin *PluginManagerPrivate::load(QString path) {
+Plugin *PluginManagerPrivate::load(QFileInfo info) {
   Plugin *p = NULL;
-  QPluginLoader loader(path);
+  QPluginLoader loader(info.absoluteFilePath());
   if(loader.load())   {
     p = dynamic_cast<Plugin*>(loader.instance());
     if(!p) {
@@ -228,8 +186,8 @@ QList<SqlWrapper*> PluginManagerPrivate::wrappers() {
 
 PluginManagerPrivate *PluginManager::instance = NULL;
 
-void PluginManager::add(QString path) {
-  instance->add(path);
+SqlWrapper* PluginManager::availableWrapper(QString driver) {
+  return instance->availableWrapper(driver);
 }
 
 QList<ExportEngine*> PluginManager::exportEngines() {

@@ -114,6 +114,26 @@ void DbManagerPrivate::close(QSqlDatabase* db) {
     start();
 }
 
+QStandardItem* DbManagerPrivate::columnsItem(QList<SqlColumn> columns) {
+  QStandardItem *cItem =
+      new QStandardItem(IconManager::get("folder_columns"),
+                        tr("Columns (%1)")
+                        .arg(columns.size()));
+
+  foreach (SqlColumn c, columns) {
+    QStandardItem *i = new QStandardItem();
+    i->setText(c.name);
+    if (c.primaryKey) {
+      i->setIcon(IconManager::get("column_key"));
+    } else {
+      i->setIcon(IconManager::get("column"));
+    }
+    cItem->appendRow(i);
+  }
+
+  return cItem;
+}
+
 QString DbManagerPrivate::dbTitle(QSqlDatabase *db) {
   QString title;
   if(db->hostName().isEmpty())
@@ -320,37 +340,43 @@ void DbManagerPrivate::refreshModelItem(QSqlDatabase *db)
   QStandardItem *schemaItem = NULL;
 
   QModelIndex index = m_model->indexFromItem(item);
-  if(db->isOpen())   {
-    item->setIcon(IconManager::get("connect_established"));
+  if(db->isOpen()) {
+
     while (m_model->rowCount(index) > 0) {
       m_model->removeRow(0, index);
     }
 
     SqlWrapper *wrapper = dbWrappers.value(db, NULL);
 
-    if (wrapper && wrapper->features().testFlag(SqlWrapper::Schemas)) {
-      QList<SqlSchema> schemas = wrapper->schemas();
+    if (wrapper) {
+      if (wrapper->features().testFlag(SqlWrapper::Schemas)) {
+        QList<SqlSchema> schemas = wrapper->schemas();
 
-      schemaItem = new QStandardItem(tr("Schemas (%1)")
-                                     .arg(schemas.size()));
-      schemaItem->setIcon(IconManager::get("folder_schemas"));
+        schemaItem = new QStandardItem(tr("Schemas (%1)")
+                                       .arg(schemas.size()));
+        schemaItem->setIcon(IconManager::get("folder_schemas"));
 
-      foreach (SqlSchema s, schemas) {
-        QStandardItem *sitem = new QStandardItem(s.name);
-        sitem->setIcon(IconManager::get("schema"));
-        schemaItem->appendRow(sitem);
+        foreach (SqlSchema s, schemas) {
+          QStandardItem *sitem = new QStandardItem(s.name);
+          sitem->setIcon(IconManager::get("schema"));
+          schemaItem->appendRow(sitem);
 
-        QString prefix;
-        if (!s.defaultSchema) {
-          prefix = s.name;
+          QString prefix;
+          if (!s.defaultSchema) {
+            prefix = s.name;
+          }
+
+          sitem->appendRow(tablesItem(s.tables, prefix));
+          sitem->appendRow(viewsItem(s.tables, prefix));
         }
 
-        sitem->appendRow(tablesItem(s.tables, prefix));
-        sitem->appendRow(viewsItem(s.tables, prefix));
-        sitem->appendRow(sysTablesItem(s.tables, prefix));
-      }
+        item->appendRow(schemaItem);
+      } else {
+        QList<SqlTable> tables = wrapper->tables();
 
-      item->appendRow(schemaItem);
+        item->appendRow(tablesItem(tables));
+        item->appendRow(viewsItem(tables));
+      }
     } else {
       QList<SqlTable> tables;
       foreach (QString s, db->tables(QSql::Tables)) {
@@ -383,8 +409,7 @@ void DbManagerPrivate::refreshModelItem(QSqlDatabase *db)
       item->appendRow(sysTablesItem(sysTables));
     }
 
-
-
+    item->setIcon(IconManager::get("connect_established"));
 
   } else {
     item->setIcon(IconManager::get("connect_no"));
@@ -445,6 +470,7 @@ void DbManagerPrivate::run()
 
       emit statusChanged(db);
       emit statusChanged(dbMap[db]->index());
+      refreshModelItem(db);
     }
 
     // traitement des connexions à fermer
@@ -460,6 +486,7 @@ void DbManagerPrivate::run()
         if (dbMap.contains(db)) {
           emit statusChanged(dbMap[db]->index());
         }
+        refreshModelItem(db);
       }
 
       if(!dbList.contains(db))
@@ -493,8 +520,7 @@ void DbManagerPrivate::saveList()
 }
 
 
-void DbManagerPrivate::setDatabase(int nb, QSqlDatabase db)
-{
+void DbManagerPrivate::setDatabase(int nb, QSqlDatabase db) {
   if (dbList.size() >= nb)
     return;
 
@@ -504,21 +530,19 @@ void DbManagerPrivate::setDatabase(int nb, QSqlDatabase db)
   swapDatabase(oldDb, newDb);
 }
 
-void DbManagerPrivate::setupConnections()
-{
-  connect(this, SIGNAL(statusChanged(QSqlDatabase*)),
-          this, SLOT(refreshModelItem(QSqlDatabase*)));
+void DbManagerPrivate::setupConnections() {
+//  connect(this, SIGNAL(statusChanged(QSqlDatabase*)),
+//          this, SLOT(refreshModelItem(QSqlDatabase*)));
 }
 
-void DbManagerPrivate::setupModels()
-{
+void DbManagerPrivate::setupModels() {
   m_driverModel->setHorizontalHeaderItem(0, new QStandardItem(tr("Driver")));
 
   driverAlias["QIBASE"]   = tr("Interbase/Firebird");
   driverAlias["QMYSQL"]   = tr("MySql");
   driverAlias["QMYSQL3"]  = tr("MySql 3");
-  driverAlias["QODBC"]    = tr("ODBC");
-  driverAlias["QODBC3"]   = tr("ODBC 3");
+  driverAlias["QODBC"]    = tr("Generic (ODBC)");
+  driverAlias["QODBC3"]   = tr("Generic (ODBC 3)");
   driverAlias["QPSQL"]    = tr("PostGreSQL");
   driverAlias["QPSQL7"]   = tr("PostGreSQL 7");
   driverAlias["QSQLITE"]  = tr("SQLite");
@@ -529,8 +553,7 @@ void DbManagerPrivate::setupModels()
   driverIcon["QPSQL"]     = QIcon(":/img/db_postgresql.png");
 
   QStandardItem *item;
-  foreach(QString driver, QSqlDatabase::drivers())
-  {
+  foreach(QString driver, QSqlDatabase::drivers()) {
     item = new QStandardItem();
     item->setData(driver, Qt::UserRole);
     item->setText(driverAlias.value(driver, driver));
@@ -542,8 +565,7 @@ void DbManagerPrivate::setupModels()
   m_model->setHorizontalHeaderItem(0, new QStandardItem(tr("Database")));
 }
 
-void DbManagerPrivate::swapDatabase(QSqlDatabase *oldDb, QSqlDatabase *newDb)
-{
+void DbManagerPrivate::swapDatabase(QSqlDatabase *oldDb, QSqlDatabase *newDb) {
   if (!dbMap.contains(oldDb))
     return;
 
@@ -599,6 +621,9 @@ QStandardItem *DbManagerPrivate::tablesItem(QList<SqlTable> tables,
         i->setData(table.name, Qt::ToolTipRole);
       } else {
         i->setData(QString(schema + "." + table.name), Qt::ToolTipRole);
+      }
+      if (table.columns.size() > 0) {
+        i->appendRow(columnsItem(table.columns));
       }
       tablesItem->appendRow(i);
     }

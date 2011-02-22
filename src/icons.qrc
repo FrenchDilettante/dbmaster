@@ -69,5 +69,7 @@
         <file>img/table_gear.png</file>
         <file>img/schema.png</file>
         <file>img/plugins.png</file>
+        <file>img/column.png</file>
+        <file>img/column_key.png</file>
     </qresource>
 </RCC>

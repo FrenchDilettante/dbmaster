@@ -36,19 +36,23 @@ struct SqlType {
 };
 
 struct SqlColumn {
+  QString name;
   SqlType type;
   bool permitsNull;
+  bool primaryKey;
 };
 
 struct SqlTable {
   QString name;
   QList<SqlColumn> columns;
+  QString owner;
   TableType type;
 };
 
 struct SqlSchema {
   bool defaultSchema;
   QString name;
+  QString owner;
   QList<SqlTable> tables;
 };
 
