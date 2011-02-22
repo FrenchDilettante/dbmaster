@@ -23,9 +23,6 @@ class PluginDialog : public QDialog, Ui::PluginDialog
 Q_OBJECT
 public:
   PluginDialog(QWidget *parent = 0);
-
-private slots:
-  void add();
 };
 
 #endif // PLUGINDIALOG_H

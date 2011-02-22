@@ -28,13 +28,6 @@ PluginManagerPrivate::PluginManagerPrivate()
   init();
 }
 
-void PluginManagerPrivate::add(QString path) {
-//  Plugin *p = load(path);
-//  if (p) {
-//    registerPlugin(p);
-//  }
-}
-
 /**
  * Extrait le wrapper disponible pour le driver spécifié
  */
@@ -81,51 +74,11 @@ void PluginManagerPrivate::init() {
 #else
   pluginsInFolder = QDir("plugins").entryInfoList(QStringList(filter));
 #endif
-  QStringList registeredPlugins;
-  QStringList unavailablePlugins;
-  QList<Plugin*> unregisteredPlugins;
-
-  // Liste des plugins enregistrés
-  QSettings s;
-  s.beginGroup("plugins");
-  int size = s.beginReadArray("list");
-  for(int i=0; i<size; i++) {
-    s.setArrayIndex(i);
-
-    registeredPlugins << s.value("path").toString();
-  }
-  s.endArray();
-  s.endGroup();
 
   // On trie sur le volet les plugins qui ne sont pas enregistrés
   foreach (QFileInfo f, pluginsInFolder) {
-//    if (!registeredPlugins.contains(f)) {
-      Plugin *p = load(f);
-      if (p) {
-        unregisteredPlugins << p;
-      }
-//    }
-  }
-
-  // On fait le tri dans ces déjà enregistrés
-//  foreach (QString f, registeredPlugins) {
-//    if (QFile::exists(f)) {
-//      // Ceux qui ne sont pas valides
-//      Plugin *p = load(f);
-//      if (p) {
-//        // Bon lui par exemple il est bon.
-//        registerPlugin(p);
-//      } else {
-//        unavailablePlugins << f;
-//      }
-//    } else {
-//      // On met de côté ceux qui n'existent plus
-//      unavailablePlugins << f;
-//    }
-//  }
-
-  if (unregisteredPlugins.size() > 0) {
-    foreach (Plugin *p, unregisteredPlugins) {
+    Plugin *p = load(f);
+    if (p) {
       registerPlugin(p);
     }
   }
@@ -232,10 +185,6 @@ QList<SqlWrapper*> PluginManagerPrivate::wrappers() {
  */
 
 PluginManagerPrivate *PluginManager::instance = NULL;
-
-void PluginManager::add(QString path) {
-  instance->add(path);
-}
 
 SqlWrapper* PluginManager::availableWrapper(QString driver) {
   return instance->availableWrapper(driver);

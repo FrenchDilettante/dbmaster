@@ -20,8 +20,7 @@
 #include <QtCore>
 #include <QtGui>
 
-class PluginManagerPrivate : QObject
-{
+class PluginManagerPrivate : QObject {
 Q_OBJECT
 public:
   PluginManagerPrivate();
@@ -48,10 +47,8 @@ private:
   QMap<Plugin*, QStandardItem*>   pluginsMap;
 };
 
-class PluginManager
-{
+class PluginManager {
 public:
-  static void add(QString path);
   static SqlWrapper* availableWrapper(QString driver);
   static QList<ExportEngine*> exportEngines();
   static void init();
