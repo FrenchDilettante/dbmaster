@@ -101,7 +101,7 @@
      <x>0</x>
      <y>0</y>
      <width>840</width>
-     <height>23</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuTools">
@@ -472,6 +472,9 @@
    <property name="toolTip">
     <string>Change the selection case to upper</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+U</string>
+   </property>
   </action>
   <action name="actionLowerCase">
    <property name="enabled">
@@ -482,6 +485,9 @@
    </property>
    <property name="toolTip">
     <string>Change the selection case to lower</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+L</string>
    </property>
   </action>
  </widget>
