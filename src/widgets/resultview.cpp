@@ -19,6 +19,7 @@ ResultView::ResultView(QWidget *parent)
   setupUi(this);
   table->setModel(0);
   currentAction = Browse;
+  currentSorting = QPair<int, Qt::SortOrder>(-1, Qt::AscendingOrder);
   offset = 0;
   m_mode = QueryMode;
   shortModel = new QStandardItemModel(this);
@@ -268,6 +269,10 @@ void ResultView::setupConnections()
 
   connect(shortModel, SIGNAL(itemChanged(QStandardItem*)),
           this, SLOT(updateItem(QStandardItem*)));
+
+  connect(table->horizontalHeader(),
+            SIGNAL(sortIndicatorChanged(int,Qt::SortOrder)),
+          this, SLOT(sort(int,Qt::SortOrder)));
 }
 
 void ResultView::setupMenus()
@@ -283,6 +288,20 @@ void ResultView::setupMenus()
   actionExport->setIcon(IconManager::get("document-save-as"));
   actionExport->setShortcut(QKeySequence("Ctrl+E"));
   contextMenu->addAction(actionExport);
+}
+
+void ResultView::sort(int col, Qt::SortOrder order) {
+  if (currentSorting.first == col) {
+    if (currentSorting.second == Qt::AscendingOrder) {
+      currentSorting.second = Qt::DescendingOrder;
+    } else {
+      currentSorting.second = Qt::AscendingOrder;
+    }
+  } else {
+    currentSorting = QPair<int, Qt::SortOrder>(col, Qt::AscendingOrder);
+  }
+  model->sort(currentSorting.first, currentSorting.second);
+  updateView();
 }
 
 /**

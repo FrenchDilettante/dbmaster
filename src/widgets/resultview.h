@@ -65,6 +65,7 @@ public slots:
   void scrollDown();
   void scrollEnd();
   void scrollUp();
+  void sort(int col, Qt::SortOrder order);
 
 private:
   void contextMenuEvent(QContextMenuEvent *e);
@@ -76,6 +77,7 @@ private:
   QAction              *actionExport;
   QMenu                *contextMenu;
   Action                currentAction;
+  QPair<int, Qt::SortOrder> currentSorting;
   ExportWizard         *exportWizard;
   QMap<int, QSqlRecord> modifiedRecords;
   int                   lastEditedRow;
