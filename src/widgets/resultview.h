@@ -60,12 +60,11 @@ public slots:
   void resizeColumnsToContents();
   void resizeRowsToContents();
   void setAlternatingRowColors(bool enable);
-  void setRowsPerPage(int rowPP);
   void scrollBegin();
   void scrollDown();
   void scrollEnd();
   void scrollUp();
-  void sort(int col, Qt::SortOrder order);
+  void sort(int col);
 
 private:
   void contextMenuEvent(QContextMenuEvent *e);

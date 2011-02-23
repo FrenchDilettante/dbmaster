@@ -169,14 +169,12 @@ void ResultView::scrollBegin()
   updateView();
 }
 
-void ResultView::scrollDown()
-{
+void ResultView::scrollDown() {
   offset += resultSpinBox->value();
   updateView();
 }
 
-void ResultView::scrollEnd()
-{
+void ResultView::scrollEnd() {
   double last;
   modf(model->rowCount() / resultSpinBox->value(), &last);
 
@@ -184,19 +182,16 @@ void ResultView::scrollEnd()
   updateView();
 }
 
-void ResultView::scrollUp()
-{
+void ResultView::scrollUp() {
   offset -= resultSpinBox->value();
   updateView();
 }
 
-void ResultView::setAlternatingRowColors(bool enable)
-{
+void ResultView::setAlternatingRowColors(bool enable) {
   table->setAlternatingRowColors(enable);
 }
 
-void ResultView::setMode(Mode m)
-{
+void ResultView::setMode(Mode m) {
   m_mode = m;
 
   switch(m_mode)
@@ -213,19 +208,12 @@ void ResultView::setMode(Mode m)
   }
 }
 
-void ResultView::setModel(QSqlQueryModel *model)
-{
+void ResultView::setModel(QSqlQueryModel *model) {
   this->model = model;
   updateView();
 }
 
-void ResultView::setRowsPerPage(int rowPP)
-{
-  resultSpinBox->setValue(rowPP);
-}
-
-void ResultView::setTable(QString table, QSqlDatabase *db)
-{
+void ResultView::setTable(QString table, QSqlDatabase *db) {
   setMode(TableMode);
   QSqlTableModel *m = new QSqlTableModel(this, *db);
   m->setTable(table);
@@ -242,8 +230,7 @@ void ResultView::setTable(QString table, QSqlDatabase *db)
   }
 }
 
-void ResultView::setToken(QueryToken *token)
-{
+void ResultView::setToken(QueryToken *token) {
   setMode(QueryMode);
   m_token = token;
   offset = 0;
@@ -251,8 +238,7 @@ void ResultView::setToken(QueryToken *token)
   setModel(m_token->model());
 }
 
-void ResultView::setupConnections()
-{
+void ResultView::setupConnections() {
   connect(actionAlternateColor, SIGNAL(toggled(bool)),
           this, SLOT(setAlternatingRowColors(bool)));
   connect(actionExport, SIGNAL(triggered()), this, SLOT(exportContent()));
@@ -270,13 +256,11 @@ void ResultView::setupConnections()
   connect(shortModel, SIGNAL(itemChanged(QStandardItem*)),
           this, SLOT(updateItem(QStandardItem*)));
 
-  connect(table->horizontalHeader(),
-            SIGNAL(sortIndicatorChanged(int,Qt::SortOrder)),
-          this, SLOT(sort(int,Qt::SortOrder)));
+  connect(table->horizontalHeader(), SIGNAL(sectionClicked(int)),
+          this, SLOT(sort(int)));
 }
 
-void ResultView::setupMenus()
-{
+void ResultView::setupMenus() {
   contextMenu = new QMenu(this);
 
   actionAlternateColor = new QAction(tr("Alternate row colors"), this);
@@ -290,7 +274,7 @@ void ResultView::setupMenus()
   contextMenu->addAction(actionExport);
 }
 
-void ResultView::sort(int col, Qt::SortOrder order) {
+void ResultView::sort(int col) {
   if (currentSorting.first == col) {
     if (currentSorting.second == Qt::AscendingOrder) {
       currentSorting.second = Qt::DescendingOrder;
@@ -308,8 +292,7 @@ void ResultView::sort(int col, Qt::SortOrder order) {
  * Called by the shortmodel's signal dataChanged in order to forward it to the
  * real one.
  */
-void ResultView::updateItem(QStandardItem *item)
-{
+void ResultView::updateItem(QStandardItem *item) {
   if (currentAction == Browse) {
     currentAction = Update;
     insertButton->setIcon(QIcon());
@@ -329,20 +312,24 @@ void ResultView::updateItem(QStandardItem *item)
   modifiedRecords[row] = record;
 }
 
-void ResultView::updateView()
-{
+/**
+ * Mise à jour pagination
+ */
+void ResultView::updateView() {
   shortModel->clear();
 
   if(model->rowCount() == 0)
     return;
 
+  // 1ère ligne à afficher
   int startIndex;
   startIndex = offset;
-  if(startIndex > model->rowCount())
+  if (startIndex > model->rowCount())
     startIndex = model->rowCount() - resultSpinBox->value();
-  if(startIndex < 0)
+  if (startIndex < 0)
     startIndex = 0;
 
+  // Page en cours, nb de page
   double page, maxpage;
   modf(startIndex / resultSpinBox->value(), &page);
   modf(model->rowCount() / resultSpinBox->value(), &maxpage);
@@ -350,9 +337,10 @@ void ResultView::updateView()
                      .arg(page+1)
                      .arg(maxpage+1));
 
+  // dernière ligne à afficher
   int endIndex;
   endIndex = startIndex + resultSpinBox->value();
-  if(endIndex > model->rowCount())
+  if (endIndex > model->rowCount())
     endIndex = model->rowCount();
 
   firstPageButton->setEnabled(startIndex > 0);
@@ -360,20 +348,19 @@ void ResultView::updateView()
   nextPageButton->setEnabled(endIndex < model->rowCount());
   lastPageButton->setEnabled(endIndex < model->rowCount());
 
-  for(int i=0; i<model->columnCount(); i++)
+  for (int i=0; i<model->columnCount(); i++) {
     shortModel->setHorizontalHeaderItem(i, new QStandardItem(
         model->headerData(i, Qt::Horizontal).toString()));
+  }
 
   QStandardItem *item;
   QStringList vlabels;
   QSqlRecord r;
   QList<QStandardItem*> row;
-  for(int i=startIndex; i<endIndex; i++)
-  {
+  for(int i=startIndex; i<endIndex; i++) {
     row.clear();
     r = model->record(i);
-    for(int j=0; j<model->columnCount(); j++)
-    {
+    for(int j=0; j<model->columnCount(); j++) {
       item = new QStandardItem();
       item->setData( r.value( j ), Qt::DisplayRole );
       item->setEditable(m_mode == TableMode);
@@ -382,8 +369,7 @@ void ResultView::updateView()
     shortModel->appendRow(row);
     vlabels << QString::number(i+1);
   }
-  if(currentAction == Insert)
-  {
+  if(currentAction == Insert) {
     vlabels.removeLast();
     vlabels << "*";
   }
@@ -391,4 +377,8 @@ void ResultView::updateView()
 
   resizeColumnsToContents();
   resizeRowsToContents();
+
+  table->horizontalHeader()->setSortIndicatorShown(true);
+  table->horizontalHeader()->setSortIndicator(currentSorting.first,
+                                              currentSorting.second);
 }
