@@ -56,22 +56,25 @@ void ResultView::contextMenuEvent(QContextMenuEvent *e)
   if( model->columnCount() == 0 || model->rowCount() == 0 )
     return;
 
-  actionExport->setEnabled(m_mode == QueryMode);
-
   contextMenu->move(e->globalPos());
   contextMenu->exec();
 }
 
 void ResultView::exportContent()
 {
-  if( model == 0 )
+  if (model == 0)
     return;
 
-  if( model->columnCount() == 0 || model->rowCount() == 0 )
+  if (model->columnCount() == 0 || model->rowCount() == 0)
     return;
 
 //  exportWizard = new ExportWizard(model, this);
-  exportWizard = new ExportWizard(m_token, this);
+  if (m_mode == TableMode) {
+    exportWizard = new ExportWizard(model, this);
+  } else {
+    exportWizard = new ExportWizard(m_token, this);
+  }
+
   exportWizard->exec();
 }
 

@@ -20,12 +20,34 @@ ExportWizard::ExportWizard(QueryToken *token, QWidget *parent)
   : QWizard(parent) {
   setWindowTitle(tr("Export"));
 
-  this->token = token;
+  this->m_model = NULL;
+  this->m_token = token;
 
   setWindowIcon(IconManager::get("filesaveas"));
 
   setPage(0, new EwFirstPage(this));
-  setPage(2, new EwExportPage(token, this));
+  setPage(2, new EwExportPage(m_token, this));
+}
+
+ExportWizard::ExportWizard(QAbstractItemModel *model, QWidget *parent)
+  : QWizard(parent) {
+  setWindowTitle(tr("Export"));
+
+  this->m_model = model;
+  this->m_token = NULL;
+
+  setWindowIcon(IconManager::get("filesaveas"));
+
+  setPage(0, new EwFirstPage(this));
+  setPage(2, new EwExportPage(m_model, this));
+}
+
+QAbstractItemModel* ExportWizard::model() {
+  if (m_token) {
+    return m_token->model();
+  } else {
+    return m_model;
+  }
 }
 
 void ExportWizard::setEngine(ExportEngine *e) {
@@ -35,7 +57,7 @@ void ExportWizard::setEngine(ExportEngine *e) {
       removePage(1);
     }
     e->setWizard(this);
-    e->setModel(token->model());
+    e->setModel(model());
     setPage(1, e->wizardPage());
   }
 }
@@ -149,7 +171,16 @@ EwExportPage::EwExportPage(QueryToken *token, QWizard *parent)
   : QWizardPage(parent) {
   setupUi(this);
 
+  this->model = token->model();
   this->token = token;
+}
+
+EwExportPage::EwExportPage(QAbstractItemModel *model, QWizard *parent)
+  : QWizardPage(parent) {
+  setupUi(this);
+
+  this->model = model;
+  this->token = NULL;
 }
 
 void EwExportPage::checkProgress() {
@@ -161,7 +192,7 @@ void EwExportPage::initializePage() {
   finished = false;
   dial = new QProgressDialog(this);
   dial->setWindowTitle(tr("Export running..."));
-  dial->setMaximum(token->model()->rowCount()-1);
+  dial->setMaximum(model->rowCount()-1);
   connect(this, SIGNAL(progress(int)), dial, SLOT(setValue(int)));
   QTimer::singleShot(1000, this, SLOT(checkProgress()));
   run();
