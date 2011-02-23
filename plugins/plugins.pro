@@ -1,0 +1,2 @@
+TEMPLATE=subdirs
+SUBDIRS=exportengines fakeplugin wrappers
