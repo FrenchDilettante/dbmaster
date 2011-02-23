@@ -199,11 +199,13 @@ void ResultView::setMode(Mode m) {
   case QueryMode:
     insertButton->setVisible(false);
     deleteButton->setVisible(false);
+    table->setSortingEnabled(false);
     break;
 
   case TableMode:
     insertButton->setVisible(true);
     deleteButton->setVisible(true);
+    table->setSortingEnabled(true);
     break;
   }
 }
@@ -275,6 +277,10 @@ void ResultView::setupMenus() {
 }
 
 void ResultView::sort(int col) {
+  if (m_mode == QueryMode) {
+    return;
+  }
+
   if (currentSorting.first == col) {
     if (currentSorting.second == Qt::AscendingOrder) {
       currentSorting.second = Qt::DescendingOrder;
@@ -378,7 +384,9 @@ void ResultView::updateView() {
   resizeColumnsToContents();
   resizeRowsToContents();
 
-  table->horizontalHeader()->setSortIndicatorShown(true);
-  table->horizontalHeader()->setSortIndicator(currentSorting.first,
-                                              currentSorting.second);
+  if (m_mode == TableMode) {
+    table->horizontalHeader()->setSortIndicatorShown(true);
+    table->horizontalHeader()->setSortIndicator(currentSorting.first,
+                                                currentSorting.second);
+  }
 }

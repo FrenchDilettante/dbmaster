@@ -105,6 +105,19 @@ void QueryTextEdit::keyPressEvent(QKeyEvent *event)
     return;
   }
 
+  // Combinaison spéciales
+  if (event->modifiers() & Qt::ControlModifier && event->key() == Qt::Key_D) {
+    // Supprimer une ligne
+    if (completer->popup()->isVisible()) {
+      completer->popup()->hide();
+    }
+    QTextCursor cur = textCursor();
+    cur.movePosition(QTextCursor::StartOfLine);
+    cur.select(QTextCursor::LineUnderCursor);
+    cur.removeSelectedText();
+    return;
+  }
+
   bool ctrlOrShift = event->modifiers() &
                      (Qt::ControlModifier | Qt::ShiftModifier);
 
