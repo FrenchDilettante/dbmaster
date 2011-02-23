@@ -44,6 +44,7 @@ public:
   };
 
   ResultView(QWidget *parent=0);
+  ~ResultView();
 
   void setTable(QString table, QSqlDatabase *db);
   void setToken(QueryToken *token);
@@ -59,7 +60,7 @@ signals:
 public slots:
   void resizeColumnsToContents();
   void resizeRowsToContents();
-  void setAlternatingRowColors(bool enable);
+  void setAlternatingRowColors(bool enable, bool loop =true);
   void scrollBegin();
   void scrollDown();
   void scrollEnd();
@@ -86,6 +87,9 @@ private:
   QueryToken           *m_token;
 
   int                   offset;
+
+  static bool           alternateRows;
+  static QList<ResultView*> instances;
 
 private slots:
   void on_deleteButton_clicked();

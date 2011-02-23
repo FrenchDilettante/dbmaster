@@ -13,17 +13,21 @@
 
 #include "../iconmanager.h"
 
+bool ResultView::alternateRows = false;
+QList<ResultView*> ResultView::instances = QList<ResultView*>();
+
 ResultView::ResultView(QWidget *parent)
-  : QWidget(parent)
-{
+  : QWidget(parent) {
   setupUi(this);
   table->setModel(0);
   currentAction = Browse;
   currentSorting = QPair<int, Qt::SortOrder>(-1, Qt::AscendingOrder);
+  instances << this;
   offset = 0;
   m_mode = QueryMode;
   shortModel = new QStandardItemModel(this);
   table->setModel(shortModel);
+  table->setAlternatingRowColors(alternateRows);
 
   setupMenus();
   setupConnections();
@@ -36,6 +40,10 @@ ResultView::ResultView(QWidget *parent)
   reloadButton->setIcon(IconManager::get("view-refresh"));
   insertButton->setIcon(IconManager::get("list-add"));
   deleteButton->setIcon(IconManager::get("list-remove"));
+}
+
+ResultView::~ResultView() {
+  instances.removeAll(this);
 }
 
 void ResultView::contextMenuEvent(QContextMenuEvent *e)
@@ -187,8 +195,18 @@ void ResultView::scrollUp() {
   updateView();
 }
 
-void ResultView::setAlternatingRowColors(bool enable) {
+void ResultView::setAlternatingRowColors(bool enable, bool loop) {
+  alternateRows = enable;
   table->setAlternatingRowColors(enable);
+  actionAlternateColor->setChecked(enable);
+
+  if (loop) {
+    foreach (ResultView *v, instances) {
+      if (dynamic_cast<ResultView*>(v) && v != this) {
+        v->setAlternatingRowColors(enable, false);
+      }
+    }
+  }
 }
 
 void ResultView::setMode(Mode m) {
