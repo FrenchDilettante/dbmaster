@@ -79,6 +79,7 @@ private:
   QString                 dbToolTip(QSqlDatabase *db);
   void                    setupConnections();
   void                    setupModels();
+  QStandardItem*          schemaItem(SqlSchema schema);
   QStandardItem*          tablesItem(QList<SqlTable> tables,
                                      QString schema ="");
   QStandardItem*          viewsItem(QList<SqlTable> tables,

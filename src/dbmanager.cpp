@@ -329,8 +329,7 @@ void DbManagerPrivate::refreshModel()
 /**
  * @bug check indexes
  */
-void DbManagerPrivate::refreshModelItem(QSqlDatabase *db)
-{
+void DbManagerPrivate::refreshModelItem(QSqlDatabase *db) {
   if(!dbMap.contains(db))
     return;
 
@@ -357,17 +356,7 @@ void DbManagerPrivate::refreshModelItem(QSqlDatabase *db)
         schemaItem->setIcon(IconManager::get("folder_schemas"));
 
         foreach (SqlSchema s, schemas) {
-          QStandardItem *sitem = new QStandardItem(s.name);
-          sitem->setIcon(IconManager::get("schema"));
-          schemaItem->appendRow(sitem);
-
-          QString prefix;
-          if (!s.defaultSchema) {
-            prefix = s.name;
-          }
-
-          sitem->appendRow(tablesItem(s.tables, prefix));
-          sitem->appendRow(viewsItem(s.tables, prefix));
+          schemaItem->appendRow(this->schemaItem(s));
         }
 
         item->appendRow(schemaItem);
@@ -487,8 +476,7 @@ void DbManagerPrivate::run()
   }
 }
 
-void DbManagerPrivate::saveList()
-{
+void DbManagerPrivate::saveList() {
   QSettings s;
   s.beginWriteArray("dblist", dbMap.size());
 
@@ -509,6 +497,20 @@ void DbManagerPrivate::saveList()
   s.sync();
 }
 
+QStandardItem* DbManagerPrivate::schemaItem(SqlSchema schema) {
+  QStandardItem *sitem = new QStandardItem(schema.name);
+  sitem->setIcon(IconManager::get("schema"));
+
+  QString prefix;
+  if (!schema.defaultSchema) {
+    prefix = schema.name;
+  }
+
+  sitem->appendRow(tablesItem(schema.tables, prefix));
+  sitem->appendRow(viewsItem(schema.tables, prefix));
+
+  return sitem;
+}
 
 void DbManagerPrivate::setDatabase(int nb, QSqlDatabase db) {
   if (dbList.size() >= nb)
