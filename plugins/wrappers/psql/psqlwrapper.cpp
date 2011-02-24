@@ -73,6 +73,7 @@ QList<SqlSchema> PsqlWrapper::schemas() {
     if (ruptureSchema) {
       s = SqlSchema();
       s.name = query.value(0).toString();
+      s.defaultSchema = s.name == "public";
     }
 
     // Tables
