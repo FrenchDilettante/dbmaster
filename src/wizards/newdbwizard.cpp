@@ -90,7 +90,7 @@ void NdwFirstPage::on_dbTypeComboBox_currentIndexChanged(int index) {
   if (wrapper) {
     odbcCheckBox->setEnabled(wrapper->supportsOdbc());
   } else {
-    odbcCheckBox->setEnabled(false);
+    odbcCheckBox->setEnabled(true);
   }
 }
 
