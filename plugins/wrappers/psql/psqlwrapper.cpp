@@ -19,6 +19,84 @@ SqlWrapper* PsqlWrapper::newInstance(QSqlDatabase *db) {
 }
 
 /**
+ * Récupération d'un schéma
+ */
+SqlSchema PsqlWrapper::schema(QString sch) {
+  SqlSchema schema;
+
+  if (!m_db) {
+    return schema;
+  }
+
+  QString sql;
+  sql += "SELECT schemaname, typname, 'T', attname, attnotnull, attlen, attnum ";
+  sql += "FROM pg_attribute, pg_type, pg_tables ";
+  sql += "WHERE attrelid = typrelid ";
+  sql +=   "AND attname NOT IN ('cmin', 'cmax', 'ctid', 'oid', ";
+  sql +=      "'tableoid', 'xmin', 'xmax') ";
+  sql +=   "AND typname = tablename ";
+  sql +=   "AND typname not like 'pg_%' ";
+  sql +=   "AND schemaname = '" + sch + "' ";
+
+
+  sql += "UNION ";
+
+  sql += "SELECT schemaname, typname, 'V', attname, attnotnull, attlen, attnum ";
+  sql += "FROM pg_attribute, pg_type, pg_views ";
+  sql += "WHERE attrelid = typrelid ";
+  sql +=   "AND attname NOT IN ('cmin', 'cmax', 'ctid', 'oid', ";
+  sql +=      "'tableoid', 'xmin', 'xmax') ";
+  sql +=   "AND typname = viewname ";
+  sql +=   "AND typname not like 'pg_%' ";
+  sql +=   "AND schemaname = '" + sch + "' ";
+
+  sql += "ORDER BY schemaname, typname, attnum ";
+
+  QSqlQuery query(*m_db);
+  if (!query.exec(sql)) {
+    qDebug() << query.lastError().text();
+    return schema;
+  }
+
+  bool ruptureTable = false;
+  SqlTable t;
+  while (query.next()) {
+    schema.name = query.value(0).toString();
+    schema.defaultSchema = schema.name == "public";
+
+    // Tables
+    ruptureTable = t.name != query.value(1).toString();
+
+    if (ruptureTable) {
+      if (t.name.length() > 0) {
+        schema.tables << t;
+      }
+
+      t = SqlTable();
+      t.name = query.value(1).toString();
+      if (query.value(2).toString() == "T") {
+        t.type = Table;
+      } else if (query.value(2).toString() == "V") {
+        t.type = ViewTable;
+      }
+    }
+
+    // Colonnes
+    SqlColumn c;
+    c.name = query.value(3).toString();
+    c.permitsNull = query.value(4).toBool();
+    c.primaryKey = false;
+    t.columns << c;
+  }
+
+  if (t.name.length() > 0) {
+    schema.tables << t;
+  }
+
+  return schema;
+}
+
+/**
  * Récupération de la liste des tables
  */
 QList<SqlSchema> PsqlWrapper::schemas() {

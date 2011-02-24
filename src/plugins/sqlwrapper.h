@@ -44,6 +44,9 @@ public:
 
   virtual WrapperFeatures features() =0;
 
+  /** Extrait un schéma selon son nom */
+  virtual SqlSchema schema(QString s) { return SqlSchema(); };
+
   /**
    * Retourne la liste des schémas disponibles sur cette connexion.
    *

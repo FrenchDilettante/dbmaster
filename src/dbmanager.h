@@ -56,6 +56,7 @@ public:
   void                    removeDatabase(QSqlDatabase *db);
   void                    run();
   void                    saveList();
+  SqlSchema               schema(QSqlDatabase *db, QString schema);
   void                    setDatabase(int, QSqlDatabase);
   void                    swapDatabase(QSqlDatabase *oldDb,
                                        QSqlDatabase *newDb);
@@ -65,7 +66,6 @@ public:
   static QString          dbTitle(QSqlDatabase *db);
 
 public slots:
-
   void                    refreshModel();
   void                    refreshModelItem(QSqlDatabase *db);
   void                    terminate();
@@ -149,6 +149,7 @@ public:
   static void           refreshModelItem(QSqlDatabase *db);
   static void           removeDatabase(int);
   static void           saveList();
+  static SqlSchema      schema(QSqlDatabase *db, QString schema);
   static void           setDatabase(int, QSqlDatabase);
   static void           terminate();
   static void           toggle(QSqlDatabase *db);

@@ -497,6 +497,19 @@ void DbManagerPrivate::saveList() {
   s.sync();
 }
 
+/**
+ * Extrait les informations d'un schéma particulier
+ */
+SqlSchema DbManagerPrivate::schema(QSqlDatabase *db, QString sch) {
+  if (!dbWrappers[db] || !(dbWrappers[db]->features() & SqlWrapper::Schemas)) {
+    return SqlSchema();
+  }
+
+  SqlSchema schema = dbWrappers[db]->schema(sch);
+
+  return schema;
+}
+
 QStandardItem* DbManagerPrivate::schemaItem(SqlSchema schema) {
   QStandardItem *sitem = new QStandardItem(schema.name);
   sitem->setIcon(IconManager::get("schema"));
@@ -745,6 +758,11 @@ void DbManager::removeDatabase(int index) {
 void DbManager::saveList() {
   m_instance->saveList();
 }
+
+SqlSchema DbManager::schema(QSqlDatabase *db, QString schema) {
+  return m_instance->schema(db, schema);
+}
+
 void DbManager::setDatabase(int nb, QSqlDatabase db) {
   m_instance->setDatabase(nb, db);
 }
