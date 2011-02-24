@@ -21,7 +21,7 @@ SqlWrapper* PsqlWrapper::newInstance(QSqlDatabase *db) {
 /**
  * Récupération de la liste des tables
  */
-QList<SqlSchema> PsqlWrapper::schemas(bool fillTables) {
+QList<SqlSchema> PsqlWrapper::schemas() {
   QList<SqlSchema> schemas;
 
   if (!m_db) {

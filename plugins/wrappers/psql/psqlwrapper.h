@@ -21,7 +21,7 @@ public:
   // Fonctions de SqlWrapper
   WrapperFeatures features();
   SqlWrapper* newInstance(QSqlDatabase *db);
-  QList<SqlSchema> schemas(bool fillTables =true);
+  QList<SqlSchema> schemas();
   QString driver() { return "QPSQL"; };
   QList<SqlTable> tables();
 
