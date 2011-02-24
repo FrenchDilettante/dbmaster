@@ -635,15 +635,25 @@ msgctxt "MainWindowClass|"
 msgid "Change the selection case to upper"
 msgstr "Passe la sélection en majuscule"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:481
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:476
+msgctxt "MainWindowClass|"
+msgid "Ctrl+Shift+U"
+msgstr "Ctrl+Shift+U"
+
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:484
 msgctxt "MainWindowClass|"
 msgid "Lower"
 msgstr "Minuscule"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:484
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:487
 msgctxt "MainWindowClass|"
 msgid "Change the selection case to lower"
 msgstr "Passe la sélection en minuscule"
+
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:490
+msgctxt "MainWindowClass|"
+msgid "Ctrl+Shift+L"
+msgstr "Ctrl+Shift+L"
 
 #: /home/manu/programmation/dbmaster/src/mainwindow.ui:392
 msgctxt "MainWindowClass|"
@@ -771,17 +781,17 @@ msgctxt "EwExportPage|"
 msgid "The export process is finished."
 msgstr "Le processus d'export est terminé."
 
-#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:163
+#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:194
 msgctxt "EwExportPage|"
 msgid "Export running..."
 msgstr "Export en cours..."
 
-#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:174
+#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:205
 msgctxt "EwExportPage|"
 msgid "Openning error"
 msgstr "Erreur d'ouverture"
 
-#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:175
+#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:206
 #, qt-format
 msgctxt "EwExportPage|"
 msgid "Unable to open the file %1."
@@ -812,7 +822,7 @@ msgctxt "EwFirstPage|"
 msgid "Format"
 msgstr "Format"
 
-#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:72
+#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:94
 msgctxt "EwFirstPage|"
 msgid "Output file"
 msgstr "Fichier de sortie"
@@ -891,6 +901,11 @@ msgctxt "NdwFirstPage|"
 msgid "Host IP or DNS adress"
 msgstr "Adresse IP ou DNS de l'hôte"
 
+#: /home/manu/programmation/dbmaster/src/wizards/ndw_firstpage.ui:58
+msgctxt "NdwFirstPage|"
+msgid "Use ODBC"
+msgstr "Utiliser ODBC"
+
 #: /home/manu/programmation/dbmaster/src/wizards/ndw_secondpage.ui:14
 msgctxt "NdwSecondPage|"
 msgid "Database informations"
@@ -941,34 +956,34 @@ msgctxt "NdwSecondPage|"
 msgid "<- Clic to test"
 msgstr "<- Cliquer pour tester"
 
-#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:108
+#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:120
 msgctxt "NdwSecondPage|"
 msgid "Open Database"
 msgstr "Ouvrir la base de données"
 
-#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:110
+#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:122
 msgctxt "NdwSecondPage|"
 msgid "Database file (*.*)"
 msgstr "Fichier de base de données (*.*)"
 
-#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:130
+#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:142
 msgctxt "NdwSecondPage|"
 msgid "Connection succeded"
 msgstr "Connexion réussie"
 
-#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:132
-#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:134
+#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:144
+#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:146
 msgctxt "NdwSecondPage|"
 msgid "Connection failed"
 msgstr "Connexion échouée"
 
-#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:143
+#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:155
 #, qt-format
 msgctxt "NdwSecondPage|"
 msgid "%1 (local)"
 msgstr "%1 (locale)"
 
-#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:145
+#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:157
 #, qt-format
 msgctxt "NdwSecondPage|"
 msgid "%1 on %2"
@@ -990,7 +1005,7 @@ msgctxt "QObject|"
 msgid "Connection %1 added"
 msgstr "Connexion %1 ajoutée"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:551
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:573
 #, qt-format
 msgctxt "QObject|"
 msgid "%1 on %2"
@@ -1084,9 +1099,9 @@ msgstr "<b>[%1]</b>Requête en attente"
 
 #: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:115
 #: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:143
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:291
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:337
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:349
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:300
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:346
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:358
 msgctxt "QueryEditorWidget|"
 msgid "DbMaster"
 msgstr "DbMaster"
@@ -1117,81 +1132,81 @@ msgstr ""
 "Attention ! %1 a été modifié.\n"
 "Voulez-vous l'enregistrer ?"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:292
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:301
 msgctxt "QueryEditorWidget|"
 msgid "Unable to open the file !"
 msgstr "Impossible d'ouvrir le fichier !"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:318
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:327
 msgctxt "QueryEditorWidget|"
 msgid "Running..."
 msgstr "Exécution..."
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:507
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:516
 msgctxt "QueryEditorWidget|"
 msgid "Query executed with success"
 msgstr "Requête exécutée avec succès"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:519
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:528
 msgctxt "QueryEditorWidget|"
 msgid "Unable to run query"
 msgstr "Impossible d'exécuter la requête"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:338
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:347
 msgctxt "QueryEditorWidget|"
 msgid "Query file (*.sql);;All files (*.*)"
 msgstr "Fichier de requête (*.sql);;Tous fichiers (*.*)"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:349
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:358
 msgctxt "QueryEditorWidget|"
 msgid "Unable to save the file !"
 msgstr "Impossible d'enregistrer le fichier !"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:458
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:467
 msgctxt "QueryEditorWidget|"
 msgid "Query editor"
 msgstr "Éditeur de requêtes"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:503
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:513
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:512
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:522
 #, qt-format
 msgctxt "QueryEditorWidget|"
 msgid "Query executed with success in %2secs (%1 lines returned)"
 msgstr "Requête exécutée avec succès en %2secs (%1 lignes retournées)"
 
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:130
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:297
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:142
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:326
 msgctxt "ResultView|"
 msgid "Apply"
 msgstr "Appliquer"
 
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:132
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:299
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:144
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:328
 msgctxt "ResultView|"
 msgid "Cancel"
 msgstr "Annuler"
 
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:238
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:250
 msgctxt "ResultView|"
 msgid "Error"
 msgstr "Erreur"
 
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:239
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:251
 msgctxt "ResultView|"
 msgid "The specified table doesn't exist"
 msgstr "La table n'existe pas"
 
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:277
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:289
 msgctxt "ResultView|"
 msgid "Alternate row colors"
 msgstr "Alterner les lignes"
 
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:282
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:294
 msgctxt "ResultView|"
 msgid "Export"
 msgstr "Exporter"
 
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:330
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:363
 #, qt-format
 msgctxt "ResultView|"
 msgid "Page %1/%2"
@@ -1252,143 +1267,149 @@ msgctxt "ResultView|"
 msgid "Fetching..."
 msgstr "Exécution..."
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:542
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:565
 msgctxt "DbManagerPrivate|"
 msgid "Database"
 msgstr "Base de données"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:607
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:632
 #, qt-format
 msgctxt "DbManagerPrivate|"
 msgid "Tables (%1)"
 msgstr "Tables (%1)"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:120
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:140
 #, qt-format
 msgctxt "DbManagerPrivate|"
 msgid "%1 (local)"
 msgstr "%1 (locale)"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:122
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:133
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:120
+#, qt-format
+msgctxt "DbManagerPrivate|"
+msgid "Columns (%1)"
+msgstr "Colonnes (%1)"
+
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:142
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:153
 #, qt-format
 msgctxt "DbManagerPrivate|"
 msgid "%1 on %2"
 msgstr "%1 sur %2"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:144
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:164
 msgctxt "DbManagerPrivate|"
 msgid "Openned"
 msgstr "Ouverte"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:146
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:166
 msgctxt "DbManagerPrivate|"
 msgid "Closed"
 msgstr "Fermée"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:148
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:168
 msgctxt "DbManagerPrivate|"
 msgid "Status"
 msgstr "Statut"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:153
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:173
 msgctxt "DbManagerPrivate|"
 msgid "DBMS"
 msgstr "SGBD"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:155
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:175
 #, qt-format
 msgctxt "DbManagerPrivate|"
 msgid "Generic (%1)"
 msgstr "Générique (%1)"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:159
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:179
 msgctxt "DbManagerPrivate|"
 msgid "Host"
 msgstr "Hôte"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:633
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:544
+msgctxt "DbManagerPrivate|"
+msgid "Generic (ODBC)"
+msgstr "Générique (ODBC)"
+
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:545
+msgctxt "DbManagerPrivate|"
+msgid "Generic (ODBC 3)"
+msgstr "Générique (ODBC 3)"
+
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:658
 #, qt-format
 msgctxt "DbManagerPrivate|"
 msgid "Views (%1)"
 msgstr "Vues (%1)"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:582
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:604
 #, qt-format
 msgctxt "DbManagerPrivate|"
 msgid "System tables (%1)"
 msgstr "Tables système (%1)"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:334
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:355
 #, qt-format
 msgctxt "DbManagerPrivate|"
 msgid "Schemas (%1)"
 msgstr "Schémas (%1)"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:439
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:464
 #, qt-format
 msgctxt "DbManagerPrivate|"
 msgid "Connected to %1"
 msgstr "Connecté à %1"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:442
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:467
 #, qt-format
 msgctxt "DbManagerPrivate|"
 msgid "Unable to connect to %1"
 msgstr "Impossible de se connecter à %1"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:455
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:481
 #, qt-format
 msgctxt "DbManagerPrivate|"
 msgid "Disconnected from %1"
 msgstr "Déconnecté de %1"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:515
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:539
 msgctxt "DbManagerPrivate|"
 msgid "Driver"
 msgstr "Pilote"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:517
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:541
 msgctxt "DbManagerPrivate|"
 msgid "Interbase/Firebird"
 msgstr "Interbase/Firebird"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:518
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:542
 msgctxt "DbManagerPrivate|"
 msgid "MySql"
 msgstr "MySql"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:519
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:543
 msgctxt "DbManagerPrivate|"
 msgid "MySql 3"
 msgstr "MySql 3"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:520
-msgctxt "DbManagerPrivate|"
-msgid "ODBC"
-msgstr "ODBC"
-
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:521
-msgctxt "DbManagerPrivate|"
-msgid "ODBC 3"
-msgstr "ODBC 3"
-
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:522
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:546
 msgctxt "DbManagerPrivate|"
 msgid "PostGreSQL"
 msgstr "PostGreSQL"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:523
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:547
 msgctxt "DbManagerPrivate|"
 msgid "PostGreSQL 7"
 msgstr "PostGreSQL 7"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:524
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:548
 msgctxt "DbManagerPrivate|"
 msgid "SQLite"
 msgstr "SQLite"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:525
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:549
 msgctxt "DbManagerPrivate|"
 msgid "SQLite 2"
 msgstr "SQLite 2"
@@ -1522,6 +1543,7 @@ msgid "Replace"
 msgstr "Remplacer"
 
 #: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:21
+#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:34
 msgctxt "ExportWizard|"
 msgid "Export"
 msgstr "Exporter"
@@ -1531,53 +1553,23 @@ msgctxt "PluginDialog|"
 msgid "Plugin center"
 msgstr ""
 
-#: /home/manu/programmation/dbmaster/src/plugins/plugindialog.ui:66
-msgctxt "PluginDialog|"
-msgid "Add"
-msgstr "Ajouter"
-
-#: /home/manu/programmation/dbmaster/src/plugins/plugindialog.ui:26
-msgctxt "PluginDialog|"
-msgid "Remove"
-msgstr "Supprimer"
-
-#: /home/manu/programmation/dbmaster/src/plugins/plugindialog.ui:36
-msgctxt "PluginDialog|"
-msgid "Configure"
-msgstr "Configurer"
-
-#: /home/manu/programmation/dbmaster/src/plugins/plugindialog.cpp:27
-msgctxt "PluginDialog|"
-msgid "Choose a plugin file"
-msgstr "Choisir un fichier de plugin"
-
-#: /home/manu/programmation/dbmaster/src/plugins/plugindialog.cpp:35
-msgctxt "PluginDialog|"
-msgid "Add a plugin"
-msgstr "Ajouter un plugin"
-
-#: /home/manu/programmation/dbmaster/src/plugins/plugindialog.cpp:36
-msgctxt "PluginDialog|"
-msgid "The file doesn't exist."
-msgstr "Le fichier n'existe pas."
-
-#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:171
-#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:176
+#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:129
+#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:134
 msgctxt "PluginManagerPrivate|"
 msgid "Incorrect plugin file"
 msgstr "Fichier de plugin incorrect"
 
-#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:172
+#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:130
 msgctxt "PluginManagerPrivate|"
 msgid "This file contains no DbMaster plugin."
 msgstr "Ce fichier ne contient aucun plugin."
 
-#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:177
+#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:135
 msgctxt "PluginManagerPrivate|"
 msgid "Unable to load the plugin. Specified error : \n"
 msgstr "Impossible de charger le plugin. Erreur retournée :\n"
 
-#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:133
+#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:91
 msgctxt "PluginManagerPrivate|"
 msgid "Add a plugin"
 msgstr "Ajouter un plugin"
@@ -1602,28 +1594,27 @@ msgctxt "PluginManagerPrivate|"
 msgid "Version"
 msgstr "Version"
 
-#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:134
+#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:92
 msgctxt "PluginManagerPrivate|"
 msgid "This plugin is already registered"
 msgstr "Ce plugin est déjà présent"
 
-#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:142
+#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:100
 msgctxt "PluginManagerPrivate|"
 msgid "Other"
 msgstr "Autre"
 
-#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:145
+#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:103
 msgctxt "PluginManagerPrivate|"
 msgid "Export engine"
 msgstr "Moteur d'export"
 
-#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:147
+#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:105
 msgctxt "PluginManagerPrivate|"
 msgid "SQL Wrapper"
 msgstr "Adaptateur SQL"
 
 #: /home/manu/programmation/dbmaster/src/tabwidget/tablewidget.cpp:61
-#, fuzzy
 msgctxt "TableWidget|"
 msgid "Error"
 msgstr "Erreur"
@@ -1632,9 +1623,24 @@ msgstr "Erreur"
 #, qt-format
 msgctxt "TableWidget|"
 msgid "Unable to open the table %1.\n"
-msgstr ""
+msgstr "Impossible d'ouvrir la table %1."
 
 #: /home/manu/programmation/dbmaster/src/tabwidget/tablewidget.cpp:63
 msgctxt "TableWidget|"
 msgid "Check you have the necessary permissions."
+msgstr "Vérifiez que vous avez les permissions nécessaires."
+
+#: /home/manu/programmation/dbmaster/src/tabwidget/schemawidget.ui:14
+msgctxt "SchemaWidget|"
+msgid "Form"
 msgstr ""
+
+#: /home/manu/programmation/dbmaster/src/tabwidget/schemawidget.ui:22
+msgctxt "SchemaWidget|"
+msgid "Schema"
+msgstr "Schéma"
+
+#: /home/manu/programmation/dbmaster/src/tabwidget/schemawidget.ui:42
+msgctxt "SchemaWidget|"
+msgid "Owner"
+msgstr "Propriétaire"
