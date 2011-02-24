@@ -397,16 +397,6 @@ void DbManagerPrivate::refreshModelItem(QSqlDatabase *db)
       }
 
       item->appendRow(viewsItem(views));
-
-      QList<SqlTable> sysTables;
-      foreach (QString s, db->tables(QSql::SystemTables)) {
-        SqlTable t;
-        t.name = s;
-        t.type = SysTable;
-        sysTables << t;
-      }
-
-      item->appendRow(sysTablesItem(sysTables));
     }
 
     item->setIcon(IconManager::get("connect_established"));
@@ -579,32 +569,6 @@ void DbManagerPrivate::swapDatabase(QSqlDatabase *oldDb, QSqlDatabase *newDb) {
   dbMap.remove(oldDb);
 
   saveList();
-}
-
-QStandardItem *DbManagerPrivate::sysTablesItem(QList<SqlTable> tables,
-                                               QString schema) {
-  QStandardItem *sysTablesItem = new QStandardItem();
-
-  sysTablesItem->setIcon(IconManager::get("folder_systemtables"));
-
-  foreach (SqlTable table, tables) {
-    if (table.type == SysTable) {
-      QStandardItem *i = new QStandardItem(IconManager::get("folder_gear"),
-                                           table.name);
-      i->setData(DbManager::SysTableItem, Qt::UserRole);
-      if (schema.length() == 0) {
-        i->setData(table.name, Qt::ToolTipRole);
-      } else {
-        i->setData(QString(schema + "." + table.name), Qt::ToolTipRole);
-      }
-      sysTablesItem->appendRow(i);
-    }
-  }
-
-  sysTablesItem->setText(tr("System tables (%1)")
-                         .arg(sysTablesItem->rowCount()));
-
-  return sysTablesItem;
 }
 
 QStandardItem *DbManagerPrivate::tablesItem(QList<SqlTable> tables,
