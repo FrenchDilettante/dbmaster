@@ -12,6 +12,7 @@ public:
   SchemaWidget(QString schema, QSqlDatabase *db, QWidget *parent = 0);
 
   QIcon icon();
+  QString id();
 
 public slots:
   void reload();

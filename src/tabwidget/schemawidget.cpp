@@ -17,6 +17,12 @@ QIcon SchemaWidget::icon() {
   return IconManager::get("schema");
 }
 
+QString SchemaWidget::id() {
+  return QString("s %1 on %2")
+            .arg(m_schema)
+            .arg(m_db->connectionName());
+}
+
 void SchemaWidget::reload() {
   SqlSchema s = DbManager::schema(m_db, m_schema);
   schemaEdit->setText(s.name);
