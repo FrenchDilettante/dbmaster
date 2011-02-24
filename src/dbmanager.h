@@ -112,6 +112,7 @@ public:
     DbItem,
     DisplayItem,
     FieldItem,
+    SchemaItem,
     SysTableItem,
     TableItem,
     ViewItem

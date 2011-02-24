@@ -21,6 +21,7 @@
 #include "query/queryscheduler.h"
 #include "tabwidget/abstracttabwidget.h"
 #include "tabwidget/queryeditorwidget.h"
+#include "tabwidget/schemawidget.h"
 #include "tabwidget/tablewidget.h"
 #include "widgets/dbtreeview.h"
 
@@ -342,13 +343,40 @@ void MainWindow::openQuery(QString file) {
 }
 
 /**
+ * Ouvre un schéma dans l'onglet associé
+ */
+void MainWindow::openSchema(QSqlDatabase *db, QString schema) {
+  // ID unique pour retrouver facilement le schéma ouvert
+  QString id = QString("s %1 on %2")
+                .arg(schema)
+                .arg(db->connectionName());
+
+  // On vérifie si le schéma demandé n'est pas déjà ouvert
+  int index = -1;
+  for (int i=0; i<tabWidget->count(); i++) {
+    if (((AbstractTabWidget*) tabWidget->widget(i))->id() == id) {
+      index = i;
+      break;
+    }
+  }
+
+  if (index >= 0) {
+    tabWidget->setCurrentIndex(index);
+  } else {
+    SchemaWidget *tab = new SchemaWidget(schema, db, this);
+    index = tabWidget->addTab(tab, tab->icon(), schema);
+    tabWidget->setCurrentIndex(index);
+    tab->reload();
+  }
+}
+
+/**
  * Open a table browser tab
  *
  * @param db
  *          concerned database
  */
-void MainWindow::openTable(QSqlDatabase *db, QString table)
-{
+void MainWindow::openTable(QSqlDatabase *db, QString table) {
   // generates an unique ID for the table
   QString id = QString("t %1 on %2")
                .arg(table)
@@ -356,10 +384,8 @@ void MainWindow::openTable(QSqlDatabase *db, QString table)
 
   // First of all, the table may be already openned. We're gonna check it.
   int index = -1;
-  for(int i=0; i<tabWidget->count(); i++)
-  {
-    if(((AbstractTabWidget*)tabWidget->widget(i))->id() == id)
-    {
+  for (int i=0; i<tabWidget->count(); i++) {
+    if (((AbstractTabWidget*) tabWidget->widget(i))->id() == id) {
       index = i;
       break;
     }
@@ -378,14 +404,12 @@ void MainWindow::openTable(QSqlDatabase *db, QString table)
   }
 }
 
-void MainWindow::paste()
-{
+void MainWindow::paste() {
   if(currentTab())
     currentTab()->paste();
 }
 
-void MainWindow::previousTab()
-{
+void MainWindow::previousTab() {
   int count = tabWidget->count();
   int index = tabWidget->currentIndex();
 
@@ -531,6 +555,8 @@ void MainWindow::setupConnections()
   /*
    * DbTreeView
    */
+  connect(dbTreeView, SIGNAL(schemaSelected(QSqlDatabase*,QString)),
+          this, SLOT(openSchema(QSqlDatabase*,QString)));
   connect(dbTreeView, SIGNAL(tableSelected(QSqlDatabase*,QString)),
           this, SLOT(openTable(QSqlDatabase*,QString)));
 

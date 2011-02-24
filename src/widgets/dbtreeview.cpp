@@ -101,36 +101,36 @@ void DbTreeView::editCurrent()
   }
 }
 
-void DbTreeView::mouseDoubleClickEvent(QMouseEvent *event)
-{
-  if(selectedIndexes().size() == 1)
-  {
+/**
+ * Gestion du double-clic
+ */
+void DbTreeView::mouseDoubleClickEvent(QMouseEvent *event) {
+  if (selectedIndexes().size() == 1) {
     QModelIndex index = selectedIndexes()[0];
-    if(!visualRect(index).contains(event->pos()))
-    {
+    if (!visualRect(index).contains(event->pos())) {
       event->accept();
       return;
     }
 
-    if(index.data(Qt::UserRole).canConvert(QVariant::Int))
-    {
-      QString _db, _tb;
-      switch(index.data(Qt::UserRole).toInt())
-      {
+    if (index.data(Qt::UserRole).canConvert(QVariant::Int)) {
+      switch(index.data(Qt::UserRole).toInt()) {
       case DbManager::DbItem:
         toggleCurrentDb();
-        // DbManager::toggle(DbManager::getDatabase(index.row()));
         break;
 
       case DbManager::FieldItem:
         break;
 
+      case DbManager::SchemaItem:
+        emit schemaSelected(parentDb(index),
+                            index.data(Qt::ToolTipRole).toString());
+        break;
+
       case DbManager::SysTableItem:
       case DbManager::TableItem:
       case DbManager::ViewItem:
-        _db = parentDb(index)->connectionName();
-        _tb = index.data(Qt::ToolTipRole).toString();
-        emit tableSelected(parentDb(index), _tb);
+        emit tableSelected(parentDb(index),
+                           index.data(Qt::ToolTipRole).toString());
         break;
 
       case DbManager::DisplayItem:

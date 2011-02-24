@@ -500,6 +500,8 @@ void DbManagerPrivate::saveList() {
 QStandardItem* DbManagerPrivate::schemaItem(SqlSchema schema) {
   QStandardItem *sitem = new QStandardItem(schema.name);
   sitem->setIcon(IconManager::get("schema"));
+  sitem->setData(schema.name, Qt::ToolTipRole);
+  sitem->setData(DbManager::SchemaItem, Qt::UserRole);
 
   QString prefix;
   if (!schema.defaultSchema) {

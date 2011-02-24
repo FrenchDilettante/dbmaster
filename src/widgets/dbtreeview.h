@@ -26,6 +26,7 @@ public:
   DbTreeView(QWidget *parent = 0);
 
 signals:
+  void schemaSelected(QSqlDatabase*, QString);
   void tableSelected(QSqlDatabase*, QString);
 
 public slots:

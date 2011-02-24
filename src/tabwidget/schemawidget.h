@@ -9,7 +9,16 @@ class SchemaWidget : public AbstractTabWidget, private Ui::SchemaWidget
 {
 Q_OBJECT
 public:
-  SchemaWidget(QWidget *parent = 0);
+  SchemaWidget(QString schema, QSqlDatabase *db, QWidget *parent = 0);
+
+  QIcon icon();
+
+public slots:
+  void reload();
+
+private:
+  QSqlDatabase *m_db;
+  QString m_schema;
 };
 
 #endif // SCHEMAWIDGET_H
