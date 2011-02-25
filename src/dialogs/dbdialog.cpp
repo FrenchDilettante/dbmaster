@@ -207,10 +207,14 @@ void DbDialog::toggleConnection() {
 void DbDialog::updateAlias() {
   if (!aliasOnCurrent && db != NULL) {
     QString title;
+    QString simplifiedName = QFileInfo(dbEdit->text()).fileName();
+    if (simplifiedName.length() == 0) {
+      simplifiedName = dbEdit->text();
+    }
     if(hostEdit->text().isEmpty())
-      title = tr("%1 (local)").arg(dbEdit->text());
+      title = tr("%1 (local)").arg(simplifiedName);
     else
-      title = tr("%1 on %2").arg(dbEdit->text()).arg(hostEdit->text());
+      title = tr("%1 on %2").arg(simplifiedName).arg(hostEdit->text());
 
     aliasEdit->setText(title);
   }

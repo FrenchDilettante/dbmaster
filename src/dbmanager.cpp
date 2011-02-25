@@ -136,10 +136,14 @@ QStandardItem* DbManagerPrivate::columnsItem(QList<SqlColumn> columns) {
 
 QString DbManagerPrivate::dbTitle(QSqlDatabase *db) {
   QString title;
+  QString simplifiedName = QFileInfo(db->databaseName()).fileName();
+  if (simplifiedName.length() == 0) {
+    simplifiedName = db->databaseName();
+  }
   if(db->hostName().isEmpty())
-    title = tr("%1 (local)").arg(db->databaseName());
+    title = tr("%1 (local)").arg(simplifiedName);
   else
-    title = tr("%1 on %2").arg(db->databaseName()).arg(db->hostName());
+    title = tr("%1 on %2").arg(simplifiedName).arg(db->hostName());
 
   return title;
 }

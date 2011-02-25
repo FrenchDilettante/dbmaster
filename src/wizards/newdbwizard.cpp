@@ -179,11 +179,16 @@ void NdwSecondPage::test() {
 }
 
 void NdwSecondPage::updateAlias() {
+  // Le nom de BDD peut être un nom de fichier, dans ce cas on va le raccourcir
+  QString simplifiedName = QFileInfo(dbLineEdit->text()).fileName();
+  if (simplifiedName.length() == 0) {
+    simplifiedName = dbLineEdit->text();
+  }
   if (field("host").toString().isEmpty()) {
-    aliasLineEdit->setText(tr("%1 (local)").arg(dbLineEdit->text()));
+    aliasLineEdit->setText(tr("%1 (local)").arg(simplifiedName));
   } else {
     aliasLineEdit->setText(tr("%1 on %2")
-                           .arg(dbLineEdit->text())
+                           .arg(simplifiedName)
                            .arg(field("host").toString()));
   }
 }
