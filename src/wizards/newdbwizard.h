@@ -39,6 +39,7 @@ Q_OBJECT
 public:
   NdwFirstPage(QWizard *parent=0);
   void initializePage();
+  bool isComplete() const;
 
 private slots:
   void on_dbTypeComboBox_currentIndexChanged(int index);

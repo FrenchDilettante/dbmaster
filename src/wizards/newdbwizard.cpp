@@ -76,11 +76,27 @@ NdwFirstPage::NdwFirstPage(QWizard *parent)
   QCompleter *c = new QCompleter(QStringList("localhost"), this);
   c->setCompletionMode(QCompleter::InlineCompletion);
   hostLineEdit->setCompleter(c);
+
+  connect(dbTypeComboBox, SIGNAL(currentIndexChanged(int)),
+          this, SIGNAL(completeChanged()));
+  connect(hostLineEdit, SIGNAL(textChanged(QString)),
+          this, SIGNAL(completeChanged()));
 }
 
 void NdwFirstPage::initializePage() {
   dbTypeComboBox->setCurrentDriver(Config::defaultDriver);
   on_dbTypeComboBox_currentIndexChanged(0);
+}
+
+bool NdwFirstPage::isComplete() const {
+  SqlWrapper *wrapper =
+      PluginManager::availableWrapper(dbTypeComboBox->currentDriverName());
+
+  if (wrapper && wrapper->requiresHostname()) {
+    return hostLineEdit->text().length() > 0;
+  } else {
+    return true;
+  }
 }
 
 void NdwFirstPage::on_dbTypeComboBox_currentIndexChanged(int index) {
