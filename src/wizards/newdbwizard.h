@@ -41,6 +41,9 @@ public:
   void initializePage();
   bool isComplete() const;
 
+private:
+  bool odbcAvailable;
+
 private slots:
   void on_dbTypeComboBox_currentIndexChanged(int index);
 };

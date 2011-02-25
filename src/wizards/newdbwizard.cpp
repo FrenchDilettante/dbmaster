@@ -70,8 +70,15 @@ NdwFirstPage::NdwFirstPage(QWizard *parent)
   : QWizardPage(parent) {
   setupUi(this);
 
+  odbcAvailable = QSqlDatabase::drivers().contains("QODBC");
+  if (!odbcAvailable) {
+    odbcCheckBox->setEnabled(false);
+    odbcCheckBox->setToolTip(tr("You have no ODBC driver installed."));
+  }
+
   registerField("host", hostLineEdit);
   registerField("driver", dbTypeComboBox, "currentDriver");
+  registerField("useODBC", odbcCheckBox);
 
   QCompleter *c = new QCompleter(QStringList("localhost"), this);
   c->setCompletionMode(QCompleter::InlineCompletion);
@@ -100,6 +107,10 @@ bool NdwFirstPage::isComplete() const {
 }
 
 void NdwFirstPage::on_dbTypeComboBox_currentIndexChanged(int index) {
+  if (!odbcAvailable) {
+    return;
+  }
+
   SqlWrapper *wrapper =
       PluginManager::availableWrapper(dbTypeComboBox->currentDriverName());
 
@@ -147,8 +158,9 @@ void NdwSecondPage::initializePage() {
 }
 
 void NdwSecondPage::test() {
-  QSqlDatabase db =
-      QSqlDatabase::addDatabase(field("driver").toString(), "testdb");
+  QString driver =
+      field("useODBC").toBool() ? "ODBC" : field("driver").toString();
+  QSqlDatabase db = QSqlDatabase::addDatabase(driver, "testdb");
   db.setHostName(field("host").toString());
   db.setUserName(field("user").toString());
   db.setPassword(field("pswd").toString());
