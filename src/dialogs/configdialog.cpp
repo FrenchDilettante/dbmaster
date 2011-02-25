@@ -26,6 +26,8 @@ ConfigDialog::ConfigDialog(QWidget *parent)
 
   setupConnections();
 
+  shListWidget->setCurrentRow(0);
+
   reload();
 
   // loading icons from theme
