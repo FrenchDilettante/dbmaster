@@ -88,7 +88,7 @@ void NdwFirstPage::on_dbTypeComboBox_currentIndexChanged(int index) {
       PluginManager::availableWrapper(dbTypeComboBox->currentDriverName());
 
   if (wrapper) {
-    odbcCheckBox->setEnabled(wrapper->supportsOdbc());
+    odbcCheckBox->setEnabled(wrapper->features() & SqlWrapper::ODBC);
   } else {
     odbcCheckBox->setEnabled(true);
   }

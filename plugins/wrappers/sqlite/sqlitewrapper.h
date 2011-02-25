@@ -20,9 +20,10 @@ public:
   QString version() { return QCoreApplication::applicationVersion(); };
 
   // Fonctions de SqlWrapper
+  QString driver() { return "QSQLITE"; };
   WrapperFeatures features();
   SqlWrapper *newInstance(QSqlDatabase *db);
-  QString driver() { return "QSQLITE"; };
+  bool requiresHostname() { return false; };
   QList<SqlTable> tables();
 
 signals:

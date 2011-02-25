@@ -15,7 +15,7 @@ MysqlWrapper::MysqlWrapper(QSqlDatabase *db)
 }
 
 SqlWrapper::WrapperFeatures MysqlWrapper::features() {
-  return BasicFeatures;
+  return BasicFeatures | ODBC;
 }
 
 SqlWrapper* MysqlWrapper::newInstance(QSqlDatabase *db) {

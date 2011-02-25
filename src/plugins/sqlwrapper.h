@@ -30,10 +30,11 @@ public:
     Dumps             = 0x0002,
     ForeignKeys       = 0x0004,
     Indexes           = 0x0008,
-    Schemas           = 0x0010,
-    StoredProcedures  = 0x0020,
-    Triggers          = 0x0040,
-    Views             = 0x0080
+    ODBC              = 0x0010,
+    Schemas           = 0x0020,
+    StoredProcedures  = 0x0040,
+    Triggers          = 0x0080,
+    Views             = 0x0100
   };
   Q_DECLARE_FLAGS(WrapperFeatures, WrapperFeature)
 
@@ -43,6 +44,12 @@ public:
   virtual QString driver() =0;
 
   virtual WrapperFeatures features() =0;
+
+  /**
+   * Spécifie si le SGBD fonctionne par le réseau ou non. Si oui, il aura besoin
+   * d'un nom d'hôte.
+   */
+  virtual bool requiresHostname() { return true; };
 
   /** Extrait un schéma selon son nom */
   virtual SqlSchema schema(QString s) { return SqlSchema(); };
@@ -60,8 +67,6 @@ public:
   virtual QList<SqlSchema> schemas() { return QList<SqlSchema>(); };
 
   virtual QList<SqlTable> tables() { return QList<SqlTable>(); };
-
-  virtual bool supportsOdbc() { return true; };
 
   QSqlDatabase* db() { return m_db; };
 
