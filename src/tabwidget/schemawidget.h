@@ -20,6 +20,10 @@ public slots:
 private:
   QSqlDatabase *m_db;
   QString m_schema;
+  QString prefix;
+
+private slots:
+  void on_tableTree_itemDoubleClicked(QTreeWidgetItem *item, int col);
 };
 
 #endif // SCHEMAWIDGET_H

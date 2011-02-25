@@ -366,6 +366,9 @@ void MainWindow::openSchema(QSqlDatabase *db, QString schema) {
     SchemaWidget *tab = new SchemaWidget(schema, db, this);
     index = tabWidget->addTab(tab, tab->icon(), schema);
     tabWidget->setCurrentIndex(index);
+    connect(tab, SIGNAL(closeRequested()), this, SLOT(closeSender()));
+    connect(tab, SIGNAL(tableRequested(QSqlDatabase*,QString)),
+            this, SLOT(openTable(QSqlDatabase*,QString)));
     tab->reload();
   }
 }

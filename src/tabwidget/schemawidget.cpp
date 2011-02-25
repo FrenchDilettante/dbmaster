@@ -3,6 +3,7 @@
 #include "../iconmanager.h"
 #include "../dbmanager.h"
 
+#include <QDebug>
 #include <QStandardItem>
 
 SchemaWidget::SchemaWidget(QString schema, QSqlDatabase *db, QWidget *parent)
@@ -23,9 +24,18 @@ QString SchemaWidget::id() {
             .arg(m_db->connectionName());
 }
 
+void SchemaWidget::on_tableTree_itemDoubleClicked(QTreeWidgetItem *item,
+                                                  int col) {
+  QString table = prefix.length() == 0 ? "" : prefix + ".";
+  table += item->text(0);
+  emit tableRequested(m_db, table);
+}
+
 void SchemaWidget::reload() {
   SqlSchema s = DbManager::schema(m_db, m_schema);
   schemaEdit->setText(s.name);
+
+  prefix = s.defaultSchema ? "" : s.name;
 
   tableTree->clear();
 
