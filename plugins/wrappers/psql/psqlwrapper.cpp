@@ -11,7 +11,7 @@ PsqlWrapper::PsqlWrapper(QSqlDatabase *db)
 }
 
 SqlWrapper::WrapperFeatures PsqlWrapper::features() {
-  return Schemas;
+  return ODBC | Schemas;
 }
 
 SqlWrapper* PsqlWrapper::newInstance(QSqlDatabase *db) {
