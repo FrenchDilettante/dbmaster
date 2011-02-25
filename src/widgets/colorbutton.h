@@ -2,6 +2,7 @@
 #define COLORBUTTON_H
 
 #include <QColor>
+#include <QColorDialog>
 #include <QToolButton>
 
 class ColorButton : public QToolButton
@@ -11,7 +12,6 @@ public:
   ColorButton(QWidget *parent = 0);
 
   QColor color() { return m_color; };
-  void setColor(QColor c) { c = m_color; };
 
   Q_PROPERTY(QColor color READ color WRITE setColor NOTIFY colorChanged)
 
@@ -19,11 +19,13 @@ signals:
   void colorChanged(QColor);
 
 public slots:
+  void setColor(QColor c);
 
 private:
   void render(QPainter *painter, const QPoint &targetOffset,
               const QRegion &sourceRegion, RenderFlags renderFlags);
 
+  QColorDialog *cDialog;
   QColor m_color;
 
 };

@@ -215,8 +215,8 @@ void ConfigDialog::setupConnections() {
 
   connect(shBoldButton, SIGNAL(clicked(bool)),
           this, SLOT(updateSyntaxFont()));
-  connect(shColorButton, SIGNAL(clicked()),
-          this, SLOT(updateSyntaxFont()));
+//  connect(shColorButton, SIGNAL(colorChanged(QColor)),
+//          this, SLOT(updateSyntaxFont()));
   connect(shItalicButton, SIGNAL(clicked(bool)),
           this, SLOT(updateSyntaxFont()));
 
@@ -242,5 +242,5 @@ void ConfigDialog::updateSyntaxFont() {
     font.setItalic(true);
   item->setFont(font);
 
-  item->setForeground(shColorButton->color());
+//  item->setForeground(shColorButton->color());
 }
