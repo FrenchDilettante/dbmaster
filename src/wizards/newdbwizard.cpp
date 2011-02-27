@@ -23,41 +23,37 @@
 /*
  * Wizard
  */
-NewDbWizard::NewDbWizard(QWidget *parent) :
-	QWizard(parent)
-{
+NewDbWizard::NewDbWizard(QWidget *parent)
+  : QWizard(parent) {
   setupUi(this);
   setWindowIcon(IconManager::get("bookmark-new"));
 
   setupPages();
 }
 
-void NewDbWizard::accept()
-{
-  if(field("savepswd").toBool())
-  {
+void NewDbWizard::accept() {
+  if(field("savepswd").toBool()) {
     DbManager::addDatabase(field("driver").toString(),
                            field("host").toString(),
                            field("user").toString(),
                            field("pswd").toString(),
                            field("name").toString(),
-                           field("alias").toString());
-  }
-  else
-  {
+                           field("alias").toString(),
+                           field("usesOdbc").toBool());
+  } else {
     DbManager::addDatabase(field("driver").toString(),
                            field("host").toString(),
                            field("user").toString(),
                            field("name").toString(),
-                           field("alias").toString());
+                           field("alias").toString(),
+                           field("usesOdbc").toBool());
   }
 
   emit(accepted());
   close();
 }
 
-void NewDbWizard::setupPages()
-{
+void NewDbWizard::setupPages() {
   setPage(FirstPage, new NdwFirstPage(this));
   setPage(SecondPage, new NdwSecondPage(this));
 }
@@ -72,6 +68,7 @@ NdwFirstPage::NdwFirstPage(QWizard *parent)
 
   registerField("host", hostLineEdit);
   registerField("driver", dbTypeComboBox, "currentDriver");
+  registerField("usesOdbc", odbcCheckBox);
 
   QCompleter *c = new QCompleter(QStringList("localhost"), this);
   c->setCompletionMode(QCompleter::InlineCompletion);
@@ -114,8 +111,7 @@ NdwSecondPage::NdwSecondPage(QWizard *parent)
           this, SLOT(updateAlias()));
 }
 
-void NdwSecondPage::browse()
-{
+void NdwSecondPage::browse() {
   dbLineEdit->setText( QFileDialog::getOpenFileName(this,
                                                     tr("Open Database"),
                                                     QDir::homePath(),

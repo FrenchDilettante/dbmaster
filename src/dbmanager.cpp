@@ -42,6 +42,45 @@ DbManagerPrivate::DbManagerPrivate()
  *    Mot de passe
  * @param dbnm
  *    Base de données
+ * @param alias
+ *    Nom à afficher
+ * @param usesOdbc
+ *    Utilise (ou non) ODBC
+ * @param save
+ *    Déclenche l'enregistrement de la liste ou non
+ */
+int DbManagerPrivate::addDatabase(QString driver, QString host, QString user,
+                                  QString pswd, QString dbnm, QString alias,
+                                  bool usesOdbc, bool save) {
+  // On détermine si un adaptateur est disponible...
+  SqlWrapper *wrapper = PluginManager::availableWrapper(driver);
+  // ... avant d'inscrire le driver en ODBC (voir assistant d'ajout)
+  if (usesOdbc) {
+    driver = "QODBC";
+  }
+
+  // On continue avec la procédure classique
+  return addDatabase(driver, host, user, pswd, dbnm, alias, wrapper->plid(),
+                     save);
+}
+
+/**
+ * Ajoute une base au pool de connexions.
+ *
+ * @param driver
+ *    Voir doc Qt
+ * @param host
+ *    Hôte distant ou local
+ * @param user
+ *    Nom d'utilisateur
+ * @param pswd
+ *    Mot de passe
+ * @param dbnm
+ *    Base de données
+ * @param alias
+ *    Nom à afficher
+ * @param wrapper
+ *    Nom (PLID) de l'adaptateur SQL à utiliser
  * @param save
  *    Déclenche l'enregistrement de la liste ou non
  */
@@ -82,15 +121,16 @@ int DbManagerPrivate::addDatabase(QString driver, QString host, QString user,
   dbMap[newDb]->setToolTip(dbToolTip(newDb));
 
   m_model->appendRow(dbMap[newDb]);
-  if(save) {
-    saveList();
-    LogDialog::instance()->append(QObject::tr("Connection %1 added")
-            .arg(title));
-  }
 
   SqlWrapper *w = PluginManager::wrapper(wrapper);
   if (w) {
     dbWrappers[newDb] = w->newInstance(newDb);
+  }
+
+  if (save) {
+    saveList();
+    LogDialog::instance()->append(QObject::tr("Connection %1 added")
+            .arg(title));
   }
 
   return dbList.size() - 1;
@@ -481,8 +521,7 @@ void DbManagerPrivate::saveList() {
   s.beginWriteArray("dblist", dbMap.size());
 
   int i=0;
-  foreach(QSqlDatabase *db, dbList)
-  {
+  foreach (QSqlDatabase *db, dbList) {
     i++;
     s.setArrayIndex(i);
     s.setValue("driver", db->driverName());
@@ -492,6 +531,9 @@ void DbManagerPrivate::saveList() {
       s.setValue("password", db->password());
     s.setValue("database", db->databaseName());
     s.setValue("alias", dbMap[db]->text());
+    if (dbWrappers.contains(db) && dbWrappers[db]) {
+      s.setValue("wrapper", dbWrappers[db]->plid());
+    }
   }
   s.endArray();
   s.sync();
@@ -676,13 +718,15 @@ DbManagerPrivate   *DbManager::m_instance = new DbManagerPrivate();
 int                 DbManager::lastIndex  = 0;
 
 int DbManager::addDatabase(QString driver, QString host, QString user,
-                           QString pswd, QString dbnm, QString alias) {
-  return m_instance->addDatabase(driver, host, user, pswd, dbnm, alias);
+                           QString pswd, QString dbnm, QString alias,
+                           bool usesOdbc) {
+  return
+      m_instance->addDatabase(driver, host, user, pswd, dbnm, alias, usesOdbc);
 }
 
 int DbManager::addDatabase(QString driver, QString host, QString user,
-                           QString dbnm, QString alias) {
-  return addDatabase(driver, host, user, QString::null, dbnm, alias);
+                           QString dbnm, QString alias, bool usesOdbc) {
+  return addDatabase(driver, host, user, QString::null, dbnm, alias, usesOdbc);
 }
 
 QString DbManager::alias(QSqlDatabase *db) {
@@ -723,16 +767,8 @@ QStringList DbManager::getDbNames(bool showHosts) {
   return m_instance->getDbNames(showHosts);
 }
 
-int DbManager::indexOf(QSqlDatabase *db) {
-  return m_instance->indexOf(db);
-}
-
 void DbManager::init() {
   m_instance->init();
-}
-
-QString DbManager::lastError() {
-  return m_instance->lastError();
 }
 
 void DbManager::open(int nb, QString pswd) {
