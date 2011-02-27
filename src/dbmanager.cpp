@@ -676,8 +676,8 @@ DbManagerPrivate   *DbManager::m_instance = new DbManagerPrivate();
 int                 DbManager::lastIndex  = 0;
 
 int DbManager::addDatabase(QString driver, QString host, QString user,
-                           QString pswd, QString alias, QString dbnm) {
-  return m_instance->addDatabase(driver, host, user, pswd, alias, dbnm);
+                           QString pswd, QString dbnm, QString alias) {
+  return m_instance->addDatabase(driver, host, user, pswd, dbnm, alias);
 }
 
 int DbManager::addDatabase(QString driver, QString host, QString user,
