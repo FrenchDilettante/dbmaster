@@ -19,11 +19,19 @@ QList<ResultView*> ResultView::instances = QList<ResultView*>();
 ResultView::ResultView(QWidget *parent)
   : QWidget(parent) {
   setupUi(this);
+  // Sincèrement, un jour, il faudra se poser la question de l'utilité de la
+  // ligne suivante :
   table->setModel(0);
+
+  // Par défaut, on visualise
   currentAction = Browse;
+  // Aucun tri
   currentSorting = QPair<int, Qt::SortOrder>(-1, Qt::AscendingOrder);
+  // Nécessaire pour la synchronisation sur l'option d'alternance des lignes
   instances << this;
+  // On commence à la première ligne
   offset = 0;
+  // Purement arbitraire, j'avoue
   m_mode = QueryMode;
   shortModel = new QStandardItemModel(this);
   table->setModel(shortModel);
@@ -55,6 +63,10 @@ void ResultView::contextMenuEvent(QContextMenuEvent *e)
 
   if( model->columnCount() == 0 || model->rowCount() == 0 )
     return;
+
+  actionDetails->setEnabled(
+        table->selectionModel()->selectedIndexes().size() > 0
+        && table->selectionModel()->selectedIndexes().size() < 2);
 
   contextMenu->move(e->globalPos());
   contextMenu->exec();
@@ -285,6 +297,10 @@ void ResultView::setupConnections() {
 
 void ResultView::setupMenus() {
   contextMenu = new QMenu(this);
+
+  actionDetails = new QAction(tr("Details"), this);
+  actionDetails->setEnabled(false);
+  contextMenu->addAction(actionDetails);
 
   actionAlternateColor = new QAction(tr("Alternate row colors"), this);
   actionAlternateColor->setCheckable(true);

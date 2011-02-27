@@ -74,6 +74,7 @@ private:
   void setupMenus();
 
   QAction              *actionAlternateColor;
+  QAction              *actionDetails;
   QAction              *actionExport;
   QMenu                *contextMenu;
   Action                currentAction;
