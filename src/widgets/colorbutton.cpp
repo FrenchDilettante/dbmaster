@@ -1,5 +1,6 @@
 #include "colorbutton.h"
 
+#include <QDebug>
 #include <QPainter>
 
 ColorButton::ColorButton(QWidget *parent)
@@ -10,19 +11,21 @@ ColorButton::ColorButton(QWidget *parent)
   connect(cDialog, SIGNAL(colorSelected(QColor)), this, SLOT(setColor(QColor)));
 }
 
-void ColorButton::render(QPainter *painter, const QPoint &targetOffset,
-                         const QRegion &sourceRegion, RenderFlags renderFlags) {
-  QToolButton::render(painter, targetOffset, sourceRegion, renderFlags);
-
-  painter->save();
-  painter->setPen(Qt::NoPen);
-  painter->setBrush(Qt::red);
-  painter->drawRect(QRect(0, 0, 10, 10));
-  painter->restore();
-}
-
+/**
+ * Mise à jour de la couleur + affichage
+ */
 void ColorButton::setColor(QColor c) {
-  c = m_color;
+  m_color = c;
+
+  QPixmap pixmap(10, 10);
+  QPainter painter;
+  painter.begin(&pixmap);
+  painter.setBrush(c);
+  painter.setPen(Qt::NoPen);
+  painter.drawRect(QRect(QPoint(0, 0), pixmap.size()));
+  painter.end();
+
+  setIcon(QIcon(pixmap));
 
   emit colorChanged(c);
 }

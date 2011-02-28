@@ -22,9 +22,6 @@ public slots:
   void setColor(QColor c);
 
 private:
-  void render(QPainter *painter, const QPoint &targetOffset,
-              const QRegion &sourceRegion, RenderFlags renderFlags);
-
   QColorDialog *cDialog;
   QColor m_color;
 

@@ -244,5 +244,5 @@ void ConfigDialog::updateSyntaxFont() {
     font.setItalic(true);
   item->setFont(font);
 
-//  item->setForeground(shColorButton->color());
+  item->setForeground(shColorButton->color());
 }
