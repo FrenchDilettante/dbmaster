@@ -45,7 +45,7 @@ public:
 
   ResultView(QWidget *parent=0);
 
-  void setTable(QString table, QSqlDatabase *db);
+  bool setTable(QString table, QSqlDatabase *db);
   void setToken(QueryToken *token);
 
   Mode mode()           { return m_mode;    };

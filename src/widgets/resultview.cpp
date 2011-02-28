@@ -223,21 +223,21 @@ void ResultView::setRowsPerPage(int rowPP)
   resultSpinBox->setValue(rowPP);
 }
 
-void ResultView::setTable(QString table, QSqlDatabase *db)
-{
+bool ResultView::setTable(QString table, QSqlDatabase *db) {
   setMode(TableMode);
   QSqlTableModel *m = new QSqlTableModel(this, *db);
   m->setTable(table);
   m->setEditStrategy(QSqlTableModel::OnManualSubmit);
   m->select();
-  if(m->lastError().type() == QSqlError::NoError)
-  {
+  if(m->lastError().type() == QSqlError::NoError)   {
     setModel(m);
+    return true;
   } else {
     QMessageBox::critical(this,
                           tr("Error"),
                           tr("The specified table doesn't exist"),
                           QMessageBox::Ok);
+    return false;
   }
 }
 

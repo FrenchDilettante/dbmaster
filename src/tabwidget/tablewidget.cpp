@@ -66,7 +66,9 @@ void TableWidget::reload() {
     return;
   }
 
-  tableView->setTable(m_table, m_db);
+  if (!tableView->setTable(m_table, m_db)) {
+    emit closeRequested();
+  }
 }
 
 void TableWidget::setTable( QString table, QSqlDatabase *db )
