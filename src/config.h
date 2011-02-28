@@ -28,6 +28,8 @@ public:
   static void reload();
   static void save();
 
+  static void import_0_7();
+
   static int              compCharCount;
   static QString          defaultDriver;
   static QFont            editorFont;

@@ -39,8 +39,14 @@ void Config::reload()
   QSettings s;
   if(!s.contains("default_database"))
   {
-    QWizard *wizard = new FirstLaunchWizard;
-    wizard->exec();
+    // Test version < 0.8
+    QSettings s_0_7("dbmaster.sourceforge.net", "dbmaster");
+    if (s_0_7.contains("default_database")) {
+      import_0_7();
+    } else {
+      QWizard *wizard = new FirstLaunchWizard;
+      wizard->exec();
+    }
     save();
   }
 
@@ -118,4 +124,44 @@ void Config::save()
   s.endArray();
 
   s.sync();
+}
+
+void Config::import_0_7() {
+  QSettings sold("dbmaster.org", "dbmaster");
+  defaultDriver = sold.value("default_database").toString();
+
+  /*
+   * Editor's properties
+   */
+  sold.beginGroup("editor");
+  editorAutoSave = sold.value("autosave").toBool();
+  compCharCount = sold.value("comp_count").toInt();
+  editorEncoding = sold.value("encoding").toString();
+  editorFont.setFamily(sold.value("font_name").toString());
+  if(sold.value("font_size").toInt() > 0)
+    editorFont.setPointSize(sold.value("font_size").toInt());
+  editorSemantic = sold.value("semantic").toBool();
+  sold.endGroup();
+
+  /*
+   * Syntax highlighting properties
+   */
+  int max = sold.beginReadArray("highlighting");
+  for(int i=0; i<max; i++)
+  {
+    sold.setArrayIndex(i);
+    QString group = sold.value("groupname").toString();
+    QColor c;
+    c.setNamedColor(sold.value("color").toString());
+    shColor[group] = c;
+    QTextCharFormat f;
+    if(sold.value("bold").toBool())
+      f.setFontWeight(QFont::Bold);
+    else
+      f.setFontWeight(QFont::Normal);
+    f.setFontItalic(sold.value("italic").toBool());
+    shFormat[group] = f;
+  }
+
+  sold.endArray();
 }
