@@ -235,7 +235,8 @@ bool ResultView::setTable(QString table, QSqlDatabase *db) {
   } else {
     QMessageBox::critical(this,
                           tr("Error"),
-                          tr("The specified table doesn't exist"),
+                          tr("Unable to open the table. Returned error :\n%1")
+                          .arg(m->lastError().text()),
                           QMessageBox::Ok);
     return false;
   }
