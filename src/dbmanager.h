@@ -35,7 +35,11 @@ public:
 
   int                     addDatabase(QString driver, QString host,
                                       QString user, QString pswd, QString dbnm,
-                                      QString alias, QString wrapper ="",
+                                      QString alias, bool usesOdbc,
+                                      bool save =true);
+  int                     addDatabase(QString driver, QString host,
+                                      QString user, QString pswd, QString dbnm,
+                                      QString alias, QString wrapper,
                                       bool save =true);
   QString                 alias(QSqlDatabase *db);
   void                    close(QSqlDatabase *db);
@@ -119,9 +123,11 @@ public:
   };
 
   static int            addDatabase(QString driver, QString host, QString user,
-                                    QString pswd, QString dbnm, QString alias);
+                                    QString pswd, QString dbnm, QString alias,
+                                    bool usesOdbc =false);
   static int            addDatabase(QString driver, QString host, QString user,
-                                    QString dbnm, QString alias);
+                                    QString dbnm, QString alias,
+                                    bool usesOdbc =false);
   static QString        alias(QSqlDatabase *db);
   static void           close(QSqlDatabase *db);
   static void           closeAll();
@@ -134,13 +140,9 @@ public:
   static QList<QSqlDatabase*>
                         getDbList();
   static QStringList    getDbNames(bool);
-  /// @deprecated
-  static int            indexOf(QSqlDatabase *db);
   static void           init();
   static DbManagerPrivate *instance()   { return m_instance;    };
   static int            lastIndex;
-  /// @deprecated
-  static QString        lastError();
   static QStandardItemModel*
                         model()     { return m_instance->model();   };
   static void           open(int, QString=QString::null);
