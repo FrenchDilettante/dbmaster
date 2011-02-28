@@ -74,11 +74,7 @@ NdwFirstPage::NdwFirstPage(QWizard *parent)
 
   registerField("host", hostLineEdit);
   registerField("driver", dbTypeComboBox, "currentDriver");
-<<<<<<< HEAD
-  registerField("useODBC", odbcCheckBox);
-=======
   registerField("usesOdbc", odbcCheckBox);
->>>>>>> origin/next
 
   QCompleter *c = new QCompleter(QStringList("localhost"), this);
   c->setCompletionMode(QCompleter::InlineCompletion);
