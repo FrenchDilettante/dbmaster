@@ -217,8 +217,8 @@ void ConfigDialog::setupConnections() {
 
   connect(shBoldButton, SIGNAL(clicked(bool)),
           this, SLOT(updateSyntaxFont()));
-//  connect(shColorButton, SIGNAL(colorChanged(QColor)),
-//          this, SLOT(updateSyntaxFont()));
+  connect(shColorButton, SIGNAL(colorChanged(QColor)),
+          this, SLOT(updateSyntaxFont()));
   connect(shItalicButton, SIGNAL(clicked(bool)),
           this, SLOT(updateSyntaxFont()));
 

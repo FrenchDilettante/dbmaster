@@ -9,6 +9,8 @@ ColorButton::ColorButton(QWidget *parent)
   cDialog = new QColorDialog(this);
   connect(this, SIGNAL(clicked()), cDialog, SLOT(exec()));
   connect(cDialog, SIGNAL(colorSelected(QColor)), this, SLOT(setColor(QColor)));
+  connect(cDialog, SIGNAL(colorSelected(QColor)),
+          this, SIGNAL(colorChanged(QColor)));
 }
 
 /**
@@ -17,7 +19,7 @@ ColorButton::ColorButton(QWidget *parent)
 void ColorButton::setColor(QColor c) {
   m_color = c;
 
-  QPixmap pixmap(10, 10);
+  QPixmap pixmap(12, 12);
   QPainter painter;
   painter.begin(&pixmap);
   painter.setBrush(c);
@@ -26,6 +28,5 @@ void ColorButton::setColor(QColor c) {
   painter.end();
 
   setIcon(QIcon(pixmap));
-
-  emit colorChanged(c);
+  setToolTip(c.name());
 }
