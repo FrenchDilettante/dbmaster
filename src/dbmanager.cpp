@@ -59,9 +59,10 @@ int DbManagerPrivate::addDatabase(QString driver, QString host, QString user,
     driver = "QODBC";
   }
 
+  QString plid = wrapper ? wrapper->plid() : "";
+
   // On continue avec la procédure classique
-  return addDatabase(driver, host, user, pswd, dbnm, alias, wrapper->plid(),
-                     save);
+  return addDatabase(driver, host, user, pswd, dbnm, alias, plid, save);
 }
 
 /**
