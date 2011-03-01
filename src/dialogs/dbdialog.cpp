@@ -19,8 +19,7 @@
 #include <QMessageBox>
 
 DbDialog::DbDialog(QWidget *parent)
-  : QDialog(parent)
-{
+  : QDialog(parent) {
   setupUi(this);
   setupWidgets();
   setupConnections();
@@ -29,8 +28,7 @@ DbDialog::DbDialog(QWidget *parent)
   reload();
 }
 
-void DbDialog::accept()
-{
+void DbDialog::accept() {
   if(db->isOpen()) {
     close();
     return;
@@ -55,24 +53,16 @@ void DbDialog::apply() {
   DbManager::update(db);
 }
 
-/**
- * Forwards the signal from NewDbWizard to MainWindow.
- */
-void DbDialog::forwardAccept()
-{
-}
-
-void DbDialog::refresh(QModelIndex index)
-{
-  if(dbListView->selectionModel()->selectedRows().contains(index))
+void DbDialog::refresh(QModelIndex index) {
+  if(dbListView->selectionModel()->selectedRows().contains(index)) {
     reload();
+  }
 }
 
 /**
  * Re-fills all fields and enables/disables widgets
  */
-void DbDialog::reload()
-{
+void DbDialog::reload() {
   bool emptyList = DbManager::getDbList().size() == 0;
   bool selected = !emptyList
                   && dbListView->selectionModel()->selection().size() > 0;
@@ -149,8 +139,6 @@ void DbDialog::setupConnections()
   // list view
   connect(dbListView, SIGNAL(clicked(QModelIndex)),
           this, SLOT(setDatabase(QModelIndex)));
-
-  connect(addWzd, SIGNAL(accepted()), this, SLOT(forwardAccept()));
 
   connect(DbManager::instance(), SIGNAL(statusChanged(QModelIndex)),
           this, SLOT(refresh(QModelIndex)));

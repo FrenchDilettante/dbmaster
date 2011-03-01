@@ -83,7 +83,6 @@ private:
 private slots:
   void acceptToken();
   void checkDbOpen();
-  void forwardChanged(bool changed);
   void rejectToken();
   void startToken();
   void validateToken(QSqlError err);

@@ -47,7 +47,6 @@ private:
 private slots:
   void accept();
   void apply();
-  void forwardAccept();
   void refresh(QModelIndex index);
   void reload();
   void removeCurrent();

@@ -163,14 +163,6 @@ QString QueryEditorWidget::file()
   return filePath;
 }
 
-/**
- * Forwards from the editor
- */
-void QueryEditorWidget::forwardChanged(bool changed)
-{
-  emit modificationChanged(changed);
-}
-
 QIcon QueryEditorWidget::icon()
 {
   return IconManager::get("accessories-text-editor");
@@ -388,7 +380,7 @@ void QueryEditorWidget::setupConnections()
   connect(runButton, SIGNAL(clicked()), this, SLOT(run()));
 
   connect(editor->document(), SIGNAL(modificationChanged(bool)),
-          this, SLOT(forwardChanged(bool)));
+          this, SIGNAL(modificationChanged(bool)));
 }
 
 void QueryEditorWidget::setupWidgets()
