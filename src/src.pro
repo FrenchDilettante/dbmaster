@@ -88,7 +88,6 @@ FORMS += mainwindow.ui \
     dialogs/searchdialog.ui \
     tabwidget/schemawidget.ui
 RESOURCES += icons.qrc
-TRANSLATIONS += tr/fr_FR.po
 
 # ##
 # Common
