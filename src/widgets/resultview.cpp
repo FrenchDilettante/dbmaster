@@ -248,20 +248,22 @@ void ResultView::setModel(QSqlQueryModel *model) {
   updateView();
 }
 
-void ResultView::setTable(QString table, QSqlDatabase *db) {
+bool ResultView::setTable(QString table, QSqlDatabase *db) {
   setMode(TableMode);
   QSqlTableModel *m = new QSqlTableModel(this, *db);
   m->setTable(table);
   m->setEditStrategy(QSqlTableModel::OnManualSubmit);
   m->select();
-  if(m->lastError().type() == QSqlError::NoError)
-  {
+  if(m->lastError().type() == QSqlError::NoError)   {
     setModel(m);
+    return true;
   } else {
     QMessageBox::critical(this,
                           tr("Error"),
-                          tr("The specified table doesn't exist"),
+                          tr("Unable to open the table. Returned error :\n%1")
+                          .arg(m->lastError().text()),
                           QMessageBox::Ok);
+    return false;
   }
 }
 

@@ -592,6 +592,7 @@ void DbManagerPrivate::setupConnections() {
 void DbManagerPrivate::setupModels() {
   m_driverModel->setHorizontalHeaderItem(0, new QStandardItem(tr("Driver")));
 
+  driverAlias["QDB2"]     = tr("DB2");
   driverAlias["QIBASE"]   = tr("Interbase/Firebird");
   driverAlias["QMYSQL"]   = tr("MySql");
   driverAlias["QMYSQL3"]  = tr("MySql 3");
@@ -602,6 +603,7 @@ void DbManagerPrivate::setupModels() {
   driverAlias["QSQLITE"]  = tr("SQLite");
   driverAlias["QSQLITE2"] = tr("SQLite 2");
 
+  driverIcon["QDB2"]      = QIcon(":/img/db_db2.png");
   driverIcon["QIBASE"]    = QIcon(":/img/db_firebird.png");
   driverIcon["QMYSQL"]    = QIcon(":/img/db_mysql.png");
   driverIcon["QPSQL"]     = QIcon(":/img/db_postgresql.png");

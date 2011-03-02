@@ -87,7 +87,6 @@ private:
 private slots:
   void acceptToken();
   void checkDbOpen();
-  void forwardChanged(bool changed);
   void on_watcher_fileChanged(QString path);
   void rejectToken();
   void startToken();

@@ -27,23 +27,6 @@
    <item row="1" column="1">
     <widget class="QLineEdit" name="lineEdit"/>
    </item>
-   <item row="1" column="2">
-    <widget class="QPushButton" name="pushButton">
-     <property name="text">
-      <string/>
-     </property>
-     <property name="icon">
-      <iconset resource="../icons.qrc">
-       <normaloff>:/img/clear_left.png</normaloff>:/img/clear_left.png</iconset>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>16</width>
-       <height>16</height>
-      </size>
-     </property>
-    </widget>
-   </item>
    <item row="2" column="0" colspan="3">
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="standardButtons">
@@ -68,11 +51,19 @@
      </column>
     </widget>
    </item>
+   <item row="1" column="2">
+    <widget class="QToolButton" name="clearButton">
+     <property name="text">
+      <string/>
+     </property>
+     <property name="autoRaise">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
- <resources>
-  <include location="../icons.qrc"/>
- </resources>
+ <resources/>
  <connections>
   <connection>
    <sender>buttonBox</sender>
@@ -91,18 +82,18 @@
    </hints>
   </connection>
   <connection>
-   <sender>pushButton</sender>
+   <sender>clearButton</sender>
    <signal>clicked()</signal>
    <receiver>lineEdit</receiver>
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>400</x>
-     <y>271</y>
+     <x>406</x>
+     <y>270</y>
     </hint>
     <hint type="destinationlabel">
-     <x>242</x>
-     <y>262</y>
+     <x>345</x>
+     <y>270</y>
     </hint>
    </hints>
   </connection>

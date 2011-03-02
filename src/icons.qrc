@@ -71,5 +71,6 @@
         <file>img/plugins.png</file>
         <file>img/column.png</file>
         <file>img/column_key.png</file>
+        <file>img/db_db2.png</file>
     </qresource>
 </RCC>

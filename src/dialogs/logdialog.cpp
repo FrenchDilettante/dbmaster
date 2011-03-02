@@ -34,7 +34,7 @@ LogDialog::LogDialog(QWidget *parent)
   connect(lineEdit, SIGNAL(textChanged(QString)),
           this, SLOT(updateFilter(QString)));
 
-  pushButton->setIcon(IconManager::get("edit-clear"));
+  clearButton->setIcon(IconManager::get("edit-clear"));
 }
 
 void LogDialog::append(QString text)

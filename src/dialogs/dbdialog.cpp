@@ -28,8 +28,7 @@ DbDialog::DbDialog(QWidget *parent)
   reload();
 }
 
-void DbDialog::accept()
-{
+void DbDialog::accept() {
   if(db->isOpen()) {
     close();
     return;
@@ -53,17 +52,10 @@ void DbDialog::apply() {
   DbManager::update(db, aliasEdit->text());
 }
 
-/**
- * Forwards the signal from NewDbWizard to MainWindow.
- */
-void DbDialog::forwardAccept()
-{
-}
-
-void DbDialog::refresh(QModelIndex index)
-{
-  if(dbListView->selectionModel()->selectedRows().contains(index))
+void DbDialog::refresh(QModelIndex index) {
+  if(dbListView->selectionModel()->selectedRows().contains(index)) {
     reload();
+  }
 }
 
 /**
@@ -147,8 +139,6 @@ void DbDialog::setupConnections()
   // list view
   connect(dbListView, SIGNAL(clicked(QModelIndex)),
           this, SLOT(setDatabase(QModelIndex)));
-
-  connect(addWzd, SIGNAL(accepted()), this, SLOT(forwardAccept()));
 
   connect(DbManager::instance(), SIGNAL(statusChanged(QModelIndex)),
           this, SLOT(refresh(QModelIndex)));
