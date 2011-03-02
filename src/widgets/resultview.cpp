@@ -13,6 +13,8 @@
 
 #include "../iconmanager.h"
 
+#include <QModelIndex>
+
 bool ResultView::alternateRows = false;
 QList<ResultView*> ResultView::instances = QList<ResultView*>();
 
@@ -36,6 +38,8 @@ ResultView::ResultView(QWidget *parent)
   shortModel = new QStandardItemModel(this);
   table->setModel(shortModel);
   table->setAlternatingRowColors(alternateRows);
+
+  blobDialog = new BlobDialog(this);
 
   setupMenus();
   setupConnections();
@@ -278,6 +282,7 @@ void ResultView::setToken(QueryToken *token) {
 void ResultView::setupConnections() {
   connect(actionAlternateColor, SIGNAL(toggled(bool)),
           this, SLOT(setAlternatingRowColors(bool)));
+  connect(actionDetails, SIGNAL(triggered()), this, SLOT(showBlob()));
   connect(actionExport, SIGNAL(triggered()), this, SLOT(exportContent()));
 
   connect(firstPageButton, SIGNAL(clicked()), this, SLOT(scrollBegin()));
@@ -313,6 +318,16 @@ void ResultView::setupMenus() {
   actionExport->setIcon(IconManager::get("document-save-as"));
   actionExport->setShortcut(QKeySequence("Ctrl+E"));
   contextMenu->addAction(actionExport);
+}
+
+void ResultView::showBlob() {
+  if (table->selectionModel()->selectedIndexes().size() != 1) {
+    return;
+  }
+
+  QVariant blob = table->selectionModel()->selectedIndexes().at(0).data();
+  blobDialog->setBlob(blob);
+  blobDialog->show();
 }
 
 void ResultView::sort(int col) {

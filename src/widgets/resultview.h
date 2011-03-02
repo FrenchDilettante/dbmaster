@@ -13,6 +13,7 @@
 #ifndef RESULTVIEW_H
 #define RESULTVIEW_H
 
+#include "../dialogs/blobdialog.h"
 #include "../query/querytoken.h"
 #include "../wizards/exportwizard.h"
 #include "ui_resultview.h"
@@ -76,6 +77,7 @@ private:
   QAction              *actionAlternateColor;
   QAction              *actionDetails;
   QAction              *actionExport;
+  BlobDialog           *blobDialog;
   QMenu                *contextMenu;
   Action                currentAction;
   QPair<int, Qt::SortOrder> currentSorting;
@@ -97,6 +99,7 @@ private slots:
   void exportContent();
   void on_reloadButton_clicked();
   void on_insertButton_clicked();
+  void showBlob();
   void updateItem(QStandardItem *item);
   void updateView();
 };
