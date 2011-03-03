@@ -68,5 +68,6 @@
         <file>img/table_lightning.png</file>
         <file>img/table_gear.png</file>
         <file>img/db_db2.png</file>
+        <file>img/edit-search.png</file>
     </qresource>
 </RCC>
