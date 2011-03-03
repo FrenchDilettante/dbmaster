@@ -22,6 +22,58 @@ SqlWrapper* MysqlWrapper::newInstance(QSqlDatabase *db) {
   return new MysqlWrapper(db);
 }
 
+SqlTable MysqlWrapper::table(QString t) {
+  SqlTable table;
+
+  if (!m_db) {
+    return table;
+  }
+
+  QString sql;
+
+  sql += "SELECT C.TABLE_NAME, T.TABLE_TYPE, C.COLUMN_NAME, C.DATA_TYPE, ";
+  sql += "C.IS_NULLABLE, 0 AS 'PK', C.ORDINAL_POSITION ";
+  sql += "FROM INFORMATION_SCHEMA.COLUMNS C ";
+  sql +=   "INNER JOIN INFORMATION_SCHEMA.TABLES T ";
+  sql +=   "ON C.TABLE_NAME = T.TABLE_NAME ";
+  sql +=     "AND C.TABLE_SCHEMA = T.TABLE_SCHEMA ";
+  sql += "WHERE C.TABLE_SCHEMA='" + m_db->databaseName() + "' ";
+  sql += "AND C.TABLE_NAME='" + t + "' ";
+
+  sql += "ORDER BY ORDINAL_POSITION";
+
+  QSqlQuery query(*m_db);
+  if (!query.exec(sql)) {
+    qDebug() << query.lastError().text();
+    return table;
+  }
+
+  bool first = true;
+  while (query.next()) {
+    if (first) {
+      table.name = query.value(0).toString();
+      if (query.value(1).toString().toLower() == "base table") {
+        table.type = Table;
+      } else {
+        table.type = ViewTable;
+      }
+      first = false;
+    }
+
+    SqlColumn c;
+    c.name = query.value(2).toString();
+    c.primaryKey = false;
+    SqlType ty;
+    ty.name = query.value(3).toString().toUpper();
+    c.type = ty;
+    c.permitsNull = query.value(4).toString().toLower() == "yes";
+    c.primaryKey = query.value(5).toInt();
+    table.columns << c;
+  }
+
+  return table;
+}
+
 QList<SqlTable> MysqlWrapper::tables() {
   QList<SqlTable> tables;
 
@@ -36,6 +88,7 @@ QList<SqlTable> MysqlWrapper::tables() {
   sql += "FROM INFORMATION_SCHEMA.COLUMNS C ";
   sql +=   "INNER JOIN INFORMATION_SCHEMA.TABLES T ";
   sql +=   "ON C.TABLE_NAME = T.TABLE_NAME ";
+  sql +=     "AND C.TABLE_SCHEMA = T.TABLE_SCHEMA ";
   sql += "WHERE C.TABLE_SCHEMA='";
   sql += m_db->databaseName();
   sql += "' ";

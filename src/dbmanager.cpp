@@ -637,6 +637,16 @@ void DbManagerPrivate::swapDatabase(QSqlDatabase *oldDb, QSqlDatabase *newDb) {
   saveList();
 }
 
+SqlTable DbManagerPrivate::table(QSqlDatabase *db, QString tbl) {
+  if (!dbWrappers[db]) {
+    return SqlTable();
+  }
+
+  SqlTable table = dbWrappers[db]->table(tbl);
+
+  return table;
+}
+
 QStandardItem *DbManagerPrivate::tablesItem(QList<SqlTable> tables,
                                             QString schema) {
   QStandardItem *tablesItem = new QStandardItem();
@@ -808,6 +818,10 @@ SqlSchema DbManager::schema(QSqlDatabase *db, QString schema) {
 
 void DbManager::setDatabase(int nb, QSqlDatabase db) {
   m_instance->setDatabase(nb, db);
+}
+
+SqlTable DbManager::table(QSqlDatabase *db, QString tbl) {
+  return m_instance->table(db, tbl);
 }
 
 void DbManager::terminate() {

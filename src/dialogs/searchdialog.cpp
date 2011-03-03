@@ -41,8 +41,7 @@ void SearchDialog::closeEvent(QCloseEvent *event) {
 void SearchDialog::replace() {
   QTextCursor tc = m_textEdit->textCursor();
 
-  if(tc.selectedText().size() > 0)
-  {
+  if (tc.selectedText().size() > 0) {
     tc.removeSelectedText();
     tc.insertText(replaceComboBox->currentText());
   }

@@ -24,7 +24,7 @@ public:
   SqlSchema schema(QString s);
   QList<SqlSchema> schemas();
   QString driver() { return "QPSQL"; };
-  QList<SqlTable> tables();
+  SqlTable table(QString t);
 
 signals:
 

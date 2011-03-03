@@ -68,6 +68,22 @@ void TableWidget::reload() {
 
   if (!tableView->setTable(m_table, m_db)) {
     emit closeRequested();
+  } else {
+    columnsTree->clear();
+    SqlTable table = DbManager::table(m_db, m_table);
+    foreach (SqlColumn c, table.columns) {
+      QStringList cols;
+      cols << c.name
+           << c.type.name
+           << ( c.permitsNull ? tr("Oui") : tr("Non") );
+      QTreeWidgetItem *it = new QTreeWidgetItem(cols);
+      if (c.primaryKey) {
+        it->setIcon(0, IconManager::get("column_key"));
+      } else {
+        it->setIcon(0, IconManager::get("column"));
+      }
+      columnsTree->addTopLevelItem(it);
+    }
   }
 }
 

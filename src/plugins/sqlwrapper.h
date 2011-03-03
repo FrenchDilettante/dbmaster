@@ -66,6 +66,9 @@ public:
    */
   virtual QList<SqlSchema> schemas() { return QList<SqlSchema>(); };
 
+  /** Extrait une table depuis son nom */
+  virtual SqlTable table(QString t) =0;
+
   virtual QList<SqlTable> tables() { return QList<SqlTable>(); };
 
   QSqlDatabase* db() { return m_db; };

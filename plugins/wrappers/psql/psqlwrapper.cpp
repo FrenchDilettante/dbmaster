@@ -190,16 +190,62 @@ QList<SqlSchema> PsqlWrapper::schemas() {
   return schemas;
 }
 
-QList<SqlTable> PsqlWrapper::tables() {
-  QList<SqlTable> tables;
+SqlTable PsqlWrapper::table(QString t) {
+  SqlTable table;
 
-  if (m_db) {
-    return tables;
+  if (!m_db) {
+    return table;
   }
 
-  QString sql = "select ";
+  QString sql;
+  sql += "SELECT schemaname, typname, 'T', attname, attnotnull, attlen, attnum ";
+  sql += "FROM pg_attribute, pg_type, pg_tables ";
+  sql += "WHERE attrelid = typrelid ";
+  sql +=   "AND attname NOT IN ('cmin', 'cmax', 'ctid', 'oid', ";
+  sql +=      "'tableoid', 'xmin', 'xmax') ";
+  sql +=   "AND typname = tablename ";
+  sql +=   "AND typname = '" + t + "' ";
 
-  return tables;
+
+  sql += "UNION ";
+
+  sql += "SELECT schemaname, typname, 'V', attname, attnotnull, attlen, attnum ";
+  sql += "FROM pg_attribute, pg_type, pg_views ";
+  sql += "WHERE attrelid = typrelid ";
+  sql +=   "AND attname NOT IN ('cmin', 'cmax', 'ctid', 'oid', ";
+  sql +=      "'tableoid', 'xmin', 'xmax') ";
+  sql +=   "AND typname = viewname ";
+  sql +=   "AND typname = '" + t + "' ";
+
+  sql += "ORDER BY schemaname, typname, attnum ";
+
+  QSqlQuery query(*m_db);
+  if (!query.exec(sql)) {
+    qDebug() << query.lastError().text();
+    return table;
+  }
+
+  bool first = true;
+  while (query.next()) {
+    if (first) {
+      table.name = query.value(1).toString();
+      if (query.value(2).toString() == "T") {
+        table.type = Table;
+      } else if (query.value(2).toString() == "V") {
+        table.type = ViewTable;
+      }
+      first = false;
+    }
+
+    // Colonnes
+    SqlColumn c;
+    c.name = query.value(3).toString();
+    c.permitsNull = query.value(4).toBool();
+    c.primaryKey = false;
+    table.columns << c;
+  }
+
+  return table;
 }
 
 Q_EXPORT_PLUGIN2(dbm_psql_wrapper, PsqlWrapper)

@@ -23,6 +23,7 @@ public:
   WrapperFeatures features();
   SqlWrapper* newInstance(QSqlDatabase *db);
   QString driver() { return "QMYSQL"; };
+  SqlTable table(QString t);
   QList<SqlTable> tables();
 
 signals:
