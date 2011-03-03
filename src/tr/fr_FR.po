@@ -80,159 +80,159 @@ msgctxt "ConfigDialogClass|"
 msgid "DbMaster - Preferences"
 msgstr "DbMaster - Préférences"
 
-#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:44
-#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:110
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:40
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:106
 msgctxt "ConfigDialogClass|"
 msgid "General"
 msgstr "Général"
 
-#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:53
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:49
 msgctxt "ConfigDialogClass|"
 msgid "Query editor"
 msgstr "Éditeur de requêtes"
 
-#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:85
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:81
 #| msgid "Default database"
 msgctxt "ConfigDialogClass|"
 msgid "Default driver"
 msgstr "Driver par défaut"
 
-#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:116
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:112
 msgctxt "ConfigDialogClass|"
 msgid "Save query before execute it"
 msgstr "Enregistrer la requête avant de l'exécuter"
 
-#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:123
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:119
 msgctxt "ConfigDialogClass|"
 msgid "Enable semantic analysis"
 msgstr "Activer l'analyse sémantique"
 
-#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:133
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:129
 msgctxt "ConfigDialogClass|"
 msgid "Default encoding"
 msgstr "Encodage par défaut"
 
-#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:150
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:146
 msgctxt "ConfigDialogClass|"
 msgid "latin1"
 msgstr "latin1"
 
-#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:155
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:151
 msgctxt "ConfigDialogClass|"
 msgid "utf8"
 msgstr "utf8"
 
-#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:164
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:160
 msgctxt "ConfigDialogClass|"
 msgid "Font && Size"
 msgstr "Police && taille"
 
-#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:170
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:166
 msgctxt "ConfigDialogClass|"
 msgid "Editor's font"
 msgstr "Police de l'éditeur"
 
-#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:182
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:178
 msgctxt "ConfigDialogClass|"
 msgid "&Font"
 msgstr "&Police"
 
-#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:208
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:204
 msgctxt "ConfigDialogClass|"
 msgid "S&ize"
 msgstr "Ta&ille"
 
-#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:231
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:227
 msgctxt "ConfigDialogClass|"
 msgid "You can type some text here :"
 msgstr "Vous pouvez tester les paramètres ici :"
 
-#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:253
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:249
 msgctxt "ConfigDialogClass|"
 msgid "Syntax highlighting"
 msgstr "Coloration syntaxique"
 
-#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:259
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:255
 msgctxt "ConfigDialogClass|"
 msgid "Enable Syntax highlighting"
 msgstr "Activer la coloration syntaxique"
 
-#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:272
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:268
 msgctxt "ConfigDialogClass|"
 msgid "Basic SQL keywords"
 msgstr "Mots clés SQL"
 
-#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:277
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:273
 msgctxt "ConfigDialogClass|"
 msgid "SQL functions"
 msgstr "Fonctions SQL"
 
-#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:282
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:278
 msgctxt "ConfigDialogClass|"
 msgid "SQL types"
 msgstr "Types SQL"
 
-#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:287
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:283
 msgctxt "ConfigDialogClass|"
 msgid "Strings"
 msgstr "Chaînes"
 
-#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:292
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:288
 msgctxt "ConfigDialogClass|"
 msgid "Numbers"
 msgstr "Nombres"
 
-#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:297
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:293
 msgctxt "ConfigDialogClass|"
 msgid "Comments"
 msgstr "Commentaires"
 
-#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:302
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:298
 msgctxt "ConfigDialogClass|"
 msgid "Table name"
 msgstr "Nom de table"
 
-#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:307
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:303
 msgctxt "ConfigDialogClass|"
 msgid "Field name"
 msgstr "Nom de colonne"
 
-#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:327
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:323
 msgctxt "ConfigDialogClass|"
 msgid "Color"
 msgstr "Couleur"
 
-#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:340
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:336
 msgctxt "ConfigDialogClass|"
 msgid "Bold"
 msgstr "Gras"
 
-#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:352
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:348
 msgctxt "ConfigDialogClass|"
 msgid "Italic"
 msgstr "Italique"
 
-#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:385
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:381
 msgctxt "ConfigDialogClass|"
 msgid "Auto-completion"
 msgstr "Auto-complément"
 
-#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:391
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:387
 msgctxt "ConfigDialogClass|"
 msgid "Enable auto-completion"
 msgstr "Activer l'auto-complément"
 
-#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:406
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:402
 msgctxt "ConfigDialogClass|"
 msgid "Show completion popup after"
 msgstr "Afficher le complément après"
 
-#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:431
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:427
 msgctxt "ConfigDialogClass|"
 msgid "characters"
 msgstr "caractères"
 
-#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:447
+#: /home/manu/programmation/dbmaster/src/dialogs/configdialogclass.ui:443
 msgctxt "ConfigDialogClass|"
 msgid ""
 "<b>Warning !</b> All modifications concerning the editor will work after "
@@ -355,17 +355,17 @@ msgctxt "LogDialogClass|"
 msgid "Logs"
 msgstr "Journaux"
 
-#: /home/manu/programmation/dbmaster/src/dialogs/logdialogclass.ui:20
+#: /home/manu/programmation/dbmaster/src/dialogs/logdialogclass.ui:24
 msgctxt "LogDialogClass|"
 msgid "F&ilter"
 msgstr "F&iltre"
 
-#: /home/manu/programmation/dbmaster/src/dialogs/logdialogclass.ui:41
+#: /home/manu/programmation/dbmaster/src/dialogs/logdialogclass.ui:45
 msgctxt "LogDialogClass|"
 msgid "Time"
 msgstr "Heure"
 
-#: /home/manu/programmation/dbmaster/src/dialogs/logdialogclass.ui:46
+#: /home/manu/programmation/dbmaster/src/dialogs/logdialogclass.ui:50
 msgctxt "LogDialogClass|"
 msgid "Message"
 msgstr "Message"
@@ -1630,10 +1630,19 @@ msgstr "Erreur"
 #: /home/manu/programmation/dbmaster/src/tabwidget/tablewidget.cpp:62
 #, qt-format
 msgctxt "TableWidget|"
-msgid "Unable to open the table %1.\n"
-msgstr "Impossible d'ouvrir la table %1."
+msgid "Unable to open the table %1. "
+msgstr "Impossible d'ouvrir la table %1. "
 
 #: /home/manu/programmation/dbmaster/src/tabwidget/tablewidget.cpp:63
 msgctxt "TableWidget|"
 msgid "Check you have the necessary permissions."
 msgstr "Vérifiez que vous avez les permissions nécessaires."
+
+#, qt-format
+#~ msgctxt "TableWidget~~~|"
+#~ msgid "Unable to open the table %1.\n"
+#~ msgstr "Impossible d'ouvrir la table %1."
+
+#~ msgctxt "TableWidget~~~|"
+#~ msgid "Check you have the necessary permissions."
+#~ msgstr "Vérifiez que vous avez les permissions nécessaires."

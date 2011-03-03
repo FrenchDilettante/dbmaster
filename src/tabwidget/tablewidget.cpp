@@ -59,7 +59,7 @@ void TableWidget::reload() {
     && !m_db->tables(QSql::SystemTables).contains(m_table))   {
     QMessageBox::critical(this,
                           tr("Error"),
-                          tr("Unable to open the table %1.\n").append(
+                          tr("Unable to open the table %1. ").append(
                             tr("Check you have the necessary permissions."))
                           .arg(m_table));
     emit closeRequested();
