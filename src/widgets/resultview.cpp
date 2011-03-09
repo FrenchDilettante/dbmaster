@@ -422,7 +422,18 @@ void ResultView::updateView() {
     r = model->record(i);
     for(int j=0; j<model->columnCount(); j++) {
       item = new QStandardItem();
-      item->setData( r.value( j ), Qt::DisplayRole );
+      if (r.value(j).canConvert(QVariant::String)
+          && r.value(j).toString().length() > 50) {
+        QString val = r.value(j).toString();
+        // BLOB
+        item->setData(val.left(47).append("..."), Qt::DisplayRole);
+        item->setData(val, Qt::ToolTipRole);
+        item->setEditable(false);
+        item->setData(true, Qt::UserRole);
+      } else {
+        item->setData(r.value(j), Qt::DisplayRole);
+        item->setData(false, Qt::UserRole);
+      }
       item->setEditable(m_mode == TableMode);
       row << item;
     }
