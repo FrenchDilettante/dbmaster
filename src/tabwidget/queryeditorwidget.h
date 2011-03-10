@@ -87,7 +87,7 @@ private:
 private slots:
   void acceptToken();
   void checkDbOpen();
-  void on_watcher_fileChanged(QString path);
+  void onFileChanged(QString path);
   void rejectToken();
   void startToken();
   void validateToken(QSqlError err);

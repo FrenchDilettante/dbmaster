@@ -164,6 +164,15 @@ QString QueryEditorWidget::file()
   return filePath;
 }
 
+void QueryEditorWidget::onFileChanged(QString path) {
+
+  if (QFile::exists(path)) {
+    // Le fichier a été modifié
+  } else {
+    // Le fichier a été supprimé
+  }
+}
+
 QIcon QueryEditorWidget::icon()
 {
   return IconManager::get("accessories-text-editor");
@@ -197,15 +206,6 @@ void QueryEditorWidget::lowerCase() {
     QString txt = tc.selectedText();
     tc.removeSelectedText();
     tc.insertText(txt.toLower());
-  }
-}
-
-void QueryEditorWidget::on_watcher_fileChanged(QString path) {
-
-  if (QFile::exists(path)) {
-    // Le fichier a été modifié
-  } else {
-    // Le fichier a été supprimé
   }
 }
 
@@ -397,7 +397,9 @@ void QueryEditorWidget::setFilePath( QString path )
     path = QFileInfo(path).fileName();
 
   pathLabel->setText(path);
-  watcher->addPath(path);
+  if (path.length() > 0) {
+    watcher->addPath(path);
+  }
 }
 
 void QueryEditorWidget::setupConnections()
@@ -410,6 +412,9 @@ void QueryEditorWidget::setupConnections()
 
   connect(editor->document(), SIGNAL(modificationChanged(bool)),
           this, SIGNAL(modificationChanged(bool)));
+
+  connect(watcher, SIGNAL(fileChanged(QString)),
+          this, SLOT(onFileChanged(QString)));
 }
 
 void QueryEditorWidget::setupWidgets()
