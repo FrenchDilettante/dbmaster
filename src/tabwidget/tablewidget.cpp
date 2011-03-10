@@ -47,7 +47,7 @@ QString TableWidget::id()
 void TableWidget::refresh()
 {
   if(!m_db->isOpen())
-    close();
+    emit closeRequested();
 }
 
 void TableWidget::reload() {
