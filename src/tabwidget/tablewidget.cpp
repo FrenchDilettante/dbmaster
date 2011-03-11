@@ -41,7 +41,7 @@ QString TableWidget::id()
 {
   return QString("t %1 on %2")
       .arg(m_table)
-      .arg(m_db->databaseName());
+      .arg(m_db->connectionName());
 }
 
 void TableWidget::refresh()
