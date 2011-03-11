@@ -13,3 +13,13 @@ SOURCES += \
 
 FORMS += \
     csvwizardpage.ui
+
+# ##
+# MS Windows
+win32: {
+    isEmpty(PREFIX):PREFIX = ..\\..\\..\\src\\install
+    DEFINES += PREFIX=\\\"$${PREFIX}\\\"
+    target.path = $${PREFIX}\\plugins
+    INSTALLS = target
+}
+
