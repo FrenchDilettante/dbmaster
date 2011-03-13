@@ -33,7 +33,7 @@ SqlTable MysqlWrapper::table(QString t) {
 
   // Récupération des colonnes
 
-  sql += "SELECT C.TABLE_NAME, T.TABLE_TYPE, C.COLUMN_NAME, C.DATA_TYPE, ";
+  sql += "SELECT C.TABLE_NAME, T.TABLE_TYPE, C.COLUMN_NAME, C.COLUMN_TYPE, ";
   sql += "C.IS_NULLABLE, 0 AS 'PK', C.ORDINAL_POSITION ";
   sql += "FROM INFORMATION_SCHEMA.COLUMNS C ";
   sql +=   "INNER JOIN INFORMATION_SCHEMA.TABLES T ";
@@ -116,7 +116,7 @@ QList<SqlTable> MysqlWrapper::tables() {
 
   QString sql;
 
-  sql += "SELECT C.TABLE_NAME, T.TABLE_TYPE, C.COLUMN_NAME, C.DATA_TYPE, ";
+  sql += "SELECT C.TABLE_NAME, T.TABLE_TYPE, C.COLUMN_NAME, C.COLUMN_TYPE, ";
   sql += "C.IS_NULLABLE, 0 AS 'PK', C.ORDINAL_POSITION ";
   sql += "FROM INFORMATION_SCHEMA.COLUMNS C ";
   sql +=   "INNER JOIN INFORMATION_SCHEMA.TABLES T ";
