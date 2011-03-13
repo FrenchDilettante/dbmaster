@@ -31,6 +31,8 @@ SqlTable MysqlWrapper::table(QString t) {
 
   QString sql;
 
+  // Récupération des colonnes
+
   sql += "SELECT C.TABLE_NAME, T.TABLE_TYPE, C.COLUMN_NAME, C.DATA_TYPE, ";
   sql += "C.IS_NULLABLE, 0 AS 'PK', C.ORDINAL_POSITION ";
   sql += "FROM INFORMATION_SCHEMA.COLUMNS C ";
@@ -69,6 +71,37 @@ SqlTable MysqlWrapper::table(QString t) {
     c.permitsNull = query.value(4).toString().toLower() == "yes";
     c.primaryKey = query.value(5).toInt();
     table.columns << c;
+  }
+
+
+  // Récupération des clés primaires
+
+  sql = "";
+  sql += "SELECT COLUMN_NAME ";
+  sql += "FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE ";
+  sql += "WHERE CONSTRAINT_SCHEMA='" + m_db->databaseName() + "' ";
+  sql +=   "AND CONSTRAINT_NAME='PRIMARY' ";
+  sql +=   "AND TABLE_NAME='" + t + "' ";
+
+  if (!query.exec(sql)) {
+    qDebug() << query.lastError().text();
+    return table;
+  }
+
+  while (query.next()) {
+    QString column = query.value(0).toString();
+    int position = -1;
+
+    for (int i=0; i<table.columns.size(); i++) {
+      if (table.columns[i].name == column) {
+        position = i;
+        table.columns[position].primaryKey = true;
+      }
+    }
+
+    if (position == -1) {
+      qDebug() << "Unable to find" << column << "in table" << t;
+    }
   }
 
   return table;
@@ -131,6 +164,57 @@ QList<SqlTable> MysqlWrapper::tables() {
 
   if (t.name.length() > 0) {
     tables << t;
+  }
+
+  if (tables.length() == 0) {
+    return tables;
+  }
+
+  // Récupération des clés primaires
+
+  sql = "";
+  sql += "SELECT TABLE_NAME, COLUMN_NAME ";
+  sql += "FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE ";
+  sql += "WHERE CONSTRAINT_SCHEMA='" + m_db->databaseName() + "' ";
+  sql +=   "AND CONSTRAINT_NAME='PRIMARY' ";
+  sql += "ORDER BY TABLE_NAME";
+
+  if (!query.exec(sql)) {
+    qDebug() << query.lastError().text();
+    return tables;
+  }
+
+  rupture = "";
+  int idx = -1;
+  while (query.next()) {
+    if (rupture != query.value(0).toString()) {
+      rupture = query.value(0).toString();
+      idx = -1;
+      for (int i=0; i<tables.size(); i++) {
+        if (tables[i].name == rupture) {
+          idx = i;
+          break;
+        }
+      }
+
+      if (idx < 0) {
+        qDebug() << "Unknown table" << rupture;
+        continue;
+      }
+    }
+
+    QString column = query.value(1).toString();
+    int position = -1;
+    for (int i=0; i<tables[idx].columns.size(); i++) {
+      if (tables[idx].columns[i].name == column) {
+        position = i;
+        tables[idx].columns[position].primaryKey = true;
+      }
+    }
+
+    if (position == -1) {
+      qDebug() << "Unable to find" << column << "in table" << tables[idx].name;
+    }
   }
 
   return tables;
