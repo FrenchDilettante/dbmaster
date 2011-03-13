@@ -378,6 +378,10 @@ void ResultView::updateItem(QStandardItem *item) {
 void ResultView::updateView() {
   shortModel->clear();
 
+  for(int i=0; i<model->columnCount(); i++)
+    shortModel->setHorizontalHeaderItem(i, new QStandardItem(
+        model->headerData(i, Qt::Horizontal).toString()));
+
   if(model->rowCount() == 0)
     return;
 
@@ -407,11 +411,6 @@ void ResultView::updateView() {
   prevPageButton->setEnabled(startIndex > 0);
   nextPageButton->setEnabled(endIndex < model->rowCount());
   lastPageButton->setEnabled(endIndex < model->rowCount());
-
-  for (int i=0; i<model->columnCount(); i++) {
-    shortModel->setHorizontalHeaderItem(i, new QStandardItem(
-        model->headerData(i, Qt::Horizontal).toString()));
-  }
 
   QStandardItem *item;
   QStringList vlabels;

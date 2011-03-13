@@ -26,6 +26,9 @@ public:
   void reloadContext(QStringList tables, QMultiMap<QString, QString> fields);
   static void reloadCompleter();
 
+protected:
+  void insertFromMimeData(const QMimeData *source);
+
 private:
   void focusInEvent(QFocusEvent *e);
   void keyPressEvent(QKeyEvent *e);

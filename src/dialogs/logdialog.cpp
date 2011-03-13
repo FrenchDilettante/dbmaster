@@ -13,6 +13,7 @@
 #include <QtGui>
 
 #include "logdialog.h"
+#include "../dbmanager.h"
 #include "../iconmanager.h"
 #include "../mainwindow.h"
 
@@ -33,6 +34,9 @@ LogDialog::LogDialog(QWidget *parent)
 
   connect(lineEdit, SIGNAL(textChanged(QString)),
           this, SLOT(updateFilter(QString)));
+
+  connect(DbManager::instance(), SIGNAL(logMessage(QString)),
+          this, SLOT(append(QString)));
 
   clearButton->setIcon(IconManager::get("edit-clear"));
 }

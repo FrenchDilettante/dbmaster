@@ -41,13 +41,13 @@ QString TableWidget::id()
 {
   return QString("t %1 on %2")
       .arg(m_table)
-      .arg(m_db->databaseName());
+      .arg(m_db->connectionName());
 }
 
 void TableWidget::refresh()
 {
   if(!m_db->isOpen())
-    close();
+    emit closeRequested();
 }
 
 void TableWidget::reload() {
@@ -59,7 +59,7 @@ void TableWidget::reload() {
     && !m_db->tables(QSql::SystemTables).contains(m_table))   {
     QMessageBox::critical(this,
                           tr("Error"),
-                          tr("Unable to open the table %1.\n").append(
+                          tr("Unable to open the table %1. ").append(
                             tr("Check you have the necessary permissions."))
                           .arg(m_table));
     emit closeRequested();

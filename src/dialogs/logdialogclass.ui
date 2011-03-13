@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Logs</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../icons.qrc">
+    <normaloff>:/img/dbmaster.png</normaloff>:/img/dbmaster.png</iconset>
+  </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="1" column="0">
     <widget class="QLabel" name="label">
@@ -63,7 +67,9 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../icons.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

@@ -485,11 +485,9 @@ void DbManagerPrivate::run()
       }
       db = openStack.pop();
       if(db->open()) {
-        LogDialog::instance()->append(tr("Connected to %1")
-                                      .arg(db->hostName()));
+        emit logMessage(tr("Connected to %1").arg(db->hostName()));
       } else {
-        LogDialog::instance()->append(tr("Unable to connect to %1")
-                                      .arg(db->hostName()));
+        emit logMessage(tr("Unable to connect to %1").arg(db->hostName()));
       }
 
       emit statusChanged(db);
@@ -502,8 +500,7 @@ void DbManagerPrivate::run()
     {
       db = closeStack.pop();
       db->close();
-      LogDialog::instance()->append(tr("Disconnected from %1")
-                                    .arg(db->hostName()));
+      emit logMessage(tr("Disconnected from %1").arg(db->hostName()));
       if(!closingAll)
       {
         emit statusChanged(db);
