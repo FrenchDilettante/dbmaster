@@ -34,7 +34,7 @@ SqlTable MysqlWrapper::table(QString t) {
   // Récupération des colonnes
 
   sql += "SELECT C.TABLE_NAME, T.TABLE_TYPE, C.COLUMN_NAME, C.COLUMN_TYPE, ";
-  sql += "C.IS_NULLABLE, 0 AS 'PK', C.ORDINAL_POSITION ";
+  sql += "C.IS_NULLABLE, C.COLUMN_DEFAULT, C.ORDINAL_POSITION ";
   sql += "FROM INFORMATION_SCHEMA.COLUMNS C ";
   sql +=   "INNER JOIN INFORMATION_SCHEMA.TABLES T ";
   sql +=   "ON C.TABLE_NAME = T.TABLE_NAME ";
@@ -69,7 +69,8 @@ SqlTable MysqlWrapper::table(QString t) {
     ty.name = query.value(3).toString().toUpper();
     c.type = ty;
     c.permitsNull = query.value(4).toString().toLower() == "yes";
-    c.primaryKey = query.value(5).toInt();
+    c.primaryKey = false;
+    c.defaultValue = query.value(5);
     table.columns << c;
   }
 
@@ -117,7 +118,7 @@ QList<SqlTable> MysqlWrapper::tables() {
   QString sql;
 
   sql += "SELECT C.TABLE_NAME, T.TABLE_TYPE, C.COLUMN_NAME, C.COLUMN_TYPE, ";
-  sql += "C.IS_NULLABLE, 0 AS 'PK', C.ORDINAL_POSITION ";
+  sql += "C.IS_NULLABLE, C.COLUMN_DEFAULT, C.ORDINAL_POSITION ";
   sql += "FROM INFORMATION_SCHEMA.COLUMNS C ";
   sql +=   "INNER JOIN INFORMATION_SCHEMA.TABLES T ";
   sql +=   "ON C.TABLE_NAME = T.TABLE_NAME ";
@@ -158,7 +159,8 @@ QList<SqlTable> MysqlWrapper::tables() {
     ty.name = query.value(3).toString();
     c.type = ty;
     c.permitsNull = query.value(4).toString().toLower() == "yes";
-    c.primaryKey = query.value(5).toInt();
+    c.primaryKey = false;
+    c.defaultValue = query.value(5);
     t.columns << c;
   }
 

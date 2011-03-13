@@ -75,7 +75,8 @@ void TableWidget::reload() {
       QStringList cols;
       cols << c.name
            << c.type.name
-           << ( c.permitsNull ? tr("Oui") : tr("Non") );
+           << ( c.permitsNull ? tr("Yes") : tr("No") )
+           << c.defaultValue.toString();
       QTreeWidgetItem *it = new QTreeWidgetItem(cols);
       if (c.primaryKey) {
         it->setIcon(0, IconManager::get("column_key"));
@@ -99,6 +100,7 @@ void TableWidget::setupWidgets() {
   columnsTree->header()->setResizeMode(0, QHeaderView::Stretch);
   columnsTree->header()->setResizeMode(1, QHeaderView::ResizeToContents);
   columnsTree->header()->setResizeMode(2, QHeaderView::ResizeToContents);
+  columnsTree->header()->setResizeMode(3, QHeaderView::ResizeToContents);
 
   connect(tableView, SIGNAL(reloadRequested()), this, SLOT(reload()));
 }
