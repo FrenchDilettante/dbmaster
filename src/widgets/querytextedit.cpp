@@ -173,6 +173,10 @@ void QueryTextEdit::insertCompletion(QString text)
   tc.insertHtml(text);
 }
 
+void QueryTextEdit::insertFromMimeData(const QMimeData *source) {
+  QTextEdit::insertPlainText(source->text());
+}
+
 void QueryTextEdit::reloadCompleter()
 {
   SqlHighlighter::reloadKeywords();

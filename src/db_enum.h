@@ -4,6 +4,7 @@
 #include "plugins/sqlwrapper.h"
 
 #include <QString>
+#include <QVariant>
 
 enum ColumnFamily {
   Blob,
@@ -37,9 +38,10 @@ struct SqlType {
 
 struct SqlColumn {
   QString name;
+  bool primaryKey;
   SqlType type;
   bool permitsNull;
-  bool primaryKey;
+  QVariant defaultValue;
 };
 
 struct SqlTable {

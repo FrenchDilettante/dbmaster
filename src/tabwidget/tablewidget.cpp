@@ -41,13 +41,13 @@ QString TableWidget::id()
 {
   return QString("t %1 on %2")
       .arg(m_table)
-      .arg(m_db->databaseName());
+      .arg(m_db->connectionName());
 }
 
 void TableWidget::refresh()
 {
   if(!m_db->isOpen())
-    close();
+    emit closeRequested();
 }
 
 void TableWidget::reload() {
@@ -59,7 +59,7 @@ void TableWidget::reload() {
     && !m_db->tables(QSql::SystemTables).contains(m_table))   {
     QMessageBox::critical(this,
                           tr("Error"),
-                          tr("Unable to open the table %1.\n").append(
+                          tr("Unable to open the table %1. ").append(
                             tr("Check you have the necessary permissions."))
                           .arg(m_table));
     emit closeRequested();
@@ -75,7 +75,8 @@ void TableWidget::reload() {
       QStringList cols;
       cols << c.name
            << c.type.name
-           << ( c.permitsNull ? tr("Oui") : tr("Non") );
+           << ( c.permitsNull ? tr("Yes") : tr("No") )
+           << c.defaultValue.toString();
       QTreeWidgetItem *it = new QTreeWidgetItem(cols);
       if (c.primaryKey) {
         it->setIcon(0, IconManager::get("column_key"));
@@ -99,6 +100,7 @@ void TableWidget::setupWidgets() {
   columnsTree->header()->setResizeMode(0, QHeaderView::Stretch);
   columnsTree->header()->setResizeMode(1, QHeaderView::ResizeToContents);
   columnsTree->header()->setResizeMode(2, QHeaderView::ResizeToContents);
+  columnsTree->header()->setResizeMode(3, QHeaderView::ResizeToContents);
 
   connect(tableView, SIGNAL(reloadRequested()), this, SLOT(reload()));
 }

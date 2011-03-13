@@ -54,6 +54,9 @@
          </item>
          <item>
           <widget class="QToolButton" name="firstPageButton">
+           <property name="toolTip">
+            <string>First page</string>
+           </property>
            <property name="text">
             <string>&lt;&lt;</string>
            </property>
@@ -74,6 +77,9 @@
          </item>
          <item>
           <widget class="QToolButton" name="prevPageButton">
+           <property name="toolTip">
+            <string>Previous page</string>
+           </property>
            <property name="text">
             <string>&lt;</string>
            </property>
@@ -94,6 +100,9 @@
          </item>
          <item>
           <widget class="QToolButton" name="nextPageButton">
+           <property name="toolTip">
+            <string>Next page</string>
+           </property>
            <property name="text">
             <string>&gt;</string>
            </property>
@@ -114,6 +123,9 @@
          </item>
          <item>
           <widget class="QToolButton" name="lastPageButton">
+           <property name="toolTip">
+            <string>Last page</string>
+           </property>
            <property name="text">
             <string>&gt;&gt;</string>
            </property>
@@ -141,6 +153,9 @@
          </item>
          <item>
           <widget class="QToolButton" name="reloadButton">
+           <property name="toolTip">
+            <string>Reload</string>
+           </property>
            <property name="text">
             <string>...</string>
            </property>
@@ -229,6 +244,9 @@
          </item>
          <item>
           <widget class="QToolButton" name="insertButton">
+           <property name="toolTip">
+            <string>Add a row</string>
+           </property>
            <property name="text">
             <string>+</string>
            </property>
@@ -245,6 +263,9 @@
          </item>
          <item>
           <widget class="QToolButton" name="deleteButton">
+           <property name="toolTip">
+            <string>Delete row(s)</string>
+           </property>
            <property name="text">
             <string>-</string>
            </property>
