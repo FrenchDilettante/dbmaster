@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>DbMaster 0.7 - Documentation utilisateur</title>
+<title>DbMaster 0.8 - Documentation utilisateur</title>
 <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
@@ -10,7 +10,7 @@
 <table style="margin-left: 200px">
 <tr>
 <td><img src="dbmaster.png" style="margin-right: 50px" /></td>
-<td><h1>DbMaster 0.7</h1></td>
+<td><h1>DbMaster 0.8</h1></td>
 </tr>
 </table>
 </div>
