@@ -50,7 +50,7 @@ SqlSchema PsqlWrapper::schema(QString sch) {
 
   QString sql;
   sql += "SELECT '" + sch + "', t.table_name, t.table_type, c.column_name, ";
-  sql += "c.is_nullable, c.data_type ";
+  sql += "c.is_nullable, c.data_type, c.column_default ";
   sql += "FROM INFORMATION_SCHEMA.COLUMNS C ";
   sql += "INNER JOIN INFORMATION_SCHEMA.TABLES T ";
   sql +=   "ON C.TABLE_NAME = T.TABLE_NAME ";
@@ -115,7 +115,7 @@ QList<SqlSchema> PsqlWrapper::schemas() {
 
   QString sql;
   sql += "SELECT t.table_schema, t.table_name, t.table_type, c.column_name, ";
-  sql += "c.is_nullable, c.data_type ";
+  sql += "c.is_nullable, c.data_type, c.column_default ";
   sql += "FROM INFORMATION_SCHEMA.COLUMNS C ";
   sql += "INNER JOIN INFORMATION_SCHEMA.TABLES T ";
   sql +=   "ON C.TABLE_NAME = T.TABLE_NAME ";
@@ -199,27 +199,27 @@ SqlTable PsqlWrapper::table(QString t) {
     return table;
   }
 
+  QString sch = "";
+  if (t.contains(".")) {
+    sch = t.left(t.indexOf("."));
+    t = t.right(t.indexOf(".") + 2);
+  }
+
+  qDebug() << sch << t;
+
   QString sql;
-  sql += "SELECT schemaname, typname, 'T', attname, attnotnull, attlen, attnum ";
-  sql += "FROM pg_attribute, pg_type, pg_tables ";
-  sql += "WHERE attrelid = typrelid ";
-  sql +=   "AND attname NOT IN ('cmin', 'cmax', 'ctid', 'oid', ";
-  sql +=      "'tableoid', 'xmin', 'xmax') ";
-  sql +=   "AND typname = tablename ";
-  sql +=   "AND typname = '" + t + "' ";
-
-
-  sql += "UNION ";
-
-  sql += "SELECT schemaname, typname, 'V', attname, attnotnull, attlen, attnum ";
-  sql += "FROM pg_attribute, pg_type, pg_views ";
-  sql += "WHERE attrelid = typrelid ";
-  sql +=   "AND attname NOT IN ('cmin', 'cmax', 'ctid', 'oid', ";
-  sql +=      "'tableoid', 'xmin', 'xmax') ";
-  sql +=   "AND typname = viewname ";
-  sql +=   "AND typname = '" + t + "' ";
-
-  sql += "ORDER BY schemaname, typname, attnum ";
+  sql += "SELECT t.table_schema, t.table_name, t.table_type, c.column_name, ";
+  sql += "c.is_nullable, c.data_type, c.column_default ";
+  sql += "FROM INFORMATION_SCHEMA.COLUMNS C ";
+  sql += "INNER JOIN INFORMATION_SCHEMA.TABLES T ";
+  sql +=   "ON C.TABLE_NAME = T.TABLE_NAME ";
+  sql +=      "AND C.TABLE_SCHEMA = T.TABLE_SCHEMA ";
+  sql +=   "WHERE t.table_catalog='" + m_db->databaseName() + "' ";
+  if (sch.length() > 0) {
+    sql +=   "AND t.table_schema = '" + sch + "'";
+  }
+  sql +=     "AND t.table_name = '" + t + "' ";
+  sql +=   "ORDER BY ordinal_position ";
 
   QSqlQuery query(*m_db);
   if (!query.exec(sql)) {
