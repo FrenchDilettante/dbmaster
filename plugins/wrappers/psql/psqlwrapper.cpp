@@ -6,14 +6,17 @@
 #include <QSqlQuery>
 #include <QVariant>
 
+bool PsqlWrapper::informationSchemaHidden = true;
+bool PsqlWrapper::pgCatalogHidden = true;
+
 PsqlWrapper::PsqlWrapper(QSqlDatabase *db)
   : QObject(NULL) {
   m_db = db;
 
   QSettings s;
   s.beginGroup(plid());
-  informationSchemaHidden = s.value("informationSchemaHidden", false).toBool();
-  pgCatalogHidden = s.value("pgCatalogHidden", false).toBool();
+  informationSchemaHidden = s.value("informationSchemaHidden", true).toBool();
+  pgCatalogHidden = s.value("pgCatalogHidden", true).toBool();
   s.endGroup();
 
   m_configDialog = new PsqlConfig(this);

@@ -30,8 +30,8 @@ public:
   SqlTable        table(QString t);
 
   // Fonctions propres
-  bool pgCatalogHidden;
-  bool informationSchemaHidden;
+  static bool pgCatalogHidden;
+  static bool informationSchemaHidden;
 
 signals:
 
