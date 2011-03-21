@@ -13,12 +13,16 @@
 #ifndef PLUGIN_H
 #define PLUGIN_H
 
+#include <QDialog>
 #include <QString>
 #include <QStringList>
 #include <QtPlugin>
 
 class Plugin {
 public:
+  /** Boîte de dialogue de configuration. */
+  virtual QDialog* configDialog() { return NULL; };
+
   /**
    * Liste des fichiers accompagnant le plugin.
    * Il est vivement recommandé de ne mettre que des noms de fichiers relatifs.
@@ -36,6 +40,9 @@ public:
    */
   virtual QString plid()    =0;
 
+  /** Enregistre la configuration actuelle du plugin. */
+  virtual void save() {};
+
   /**
    * Nom à afficher (traduisible), par ex. "Export au format CSV" ou "Adaptateur
    * MySQL"
@@ -44,9 +51,7 @@ public:
 
   virtual QString vendor()  =0;
 
-  /**
-   * Laissée à l'appreciation du développeur.
-   */
+  /** Laissée à l'appreciation du développeur. */
   virtual QString version() =0;
 };
 

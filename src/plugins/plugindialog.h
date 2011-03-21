@@ -23,6 +23,9 @@ class PluginDialog : public QDialog, Ui::PluginDialog
 Q_OBJECT
 public:
   PluginDialog(QWidget *parent = 0);
+
+private slots:
+  void on_configButton_clicked();
 };
 
 #endif // PLUGINDIALOG_H

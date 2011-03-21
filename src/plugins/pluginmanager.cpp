@@ -96,6 +96,7 @@ void PluginManagerPrivate::registerPlugin(Plugin *plugin) {
 
   QStandardItem *item = new QStandardItem();
   item->setText(plugin->title());
+  item->setData(plugin->plid(), Qt::UserRole);
 
   QString type = tr("Other");
 
