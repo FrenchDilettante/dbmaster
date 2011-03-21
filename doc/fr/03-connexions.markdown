@@ -13,6 +13,8 @@ Avant d'aller plus loin dans cette section, il est nécessaire de prendre connai
 
 DbMaster s'appuie sur la technologie Qt pour se connecter aux SGBD. S'il n'y a pas de pilote spécifique disponible pour votre SGBD, vous pourrez vous reporter à cette [page](http://doc.qt.nokia.com/4.7/sql-driver.html).
 
+La version 0.8 étend les possibilités de ces plugins, en permettant notamment d'afficher les schémas ou les types des colonnes.
+
 À l'heure actuelle, il n'y a pas de limite fixée au nombre de connexions simultanées.
 
 

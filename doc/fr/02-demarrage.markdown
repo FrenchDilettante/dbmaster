@@ -13,7 +13,7 @@ L'installation du paquet .deb est entièrement automatique.
 
 ### Windows ###
 
-L'archive binaire `dbmaster-0.7.zip` contient tout ce qui est nécessaire pour utiliser DbMaster. Une fois extraite, vous pouvez exécuter `dbmaster.exe`.
+L'archive binaire `dbmaster-0.8.zip` contient tout ce qui est nécessaire pour utiliser DbMaster. Une fois extraite, vous pouvez exécuter `dbmaster.exe`.
 
 
 Premier lancement

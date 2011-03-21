@@ -23,6 +23,7 @@ Nokia fournit les drivers pour les SGBD suivants :
 
 Les SGBD suivants ont été testés et validés :
 
+* IBM DB2
 * Firebird
 * MySQL
 * PostgreSQL
@@ -45,14 +46,11 @@ Auteurs
 Développement :
 
 - Emmanuel BOURGERIE
+- Thibault HANOUT
 
 Documentation & traduction :
 
 **`[FR]`** Emmanuel BOURGERIE
-
-Code tiers :
-
-- QColorButton : Florian BECKER
 
 Soutenir le projet
 ------------------
