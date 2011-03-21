@@ -15,31 +15,24 @@
 
 #include "../iconmanager.h"
 
-#include <time.h>
-
 TooltipFrame::TooltipFrame(QWidget *parent)
-  : QFrame(parent)
-{
+  : QFrame(parent) {
   setupUi(this);
 
-  if(tooltips.size() == 0)
-  {
+  if (tooltips.size() == 0) {
     tooltips
         << tr("Press Ctrl+Espace in the query editor to display the completer.")
         << tr("While a query is executed, you can edit an another one.")
         << tr("You can export a table or a query's content in a CSV file by right-clicking on the spreadsheet.")
-        << tr("While it is connected, a database cannot be edited.");
+        << tr("While it is connected, a database cannot be edited.")
+        << tr("All queries are logged. Check them out in Tools - Logs.")
+        << tr("DbMaster is a free software developped by volunteers. Join the community and help us making it better !");
   }
 
   srand(time(NULL));
 
   currentIndex = -1;
   showTooltip();
-
-//  t.setInterval(30000);
-//  t.setSingleShot(false);
-//  t.start();
-//  connect(&t, SIGNAL(timeout()), this, SLOT(showTooltip()));
 
   connect(nextButton, SIGNAL(clicked()), this, SLOT(showTooltip()));
 
@@ -48,8 +41,7 @@ TooltipFrame::TooltipFrame(QWidget *parent)
   label_2->setPixmap(IconManager::get("help-faq").pixmap(32, 32));
 }
 
-void TooltipFrame::showTooltip()
-{
+void TooltipFrame::showTooltip() {
   int index;
   if(tooltips.size() > 1)
   {
