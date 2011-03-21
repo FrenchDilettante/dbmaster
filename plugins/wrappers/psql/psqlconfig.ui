@@ -29,7 +29,7 @@
      <item row="1" column="0" colspan="2">
       <widget class="QCheckBox" name="infoschemaCheckbox">
        <property name="text">
-        <string>Hide INFORMATION_SCHEMA</string>
+        <string>Hide information_schema</string>
        </property>
       </widget>
      </item>
