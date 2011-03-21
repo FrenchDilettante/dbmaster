@@ -402,8 +402,7 @@ void QueryEditorWidget::setFilePath( QString path )
   }
 }
 
-void QueryEditorWidget::setupConnections()
-{
+void QueryEditorWidget::setupConnections() {
   connect(dbChooser, SIGNAL(currentIndexChanged(int)),
           this, SLOT(checkDbOpen()));
   connect(tabView, SIGNAL(reloadRequested()), this, SLOT(reload()));
@@ -413,12 +412,11 @@ void QueryEditorWidget::setupConnections()
   connect(editor->document(), SIGNAL(modificationChanged(bool)),
           this, SIGNAL(modificationChanged(bool)));
 
-  connect(watcher, SIGNAL(fileChanged(QString)),
-          this, SLOT(onFileChanged(QString)));
+  // connect(watcher, SIGNAL(fileChanged(QString)),
+  //         this, SLOT(onFileChanged(QString)));
 }
 
-void QueryEditorWidget::setupWidgets()
-{
+void QueryEditorWidget::setupWidgets() {
   editor->setFont(Config::editorFont);
 
   tabWidget->setVisible(false);
