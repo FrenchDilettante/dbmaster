@@ -1,6 +1,7 @@
 #include "psqlwrapper.h"
 
 #include <QDebug>
+#include <QSettings>
 #include <QSqlError>
 #include <QSqlQuery>
 #include <QVariant>
@@ -8,6 +9,14 @@
 PsqlWrapper::PsqlWrapper(QSqlDatabase *db)
   : QObject(NULL) {
   m_db = db;
+
+  QSettings s;
+  s.beginGroup(plid());
+  informationSchemaHidden = s.value("informationSchemaHidden", false).toBool();
+  pgCatalogHidden = s.value("pgCatalogHidden", false).toBool();
+  s.endGroup();
+
+  m_configDialog = new PsqlConfig(this);
 }
 
 SqlWrapper::WrapperFeatures PsqlWrapper::features() {
@@ -16,6 +25,14 @@ SqlWrapper::WrapperFeatures PsqlWrapper::features() {
 
 SqlWrapper* PsqlWrapper::newInstance(QSqlDatabase *db) {
   return new PsqlWrapper(db);
+}
+
+void PsqlWrapper::save() {
+  QSettings s;
+  s.beginGroup(plid());
+  s.setValue("informationSchemaHidden", informationSchemaHidden);
+  s.setValue("pgCatalogHidden", pgCatalogHidden);
+  s.endGroup();
 }
 
 /**
@@ -101,6 +118,12 @@ QList<SqlSchema> PsqlWrapper::schemas() {
   sql +=   "ON C.TABLE_NAME = T.TABLE_NAME ";
   sql +=      "AND C.TABLE_SCHEMA = T.TABLE_SCHEMA ";
   sql +=   "WHERE t.table_catalog='" + m_db->databaseName() + "' ";
+  if (informationSchemaHidden) {
+    sql +=   "AND t.table_schema <> 'information_schema' ";
+  }
+  if (pgCatalogHidden) {
+    sql +=   "AND t.table_schema <> 'pg_catalog' ";
+  }
   sql +=   "ORDER BY table_schema, table_name, ordinal_position ";
 
   QSqlQuery query(*m_db);

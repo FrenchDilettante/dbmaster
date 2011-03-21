@@ -1,14 +1,16 @@
 TEMPLATE=lib
 CONFIG+=release plugin
-QT = core sql
+QT = core gui sql
 VERSION=0.8
 INCLUDEPATH+=../../../src/plugins
 TARGET=psqlwrapper
 HEADERS += \
-    psqlwrapper.h
+    psqlwrapper.h \
+    psqlconfig.h
 
 SOURCES += \
-    psqlwrapper.cpp
+    psqlwrapper.cpp \
+    psqlconfig.cpp
 
 # ##
 # MS Windows
@@ -19,3 +21,5 @@ win32: {
     INSTALLS = target
 }
 
+FORMS += \
+    psqlconfig.ui

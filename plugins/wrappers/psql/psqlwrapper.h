@@ -2,6 +2,7 @@
 #define PSQLWRAPPER_H
 
 #include "sqlwrapper.h"
+#include "psqlconfig.h"
 
 #include <QCoreApplication>
 #include <QObject>
@@ -14,21 +15,30 @@ public:
 
   // Fonctions de Plugin
   QString plid() { return "DBM.PSQL.WRAPPER"; };
+  void    save();
   QString title() { return tr("PostgreSQL wrapper"); };
   QString vendor() { return "DbMaster"; };
   QString version() { return QCoreApplication::applicationVersion(); };
 
   // Fonctions de SqlWrapper
+  QDialog*        configDialog() { return m_configDialog; };
   WrapperFeatures features();
-  SqlWrapper* newInstance(QSqlDatabase *db);
-  SqlSchema schema(QString s);
+  SqlWrapper*     newInstance(QSqlDatabase *db);
+  SqlSchema       schema(QString s);
   QList<SqlSchema> schemas();
-  QString driver() { return "QPSQL"; };
-  SqlTable table(QString t);
+  QString         driver() { return "QPSQL"; };
+  SqlTable        table(QString t);
+
+  // Fonctions propres
+  bool pgCatalogHidden;
+  bool informationSchemaHidden;
 
 signals:
 
 public slots:
+
+private:
+  PsqlConfig* m_configDialog;
 
 };
 
