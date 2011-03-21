@@ -15,6 +15,8 @@
 
 #include "../iconmanager.h"
 
+#include <time.h>
+
 TooltipFrame::TooltipFrame(QWidget *parent)
   : QFrame(parent) {
   setupUi(this);
