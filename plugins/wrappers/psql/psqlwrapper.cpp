@@ -205,8 +205,6 @@ SqlTable PsqlWrapper::table(QString t) {
     t = t.right(t.indexOf(".") + 2);
   }
 
-  qDebug() << sch << t;
-
   QString sql;
   sql += "SELECT t.table_schema, t.table_name, t.table_type, c.column_name, ";
   sql += "c.is_nullable, c.data_type, c.column_default ";
@@ -244,6 +242,8 @@ SqlTable PsqlWrapper::table(QString t) {
     c.name = query.value(3).toString();
     c.permitsNull = query.value(4).toBool();
     c.primaryKey = false;
+    c.type.name = query.value(5).toString();
+    c.defaultValue = query.value(6);
     table.columns << c;
   }
 
