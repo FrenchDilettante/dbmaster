@@ -135,6 +135,10 @@ QList<SqlSchema> PsqlWrapper::schemas() {
     return schemas;
   }
 
+  // compte le nombre total de tables
+  // si = 0 alors inutile de chercher les clés primaires.
+  int tableCount = 0;
+
   bool first = true;
   bool ruptureSchema = false;
   bool ruptureTable = false;
@@ -147,6 +151,8 @@ QList<SqlSchema> PsqlWrapper::schemas() {
     if (ruptureSchema && s.name != "") {
       s.tables << t;
       schemas << s;
+
+      tableCount += s.tables.size();
     }
 
     if (ruptureSchema) {
@@ -187,6 +193,86 @@ QList<SqlSchema> PsqlWrapper::schemas() {
       s.tables << t;
     }
     schemas << s;
+
+    tableCount += s.tables.size();
+  }
+
+  if (tableCount == 0) {
+    return schemas;
+  }
+
+
+
+  // Récupération des clés primaires
+
+  sql = "";
+  sql += "SELECT U.TABLE_SCHEMA, U.TABLE_NAME, COLUMN_NAME ";
+  sql += "FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE U ";
+  sql += "INNER JOIN INFORMATION_SCHEMA.TABLE_CONSTRAINTS T ";
+  sql += "USING (TABLE_CATALOG, TABLE_SCHEMA, TABLE_NAME, CONSTRAINT_NAME) ";
+  sql += "WHERE T.CONSTRAINT_CATALOG = '" + m_db->databaseName() + "' ";
+  sql +=   "AND CONSTRAINT_TYPE = 'PRIMARY KEY' ";
+  sql += "ORDER BY TABLE_SCHEMA, TABLE_NAME";
+
+  if (!query.exec(sql)) {
+    qDebug() << query.lastError().text();
+    return schemas;
+  }
+
+  QString ruptureS = "";
+  QString ruptureT = "";
+  s = schemas[0];
+  int t_idx = -1;
+  int s_idx = 0;
+  while (query.next()) {
+
+    ruptureS = query.value(0).toString();
+    if (schemas[s_idx].name != ruptureS) {
+      s_idx = -1;
+      for (int i=0; i<schemas.size(); i++) {
+        if (schemas[i].name == ruptureS) {
+          s_idx = i;
+          s = schemas[i];
+          break;
+        }
+      }
+
+      if (s_idx == -1) {
+        s_idx = 0;
+        qDebug() << "Unknown schema" << ruptureS;
+        continue;
+      }
+    }
+
+    if (ruptureT != query.value(1).toString()) {
+      ruptureT = query.value(1).toString();
+      t_idx = -1;
+      for (int i=0; i<s.tables.size(); i++) {
+        if (s.tables[i].name == ruptureT) {
+          t_idx = i;
+          break;
+        }
+      }
+
+      if (t_idx < 0) {
+        qDebug() << "Unknown table" << ruptureT;
+        continue;
+      }
+    }
+
+    QString column = query.value(2).toString();
+    int position = -1;
+    for (int i=0; i<schemas[s_idx].tables[t_idx].columns.size(); i++) {
+      if (schemas[s_idx].tables[t_idx].columns[i].name == column) {
+        position = i;
+        schemas[s_idx].tables[t_idx].columns[position].primaryKey = true;
+      }
+    }
+
+    if (position == -1) {
+      qDebug() << "Unable to find" << column
+               << "in table" << schemas[s_idx].tables[t_idx].name;
+    }
   }
 
   return schemas;
@@ -199,7 +285,7 @@ SqlTable PsqlWrapper::table(QString t) {
     return table;
   }
 
-  QString sch = "";
+  QString sch = "public";
   if (t.contains(".")) {
     sch = t.left(t.indexOf("."));
     t = t.right(t.indexOf(".") + 2);
@@ -245,6 +331,43 @@ SqlTable PsqlWrapper::table(QString t) {
     c.type.name = query.value(5).toString();
     c.defaultValue = query.value(6);
     table.columns << c;
+  }
+
+  if (table.columns.size() == 0) {
+    return table;
+  }
+
+  // Récupération des clés primaires
+
+  sql = "";
+
+  sql += "SELECT COLUMN_NAME ";
+  sql += "FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE U ";
+  sql += "INNER JOIN INFORMATION_SCHEMA.TABLE_CONSTRAINTS T ";
+  sql += "USING (TABLE_CATALOG, TABLE_SCHEMA, TABLE_NAME, CONSTRAINT_NAME) ";
+  sql += "WHERE T.CONSTRAINT_CATALOG = '" + m_db->databaseName() + "' ";
+  sql +=   "AND U.TABLE_SCHEMA = '" + sch + "' ";
+  sql +=   "AND U.TABLE_NAME = '" + t + "' ";
+  sql +=   "AND CONSTRAINT_TYPE = 'PRIMARY KEY' ";
+
+  if (!query.exec(sql)) {
+    qDebug() << query.lastError().text();
+    return table;
+  }
+
+  while (query.next()) {
+    QString column = query.value(0).toString();
+    int position = -1;
+    for (int i=0; i<table.columns.size(); i++) {
+      if (table.columns[i].name == column) {
+        position = i;
+        table.columns[position].primaryKey = true;
+      }
+    }
+
+    if (position == -1) {
+      qDebug() << "Unable to find" << column << "in table" << table.name;
+    }
   }
 
   return table;
