@@ -53,5 +53,5 @@ void SchemaWidget::reload() {
     tableTree->addTopLevelItem(it);
   }
 
-  tableTree->resizeColumnToContents(0);
+  tableTree->header()->setResizeMode(0, QHeaderView::Stretch);
 }
