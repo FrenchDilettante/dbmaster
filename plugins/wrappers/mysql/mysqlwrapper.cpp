@@ -123,7 +123,7 @@ QList<SqlTable> MysqlWrapper::tables() {
   sql +=   "INNER JOIN INFORMATION_SCHEMA.TABLES T ";
   sql +=   "ON C.TABLE_NAME = T.TABLE_NAME ";
   sql +=     "AND C.TABLE_SCHEMA = T.TABLE_SCHEMA ";
-  sql += "WHERE C.TABLE_SCHEMA='";
+  sql += "WHERE C.TABLE_SCHEMA = '";
   sql += m_db->databaseName();
   sql += "' ";
 
@@ -177,8 +177,8 @@ QList<SqlTable> MysqlWrapper::tables() {
   sql = "";
   sql += "SELECT TABLE_NAME, COLUMN_NAME ";
   sql += "FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE ";
-  sql += "WHERE CONSTRAINT_SCHEMA='" + m_db->databaseName() + "' ";
-  sql +=   "AND CONSTRAINT_NAME='PRIMARY' ";
+  sql += "WHERE CONSTRAINT_SCHEMA = '" + m_db->databaseName() + "' ";
+  sql +=   "AND CONSTRAINT_NAME = 'PRIMARY' ";
   sql += "ORDER BY TABLE_NAME";
 
   if (!query.exec(sql)) {
