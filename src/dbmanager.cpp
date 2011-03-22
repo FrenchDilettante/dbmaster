@@ -571,6 +571,15 @@ QStandardItem* DbManagerPrivate::schemaItem(SqlSchema schema) {
   return sitem;
 }
 
+void DbManagerPrivate::setAlias(QSqlDatabase *db, QString alias) {
+  if (!dbList.contains(db)) {
+    return;
+  }
+
+  dbMap[db]->setText(alias);
+  saveList();
+}
+
 void DbManagerPrivate::setDatabase(int nb, QSqlDatabase db) {
   if (dbList.size() >= nb)
     return;
@@ -811,6 +820,10 @@ void DbManager::saveList() {
 
 SqlSchema DbManager::schema(QSqlDatabase *db, QString schema) {
   return m_instance->schema(db, schema);
+}
+
+void DbManager::setAlias(QSqlDatabase *db, QString alias) {
+  m_instance->setAlias(db, alias);
 }
 
 void DbManager::setDatabase(int nb, QSqlDatabase db) {

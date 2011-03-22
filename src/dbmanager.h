@@ -61,6 +61,7 @@ public:
   void                    run();
   void                    saveList();
   SqlSchema               schema(QSqlDatabase *db, QString sch);
+  void                    setAlias(QSqlDatabase *db, QString alias);
   void                    setDatabase(int, QSqlDatabase);
   void                    swapDatabase(QSqlDatabase *oldDb,
                                        QSqlDatabase *newDb);
@@ -154,6 +155,7 @@ public:
   static void           removeDatabase(int);
   static void           saveList();
   static SqlSchema      schema(QSqlDatabase *db, QString schema);
+  static void           setAlias(QSqlDatabase *db, QString alias);
   static void           setDatabase(int, QSqlDatabase);
   static SqlTable       table(QSqlDatabase *db, QString tbl);
   static void           terminate();

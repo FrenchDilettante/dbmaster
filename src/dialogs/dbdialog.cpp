@@ -29,11 +29,6 @@ DbDialog::DbDialog(QWidget *parent)
 }
 
 void DbDialog::accept() {
-  if(db->isOpen()) {
-    close();
-    return;
-  }
-
   apply();
 
   QDialog::accept();
@@ -42,6 +37,7 @@ void DbDialog::accept() {
 
 void DbDialog::apply() {
   if(db->isOpen()) {
+    DbManager::setAlias(db, aliasEdit->text());
     return;
   }
 
