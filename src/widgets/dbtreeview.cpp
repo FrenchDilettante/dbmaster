@@ -24,6 +24,8 @@ DbTreeView::DbTreeView(QWidget *parent)
           this, SLOT(on_model_dataChanged(QModelIndex,QModelIndex)));
   setModel(model);
 
+  header()->setResizeMode(0, QHeaderView::Stretch);
+
   setupActions();
 }
 
@@ -39,7 +41,7 @@ void DbTreeView::contextMenuEvent(QContextMenuEvent *event)
   removeDbAct->setVisible(false);
   toggleAct->setVisible(false);
 
-  if(selectedIndexes().size() == 1)
+  if(selectedIndexes().size() != 0)
   {
     QModelIndex index = selectedIndexes()[0];
     if(index.data(Qt::UserRole).canConvert(QVariant::Int))
@@ -93,7 +95,7 @@ void DbTreeView::contextMenuEvent(QContextMenuEvent *event)
 
 void DbTreeView::editCurrent()
 {
-  if(selectedIndexes().size() == 1)
+  if(selectedIndexes().size() != 0)
   {
     QModelIndex index = selectedIndexes()[0];
     MainWindow::dbDialog->setDatabase(index);
@@ -105,7 +107,7 @@ void DbTreeView::editCurrent()
  * Gestion du double-clic
  */
 void DbTreeView::mouseDoubleClickEvent(QMouseEvent *event) {
-  if (selectedIndexes().size() == 1) {
+  if (selectedIndexes().size() != 0) {
     QModelIndex index = selectedIndexes()[0];
     if (!visualRect(index).contains(event->pos())) {
       event->accept();
@@ -156,7 +158,7 @@ void DbTreeView::on_model_dataChanged(const QModelIndex &topLeft,
  * Suppression de la connexion sélectionnée. Ne fait rien si elle est ouverte.
  */
 void DbTreeView::on_removeDbAct_triggered() {
-  if(selectedIndexes().size() == 1) {
+  if(selectedIndexes().size() != 0) {
     QModelIndex index = selectedIndexes()[0];
     if (DbManager::getDatabase(index.row())->isOpen()) {
       QMessageBox::warning(this,
@@ -183,7 +185,7 @@ QSqlDatabase *DbTreeView::parentDb(QModelIndex index)
 
 void DbTreeView::refreshCurrent()
 {
-  if (selectedIndexes().size()==0)
+  if (selectedIndexes().size() == 0)
     return;
 
   DbManager::refreshModelItem(parentDb(selectedIndexes()[0]));
@@ -202,6 +204,7 @@ void DbTreeView::setupActions()
 
   refreshAct = new QAction(this);
   refreshAct->setText(tr("Refresh"));
+  refreshAct->setShortcut(QKeySequence(Qt::ShiftModifier + Qt::Key_F5));
   connect(refreshAct, SIGNAL(triggered()), this, SLOT(refreshCurrent()));
 
   removeDbAct = new QAction(this);
@@ -225,7 +228,7 @@ void DbTreeView::setupActions()
 
 void DbTreeView::toggleCurrentDb()
 {
-  if(selectedIndexes().size() == 1)
+  if(selectedIndexes().size() != 0)
   {
     QModelIndex index = selectedIndexes()[0];
     DbManager::toggle(DbManager::getDatabase(index.row()));

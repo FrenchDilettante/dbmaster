@@ -121,7 +121,11 @@ int DbManagerPrivate::addDatabase(QString driver, QString host, QString user,
   dbMap[newDb]->setIcon(IconManager::get("connect_no"));
   dbMap[newDb]->setToolTip(dbToolTip(newDb));
 
-  m_model->appendRow(dbMap[newDb]);
+  QList<QStandardItem*> l;
+  l << dbMap[newDb];
+  l << new QStandardItem(driverIcon[driver], "");
+
+  m_model->appendRow(l);
 
   SqlWrapper *w = PluginManager::wrapper(wrapper);
   if (w) {

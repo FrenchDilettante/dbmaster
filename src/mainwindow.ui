@@ -215,6 +215,12 @@
        <property name="headerHidden">
         <bool>true</bool>
        </property>
+       <attribute name="headerDefaultSectionSize">
+        <number>24</number>
+       </attribute>
+       <attribute name="headerStretchLastSection">
+        <bool>false</bool>
+       </attribute>
       </widget>
      </item>
     </layout>
