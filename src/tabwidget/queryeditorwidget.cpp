@@ -77,7 +77,7 @@ void QueryEditorWidget::checkDbOpen()
 
   runButton->setEnabled(db->isOpen());
 
-  if(!db->isOpen())
+  if(!db->isOpen() || db->driverName().startsWith("QOCI"))
     return;
 
   QMultiMap<QString, QString> fields;

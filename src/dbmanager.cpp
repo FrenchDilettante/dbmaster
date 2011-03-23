@@ -606,6 +606,8 @@ void DbManagerPrivate::setupModels() {
   driverAlias["QIBASE"]   = tr("Interbase/Firebird");
   driverAlias["QMYSQL"]   = tr("MySql");
   driverAlias["QMYSQL3"]  = tr("MySql 3");
+  driverAlias["QOCI"]     = tr("Oracle");
+  driverAlias["QOCI8"]    = tr("Oracle 8");
   driverAlias["QODBC"]    = tr("Generic (ODBC)");
   driverAlias["QODBC3"]   = tr("Generic (ODBC 3)");
   driverAlias["QPSQL"]    = tr("PostGreSQL");
