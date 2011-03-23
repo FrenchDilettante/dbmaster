@@ -77,10 +77,10 @@ private:
 //  QueryToken           *oldToken;
   QMenu                *optionsMenu;
   int                   page;
+  QToolButton*          resultButton;
   QSqlQuery             query;
   QStandardItemModel   *shortModel;
   QStatusBar           *statusBar;
-  QLabel               *statusLabel;
   QueryToken           *token;
   QFileSystemWatcher   *watcher;
 

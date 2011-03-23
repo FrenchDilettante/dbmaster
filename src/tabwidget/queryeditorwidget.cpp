@@ -194,6 +194,7 @@ void QueryEditorWidget::keyPressEvent(QKeyEvent *event) {
   if (event->key() == Qt::Key_Escape) {
     // Appui touche échap = masque le panel de résultat
     tabWidget->hide();
+    resultButton->setChecked(false);
   } else {
     QWidget::keyPressEvent(event);
   }
@@ -425,8 +426,14 @@ void QueryEditorWidget::setupWidgets() {
   statusBar->setSizeGripEnabled(false);
   gridLayout->addWidget(statusBar, gridLayout->rowCount(), 0, 1, -1);
 
-  statusLabel = new QLabel(this);
-  statusBar->addWidget(statusLabel, 200);
+  resultButton = new QToolButton(this);
+  resultButton->setText(tr("Display result"));
+  resultButton->setAutoRaise(true);
+  resultButton->setCheckable(true);
+  resultButton->setChecked(true);
+  statusBar->addPermanentWidget(resultButton);
+  connect(resultButton, SIGNAL(clicked(bool)),
+          tabWidget, SLOT(setVisible(bool)));
 
   optionsMenu = new QMenu(this);
   optionsMenu->addAction(actionEnqueue);
