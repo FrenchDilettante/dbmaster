@@ -207,6 +207,8 @@ void QueryEditorWidget::lowerCase() {
     QString txt = tc.selectedText();
     tc.removeSelectedText();
     tc.insertText(txt.toLower());
+    tc.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor, txt.size());
+    editor->setTextCursor(tc);
   }
 }
 
@@ -487,6 +489,8 @@ void QueryEditorWidget::upperCase() {
     QString txt = tc.selectedText();
     tc.removeSelectedText();
     tc.insertText(txt.toUpper());
+    tc.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor, txt.size());
+    editor->setTextCursor(tc);
   }
 }
 
