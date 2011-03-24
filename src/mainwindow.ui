@@ -168,6 +168,8 @@
      <addaction name="actionLeftPanel"/>
     </widget>
     <addaction name="menuPanels"/>
+    <addaction name="actionPreviousTab"/>
+    <addaction name="actionNextTab"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menu_Edit"/>
@@ -415,7 +417,7 @@
     <string>Next tab</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+PgDown</string>
+    <string>Alt+Right</string>
    </property>
   </action>
   <action name="actionPreviousTab">
@@ -423,7 +425,7 @@
     <string>Previous tab</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+PgUp</string>
+    <string>Alt+Left</string>
    </property>
   </action>
   <action name="actionSearch">
