@@ -619,6 +619,7 @@ void DbManagerPrivate::setupModels() {
   driverIcon["QIBASE"]    = QIcon(":/img/db_firebird.png");
   driverIcon["QMYSQL"]    = QIcon(":/img/db_mysql.png");
   driverIcon["QPSQL"]     = QIcon(":/img/db_postgresql.png");
+  driverIcon["QSQLITE"]   = QIcon(":/img/db_sqlite.png");
 
   QStandardItem *item;
   foreach(QString driver, QSqlDatabase::drivers()) {
@@ -650,11 +651,20 @@ void DbManagerPrivate::swapDatabase(QSqlDatabase *oldDb, QSqlDatabase *newDb) {
 }
 
 SqlTable DbManagerPrivate::table(QSqlDatabase *db, QString tbl) {
-  if (!dbWrappers[db]) {
-    return SqlTable();
-  }
+  SqlTable table;
 
-  SqlTable table = dbWrappers[db]->table(tbl);
+  if (dbWrappers[db]) {
+    table = dbWrappers[db]->table(tbl);
+  } else {
+    QSqlRecord r = db->record(tbl);
+    for (int i=0; i<r.count(); i++) {
+      SqlColumn c;
+      c.permitsNull = false;
+      c.primaryKey = false;
+      c.name = r.fieldName(i);
+      table.columns << c;
+    }
+  }
 
   return table;
 }
