@@ -1,2 +1,2 @@
 TEMPLATE=subdirs
-SUBDIRS=mysql psql #sqlite
+SUBDIRS=mysql psql sqlite

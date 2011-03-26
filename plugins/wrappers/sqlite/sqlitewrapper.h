@@ -24,6 +24,7 @@ public:
   WrapperFeatures features();
   SqlWrapper *newInstance(QSqlDatabase *db);
   bool requiresHostname() { return false; };
+  SqlTable table(QString t);
   QList<SqlTable> tables();
 
 signals:
