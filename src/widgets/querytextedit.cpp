@@ -74,6 +74,27 @@ void QueryTextEdit::keyPressEvent(QKeyEvent *event)
 //    return;
 //  }
 
+  // Combinaison spéciales
+  if (event->modifiers() & Qt::ControlModifier && event->key() == Qt::Key_D) {
+    // Supprimer une ligne
+    if (completer->popup()->isVisible()) {
+      completer->popup()->hide();
+    }
+    QTextCursor cur = textCursor();
+    cur.movePosition(QTextCursor::StartOfLine);
+    cur.movePosition(QTextCursor::EndOfLine, QTextCursor::KeepAnchor);
+    if (!cur.movePosition(QTextCursor::NextCharacter,
+                          QTextCursor::KeepAnchor)) {
+      cur.movePosition(QTextCursor::StartOfLine);
+      cur.movePosition(QTextCursor::PreviousCharacter);
+      cur.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
+      cur.movePosition(QTextCursor::EndOfLine, QTextCursor::KeepAnchor);
+    }
+
+    cur.removeSelectedText();
+    return;
+  }
+
   // the shortcut to pop up the completer
   bool isShortcut = ((event->modifiers() & Qt::ControlModifier)
                      && event->key() == Qt::Key_Space);
@@ -102,19 +123,6 @@ void QueryTextEdit::keyPressEvent(QKeyEvent *event)
   {
     completer->popup()->hide();
     event->accept();
-    return;
-  }
-
-  // Combinaison spéciales
-  if (event->modifiers() & Qt::ControlModifier && event->key() == Qt::Key_D) {
-    // Supprimer une ligne
-    if (completer->popup()->isVisible()) {
-      completer->popup()->hide();
-    }
-    QTextCursor cur = textCursor();
-    cur.movePosition(QTextCursor::StartOfLine);
-    cur.select(QTextCursor::LineUnderCursor);
-    cur.removeSelectedText();
     return;
   }
 
