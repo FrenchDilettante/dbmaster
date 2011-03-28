@@ -118,6 +118,8 @@ void ResultView::on_insertButton_clicked()
       tmodel->setRecord(row, modifiedRecords[row]);
     }
 
+    modifiedRecords.clear();
+
     if (!tmodel->submitAll()) {
       QMessageBox::critical(this, "Error", tmodel->lastError().text());
     }
