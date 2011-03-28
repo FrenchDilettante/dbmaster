@@ -58,6 +58,33 @@ ResultView::~ResultView() {
   instances.removeAll(this);
 }
 
+void ResultView::apply() {
+  if (modifiedRecords.size() == 0) {
+    return;
+  }
+
+  qDebug() << modifiedRecords;
+
+  insertButton->setIcon(IconManager::get("list-add"));
+  deleteButton->setIcon(IconManager::get("list-remove"));
+
+  QSqlTableModel *tmodel = (QSqlTableModel*) model;
+
+  foreach (int row, modifiedRecords.keys()) {
+    tmodel->setRecord(row, modifiedRecords[row]);
+  }
+
+  modifiedRecords.clear();
+
+  if (!tmodel->submitAll()) {
+    QMessageBox::critical(this, "Error", tmodel->lastError().text());
+  }
+
+  currentAction = Browse;
+  tmodel->select();
+  updateView();
+}
+
 void ResultView::contextMenuEvent(QContextMenuEvent *e)
 {
   if(e->reason() != QContextMenuEvent::Mouse
@@ -137,22 +164,7 @@ void ResultView::on_insertButton_clicked()
     return;
 
   if (currentAction == Insert || currentAction == Update) {
-    insertButton->setIcon(IconManager::get("list-add"));
-    deleteButton->setIcon(IconManager::get("list-remove"));
-
-    QSqlTableModel *tmodel = (QSqlTableModel*) model;
-
-    foreach (int row, modifiedRecords.keys()) {
-      tmodel->setRecord(row, modifiedRecords[row]);
-    }
-
-    if (!tmodel->submitAll()) {
-      QMessageBox::critical(this, "Error", tmodel->lastError().text());
-    }
-
-    currentAction = Browse;
-    tmodel->select();
-    updateView();
+    apply();
   } else {
     insertButton->setIcon(QIcon());
     insertButton->setText(tr("Apply"));
@@ -163,6 +175,7 @@ void ResultView::on_insertButton_clicked()
     currentAction = Insert;
     updateView();
     table->scrollToBottom();
+//    table->hold();
   }
 }
 
@@ -298,6 +311,7 @@ void ResultView::setupConnections() {
   connect(shortModel, SIGNAL(itemChanged(QStandardItem*)),
           this, SLOT(updateItem(QStandardItem*)));
 
+  connect(table, SIGNAL(rowLeaved(int)), this, SLOT(apply()));
   connect(table->horizontalHeader(), SIGNAL(sectionClicked(int)),
           this, SLOT(sort(int)));
 }

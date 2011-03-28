@@ -296,7 +296,7 @@
         </layout>
        </item>
        <item row="1" column="0">
-        <widget class="QTableView" name="table"/>
+        <widget class="ResultViewTable" name="table"/>
        </item>
       </layout>
      </widget>
@@ -325,6 +325,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ResultViewTable</class>
+   <extends>QTableView</extends>
+   <header>widgets/resultviewtable.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

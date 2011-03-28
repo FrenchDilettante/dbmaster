@@ -95,6 +95,7 @@ private:
   static QList<ResultView*> instances;
 
 private slots:
+  void apply();
   void on_deleteButton_clicked();
   void exportContent();
   void on_reloadButton_clicked();
