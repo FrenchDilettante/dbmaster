@@ -329,7 +329,7 @@
   <customwidget>
    <class>ResultViewTable</class>
    <extends>QTableView</extends>
-   <header>widgets/resultviewtable.h</header>
+   <header>../src/widgets/resultviewtable.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
