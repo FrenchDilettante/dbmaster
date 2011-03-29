@@ -143,6 +143,16 @@ void DbTreeView::mouseDoubleClickEvent(QMouseEvent *event) {
   }
 }
 
+void DbTreeView::mousePressEvent(QMouseEvent *event) {
+  if (event->button() == Qt::RightButton) {
+    QModelIndex item = indexAt(event->pos());
+    selectionModel()->select(item, QItemSelectionModel::ClearAndSelect);
+    QTreeView::mousePressEvent(event);
+  } else {
+    QTreeView::mousePressEvent(event);
+  }
+}
+
 /**
  * Prise en charge de la modification du modèle
  */

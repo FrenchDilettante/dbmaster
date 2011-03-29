@@ -34,6 +34,7 @@ public slots:
 private:
   void contextMenuEvent(QContextMenuEvent *event);
   void mouseDoubleClickEvent(QMouseEvent *event);
+  void mousePressEvent(QMouseEvent *event);
   QSqlDatabase *parentDb(QModelIndex index);
   void setupActions();
 
