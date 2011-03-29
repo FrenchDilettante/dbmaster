@@ -432,7 +432,6 @@ void QueryEditorWidget::setupWidgets() {
   resultButton->setText(tr("Display result"));
   resultButton->setAutoRaise(true);
   resultButton->setCheckable(true);
-  resultButton->setChecked(true);
   statusBar->addPermanentWidget(resultButton);
   connect(resultButton, SIGNAL(clicked(bool)),
           tabWidget, SLOT(setVisible(bool)));
