@@ -127,7 +127,13 @@ int DbManagerPrivate::addDatabase(QString driver, QString host, QString user,
 
   m_model->appendRow(l);
 
-  SqlWrapper *w = PluginManager::wrapper(wrapper);
+  SqlWrapper *w = NULL;
+  if (wrapper.length() > 0) {
+    w = PluginManager::wrapper(wrapper);
+  } else if (!driver.startsWith("QODBC")) {
+    w = PluginManager::availableWrapper(driver);
+  }
+
   if (w) {
     dbWrappers[newDb] = w->newInstance(newDb);
   }
