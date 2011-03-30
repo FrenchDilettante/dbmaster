@@ -42,6 +42,8 @@ public:
   virtual SqlWrapper* newInstance(QSqlDatabase *db) =0;
 
   virtual QString driver() =0;
+  virtual QString driverName() { return ""; };
+  virtual QString driverIconCode() { return ""; };
 
   virtual WrapperFeatures features() =0;
 

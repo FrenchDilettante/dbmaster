@@ -622,7 +622,7 @@ void DbManagerPrivate::setupModels() {
   driverIcon["QSQLITE"]   = QIcon(":/img/db_sqlite.png");
 
   QStandardItem *item;
-  foreach(QString driver, QSqlDatabase::drivers()) {
+  foreach (QString driver, QSqlDatabase::drivers()) {
     item = new QStandardItem();
     item->setData(driver, Qt::UserRole);
     item->setText(driverAlias.value(driver, driver));
@@ -630,6 +630,21 @@ void DbManagerPrivate::setupModels() {
 
     m_driverModel->appendRow(item);
   }
+
+  foreach (SqlWrapper *w, PluginManager::wrappers()) {
+    if (w->driver() == "QODBC") {
+      qDebug() << w->driver() << w->driverName() << w->driverIconCode();
+      item = new QStandardItem();
+      item->setData("QODBC", Qt::UserRole);
+      item->setData(w->plid(), Qt::UserRole + 1);
+      item->setText(w->driverName());
+      item->setIcon(IconManager::get(w->driverIconCode()));
+
+      m_driverModel->appendRow(item);
+    }
+  }
+
+  m_driverModel->sort(0);
 
   m_model->setHorizontalHeaderItem(0, new QStandardItem(tr("Database")));
 }

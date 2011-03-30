@@ -32,6 +32,10 @@ PluginManagerPrivate::PluginManagerPrivate()
  * Extrait le wrapper disponible pour le driver spécifié
  */
 SqlWrapper* PluginManagerPrivate::availableWrapper(QString driver) {
+  if (driver == "QODBC") {
+    return NULL;
+  }
+
   foreach (Plugin *p, m_plugins) {
     SqlWrapper *w = dynamic_cast<SqlWrapper*>(p);
     if (w && w->driver() == driver) {

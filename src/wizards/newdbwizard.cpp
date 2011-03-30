@@ -70,6 +70,8 @@ NdwFirstPage::NdwFirstPage(QWizard *parent)
   if (!odbcAvailable) {
     odbcCheckBox->setEnabled(false);
     odbcCheckBox->setToolTip(tr("You have no ODBC driver installed."));
+  } else {
+    odbcCheckBox->setToolTip("");
   }
 
   registerField("host", hostLineEdit);
@@ -107,8 +109,19 @@ void NdwFirstPage::on_dbTypeComboBox_currentIndexChanged(int index) {
     return;
   }
 
-  SqlWrapper *wrapper =
-      PluginManager::availableWrapper(dbTypeComboBox->currentDriverName());
+  SqlWrapper *wrapper;
+  if (dbTypeComboBox->currentDriverName() != "QODBC") {
+    wrapper = PluginManager::availableWrapper(
+        dbTypeComboBox->currentDriverName());
+  } else {
+    /* Si le driver choisi est ODBC, il se peut que l'item choisie soit un
+       adaptateur autre. */
+    QString plid = ((QStandardItemModel*) dbTypeComboBox->model())
+                    ->item(dbTypeComboBox->currentIndex())
+                      ->data(Qt::UserRole + 1).toString();
+
+    wrapper = plid == "" ? NULL : PluginManager::wrapper(plid);
+  }
 
   if (wrapper) {
     odbcCheckBox->setEnabled(wrapper->features() & SqlWrapper::ODBC);
