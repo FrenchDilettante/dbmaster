@@ -48,14 +48,14 @@ void ResultViewTable::selectionChanged(const QItemSelection &selected,
 }
 
 void ResultViewTable::setAlternatingRowColors(bool enable) {
-   actionAlternateColor->setEnabled(enable);
+   actionAlternateColor->setChecked(enable);
 
    QTableView::setAlternatingRowColors(enable);
 }
 
 void ResultViewTable::setupConnections() {
   connect(actionAlternateColor, SIGNAL(toggled(bool)),
-          this, SIGNAL(alternateRowsRequested()));
+          this, SIGNAL(alternateRowsRequested(bool)));
   connect(actionDetails, SIGNAL(triggered()), this, SLOT(showBlob()));
   connect(actionExport, SIGNAL(triggered()), this, SIGNAL(exportRequested()));
 }

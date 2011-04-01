@@ -288,6 +288,8 @@ void ResultView::setupConnections() {
   connect(table, SIGNAL(rowLeaved(int)), this, SLOT(apply()));
   connect(table->horizontalHeader(), SIGNAL(sectionClicked(int)),
           this, SLOT(sort(int)));
+  connect(table, SIGNAL(alternateRowsRequested(bool)),
+          this, SLOT(setAlternatingRowColors(bool)));
   connect(table, SIGNAL(exportRequested()), this, SLOT(exportContent()));
 }
 

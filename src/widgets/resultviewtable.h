@@ -15,7 +15,7 @@ public:
   void setAlternatingRowColors(bool enable);
 
 signals:
-  void alternateRowsRequested();
+  void alternateRowsRequested(bool);
   void exportRequested();
   void rowLeaved(int);
 
