@@ -39,9 +39,7 @@ ResultView::ResultView(QWidget *parent)
   table->setModel(shortModel);
   table->setAlternatingRowColors(alternateRows);
 
-  blobDialog = new BlobDialog(this);
-
-  setupMenus();
+//  setupMenus();
   setupConnections();
 
   // loading icons from theme
@@ -83,24 +81,6 @@ void ResultView::apply() {
   currentAction = Browse;
   tmodel->select();
   updateView();
-}
-
-void ResultView::contextMenuEvent(QContextMenuEvent *e)
-{
-  if(e->reason() != QContextMenuEvent::Mouse
-     || !table->geometry().contains(e->pos())
-     || model == 0)
-    return;
-
-  if( model->columnCount() == 0 || model->rowCount() == 0 )
-    return;
-
-  actionDetails->setEnabled(
-        table->selectionModel()->selectedIndexes().size() > 0
-        && table->selectionModel()->selectedIndexes().size() < 2);
-
-  contextMenu->move(e->globalPos());
-  contextMenu->exec();
 }
 
 void ResultView::exportContent()
@@ -230,7 +210,6 @@ void ResultView::scrollUp() {
 void ResultView::setAlternatingRowColors(bool enable, bool loop) {
   alternateRows = enable;
   table->setAlternatingRowColors(enable);
-  actionAlternateColor->setChecked(enable);
 
   if (loop) {
     foreach (ResultView *v, instances) {
@@ -293,11 +272,6 @@ void ResultView::setToken(QueryToken *token) {
 }
 
 void ResultView::setupConnections() {
-  connect(actionAlternateColor, SIGNAL(toggled(bool)),
-          this, SLOT(setAlternatingRowColors(bool)));
-  connect(actionDetails, SIGNAL(triggered()), this, SLOT(showBlob()));
-  connect(actionExport, SIGNAL(triggered()), this, SLOT(exportContent()));
-
   connect(firstPageButton, SIGNAL(clicked()), this, SLOT(scrollBegin()));
   connect(prevPageButton, SIGNAL(clicked()), this, SLOT(scrollUp()));
   connect(nextPageButton, SIGNAL(clicked()), this, SLOT(scrollDown()));
@@ -314,34 +288,7 @@ void ResultView::setupConnections() {
   connect(table, SIGNAL(rowLeaved(int)), this, SLOT(apply()));
   connect(table->horizontalHeader(), SIGNAL(sectionClicked(int)),
           this, SLOT(sort(int)));
-}
-
-void ResultView::setupMenus() {
-  contextMenu = new QMenu(this);
-
-  actionDetails = new QAction(tr("Details"), this);
-  actionDetails->setEnabled(false);
-  contextMenu->addAction(actionDetails);
-
-  actionAlternateColor = new QAction(tr("Alternate row colors"), this);
-  actionAlternateColor->setCheckable(true);
-  actionAlternateColor->setChecked(false);
-  contextMenu->addAction(actionAlternateColor);
-
-  actionExport = new QAction(tr("Export"), this);
-  actionExport->setIcon(IconManager::get("document-save-as"));
-  actionExport->setShortcut(QKeySequence("Ctrl+E"));
-  contextMenu->addAction(actionExport);
-}
-
-void ResultView::showBlob() {
-  if (table->selectionModel()->selectedIndexes().size() != 1) {
-    return;
-  }
-
-  QVariant blob = table->selectionModel()->selectedIndexes().at(0).data();
-  blobDialog->setBlob(blob);
-  blobDialog->show();
+  connect(table, SIGNAL(exportRequested()), this, SLOT(exportContent()));
 }
 
 void ResultView::sort(int col) {
@@ -435,18 +382,18 @@ void ResultView::updateView() {
     r = model->record(i);
     for(int j=0; j<model->columnCount(); j++) {
       item = new QStandardItem();
-      if (r.value(j).canConvert(QVariant::String)
-          && r.value(j).toString().length() > 50) {
-        QString val = r.value(j).toString();
-        // BLOB
-        item->setData(val.left(47).append("..."), Qt::DisplayRole);
-        item->setData(val, Qt::ToolTipRole);
-        item->setEditable(false);
-        item->setData(true, Qt::UserRole);
-      } else {
+//      if (r.value(j).canConvert(QVariant::String)
+//          && r.value(j).toString().length() > 50) {
+//        QString val = r.value(j).toString();
+//        // BLOB
+//        item->setData(val.left(47).append("..."), Qt::DisplayRole);
+//        item->setData(val, Qt::ToolTipRole);
+//        item->setEditable(false);
+//        item->setData(true, Qt::UserRole);
+//      } else {
         item->setData(r.value(j), Qt::DisplayRole);
         item->setData(false, Qt::UserRole);
-      }
+//      }
       item->setEditable(m_mode == TableMode);
       row << item;
     }

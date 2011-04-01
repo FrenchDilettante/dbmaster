@@ -69,16 +69,9 @@ public slots:
   void sort(int col);
 
 private:
-  void contextMenuEvent(QContextMenuEvent *e);
   void setModel(QSqlQueryModel *model);
   void setupConnections();
-  void setupMenus();
 
-  QAction              *actionAlternateColor;
-  QAction              *actionDetails;
-  QAction              *actionExport;
-  BlobDialog           *blobDialog;
-  QMenu                *contextMenu;
   Action                currentAction;
   QPair<int, Qt::SortOrder> currentSorting;
   ExportWizard         *exportWizard;
@@ -100,7 +93,6 @@ private slots:
   void exportContent();
   void on_reloadButton_clicked();
   void on_insertButton_clicked();
-  void showBlob();
   void updateItem(QStandardItem *item);
   void updateView();
 };
