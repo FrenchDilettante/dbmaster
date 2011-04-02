@@ -668,7 +668,7 @@ void MainWindow::setupWidgets()
   actionRedo->setIcon(          IconManager::get("edit-redo"));
   actionSaveQuery->setIcon(     IconManager::get("document-save"));
 //  actionSaveQueryAs->setIcon(   IconManager::get("document-save-as"));
-  actionSearch->setIcon(        IconManager::get("edit-search"));
+  actionSearch->setIcon(        IconManager::get("edit-find"));
   actionUndo->setIcon(          IconManager::get("edit-undo"));
 
   tooltipButton->setIcon(       IconManager::get("help-faq"));
