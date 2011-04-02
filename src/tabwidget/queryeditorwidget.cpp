@@ -313,6 +313,7 @@ void QueryEditorWidget::reloadFile()
 
 void QueryEditorWidget::run() {
 
+  resultButton->setChecked(true);
   tabWidget->setVisible(true);
   tabWidget->setTabEnabled(1, false);
   tabWidget->setCurrentIndex(0);
