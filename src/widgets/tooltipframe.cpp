@@ -28,7 +28,11 @@ TooltipFrame::TooltipFrame(QWidget *parent)
         << tr("You can export a table or a query's content in a CSV file by right-clicking on the spreadsheet.")
         << tr("While it is connected, a database cannot be edited.")
         << tr("All queries are logged. Check them out in Tools - Logs.")
-        << tr("DbMaster is a free software developped by volunteers. Join the community and help us making it better !");
+        << tr("DbMaster is a free software developped by volunteers. Join the community and help us making it better !")
+        << tr("Move from a tab to another by pressing Alt+Left/Right.")
+        << tr("Name your connections with an alias to avoid blanks.")
+        << tr("You like having a good-looking code ? In the Edit menu, case can be modified.")
+        << tr("'want to prove to your teacher that your query works ? Right-clic on the result, and export it in HTML or CSV.");
   }
 
   srand(time(NULL));
@@ -54,8 +58,5 @@ void TooltipFrame::showTooltip() {
     index = 0;
 
   currentIndex = index;
-  label->setText(tr("Did you know ? #%1/%2")
-                 .arg(currentIndex+1)
-                 .arg(tooltips.size()));
   textBrowser->setText(tooltips[index]);
 }
