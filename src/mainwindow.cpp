@@ -172,6 +172,10 @@ void MainWindow::closeEvent(QCloseEvent *event) {
   s.setValue("maindock_visible", dockWidget->isVisible());
   s.setValue("maindock_area", dockWidgetArea(dockWidget));
   s.setValue("maindock_size", dockWidget->size());
+
+  // Positionnement de la toolbar principale
+  s.setValue("maintoolbar_area", toolBarArea(mainToolBar));
+
   s.endGroup();
 
   // fichiers récents
@@ -606,6 +610,9 @@ void MainWindow::setupWidgets()
 
   dockWidget->setVisible(s.value("maindock_visible", true).toBool());
 
+  addToolBar((Qt::ToolBarArea) s.value("maintoolbar_area", 4).toInt(),
+             mainToolBar);
+
   queriesStatusLabel = new QLabel("", this);
   QMainWindow::statusBar()->addPermanentWidget(queriesStatusLabel);
 
@@ -668,7 +675,7 @@ void MainWindow::setupWidgets()
   actionRedo->setIcon(          IconManager::get("edit-redo"));
   actionSaveQuery->setIcon(     IconManager::get("document-save"));
 //  actionSaveQueryAs->setIcon(   IconManager::get("document-save-as"));
-  actionSearch->setIcon(        IconManager::get("edit-search"));
+  actionSearch->setIcon(        IconManager::get("edit-find"));
   actionUndo->setIcon(          IconManager::get("edit-undo"));
 
   tooltipButton->setIcon(       IconManager::get("help-faq"));
