@@ -293,7 +293,14 @@
         </layout>
        </item>
        <item row="1" column="0">
-        <widget class="QTableView" name="table"/>
+        <widget class="QTableView" name="table">
+         <property name="verticalScrollMode">
+          <enum>QAbstractItemView::ScrollPerPixel</enum>
+         </property>
+         <property name="horizontalScrollMode">
+          <enum>QAbstractItemView::ScrollPerPixel</enum>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
