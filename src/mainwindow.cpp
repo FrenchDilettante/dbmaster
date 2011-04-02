@@ -175,6 +175,8 @@ void MainWindow::closeEvent(QCloseEvent *event) {
   // où se situe le dock de connexion
   s.setValue("maindock_visible", dockWidget->isVisible());
   s.setValue("maindock_area", dockWidgetArea(dockWidget));
+  s.setValue("maindock_floating", dockWidget->isFloating());
+  s.setValue("maindock_position", dockWidget->pos());
   s.setValue("maindock_size", dockWidget->size());
   s.endGroup();
 
@@ -631,24 +633,10 @@ void MainWindow::setupWidgets()
   if(s.value("maximized", false).toBool())
     setWindowState(Qt::WindowMaximized);
 
-  int corner = s.value("maindock_area", 1).toInt();
-  switch (corner) {
-  case 1:
-    addDockWidget(Qt::LeftDockWidgetArea, dockWidget);
-    break;
-
-  case 2:
-    addDockWidget(Qt::RightDockWidgetArea, dockWidget);
-    break;
-
-  case 4:
-    addDockWidget(Qt::TopDockWidgetArea, dockWidget);
-    break;
-
-  case 8:
-    addDockWidget(Qt::BottomDockWidgetArea, dockWidget);
-    break;
-  }
+  addDockWidget((Qt::DockWidgetArea) s.value("maindock_area", 1).toInt(),
+                dockWidget);
+  dockWidget->setFloating(s.value("maindock_floating", false).toBool());
+  dockWidget->move(s.value("maindock_position").toPoint());
 
   if (s.contains("maindock_size")) {
     dockWidget->resize(s.value("maindock_size").toSize());
