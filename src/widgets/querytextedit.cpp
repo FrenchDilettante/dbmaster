@@ -115,9 +115,7 @@ void QueryTextEdit::keyPressEvent(QKeyEvent *event)
   }
 
   QString completionPrefix = textUnderCursor();
-  if(event->key() == Qt::Key_Backspace && !completionPrefix.isEmpty()
-    && !completionPrefix.right(1).at(0).isLetterOrNumber())
-  {
+  if (event->key() == Qt::Key_Backspace && completer->popup()->isHidden()) {
     completer->popup()->hide();
     event->accept();
     return;
