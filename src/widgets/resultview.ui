@@ -296,7 +296,14 @@
         </layout>
        </item>
        <item row="1" column="0">
-        <widget class="ResultViewTable" name="table"/>
+        <widget class="ResultViewTable" name="table">
+         <property name="verticalScrollMode">
+          <enum>QAbstractItemView::ScrollPerPixel</enum>
+         </property>
+         <property name="horizontalScrollMode">
+          <enum>QAbstractItemView::ScrollPerPixel</enum>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
