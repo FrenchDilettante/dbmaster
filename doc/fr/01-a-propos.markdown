@@ -52,6 +52,10 @@ Documentation & traduction :
 
 **`[FR]`** Emmanuel BOURGERIE
 
+Autres contributeurs :
+
+- Marion CROISÉ
+
 Soutenir le projet
 ------------------
 
