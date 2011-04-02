@@ -52,10 +52,8 @@ void QueryTextEdit::keyPressEvent(QKeyEvent *event)
     return;
 
   // If the completer is actually shown, it handles some keys
-  if(completer->popup()->isVisible())
-  {
-    switch(event->key())
-    {
+  if(completer->popup()->isVisible()) {
+    switch(event->key()) {
     case Qt::Key_Enter:
     case Qt::Key_Return:
     case Qt::Key_Escape:
@@ -68,11 +66,25 @@ void QueryTextEdit::keyPressEvent(QKeyEvent *event)
     }
   }
 
-//  if(event->modifiers() == Qt::ControlModifier && event->key() == Qt::Key_Control)
-//  {
-//    scanTables();
-//    return;
-//  }
+  // Gestion de l'auto-indentation
+  if (event->modifiers() == Qt::NoModifier &&
+      (event->key() == Qt::Key_Enter
+    || event->key() == Qt::Key_Return)) {
+
+    QTextCursor cur = textCursor();
+    cur.select(QTextCursor::LineUnderCursor);
+    QString ligne = cur.selectedText();
+    QString ind;
+
+    for (int i=0; i<ligne.length() && ligne[i] == ' '; i++) {
+      ind += ' ';
+    }
+
+    QTextEdit::keyPressEvent(event);
+    cur = textCursor();
+    cur.insertText(ind);
+    return;
+  }
 
   // Combinaison spéciales
   if (event->modifiers() & Qt::ControlModifier && event->key() == Qt::Key_D) {
@@ -98,23 +110,8 @@ void QueryTextEdit::keyPressEvent(QKeyEvent *event)
   // the shortcut to pop up the completer
   bool isShortcut = ((event->modifiers() & Qt::ControlModifier)
                      && event->key() == Qt::Key_Space);
-  if(!isShortcut)
-  {
-//    QString prevLine = "";
-//    if(event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return)
-//    {
-//      QTextCursor cursor = textCursor();
-//      if(cursor.movePosition(QTextCursor::Up))
-//      {
-//        cursor.select(QTextCursor::LineUnderCursor);
-//        prevLine = textCursor().selectedText();
-//      }
-//    }
-
+  if(!isShortcut) {
     QTextEdit::keyPressEvent(event);
-//    if(!prevLine.isEmpty())
-//      for(int i=0; prevLine.at(i) == QChar(' '); i++)
-//        insertPlainText(" ");
   }
 
   QString completionPrefix = textUnderCursor();
