@@ -61,8 +61,6 @@ void ResultView::apply() {
     return;
   }
 
-  qDebug() << modifiedRecords;
-
   insertButton->setIcon(IconManager::get("list-add"));
   deleteButton->setIcon(IconManager::get("list-remove"));
 
@@ -277,10 +275,7 @@ void ResultView::setupConnections() {
   connect(nextPageButton, SIGNAL(clicked()), this, SLOT(scrollDown()));
   connect(lastPageButton, SIGNAL(clicked()), this, SLOT(scrollEnd()));
 
-  connect(reloadButton, SIGNAL(clicked()), this, SLOT(on_reloadButton_clicked()));
   connect(resultSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateView()));
-
-  connect(deleteButton, SIGNAL(clicked()), this, SLOT(on_deleteButton_clicked()));
 
   connect(shortModel, SIGNAL(itemChanged(QStandardItem*)),
           this, SLOT(updateItem(QStandardItem*)));

@@ -20,6 +20,7 @@ signals:
   void rowLeaved(int);
 
 public slots:
+  void copy();
 
 protected:
   void contextMenuEvent(QContextMenuEvent *event);
@@ -30,12 +31,13 @@ private:
   void setupConnections();
   void setupMenus();
 
-  QAction              *actionAlternateColor;
-  QAction              *actionDetails;
-  QAction              *actionExport;
-  BlobDialog           *blobDialog;
-  QMenu                *contextMenu;
-  int                   currentEditedRow;
+  QAction*    actionAlternateColor;
+  QAction*    actionCopy;
+  QAction*    actionDetails;
+  QAction*    actionExport;
+  BlobDialog* blobDialog;
+  QMenu*      contextMenu;
+  int         currentEditedRow;
 
 private slots:
   void showBlob();
