@@ -25,13 +25,13 @@ Q_OBJECT
 public:
   PluginManagerPrivate();
 
-  void add(QString path);
-  SqlWrapper* availableWrapper(QString driver);
+  void          add(QString path);
+  SqlWrapper*   availableWrapper(QString driver);
   QList<ExportEngine*> exportEngines();
-  Plugin *load(QFileInfo path);
-  Plugin *plugin(QString plid);
-  void registerPlugin(Plugin *plugin);
-  SqlWrapper *wrapper(QString plid);
+  Plugin*       load(QFileInfo path);
+  Plugin*       plugin(QString plid);
+  void          registerPlugin(Plugin *plugin);
+  SqlWrapper*   wrapper(QString plid);
   QList<SqlWrapper*> wrappers();
 
   QStandardItemModel *model()   { return m_model;   };
@@ -42,6 +42,8 @@ public slots:
   void save();
 
 private:
+  bool checkType(Plugin *p, QString type);
+
   QStandardItemModel             *m_model;
   QList<Plugin*>                  m_plugins;
   QMap<Plugin*, QStandardItem*>   pluginsMap;

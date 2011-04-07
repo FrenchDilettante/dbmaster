@@ -210,7 +210,7 @@ void EwExportPage::run() {
   }
 
   ExportEngine *engine = ((ExportWizard*) wizard())->engine();
-  connect(dynamic_cast<QObject*>(engine), SIGNAL(progress(int)),
+  connect((QObject*) engine, SIGNAL(progress(int)),
           dial, SLOT(setValue(int)));
   engine->process(&f);
 

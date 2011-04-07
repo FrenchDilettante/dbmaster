@@ -37,13 +37,20 @@ SqlWrapper* PluginManagerPrivate::availableWrapper(QString driver) {
   }
 
   foreach (Plugin *p, m_plugins) {
-    SqlWrapper *w = dynamic_cast<SqlWrapper*>(p);
-    if (w && w->driver() == driver) {
+    SqlWrapper *w = NULL;
+    if (checkType(p, "WRAPPER") && ((SqlWrapper*) p)->driver() == driver) {
       return w;
     }
   }
 
   return NULL;
+}
+
+/**
+ * Vérifie le type d'un plugin : moteur d'export, adaptateur, etc.
+ */
+bool PluginManagerPrivate::checkType(Plugin *p, QString type) {
+  return (p && p->plid().count(".") == 2 && p->plid().split('.')[2] == type);
 }
 
 /**
@@ -53,9 +60,8 @@ QList<ExportEngine*> PluginManagerPrivate::exportEngines() {
   QList<ExportEngine*> engines;
 
   foreach (Plugin *p, m_plugins) {
-    ExportEngine *en = dynamic_cast<ExportEngine*>(p);
-    if (en) {
-      engines << en;
+    if (checkType(p, "EXPORTENGINE")) {
+      engines << (ExportEngine*) p;
     }
   }
 
@@ -104,9 +110,9 @@ void PluginManagerPrivate::registerPlugin(Plugin *plugin) {
 
   QString type = tr("Other");
 
-  if (dynamic_cast<ExportEngine*>(plugin)) {
+  if (checkType(plugin, "EXPORTENGINE")) {
     type = tr("Export engine");
-  } else if (dynamic_cast<SqlWrapper*>(plugin)) {
+  } else if (checkType(plugin, "WRAPPER")) {
     type = tr("SQL Wrapper");
   }
 
@@ -128,7 +134,11 @@ Plugin *PluginManagerPrivate::load(QFileInfo info) {
   Plugin *p = NULL;
   QPluginLoader loader(info.absoluteFilePath());
   if(loader.load())   {
+#if QT_VERSION >= 0x040700
     p = dynamic_cast<Plugin*>(loader.instance());
+#else
+    p = (Plugin*) loader.instance();
+#endif
     if(!p) {
       QMessageBox::critical(NULL,
                             tr("Incorrect plugin file"),
@@ -169,16 +179,21 @@ void PluginManagerPrivate::save() {
 }
 
 SqlWrapper* PluginManagerPrivate::wrapper(QString plid) {
-  return dynamic_cast<SqlWrapper*>(plugin(plid));
+  Plugin *p = plugin(plid);
+  if (p && checkType(p, "WRAPPER")) {
+    return (SqlWrapper*) p;
+  } else {
+    return NULL;
+  }
 }
 
 QList<SqlWrapper*> PluginManagerPrivate::wrappers() {
   QList<SqlWrapper*> wrappers;
 
   foreach (Plugin *p, m_plugins) {
-    SqlWrapper *wp = dynamic_cast<SqlWrapper*>(p);
-    if (wp) {
-      wrappers << wp;
+    SqlWrapper *wp = NULL;
+    if (checkType(wp, "WRAPPER")) {
+      wrappers << (SqlWrapper*) wp;
     }
   }
 
