@@ -639,7 +639,6 @@ void DbManagerPrivate::setupModels() {
 
   foreach (SqlWrapper *w, PluginManager::wrappers()) {
     if (w->driver() == "QODBC") {
-      qDebug() << w->driver() << w->driverName() << w->driverIconCode();
       item = new QStandardItem();
       item->setData("QODBC", Qt::UserRole);
       item->setData(w->plid(), Qt::UserRole + 1);

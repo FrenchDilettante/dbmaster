@@ -41,7 +41,7 @@ void ResultViewTable::copy() {
       data[idx.row()] += "<tr>";
     }
 
-    data[idx.row()] += "<td>" + idx.data() + "</td>";
+//    data[idx.row()] += "<td>" + idx.data() + "</td>";
   }
 
   text += "</table>";
