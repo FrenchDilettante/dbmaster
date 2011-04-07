@@ -14,7 +14,7 @@
    <item row="0" column="0">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -70,9 +70,6 @@
       <layout class="QGridLayout" name="gridLayout_3">
        <item row="0" column="0">
         <widget class="QTreeWidget" name="tableTree">
-         <attribute name="headerStretchLastSection">
-          <bool>false</bool>
-         </attribute>
          <column>
           <property name="text">
            <string>Table</string>
@@ -81,6 +78,11 @@
          <column>
           <property name="text">
            <string>Column count</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Comment</string>
           </property>
          </column>
         </widget>

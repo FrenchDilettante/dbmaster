@@ -43,6 +43,7 @@ void SchemaWidget::reload() {
     QStringList ligne;
     ligne << t.name;
     ligne << QString::number(t.columns.size());
+    ligne << t.comment;
 
     QTreeWidgetItem *it = new QTreeWidgetItem(ligne);
     if (t.type == Table) {
