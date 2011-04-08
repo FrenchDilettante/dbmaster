@@ -196,7 +196,7 @@ void DbTreeView::setupActions()
 {
   addDbAct = new QAction(this);
   addDbAct->setText(tr("New connection"));
-  addDbAct->setIcon(IconManager::get("list-add"));
+  addDbAct->setIcon(IconManager::get("db_add"));
   connect(addDbAct, SIGNAL(triggered()), MainWindow::dbWizard, SLOT(exec()));
 
   editDbAct = new QAction(this);
