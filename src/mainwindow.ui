@@ -241,8 +241,6 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="actionAddDb"/>
-   <addaction name="separator"/>
    <addaction name="actionNewQuery"/>
    <addaction name="actionOpenQuery"/>
    <addaction name="actionSaveQuery"/>
@@ -257,6 +255,23 @@
    <addaction name="actionPaste"/>
    <addaction name="separator"/>
    <addaction name="actionSearch"/>
+  </widget>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionAddDb"/>
+   <addaction name="actionEditConnection"/>
+   <addaction name="actionRemoveConnection"/>
+   <addaction name="separator"/>
+   <addaction name="actionConnect"/>
+   <addaction name="actionDisconnect"/>
   </widget>
   <action name="actionAddDb">
    <property name="text">
@@ -499,6 +514,32 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+L</string>
+   </property>
+  </action>
+  <action name="actionEditConnection">
+   <property name="text">
+    <string>Edit</string>
+   </property>
+   <property name="toolTip">
+    <string>Edit the connection in the manager</string>
+   </property>
+  </action>
+  <action name="actionRemoveConnection">
+   <property name="text">
+    <string>Remove</string>
+   </property>
+   <property name="toolTip">
+    <string>Remove current connection</string>
+   </property>
+  </action>
+  <action name="actionConnect">
+   <property name="text">
+    <string>Connect</string>
+   </property>
+  </action>
+  <action name="actionDisconnect">
+   <property name="text">
+    <string>Disconnect</string>
    </property>
   </action>
  </widget>
