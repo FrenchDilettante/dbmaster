@@ -30,6 +30,8 @@ signals:
   void tableSelected(QSqlDatabase*, QString);
 
 public slots:
+  void editCurrent();
+  void refreshCurrent();
 
 private:
   void contextMenuEvent(QContextMenuEvent *event);
@@ -51,9 +53,7 @@ private slots:
   void addDatabase();
   void on_model_dataChanged(const QModelIndex & topLeft,
                             const QModelIndex & bottomRight);
-  void editCurrent();
-  void refreshCurrent();
-  void on_removeDbAct_triggered();
+  void removeCurrent();
   void toggleCurrentDb();
 };
 

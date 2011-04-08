@@ -554,6 +554,8 @@ void MainWindow::setupConnections()
   connect(actionPreviousTab,  SIGNAL(triggered()),  this,          SLOT(previousTab()));
   connect(actionPrint,        SIGNAL(triggered()),  this,          SLOT(print()));
   connect(actionRedo,         SIGNAL(triggered()),  this,          SLOT(redo()));
+  connect(actionRefreshConnection, SIGNAL(triggered()), dbTreeView,SLOT(refreshCurrent()));
+  connect(actionRemoveConnection, SIGNAL(triggered()), dbTreeView, SLOT(removeCurrent()));
   connect(actionSaveQuery,    SIGNAL(triggered()),  this,          SLOT(saveQuery()));
   connect(actionSaveQueryAs,  SIGNAL(triggered()),  this,          SLOT(saveQueryAs()));
   connect(actionSearch,       SIGNAL(triggered()),  this,          SLOT(search()));
@@ -707,6 +709,7 @@ void MainWindow::setupWidgets()
   actionPreferences->setIcon(   IconManager::get("preferences"));
   actionPrint->setIcon(         IconManager::get("document-print"));
   actionRedo->setIcon(          IconManager::get("edit-redo"));
+  actionRefreshConnection->setIcon(IconManager::get("database_refresh"));
   actionRemoveConnection->setIcon(IconManager::get("database_delete"));
   actionSaveQuery->setIcon(     IconManager::get("document-save"));
   actionSearch->setIcon(        IconManager::get("edit-find"));

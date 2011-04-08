@@ -167,7 +167,7 @@ void DbTreeView::on_model_dataChanged(const QModelIndex &topLeft,
 /**
  * Suppression de la connexion sélectionnée. Ne fait rien si elle est ouverte.
  */
-void DbTreeView::on_removeDbAct_triggered() {
+void DbTreeView::removeCurrent() {
   if(selectedIndexes().size() != 0) {
     QModelIndex index = selectedIndexes()[0];
     if (DbManager::getDatabase(index.row())->isOpen()) {
@@ -205,7 +205,7 @@ void DbTreeView::setupActions()
 {
   addDbAct = new QAction(this);
   addDbAct->setText(tr("New connection"));
-  addDbAct->setIcon(IconManager::get("db_add"));
+  addDbAct->setIcon(IconManager::get("database_add"));
   connect(addDbAct, SIGNAL(triggered()), MainWindow::dbWizard, SLOT(exec()));
 
   editDbAct = new QAction(this);
@@ -220,8 +220,7 @@ void DbTreeView::setupActions()
   removeDbAct = new QAction(this);
   removeDbAct->setText(tr("Remove"));
   removeDbAct->setIcon(IconManager::get("list-remove"));
-  connect(removeDbAct, SIGNAL(triggered()),
-          this, SLOT(on_removeDbAct_triggered()));
+  connect(removeDbAct, SIGNAL(triggered()), this, SLOT(removeCurrent()));
 
   toggleAct = new QAction(this);
   toggleAct->setText(tr("Connect"));
