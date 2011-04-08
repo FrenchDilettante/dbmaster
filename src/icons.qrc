@@ -72,7 +72,7 @@
         <file>img/column.png</file>
         <file>img/column_key.png</file>
         <file>img/db_db2.png</file>
-        <file>img/edit-search.png</file>
         <file>img/db_sqlite.png</file>
+        <file>img/edit-find.png</file>
     </qresource>
 </RCC>
