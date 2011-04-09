@@ -1,5 +1,6 @@
 #include "resultviewtable.h"
 
+#include <QClipboard>
 #include <QContextMenuEvent>
 #include <QDebug>
 
@@ -30,6 +31,24 @@ void ResultViewTable::contextMenuEvent(QContextMenuEvent *event) {
   contextMenu->exec();
 }
 
+void ResultViewTable::copy() {
+  QString text = "<table>";
+
+  QMap<int, QString> data;
+
+  foreach (QModelIndex idx, selectedIndexes()) {
+    if (!data.contains(idx.row())) {
+      data[idx.row()] += "<tr>";
+    }
+
+//    data[idx.row()] += "<td>" + idx.data() + "</td>";
+  }
+
+  text += "</table>";
+
+  QApplication::clipboard()->setText(text);
+}
+
 void ResultViewTable::selectionChanged(const QItemSelection &selected,
                                        const QItemSelection &deselected) {
   QTableView::selectionChanged(selected, deselected);
@@ -56,6 +75,7 @@ void ResultViewTable::setAlternatingRowColors(bool enable) {
 void ResultViewTable::setupConnections() {
   connect(actionAlternateColor, SIGNAL(toggled(bool)),
           this, SIGNAL(alternateRowsRequested(bool)));
+  connect(actionCopy, SIGNAL(triggered()), this, SLOT(copy()));
   connect(actionDetails, SIGNAL(triggered()), this, SLOT(showBlob()));
   connect(actionExport, SIGNAL(triggered()), this, SIGNAL(exportRequested()));
 }
@@ -71,6 +91,12 @@ void ResultViewTable::setupMenus() {
   actionAlternateColor->setCheckable(true);
   actionAlternateColor->setChecked(false);
   contextMenu->addAction(actionAlternateColor);
+
+  contextMenu->addSeparator();
+
+  actionCopy = new QAction(tr("Copy"), this);
+  actionCopy->setIcon(IconManager::get("edit-copy"));
+  contextMenu->addAction(actionCopy);
 
   actionExport = new QAction(tr("Export"), this);
   actionExport->setIcon(IconManager::get("document-save-as"));

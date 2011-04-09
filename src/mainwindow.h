@@ -67,7 +67,6 @@ private:
   QString             lastPath;
   SearchDialog       *searchDialog;
   QLabel             *queriesStatusLabel;
-  //QPrintDialog       *printDialog;
   QList<QAction*>     recentActions;
   QStringList         recentFiles;
 

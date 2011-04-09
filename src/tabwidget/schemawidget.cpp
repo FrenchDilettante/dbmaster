@@ -12,6 +12,9 @@ SchemaWidget::SchemaWidget(QString schema, QSqlDatabase *db, QWidget *parent)
 
   this->m_schema = schema;
   this->m_db = db;
+
+  tableTree->header()->setResizeMode(0, QHeaderView::Stretch);
+  viewTree->header()->setResizeMode(0, QHeaderView::Stretch);
 }
 
 QIcon SchemaWidget::icon() {
@@ -43,15 +46,15 @@ void SchemaWidget::reload() {
     QStringList ligne;
     ligne << t.name;
     ligne << QString::number(t.columns.size());
+    ligne << t.comment;
 
     QTreeWidgetItem *it = new QTreeWidgetItem(ligne);
     if (t.type == Table) {
       it->setIcon(0, IconManager::get("table"));
+      tableTree->addTopLevelItem(it);
     } else {
       it->setIcon(0, IconManager::get("table_lightning"));
+      viewTree->addTopLevelItem(it);
     }
-    tableTree->addTopLevelItem(it);
   }
-
-  tableTree->header()->setResizeMode(0, QHeaderView::Stretch);
 }

@@ -118,7 +118,7 @@ int DbManagerPrivate::addDatabase(QString driver, QString host, QString user,
   dbMap[newDb]->setEditable(false);
 
   dbMap[newDb]->setData(DbManager::DbItem, Qt::UserRole);
-  dbMap[newDb]->setIcon(IconManager::get("connect_no"));
+  dbMap[newDb]->setIcon(IconManager::get("database_connect"));
   dbMap[newDb]->setToolTip(dbToolTip(newDb));
 
   QList<QStandardItem*> l;
@@ -344,7 +344,7 @@ void DbManagerPrivate::open(QSqlDatabase *db, QString pswd)
   if(!pswd.isNull())
     db->setPassword(pswd);
 
-  dbMap[db]->setIcon(IconManager::get("connect_creating"));
+  dbMap[db]->setIcon(IconManager::get("database_lightning"));
 
   openStack.push(db);
   while(closeStack.contains(db))
@@ -389,6 +389,7 @@ void DbManagerPrivate::refreshModelItem(QSqlDatabase *db) {
     return;
 
   QStandardItem *item = dbMap[db];
+  item->setIcon(IconManager::get("database_refresh"));
   item->setToolTip(dbToolTip(db));
 
   QStandardItem *schemaItem = NULL;
@@ -443,10 +444,10 @@ void DbManagerPrivate::refreshModelItem(QSqlDatabase *db) {
       item->appendRow(viewsItem(views));
     }
 
-    item->setIcon(IconManager::get("connect_established"));
+    item->setIcon(IconManager::get("database"));
 
   } else {
-    item->setIcon(IconManager::get("connect_no"));
+    item->setIcon(IconManager::get("database_connect"));
     while(m_model->rowCount(index) > 0)
       m_model->removeRow(0, index);
   }
@@ -639,7 +640,6 @@ void DbManagerPrivate::setupModels() {
 
   foreach (SqlWrapper *w, PluginManager::wrappers()) {
     if (w->driver() == "QODBC") {
-      qDebug() << w->driver() << w->driverName() << w->driverIconCode();
       item = new QStandardItem();
       item->setData("QODBC", Qt::UserRole);
       item->setData(w->plid(), Qt::UserRole + 1);

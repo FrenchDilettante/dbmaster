@@ -33,8 +33,9 @@ SqlTable MysqlWrapper::table(QString t) {
 
   // Récupération des colonnes
 
-  sql += "SELECT C.TABLE_NAME, T.TABLE_TYPE, C.COLUMN_NAME, C.COLUMN_TYPE, ";
-  sql += "C.IS_NULLABLE, C.COLUMN_DEFAULT, C.ORDINAL_POSITION ";
+  sql += "SELECT C.TABLE_NAME, T.TABLE_TYPE, T.TABLE_COMMENT, C.COLUMN_NAME, ";
+  sql += "C.COLUMN_TYPE, C.IS_NULLABLE, C.COLUMN_DEFAULT, C.COLUMN_COMMENT, ";
+  sql += "C.ORDINAL_POSITION ";
   sql += "FROM INFORMATION_SCHEMA.COLUMNS C ";
   sql +=   "INNER JOIN INFORMATION_SCHEMA.TABLES T ";
   sql +=   "ON C.TABLE_NAME = T.TABLE_NAME ";
@@ -59,18 +60,20 @@ SqlTable MysqlWrapper::table(QString t) {
       } else {
         table.type = ViewTable;
       }
+      table.comment = query.value(2).toString();
       first = false;
     }
 
     SqlColumn c;
-    c.name = query.value(2).toString();
+    c.name = query.value(3).toString();
     c.primaryKey = false;
     SqlType ty;
-    ty.name = query.value(3).toString().toUpper();
+    ty.name = query.value(4).toString().toUpper();
     c.type = ty;
-    c.permitsNull = query.value(4).toString().toLower() == "yes";
+    c.permitsNull = query.value(5).toString().toLower() == "yes";
     c.primaryKey = false;
-    c.defaultValue = query.value(5);
+    c.defaultValue = query.value(6);
+    c.comment = query.value(7).toString();
     table.columns << c;
   }
 
@@ -117,8 +120,7 @@ QList<SqlTable> MysqlWrapper::tables() {
 
   QString sql;
 
-  sql += "SELECT C.TABLE_NAME, T.TABLE_TYPE, C.COLUMN_NAME, C.COLUMN_TYPE, ";
-  sql += "C.IS_NULLABLE, C.COLUMN_DEFAULT, C.ORDINAL_POSITION ";
+  sql += "SELECT C.TABLE_NAME, T.TABLE_TYPE, C.COLUMN_NAME, C.ORDINAL_POSITION ";
   sql += "FROM INFORMATION_SCHEMA.COLUMNS C ";
   sql +=   "INNER JOIN INFORMATION_SCHEMA.TABLES T ";
   sql +=   "ON C.TABLE_NAME = T.TABLE_NAME ";
@@ -158,9 +160,9 @@ QList<SqlTable> MysqlWrapper::tables() {
     SqlType ty;
     ty.name = query.value(3).toString();
     c.type = ty;
-    c.permitsNull = query.value(4).toString().toLower() == "yes";
+    c.permitsNull = false;
     c.primaryKey = false;
-    c.defaultValue = query.value(5);
+    c.defaultValue = QVariant();
     t.columns << c;
   }
 

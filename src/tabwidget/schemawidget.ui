@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>296</width>
-    <height>258</height>
+    <width>534</width>
+    <height>412</height>
    </rect>
   </property>
   <layout class="QGridLayout" name="gridLayout">
@@ -70,9 +70,6 @@
       <layout class="QGridLayout" name="gridLayout_3">
        <item row="0" column="0">
         <widget class="QTreeWidget" name="tableTree">
-         <attribute name="headerStretchLastSection">
-          <bool>false</bool>
-         </attribute>
          <column>
           <property name="text">
            <string>Table</string>
@@ -81,6 +78,37 @@
          <column>
           <property name="text">
            <string>Column count</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Comment</string>
+          </property>
+         </column>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_3">
+      <attribute name="title">
+       <string>Views</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_4">
+       <item row="0" column="0">
+        <widget class="QTreeWidget" name="viewTree">
+         <column>
+          <property name="text">
+           <string>View</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Column count</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Comment</string>
           </property>
          </column>
         </widget>

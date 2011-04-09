@@ -449,7 +449,7 @@ void QueryEditorWidget::setupWidgets() {
   dbChooser->setModel(DbManager::model());
   dbChooser->setCurrentIndex(DbManager::lastIndex);
 
-  runButton->setIcon(IconManager::get("media-playback-start"));
+  runButton->setIcon(IconManager::get("player_play"));
 
   refresh();
 }

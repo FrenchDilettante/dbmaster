@@ -63,8 +63,6 @@ QList<SqlTable> SqliteWrapper::tables() {
   sql += "WHERE type in ('table', 'view') ";
   sql += "ORDER BY name ";
 
-  qDebug() << sql;
-
   QSqlQuery query(*m_db);
   if (!query.exec(sql)) {
     qDebug() << query.lastError().text();

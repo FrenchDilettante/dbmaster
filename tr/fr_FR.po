@@ -1059,7 +1059,7 @@ msgctxt "ResultView|"
 msgid "-"
 msgstr "-"
 
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:315
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:322
 msgctxt "ResultView|"
 msgid "Fetching..."
 msgstr "Exécution..."
@@ -1144,11 +1144,35 @@ msgstr ""
 "DbMaster est un logiciel libre développé bénévolement. Rejoignez la "
 "communauté et aidez-nous à le rendre meilleur !"
 
-#: /home/manu/programmation/dbmaster/src/widgets/tooltipframe.cpp:57
-#, qt-format
+#: /home/manu/programmation/dbmaster/src/widgets/tooltipframe.cpp:32
 msgctxt "TooltipFrame|"
-msgid "Did you know ? #%1/%2"
-msgstr "Le saviez-vous ? #%1/%2"
+msgid "Move from a tab to another by pressing Alt+Left/Right."
+msgstr "Déplacez-vous d'un onglet à l'autre en appuyant sur Alt+Gauche/Droite."
+
+#: /home/manu/programmation/dbmaster/src/widgets/tooltipframe.cpp:33
+#| msgid ""
+#| "Name your connections with an alias so your connection panel will be more "
+#| "meanfull."
+msgctxt "TooltipFrame|"
+msgid "Name your connections with an alias to avoid blanks."
+msgstr "Nommez vos connexions avec un alias pour éviter les trous de mémoire."
+
+#: /home/manu/programmation/dbmaster/src/widgets/tooltipframe.cpp:34
+msgctxt "TooltipFrame|"
+msgid ""
+"You like having a good-looking code ? In the Edit menu, case can be modified."
+msgstr ""
+"Vous aimez avoir un beau code ? Dans le menu Édition, la casse peut être "
+"modifiée."
+
+#: /home/manu/programmation/dbmaster/src/widgets/tooltipframe.cpp:35
+msgctxt "TooltipFrame|"
+msgid ""
+"'want to prove to your teacher that your query works ? Right-clic on the "
+"result, and export it in HTML or CSV."
+msgstr ""
+"Vous voulez prouver à votre professeur que votre requête fonctionne ? "
+"Clic-droit sur le résultat, et exportez-la en HTML ou CSV."
 
 #: /home/manu/programmation/dbmaster/src/wizards/ew_exportpage.ui:14
 msgctxt "EwExportPage|"

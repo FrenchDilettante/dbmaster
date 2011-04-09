@@ -178,6 +178,10 @@ void MainWindow::closeEvent(QCloseEvent *event) {
   s.setValue("maindock_floating", dockWidget->isFloating());
   s.setValue("maindock_position", dockWidget->pos());
   s.setValue("maindock_size", dockWidget->size());
+
+  // Positionnement de la toolbar principale
+  s.setValue("maintoolbar_area", toolBarArea(mainToolBar));
+
   s.endGroup();
 
   // fichiers récents
@@ -550,6 +554,8 @@ void MainWindow::setupConnections()
   connect(actionPreviousTab,  SIGNAL(triggered()),  this,          SLOT(previousTab()));
   connect(actionPrint,        SIGNAL(triggered()),  this,          SLOT(print()));
   connect(actionRedo,         SIGNAL(triggered()),  this,          SLOT(redo()));
+  connect(actionRefreshConnection, SIGNAL(triggered()), dbTreeView,SLOT(refreshCurrent()));
+  connect(actionRemoveConnection, SIGNAL(triggered()), dbTreeView, SLOT(removeCurrent()));
   connect(actionSaveQuery,    SIGNAL(triggered()),  this,          SLOT(saveQuery()));
   connect(actionSaveQueryAs,  SIGNAL(triggered()),  this,          SLOT(saveQueryAs()));
   connect(actionSearch,       SIGNAL(triggered()),  this,          SLOT(search()));
@@ -644,6 +650,9 @@ void MainWindow::setupWidgets()
 
   dockWidget->setVisible(s.value("maindock_visible", true).toBool());
 
+  addToolBar((Qt::ToolBarArea) s.value("maintoolbar_area", 4).toInt(),
+             mainToolBar);
+
   queriesStatusLabel = new QLabel("", this);
   QMainWindow::statusBar()->addPermanentWidget(queriesStatusLabel);
 
@@ -684,11 +693,14 @@ void MainWindow::setupWidgets()
 
   // loading icons from current theme
   actionAbout->setIcon(         IconManager::get("help-about"));
-  actionAddDb->setIcon(         IconManager::get("db_add"));
+  actionAddDb->setIcon(         IconManager::get("database_add"));
   actionClearRecent->setIcon(   IconManager::get("edit-clear"));
   actionCloseTab->setIcon(      IconManager::get("window-close"));
+  actionConnect->setIcon(       IconManager::get("database_go"));
   actionCopy->setIcon(          IconManager::get("edit-copy"));
   actionCut->setIcon(           IconManager::get("edit-cut"));
+  actionDisconnect->setIcon(    IconManager::get("database_connect"));
+  actionEditConnection->setIcon(IconManager::get("database_edit"));
   actionExit->setIcon(          IconManager::get("application-exit"));
   actionNewQuery->setIcon(      IconManager::get("document-new"));
   actionOpenQuery->setIcon(     IconManager::get("document-open"));
@@ -697,9 +709,10 @@ void MainWindow::setupWidgets()
   actionPreferences->setIcon(   IconManager::get("preferences"));
   actionPrint->setIcon(         IconManager::get("document-print"));
   actionRedo->setIcon(          IconManager::get("edit-redo"));
+  actionRefreshConnection->setIcon(IconManager::get("database_refresh"));
+  actionRemoveConnection->setIcon(IconManager::get("database_delete"));
   actionSaveQuery->setIcon(     IconManager::get("document-save"));
-//  actionSaveQueryAs->setIcon(   IconManager::get("document-save-as"));
-  actionSearch->setIcon(        IconManager::get("edit-search"));
+  actionSearch->setIcon(        IconManager::get("edit-find"));
   actionUndo->setIcon(          IconManager::get("edit-undo"));
 
   tooltipButton->setIcon(       IconManager::get("help-faq"));

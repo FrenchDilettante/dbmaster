@@ -42,6 +42,7 @@ struct SqlColumn {
   SqlType type;
   bool permitsNull;
   QVariant defaultValue;
+  QString comment;
 };
 
 struct SqlTable {
@@ -49,6 +50,7 @@ struct SqlTable {
   QList<SqlColumn> columns;
   QString owner;
   TableType type;
+  QString comment;
 };
 
 struct SqlSchema {
