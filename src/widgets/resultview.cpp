@@ -50,6 +50,9 @@ ResultView::ResultView(QWidget *parent)
   reloadButton->setIcon(IconManager::get("view-refresh"));
   insertButton->setIcon(IconManager::get("list-add"));
   deleteButton->setIcon(IconManager::get("list-remove"));
+
+  insertButton->setVisible(false);
+  deleteButton->setVisible(false);
 }
 
 ResultView::~ResultView() {
@@ -335,6 +338,8 @@ void ResultView::updateItem(QStandardItem *item) {
  */
 void ResultView::updateView() {
   shortModel->clear();
+
+  qDebug() << model->rowCount();
 
   for(int i=0; i<model->columnCount(); i++)
     shortModel->setHorizontalHeaderItem(i, new QStandardItem(
