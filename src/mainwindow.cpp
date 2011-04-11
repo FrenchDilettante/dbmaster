@@ -542,6 +542,7 @@ void MainWindow::setupConnections()
   connect(actionCopy,         SIGNAL(triggered()),  this,          SLOT(copy()));
   connect(actionCut,          SIGNAL(triggered()),  this,          SLOT(cut()));
   connect(actionDbManager,    SIGNAL(triggered()),  dbDialog,      SLOT(exec()));
+  connect(actionEditConnection,SIGNAL(triggered()), dbTreeView,    SLOT(editCurrent()));
   connect(actionLeftPanel,    SIGNAL(triggered()),  this,          SLOT(toggleLeftPanel()));
   connect(actionLowerCase,    SIGNAL(triggered()),  this,          SLOT(lowerCase()));
   connect(actionLogs,         SIGNAL(triggered()),  logDial,       SLOT(exec()));
@@ -554,7 +555,7 @@ void MainWindow::setupConnections()
   connect(actionPreviousTab,  SIGNAL(triggered()),  this,          SLOT(previousTab()));
   connect(actionPrint,        SIGNAL(triggered()),  this,          SLOT(print()));
   connect(actionRedo,         SIGNAL(triggered()),  this,          SLOT(redo()));
-  connect(actionRefreshConnection, SIGNAL(triggered()), dbTreeView,SLOT(refreshCurrent()));
+  connect(actionRefreshConnection, SIGNAL(triggered()),dbTreeView, SLOT(refreshCurrent()));
   connect(actionRemoveConnection, SIGNAL(triggered()), dbTreeView, SLOT(removeCurrent()));
   connect(actionSaveQuery,    SIGNAL(triggered()),  this,          SLOT(saveQuery()));
   connect(actionSaveQueryAs,  SIGNAL(triggered()),  this,          SLOT(saveQueryAs()));
@@ -568,6 +569,7 @@ void MainWindow::setupConnections()
    */
   connect(dbTreeView, SIGNAL(schemaSelected(QSqlDatabase*,QString)),
           this, SLOT(openSchema(QSqlDatabase*,QString)));
+  connect(dbTreeView, SIGNAL(itemSelected()), this, SLOT(updateDbActions()));
   connect(dbTreeView, SIGNAL(tableSelected(QSqlDatabase*,QString)),
           this, SLOT(openTable(QSqlDatabase*,QString)));
 
@@ -726,6 +728,15 @@ void MainWindow::toggleLeftPanel() {
 void MainWindow::undo() {
   if(currentTab())
     currentTab()->undo();
+}
+
+void MainWindow::updateDbActions() {
+  bool select = dbTreeView->isDbSelected();
+
+  actionEditConnection->setEnabled(select);
+  actionRemoveConnection->setEnabled(select);
+  actionConnect->setEnabled(select);
+  actionDisconnect->setEnabled(select);
 }
 
 void MainWindow::upperCase() {

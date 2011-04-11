@@ -90,6 +90,7 @@ private slots:
   void selectAll();
   void setQueryCount(int count);
   void undo();
+  void updateDbActions();
   void upperCase();
   void userManual();
 };

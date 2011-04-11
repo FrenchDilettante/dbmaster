@@ -98,8 +98,19 @@ void DbTreeView::editCurrent()
   if(selectedIndexes().size() != 0)
   {
     QModelIndex index = selectedIndexes()[0];
+    while (index.parent() != QModelIndex()) {
+      index = index.parent();
+    }
     MainWindow::dbDialog->setDatabase(index);
     MainWindow::dbDialog->exec();
+  }
+}
+
+bool DbTreeView::isDbSelected() {
+  if (selectedIndexes().size() == 1 || selectedIndexes().size() == 2) {
+    return parentDb(selectedIndexes()[0]);
+  } else {
+    return false;
   }
 }
 
@@ -170,6 +181,9 @@ void DbTreeView::on_model_dataChanged(const QModelIndex &topLeft,
 void DbTreeView::removeCurrent() {
   if(selectedIndexes().size() != 0) {
     QModelIndex index = selectedIndexes()[0];
+    while (index.parent() != QModelIndex()) {
+      index = index.parent();
+    }
     if (DbManager::getDatabase(index.row())->isOpen()) {
       QMessageBox::warning(this,
                            tr("Cannot remove"),
@@ -199,6 +213,13 @@ void DbTreeView::refreshCurrent()
     return;
 
   DbManager::refreshModelItem(parentDb(selectedIndexes()[0]));
+}
+
+void DbTreeView::selectionChanged(const QItemSelection &selected,
+                                  const QItemSelection &deselected) {
+  emit itemSelected();
+
+  QTreeView::selectionChanged(selected, deselected);
 }
 
 void DbTreeView::setupActions()

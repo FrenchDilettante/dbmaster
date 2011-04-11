@@ -531,6 +531,9 @@
    </property>
   </action>
   <action name="actionEditConnection">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Edit</string>
    </property>
@@ -539,6 +542,9 @@
    </property>
   </action>
   <action name="actionRemoveConnection">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Remove</string>
    </property>
@@ -547,11 +553,17 @@
    </property>
   </action>
   <action name="actionConnect">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Connect</string>
    </property>
   </action>
   <action name="actionDisconnect">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Disconnect</string>
    </property>
