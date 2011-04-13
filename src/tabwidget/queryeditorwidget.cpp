@@ -431,7 +431,6 @@ void QueryEditorWidget::setupWidgets() {
 
   resultButton = new QToolButton(this);
   resultButton->setText(tr("Display result"));
-  resultButton->setAutoRaise(true);
   resultButton->setCheckable(true);
   statusBar->addPermanentWidget(resultButton);
   connect(resultButton, SIGNAL(clicked(bool)),

@@ -486,10 +486,11 @@ void MainWindow::refreshRecent()
   actionClearRecent->setEnabled(!recentFiles.size() == 0);
 }
 
-void MainWindow::reloadDbList()
-{
+void MainWindow::reloadDbList() {
   for(int i = 0; i < tabWidget->count(); i++)
     ((AbstractTabWidget*)tabWidget->widget(i))->refresh();
+
+  updateDbActions();
 }
 
 void MainWindow::saveQuery()
@@ -540,8 +541,11 @@ void MainWindow::setupConnections()
   connect(actionClearRecent,  SIGNAL(triggered()),  this,          SLOT(clearRecent()));
   connect(actionCloseTab,     SIGNAL(triggered()),  this,          SLOT(closeCurrentTab()));
   connect(actionCopy,         SIGNAL(triggered()),  this,          SLOT(copy()));
+  connect(actionConnect,      SIGNAL(triggered()),  dbTreeView,    SLOT(connectCurrent()));
   connect(actionCut,          SIGNAL(triggered()),  this,          SLOT(cut()));
   connect(actionDbManager,    SIGNAL(triggered()),  dbDialog,      SLOT(exec()));
+  connect(actionDisconnect,   SIGNAL(triggered()),  dbTreeView,    SLOT(disconnectCurrent()));
+  connect(actionEditConnection,SIGNAL(triggered()), dbTreeView,    SLOT(editCurrent()));
   connect(actionLeftPanel,    SIGNAL(triggered()),  this,          SLOT(toggleLeftPanel()));
   connect(actionLowerCase,    SIGNAL(triggered()),  this,          SLOT(lowerCase()));
   connect(actionLogs,         SIGNAL(triggered()),  logDial,       SLOT(exec()));
@@ -554,7 +558,7 @@ void MainWindow::setupConnections()
   connect(actionPreviousTab,  SIGNAL(triggered()),  this,          SLOT(previousTab()));
   connect(actionPrint,        SIGNAL(triggered()),  this,          SLOT(print()));
   connect(actionRedo,         SIGNAL(triggered()),  this,          SLOT(redo()));
-  connect(actionRefreshConnection, SIGNAL(triggered()), dbTreeView,SLOT(refreshCurrent()));
+  connect(actionRefreshConnection, SIGNAL(triggered()),dbTreeView, SLOT(refreshCurrent()));
   connect(actionRemoveConnection, SIGNAL(triggered()), dbTreeView, SLOT(removeCurrent()));
   connect(actionSaveQuery,    SIGNAL(triggered()),  this,          SLOT(saveQuery()));
   connect(actionSaveQueryAs,  SIGNAL(triggered()),  this,          SLOT(saveQueryAs()));
@@ -568,6 +572,7 @@ void MainWindow::setupConnections()
    */
   connect(dbTreeView, SIGNAL(schemaSelected(QSqlDatabase*,QString)),
           this, SLOT(openSchema(QSqlDatabase*,QString)));
+  connect(dbTreeView, SIGNAL(itemSelected()), this, SLOT(updateDbActions()));
   connect(dbTreeView, SIGNAL(tableSelected(QSqlDatabase*,QString)),
           this, SLOT(openTable(QSqlDatabase*,QString)));
 
@@ -726,6 +731,16 @@ void MainWindow::toggleLeftPanel() {
 void MainWindow::undo() {
   if(currentTab())
     currentTab()->undo();
+}
+
+void MainWindow::updateDbActions() {
+  bool select = dbTreeView->isDbSelected();
+  QSqlDatabase *currentDb = dbTreeView->currentDb();
+
+  actionEditConnection->setEnabled(select);
+  actionRemoveConnection->setEnabled(select && !currentDb->isOpen());
+  actionConnect->setEnabled(select && !currentDb->isOpen());
+  actionDisconnect->setEnabled(select && currentDb->isOpen());
 }
 
 void MainWindow::upperCase() {

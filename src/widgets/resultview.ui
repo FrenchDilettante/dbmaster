@@ -54,6 +54,9 @@
          </item>
          <item>
           <widget class="QToolButton" name="firstPageButton">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="toolTip">
             <string>First page</string>
            </property>
@@ -77,6 +80,9 @@
          </item>
          <item>
           <widget class="QToolButton" name="prevPageButton">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="toolTip">
             <string>Previous page</string>
            </property>
@@ -100,6 +106,9 @@
          </item>
          <item>
           <widget class="QToolButton" name="nextPageButton">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="toolTip">
             <string>Next page</string>
            </property>
@@ -123,6 +132,9 @@
          </item>
          <item>
           <widget class="QToolButton" name="lastPageButton">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="toolTip">
             <string>Last page</string>
            </property>
@@ -153,6 +165,9 @@
          </item>
          <item>
           <widget class="QToolButton" name="reloadButton">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="toolTip">
             <string>Reload</string>
            </property>
@@ -297,14 +312,14 @@
        </item>
        <item row="1" column="0">
         <widget class="ResultViewTable" name="table">
+         <property name="selectionMode">
+          <enum>QAbstractItemView::ContiguousSelection</enum>
+         </property>
          <property name="verticalScrollMode">
           <enum>QAbstractItemView::ScrollPerPixel</enum>
          </property>
          <property name="horizontalScrollMode">
           <enum>QAbstractItemView::ScrollPerPixel</enum>
-         </property>
-         <property name="selectionMode">
-          <enum>QAbstractItemView::ContiguousSelection</enum>
          </property>
         </widget>
        </item>

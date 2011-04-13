@@ -25,6 +25,7 @@ void ResultViewTable::contextMenuEvent(QContextMenuEvent *event) {
     return;
   }
 
+  actionCopy->setEnabled(selectedIndexes().size() > 0);
   actionDetails->setEnabled(selectedIndexes().size() == 1);
 
   contextMenu->move(event->globalPos());
@@ -32,6 +33,16 @@ void ResultViewTable::contextMenuEvent(QContextMenuEvent *event) {
 }
 
 void ResultViewTable::copy() {
+
+  if (selectedIndexes().size() == 0) {
+    return;
+  }
+
+  if (selectedIndexes().size() == 1) {
+    QApplication::clipboard()->setText(selectedIndexes()[0].data().toString());
+    return;
+  }
+
   QString text = "<table>";
 
   QMap<int, QString> data;
@@ -41,7 +52,12 @@ void ResultViewTable::copy() {
       data[idx.row()] += "<tr>";
     }
 
-//    data[idx.row()] += "<td>" + idx.data() + "</td>";
+    data[idx.row()] += "<td>" + idx.data().toString() + "</td>";
+  }
+
+  foreach (int line, data.keys()) {
+    data[line] += "</tr>";
+    text += data[line];
   }
 
   text += "</table>";
