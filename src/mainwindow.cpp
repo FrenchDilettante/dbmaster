@@ -486,10 +486,11 @@ void MainWindow::refreshRecent()
   actionClearRecent->setEnabled(!recentFiles.size() == 0);
 }
 
-void MainWindow::reloadDbList()
-{
+void MainWindow::reloadDbList() {
   for(int i = 0; i < tabWidget->count(); i++)
     ((AbstractTabWidget*)tabWidget->widget(i))->refresh();
+
+  updateDbActions();
 }
 
 void MainWindow::saveQuery()
@@ -540,8 +541,10 @@ void MainWindow::setupConnections()
   connect(actionClearRecent,  SIGNAL(triggered()),  this,          SLOT(clearRecent()));
   connect(actionCloseTab,     SIGNAL(triggered()),  this,          SLOT(closeCurrentTab()));
   connect(actionCopy,         SIGNAL(triggered()),  this,          SLOT(copy()));
+  connect(actionConnect,      SIGNAL(triggered()),  dbTreeView,    SLOT(connectCurrent()));
   connect(actionCut,          SIGNAL(triggered()),  this,          SLOT(cut()));
   connect(actionDbManager,    SIGNAL(triggered()),  dbDialog,      SLOT(exec()));
+  connect(actionDisconnect,   SIGNAL(triggered()),  dbTreeView,    SLOT(disconnectCurrent()));
   connect(actionEditConnection,SIGNAL(triggered()), dbTreeView,    SLOT(editCurrent()));
   connect(actionLeftPanel,    SIGNAL(triggered()),  this,          SLOT(toggleLeftPanel()));
   connect(actionLowerCase,    SIGNAL(triggered()),  this,          SLOT(lowerCase()));
@@ -732,11 +735,12 @@ void MainWindow::undo() {
 
 void MainWindow::updateDbActions() {
   bool select = dbTreeView->isDbSelected();
+  QSqlDatabase *currentDb = dbTreeView->currentDb();
 
   actionEditConnection->setEnabled(select);
-  actionRemoveConnection->setEnabled(select);
-  actionConnect->setEnabled(select);
-  actionDisconnect->setEnabled(select);
+  actionRemoveConnection->setEnabled(select && !currentDb->isOpen());
+  actionConnect->setEnabled(select && !currentDb->isOpen());
+  actionDisconnect->setEnabled(select && currentDb->isOpen());
 }
 
 void MainWindow::upperCase() {

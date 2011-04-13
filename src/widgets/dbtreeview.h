@@ -25,6 +25,7 @@ Q_OBJECT
 public:
   DbTreeView(QWidget *parent = 0);
 
+  QSqlDatabase *currentDb();
   bool isDbSelected();
 
 signals:
@@ -33,6 +34,8 @@ signals:
   void tableSelected(QSqlDatabase*, QString);
 
 public slots:
+  void connectCurrent();
+  void disconnectCurrent();
   void editCurrent();
   void refreshCurrent();
 

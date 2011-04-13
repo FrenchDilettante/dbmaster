@@ -34,6 +34,20 @@ void DbTreeView::addDatabase()
   MainWindow::dbWizard->exec();
 }
 
+void DbTreeView::connectCurrent() {
+  QSqlDatabase *db = currentDb();
+  if (db && !db->isOpen()) {
+    DbManager::open(db);
+  }
+}
+
+void DbTreeView::disconnectCurrent() {
+  QSqlDatabase *db = currentDb();
+  if (db && db->isOpen()) {
+    DbManager::close(db);
+  }
+}
+
 void DbTreeView::contextMenuEvent(QContextMenuEvent *event)
 {
   addDbAct->setVisible(false);
@@ -91,6 +105,14 @@ void DbTreeView::contextMenuEvent(QContextMenuEvent *event)
   }
 
   event->accept();
+}
+
+QSqlDatabase* DbTreeView::currentDb() {
+  if (selectedIndexes().size() != 1) {
+    return NULL;
+  }
+
+  return parentDb(selectedIndexes()[0]);
 }
 
 void DbTreeView::editCurrent()

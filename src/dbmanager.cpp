@@ -124,6 +124,7 @@ int DbManagerPrivate::addDatabase(QString driver, QString host, QString user,
   QList<QStandardItem*> l;
   l << dbMap[newDb];
   l << new QStandardItem(driverIcon[driver], "");
+  l[1]->setSelectable(false);
 
   m_model->appendRow(l);
 
