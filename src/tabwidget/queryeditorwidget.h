@@ -51,7 +51,7 @@ public slots:
   void redo();
   void refresh();
   void reload();
-  void run();
+  void runQuery();
   bool save();
   void selectAll();
   void undo();
@@ -65,10 +65,12 @@ private:
   bool confirmClose();
   void keyPressEvent(QKeyEvent *event);
   void reloadFile();
+  void run();
   void setFilePath(QString);
   void setupConnections();
   void setupWidgets();
   void showEvent(QShowEvent *event);
+  void validate();
 
   Actions               baseActions;
   QString               filePath;

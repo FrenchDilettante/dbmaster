@@ -18,12 +18,13 @@
 #include <QIcon>
 #include <QMessageBox>
 #include <QPrinter>
+#include <QRunnable>
 #include <QSqlDatabase>
 #include <QString>
 #include <QTextEdit>
 #include <QWidget>
 
-class AbstractTabWidget: public QWidget {
+class AbstractTabWidget: public QWidget, protected QRunnable {
 
 Q_OBJECT
 public:
@@ -53,6 +54,7 @@ public:
   static QDir       lastDir;
   virtual void      print()           {};
   virtual QPrinter *printer()         { return NULL; };
+  virtual void      run()             {};
   virtual QTextEdit* textEdit()       { return NULL; };
   virtual QString   title()           { return ""; };
 

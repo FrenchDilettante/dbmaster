@@ -21,6 +21,8 @@
 
 #include "queryeditorwidget.h"
 
+#include <time.h>
+
 QueryEditorWidget::QueryEditorWidget(QWidget *parent)
   : AbstractTabWidget(parent)
 {
@@ -274,7 +276,7 @@ void QueryEditorWidget::rejectToken()
 
 void QueryEditorWidget::reload()
 {
-  run();
+  runQuery();
 }
 
 /**
@@ -312,6 +314,18 @@ void QueryEditorWidget::reloadFile()
 }
 
 void QueryEditorWidget::run() {
+  time_t startTime = time(NULL);
+
+  query = QSqlQuery(editor->toPlainText(),
+                    *DbManager::getDatabase(dbChooser->currentIndex()));
+
+  time_t endTime = time(NULL);
+  token->setDuration(endTime - startTime);
+
+  validate();
+}
+
+void QueryEditorWidget::runQuery() {
 
   resultButton->setChecked(true);
   tabWidget->setVisible(true);
@@ -325,7 +339,8 @@ void QueryEditorWidget::run() {
 //  oldToken = token;
   token = prepareToken();
 
-  QueryScheduler::enqueue(token);
+//  QueryScheduler::enqueue(token);
+  QThreadPool::globalInstance()->start(this);
 }
 
 /**
@@ -411,7 +426,7 @@ void QueryEditorWidget::setupConnections() {
           this, SLOT(checkDbOpen()));
   connect(tabView, SIGNAL(reloadRequested()), this, SLOT(reload()));
 
-  connect(runButton, SIGNAL(clicked()), this, SLOT(run()));
+  connect(runButton, SIGNAL(clicked()), this, SLOT(runQuery()));
 
   connect(editor->document(), SIGNAL(modificationChanged(bool)),
           this, SIGNAL(modificationChanged(bool)));
@@ -491,6 +506,49 @@ void QueryEditorWidget::upperCase() {
     tc.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor, txt.size());
     editor->setTextCursor(tc);
   }
+}
+
+void QueryEditorWidget::validate() {
+  QString                 logMsg;
+  QMap<QString, QVariant> logData;
+
+  tabWidget->setTabEnabled(1, false);
+
+  switch(query.lastError().type()) {
+  case QSqlError::NoError:
+    tabView->setToken(token);
+    tabWidget->setCurrentIndex(1);
+    tabWidget->setTabEnabled(1, true);
+
+    if(actionClearOnSuccess->isChecked())
+      editor->clear();
+
+    statusBar->showMessage(
+        tr("Query executed with success in %2secs (%1 lines returned)")
+        .arg(token->model()->rowCount())
+        .arg(token->duration()));
+
+    logMsg = tr("Query executed with success");
+    logData["query"] = token->query();
+    LogDialog::instance()->append(logMsg, logData);
+
+    debugText->append(QString("<b>[%1]</b>%2")
+                      .arg(QTime::currentTime().toString())
+                      .arg(tr("Query executed with success in %2secs (%1 lines returned)")
+                           .arg(token->model()->rowCount())
+                           .arg(token->duration())));
+    break;
+
+  default:
+    statusBar->showMessage(tr("Unable to run query"));
+
+    debugText->append(QString("<b>[%1]</b>%2")
+                      .arg(QTime::currentTime().toString())
+                      .arg(query.lastError().text()));
+    break;
+  }
+
+  runButton->setEnabled(true);
 }
 
 void QueryEditorWidget::validateToken(QSqlError err) {
