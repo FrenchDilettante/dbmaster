@@ -18,7 +18,6 @@
 
 #include "dialogs/dbdialog.h"
 #include "plugins/pluginmanager.h"
-#include "query/queryscheduler.h"
 #include "tabwidget/abstracttabwidget.h"
 #include "tabwidget/queryeditorwidget.h"
 #include "tabwidget/schemawidget.h"
@@ -590,9 +589,6 @@ void MainWindow::setupConnections()
   connect(dbWizard, SIGNAL(accepted()), this, SLOT(reloadDbList()));
   connect(logDial,  SIGNAL(event(QString)),
           QMainWindow::statusBar(), SLOT(showMessage(QString)));
-
-  connect(QueryScheduler::instance(), SIGNAL(countChanged(int)),
-          this, SLOT(setQueryCount(int)));
 
   /*
    * Tab widget

@@ -16,8 +16,6 @@
 #include <QtGui>
 #include <QtSql>
 
-#include "../query/querytoken.h"
-
 #include "abstracttabwidget.h"
 
 #include "ui_queryeditorwidgetclass.h"
@@ -27,7 +25,6 @@ class QueryEditorWidget: public AbstractTabWidget, Ui::QueryEditorWidgetClass
 Q_OBJECT
 public:
   QueryEditorWidget( QWidget* = 0 );
-  ~QueryEditorWidget();
 
   Actions       availableActions();
   int           confirmCloseAll();
@@ -35,7 +32,6 @@ public:
   QIcon         icon();
   QString       id();
   bool          isSaved();
-  QueryToken   *prepareToken();
   void          print();
   QPrinter     *printer();
   void          saveAs( QString = QString::null );
@@ -76,14 +72,12 @@ private:
   QString               filePath;
   QSqlQueryModel       *model;
   int                   oldCount;
-//  QueryToken           *oldToken;
   QMenu                *optionsMenu;
   int                   page;
   QToolButton*          resultButton;
   QSqlQuery             query;
   QStandardItemModel   *shortModel;
   QStatusBar           *statusBar;
-  QueryToken           *token;
   QFileSystemWatcher   *watcher;
 
 private slots:
@@ -92,7 +86,6 @@ private slots:
   void onFileChanged(QString path);
   void rejectToken();
   void startToken();
-  void validateToken(QSqlError err);
 };
 
 #endif // QUERYEDITORWIDGET_H

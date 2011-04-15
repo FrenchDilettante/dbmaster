@@ -15,8 +15,6 @@
 #include "../iconmanager.h"
 #include "../mainwindow.h"
 #include "../dialogs/logdialog.h"
-#include "../query/queryscheduler.h"
-#include "../query/querytoken.h"
 #include "../widgets/resultview.h"
 
 #include "queryeditorwidget.h"
@@ -33,17 +31,7 @@ QueryEditorWidget::QueryEditorWidget(QWidget *parent)
   model       = new QSqlQueryModel(this);
   shortModel  = new QStandardItemModel(this);
 //  oldToken    = NULL;
-  token       = NULL;
   watcher     = new QFileSystemWatcher(this);
-}
-
-QueryEditorWidget::~QueryEditorWidget()
-{
-  if(token)
-  {
-    token->disconnect();
-    delete token;
-  }
 }
 
 void QueryEditorWidget::acceptToken()
@@ -226,26 +214,6 @@ void QueryEditorWidget::paste() {
   editor->paste();
 }
 
-QueryToken *QueryEditorWidget::prepareToken()
-{
-  QString qtext = editor->textCursor().selectedText();
-  if(qtext.isEmpty())
-    qtext = editor->toPlainText();
-
-  QueryToken *token =
-      new QueryToken(qtext,
-                     DbManager::getDatabase(dbChooser->currentIndex()),
-                     actionEnqueue->isChecked(),
-                     this);
-
-  connect(token, SIGNAL(accepted()), this, SLOT(acceptToken()));
-  connect(token, SIGNAL(finished(QSqlError)),
-          this, SLOT(validateToken(QSqlError)));
-  connect(token, SIGNAL(rejected()), this, SLOT(rejectToken()));
-  connect(token, SIGNAL(started()), this, SLOT(startToken()));
-  return token;
-}
-
 void QueryEditorWidget::print()
 {
   QPainter painter;
@@ -320,9 +288,8 @@ void QueryEditorWidget::run() {
                     *DbManager::getDatabase(dbChooser->currentIndex()));
 
   time_t endTime = time(NULL);
-  token->setDuration(endTime - startTime);
 
-  validate();
+//  validate();
 }
 
 void QueryEditorWidget::runQuery() {
@@ -336,10 +303,6 @@ void QueryEditorWidget::runQuery() {
 
   statusBar->showMessage(tr("Running..."));
 
-//  oldToken = token;
-  token = prepareToken();
-
-//  QueryScheduler::enqueue(token);
   QThreadPool::globalInstance()->start(this);
 }
 
@@ -516,27 +479,27 @@ void QueryEditorWidget::validate() {
 
   switch(query.lastError().type()) {
   case QSqlError::NoError:
-    tabView->setToken(token);
+    tabView->setQuery(model);
     tabWidget->setCurrentIndex(1);
     tabWidget->setTabEnabled(1, true);
 
     if(actionClearOnSuccess->isChecked())
       editor->clear();
 
-    statusBar->showMessage(
-        tr("Query executed with success in %2secs (%1 lines returned)")
-        .arg(token->model()->rowCount())
-        .arg(token->duration()));
+//    statusBar->showMessage(
+//        tr("Query executed with success in %2secs (%1 lines returned)")
+//        .arg(token->model()->rowCount())
+//        .arg(token->duration()));
 
-    logMsg = tr("Query executed with success");
-    logData["query"] = token->query();
-    LogDialog::instance()->append(logMsg, logData);
+//    logMsg = tr("Query executed with success");
+//    logData["query"] = token->query();
+//    LogDialog::instance()->append(logMsg, logData);
 
-    debugText->append(QString("<b>[%1]</b>%2")
-                      .arg(QTime::currentTime().toString())
-                      .arg(tr("Query executed with success in %2secs (%1 lines returned)")
-                           .arg(token->model()->rowCount())
-                           .arg(token->duration())));
+//    debugText->append(QString("<b>[%1]</b>%2")
+//                      .arg(QTime::currentTime().toString())
+//                      .arg(tr("Query executed with success in %2secs (%1 lines returned)")
+//                           .arg(token->model()->rowCount())
+//                           .arg(token->duration())));
     break;
 
   default:
@@ -545,54 +508,6 @@ void QueryEditorWidget::validate() {
     debugText->append(QString("<b>[%1]</b>%2")
                       .arg(QTime::currentTime().toString())
                       .arg(query.lastError().text()));
-    break;
-  }
-
-  runButton->setEnabled(true);
-}
-
-void QueryEditorWidget::validateToken(QSqlError err) {
-  QString                 logMsg;
-  QMap<QString, QVariant> logData;
-  tabWidget->setTabEnabled(1, false);
-  switch(err.type())
-  {
-  case QSqlError::NoError:
-    tabView->setToken(token);
-    tabWidget->setCurrentIndex(1);
-    tabWidget->setTabEnabled(1, true);
-
-    if(actionClearOnSuccess->isChecked())
-      editor->clear();
-
-//    if(oldToken)
-//    {
-//      oldToken->disconnect();
-//      delete oldToken;
-//    }
-
-    statusBar->showMessage(
-        tr("Query executed with success in %2secs (%1 lines returned)")
-        .arg(token->model()->rowCount())
-        .arg(token->duration()));
-
-    logMsg = tr("Query executed with success");
-    logData["query"] = token->query();
-    LogDialog::instance()->append(logMsg, logData);
-
-    debugText->append(QString("<b>[%1]</b>%2")
-                      .arg(QTime::currentTime().toString())
-                      .arg(tr("Query executed with success in %2secs (%1 lines returned)")
-                           .arg(token->model()->rowCount())
-                           .arg(token->duration())));
-    break;
-
-  default:
-    statusBar->showMessage(tr("Unable to run query"));
-
-    debugText->append(QString("<b>[%1]</b>%2")
-                      .arg(QTime::currentTime().toString())
-                      .arg(err.text()));
     break;
   }
 
