@@ -55,6 +55,7 @@ public slots:
 
 signals:
   void fileChanged(QString);
+  void ready();
 
 private:
   void closeEvent(QCloseEvent *event);
@@ -66,7 +67,6 @@ private:
   void setupConnections();
   void setupWidgets();
   void showEvent(QShowEvent *event);
-  void validate();
 
   Actions               baseActions;
   QString               filePath;
@@ -86,6 +86,7 @@ private slots:
   void onFileChanged(QString path);
   void rejectToken();
   void startToken();
+  void validate();
 };
 
 #endif // QUERYEDITORWIDGET_H

@@ -286,9 +286,11 @@ void QueryEditorWidget::run() {
 
   query = QSqlQuery(editor->toPlainText(),
                     *DbManager::getDatabase(dbChooser->currentIndex()));
+  model->setQuery(query);
 
   time_t endTime = time(NULL);
 
+  emit ready();
 //  validate();
 }
 
@@ -394,6 +396,8 @@ void QueryEditorWidget::setupConnections() {
   connect(editor->document(), SIGNAL(modificationChanged(bool)),
           this, SIGNAL(modificationChanged(bool)));
 
+  connect(this, SIGNAL(ready()), this, SLOT(validate()));
+
   // connect(watcher, SIGNAL(fileChanged(QString)),
   //         this, SLOT(onFileChanged(QString)));
 }
@@ -477,7 +481,7 @@ void QueryEditorWidget::validate() {
 
   tabWidget->setTabEnabled(1, false);
 
-  switch(query.lastError().type()) {
+  switch (query.lastError().type()) {
   case QSqlError::NoError:
     tabView->setQuery(model);
     tabWidget->setCurrentIndex(1);
