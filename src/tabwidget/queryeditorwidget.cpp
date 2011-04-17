@@ -305,7 +305,7 @@ void QueryEditorWidget::runQuery() {
 
   statusBar->showMessage(tr("Running..."));
 
-  QThreadPool::globalInstance()->start(this);
+  start();
 }
 
 /**

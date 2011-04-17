@@ -13,8 +13,10 @@
 #ifndef TABLEWIDGET_H
 #define TABLEWIDGET_H
 
-#include <QtGui>
-#include <QtSql>
+#include "../plugins/sqlwrapper.h"
+
+#include <QSqlDatabase>
+#include <QSqlError>
 
 #include "abstracttabwidget.h"
 #include "ui_tablewidgetclass.h"
@@ -34,12 +36,22 @@ public:
   void      setTable( QString, QSqlDatabase* );
   QString   table();
 
+signals:
+  void error(QSqlError);
+  void ready();
+
 protected:
+  void      run();
   void      setupWidgets();
 
   QSqlDatabase *m_db;
-  QString m_table;
+  QString   m_table;
+  SqlTable  tableInfo;
   QSqlTableModel *model;
+
+private slots:
+  void showError(QSqlError err);
+  void validate();
 };
 
 #endif // TABLEWIDGET_H

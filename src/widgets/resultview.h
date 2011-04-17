@@ -46,11 +46,10 @@ public:
   ResultView(QWidget *parent=0);
   ~ResultView();
 
-  bool setTable(QString table, QSqlDatabase *db);
-
   Mode mode()           { return m_mode;    };
   void setMode(Mode m);
   void setQuery(QSqlQueryModel *model);
+  void setTable(QSqlTableModel *model);
 
   Q_PROPERTY(Mode mode READ mode WRITE setMode)
 

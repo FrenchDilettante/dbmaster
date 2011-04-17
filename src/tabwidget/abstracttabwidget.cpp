@@ -12,9 +12,15 @@
 
 #include "abstracttabwidget.h"
 
+#include <QThreadPool>
+
 QDir AbstractTabWidget::lastDir = QDir::home();
 
 AbstractTabWidget::AbstractTabWidget(QWidget *parent)
   : QWidget(parent) {
   setAutoDelete(false);
+}
+
+void AbstractTabWidget::start() {
+  QThreadPool::globalInstance()->start(this);
 }

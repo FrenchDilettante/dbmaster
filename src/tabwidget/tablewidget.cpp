@@ -20,8 +20,6 @@ TableWidget::TableWidget(QWidget *parent)
   setupUi(this);
 
   setupWidgets();
-
-  model = new QSqlTableModel(this);
 }
 
 TableWidget::TableWidget(QString table, QSqlDatabase *db, QWidget *parent)
@@ -54,6 +52,13 @@ void TableWidget::reload() {
   if(!m_db->isOpen())
     return;
 
+  model = new QSqlTableModel(this, *m_db);
+  model->setTable(m_table);
+
+  start();
+}
+
+void TableWidget::run() {
   if(!m_db->tables(QSql::Tables).contains(m_table)
     && !m_db->tables(QSql::Views).contains(m_table)
     && !m_db->tables(QSql::SystemTables).contains(m_table))   {
@@ -66,26 +71,11 @@ void TableWidget::reload() {
     return;
   }
 
-  if (!tableView->setTable(m_table, m_db)) {
-    emit closeRequested();
+  if (model->select()) {
+    tableInfo = DbManager::table(m_db, m_table);
+    emit ready();
   } else {
-    columnsTree->clear();
-    SqlTable table = DbManager::table(m_db, m_table);
-    foreach (SqlColumn c, table.columns) {
-      QStringList cols;
-      cols << c.name
-           << c.type.name
-           << ( c.permitsNull ? tr("Yes") : tr("No") )
-           << c.defaultValue.toString()
-           << c.comment;
-      QTreeWidgetItem *it = new QTreeWidgetItem(cols);
-      if (c.primaryKey) {
-        it->setIcon(0, IconManager::get("column_key"));
-      } else {
-        it->setIcon(0, IconManager::get("column"));
-      }
-      columnsTree->addTopLevelItem(it);
-    }
+    emit error(model->lastError());
   }
 }
 
@@ -105,9 +95,39 @@ void TableWidget::setupWidgets() {
   columnsTree->header()->setResizeMode(4, QHeaderView::Stretch);
 
   connect(tableView, SIGNAL(reloadRequested()), this, SLOT(reload()));
+
+  connect(this, SIGNAL(ready()), this, SLOT(validate()));
 }
 
-QString TableWidget::table()
-{
+void TableWidget::showError(QSqlError err) {
+  QMessageBox::critical(this,
+                        tr("Error"),
+                        tr("Unable to open the table. Returned error :\n%1")
+                          .arg(err.text()),
+                        QMessageBox::Ok);
+}
+
+QString TableWidget::table() {
   return m_table;
+}
+
+void TableWidget::validate() {
+  tableView->setTable(model);
+
+  columnsTree->clear();
+  foreach (SqlColumn c, tableInfo.columns) {
+    QStringList cols;
+    cols << c.name
+         << c.type.name
+         << ( c.permitsNull ? tr("Yes") : tr("No") )
+         << c.defaultValue.toString()
+         << c.comment;
+    QTreeWidgetItem *it = new QTreeWidgetItem(cols);
+    if (c.primaryKey) {
+      it->setIcon(0, IconManager::get("column_key"));
+    } else {
+      it->setIcon(0, IconManager::get("column"));
+    }
+    columnsTree->addTopLevelItem(it);
+  }
 }

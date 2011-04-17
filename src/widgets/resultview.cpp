@@ -240,29 +240,17 @@ void ResultView::setModel(QSqlQueryModel *model) {
   updateView();
 }
 
-bool ResultView::setTable(QString table, QSqlDatabase *db) {
-  setMode(TableMode);
-  QSqlTableModel *m = new QSqlTableModel(this, *db);
-  m->setTable(table);
-  m->setEditStrategy(QSqlTableModel::OnManualSubmit);
-  m->select();
-  if(m->lastError().type() == QSqlError::NoError)   {
-    setModel(m);
-    return true;
-  } else {
-    QMessageBox::critical(this,
-                          tr("Error"),
-                          tr("Unable to open the table. Returned error :\n%1")
-                          .arg(m->lastError().text()),
-                          QMessageBox::Ok);
-    return false;
-  }
-}
-
 void ResultView::setQuery(QSqlQueryModel *model) {
   setMode(QueryMode);
   offset = 0;
 
+  setModel(model);
+}
+
+void ResultView::setTable(QSqlTableModel *model) {
+  setMode(TableMode);
+
+  model->setEditStrategy(QSqlTableModel::OnManualSubmit);
   setModel(model);
 }
 

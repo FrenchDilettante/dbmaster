@@ -81,6 +81,9 @@ public slots:
 
 protected:
   QPrinter    m_printer;
+
+protected slots:
+  void        start();
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(AbstractTabWidget::Actions)
