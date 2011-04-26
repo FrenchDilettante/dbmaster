@@ -55,19 +55,15 @@ void DbTreeView::contextMenuEvent(QContextMenuEvent *event)
   removeDbAct->setVisible(false);
   toggleAct->setVisible(false);
 
-  if(selectedIndexes().size() != 0)
-  {
+  if(selectedIndexes().size() == 1) {
     QModelIndex index = selectedIndexes()[0];
-    if(index.data(Qt::UserRole).canConvert(QVariant::Int))
-    {
-      switch(index.data(Qt::UserRole).toInt())
-      {
+    if (index.data(Qt::UserRole).canConvert(QVariant::Int)) {
+      switch(index.data(Qt::UserRole).toInt()) {
       case DbManager::DbItem:
         editDbAct->setVisible(true);
         removeDbAct->setVisible(true);
         toggleAct->setVisible(true);
-        if(DbManager::getDatabase(index.row())->isOpen())
-        {
+        if(DbManager::getDatabase(index.row())->isOpen()) {
           toggleAct->setText(tr("Disconnect"));
           toggleAct->setIcon(QIcon(":/img/connect_no.png"));
         } else {
@@ -115,10 +111,8 @@ QSqlDatabase* DbTreeView::currentDb() {
   return parentDb(selectedIndexes()[0]);
 }
 
-void DbTreeView::editCurrent()
-{
-  if(selectedIndexes().size() != 0)
-  {
+void DbTreeView::editCurrent() {
+  if(selectedIndexes().size() == 1) {
     QModelIndex index = selectedIndexes()[0];
     while (index.parent() != QModelIndex()) {
       index = index.parent();
@@ -129,7 +123,7 @@ void DbTreeView::editCurrent()
 }
 
 bool DbTreeView::isDbSelected() {
-  if (selectedIndexes().size() == 1 || selectedIndexes().size() == 2) {
+  if (selectedIndexes().size() == 1) {
     return parentDb(selectedIndexes()[0]);
   } else {
     return false;
@@ -280,8 +274,7 @@ void DbTreeView::setupActions()
 
 void DbTreeView::toggleCurrentDb()
 {
-  if(selectedIndexes().size() != 0)
-  {
+  if(selectedIndexes().size() == 1) {
     QModelIndex index = selectedIndexes()[0];
     DbManager::toggle(DbManager::getDatabase(index.row()));
   }

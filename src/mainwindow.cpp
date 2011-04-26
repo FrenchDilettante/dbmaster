@@ -736,11 +736,12 @@ void MainWindow::undo() {
 void MainWindow::updateDbActions() {
   bool select = dbTreeView->isDbSelected();
   QSqlDatabase *currentDb = dbTreeView->currentDb();
+  bool dbOpen = currentDb && currentDb->isOpen();
 
   actionEditConnection->setEnabled(select);
-  actionRemoveConnection->setEnabled(select && !currentDb->isOpen());
-  actionConnect->setEnabled(select && !currentDb->isOpen());
-  actionDisconnect->setEnabled(select && currentDb->isOpen());
+  actionRemoveConnection->setEnabled(select && dbOpen);
+  actionConnect->setEnabled(select && dbOpen);
+  actionDisconnect->setEnabled(select && dbOpen);
 }
 
 void MainWindow::upperCase() {
