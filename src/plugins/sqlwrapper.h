@@ -73,6 +73,8 @@ public:
 
   virtual QList<SqlTable> tables() { return QList<SqlTable>(); };
 
+  virtual DbType type() { return RemoteDb; };
+
   QSqlDatabase* db() { return m_db; };
 
 protected:

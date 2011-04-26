@@ -124,8 +124,10 @@ void NdwFirstPage::on_dbTypeComboBox_currentIndexChanged(int index) {
   }
 
   if (wrapper) {
+    hostLineEdit->setEnabled(wrapper->type() != LocalDb);
     odbcCheckBox->setEnabled(wrapper->features() & SqlWrapper::ODBC);
   } else {
+    hostLineEdit->setEnabled(true);
     odbcCheckBox->setEnabled(true);
   }
 }

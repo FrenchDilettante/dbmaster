@@ -26,6 +26,7 @@ public:
   bool requiresHostname() { return false; };
   SqlTable table(QString t);
   QList<SqlTable> tables();
+  DbType type() { return LocalDb; };
 
 signals:
 
