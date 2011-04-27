@@ -26,6 +26,9 @@ DbTreeView::DbTreeView(QWidget *parent)
 
   header()->setResizeMode(0, QHeaderView::Stretch);
 
+  connect(this, SIGNAL(expanded(QModelIndex)),
+          this, SLOT(onItemExpanded(QModelIndex)));
+
   setupActions();
 }
 
@@ -177,6 +180,12 @@ void DbTreeView::mousePressEvent(QMouseEvent *event) {
     QTreeView::mousePressEvent(event);
   } else {
     QTreeView::mousePressEvent(event);
+  }
+}
+
+void DbTreeView::onItemExpanded(const QModelIndex &index) {
+  if (index.data(Qt::UserRole).canConvert(QVariant::Int)) {
+    DbManager::refreshModelIndex(index);
   }
 }
 

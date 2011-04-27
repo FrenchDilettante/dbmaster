@@ -21,6 +21,7 @@ public:
   QString version() { return QCoreApplication::applicationVersion(); };
 
   // Fonctions de SqlWrapper
+  QList<SqlColumn> columns(QString table);
   QDialog*        configDialog() { return m_configDialog; };
   WrapperFeatures features();
   SqlWrapper*     newInstance(QSqlDatabase *db);
@@ -28,6 +29,7 @@ public:
   QList<SqlSchema> schemas();
   QString         driver() { return "QPSQL"; };
   SqlTable        table(QString t);
+  QList<SqlTable> tables(QString schema);
 
   // Fonctions propres
   static bool pgCatalogHidden;

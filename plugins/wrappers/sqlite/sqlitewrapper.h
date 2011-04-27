@@ -22,11 +22,12 @@ public:
   // Fonctions de SqlWrapper
   QString driver() { return "QSQLITE"; };
   WrapperFeatures features();
+  bool isIndexed() { return false; };
+  bool isRemote() { return false; };
   SqlWrapper *newInstance(QSqlDatabase *db);
   bool requiresHostname() { return false; };
   SqlTable table(QString t);
   QList<SqlTable> tables();
-  DbType type() { return LocalDb; };
 
 signals:
 
