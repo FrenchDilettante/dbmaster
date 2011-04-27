@@ -1024,17 +1024,17 @@ msgstr "Nombre de colonnes"
 #: /home/manu/programmation/dbmaster/src/tabwidget/schemawidget.ui:111
 msgctxt "SchemaWidget|"
 msgid "Comment"
-msgstr ""
+msgstr "Commentaire"
 
 #: /home/manu/programmation/dbmaster/src/tabwidget/schemawidget.ui:94
 msgctxt "SchemaWidget|"
 msgid "Views"
-msgstr ""
+msgstr "Vues"
 
 #: /home/manu/programmation/dbmaster/src/tabwidget/schemawidget.ui:101
 msgctxt "SchemaWidget|"
 msgid "View"
-msgstr ""
+msgstr "Vue"
 
 #: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:35
 msgctxt "ResultView|"
@@ -1426,34 +1426,34 @@ msgctxt "NdwSecondPage|"
 msgid "Alias"
 msgstr "Alias"
 
-#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:155
+#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:157
 msgctxt "NdwSecondPage|"
 msgid "Open Database"
 msgstr "Ouvrir la base de données"
 
-#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:157
+#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:159
 msgctxt "NdwSecondPage|"
 msgid "Database file (*.*)"
 msgstr "Fichier de base de données (*.*)"
 
-#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:178
+#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:180
 msgctxt "NdwSecondPage|"
 msgid "Connection succeded"
 msgstr "Connexion réussie"
 
-#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:180
 #: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:182
+#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:184
 msgctxt "NdwSecondPage|"
 msgid "Connection failed"
 msgstr "Connexion échouée"
 
-#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:196
+#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:198
 #, qt-format
 msgctxt "NdwSecondPage|"
 msgid "%1 (local)"
 msgstr "%1 (locale)"
 
-#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:198
+#: /home/manu/programmation/dbmaster/src/wizards/newdbwizard.cpp:200
 #, qt-format
 msgctxt "NdwSecondPage|"
 msgid "%1 on %2"
@@ -1885,43 +1885,43 @@ msgctxt "TableWidget|"
 msgid "No"
 msgstr "Non"
 
-#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:71
+#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:67
 msgctxt "DbTreeView|"
 msgid "Disconnect"
 msgstr "Déconnecter"
 
-#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:74
-#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:269
+#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:70
+#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:263
 msgctxt "DbTreeView|"
 msgid "Connect"
 msgstr "Connecter"
 
-#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:211
+#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:205
 msgctxt "DbTreeView|"
 msgid "Cannot remove"
 msgstr "Impossible de supprimer"
 
-#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:212
+#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:206
 msgctxt "DbTreeView|"
 msgid "You must close the database before remove it."
 msgstr "Vous devez fermer la connexion avant de la supprimer."
 
-#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:250
+#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:244
 msgctxt "DbTreeView|"
 msgid "New connection"
 msgstr "Nouvelle connexion"
 
-#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:255
+#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:249
 msgctxt "DbTreeView|"
 msgid "Edit"
 msgstr "Modifier"
 
-#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:259
+#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:253
 msgctxt "DbTreeView|"
 msgid "Refresh"
 msgstr "Rafraîchir"
 
-#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:264
+#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:258
 msgctxt "DbTreeView|"
 msgid "Remove"
 msgstr "Supprimer"
@@ -2013,56 +2013,48 @@ msgctxt "ResultViewTable|"
 msgid "Export"
 msgstr "Exporter"
 
-#: /home/manu/programmation/dbmaster/plugins/exportengines/plaintext/plaintextwizardpage.ui:14
-msgctxt "PlainTextWizardPage|"
-msgid "WizardPage"
-msgstr ""
+#~ msgctxt "PlainTextWizardPage~|"
+#~ msgid "WizardPage"
+#~ msgstr ""
 
-#: /home/manu/programmation/dbmaster/plugins/exportengines/plaintext/plaintextwizardpage.ui:17
-msgctxt "PlainTextWizardPage|"
-msgid "Details"
-msgstr "Détails"
+#~ msgctxt "PlainTextWizardPage~|"
+#~ msgid "Details"
+#~ msgstr "Détails"
 
-#: /home/manu/programmation/dbmaster/plugins/exportengines/plaintext/plaintextwizardpage.ui:20
-msgctxt "PlainTextWizardPage|"
-msgid ""
-"This form fill permit you to specify the way the file will be formatted."
-msgstr ""
+#~ msgctxt "PlainTextWizardPage~|"
+#~ msgid ""
+#~ "This form fill permit you to specify the way the file will be formatted."
+#~ msgstr ""
 
-#: /home/manu/programmation/dbmaster/plugins/exportengines/plaintext/plaintextwizardpage.ui:27
-msgctxt "PlainTextWizardPage|"
-msgid "Column"
-msgstr ""
+#~ msgctxt "PlainTextWizardPage~|"
+#~ msgid "Column"
+#~ msgstr ""
 
-#: /home/manu/programmation/dbmaster/plugins/exportengines/plaintext/plaintextwizardpage.ui:32
-msgctxt "PlainTextWizardPage|"
-msgid "Character count"
-msgstr ""
+#~ msgctxt "PlainTextWizardPage~|"
+#~ msgid "Character count"
+#~ msgstr ""
 
-#: /home/manu/programmation/dbmaster/plugins/exportengines/plaintext/plaintextwizardpage.ui:37
-msgctxt "PlainTextWizardPage|"
-msgid "Position in file"
-msgstr ""
+#~ msgctxt "PlainTextWizardPage~|"
+#~ msgid "Position in file"
+#~ msgstr ""
 
-#: /home/manu/programmation/dbmaster/plugins/exportengines/plaintext/plaintextexportengine.h:17
-msgctxt "PlainTextExportEngine|"
-msgid "Plain text export engine"
-msgstr ""
+#~ msgctxt "PlainTextExportEngine~|"
+#~ msgid "Plain text export engine"
+#~ msgstr ""
 
-#: /home/manu/programmation/dbmaster/plugins/exportengines/plaintext/plaintextexportengine.h:23
-msgctxt "PlainTextExportEngine|"
-msgid "Plain text"
-msgstr ""
+#~ msgctxt "PlainTextExportEngine~|"
+#~ msgid "Plain text"
+#~ msgstr ""
 
 #: /home/manu/programmation/dbmaster/plugins/wrappers/db2i/db2iwrapper.h:17
 msgctxt "Db2iWrapper|"
 msgid "DB2 for System i wrapper"
-msgstr ""
+msgstr "Adaptateur pour DB2 i5"
 
 #: /home/manu/programmation/dbmaster/plugins/wrappers/db2i/db2iwrapper.h:25
 msgctxt "Db2iWrapper|"
 msgid "DB2 for i"
-msgstr ""
+msgstr "DB2 i5"
 
 #: /home/manu/programmation/dbmaster/plugins/wrappers/sqlite/sqlitewrapper.h:18
 msgctxt "SqliteWrapper|"
