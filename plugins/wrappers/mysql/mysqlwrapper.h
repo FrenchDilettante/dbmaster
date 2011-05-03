@@ -20,6 +20,7 @@ public:
   QString version() { return QCoreApplication::applicationVersion(); };
 
   // Fonctions de SqlWrapper
+  QList<SqlColumn> columns(QString table);
   WrapperFeatures features();
   SqlWrapper* newInstance(QSqlDatabase *db);
   QString driver() { return "QMYSQL"; };
