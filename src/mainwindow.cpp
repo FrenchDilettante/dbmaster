@@ -739,6 +739,7 @@ void MainWindow::updateDbActions() {
   bool dbOpen = currentDb && currentDb->isOpen();
 
   actionEditConnection->setEnabled(select);
+  actionRefreshConnection->setEnabled(select);
   actionRemoveConnection->setEnabled(select && dbOpen);
   actionConnect->setEnabled(select && dbOpen);
   actionDisconnect->setEnabled(select && dbOpen);
