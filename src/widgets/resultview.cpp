@@ -339,6 +339,10 @@ void ResultView::updateItem(QStandardItem *item) {
 void ResultView::updateView() {
   shortModel->clear();
 
+  if (!model) {
+    return;
+  }
+
   for(int i=0; i<model->columnCount(); i++)
     shortModel->setHorizontalHeaderItem(i, new QStandardItem(
         model->headerData(i, Qt::Horizontal).toString()));
