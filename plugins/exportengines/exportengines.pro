@@ -1,2 +1,2 @@
 TEMPLATE=subdirs
-SUBDIRS=csv html plaintext
+SUBDIRS=csv html #plaintext

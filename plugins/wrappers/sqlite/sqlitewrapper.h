@@ -20,8 +20,11 @@ public:
   QString version() { return QCoreApplication::applicationVersion(); };
 
   // Fonctions de SqlWrapper
+  QList<SqlColumn> columns(QString table);
   QString driver() { return "QSQLITE"; };
   WrapperFeatures features();
+  bool isIndexed() { return false; };
+  bool isRemote() { return false; };
   SqlWrapper *newInstance(QSqlDatabase *db);
   bool requiresHostname() { return false; };
   SqlTable table(QString t);

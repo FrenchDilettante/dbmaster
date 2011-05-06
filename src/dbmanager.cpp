@@ -118,12 +118,13 @@ int DbManagerPrivate::addDatabase(QString driver, QString host, QString user,
   dbMap[newDb]->setEditable(false);
 
   dbMap[newDb]->setData(DbManager::DbItem, Qt::UserRole);
-  dbMap[newDb]->setIcon(IconManager::get("connect_no"));
+  dbMap[newDb]->setIcon(IconManager::get("database_connect"));
   dbMap[newDb]->setToolTip(dbToolTip(newDb));
 
   QList<QStandardItem*> l;
   l << dbMap[newDb];
   l << new QStandardItem(driverIcon[driver], "");
+  l[1]->setSelectable(false);
 
   m_model->appendRow(l);
 
@@ -344,7 +345,7 @@ void DbManagerPrivate::open(QSqlDatabase *db, QString pswd)
   if(!pswd.isNull())
     db->setPassword(pswd);
 
-  dbMap[db]->setIcon(IconManager::get("connect_creating"));
+  dbMap[db]->setIcon(IconManager::get("database_lightning"));
 
   openStack.push(db);
   while(closeStack.contains(db))
@@ -375,10 +376,58 @@ void DbManagerPrivate::openList()
   s.endArray();
 }
 
+QSqlDatabase *DbManagerPrivate::parentDb(QModelIndex index) {
+  while (index != QModelIndex()) {
+    if (index.data(Qt::UserRole) == DbManager::DbItem)
+      return DbManager::getDatabase(index.row());
+    index = index.parent();
+  }
+
+  return NULL;
+}
+
 void DbManagerPrivate::refreshModel()
 {
   foreach(QSqlDatabase *db, dbList)
     refreshModelItem(db);
+}
+
+void DbManagerPrivate::refreshModelIndex(QModelIndex index) {
+  if (!index.data(Qt::UserRole).canConvert(QVariant::Int)) {
+    return;
+  }
+
+  QStandardItem *it = m_model->itemFromIndex(index);
+  if (!it) {
+    return;
+  }
+
+  SqlWrapper *wrapper = dbWrappers.value(parentDb(index), NULL);
+
+  if (!wrapper) {
+    return;
+  }
+
+  QList<QStandardItem*> toAppend;
+  switch (index.data(Qt::UserRole).toInt()) {
+  case DbManager::SchemaItem:
+    toAppend << tablesItem(wrapper->tables(index.data().toString()),
+                           index.data().toString());
+    break;
+
+  case DbManager::TableItem:
+    toAppend << columnsItem(wrapper->columns(index.data().toString()));
+    break;
+
+  default:
+    break;
+  }
+
+  while (it->rowCount() > 0) {
+    it->removeRow(0);
+  }
+
+  it->appendRows(toAppend);
 }
 
 /**
@@ -389,6 +438,7 @@ void DbManagerPrivate::refreshModelItem(QSqlDatabase *db) {
     return;
 
   QStandardItem *item = dbMap[db];
+  item->setIcon(IconManager::get("database_refresh"));
   item->setToolTip(dbToolTip(db));
 
   QStandardItem *schemaItem = NULL;
@@ -443,10 +493,10 @@ void DbManagerPrivate::refreshModelItem(QSqlDatabase *db) {
       item->appendRow(viewsItem(views));
     }
 
-    item->setIcon(IconManager::get("connect_established"));
+    item->setIcon(IconManager::get("database"));
 
   } else {
-    item->setIcon(IconManager::get("connect_no"));
+    item->setIcon(IconManager::get("database_connect"));
     while(m_model->rowCount(index) > 0)
       m_model->removeRow(0, index);
   }
@@ -575,8 +625,10 @@ QStandardItem* DbManagerPrivate::schemaItem(SqlSchema schema) {
     prefix = schema.name;
   }
 
-  sitem->appendRow(tablesItem(schema.tables, prefix));
-  sitem->appendRow(viewsItem(schema.tables, prefix));
+  sitem->appendRow(new QStandardItem(IconManager::get("view-refresh"), ""));
+
+//  sitem->appendRow(tablesItem(schema.tables, prefix));
+//  sitem->appendRow(viewsItem(schema.tables, prefix));
 
   return sitem;
 }
@@ -704,9 +756,10 @@ QStandardItem *DbManagerPrivate::tablesItem(QList<SqlTable> tables,
       } else {
         i->setData(QString(schema + "." + table.name), Qt::ToolTipRole);
       }
-      if (table.columns.size() > 0) {
-        i->appendRow(columnsItem(table.columns));
-      }
+      i->appendRow(new QStandardItem(IconManager::get("view-refresh"), ""));
+//      if (table.columns.size() > 0) {
+//        i->appendRow(columnsItem(table.columns));
+//      }
       tablesItem->appendRow(i);
     }
   }
@@ -840,6 +893,10 @@ void DbManager::open(QSqlDatabase *db, QString pswd) {
 
 void DbManager::openList() {
   m_instance->openList();
+}
+
+void DbManager::refreshModelIndex(QModelIndex index) {
+  m_instance->refreshModelIndex(index);
 }
 
 void DbManager::refreshModelItem(QSqlDatabase *db) {

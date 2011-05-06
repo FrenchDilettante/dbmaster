@@ -178,6 +178,10 @@ void MainWindow::closeEvent(QCloseEvent *event) {
   s.setValue("maindock_floating", dockWidget->isFloating());
   s.setValue("maindock_position", dockWidget->pos());
   s.setValue("maindock_size", dockWidget->size());
+
+  // Positionnement de la toolbar principale
+  s.setValue("maintoolbar_area", toolBarArea(mainToolBar));
+
   s.endGroup();
 
   // fichiers récents
@@ -482,10 +486,11 @@ void MainWindow::refreshRecent()
   actionClearRecent->setEnabled(!recentFiles.size() == 0);
 }
 
-void MainWindow::reloadDbList()
-{
+void MainWindow::reloadDbList() {
   for(int i = 0; i < tabWidget->count(); i++)
     ((AbstractTabWidget*)tabWidget->widget(i))->refresh();
+
+  updateDbActions();
 }
 
 void MainWindow::saveQuery()
@@ -536,8 +541,11 @@ void MainWindow::setupConnections()
   connect(actionClearRecent,  SIGNAL(triggered()),  this,          SLOT(clearRecent()));
   connect(actionCloseTab,     SIGNAL(triggered()),  this,          SLOT(closeCurrentTab()));
   connect(actionCopy,         SIGNAL(triggered()),  this,          SLOT(copy()));
+  connect(actionConnect,      SIGNAL(triggered()),  dbTreeView,    SLOT(connectCurrent()));
   connect(actionCut,          SIGNAL(triggered()),  this,          SLOT(cut()));
   connect(actionDbManager,    SIGNAL(triggered()),  dbDialog,      SLOT(exec()));
+  connect(actionDisconnect,   SIGNAL(triggered()),  dbTreeView,    SLOT(disconnectCurrent()));
+  connect(actionEditConnection,SIGNAL(triggered()), dbTreeView,    SLOT(editCurrent()));
   connect(actionLeftPanel,    SIGNAL(triggered()),  this,          SLOT(toggleLeftPanel()));
   connect(actionLowerCase,    SIGNAL(triggered()),  this,          SLOT(lowerCase()));
   connect(actionLogs,         SIGNAL(triggered()),  logDial,       SLOT(exec()));
@@ -550,6 +558,8 @@ void MainWindow::setupConnections()
   connect(actionPreviousTab,  SIGNAL(triggered()),  this,          SLOT(previousTab()));
   connect(actionPrint,        SIGNAL(triggered()),  this,          SLOT(print()));
   connect(actionRedo,         SIGNAL(triggered()),  this,          SLOT(redo()));
+  connect(actionRefreshConnection, SIGNAL(triggered()),dbTreeView, SLOT(refreshCurrent()));
+  connect(actionRemoveConnection, SIGNAL(triggered()), dbTreeView, SLOT(removeCurrent()));
   connect(actionSaveQuery,    SIGNAL(triggered()),  this,          SLOT(saveQuery()));
   connect(actionSaveQueryAs,  SIGNAL(triggered()),  this,          SLOT(saveQueryAs()));
   connect(actionSearch,       SIGNAL(triggered()),  this,          SLOT(search()));
@@ -562,6 +572,7 @@ void MainWindow::setupConnections()
    */
   connect(dbTreeView, SIGNAL(schemaSelected(QSqlDatabase*,QString)),
           this, SLOT(openSchema(QSqlDatabase*,QString)));
+  connect(dbTreeView, SIGNAL(itemSelected()), this, SLOT(updateDbActions()));
   connect(dbTreeView, SIGNAL(tableSelected(QSqlDatabase*,QString)),
           this, SLOT(openTable(QSqlDatabase*,QString)));
 
@@ -644,6 +655,9 @@ void MainWindow::setupWidgets()
 
   dockWidget->setVisible(s.value("maindock_visible", true).toBool());
 
+  addToolBar((Qt::ToolBarArea) s.value("maintoolbar_area", 4).toInt(),
+             mainToolBar);
+
   queriesStatusLabel = new QLabel("", this);
   QMainWindow::statusBar()->addPermanentWidget(queriesStatusLabel);
 
@@ -684,11 +698,14 @@ void MainWindow::setupWidgets()
 
   // loading icons from current theme
   actionAbout->setIcon(         IconManager::get("help-about"));
-  actionAddDb->setIcon(         IconManager::get("db_add"));
+  actionAddDb->setIcon(         IconManager::get("database_add"));
   actionClearRecent->setIcon(   IconManager::get("edit-clear"));
   actionCloseTab->setIcon(      IconManager::get("window-close"));
+  actionConnect->setIcon(       IconManager::get("database_go"));
   actionCopy->setIcon(          IconManager::get("edit-copy"));
   actionCut->setIcon(           IconManager::get("edit-cut"));
+  actionDisconnect->setIcon(    IconManager::get("database_connect"));
+  actionEditConnection->setIcon(IconManager::get("database_edit"));
   actionExit->setIcon(          IconManager::get("application-exit"));
   actionNewQuery->setIcon(      IconManager::get("document-new"));
   actionOpenQuery->setIcon(     IconManager::get("document-open"));
@@ -697,9 +714,10 @@ void MainWindow::setupWidgets()
   actionPreferences->setIcon(   IconManager::get("preferences"));
   actionPrint->setIcon(         IconManager::get("document-print"));
   actionRedo->setIcon(          IconManager::get("edit-redo"));
+  actionRefreshConnection->setIcon(IconManager::get("database_refresh"));
+  actionRemoveConnection->setIcon(IconManager::get("database_delete"));
   actionSaveQuery->setIcon(     IconManager::get("document-save"));
-//  actionSaveQueryAs->setIcon(   IconManager::get("document-save-as"));
-  actionSearch->setIcon(        IconManager::get("edit-search"));
+  actionSearch->setIcon(        IconManager::get("edit-find"));
   actionUndo->setIcon(          IconManager::get("edit-undo"));
 
   tooltipButton->setIcon(       IconManager::get("help-faq"));
@@ -713,6 +731,18 @@ void MainWindow::toggleLeftPanel() {
 void MainWindow::undo() {
   if(currentTab())
     currentTab()->undo();
+}
+
+void MainWindow::updateDbActions() {
+  bool select = dbTreeView->isDbSelected();
+  QSqlDatabase *currentDb = dbTreeView->currentDb();
+  bool dbOpen = currentDb && currentDb->isOpen();
+
+  actionEditConnection->setEnabled(select);
+  actionRefreshConnection->setEnabled(select);
+  actionRemoveConnection->setEnabled(select && dbOpen);
+  actionConnect->setEnabled(select && dbOpen);
+  actionDisconnect->setEnabled(select && dbOpen);
 }
 
 void MainWindow::upperCase() {

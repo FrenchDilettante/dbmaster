@@ -25,17 +25,27 @@ Q_OBJECT
 public:
   DbTreeView(QWidget *parent = 0);
 
+  QSqlDatabase *currentDb();
+  bool isDbSelected();
+
 signals:
+  void itemSelected();
   void schemaSelected(QSqlDatabase*, QString);
   void tableSelected(QSqlDatabase*, QString);
 
 public slots:
+  void connectCurrent();
+  void disconnectCurrent();
+  void editCurrent();
+  void refreshCurrent();
 
 private:
   void contextMenuEvent(QContextMenuEvent *event);
   void mouseDoubleClickEvent(QMouseEvent *event);
   void mousePressEvent(QMouseEvent *event);
   QSqlDatabase *parentDb(QModelIndex index);
+  void selectionChanged(const QItemSelection &selected,
+                        const QItemSelection &deselected);
   void setupActions();
 
   QMenu *contextMenu;
@@ -49,11 +59,10 @@ private:
 
 private slots:
   void addDatabase();
+  void onItemExpanded(const QModelIndex &index);
   void on_model_dataChanged(const QModelIndex & topLeft,
                             const QModelIndex & bottomRight);
-  void editCurrent();
-  void refreshCurrent();
-  void on_removeDbAct_triggered();
+  void removeCurrent();
   void toggleCurrentDb();
 };
 

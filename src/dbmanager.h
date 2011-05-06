@@ -73,6 +73,7 @@ public:
 
 public slots:
   void                    refreshModel();
+  void                    refreshModelIndex(QModelIndex index);
   void                    refreshModelItem(QSqlDatabase *db);
   void                    terminate();
 
@@ -84,6 +85,7 @@ signals:
 private:
   QStandardItem*          columnsItem(QList<SqlColumn> columns);
   QString                 dbToolTip(QSqlDatabase *db);
+  QSqlDatabase*           parentDb(QModelIndex index);
   void                    setupConnections();
   void                    setupModels();
   QStandardItem*          schemaItem(SqlSchema schema);
@@ -151,6 +153,7 @@ public:
   static void           open(int, QString=QString::null);
   static void           open(QSqlDatabase *db, QString pswd=QString::null);
   static void           openList();
+  static void           refreshModelIndex(QModelIndex index);
   static void           refreshModelItem(QSqlDatabase *db);
   static void           removeDatabase(int);
   static void           saveList();

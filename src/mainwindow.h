@@ -67,7 +67,6 @@ private:
   QString             lastPath;
   SearchDialog       *searchDialog;
   QLabel             *queriesStatusLabel;
-  //QPrintDialog       *printDialog;
   QList<QAction*>     recentActions;
   QStringList         recentFiles;
 
@@ -91,6 +90,7 @@ private slots:
   void selectAll();
   void setQueryCount(int count);
   void undo();
+  void updateDbActions();
   void upperCase();
   void userManual();
 };

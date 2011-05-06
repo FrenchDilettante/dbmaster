@@ -90,7 +90,7 @@ QTextCursor SearchDialog::search() {
 
 void SearchDialog::setupWidgets()
 {
-  setWindowIcon(IconManager::get("edit-search"));
+  setWindowIcon(IconManager::get("edit-find"));
 
   // Les boutons sont stockés dans une QButtonBox pour des raisons pratiques.
   searchButton = buttonBox->addButton(tr("Search"),

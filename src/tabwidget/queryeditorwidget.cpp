@@ -313,6 +313,7 @@ void QueryEditorWidget::reloadFile()
 
 void QueryEditorWidget::run() {
 
+  resultButton->setChecked(true);
   tabWidget->setVisible(true);
   tabWidget->setTabEnabled(1, false);
   tabWidget->setCurrentIndex(0);
@@ -430,7 +431,6 @@ void QueryEditorWidget::setupWidgets() {
 
   resultButton = new QToolButton(this);
   resultButton->setText(tr("Display result"));
-  resultButton->setAutoRaise(true);
   resultButton->setCheckable(true);
   statusBar->addPermanentWidget(resultButton);
   connect(resultButton, SIGNAL(clicked(bool)),
@@ -448,7 +448,7 @@ void QueryEditorWidget::setupWidgets() {
   dbChooser->setModel(DbManager::model());
   dbChooser->setCurrentIndex(DbManager::lastIndex);
 
-  runButton->setIcon(IconManager::get("media-playback-start"));
+  runButton->setIcon(IconManager::get("player_play"));
 
   refresh();
 }

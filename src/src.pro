@@ -3,11 +3,8 @@
 # -------------------------------------------------
 
 QT += sql
-TARGET = ../bin/dbmaster
+TARGET = dbmaster
 TEMPLATE = app
-MOC_DIR = ../build
-OBJECTS_DIR = ../build
-UI_DIR = ../build
 SOURCES += main.cpp \
     mainwindow.cpp \
     dbmanager.cpp \
@@ -96,7 +93,7 @@ RESOURCES += icons.qrc
 
 # ##
 # Common
-trs.files = tr/fr_FR.qm
+trs.files = ../tr/fr_FR.qm
 sqlsyntax.files = share/sql_basics \
     share/sql_functions \
     share/sql_operators \

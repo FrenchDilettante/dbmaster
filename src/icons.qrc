@@ -1,7 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>img/view-refresh.png</file>
-        <file>img/folder_documents.png</file>
         <file>img/document-print.png</file>
         <file>img/go-home.png</file>
         <file>img/help-about.png</file>
@@ -11,55 +10,28 @@
         <file>img/db_firebird.png</file>
         <file>img/db_mysql.png</file>
         <file>img/db_postgresql.png</file>
-        <file>img/edit_user.png</file>
-        <file>img/socket.png</file>
-        <file>img/dialog-password.png</file>
         <file>img/edit-paste.png</file>
         <file>img/preferences.png</file>
-        <file>img/delete_table_col.png</file>
-        <file>img/delete_table_row.png</file>
-        <file>img/insert_table_col.png</file>
-        <file>img/insert_table_row.png</file>
         <file>img/button_cancel.png</file>
         <file>img/application-exit.png</file>
         <file>img/button_ok.png</file>
         <file>img/previous.png</file>
         <file>img/next.png</file>
-        <file>img/save_all.png</file>
-        <file>img/revert.png</file>
         <file>img/document-open.png</file>
         <file>img/document-save.png</file>
-        <file>img/document-save-as.png</file>
         <file>img/edit-copy.png</file>
         <file>img/edit-cut.png</file>
         <file>img/player_play.png</file>
         <file>img/run.png</file>
-        <file>img/connect_creating.png</file>
-        <file>img/connect_established.png</file>
-        <file>img/connect_no.png</file>
-        <file>img/db_add.png</file>
-        <file>img/db_comit.png</file>
-        <file>img/db.png</file>
-        <file>img/db_remove.png</file>
-        <file>img/db_status.png</file>
-        <file>img/db_update.png</file>
         <file>img/document-new.png</file>
-        <file>img/edit_sql.png</file>
         <file>img/edit-clear.png</file>
-        <file>img/view_remove.png</file>
-        <file>img/window_new.png</file>
-        <file>img/view_text.png</file>
-        <file>img/fileexport.png</file>
         <file>img/window-close.png</file>
         <file>img/go-previous.png</file>
         <file>img/go-next.png</file>
         <file>img/go-first.png</file>
         <file>img/go-last.png</file>
         <file>img/dbmaster.png</file>
-        <file>img/wizard.png</file>
         <file>img/folder.png</file>
-        <file>img/folder_green.png</file>
-        <file>img/folder_grey.png</file>
         <file>img/splash.png</file>
         <file>img/edit-undo.png</file>
         <file>img/edit-redo.png</file>
@@ -72,7 +44,15 @@
         <file>img/column.png</file>
         <file>img/column_key.png</file>
         <file>img/db_db2.png</file>
-        <file>img/edit-search.png</file>
         <file>img/db_sqlite.png</file>
+        <file>img/edit-find.png</file>
+        <file>img/database.png</file>
+        <file>img/database_add.png</file>
+        <file>img/database_connect.png</file>
+        <file>img/database_delete.png</file>
+        <file>img/database_edit.png</file>
+        <file>img/database_go.png</file>
+        <file>img/database_lightning.png</file>
+        <file>img/database_refresh.png</file>
     </qresource>
 </RCC>
