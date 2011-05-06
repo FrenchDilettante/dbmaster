@@ -24,7 +24,7 @@ FirstLaunchWizard::FirstLaunchWizard(QWidget *parent) :
   Config::editorAutoSave = false;
   Config::editorEncoding = "utf8";
   Config::editorFont = QFont("Monospace", 10);
-  Config::editorSemantic = false;
+  Config::editorSemantic = true;
 
   Config::shColor.clear();
   Config::shColor["sql_basics"]     = Qt::black;
