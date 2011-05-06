@@ -59,6 +59,7 @@ public:
   static QStandardItemModel *model()    { return instance->model();   };
   static Plugin *plugin(QString plid);
   static QString pluginDirectory();
+  static QObject* pluginObject(QString plid);
   static void registerPlugin(QObject *p);
   static void save();
   static SqlWrapper *wrapper(QString plid);

@@ -171,6 +171,9 @@ EwExportPage::EwExportPage(QueryToken *token, QWizard *parent)
   : QWizardPage(parent) {
   setupUi(this);
 
+  dial = new QProgressDialog(this);
+  dial->setWindowTitle(tr("Export running..."));
+
   this->model = token->model();
   this->token = token;
 }
@@ -178,6 +181,9 @@ EwExportPage::EwExportPage(QueryToken *token, QWizard *parent)
 EwExportPage::EwExportPage(QAbstractItemModel *model, QWizard *parent)
   : QWizardPage(parent) {
   setupUi(this);
+
+  dial = new QProgressDialog(this);
+  dial->setWindowTitle(tr("Export running..."));
 
   this->model = model;
   this->token = NULL;
@@ -190,8 +196,6 @@ void EwExportPage::checkProgress() {
 
 void EwExportPage::initializePage() {
   finished = false;
-  dial = new QProgressDialog(this);
-  dial->setWindowTitle(tr("Export running..."));
   dial->setMaximum(model->rowCount()-1);
   connect(this, SIGNAL(progress(int)), dial, SLOT(setValue(int)));
   QTimer::singleShot(1000, this, SLOT(checkProgress()));
@@ -210,7 +214,7 @@ void EwExportPage::run() {
   }
 
   ExportEngine *engine = ((ExportWizard*) wizard())->engine();
-  connect((QObject*) engine, SIGNAL(progress(int)),
+  connect(PluginManager::pluginObject(engine->plid()), SIGNAL(progress(int)),
           dial, SLOT(setValue(int)));
   engine->process(&f);
 

@@ -72,8 +72,9 @@ QList<ExportEngine*> PluginManagerPrivate::exportEngines() {
   QList<ExportEngine*> engines;
 
   foreach (QObject *p, m_plugins) {
-    if (qobject_cast<ExportEngine*>(p)) {
-      engines << qobject_cast<ExportEngine*>(p);
+    ExportEngine *e = qobject_cast<ExportEngine*>(p);
+    if (e) {
+      engines << e;
     }
   }
 
@@ -232,6 +233,10 @@ Plugin* PluginManager::plugin(QString plid) {
 
 QString PluginManager::pluginDirectory() {
   return QDir::homePath();
+}
+
+QObject* PluginManager::pluginObject(QString plid) {
+  return instance->plugin(plid);
 }
 
 void PluginManager::registerPlugin(QObject *p) {
