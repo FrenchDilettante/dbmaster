@@ -145,6 +145,7 @@ void DbTreeView::mouseDoubleClickEvent(QMouseEvent *event) {
     }
 
     if (index.data(Qt::UserRole).canConvert(QVariant::Int)) {
+      QString table;
       switch(index.data(Qt::UserRole).toInt()) {
       case DbManager::DbItem:
         toggleCurrentDb();
@@ -161,8 +162,11 @@ void DbTreeView::mouseDoubleClickEvent(QMouseEvent *event) {
       case DbManager::SysTableItem:
       case DbManager::TableItem:
       case DbManager::ViewItem:
-        emit tableSelected(parentDb(index),
-                           index.data(Qt::ToolTipRole).toString());
+        table = index.data(Qt::ToolTipRole).toString();
+        if (table.startsWith("public.")) {
+          table = table.mid(7);
+        }
+        emit tableSelected(parentDb(index), table);
         break;
 
       case DbManager::DisplayItem:
