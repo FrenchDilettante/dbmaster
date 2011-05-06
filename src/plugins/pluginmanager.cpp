@@ -18,6 +18,18 @@
  * PluginManagerPrivate
  */
 
+Plugin* PluginManagerPrivate::toPlugin(QObject *pl) {
+  Plugin *p = qobject_cast<Plugin*>(pl);
+  if (!p) {
+    p = qobject_cast<ExportEngine*>(pl);
+  }
+  if (!p) {
+    p = qobject_cast<SqlWrapper*>(pl);
+  }
+
+  return p;
+}
+
 PluginManagerPrivate::PluginManagerPrivate()
   : QObject() {
   m_model = new QStandardItemModel(this);
@@ -36,9 +48,9 @@ SqlWrapper* PluginManagerPrivate::availableWrapper(QString driver) {
     return NULL;
   }
 
-  foreach (Plugin *p, m_plugins) {
-    SqlWrapper *w = NULL;
-    if (checkType(p, "WRAPPER") && ((SqlWrapper*) p)->driver() == driver) {
+  foreach (QObject *p, m_plugins) {
+    SqlWrapper *w = qobject_cast<SqlWrapper*>(p);
+    if (w && w->driver() == driver) {
       return w;
     }
   }
@@ -59,9 +71,9 @@ bool PluginManagerPrivate::checkType(Plugin *p, QString type) {
 QList<ExportEngine*> PluginManagerPrivate::exportEngines() {
   QList<ExportEngine*> engines;
 
-  foreach (Plugin *p, m_plugins) {
-    if (checkType(p, "EXPORTENGINE")) {
-      engines << (ExportEngine*) p;
+  foreach (QObject *p, m_plugins) {
+    if (qobject_cast<ExportEngine*>(p)) {
+      engines << qobject_cast<ExportEngine*>(p);
     }
   }
 
@@ -87,16 +99,18 @@ void PluginManagerPrivate::init() {
 
   // On trie sur le volet les plugins qui ne sont pas enregistrés
   foreach (QFileInfo f, pluginsInFolder) {
-    Plugin *p = load(f);
+    QObject *p = load(f);
     if (p) {
       registerPlugin(p);
     }
   }
 }
 
-void PluginManagerPrivate::registerPlugin(Plugin *plugin) {
-  foreach (Plugin *p, m_plugins) {
-    if (plugin->plid() == p->plid()) {
+void PluginManagerPrivate::registerPlugin(QObject *plugin) {
+  Plugin *pl = toPlugin(plugin);
+
+  foreach (QObject *p, m_plugins) {
+    if (pl->plid() == toPlugin(p)->plid()) {
       QMessageBox::warning(NULL,
                            tr("Add a plugin"),
                            tr("This plugin is already registered"));
@@ -105,22 +119,22 @@ void PluginManagerPrivate::registerPlugin(Plugin *plugin) {
   }
 
   QStandardItem *item = new QStandardItem();
-  item->setText(plugin->title());
-  item->setData(plugin->plid(), Qt::UserRole);
+  item->setText(pl->title());
+  item->setData(pl->plid(), Qt::UserRole);
 
   QString type = tr("Other");
 
-  if (checkType(plugin, "EXPORTENGINE")) {
+  if (qobject_cast<ExportEngine*>(plugin)) {
     type = tr("Export engine");
-  } else if (checkType(plugin, "WRAPPER")) {
+  } else if (qobject_cast<SqlWrapper*>(plugin)) {
     type = tr("SQL Wrapper");
   }
 
   QList<QStandardItem*> l;
   l << item;
   l << new QStandardItem(type);
-  l << new QStandardItem(plugin->vendor());
-  l << new QStandardItem(plugin->version());
+  l << new QStandardItem(pl->vendor());
+  l << new QStandardItem(pl->version());
   m_plugins << plugin;
   foreach (QStandardItem *i, l) {
     i->setEditable(false);
@@ -130,16 +144,12 @@ void PluginManagerPrivate::registerPlugin(Plugin *plugin) {
   m_model->appendRow(l);
 }
 
-Plugin *PluginManagerPrivate::load(QFileInfo info) {
-  Plugin *p = NULL;
+QObject *PluginManagerPrivate::load(QFileInfo info) {
+  QObject *p = NULL;
   QPluginLoader loader(info.absoluteFilePath());
   if(loader.load())   {
-#if QT_VERSION >= 0x040700
-    p = dynamic_cast<Plugin*>(loader.instance());
-#else
-    p = (Plugin*) loader.instance();
-#endif
-    if(!p) {
+    p = loader.instance();
+    if (!toPlugin(p)) {
       QMessageBox::critical(NULL,
                             tr("Incorrect plugin file"),
                             tr("This file contains no DbMaster plugin."));
@@ -154,12 +164,12 @@ Plugin *PluginManagerPrivate::load(QFileInfo info) {
   return p;
 }
 
-Plugin *PluginManagerPrivate::plugin(QString plid) {
+QObject *PluginManagerPrivate::plugin(QString plid) {
   if (plid.size() == 0) {
     return NULL;
   }
-  foreach (Plugin *p, m_plugins) {
-    if (p->plid() == plid) {
+  foreach (QObject *p, m_plugins) {
+    if (toPlugin(p)->plid() == plid) {
       return p;
     }
   }
@@ -179,21 +189,19 @@ void PluginManagerPrivate::save() {
 }
 
 SqlWrapper* PluginManagerPrivate::wrapper(QString plid) {
-  Plugin *p = plugin(plid);
-  if (p && checkType(p, "WRAPPER")) {
-    return (SqlWrapper*) p;
-  } else {
-    return NULL;
-  }
+  QObject *p = plugin(plid);
+  SqlWrapper *w = p ? qobject_cast<SqlWrapper*>(p) : NULL;
+
+  return w;
 }
 
 QList<SqlWrapper*> PluginManagerPrivate::wrappers() {
   QList<SqlWrapper*> wrappers;
 
-  foreach (Plugin *p, m_plugins) {
-    SqlWrapper *wp = NULL;
-    if (checkType(wp, "WRAPPER")) {
-      wrappers << (SqlWrapper*) wp;
+  foreach (QObject *p, m_plugins) {
+    SqlWrapper *wp = qobject_cast<SqlWrapper*>(p);
+    if (wp) {
+      wrappers << wp;
     }
   }
 
@@ -219,14 +227,14 @@ void PluginManager::init() {
 }
 
 Plugin* PluginManager::plugin(QString plid) {
-  return instance->plugin(plid);
+  return PluginManagerPrivate::toPlugin(instance->plugin(plid));
 }
 
 QString PluginManager::pluginDirectory() {
   return QDir::homePath();
 }
 
-void PluginManager::registerPlugin(Plugin *p) {
+void PluginManager::registerPlugin(QObject *p) {
   instance->registerPlugin(p);
 }
 
