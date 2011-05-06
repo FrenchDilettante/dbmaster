@@ -76,8 +76,9 @@ void QueryTextEdit::keyPressEvent(QKeyEvent *event)
     QString ligne = cur.selectedText();
     QString ind;
 
-    for (int i=0; i<ligne.length() && ligne[i] == ' '; i++) {
-      ind += ' ';
+    for (int i=0; i<ligne.length() &&
+                  (ligne[i] == ' ' || ligne[i] == '\t'); i++) {
+      ind += ligne[i];
     }
 
     QTextEdit::keyPressEvent(event);
