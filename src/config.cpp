@@ -127,7 +127,7 @@ void Config::save()
 }
 
 void Config::import_0_7() {
-  QSettings sold("dbmaster.org", "dbmaster");
+  QSettings sold("dbmaster.sourceforge.net", "dbmaster");
   defaultDriver = sold.value("default_database").toString();
 
   /*
