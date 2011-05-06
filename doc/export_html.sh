@@ -1,5 +1,5 @@
 #!/bin/bash
-langs="fr"
+langs="fr en"
 
 for lng in $langs
 do
@@ -28,4 +28,6 @@ do
 	done
 	
 	rm html/*.stub
+	
+	cd ..
 done
