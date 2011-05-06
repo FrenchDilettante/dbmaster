@@ -78,6 +78,12 @@ Les quatres boutons de parcours permettent, dans l'ordre, d'accéder à :
 Le dernier bouton permet de relancer l'exécution de la requête (pour prendre en compte d'éventuelles modifications dans la base).
 
 
+Visualisation des grandes données (BLOBS)
+-----------------------------------------
+
+Les BLOBS SQL peuvent être visualisés au format texte ou html via l'option "Détails", accessible par un clic droit sur une cellule.
+
+
 Export
 ------
 

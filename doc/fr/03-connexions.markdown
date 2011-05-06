@@ -31,14 +31,14 @@ Les différents champs de l'assistant sont en saisie libre (à part le nom de ba
 
 ### Modifier une connexion ###
 
-La modification est accessible dans le menu contextuel de la liste à gauche ou directement dans le gestionnaire.
+La modification est accessible dans la barre d'outil, dans le menu contextuel de la liste à gauche ou directement dans le gestionnaire.
 
 Il y a deux restrictions : vous ne pouvez ni modifier une connexion active, ni changer le driver.
 
 
 ### Supprimer une connexion ###
 
-Comme pour la modification, par le menu contextuel ou le gestionnaire.
+Comme pour la modification, par la barre d'outils, le menu contextuel ou le gestionnaire.
 
 Vous ne pouvez pas supprimer une connexion active.
 

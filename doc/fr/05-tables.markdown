@@ -16,3 +16,9 @@ Modification
 Les modifications seront gardées en mémoire et transmises lors de l'appui sur le bouton "Valider".
 
 Il y a aussi deux boutons, Ajout et Suppression, disponibles à droite de la pagination.
+
+
+Structure
+---------
+
+Les informations de structures permettent de consulter rapidement les colonnes de la table, leur type, leur valeur par défaut...

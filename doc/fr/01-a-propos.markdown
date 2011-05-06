@@ -23,11 +23,16 @@ Nokia fournit les drivers pour les SGBD suivants :
 
 Les SGBD suivants ont été testés et validés :
 
-* IBM DB2
 * Firebird
 * MySQL
 * PostgreSQL
+* ODBC
 * SQLite
+
+Testés, mais avec une mauvaise compatibilité :
+
+* IBM DB2
+* Oracle Express
 
 Les autres n'ont pas été testés.
 

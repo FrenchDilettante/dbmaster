@@ -1,7 +1,7 @@
-DbMaster 0.7 - Notes de version
+DbMaster 0.8 - Notes de version
 ===============================
 
-_v0.7, 1er déc 2010_
+_v0.8, 1er juin 2011_
 
 
 Avancée
@@ -13,17 +13,16 @@ DbMaster est toujours en phase de développement. Cette version a été longueme
 Nouveautés
 ----------
 
-DbMaster 0.7 introduit relativement peu de nouveautés fonctionnelles : c'est avant tout une réécriture de la plateforme pour plus de stabilité et de confort utilisateur. Cependant, on peut noter :
+DbMaster 0.8 apporte la possibilité d'ajouter des fonctionnalités spécifiques à DbMaster via des plugins.
 
-* Un outil de recherche
-* Le parcours des tables est paginé
-* Un nouveau format d'export : HTML
-* La tooltip "Le saviez-vous ?" qui donne des conseils
+Côté fonctionnel, on notera :
 
-Les travaux de fond auront permis, eux :
+* Le support des schémas pour PostgreSQL
+* L'affichage des structures des tables (colonnes)
+* Blob viewer pour les grandes données
+* Auto-indentation
+* Tri sur colonnes pour les tables
+* Nommage personnalisé des connexions
+* Mises à jour diverses sur la fenêtre principale
 
-* D'éviter les gels de l'interface en cas de latence sur une connexion
-* D'éviter les gels de l'interface lors de l'exécution d'une requête longue
-* Une meilleure intégration visuelle sur GNU/Linux
-
-La liste complète des nouveautés est disponible [ici](http://projets.developpez.com/versions/show/225).
+La liste complète des nouveautés est disponible [ici](http://projets.developpez.com/versions/show/232).
