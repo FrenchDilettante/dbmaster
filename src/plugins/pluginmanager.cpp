@@ -59,13 +59,6 @@ SqlWrapper* PluginManagerPrivate::availableWrapper(QString driver) {
 }
 
 /**
- * Vérifie le type d'un plugin : moteur d'export, adaptateur, etc.
- */
-bool PluginManagerPrivate::checkType(Plugin *p, QString type) {
-  return (p && p->plid().count(".") == 2 && p->plid().split('.')[2] == type);
-}
-
-/**
  * Extrait les moteurs d'export
  */
 QList<ExportEngine*> PluginManagerPrivate::exportEngines() {

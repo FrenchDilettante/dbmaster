@@ -44,8 +44,6 @@ public slots:
   void save();
 
 private:
-  bool checkType(Plugin *p, QString type);
-
   QStandardItemModel             *m_model;
   QList<QObject*>                 m_plugins;
   QMap<QObject*, QStandardItem*>  pluginsMap;
