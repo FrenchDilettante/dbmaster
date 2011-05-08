@@ -599,9 +599,10 @@ msgid "&Edit"
 msgstr "É&dition"
 
 #: /home/manu/programmation/dbmaster/src/mainwindow.ui:126
+#| msgid "Case"
 msgctxt "MainWindowClass|"
-msgid "Case"
-msgstr "Casse"
+msgid "C&ase"
+msgstr "C&asse"
 
 #: /home/manu/programmation/dbmaster/src/mainwindow.ui:145
 msgctxt "MainWindowClass|"
@@ -629,9 +630,10 @@ msgid "&View"
 msgstr "&Affichage"
 
 #: /home/manu/programmation/dbmaster/src/mainwindow.ui:185
+#| msgid "Panels"
 msgctxt "MainWindowClass|"
-msgid "Panels"
-msgstr "Panneaux"
+msgid "&Panels"
+msgstr "&Panneaux"
 
 #: /home/manu/programmation/dbmaster/src/mainwindow.ui:202
 #: /home/manu/programmation/dbmaster/src/mainwindow.ui:443
@@ -760,9 +762,10 @@ msgid "Ctrl+V"
 msgstr "Ctrl+V"
 
 #: /home/manu/programmation/dbmaster/src/mainwindow.ui:406
+#| msgid "Select all"
 msgctxt "MainWindowClass|"
-msgid "Select all"
-msgstr "Tout sélectionner"
+msgid "Se&lect all"
+msgstr "Tout sé&lectionner"
 
 #: /home/manu/programmation/dbmaster/src/mainwindow.ui:409
 msgctxt "MainWindowClass|"
@@ -830,8 +833,10 @@ msgid "Plugins"
 msgstr "Plugins"
 
 #: /home/manu/programmation/dbmaster/src/mainwindow.ui:475
+#, fuzzy
+#| msgid "Next tab"
 msgctxt "MainWindowClass|"
-msgid "Next tab"
+msgid "Ne&xt tab"
 msgstr "Onglet suivant"
 
 #: /home/manu/programmation/dbmaster/src/mainwindow.ui:478
@@ -874,24 +879,28 @@ msgctxt "MainWindowClass|"
 msgid "Disconnect"
 msgstr "Déconnecter"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:573
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:576
 msgctxt "MainWindowClass|"
 msgid "Refresh"
 msgstr "Rafraîchir"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:576
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:579
 msgctxt "MainWindowClass|"
 msgid "Shift+F5"
-msgstr ""
+msgstr "Shift+F5"
 
 #: /home/manu/programmation/dbmaster/src/mainwindow.ui:483
+#, fuzzy
+#| msgid "Previous tab"
 msgctxt "MainWindowClass|"
-msgid "Previous tab"
+msgid "Previous t&ab"
 msgstr "Onglet précédent"
 
 #: /home/manu/programmation/dbmaster/src/mainwindow.ui:494
+#, fuzzy
+#| msgid "Search"
 msgctxt "MainWindowClass|"
-msgid "Search"
+msgid "&Search"
 msgstr "Rechercher"
 
 #: /home/manu/programmation/dbmaster/src/mainwindow.ui:497
@@ -1153,7 +1162,7 @@ msgstr ""
 "Impossible d'ouvrir la table. Erreur retournée :\n"
 "%1"
 
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:361
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:365
 #, qt-format
 msgctxt "ResultView|"
 msgid "Page %1/%2"
@@ -1246,17 +1255,18 @@ msgctxt "EwExportPage|"
 msgid "The export process is finished."
 msgstr "Le processus d'export est terminé."
 
-#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:194
+#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:175
+#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:186
 msgctxt "EwExportPage|"
 msgid "Export running..."
 msgstr "Export en cours..."
 
-#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:205
+#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:209
 msgctxt "EwExportPage|"
 msgid "Openning error"
 msgstr "Erreur d'ouverture"
 
-#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:206
+#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:210
 #, qt-format
 msgctxt "EwExportPage|"
 msgid "Unable to open the file %1."
@@ -1475,7 +1485,7 @@ msgctxt "QObject|"
 msgid "Connection %1 added"
 msgstr "Connexion %1 ajoutée"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:664
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:714
 #, qt-format
 msgctxt "QObject|"
 msgid "%1 on %2"
@@ -1546,107 +1556,107 @@ msgctxt "DbManagerPrivate|"
 msgid "Host"
 msgstr "Hôte"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:411
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:459
 #, qt-format
 msgctxt "DbManagerPrivate|"
 msgid "Schemas (%1)"
 msgstr "Schémas (%1)"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:500
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:548
 #, qt-format
 msgctxt "DbManagerPrivate|"
 msgid "Connected to %1"
 msgstr "Connecté à %1"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:502
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:550
 #, qt-format
 msgctxt "DbManagerPrivate|"
 msgid "Unable to connect to %1"
 msgstr "Impossible de se connecter à %1"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:515
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:563
 #, qt-format
 msgctxt "DbManagerPrivate|"
 msgid "Disconnected from %1"
 msgstr "Déconnecté de %1"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:611
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:661
 msgctxt "DbManagerPrivate|"
 msgid "Driver"
 msgstr "Pilote"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:613
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:663
 msgctxt "DbManagerPrivate|"
 msgid "DB2"
 msgstr "DB2"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:614
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:664
 msgctxt "DbManagerPrivate|"
 msgid "Interbase/Firebird"
 msgstr "Interbase/Firebird"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:615
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:665
 msgctxt "DbManagerPrivate|"
 msgid "MySql"
 msgstr "MySql"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:616
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:666
 msgctxt "DbManagerPrivate|"
 msgid "MySql 3"
 msgstr "MySql 3"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:617
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:667
 msgctxt "DbManagerPrivate|"
 msgid "Oracle"
 msgstr "Oracle"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:618
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:668
 msgctxt "DbManagerPrivate|"
 msgid "Oracle 8"
 msgstr "Oracle 8"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:619
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:669
 msgctxt "DbManagerPrivate|"
 msgid "Generic (ODBC)"
 msgstr "Générique (ODBC)"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:620
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:670
 msgctxt "DbManagerPrivate|"
 msgid "Generic (ODBC 3)"
 msgstr "Générique (ODBC 3)"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:621
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:671
 msgctxt "DbManagerPrivate|"
 msgid "PostGreSQL"
 msgstr "PostGreSQL"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:622
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:672
 msgctxt "DbManagerPrivate|"
 msgid "PostGreSQL 7"
 msgstr "PostGreSQL 7"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:623
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:673
 msgctxt "DbManagerPrivate|"
 msgid "SQLite"
 msgstr "SQLite"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:624
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:674
 msgctxt "DbManagerPrivate|"
 msgid "SQLite 2"
 msgstr "SQLite 2"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:656
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:706
 msgctxt "DbManagerPrivate|"
 msgid "Database"
 msgstr "Base de données"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:716
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:767
 #, qt-format
 msgctxt "DbManagerPrivate|"
 msgid "Tables (%1)"
 msgstr "Tables (%1)"
 
-#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:742
+#: /home/manu/programmation/dbmaster/src/dbmanager.cpp:793
 #, qt-format
 msgctxt "DbManagerPrivate|"
 msgid "Views (%1)"
@@ -1715,63 +1725,63 @@ msgctxt "MainWindow|"
 msgid "%1 queries pending..."
 msgstr "%1 requête en attente..."
 
-#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:25
+#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:37
 msgctxt "PluginManagerPrivate|"
 msgid "Plugin"
 msgstr "Plugin"
 
-#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:25
+#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:37
 msgctxt "PluginManagerPrivate|"
 msgid "Type"
 msgstr "Type"
 
-#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:25
+#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:37
 msgctxt "PluginManagerPrivate|"
 msgid "Vendor"
 msgstr "Fournisseur"
 
-#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:25
+#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:37
 msgctxt "PluginManagerPrivate|"
 msgid "Version"
 msgstr "Version"
 
-#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:95
+#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:109
 msgctxt "PluginManagerPrivate|"
 msgid "Add a plugin"
 msgstr "Ajouter un plugin"
 
-#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:96
+#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:110
 msgctxt "PluginManagerPrivate|"
 msgid "This plugin is already registered"
 msgstr "Ce plugin est déjà présent"
 
-#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:105
+#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:119
 msgctxt "PluginManagerPrivate|"
 msgid "Other"
 msgstr "Autre"
 
-#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:108
+#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:122
 msgctxt "PluginManagerPrivate|"
 msgid "Export engine"
 msgstr "Moteur d'export"
 
-#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:110
+#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:124
 msgctxt "PluginManagerPrivate|"
 msgid "SQL Wrapper"
 msgstr "Adaptateur SQL"
 
-#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:134
-#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:139
+#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:148
+#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:153
 msgctxt "PluginManagerPrivate|"
 msgid "Incorrect plugin file"
 msgstr "Fichier de plugin incorrect"
 
-#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:135
+#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:149
 msgctxt "PluginManagerPrivate|"
 msgid "This file contains no DbMaster plugin."
 msgstr "Ce fichier ne contient aucun plugin."
 
-#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:140
+#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:154
 msgctxt "PluginManagerPrivate|"
 msgid "Unable to load the plugin. Specified error : \n"
 msgstr "Impossible de charger le plugin. Erreur retournée :\n"
@@ -1885,43 +1895,43 @@ msgctxt "TableWidget|"
 msgid "No"
 msgstr "Non"
 
-#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:67
+#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:70
 msgctxt "DbTreeView|"
 msgid "Disconnect"
 msgstr "Déconnecter"
 
-#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:70
-#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:263
+#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:73
+#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:276
 msgctxt "DbTreeView|"
 msgid "Connect"
 msgstr "Connecter"
 
-#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:205
+#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:218
 msgctxt "DbTreeView|"
 msgid "Cannot remove"
 msgstr "Impossible de supprimer"
 
-#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:206
+#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:219
 msgctxt "DbTreeView|"
 msgid "You must close the database before remove it."
 msgstr "Vous devez fermer la connexion avant de la supprimer."
 
-#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:244
+#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:257
 msgctxt "DbTreeView|"
 msgid "New connection"
 msgstr "Nouvelle connexion"
 
-#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:249
+#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:262
 msgctxt "DbTreeView|"
 msgid "Edit"
 msgstr "Modifier"
 
-#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:253
+#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:266
 msgctxt "DbTreeView|"
 msgid "Refresh"
 msgstr "Rafraîchir"
 
-#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:258
+#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:271
 msgctxt "DbTreeView|"
 msgid "Remove"
 msgstr "Supprimer"
