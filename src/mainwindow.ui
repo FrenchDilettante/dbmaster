@@ -199,7 +199,7 @@
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QDockWidget" name="dockWidget">
    <property name="windowTitle">
-    <string>Connections</string>
+    <string>Connections panel</string>
    </property>
    <attribute name="dockWidgetArea">
     <number>1</number>
@@ -264,7 +264,7 @@
   </widget>
   <widget class="QToolBar" name="dbToolBar">
    <property name="windowTitle">
-    <string>toolBar</string>
+    <string>Connection toolbar</string>
    </property>
    <property name="iconSize">
     <size>
@@ -549,7 +549,7 @@
     <string>Remove</string>
    </property>
    <property name="toolTip">
-    <string>Remove current connection</string>
+    <string>Remove connection</string>
    </property>
   </action>
   <action name="actionConnect">

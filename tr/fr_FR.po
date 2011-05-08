@@ -635,7 +635,6 @@ msgctxt "MainWindowClass|"
 msgid "&Panels"
 msgstr "&Panneaux"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:202
 #: /home/manu/programmation/dbmaster/src/mainwindow.ui:443
 msgctxt "MainWindowClass|"
 msgid "Connections"
@@ -646,10 +645,16 @@ msgctxt "MainWindowClass|"
 msgid "Main toolbar"
 msgstr "Barre d'outils principale"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.ui:267
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:202
 msgctxt "MainWindowClass|"
-msgid "toolBar"
-msgstr ""
+msgid "Connections panel"
+msgstr "Panneau de connexions"
+
+#: /home/manu/programmation/dbmaster/src/mainwindow.ui:267
+#| msgid "toolBar"
+msgctxt "MainWindowClass|"
+msgid "Connection toolbar"
+msgstr "Barre d'outils des connexions"
 
 #: /home/manu/programmation/dbmaster/src/mainwindow.ui:292
 msgctxt "MainWindowClass|"
@@ -857,7 +862,7 @@ msgstr "Modifier"
 #: /home/manu/programmation/dbmaster/src/mainwindow.ui:541
 msgctxt "MainWindowClass|"
 msgid "Edit the connection in the manager"
-msgstr ""
+msgstr "Modifier la connexion dans le gestionnaire"
 
 #: /home/manu/programmation/dbmaster/src/mainwindow.ui:549
 msgctxt "MainWindowClass|"
@@ -865,9 +870,10 @@ msgid "Remove"
 msgstr "Supprimer"
 
 #: /home/manu/programmation/dbmaster/src/mainwindow.ui:552
+#| msgid "Remove current connection"
 msgctxt "MainWindowClass|"
-msgid "Remove current connection"
-msgstr ""
+msgid "Remove connection"
+msgstr "Supprimer la connexion"
 
 #: /home/manu/programmation/dbmaster/src/mainwindow.ui:560
 msgctxt "MainWindowClass|"
