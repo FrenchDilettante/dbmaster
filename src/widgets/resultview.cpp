@@ -223,9 +223,10 @@ void ResultView::setAlternatingRowColors(bool enable, bool loop) {
 
 void ResultView::setMode(Mode m) {
   m_mode = m;
+  reloadButton->setEnabled(true);
+  resultSpinBox->setEnabled(true);
 
-  switch(m_mode)
-  {
+  switch(m_mode) {
   case QueryMode:
     insertButton->setVisible(false);
     deleteButton->setVisible(false);
