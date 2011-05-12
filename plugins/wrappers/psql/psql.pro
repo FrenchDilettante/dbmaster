@@ -21,5 +21,15 @@ win32: {
     INSTALLS = target
 }
 
+# ##
+# All unix-like
+unix:!macx {
+    isEmpty( PREFIX ):PREFIX = /usr
+    DEFINES += PREFIX=\\\"$${PREFIX}\\\"
+    target.path = $${PREFIX}/share/dbmaster/plugins
+    INSTALLS = target
+}
+
+
 FORMS += \
     psqlconfig.ui

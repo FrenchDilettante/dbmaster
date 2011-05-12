@@ -87,6 +87,8 @@ void PluginManagerPrivate::init() {
   QFileInfoList pluginsInFolder;
 #ifdef Q_OS_LINUX
   pluginsInFolder = QDir().entryInfoList(QStringList(filter));
+  pluginsInFolder += QDir(QString(PREFIX) + "/share/dbmaster/plugins")
+                          .entryInfoList(QStringList(filter));
 #else
   pluginsInFolder = QDir("plugins").entryInfoList(QStringList(filter));
 #endif
