@@ -87,8 +87,10 @@ void PluginManagerPrivate::init() {
   QFileInfoList pluginsInFolder;
 #ifdef Q_OS_LINUX
   pluginsInFolder = QDir().entryInfoList(QStringList(filter));
-  pluginsInFolder += QDir(QString(PREFIX) + "/share/dbmaster/plugins")
+  if (pluginsInFolder.size() == 0) {
+    pluginsInFolder = QDir(QString(PREFIX) + "/share/dbmaster/plugins")
                           .entryInfoList(QStringList(filter));
+  }
 #else
   pluginsInFolder = QDir("plugins").entryInfoList(QStringList(filter));
 #endif
@@ -107,9 +109,9 @@ void PluginManagerPrivate::registerPlugin(QObject *plugin) {
 
   foreach (QObject *p, m_plugins) {
     if (pl->plid() == toPlugin(p)->plid()) {
-      QMessageBox::warning(NULL,
-                           tr("Add a plugin"),
-                           tr("This plugin is already registered"));
+//      QMessageBox::warning(NULL,
+//                           tr("Add a plugin"),
+//                           tr("This plugin is already registered"));
       return;
     }
   }
