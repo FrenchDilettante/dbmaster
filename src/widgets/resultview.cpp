@@ -338,6 +338,8 @@ void ResultView::updateItem(QStandardItem *item) {
  * Mise à jour pagination
  */
 void ResultView::updateView() {
+  int hpos = table->horizontalScrollBar()->value();
+
   shortModel->clear();
 
   if (!model) {
@@ -419,4 +421,6 @@ void ResultView::updateView() {
     table->horizontalHeader()->setSortIndicator(currentSorting.first,
                                                 currentSorting.second);
   }
+
+  table->horizontalScrollBar()->setValue(hpos);
 }
