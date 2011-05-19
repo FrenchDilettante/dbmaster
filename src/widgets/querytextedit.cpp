@@ -122,10 +122,11 @@ void QueryTextEdit::keyPressEvent(QKeyEvent *event)
     return;
   }
 
-  bool ctrl = event->modifiers() & Qt::ControlModifier;
+  bool ctrlOrTab = event->modifiers() & Qt::ControlModifier
+                  || event->key() == Qt::Key_Tab;
 
   // if the user just pressed Control or Shift (nothing else)
-  if (ctrl && !isShortcut)
+  if (ctrlOrTab && !isShortcut)
     return;
 
   bool hasModifier = (event->modifiers() != Qt::NoModifier);
