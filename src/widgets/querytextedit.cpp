@@ -122,14 +122,13 @@ void QueryTextEdit::keyPressEvent(QKeyEvent *event)
     return;
   }
 
-  bool ctrlOrShift = event->modifiers() &
-                     (Qt::ControlModifier | Qt::ShiftModifier);
+  bool ctrl = event->modifiers() & Qt::ControlModifier;
 
   // if the user just pressed Control or Shift (nothing else)
-  if(ctrlOrShift && event->text().isEmpty())
+  if (ctrl && !isShortcut)
     return;
 
-  bool hasModifier = (event->modifiers() != Qt::NoModifier) && !ctrlOrShift;
+  bool hasModifier = (event->modifiers() != Qt::NoModifier);
 
   // if lastChar is not a letter, the popup will not be shown
   QChar lastChar;
