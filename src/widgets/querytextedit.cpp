@@ -136,24 +136,23 @@ void QueryTextEdit::keyPressEvent(QKeyEvent *event)
   if(!completionPrefix.isEmpty())
     lastChar = completionPrefix.right(1).at(0);
 
-  bool followsTable = false;
-  if(lastChar == '.')
-  {
-    QString table = completionPrefix.left(completionPrefix.length()-1);
-    followsTable = tables.contains(table);
-  }
+//  bool followsTable = false;
+//  if (lastChar == '.') {
+//    QString table = completionPrefix.left(completionPrefix.length()-1);
+//    followsTable = tables.contains(table);
+//  }
 
-  if(!isShortcut && ((!lastChar.isLetterOrNumber() && !followsTable) ||
+  bool allowedChar = lastChar.isLetterOrNumber() || lastChar == '_';
+
+  if (!isShortcut && (!allowedChar ||
                      hasModifier ||
                      event->text().isEmpty() ||
-                     completionPrefix.length() < Config::compCharCount))
-  {
+                     completionPrefix.length() < Config::compCharCount)) {
     completer->popup()->hide();
     return;
   }
 
-  if(completionPrefix != completer->completionPrefix())
-  {
+  if (completionPrefix != completer->completionPrefix()) {
     completer->setCompletionPrefix(completionPrefix);
     completer->popup()->setCurrentIndex(
         completer->completionModel()->index(0,0));
