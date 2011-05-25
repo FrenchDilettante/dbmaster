@@ -339,6 +339,7 @@ void ResultView::updateItem(QStandardItem *item) {
  */
 void ResultView::updateView() {
   int hpos = table->horizontalScrollBar()->value();
+  int vpos = table->verticalScrollBar()->value();
 
   shortModel->clear();
 
@@ -423,4 +424,5 @@ void ResultView::updateView() {
   }
 
   table->horizontalScrollBar()->setValue(hpos);
+  table->verticalScrollBar()->setValue(vpos);
 }
