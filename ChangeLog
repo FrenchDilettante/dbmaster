@@ -1,3 +1,26 @@
+= 0.8 =
+
+== Highligths ==
+
+  * Plugin draft
+  * Table information (columns)
+  * Blob viewer
+
+== Improvements ==
+
+  * Schema grouping for PostgreSQL
+  * Uppercase/lowercase
+  * Auto-indent
+  * Line deletion (Ctrl+D)
+  * Show/hide query result
+  * Column sorting
+  * Content copy
+  * Aliases can be assigned to connections
+  * DBMS icon on the right of the connection
+  * Reload action in the connection context menu
+  * Direct file openning in CLI : dbmaster %1
+  * Connection tree can be moved
+
 = 0.7 =
 
 == Highlights ==
