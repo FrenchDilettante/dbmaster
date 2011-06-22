@@ -53,6 +53,7 @@ public slots:
   void saveQuery();
   void saveQueryAs();
   void toggleLeftPanel();
+  void togglePropertiesPanel();
 
 private:
   void                closeEvent(QCloseEvent*);
@@ -63,6 +64,7 @@ private:
   AboutDialog        *aboutDial;
   QMap<AbstractTabWidget::Action, QAction*> actionMap;
   ConfigDialog       *confDial;
+  QMap<QString, QDockWidget*> dockMap;
   LogDialog          *logDial;
   QString             lastPath;
   SearchDialog       *searchDialog;

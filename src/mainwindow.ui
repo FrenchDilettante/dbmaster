@@ -185,6 +185,7 @@
       <string>&amp;Panels</string>
      </property>
      <addaction name="actionLeftPanel"/>
+     <addaction name="actionPropertiesPanel"/>
     </widget>
     <addaction name="menuPanels"/>
     <addaction name="actionPreviousTab"/>
@@ -304,6 +305,9 @@
      </property>
      <item row="0" column="0">
       <widget class="QTreeView" name="propTree">
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
        <attribute name="headerDefaultSectionSize">
         <number>0</number>
        </attribute>
@@ -602,6 +606,14 @@
    </property>
    <property name="shortcut">
     <string>Shift+F5</string>
+   </property>
+  </action>
+  <action name="actionPropertiesPanel">
+   <property name="text">
+    <string>Properties</string>
+   </property>
+   <property name="shortcut">
+    <string>F10</string>
    </property>
   </action>
  </widget>
