@@ -519,17 +519,6 @@ void MainWindow::selectAll()
     currentTab()->selectAll();
 }
 
-/**
- * Affiche le nombre de requêtes en cour dans la statusBar
- */
-void MainWindow::setQueryCount(int count)
-{
-  queriesStatusLabel->setText(tr("%1 queries pending...")
-                              .arg(QString::number(count)));
-  if(count == 0)
-    QTimer::singleShot(3000, queriesStatusLabel, SLOT(clear()));
-}
-
 void MainWindow::setupConnections()
 {
   /*
@@ -653,9 +642,6 @@ void MainWindow::setupWidgets()
 
   addToolBar((Qt::ToolBarArea) s.value("maintoolbar_area", 4).toInt(),
              mainToolBar);
-
-  queriesStatusLabel = new QLabel("", this);
-  QMainWindow::statusBar()->addPermanentWidget(queriesStatusLabel);
 
   tooltipButton->setChecked(s.value("tooltips", true).toBool());
   tooltipFrame->setVisible(s.value("tooltips", true).toBool());
