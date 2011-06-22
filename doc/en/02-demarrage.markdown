@@ -1,5 +1,5 @@
-Démarrage
-=========
+First launch
+============
 
 
 Installation
@@ -7,27 +7,28 @@ Installation
 
 ### Linux ###
 
-#### Debian & dérivées (Ubuntu) ####
+#### Debian & debian-based (Ubuntu) ####
 
-L'installation du paquet .deb est entièrement automatique.
+Installing the .deb is entirely automatic.
 
 ### Windows ###
 
-L'archive binaire `dbmaster-0.8.zip` contient tout ce qui est nécessaire pour utiliser DbMaster. Une fois extraite, vous pouvez exécuter `dbmaster.exe`.
+The binary archive `dbmaster-0.8.zip` provides everything necessary to run DbMaster. Just extract it and run `dbmaster.exe`.
 
 
-Premier lancement
------------------
+First launch
+------------
 
-La première fois que vous exécutez DbMaster, un assistant s'affichera à l'écran afin de déterminer les paramètres par défaut.
-Il vous sera demandé quel driver par défaut utiliser pour les nouvelles connexions. Par exemple, un développeur web aura souvent besoin de MySQL. Ce choix n'est ni définitif ni exclusif. Vous pourrez modifier ce réglage ultérieurement, de même que les autres drivers seront toujours accessibles.
+The first time you run DbMaster, a wizard will pop up in order to set defaults parameters.
 
-### Mise à jour ###
+It will be asked which driver you will use for new connections. For example, a web developper might often use MySQL. This parameter can be easily modified. Besides, the other drivers remain available.
 
-Si vous utilisiez DbMaster 0.7, vos paramètres seront importés automatiquement.
+### Upgrade ###
+
+Si you used to run DbMaster 0.7, your parameters will be imported automatically.
 
 
-### Ajouter une connexion ###
+### Add a connection ###
 
 Le premier bouton de la barre d'outil (accessible aussi dans Fichier→Nouvelle→Connexion) lance l'assistant d'ajout de connexion.
 Une fois le SGBD choisi, vous pouvez utiliser le driver natif ou passer par ODBC en cochant la case adéquate.

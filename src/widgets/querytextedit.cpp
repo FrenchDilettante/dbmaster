@@ -76,8 +76,9 @@ void QueryTextEdit::keyPressEvent(QKeyEvent *event)
     QString ligne = cur.selectedText();
     QString ind;
 
-    for (int i=0; i<ligne.length() && ligne[i] == ' '; i++) {
-      ind += ' ';
+    for (int i=0; i<ligne.length() &&
+                  (ligne[i] == ' ' || ligne[i] == '\t'); i++) {
+      ind += ligne[i];
     }
 
     QTextEdit::keyPressEvent(event);
@@ -121,38 +122,37 @@ void QueryTextEdit::keyPressEvent(QKeyEvent *event)
     return;
   }
 
-  bool ctrlOrShift = event->modifiers() &
-                     (Qt::ControlModifier | Qt::ShiftModifier);
+  bool ctrlOrTab = event->modifiers() & Qt::ControlModifier
+                  || event->key() == Qt::Key_Tab;
 
   // if the user just pressed Control or Shift (nothing else)
-  if(ctrlOrShift && event->text().isEmpty())
+  if (ctrlOrTab && !isShortcut)
     return;
 
-  bool hasModifier = (event->modifiers() != Qt::NoModifier) && !ctrlOrShift;
+  bool hasModifier = (event->modifiers() != Qt::NoModifier);
 
   // if lastChar is not a letter, the popup will not be shown
   QChar lastChar;
   if(!completionPrefix.isEmpty())
     lastChar = completionPrefix.right(1).at(0);
 
-  bool followsTable = false;
-  if(lastChar == '.')
-  {
-    QString table = completionPrefix.left(completionPrefix.length()-1);
-    followsTable = tables.contains(table);
-  }
+//  bool followsTable = false;
+//  if (lastChar == '.') {
+//    QString table = completionPrefix.left(completionPrefix.length()-1);
+//    followsTable = tables.contains(table);
+//  }
 
-  if(!isShortcut && ((!lastChar.isLetterOrNumber() && !followsTable) ||
+  bool allowedChar = lastChar.isLetterOrNumber() || lastChar == '_';
+
+  if (!isShortcut && (!allowedChar ||
                      hasModifier ||
                      event->text().isEmpty() ||
-                     completionPrefix.length() < Config::compCharCount))
-  {
+                     completionPrefix.length() < Config::compCharCount)) {
     completer->popup()->hide();
     return;
   }
 
-  if(completionPrefix != completer->completionPrefix())
-  {
+  if (completionPrefix != completer->completionPrefix()) {
     completer->setCompletionPrefix(completionPrefix);
     completer->popup()->setCurrentIndex(
         completer->completionModel()->index(0,0));

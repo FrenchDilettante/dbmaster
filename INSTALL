@@ -1,7 +1,7 @@
 = Requirements =
 
 Needed to compile DbMaster :
-  * Qt (>=4.4) with QtSql module
+  * Qt (>=4.5) with QtSql module
   * make
   * g++
 

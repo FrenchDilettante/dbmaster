@@ -22,6 +22,77 @@ PsqlWrapper::PsqlWrapper(QSqlDatabase *db)
   m_configDialog = new PsqlConfig(this);
 }
 
+QList<SqlColumn> PsqlWrapper::columns(QString table) {
+  QList<SqlColumn> cols;
+
+  if (!m_db) {
+    return cols;
+  }
+
+
+  QString sql;
+  sql += "SELECT c.column_name, c.is_nullable, c.data_type, c.column_default ";
+  sql += "FROM INFORMATION_SCHEMA.COLUMNS C ";
+  sql += "INNER JOIN INFORMATION_SCHEMA.TABLES T ";
+  sql +=   "ON C.TABLE_NAME = T.TABLE_NAME ";
+  sql +=      "AND C.TABLE_SCHEMA = T.TABLE_SCHEMA ";
+  sql +=   "WHERE t.table_catalog='" + m_db->databaseName() + "' ";
+  sql +=     "AND t.table_name = '" + table + "' ";
+  sql +=   "ORDER BY ordinal_position ";
+
+  QSqlQuery query(*m_db);
+  if (!query.exec(sql)) {
+    qDebug() << query.lastError().text();
+    return cols;
+  }
+
+  while (query.next()) {
+    SqlColumn c;
+    c.name = query.value(0).toString();
+    c.permitsNull = query.value(1).toBool();
+    c.primaryKey = false;
+    c.type.name = query.value(2).toString();
+    c.defaultValue = query.value(3);
+    cols << c;
+  }
+
+  if (cols.size() == 0) {
+    return cols;
+  }
+
+  // Récupération des clés primaires
+
+  sql = "";
+
+  sql += "SELECT COLUMN_NAME ";
+  sql += "FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE U ";
+  sql += "INNER JOIN INFORMATION_SCHEMA.TABLE_CONSTRAINTS T ";
+  sql += "USING (TABLE_CATALOG, TABLE_SCHEMA, TABLE_NAME, CONSTRAINT_NAME) ";
+  sql += "WHERE T.CONSTRAINT_CATALOG = '" + m_db->databaseName() + "' ";
+  sql +=   "AND U.TABLE_NAME = '" + table + "' ";
+  sql +=   "AND CONSTRAINT_TYPE = 'PRIMARY KEY' ";
+
+  if (!query.exec(sql)) {
+    qDebug() << query.lastError().text();
+    return cols;
+  }
+
+  while (query.next()) {
+    QString column = query.value(0).toString();
+    int position = -1;
+    for (int i=0; i<cols.size(); i++) {
+      if (cols[i].name == column) {
+        position = i;
+        cols[position].primaryKey = true;
+      }
+    }
+
+    if (position == -1) {
+      qDebug() << "Unable to find" << column << "in table" << table;
+    }
+  }
+}
+
 SqlWrapper::WrapperFeatures PsqlWrapper::features() {
   return ODBC | Schemas;
 }
@@ -49,12 +120,8 @@ SqlSchema PsqlWrapper::schema(QString sch) {
   }
 
   QString sql;
-  sql += "SELECT '" + sch + "', t.table_name, t.table_type, c.column_name, ";
-  sql += "c.is_nullable, c.data_type, c.column_default ";
-  sql += "FROM INFORMATION_SCHEMA.COLUMNS C ";
-  sql += "INNER JOIN INFORMATION_SCHEMA.TABLES T ";
-  sql +=   "ON C.TABLE_NAME = T.TABLE_NAME ";
-  sql +=      "AND C.TABLE_SCHEMA = T.TABLE_SCHEMA ";
+  sql += "SELECT '" + sch + "', t.table_name, t.table_type ";
+  sql += "FROM INFORMATION_SCHEMA.TABLES T ";
   sql += "WHERE t.table_catalog='" + m_db->databaseName() + "' ";
   sql +=   "AND t.table_schema='" + sch + "' ";
   sql += "ORDER BY table_name, ordinal_position ";
@@ -65,38 +132,20 @@ SqlSchema PsqlWrapper::schema(QString sch) {
     return schema;
   }
 
-  bool ruptureTable = false;
   SqlTable t;
   while (query.next()) {
     schema.name = query.value(0).toString();
     schema.defaultSchema = schema.name == "public";
 
-    // Tables
-    ruptureTable = t.name != query.value(1).toString();
 
-    if (ruptureTable) {
-      if (t.name.length() > 0) {
-        schema.tables << t;
-      }
-
-      t = SqlTable();
-      t.name = query.value(1).toString();
-      if (query.value(2).toString() == "BASE TABLE") {
-        t.type = Table;
-      } else if (query.value(2).toString() == "VIEW") {
-        t.type = ViewTable;
-      }
+    t = SqlTable();
+    t.name = query.value(1).toString();
+    if (query.value(2).toString() == "BASE TABLE") {
+      t.type = Table;
+    } else if (query.value(2).toString() == "VIEW") {
+      t.type = ViewTable;
     }
 
-    // Colonnes
-    SqlColumn c;
-    c.name = query.value(3).toString();
-    c.permitsNull = query.value(4).toBool();
-    c.primaryKey = false;
-    t.columns << c;
-  }
-
-  if (t.name.length() > 0) {
     schema.tables << t;
   }
 
@@ -371,6 +420,43 @@ SqlTable PsqlWrapper::table(QString t) {
   }
 
   return table;
+}
+
+QList<SqlTable> PsqlWrapper::tables(QString schema) {
+
+  QList<SqlTable> tables;
+
+  if (!m_db) {
+    return tables;
+  }
+
+  QString sql;
+  sql += "SELECT table_schema, table_name, table_type ";
+  sql += "FROM INFORMATION_SCHEMA.TABLES ";
+  sql +=   "WHERE table_catalog='" + m_db->databaseName() + "' ";
+  sql +=     "AND table_schema = '" + schema + "' ";
+  sql +=   "ORDER BY table_schema, table_name ";
+
+  QSqlQuery query(*m_db);
+  if (!query.exec(sql)) {
+    qDebug() << query.lastError().text();
+    return tables;
+  }
+
+  SqlTable t;
+  while (query.next()) {
+    t = SqlTable();
+    t.name = query.value(1).toString();
+    if (query.value(2).toString() == "BASE TABLE") {
+      t.type = Table;
+    } else if (query.value(2).toString() == "VIEW") {
+      t.type = ViewTable;
+    }
+
+    tables << t;
+  }
+
+  return tables;
 }
 
 Q_EXPORT_PLUGIN2(dbm_psql_wrapper, PsqlWrapper)

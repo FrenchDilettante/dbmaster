@@ -41,11 +41,16 @@ public:
 
   virtual SqlWrapper* newInstance(QSqlDatabase *db) =0;
 
+  virtual QList<SqlColumn> columns(QString table) { return QList<SqlColumn>(); };
+
   virtual QString driver() =0;
   virtual QString driverName() { return ""; };
   virtual QString driverIconCode() { return ""; };
 
   virtual WrapperFeatures features() =0;
+
+  virtual bool isIndexed() { return true; };
+  virtual bool isRemote() { return true; };
 
   /**
    * Spécifie si le SGBD fonctionne par le réseau ou non. Si oui, il aura besoin
@@ -72,6 +77,7 @@ public:
   virtual SqlTable table(QString t) =0;
 
   virtual QList<SqlTable> tables() { return QList<SqlTable>(); };
+  virtual QList<SqlTable> tables(QString schema) { return QList<SqlTable>(); };
 
   QSqlDatabase* db() { return m_db; };
 

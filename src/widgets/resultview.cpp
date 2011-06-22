@@ -218,9 +218,10 @@ void ResultView::setAlternatingRowColors(bool enable, bool loop) {
 
 void ResultView::setMode(Mode m) {
   m_mode = m;
+  reloadButton->setEnabled(true);
+  resultSpinBox->setEnabled(true);
 
-  switch(m_mode)
-  {
+  switch(m_mode) {
   case QueryMode:
     insertButton->setVisible(false);
     deleteButton->setVisible(false);
@@ -319,7 +320,14 @@ void ResultView::updateItem(QStandardItem *item) {
  * Mise à jour pagination
  */
 void ResultView::updateView() {
+  int hpos = table->horizontalScrollBar()->value();
+  int vpos = table->verticalScrollBar()->value();
+
   shortModel->clear();
+
+  if (!model) {
+    return;
+  }
 
   for(int i=0; i<model->columnCount(); i++)
     shortModel->setHorizontalHeaderItem(i, new QStandardItem(
@@ -396,4 +404,7 @@ void ResultView::updateView() {
     table->horizontalHeader()->setSortIndicator(currentSorting.first,
                                                 currentSorting.second);
   }
+
+  table->horizontalScrollBar()->setValue(hpos);
+  table->verticalScrollBar()->setValue(vpos);
 }

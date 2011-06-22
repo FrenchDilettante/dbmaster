@@ -59,6 +59,7 @@ private:
 
 private slots:
   void addDatabase();
+  void onItemExpanded(const QModelIndex &index);
   void on_model_dataChanged(const QModelIndex & topLeft,
                             const QModelIndex & bottomRight);
   void removeCurrent();

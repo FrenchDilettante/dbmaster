@@ -17,13 +17,6 @@ enum ColumnFamily {
   Varchar
 };
 
-enum DbType {
-  FileDb,
-  IndexedDb,
-  LocalDb,
-  RemoteDb
-};
-
 enum TableType {
   Table,
   ViewTable,

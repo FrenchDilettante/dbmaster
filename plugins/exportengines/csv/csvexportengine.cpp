@@ -3,6 +3,7 @@
 
 #include "../iconmanager.h"
 
+#include <QDebug>
 #include <QVariant>
 
 CsvExportEngine::CsvExportEngine() {
@@ -32,17 +33,22 @@ void CsvExportEngine::process(QFile *f) {
    * Writing data
    */
   QModelIndex idx;
-  for( int y=0; y<model->rowCount(); y++ )       // each row
-  {
-    for( int x=0; x<model->columnCount(); x++ )  // each piece of data
-    {
-      idx = model->index( y, x );
-      if( idx.data().canConvert( QVariant::String ) )
-        f->write( idx.data().toString()
-                 .prepend( del ).append( del + sep )
-                 .toAscii() );
+  // échapement des quotes : par exemple " -> \"
+  QString escape = del;
+  escape.prepend("\\");
+  for (int y=0; y<model->rowCount(); y++) {
+    // each row
+
+    for (int x=0; x<model->columnCount(); x++) {
+      // each piece of data
+
+      idx = model->index(y, x);
+      if (idx.data().canConvert(QVariant::String)) {
+        QString data = idx.data().toString().replace(del, escape);
+        f->write(data.prepend(del).append(del + sep).toAscii());
+      }
     }
-    f->write( "\n" );
+    f->write("\n");
 
     emit progress(y);
   }

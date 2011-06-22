@@ -13,8 +13,8 @@ SchemaWidget::SchemaWidget(QString schema, QSqlDatabase *db, QWidget *parent)
   this->m_schema = schema;
   this->m_db = db;
 
-  tableTree->header()->setResizeMode(0, QHeaderView::Stretch);
-  viewTree->header()->setResizeMode(0, QHeaderView::Stretch);
+//  tableTree->header()->setResizeMode(0, QHeaderView::Stretch);
+//  viewTree->header()->setResizeMode(0, QHeaderView::Stretch);
 }
 
 QIcon SchemaWidget::icon() {
