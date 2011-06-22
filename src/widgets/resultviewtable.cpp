@@ -62,7 +62,9 @@ void ResultViewTable::copy() {
 
   text += "</table>";
 
-  QApplication::clipboard()->setText(text);
+  QMimeData *mime = new QMimeData();
+  mime->setHtml(text);
+  QApplication::clipboard()->setMimeData(mime);
 }
 
 void ResultViewTable::resetColumnSizes() {
