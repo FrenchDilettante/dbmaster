@@ -40,7 +40,7 @@ public:
 
 
   /// @deprecated
-  virtual SqlWrapper* newInstance(QSqlDatabase *db) =0;
+  virtual SqlWrapper* newInstance(QSqlDatabase db) =0;
 
   virtual QList<SqlColumn> columns(QString table) { return QList<SqlColumn>(); };
 
@@ -80,10 +80,10 @@ public:
   virtual QList<SqlTable> tables() { return QList<SqlTable>(); };
   virtual QList<SqlTable> tables(QString schema) { return QList<SqlTable>(); };
 
-  QSqlDatabase* db() { return m_db; };
+  QSqlDatabase db() { return m_db; };
 
 protected:
-  QSqlDatabase *m_db;
+  QSqlDatabase m_db;
 };
 
 Q_DECLARE_INTERFACE(SqlWrapper, "dbmaster.Wrapper")

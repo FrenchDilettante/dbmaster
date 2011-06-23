@@ -11,7 +11,7 @@ Q_OBJECT
 Q_INTERFACES(SqlWrapper)
 public:
   MysqlWrapper(QObject *parent = 0);
-  MysqlWrapper(QSqlDatabase *db);
+  MysqlWrapper(QSqlDatabase db);
 
   // Fonctions de Plugin
   QString plid() { return "DBM.MYSQL.WRAPPER"; };
@@ -22,7 +22,7 @@ public:
   // Fonctions de SqlWrapper
   QList<SqlColumn> columns(QString table);
   WrapperFeatures features();
-  SqlWrapper* newInstance(QSqlDatabase *db);
+  SqlWrapper* newInstance(QSqlDatabase db);
   QString driver() { return "QMYSQL"; };
   SqlTable table(QString t);
   QList<SqlTable> tables();

@@ -11,7 +11,8 @@ class PsqlWrapper : public QObject, public SqlWrapper {
 Q_OBJECT
 Q_INTERFACES(SqlWrapper)
 public:
-  PsqlWrapper(QSqlDatabase *db =0);
+  PsqlWrapper();
+  PsqlWrapper(QSqlDatabase db);
 
   // Fonctions de Plugin
   QString plid() { return "DBM.PSQL.WRAPPER"; };
@@ -24,7 +25,7 @@ public:
   QList<SqlColumn> columns(QString table);
   QDialog*        configDialog() { return m_configDialog; };
   WrapperFeatures features();
-  SqlWrapper*     newInstance(QSqlDatabase *db);
+  SqlWrapper*     newInstance(QSqlDatabase db);
   SqlSchema       schema(QString s);
   QList<SqlSchema> schemas();
   QString         driver() { return "QPSQL"; };

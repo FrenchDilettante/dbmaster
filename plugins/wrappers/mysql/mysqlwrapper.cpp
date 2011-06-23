@@ -9,7 +9,7 @@ MysqlWrapper::MysqlWrapper(QObject *parent)
   : QObject(parent) {
 }
 
-MysqlWrapper::MysqlWrapper(QSqlDatabase *db)
+MysqlWrapper::MysqlWrapper(QSqlDatabase db)
   : QObject(NULL) {
   m_db = db;
 }
@@ -27,14 +27,18 @@ QList<SqlColumn> MysqlWrapper::columns(QString table) {
   sql +=   "INNER JOIN INFORMATION_SCHEMA.TABLES T ";
   sql +=   "ON C.TABLE_NAME = T.TABLE_NAME ";
   sql +=     "AND C.TABLE_SCHEMA = T.TABLE_SCHEMA ";
-  sql += "WHERE C.TABLE_SCHEMA='" + m_db->databaseName() + "' ";
+  sql += "WHERE C.TABLE_SCHEMA='" + m_db.databaseName() + "' ";
   sql += "AND C.TABLE_NAME='" + table + "' ";
 
   sql += "ORDER BY ORDINAL_POSITION";
 
-  QSqlQuery query(*m_db);
+  if (!m_db.isOpen()) {
+    m_db.open();
+  }
+  QSqlQuery query(m_db);
   if (!query.exec(sql)) {
     qDebug() << query.lastError().text();
+    m_db.close();
     return cols;
   }
 
@@ -58,12 +62,13 @@ QList<SqlColumn> MysqlWrapper::columns(QString table) {
   sql = "";
   sql += "SELECT COLUMN_NAME ";
   sql += "FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE ";
-  sql += "WHERE CONSTRAINT_SCHEMA='" + m_db->databaseName() + "' ";
+  sql += "WHERE CONSTRAINT_SCHEMA='" + m_db.databaseName() + "' ";
   sql +=   "AND CONSTRAINT_NAME='PRIMARY' ";
   sql +=   "AND TABLE_NAME='" + table + "' ";
 
   if (!query.exec(sql)) {
     qDebug() << query.lastError().text();
+    m_db.close();
     return cols;
   }
 
@@ -83,6 +88,7 @@ QList<SqlColumn> MysqlWrapper::columns(QString table) {
     }
   }
 
+  m_db.close();
   return cols;
 }
 
@@ -90,16 +96,12 @@ SqlWrapper::WrapperFeatures MysqlWrapper::features() {
   return BasicFeatures | ODBC;
 }
 
-SqlWrapper* MysqlWrapper::newInstance(QSqlDatabase *db) {
+SqlWrapper* MysqlWrapper::newInstance(QSqlDatabase db) {
   return new MysqlWrapper(db);
 }
 
 SqlTable MysqlWrapper::table(QString t) {
   SqlTable table;
-
-  if (!m_db) {
-    return table;
-  }
 
   QString sql;
 
@@ -112,14 +114,19 @@ SqlTable MysqlWrapper::table(QString t) {
   sql +=   "INNER JOIN INFORMATION_SCHEMA.TABLES T ";
   sql +=   "ON C.TABLE_NAME = T.TABLE_NAME ";
   sql +=     "AND C.TABLE_SCHEMA = T.TABLE_SCHEMA ";
-  sql += "WHERE C.TABLE_SCHEMA='" + m_db->databaseName() + "' ";
+  sql += "WHERE C.TABLE_SCHEMA='" + m_db.databaseName() + "' ";
   sql += "AND C.TABLE_NAME='" + t + "' ";
 
   sql += "ORDER BY ORDINAL_POSITION";
 
-  QSqlQuery query(*m_db);
+  if (!m_db.isOpen()) {
+    m_db.open();
+  }
+
+  QSqlQuery query(m_db);
   if (!query.exec(sql)) {
     qDebug() << query.lastError().text();
+    m_db.close();
     return table;
   }
 
@@ -155,12 +162,13 @@ SqlTable MysqlWrapper::table(QString t) {
   sql = "";
   sql += "SELECT COLUMN_NAME ";
   sql += "FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE ";
-  sql += "WHERE CONSTRAINT_SCHEMA='" + m_db->databaseName() + "' ";
+  sql += "WHERE CONSTRAINT_SCHEMA='" + m_db.databaseName() + "' ";
   sql +=   "AND CONSTRAINT_NAME='PRIMARY' ";
   sql +=   "AND TABLE_NAME='" + t + "' ";
 
   if (!query.exec(sql)) {
     qDebug() << query.lastError().text();
+    m_db.close();
     return table;
   }
 
@@ -180,29 +188,31 @@ SqlTable MysqlWrapper::table(QString t) {
     }
   }
 
+  m_db.close();
   return table;
 }
 
 QList<SqlTable> MysqlWrapper::tables() {
   QList<SqlTable> tables;
 
-  if (!m_db) {
-    return tables;
-  }
-
   QString sql;
 
   sql += "SELECT TABLE_NAME, TABLE_TYPE ";
   sql += "FROM INFORMATION_SCHEMA.TABLES ";
   sql += "WHERE TABLE_SCHEMA = '";
-  sql += m_db->databaseName();
+  sql += m_db.databaseName();
   sql += "' ";
 
   sql += "ORDER BY TABLE_NAME";
 
-  QSqlQuery query(*m_db);
+  if (!m_db.isOpen()) {
+    m_db.open();
+  }
+
+  QSqlQuery query(m_db);
   if (!query.exec(sql)) {
     qDebug() << query.lastError().text();
+    m_db.close();
     return tables;
   }
 
@@ -215,6 +225,7 @@ QList<SqlTable> MysqlWrapper::tables() {
 
     tables << t;
   }
+  m_db.close();
   return tables;
 }
 

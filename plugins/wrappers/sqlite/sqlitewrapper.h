@@ -11,7 +11,7 @@ Q_OBJECT
 Q_INTERFACES(SqlWrapper)
 public:
   SqliteWrapper(QObject *parent = 0);
-  SqliteWrapper(QSqlDatabase *db);
+  SqliteWrapper(QSqlDatabase db);
 
   // Fonctions de Plugin
   QString plid() { return "DBM.SQLITE.WRAPPER"; };
@@ -25,7 +25,7 @@ public:
   WrapperFeatures features();
   bool isIndexed() { return false; };
   bool isRemote() { return false; };
-  SqlWrapper *newInstance(QSqlDatabase *db);
+  SqlWrapper *newInstance(QSqlDatabase db);
   bool requiresHostname() { return false; };
   SqlTable table(QString t);
   QList<SqlTable> tables();

@@ -9,7 +9,7 @@ SqliteWrapper::SqliteWrapper(QObject *parent)
   : QObject(parent) {
 }
 
-SqliteWrapper::SqliteWrapper(QSqlDatabase *db)
+SqliteWrapper::SqliteWrapper(QSqlDatabase db)
   : QObject(NULL) {
   m_db = db;
 }
@@ -21,7 +21,7 @@ QList<SqlColumn> SqliteWrapper::columns(QString table) {
 
   sql += "PRAGMA TABLE_INFO('" + table + "')";
 
-  QSqlQuery query(*m_db);
+  QSqlQuery query(m_db);
   if (!query.exec(sql)) {
     qDebug() << query.lastError().text();
     return cols;
@@ -45,7 +45,7 @@ SqlWrapper::WrapperFeatures SqliteWrapper::features() {
   return BasicFeatures;
 }
 
-SqlWrapper* SqliteWrapper::newInstance(QSqlDatabase *db) {
+SqlWrapper* SqliteWrapper::newInstance(QSqlDatabase db) {
   return new SqliteWrapper(db);
 }
 
@@ -57,7 +57,7 @@ SqlTable SqliteWrapper::table(QString t) {
 
   sql += "PRAGMA TABLE_INFO('" + t + "')";
 
-  QSqlQuery query(*m_db);
+  QSqlQuery query(m_db);
   if (!query.exec(sql)) {
     qDebug() << query.lastError().text();
     return table;
@@ -80,19 +80,20 @@ SqlTable SqliteWrapper::table(QString t) {
 QList<SqlTable> SqliteWrapper::tables() {
   QList<SqlTable> tables;
 
-  if (!m_db) {
-    return tables;
-  }
-
   QString sql;
 
   sql += "SELECT name, type FROM sqlite_master ";
   sql += "WHERE type in ('table', 'view') ";
   sql += "ORDER BY name ";
 
-  QSqlQuery query(*m_db);
+  if (!m_db.isOpen()) {
+    m_db.open();
+  }
+
+  QSqlQuery query(m_db);
   if (!query.exec(sql)) {
     qDebug() << query.lastError().text();
+    m_db.close();
     return tables;
   }
 
@@ -103,6 +104,7 @@ QList<SqlTable> SqliteWrapper::tables() {
     tables << t;
   }
 
+  m_db.close();
   return tables;
 }
 

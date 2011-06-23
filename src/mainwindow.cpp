@@ -67,13 +67,13 @@ void MainWindow::addRecentFile(QString file)
 /**
  * Lorsqu'une connexion change de statut, on contrôle s'il y a des erreurs.
  */
-void MainWindow::checkDb(QSqlDatabase *db)
-{
-  if(db->isOpenError() && db->lastError().type() != QSqlError::NoError)
+void MainWindow::checkDb(int idx) {
+  QSqlDatabase db = DbManager::connections()[idx].db;
+  if(db.isOpenError() && db.lastError().type() != QSqlError::NoError)
     QMessageBox::critical(this,
                           tr("Error"),
                           tr("Unable to connect :\n%1")
-                          .arg(db->lastError().text()));
+                          .arg(db.lastError().text()));
 }
 
 /**
@@ -558,17 +558,17 @@ void MainWindow::setupConnections()
   /*
    * DbTreeView
    */
-  connect(dbTreeView, SIGNAL(schemaSelected(QSqlDatabase*,QString)),
-          this, SLOT(openSchema(QSqlDatabase*,QString)));
+  connect(dbTreeView, SIGNAL(schemaSelected(int,QString)),
+          this, SLOT(openSchema(int,QString)));
   connect(dbTreeView, SIGNAL(itemSelected()), this, SLOT(updateDbActions()));
-  connect(dbTreeView, SIGNAL(tableSelected(QSqlDatabase*,QString)),
-          this, SLOT(openTable(QSqlDatabase*,QString)));
+  connect(dbTreeView, SIGNAL(tableSelected(int,QString)),
+          this, SLOT(openTable(int,QString)));
 
   /*
    * DbManager
    */
-  connect(DbManager::instance(), SIGNAL(statusChanged(QSqlDatabase*)),
-          this, SLOT(checkDb(QSqlDatabase*)));
+  connect(DbManager::instance(), SIGNAL(statusChanged(int)),
+          this, SLOT(checkDb(int)));
   connect(DbManager::model(), SIGNAL(dataChanged(QModelIndex,QModelIndex)),
           this, SLOT(reloadDbList()));
 

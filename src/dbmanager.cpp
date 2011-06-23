@@ -133,7 +133,7 @@ int DbManagerPrivate::addDatabase(QString driver, QString host, QString user,
 
   if (w) {
     /// @todo reprendre les Wrapper
-    co.wrapper = w->newInstance(&co.db);
+    co.wrapper = w->newInstance(co.db);
   }
 
   m_connections << co;

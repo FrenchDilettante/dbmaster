@@ -9,10 +9,7 @@
 bool PsqlWrapper::informationSchemaHidden = true;
 bool PsqlWrapper::pgCatalogHidden = true;
 
-PsqlWrapper::PsqlWrapper(QSqlDatabase *db)
-  : QObject(NULL) {
-  m_db = db;
-
+PsqlWrapper::PsqlWrapper() {
   QSettings s;
   s.beginGroup(plid());
   informationSchemaHidden = s.value("informationSchemaHidden", true).toBool();
@@ -22,13 +19,15 @@ PsqlWrapper::PsqlWrapper(QSqlDatabase *db)
   m_configDialog = new PsqlConfig(this);
 }
 
+PsqlWrapper::PsqlWrapper(QSqlDatabase db)
+  : QObject(NULL) {
+  m_db = db;
+
+  PsqlWrapper();
+}
+
 QList<SqlColumn> PsqlWrapper::columns(QString table) {
   QList<SqlColumn> cols;
-
-  if (!m_db) {
-    return cols;
-  }
-
 
   QString sql;
   sql += "SELECT c.column_name, c.is_nullable, c.data_type, c.column_default ";
@@ -36,13 +35,18 @@ QList<SqlColumn> PsqlWrapper::columns(QString table) {
   sql += "INNER JOIN INFORMATION_SCHEMA.TABLES T ";
   sql +=   "ON C.TABLE_NAME = T.TABLE_NAME ";
   sql +=      "AND C.TABLE_SCHEMA = T.TABLE_SCHEMA ";
-  sql +=   "WHERE t.table_catalog='" + m_db->databaseName() + "' ";
+  sql +=   "WHERE t.table_catalog='" + m_db.databaseName() + "' ";
   sql +=     "AND t.table_name = '" + table + "' ";
   sql +=   "ORDER BY ordinal_position ";
 
-  QSqlQuery query(*m_db);
+  if (!m_db.isOpen()) {
+    m_db.open();
+  }
+
+  QSqlQuery query(m_db);
   if (!query.exec(sql)) {
     qDebug() << query.lastError().text();
+    m_db.close();
     return cols;
   }
 
@@ -57,6 +61,7 @@ QList<SqlColumn> PsqlWrapper::columns(QString table) {
   }
 
   if (cols.size() == 0) {
+    m_db.close();
     return cols;
   }
 
@@ -68,12 +73,13 @@ QList<SqlColumn> PsqlWrapper::columns(QString table) {
   sql += "FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE U ";
   sql += "INNER JOIN INFORMATION_SCHEMA.TABLE_CONSTRAINTS T ";
   sql += "USING (TABLE_CATALOG, TABLE_SCHEMA, TABLE_NAME, CONSTRAINT_NAME) ";
-  sql += "WHERE T.CONSTRAINT_CATALOG = '" + m_db->databaseName() + "' ";
+  sql += "WHERE T.CONSTRAINT_CATALOG = '" + m_db.databaseName() + "' ";
   sql +=   "AND U.TABLE_NAME = '" + table + "' ";
   sql +=   "AND CONSTRAINT_TYPE = 'PRIMARY KEY' ";
 
   if (!query.exec(sql)) {
     qDebug() << query.lastError().text();
+    m_db.close();
     return cols;
   }
 
@@ -91,13 +97,17 @@ QList<SqlColumn> PsqlWrapper::columns(QString table) {
       qDebug() << "Unable to find" << column << "in table" << table;
     }
   }
+
+  m_db.close();
+
+  return cols;
 }
 
 SqlWrapper::WrapperFeatures PsqlWrapper::features() {
   return ODBC | Schemas;
 }
 
-SqlWrapper* PsqlWrapper::newInstance(QSqlDatabase *db) {
+SqlWrapper* PsqlWrapper::newInstance(QSqlDatabase db) {
   return new PsqlWrapper(db);
 }
 
@@ -115,20 +125,21 @@ void PsqlWrapper::save() {
 SqlSchema PsqlWrapper::schema(QString sch) {
   SqlSchema schema;
 
-  if (!m_db) {
-    return schema;
-  }
-
   QString sql;
   sql += "SELECT '" + sch + "', t.table_name, t.table_type ";
   sql += "FROM INFORMATION_SCHEMA.TABLES T ";
-  sql += "WHERE t.table_catalog='" + m_db->databaseName() + "' ";
+  sql += "WHERE t.table_catalog='" + m_db.databaseName() + "' ";
   sql +=   "AND t.table_schema='" + sch + "' ";
   sql += "ORDER BY table_name, ordinal_position ";
 
-  QSqlQuery query(*m_db);
+  if (!m_db.isOpen()) {
+    m_db.open();
+  }
+
+  QSqlQuery query(m_db);
   if (!query.exec(sql)) {
     qDebug() << query.lastError().text();
+    m_db.close();
     return schema;
   }
 
@@ -149,6 +160,7 @@ SqlSchema PsqlWrapper::schema(QString sch) {
     schema.tables << t;
   }
 
+  m_db.close();
   return schema;
 }
 
@@ -158,10 +170,6 @@ SqlSchema PsqlWrapper::schema(QString sch) {
 QList<SqlSchema> PsqlWrapper::schemas() {
   QList<SqlSchema> schemas;
 
-  if (!m_db) {
-    return schemas;
-  }
-
   QString sql;
   sql += "SELECT t.table_schema, t.table_name, t.table_type, c.column_name, ";
   sql += "c.is_nullable, c.data_type, c.column_default ";
@@ -169,7 +177,7 @@ QList<SqlSchema> PsqlWrapper::schemas() {
   sql += "INNER JOIN INFORMATION_SCHEMA.TABLES T ";
   sql +=   "ON C.TABLE_NAME = T.TABLE_NAME ";
   sql +=      "AND C.TABLE_SCHEMA = T.TABLE_SCHEMA ";
-  sql +=   "WHERE t.table_catalog='" + m_db->databaseName() + "' ";
+  sql +=   "WHERE t.table_catalog='" + m_db.databaseName() + "' ";
   if (informationSchemaHidden) {
     sql +=   "AND t.table_schema <> 'information_schema' ";
   }
@@ -178,9 +186,14 @@ QList<SqlSchema> PsqlWrapper::schemas() {
   }
   sql +=   "ORDER BY table_schema, table_name, ordinal_position ";
 
-  QSqlQuery query(*m_db);
+  if (!m_db.isOpen()) {
+    m_db.open();
+  }
+
+  QSqlQuery query(m_db);
   if (!query.exec(sql)) {
     qDebug() << query.lastError().text();
+    m_db.open();
     return schemas;
   }
 
@@ -247,6 +260,7 @@ QList<SqlSchema> PsqlWrapper::schemas() {
   }
 
   if (tableCount == 0) {
+    m_db.open();
     return schemas;
   }
 
@@ -259,12 +273,13 @@ QList<SqlSchema> PsqlWrapper::schemas() {
   sql += "FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE U ";
   sql += "INNER JOIN INFORMATION_SCHEMA.TABLE_CONSTRAINTS T ";
   sql += "USING (TABLE_CATALOG, TABLE_SCHEMA, TABLE_NAME, CONSTRAINT_NAME) ";
-  sql += "WHERE T.CONSTRAINT_CATALOG = '" + m_db->databaseName() + "' ";
+  sql += "WHERE T.CONSTRAINT_CATALOG = '" + m_db.databaseName() + "' ";
   sql +=   "AND CONSTRAINT_TYPE = 'PRIMARY KEY' ";
   sql += "ORDER BY TABLE_SCHEMA, TABLE_NAME";
 
   if (!query.exec(sql)) {
     qDebug() << query.lastError().text();
+    m_db.open();
     return schemas;
   }
 
@@ -324,15 +339,12 @@ QList<SqlSchema> PsqlWrapper::schemas() {
     }
   }
 
+  m_db.open();
   return schemas;
 }
 
 SqlTable PsqlWrapper::table(QString t) {
   SqlTable table;
-
-  if (!m_db) {
-    return table;
-  }
 
   QString sch = "public";
   if (t.contains(".")) {
@@ -347,16 +359,21 @@ SqlTable PsqlWrapper::table(QString t) {
   sql += "INNER JOIN INFORMATION_SCHEMA.TABLES T ";
   sql +=   "ON C.TABLE_NAME = T.TABLE_NAME ";
   sql +=      "AND C.TABLE_SCHEMA = T.TABLE_SCHEMA ";
-  sql +=   "WHERE t.table_catalog='" + m_db->databaseName() + "' ";
+  sql +=   "WHERE t.table_catalog='" + m_db.databaseName() + "' ";
   if (sch.length() > 0) {
     sql +=   "AND t.table_schema = '" + sch + "'";
   }
   sql +=     "AND t.table_name = '" + t + "' ";
   sql +=   "ORDER BY ordinal_position ";
 
-  QSqlQuery query(*m_db);
+  if (!m_db.isOpen()) {
+    m_db.open();
+  }
+
+  QSqlQuery query(m_db);
   if (!query.exec(sql)) {
     qDebug() << query.lastError().text();
+    m_db.open();
     return table;
   }
 
@@ -383,6 +400,7 @@ SqlTable PsqlWrapper::table(QString t) {
   }
 
   if (table.columns.size() == 0) {
+    m_db.open();
     return table;
   }
 
@@ -394,13 +412,14 @@ SqlTable PsqlWrapper::table(QString t) {
   sql += "FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE U ";
   sql += "INNER JOIN INFORMATION_SCHEMA.TABLE_CONSTRAINTS T ";
   sql += "USING (TABLE_CATALOG, TABLE_SCHEMA, TABLE_NAME, CONSTRAINT_NAME) ";
-  sql += "WHERE T.CONSTRAINT_CATALOG = '" + m_db->databaseName() + "' ";
+  sql += "WHERE T.CONSTRAINT_CATALOG = '" + m_db.databaseName() + "' ";
   sql +=   "AND U.TABLE_SCHEMA = '" + sch + "' ";
   sql +=   "AND U.TABLE_NAME = '" + t + "' ";
   sql +=   "AND CONSTRAINT_TYPE = 'PRIMARY KEY' ";
 
   if (!query.exec(sql)) {
     qDebug() << query.lastError().text();
+    m_db.open();
     return table;
   }
 
@@ -419,6 +438,7 @@ SqlTable PsqlWrapper::table(QString t) {
     }
   }
 
+  m_db.open();
   return table;
 }
 
@@ -426,20 +446,21 @@ QList<SqlTable> PsqlWrapper::tables(QString schema) {
 
   QList<SqlTable> tables;
 
-  if (!m_db) {
-    return tables;
-  }
-
   QString sql;
   sql += "SELECT table_schema, table_name, table_type ";
   sql += "FROM INFORMATION_SCHEMA.TABLES ";
-  sql +=   "WHERE table_catalog='" + m_db->databaseName() + "' ";
+  sql +=   "WHERE table_catalog='" + m_db.databaseName() + "' ";
   sql +=     "AND table_schema = '" + schema + "' ";
   sql +=   "ORDER BY table_schema, table_name ";
 
-  QSqlQuery query(*m_db);
+  if (!m_db.isOpen()) {
+    m_db.open();
+  }
+
+  QSqlQuery query(m_db);
   if (!query.exec(sql)) {
     qDebug() << query.lastError().text();
+    m_db.close();
     return tables;
   }
 
@@ -456,6 +477,7 @@ QList<SqlTable> PsqlWrapper::tables(QString schema) {
     tables << t;
   }
 
+  m_db.close();
   return tables;
 }
 
