@@ -142,12 +142,10 @@ public:
   static QString        dbTitle(QSqlDatabase *db);
   static QStandardItemModel*
                         driverModel();
-  static QString        genConnectionName();
   static QSqlDatabase*
                         getDatabase(int n);
   static QList<QSqlDatabase*>
                         getDbList();
-  static QStringList    getDbNames(bool);
   static void           init();
   static DbManagerPrivate *instance()   { return m_instance;    };
   static int            lastIndex;
@@ -156,20 +154,16 @@ public:
   static void           open(int, QString=QString::null);
   /// @deprecated
   static void           open(QSqlDatabase *db, QString pswd=QString::null);
-  static void           openList();
   static void           refreshModelIndex(QModelIndex index);
   /// @deprecated
   static void           refreshModelItem(QSqlDatabase *db);
   static void           removeDatabase(int);
-  static void           saveList();
   /// @deprecated
   static SqlSchema      schema(QSqlDatabase *db, QString schema);
   /// @deprecated
   static void           setAlias(QSqlDatabase *db, QString alias);
-  static void           setDatabase(int, QSqlDatabase);
   /// @deprecated
   static SqlTable       table(QSqlDatabase *db, QString tbl);
-  static void           terminate();
   /// @deprecated
   static void           toggle(QSqlDatabase *db);
   /// @deprecated

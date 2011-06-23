@@ -863,20 +863,12 @@ QStandardItemModel *DbManager::driverModel() {
   return m_instance->driverModel();
 }
 
-QString DbManager::genConnectionName() {
-  return m_instance->genConnectionName();
-}
-
 QSqlDatabase* DbManager::getDatabase(int n) {
   return m_instance->getDatabase(n);
 }
 
 QList<QSqlDatabase*> DbManager::getDbList() {
   return m_instance->getDbList();
-}
-
-QStringList DbManager::getDbNames(bool showHosts) {
-  return m_instance->getDbNames(showHosts);
 }
 
 void DbManager::init() {
@@ -891,10 +883,6 @@ void DbManager::open(QSqlDatabase *db, QString pswd) {
   m_instance->open(db, pswd);
 }
 
-void DbManager::openList() {
-  m_instance->openList();
-}
-
 void DbManager::refreshModelIndex(QModelIndex index) {
   m_instance->refreshModelIndex(index);
 }
@@ -907,10 +895,6 @@ void DbManager::removeDatabase(int index) {
   m_instance->removeDatabase(index);
 }
 
-void DbManager::saveList() {
-  m_instance->saveList();
-}
-
 SqlSchema DbManager::schema(QSqlDatabase *db, QString schema) {
   return m_instance->schema(db, schema);
 }
@@ -919,16 +903,8 @@ void DbManager::setAlias(QSqlDatabase *db, QString alias) {
   m_instance->setAlias(db, alias);
 }
 
-void DbManager::setDatabase(int nb, QSqlDatabase db) {
-  m_instance->setDatabase(nb, db);
-}
-
 SqlTable DbManager::table(QSqlDatabase *db, QString tbl) {
   return m_instance->table(db, tbl);
-}
-
-void DbManager::terminate() {
-  m_instance->terminate();
 }
 
 void DbManager::toggle(QSqlDatabase *db) {
