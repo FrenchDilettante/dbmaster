@@ -248,6 +248,10 @@ void DbManagerPrivate::closeAll() {
   foreach (Connection c, m_connections) {
     c.db.close();
   }
+
+  foreach (QString n, QSqlDatabase::connectionNames()) {
+    QSqlDatabase::removeDatabase(n);
+  }
 }
 
 /**
@@ -315,6 +319,16 @@ void DbManagerPrivate::openList()
   s.endArray();
 }
 
+int DbManagerPrivate::parentIdx(QModelIndex index) {
+  while (index != QModelIndex()) {
+    if (index.data(Qt::UserRole) == DbManager::DbItem)
+      return index.row();
+    index = index.parent();
+  }
+
+  throw "Bad index";
+}
+
 void DbManagerPrivate::refreshModel() {
   for (int i=0; i<m_connections.size(); i++) {
     refreshModelItem(i);
@@ -326,10 +340,10 @@ void DbManagerPrivate::refreshModelIndex(QModelIndex index) {
     return;
   }
 
-  int idx = index.row();
+  int idx = parentIdx(index);
   checkDbIndex(idx);
 
-  QStandardItem *it = m_connections[idx].item;
+  QStandardItem *it = m_model->itemFromIndex(index);
 
   SqlWrapper *wrapper = m_connections[idx].wrapper;
 

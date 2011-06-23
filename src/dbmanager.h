@@ -96,7 +96,7 @@ private:
   void                    checkDbIndex(int idx);
   QStandardItem*          columnsItem(QList<SqlColumn> columns);
   QString                 dbToolTip(QSqlDatabase db);
-  QSqlDatabase*           parentDb(QModelIndex index);
+  int                     parentIdx(QModelIndex index);
   void                    setupModels();
   QStandardItem*          schemaItem(SqlSchema schema);
   QStandardItem*          tablesItem(QList<SqlTable> tables,

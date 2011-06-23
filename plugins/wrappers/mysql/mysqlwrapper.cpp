@@ -35,6 +35,7 @@ QList<SqlColumn> MysqlWrapper::columns(QString table) {
   if (!m_db.isOpen()) {
     m_db.open();
   }
+
   QSqlQuery query(m_db);
   if (!query.exec(sql)) {
     qDebug() << query.lastError().text();

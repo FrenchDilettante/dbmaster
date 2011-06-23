@@ -77,8 +77,7 @@ void QueryEditorWidget::checkDbOpen() {
   editor->reloadContext(tables, fields);
 }
 
-void QueryEditorWidget::closeEvent(QCloseEvent *event)
-{
+void QueryEditorWidget::closeEvent(QCloseEvent *event) {
   if(isSaved())
     event->accept();
   else {

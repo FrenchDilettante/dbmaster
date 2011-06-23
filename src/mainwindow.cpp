@@ -281,8 +281,8 @@ QueryEditorWidget* MainWindow::newQuery()
           this, SLOT(refreshTab()));
   connect(w, SIGNAL(fileChanged(QString)), this, SLOT(addRecentFile(QString)));
   connect(w, SIGNAL(modificationChanged(bool)), this, SLOT(refreshTab()));
-  connect(w, SIGNAL(tableRequested(QSqlDatabase*,QString)),
-          this, SLOT(openTable(QSqlDatabase*,QString)));
+  connect(w, SIGNAL(tableRequested(int,QString)),
+          this, SLOT(openTable(int,QString)));
 
   return w;
 }
@@ -717,7 +717,7 @@ void MainWindow::undo() {
 
 void MainWindow::updateDbActions() {
   bool select = dbTreeView->isDbSelected();
-  bool dbOpen = DbManager::isOpen(dbTreeView->currentDbIdx());
+  bool dbOpen = select && DbManager::isOpen(dbTreeView->currentDbIdx());
 
   actionEditConnection->setEnabled(select);
   actionRefreshConnection->setEnabled(select);
