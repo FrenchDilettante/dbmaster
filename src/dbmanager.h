@@ -27,7 +27,7 @@
  * Classe interne, singleton de DbManager.
  * ! À ne pas appeler en direct !
  */
-class DbManagerPrivate : QObject {
+class DbManagerPrivate : public QObject {
 Q_OBJECT
 public:
   enum ConnectionStatus {
@@ -144,12 +144,15 @@ public:
   static QString        alias(int idx);
   static void           close(int idx);
   static void           closeAll();
+  static QList<DbManagerPrivate::Connection> connections();
   static QSqlDatabase   db(int idx);
   static QString        dbTitle(int idx);
   static QStandardItemModel*
                         driverModel();
   static void           init();
   static DbManagerPrivate *instance()   { return m_instance;    };
+  static bool           isClosed(int idx);
+  static bool           isOpen(int idx);
   static int            lastIndex;
   static QStandardItemModel*
                         model()     { return m_instance->model();   };

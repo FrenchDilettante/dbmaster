@@ -25,13 +25,13 @@ Q_OBJECT
 public:
   DbTreeView(QWidget *parent = 0);
 
-  QSqlDatabase *currentDb();
+  int  currentDbIdx();
   bool isDbSelected();
 
 signals:
   void itemSelected();
-  void schemaSelected(QSqlDatabase*, QString);
-  void tableSelected(QSqlDatabase*, QString);
+  void schemaSelected(int, QString);
+  void tableSelected(int, QString);
 
 public slots:
   void connectCurrent();
@@ -43,7 +43,7 @@ private:
   void contextMenuEvent(QContextMenuEvent *event);
   void mouseDoubleClickEvent(QMouseEvent *event);
   void mousePressEvent(QMouseEvent *event);
-  QSqlDatabase *parentDb(QModelIndex index);
+  int parentIdx(QModelIndex index);
   void selectionChanged(const QItemSelection &selected,
                         const QItemSelection &deselected);
   void setupActions();

@@ -15,19 +15,24 @@
 #include "tablewidget.h"
 
 TableWidget::TableWidget(QWidget *parent)
-  : AbstractTabWidget(parent)
-{
+  : AbstractTabWidget(parent) {
   setupUi(this);
 
   setupWidgets();
 }
 
-TableWidget::TableWidget(QString table, QSqlDatabase *db, QWidget *parent)
-  : AbstractTabWidget(parent)
-{
+TableWidget::TableWidget(QString table, int idx, QWidget *parent)
+  : AbstractTabWidget(parent) {
   setupUi(this);
   setupWidgets();
-  setTable(table, db);
+  db = DbManager::db(idx);
+  setTable(idx, table);
+}
+
+TableWidget::~TableWidget() {
+  if (db.isOpen()) {
+    db.close();
+  }
 }
 
 QIcon TableWidget::icon()
@@ -39,29 +44,29 @@ QString TableWidget::id()
 {
   return QString("t %1 on %2")
       .arg(m_table)
-      .arg(m_db->connectionName());
+      .arg(db.connectionName().split("_")[0]);
 }
 
 void TableWidget::refresh()
 {
-  if(!m_db->isOpen())
+  if(!db.isOpen())
     emit closeRequested();
 }
 
 void TableWidget::reload() {
-  if(!m_db->isOpen())
-    return;
+  if(!db.isOpen())
+    db.open();
 
-  model = new QSqlTableModel(this, *m_db);
+  model = new QSqlTableModel(this, db);
   model->setTable(m_table);
 
   start();
 }
 
 void TableWidget::run() {
-  if(!m_db->tables(QSql::Tables).contains(m_table)
-    && !m_db->tables(QSql::Views).contains(m_table)
-    && !m_db->tables(QSql::SystemTables).contains(m_table))   {
+  if(!db.tables(QSql::Tables).contains(m_table)
+    && !db.tables(QSql::Views).contains(m_table)
+    && !db.tables(QSql::SystemTables).contains(m_table))   {
     QMessageBox::critical(this,
                           tr("Error"),
                           tr("Unable to open the table %1. ").append(
@@ -72,19 +77,21 @@ void TableWidget::run() {
   }
 
   if (model->select()) {
-    tableInfo = DbManager::table(m_db, m_table);
+    tableInfo = DbManager::table(dbIdx, m_table);
     emit ready();
   } else {
     emit error(model->lastError());
   }
 }
 
-void TableWidget::setTable( QString table, QSqlDatabase *db )
-{
-  this->m_table = table;
-  this->m_db = db;
+void TableWidget::setTable(int idx, QString table) {
+  if (this->db.isOpen()) {
+    this->db.close();
+  }
 
-//  reload();
+  this->m_table = table;
+  this->dbIdx = idx;
+  this->db = DbManager::db(idx);
 }
 
 void TableWidget::setupWidgets() {

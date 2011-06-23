@@ -6,15 +6,13 @@
 #include <QDebug>
 #include <QStandardItem>
 
-SchemaWidget::SchemaWidget(QString schema, QSqlDatabase *db, QWidget *parent)
+SchemaWidget::SchemaWidget(QString schema, int idx, QWidget *parent)
   : AbstractTabWidget(parent) {
   setupUi(this);
 
   this->m_schema = schema;
-  this->m_db = db;
-
-//  tableTree->header()->setResizeMode(0, QHeaderView::Stretch);
-//  viewTree->header()->setResizeMode(0, QHeaderView::Stretch);
+  this->dbIdx = idx;
+  this->m_db = DbManager::db(idx);
 }
 
 QIcon SchemaWidget::icon() {
@@ -24,18 +22,18 @@ QIcon SchemaWidget::icon() {
 QString SchemaWidget::id() {
   return QString("s %1 on %2")
             .arg(m_schema)
-            .arg(m_db->connectionName());
+            .arg(dbIdx);
 }
 
 void SchemaWidget::on_tableTree_itemDoubleClicked(QTreeWidgetItem *item,
                                                   int col) {
   QString table = prefix.length() == 0 ? "" : prefix + ".";
   table += item->text(0);
-  emit tableRequested(m_db, table);
+  emit tableRequested(dbIdx, table);
 }
 
 void SchemaWidget::reload() {
-  SqlSchema s = DbManager::schema(m_db, m_schema);
+  SqlSchema s = DbManager::schema(dbIdx, m_schema);
   schemaEdit->setText(s.name);
 
   prefix = s.defaultSchema ? "" : s.name;

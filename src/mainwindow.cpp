@@ -350,11 +350,11 @@ void MainWindow::openQuery(QString file) {
 /**
  * Ouvre un schéma dans l'onglet associé
  */
-void MainWindow::openSchema(QSqlDatabase *db, QString schema) {
+void MainWindow::openSchema(int idx, QString schema) {
   // ID unique pour retrouver facilement le schéma ouvert
   QString id = QString("s %1 on %2")
                 .arg(schema)
-                .arg(db->connectionName());
+                .arg(idx);
 
   // On vérifie si le schéma demandé n'est pas déjà ouvert
   int index = -1;
@@ -368,7 +368,7 @@ void MainWindow::openSchema(QSqlDatabase *db, QString schema) {
   if (index >= 0) {
     tabWidget->setCurrentIndex(index);
   } else {
-    SchemaWidget *tab = new SchemaWidget(schema, db, this);
+    SchemaWidget *tab = new SchemaWidget(schema, idx, this);
     index = tabWidget->addTab(tab, tab->icon(), schema);
     tabWidget->setCurrentIndex(index);
     connect(tab, SIGNAL(closeRequested()), this, SLOT(closeSender()));
@@ -384,11 +384,11 @@ void MainWindow::openSchema(QSqlDatabase *db, QString schema) {
  * @param db
  *          concerned database
  */
-void MainWindow::openTable(QSqlDatabase *db, QString table) {
+void MainWindow::openTable(int idx, QString table) {
   // generates an unique ID for the table
   QString id = QString("t %1 on %2")
                .arg(table)
-               .arg(db->connectionName());
+               .arg(idx);
 
   // First of all, the table may be already openned. We're gonna check it.
   int index = -1;
@@ -404,7 +404,7 @@ void MainWindow::openTable(QSqlDatabase *db, QString table) {
   if (index >= 0) {
     tabWidget->setCurrentIndex(index);
   } else {
-    TableWidget *view = new TableWidget(table, db, this);
+    TableWidget *view = new TableWidget(table, idx, this);
     index = tabWidget->addTab(view, view->icon(), table);
     tabWidget->setCurrentIndex(index);
     connect(view, SIGNAL(closeRequested()), this, SLOT(closeSender()));
@@ -717,8 +717,7 @@ void MainWindow::undo() {
 
 void MainWindow::updateDbActions() {
   bool select = dbTreeView->isDbSelected();
-  QSqlDatabase *currentDb = dbTreeView->currentDb();
-  bool dbOpen = currentDb && currentDb->isOpen();
+  bool dbOpen = DbManager::isOpen(dbTreeView->currentDbIdx());
 
   actionEditConnection->setEnabled(select);
   actionRefreshConnection->setEnabled(select);

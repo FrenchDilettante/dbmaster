@@ -39,6 +39,7 @@ public:
   Q_DECLARE_FLAGS(WrapperFeatures, WrapperFeature)
 
 
+  /// @deprecated
   virtual SqlWrapper* newInstance(QSqlDatabase *db) =0;
 
   virtual QList<SqlColumn> columns(QString table) { return QList<SqlColumn>(); };

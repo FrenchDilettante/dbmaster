@@ -27,13 +27,14 @@ Q_OBJECT
 
 public:
   TableWidget(QWidget* =0);
-  TableWidget(QString table, QSqlDatabase *db, QWidget *parent =0);
+  TableWidget(QString table, int idx, QWidget *parent =0);
+  ~TableWidget();
 
   QIcon     icon();
   QString   id();
   void      refresh();
   void      reload();
-  void      setTable( QString, QSqlDatabase* );
+  void      setTable(int idx, QString table);
   QString   table();
 
 signals:
@@ -44,7 +45,8 @@ protected:
   void      run();
   void      setupWidgets();
 
-  QSqlDatabase *m_db;
+  int       dbIdx;
+  QSqlDatabase db;
   QString   m_table;
   SqlTable  tableInfo;
   QSqlTableModel *model;

@@ -54,28 +54,22 @@ AbstractTabWidget::Actions QueryEditorWidget::availableActions()
   return ret;
 }
 
-void QueryEditorWidget::checkDbOpen()
-{
+void QueryEditorWidget::checkDbOpen() {
   DbManager::lastIndex = dbChooser->currentIndex();
 
-  QSqlDatabase *db = DbManager::getDatabase(dbChooser->currentIndex());
-  if(db == NULL)
-  {
-    runButton->setEnabled(false);
-    return;
-  }
+  QSqlDatabase db = DbManager::db(dbChooser->currentIndex());
 
-  runButton->setEnabled(db->isOpen());
+  runButton->setEnabled(db.isOpen());
 
-  if(!db->isOpen() || db->driverName().startsWith("QOCI"))
+  // Vieux hack tout moisi
+  if(!db.isOpen() || db.driverName().startsWith("QOCI"))
     return;
 
   QMultiMap<QString, QString> fields;
   QSqlRecord r;
-  QStringList tables = db->tables();
-  foreach(QString t, tables)
-  {
-    r = db->record(t);
+  QStringList tables = db.tables();
+  foreach (QString t, tables)   {
+    r = db.record(t);
     for(int i=0; i<r.count(); i++)
       fields.insert(t, r.fieldName(i));
   }
@@ -284,8 +278,14 @@ void QueryEditorWidget::reloadFile()
 void QueryEditorWidget::run() {
   time_t startTime = time(NULL);
 
-  query = QSqlQuery(editor->toPlainText(),
-                    *DbManager::getDatabase(dbChooser->currentIndex()));
+  if (db.isOpen()) {
+    db.close();
+  }
+
+  db = DbManager::db(dbChooser->currentIndex());
+  db.open();
+
+  query = QSqlQuery(editor->toPlainText(), db);
   model->setQuery(query);
 
   time_t endTime = time(NULL);

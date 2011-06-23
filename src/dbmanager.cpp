@@ -367,12 +367,15 @@ void DbManagerPrivate::refreshModelItem(int idx) {
 
   QStandardItem *item = m_connections[idx].item;
   item->setIcon(IconManager::get("database_refresh"));
-  item->setToolTip(dbToolTip(*db));
+  item->setToolTip(dbToolTip(m_connections[idx].db));
 
   QStandardItem *schemaItem = NULL;
 
+  QSqlDatabase db = this->db(idx);
+  db.open();
+
   QModelIndex index = m_model->indexFromItem(item);
-  if(db->isOpen()) {
+  if (m_connections[idx].status == Open) {
 
     while (m_model->rowCount(index) > 0) {
       m_model->removeRow(0, index);
@@ -401,7 +404,7 @@ void DbManagerPrivate::refreshModelItem(int idx) {
       }
     } else {
       QList<SqlTable> tables;
-      foreach (QString s, db->tables(QSql::Tables)) {
+      foreach (QString s, db.tables(QSql::Tables)) {
         SqlTable t;
         t.name = s;
         t.type = Table;
@@ -411,7 +414,7 @@ void DbManagerPrivate::refreshModelItem(int idx) {
       item->appendRow(tablesItem(tables));
 
       QList<SqlTable> views;
-      foreach (QString s, db->tables(QSql::Views)) {
+      foreach (QString s, db.tables(QSql::Views)) {
         SqlTable t;
         t.name = s;
         t.type = ViewTable;
@@ -446,7 +449,7 @@ void DbManagerPrivate::saveList() {
   QSettings s;
   s.beginWriteArray("dblist", m_connections.size());
 
-  for (int i=O; i<m_connections.size(); i++) {
+  for (int i=0; i<m_connections.size(); i++) {
     QSqlDatabase db = m_connections[i].db;
     i++;
     s.setArrayIndex(i);
@@ -582,7 +585,9 @@ SqlTable DbManagerPrivate::table(int idx, QString tbl) {
   if (w) {
     table = w->table(tbl);
   } else {
-    QSqlRecord r = db->record(tbl);
+    QSqlDatabase db = this->db(idx);
+    db.open();
+    QSqlRecord r = db.record(tbl);
     for (int i=0; i<r.count(); i++) {
       SqlColumn c;
       c.permitsNull = false;
@@ -590,6 +595,7 @@ SqlTable DbManagerPrivate::table(int idx, QString tbl) {
       c.name = r.fieldName(i);
       table.columns << c;
     }
+    db.close();
   }
 
   return table;
@@ -720,12 +726,16 @@ void DbManager::closeAll() {
   m_instance->closeAll();
 }
 
-QSqlDatabase* DbManager::db(int idx) {
+QList<DbManagerPrivate::Connection> DbManager::connections() {
+  return m_instance->connections();
+}
+
+QSqlDatabase DbManager::db(int idx) {
   return m_instance->db(idx);
 }
 
 QString DbManager::dbTitle(int idx) {
-  return DbManagerPrivate::dbTitle(idx);
+  return DbManagerPrivate::dbTitle(connections()[idx].db);
 }
 
 QStandardItemModel *DbManager::driverModel() {
@@ -736,12 +746,16 @@ void DbManager::init() {
   m_instance->init();
 }
 
-void DbManager::open(int nb, QString pswd) {
-  m_instance->open(nb, pswd);
+bool DbManager::isClosed(int idx) {
+  return connections()[idx].status == DbManagerPrivate::Closed;
 }
 
-void DbManager::open(int idx, QString pswd) {
-  m_instance->open(idx, pswd);
+bool DbManager::isOpen(int idx) {
+  return connections()[idx].status == DbManagerPrivate::Open;
+}
+
+void DbManager::open(int nb, QString pswd) {
+  m_instance->open(nb, pswd);
 }
 
 void DbManager::refreshModelIndex(QModelIndex index) {

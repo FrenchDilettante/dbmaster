@@ -62,7 +62,7 @@ signals:
   void actionAvailable(AbstractTabWidget::Actions);
   void closeRequested();
   void modificationChanged(bool);
-  void tableRequested(QSqlDatabase *db, QString table);
+  void tableRequested(int idx, QString table);
 
 public slots:
   virtual void copy()                 {};

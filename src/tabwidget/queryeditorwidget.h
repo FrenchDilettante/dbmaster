@@ -69,6 +69,7 @@ private:
   void showEvent(QShowEvent *event);
 
   Actions               baseActions;
+  QSqlDatabase          db;
   QString               filePath;
   QSqlQueryModel       *model;
   int                   oldCount;

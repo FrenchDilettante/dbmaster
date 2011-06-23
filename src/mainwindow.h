@@ -45,8 +45,8 @@ public slots:
   QueryEditorWidget*  newQuery();
   void openQuery();
   void openQuery(QString file);
-  void openSchema(QSqlDatabase *db, QString schema);
-  void openTable(QSqlDatabase *db, QString table);
+  void openSchema(int idx, QString schema);
+  void openTable(int idx, QString table);
   void refreshTab();
   void refreshRecent();
   void reloadDbList();

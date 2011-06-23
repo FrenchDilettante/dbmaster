@@ -38,17 +38,11 @@ void DbTreeView::addDatabase()
 }
 
 void DbTreeView::connectCurrent() {
-  QSqlDatabase *db = currentDb();
-  if (db && !db->isOpen()) {
-    DbManager::open(db);
-  }
+  DbManager::open(currentDbIdx());
 }
 
 void DbTreeView::disconnectCurrent() {
-  QSqlDatabase *db = currentDb();
-  if (db && db->isOpen()) {
-    DbManager::close(db);
-  }
+  DbManager::close(currentDbIdx());
 }
 
 void DbTreeView::contextMenuEvent(QContextMenuEvent *event)
@@ -59,6 +53,8 @@ void DbTreeView::contextMenuEvent(QContextMenuEvent *event)
   toggleAct->setVisible(false);
 
   if(selectedIndexes().size() == 1) {
+    int dbIdx = currentDbIdx();
+
     QModelIndex index = selectedIndexes()[0];
     if (index.data(Qt::UserRole).canConvert(QVariant::Int)) {
       switch(index.data(Qt::UserRole).toInt()) {
@@ -66,7 +62,7 @@ void DbTreeView::contextMenuEvent(QContextMenuEvent *event)
         editDbAct->setVisible(true);
         removeDbAct->setVisible(true);
         toggleAct->setVisible(true);
-        if(DbManager::getDatabase(index.row())->isOpen()) {
+        if (DbManager::isClosed(dbIdx)) {
           toggleAct->setText(tr("Disconnect"));
           toggleAct->setIcon(QIcon(":/img/connect_no.png"));
         } else {
@@ -106,12 +102,12 @@ void DbTreeView::contextMenuEvent(QContextMenuEvent *event)
   event->accept();
 }
 
-QSqlDatabase* DbTreeView::currentDb() {
+int DbTreeView::currentDbIdx() {
   if (selectedIndexes().size() != 1) {
-    return NULL;
+    return -1;
   }
 
-  return parentDb(selectedIndexes()[0]);
+  return selectedIndexes().at(0).row();
 }
 
 void DbTreeView::editCurrent() {
@@ -127,7 +123,7 @@ void DbTreeView::editCurrent() {
 
 bool DbTreeView::isDbSelected() {
   if (selectedIndexes().size() == 1) {
-    return parentDb(selectedIndexes()[0]);
+    return parentIdx(selectedIndexes()[0]) >= 0;
   } else {
     return false;
   }
@@ -155,7 +151,7 @@ void DbTreeView::mouseDoubleClickEvent(QMouseEvent *event) {
         break;
 
       case DbManager::SchemaItem:
-        emit schemaSelected(parentDb(index),
+        emit schemaSelected(parentIdx(index),
                             index.data(Qt::ToolTipRole).toString());
         break;
 
@@ -166,7 +162,7 @@ void DbTreeView::mouseDoubleClickEvent(QMouseEvent *event) {
         if (table.startsWith("public.")) {
           table = table.mid(7);
         }
-        emit tableSelected(parentDb(index), table);
+        emit tableSelected(parentIdx(index), table);
         break;
 
       case DbManager::DisplayItem:
@@ -198,8 +194,7 @@ void DbTreeView::onItemExpanded(const QModelIndex &index) {
  */
 void DbTreeView::on_model_dataChanged(const QModelIndex &topLeft,
                                       const QModelIndex &bottomRight) {
-  QSqlDatabase *_db = parentDb(topLeft);
-  if (_db && _db->isOpen()) {
+  if (DbManager::isOpen(parentIdx(topLeft))) {
     expand(topLeft);
   }
 }
@@ -213,7 +208,7 @@ void DbTreeView::removeCurrent() {
     while (index.parent() != QModelIndex()) {
       index = index.parent();
     }
-    if (DbManager::getDatabase(index.row())->isOpen()) {
+    if (DbManager::isOpen(currentDbIdx())) {
       QMessageBox::warning(this,
                            tr("Cannot remove"),
                            tr("You must close the database before remove it."));
@@ -224,24 +219,21 @@ void DbTreeView::removeCurrent() {
   }
 }
 
-QSqlDatabase *DbTreeView::parentDb(QModelIndex index)
-{
-  while(index != QModelIndex())
-  {
-    if(index.data(Qt::UserRole) == DbManager::DbItem)
-      return DbManager::getDatabase(index.row());
+int DbTreeView::parentIdx(QModelIndex index) {
+  while (index != QModelIndex()) {
+    if (index.data(Qt::UserRole) == DbManager::DbItem)
+      return index.row();
     index = index.parent();
   }
 
-  return NULL;
+  return -1;
 }
 
-void DbTreeView::refreshCurrent()
-{
+void DbTreeView::refreshCurrent() {
   if (selectedIndexes().size() == 0)
     return;
 
-  DbManager::refreshModelItem(parentDb(selectedIndexes()[0]));
+  DbManager::refreshModelItem(currentDbIdx());
 }
 
 void DbTreeView::selectionChanged(const QItemSelection &selected,
@@ -285,10 +277,6 @@ void DbTreeView::setupActions()
   contextMenu->addAction(removeDbAct);
 }
 
-void DbTreeView::toggleCurrentDb()
-{
-  if(selectedIndexes().size() == 1) {
-    QModelIndex index = selectedIndexes()[0];
-    DbManager::toggle(DbManager::getDatabase(index.row()));
-  }
+void DbTreeView::toggleCurrentDb() {
+  DbManager::toggle(currentDbIdx());
 }

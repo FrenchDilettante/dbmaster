@@ -40,9 +40,8 @@ private:
 
   NewDbWizard *addWzd;
   // link to the current db
-  QSqlDatabase *db;
+  QSqlDatabase db;
   // current db's id
-  int id;
   bool aliasOnCurrent;
 
 private slots:

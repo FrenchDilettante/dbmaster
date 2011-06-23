@@ -5,11 +5,10 @@
 
 #include "ui_schemawidget.h"
 
-class SchemaWidget : public AbstractTabWidget, private Ui::SchemaWidget
-{
+class SchemaWidget : public AbstractTabWidget, private Ui::SchemaWidget {
 Q_OBJECT
 public:
-  SchemaWidget(QString schema, QSqlDatabase *db, QWidget *parent = 0);
+  SchemaWidget(QString schema, int idx, QWidget *parent = 0);
 
   QIcon icon();
   QString id();
@@ -18,7 +17,8 @@ public slots:
   void reload();
 
 private:
-  QSqlDatabase *m_db;
+  int dbIdx;
+  QSqlDatabase m_db;
   QString m_schema;
   QString prefix;
 
