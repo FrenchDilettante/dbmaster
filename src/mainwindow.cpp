@@ -171,12 +171,16 @@ void MainWindow::closeEvent(QCloseEvent *event) {
   // tooltips activés ou non
   s.setValue("tooltips", tooltipButton->isChecked());
 
-  // où se situe le dock de connexion
-  s.setValue("maindock_visible", dockWidget->isVisible());
-  s.setValue("maindock_area", dockWidgetArea(dockWidget));
-  s.setValue("maindock_floating", dockWidget->isFloating());
-  s.setValue("maindock_position", dockWidget->pos());
-  s.setValue("maindock_size", dockWidget->size());
+  // positionnement des docks
+  foreach (QString name, dockMap.keys()) {
+    QString settingsName = name + "dock";
+    QDockWidget *dock = dockMap[name];
+    s.setValue(settingsName+"_visible", dock->isVisible());
+    s.setValue(settingsName+"_area", dockWidgetArea(dock));
+    s.setValue(settingsName+"_floating", dock->isFloating());
+    s.setValue(settingsName+"_position", dock->pos());
+    s.setValue(settingsName+"_size", dock->size());
+  }
 
   // Positionnement de la toolbar principale
   s.setValue("maintoolbar_area", toolBarArea(mainToolBar));
@@ -545,6 +549,7 @@ void MainWindow::setupConnections()
   connect(actionPreferences,  SIGNAL(triggered()),  confDial,      SLOT(exec()));
   connect(actionPreviousTab,  SIGNAL(triggered()),  this,          SLOT(previousTab()));
   connect(actionPrint,        SIGNAL(triggered()),  this,          SLOT(print()));
+  connect(actionPropertiesPanel, SIGNAL(triggered()), this,        SLOT(togglePropertiesPanel()));
   connect(actionRedo,         SIGNAL(triggered()),  this,          SLOT(redo()));
   connect(actionRefreshConnection, SIGNAL(triggered()),dbTreeView, SLOT(refreshCurrent()));
   connect(actionRemoveConnection, SIGNAL(triggered()), dbTreeView, SLOT(removeCurrent()));
@@ -586,18 +591,18 @@ void MainWindow::setupConnections()
   connect(tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
 }
 
-void MainWindow::setupWidgets()
-{
+void MainWindow::setupWidgets() {
+  // Instanciation dialogues
   aboutDial     = new AboutDialog(this);
   confDial      = new ConfigDialog(this);
   logDial       = LogDialog::instance();
   searchDialog  = new SearchDialog(this);
   //printDialog = new QPrintDialog(this);
 
+  // Fichiers récentes
   QAction *a;
   recentActions.clear();
-  for(int i=0; i<10; i++)
-  {
+  for(int i=0; i<10; i++) {
     a = new QAction(this);
     a->setVisible(false);
     connect(a, SIGNAL(triggered()), this, SLOT(openRecent()));
@@ -607,6 +612,7 @@ void MainWindow::setupWidgets()
   menuRecent_files->addSeparator();
   menuRecent_files->addAction(actionClearRecent);
 
+  // Association des actions type
   actionMap[AbstractTabWidget::CaseLower]   = actionLowerCase;
   actionMap[AbstractTabWidget::CaseUpper]   = actionUpperCase;
   actionMap[AbstractTabWidget::Copy]        = actionCopy;
@@ -620,7 +626,14 @@ void MainWindow::setupWidgets()
   actionMap[AbstractTabWidget::SelectAll]   = actionSelect_all;
   actionMap[AbstractTabWidget::Undo]        = actionUndo;
 
+  // Nommage des docks
+  dockMap["main"] = dockWidget;
+  dockMap["properties"] = propertiesDock;
+
+  // Ouverture des paramètres enregistrés
   QSettings s;
+
+  // Infos fenêtre principale (position, taille...)
   s.beginGroup("mainwindow");
   if(s.contains("size"))
     resize(s.value("size").toSize());
@@ -629,34 +642,43 @@ void MainWindow::setupWidgets()
   if(s.value("maximized", false).toBool())
     setWindowState(Qt::WindowMaximized);
 
-  addDockWidget((Qt::DockWidgetArea) s.value("maindock_area", 1).toInt(),
-                dockWidget);
-  dockWidget->setFloating(s.value("maindock_floating", false).toBool());
-  dockWidget->move(s.value("maindock_position").toPoint());
+  // Gestion des docks
+  foreach (QString name, dockMap.keys()) {
+    QString settingsName = name + "dock";
+    QDockWidget *dock = dockMap[name];
+    addDockWidget((Qt::DockWidgetArea) s.value(settingsName+"_area", 1).toInt(),
+                  dock);
+    dock->setFloating(s.value(settingsName+"_floating", false).toBool());
+    dock->move(s.value(settingsName+"_position").toPoint());
 
-  if (s.contains("maindock_size")) {
-    dockWidget->resize(s.value("maindock_size").toSize());
+    if (s.contains(settingsName+"_size")) {
+      dock->resize(s.value(settingsName+"_size").toSize());
+    }
+
+    dock->setVisible(s.value(settingsName+"_visible", true).toBool());
   }
 
-  dockWidget->setVisible(s.value("maindock_visible", true).toBool());
-
+  // Position des toolbar
+  // FIXME elle est où l'autre toolbar ?
   addToolBar((Qt::ToolBarArea) s.value("maintoolbar_area", 4).toInt(),
              mainToolBar);
 
+  // Affichage ou non des tooltips
   tooltipButton->setChecked(s.value("tooltips", true).toBool());
   tooltipFrame->setVisible(s.value("tooltips", true).toBool());
   s.endGroup();
 
+  // Rafraîchit la liste des fichiers récents
   int count = s.beginReadArray("recentfiles");
   recentFiles.clear();
-  for(int i=0; i<count && i<10; i++)
-  {
+  for(int i=0; i<count && i<10; i++) {
     s.setArrayIndex(i);
     recentFiles << s.value("entry").toString();
   }
   s.endArray();
   refreshRecent();
 
+  // Page d'accueil
 #if defined(Q_WS_X11)
   QString lang = QLocale::system().name().left(2).toLower();
   QString url = QString(QString(PREFIX) + "/share/dbmaster/index_%1.html")
@@ -678,7 +700,7 @@ void MainWindow::setupWidgets()
   textBrowser->setSource(url);
 #endif
 
-  // loading icons from current theme
+  // icônes du thème courant
   actionAbout->setIcon(         IconManager::get("help-about"));
   actionAddDb->setIcon(         IconManager::get("database_add"));
   actionClearRecent->setIcon(   IconManager::get("edit-clear"));
@@ -708,6 +730,10 @@ void MainWindow::setupWidgets()
 
 void MainWindow::toggleLeftPanel() {
   dockWidget->setVisible(!dockWidget->isVisible());
+}
+
+void MainWindow::togglePropertiesPanel() {
+  propertiesDock->setVisible(!propertiesDock->isVisible());
 }
 
 void MainWindow::undo() {

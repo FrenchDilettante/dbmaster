@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>840</width>
+    <width>870</width>
     <height>590</height>
    </rect>
   </property>
@@ -103,8 +103,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>840</width>
-     <height>23</height>
+     <width>870</width>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuTools">
@@ -185,6 +185,7 @@
       <string>&amp;Panels</string>
      </property>
      <addaction name="actionLeftPanel"/>
+     <addaction name="actionPropertiesPanel"/>
     </widget>
     <addaction name="menuPanels"/>
     <addaction name="actionPreviousTab"/>
@@ -286,6 +287,34 @@
    <addaction name="actionDisconnect"/>
    <addaction name="separator"/>
    <addaction name="actionRefreshConnection"/>
+  </widget>
+  <widget class="QDockWidget" name="propertiesDock">
+   <property name="windowTitle">
+    <string>Properties</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_2">
+    <layout class="QGridLayout" name="gridLayout_3">
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
+      <number>8</number>
+     </property>
+     <item row="0" column="0">
+      <widget class="QTreeView" name="propTree">
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
+       <attribute name="headerDefaultSectionSize">
+        <number>0</number>
+       </attribute>
+      </widget>
+     </item>
+    </layout>
+   </widget>
   </widget>
   <action name="actionAddDb">
    <property name="text">
@@ -577,6 +606,14 @@
    </property>
    <property name="shortcut">
     <string>Shift+F5</string>
+   </property>
+  </action>
+  <action name="actionPropertiesPanel">
+   <property name="text">
+    <string>Properties</string>
+   </property>
+   <property name="shortcut">
+    <string>F10</string>
    </property>
   </action>
  </widget>
