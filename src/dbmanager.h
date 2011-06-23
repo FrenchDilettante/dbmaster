@@ -27,10 +27,26 @@
  * Classe interne, singleton de DbManager.
  * ! À ne pas appeler en direct !
  */
-class DbManagerPrivate : public QThread
-{
+class DbManagerPrivate : QObject {
 Q_OBJECT
 public:
+  enum ConnectionStatus {
+    Closed,
+    Connecting,
+    Open
+  };
+
+  /**
+   * Structure pour regrouper plusieurs infos.
+   */
+  struct Connection {
+    QString           alias;
+    QSqlDatabase      db;
+    QStandardItem*    item;
+    ConnectionStatus  status;
+    SqlWrapper*       wrapper;
+  };
+
   DbManagerPrivate();
 
   int                     addDatabase(QString driver, QString host,
@@ -41,52 +57,46 @@ public:
                                       QString user, QString pswd, QString dbnm,
                                       QString alias, QString wrapper,
                                       bool save =true);
-  QString                 alias(QSqlDatabase *db);
-  void                    close(QSqlDatabase *db);
+  QString                 alias(int idx);
+  void                    close(int idx);
   void                    closeAll();
+  QList<Connection>       connections() { return m_connections; };
+  QSqlDatabase            db(int idx);
   QStandardItemModel     *driverModel();
   QString                 genConnectionName();
-  QSqlDatabase*           getDatabase(int n);
-  QList<QSqlDatabase*>    getDbList();
-  QStringList             getDbNames(bool);
-  int                     indexOf(QSqlDatabase *db);
   void                    init();
   QString                 lastError();
   QStandardItemModel*     model()     { return m_model;   };
   void                    open(int, QString=QString::null);
-  void                    open(QSqlDatabase *db, QString pswd=QString::null);
   void                    openList();
-  void                    removeDatabase(int);
-  void                    removeDatabase(QSqlDatabase *db);
-  void                    run();
+  void                    removeDatabase(int idx);
   void                    saveList();
-  SqlSchema               schema(QSqlDatabase *db, QString sch);
-  void                    setAlias(QSqlDatabase *db, QString alias);
-  void                    setDatabase(int, QSqlDatabase);
-  void                    swapDatabase(QSqlDatabase *oldDb,
-                                       QSqlDatabase *newDb);
-  SqlTable                table(QSqlDatabase *db, QString tbl);
-  void                    toggle(QSqlDatabase *db);
-  void                    update(QSqlDatabase *db, QString alias);
+  SqlSchema               schema(int idx, QString sch);
+  void                    setAlias(int idx, QString alias);
+  void                    setDatabase(int idx, QSqlDatabase db);
+  void                    swapDatabase(int oldIdx, int newIdx);
+  SqlTable                table(int idx, QString tbl);
+  void                    toggle(int idx);
+  void                    update(int idx, QString alias);
 
-  static QString          dbTitle(QSqlDatabase *db);
+  static QString          dbTitle(QSqlDatabase db);
 
 public slots:
   void                    refreshModel();
   void                    refreshModelIndex(QModelIndex index);
-  void                    refreshModelItem(QSqlDatabase *db);
+  void                    refreshModelItem(int idx);
   void                    terminate();
 
 signals:
   void logMessage(QString);
   void statusChanged(QModelIndex);
-  void statusChanged(QSqlDatabase*);
+  void statusChanged(int);
 
 private:
+  void                    checkDbIndex(int idx);
   QStandardItem*          columnsItem(QList<SqlColumn> columns);
-  QString                 dbToolTip(QSqlDatabase *db);
+  QString                 dbToolTip(QSqlDatabase db);
   QSqlDatabase*           parentDb(QModelIndex index);
-  void                    setupConnections();
   void                    setupModels();
   QStandardItem*          schemaItem(SqlSchema schema);
   QStandardItem*          tablesItem(QList<SqlTable> tables,
@@ -98,24 +108,22 @@ private:
   QMap<QString, QIcon>    driverIcon;
 
   bool                    closingAll;
+  QList<Connection>       m_connections;
   QStandardItemModel     *m_driverModel;
-  QList<QSqlDatabase*>    dbList;
-  QMap<QSqlDatabase*, QStandardItem*> dbMap;
-  QMap<QSqlDatabase*, SqlWrapper*> dbWrappers;
+
   QStandardItemModel     *m_model;
-  int                     nconn;
+  /// @deprecated
+  unsigned long           nconn;
   QString                 lastErr;
 
   QStack<QSqlDatabase*>   closeStack;
   QStack<QSqlDatabase*>   openStack;
-
 };
 
 /**
  * Classe statique pour l'accès aux connexions.
  */
-class DbManager
-{
+class DbManager {
 public:
   enum ItemTypes {
     DbItem,
@@ -133,41 +141,27 @@ public:
   static int            addDatabase(QString driver, QString host, QString user,
                                     QString dbnm, QString alias,
                                     bool usesOdbc =false);
-  /// @deprecated
-  static QString        alias(QSqlDatabase *db);
-  /// @deprecated
-  static void           close(QSqlDatabase *db);
+  static QString        alias(int idx);
+  static void           close(int idx);
   static void           closeAll();
-  /// @deprecated
-  static QString        dbTitle(QSqlDatabase *db);
+  static QSqlDatabase   db(int idx);
+  static QString        dbTitle(int idx);
   static QStandardItemModel*
                         driverModel();
-  static QSqlDatabase*
-                        getDatabase(int n);
-  static QList<QSqlDatabase*>
-                        getDbList();
   static void           init();
   static DbManagerPrivate *instance()   { return m_instance;    };
   static int            lastIndex;
   static QStandardItemModel*
                         model()     { return m_instance->model();   };
   static void           open(int, QString=QString::null);
-  /// @deprecated
-  static void           open(QSqlDatabase *db, QString pswd=QString::null);
   static void           refreshModelIndex(QModelIndex index);
-  /// @deprecated
-  static void           refreshModelItem(QSqlDatabase *db);
-  static void           removeDatabase(int);
-  /// @deprecated
-  static SqlSchema      schema(QSqlDatabase *db, QString schema);
-  /// @deprecated
-  static void           setAlias(QSqlDatabase *db, QString alias);
-  /// @deprecated
-  static SqlTable       table(QSqlDatabase *db, QString tbl);
-  /// @deprecated
-  static void           toggle(QSqlDatabase *db);
-  /// @deprecated
-  static void           update(QSqlDatabase *db, QString alias);
+  static void           refreshModelItem(int idx);
+  static void           removeDatabase(int idx);
+  static SqlSchema      schema(int idx, QString schema);
+  static void           setAlias(int idx, QString alias);
+  static SqlTable       table(int idx, QString tbl);
+  static void           toggle(int idx);
+  static void           update(int idx, QString alias);
 
 private:
   static DbManagerPrivate *m_instance;
