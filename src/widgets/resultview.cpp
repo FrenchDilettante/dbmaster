@@ -155,8 +155,7 @@ void ResultView::on_insertButton_clicked()
   }
 }
 
-void ResultView::on_reloadButton_clicked()
-{
+void ResultView::on_reloadButton_clicked() {
   switch (m_mode) {
   case QueryMode:
     emit reloadRequested();
@@ -169,18 +168,15 @@ void ResultView::on_reloadButton_clicked()
   }
 }
 
-void ResultView::resizeColumnsToContents()
-{
+void ResultView::resizeColumnsToContents() {
   table->resizeColumnsToContents();
 }
 
-void ResultView::resizeRowsToContents()
-{
+void ResultView::resizeRowsToContents() {
   table->resizeRowsToContents();
 }
 
-void ResultView::scrollBegin()
-{
+void ResultView::scrollBegin() {
   offset = 0;
   updateView();
 }
@@ -238,6 +234,8 @@ void ResultView::setMode(Mode m) {
 
 void ResultView::setModel(QSqlQueryModel *model) {
   this->model = model;
+  table->resetColumnSizes();
+
   updateView();
 }
 

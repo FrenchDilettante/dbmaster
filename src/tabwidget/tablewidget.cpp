@@ -95,7 +95,7 @@ void TableWidget::setTable(int idx, QString table) {
 }
 
 void TableWidget::setupWidgets() {
-//  columnsTree->header()->setResizeMode(0, QHeaderView::Stretch);
+  columnsTree->header()->setResizeMode(0, QHeaderView::ResizeToContents);
   columnsTree->header()->setResizeMode(1, QHeaderView::ResizeToContents);
   columnsTree->header()->setResizeMode(2, QHeaderView::ResizeToContents);
   columnsTree->header()->setResizeMode(3, QHeaderView::ResizeToContents);

@@ -99,7 +99,6 @@ QList<SqlColumn> PsqlWrapper::columns(QString table) {
   }
 
   m_db.close();
-
   return cols;
 }
 
@@ -126,11 +125,15 @@ SqlSchema PsqlWrapper::schema(QString sch) {
   SqlSchema schema;
 
   QString sql;
-  sql += "SELECT '" + sch + "', t.table_name, t.table_type ";
+  sql += "SELECT '" + sch + "', t.table_name, t.table_type, COUNT(COLUMN_NAME) ";
   sql += "FROM INFORMATION_SCHEMA.TABLES T ";
+  sql +=   "INNER JOIN INFORMATION_SCHEMA.COLUMNS C ";
+  sql +=     "ON C.TABLE_NAME = T.TABLE_NAME ";
+  sql +=       "AND C.TABLE_SCHEMA = T.TABLE_SCHEMA ";
   sql += "WHERE t.table_catalog='" + m_db.databaseName() + "' ";
   sql +=   "AND t.table_schema='" + sch + "' ";
-  sql += "ORDER BY table_name, ordinal_position ";
+  sql += "GROUP BY t.table_name, t.table_type ";
+  sql += "ORDER BY table_name ";
 
   if (!m_db.isOpen()) {
     m_db.open();
@@ -156,6 +159,7 @@ SqlSchema PsqlWrapper::schema(QString sch) {
     } else if (query.value(2).toString() == "VIEW") {
       t.type = ViewTable;
     }
+    t.columnCount = query.value(3).toInt();
 
     schema.tables << t;
   }

@@ -21,6 +21,8 @@ signals:
 
 public slots:
   void copy();
+  void resetColumnSizes();
+  void resizeColumnsToContents();
 
 protected:
   void contextMenuEvent(QContextMenuEvent *event);
@@ -36,6 +38,7 @@ private:
   QAction*    actionDetails;
   QAction*    actionExport;
   BlobDialog* blobDialog;
+  QList<int>  columnSizes;
   QMenu*      contextMenu;
   int         currentEditedRow;
 

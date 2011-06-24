@@ -62,7 +62,35 @@ void ResultViewTable::copy() {
 
   text += "</table>";
 
-  QApplication::clipboard()->setText(text);
+  QMimeData *mime = new QMimeData();
+  mime->setHtml(text);
+  QApplication::clipboard()->setMimeData(mime);
+}
+
+void ResultViewTable::resetColumnSizes() {
+  columnSizes = QList<int>();
+}
+
+void ResultViewTable::resizeColumnsToContents() {
+  QTableView::resizeColumnsToContents();
+
+  if (columnSizes.size() != model()->columnCount()) {
+    // si le nombre de colonnes ne correspond pas : on remplit
+    columnSizes.clear();
+    for (int i=0; i<model()->columnCount(); i++) {
+      columnSizes.append(columnWidth(i));
+    }
+  } else {
+    // Pour chaque colonne, on change la taille ssi la nouvelle est plus petite
+    // que l'ancienne. Sinon, on stocke.
+    for (int i=0; i<model()->columnCount(); i++) {
+      if (columnSizes[i] > columnWidth(i) && i < columnSizes.size()) {
+        setColumnWidth(i, columnSizes[i]);
+      } else {
+        columnSizes[i] = columnWidth(i);
+      }
+    }
+  }
 }
 
 void ResultViewTable::selectionChanged(const QItemSelection &selected,
