@@ -376,8 +376,8 @@ void MainWindow::openSchema(int idx, QString schema) {
     index = tabWidget->addTab(tab, tab->icon(), schema);
     tabWidget->setCurrentIndex(index);
     connect(tab, SIGNAL(closeRequested()), this, SLOT(closeSender()));
-    connect(tab, SIGNAL(tableRequested(QSqlDatabase*,QString)),
-            this, SLOT(openTable(QSqlDatabase*,QString)));
+    connect(tab, SIGNAL(tableRequested(int,QString)),
+            this, SLOT(openTable(int,QString)));
     tab->reload();
   }
 }
@@ -449,12 +449,10 @@ void MainWindow::redo()
 /**
  * Called after the tab widget's index changed.
  */
-void MainWindow::refreshTab()
-{
+void MainWindow::refreshTab() {
   AbstractTabWidget *tab = dynamic_cast<AbstractTabWidget*>(sender());
 
-  if(tab)
-  {
+  if (tab) {
     QString text = tab->title();
     if(!tab->isSaved())
       text.prepend("* ");
@@ -462,13 +460,15 @@ void MainWindow::refreshTab()
   }
 
   // toolbar's actions
-  if(currentTab())
-  {
+  if (currentTab()) {
     AbstractTabWidget::Actions acts;
     acts = currentTab()->availableActions();
     foreach(AbstractTabWidget::Action a, actionMap.keys())
       actionMap[a]->setEnabled(acts.testFlag(a));
   }
+
+  // Propriétés
+  propList->setModel(currentTab()->properties());
 }
 
 void MainWindow::refreshRecent()

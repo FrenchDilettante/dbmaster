@@ -13,6 +13,7 @@
 #ifndef ABSTRACTTABWIDGET_H
 #define ABSTRACTTABWIDGET_H
 
+#include <QAbstractItemModel>
 #include <QAction>
 #include <QDir>
 #include <QIcon>
@@ -25,7 +26,6 @@
 #include <QWidget>
 
 class AbstractTabWidget: public QWidget, protected QRunnable {
-
 Q_OBJECT
 public:
   enum Action {
@@ -54,6 +54,7 @@ public:
   static QDir       lastDir;
   virtual void      print()           {};
   virtual QPrinter *printer()         { return NULL; };
+  virtual QAbstractItemModel* properties() { return NULL; };
   virtual void      run()             {};
   virtual QTextEdit* textEdit()       { return NULL; };
   virtual QString   title()           { return ""; };

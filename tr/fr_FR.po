@@ -1022,45 +1022,40 @@ msgstr "Efface la requête si elle est exécutée avec succès"
 
 #: /home/manu/programmation/dbmaster/src/tabwidget/schemawidget.ui:21
 msgctxt "SchemaWidget|"
-msgid "Informations"
-msgstr "Informations"
-
-#: /home/manu/programmation/dbmaster/src/tabwidget/schemawidget.ui:45
-msgctxt "SchemaWidget|"
-msgid "Schema"
-msgstr "Schéma"
-
-#: /home/manu/programmation/dbmaster/src/tabwidget/schemawidget.ui:68
-msgctxt "SchemaWidget|"
 msgid "Tables"
 msgstr "Tables"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/schemawidget.ui:75
+#: /home/manu/programmation/dbmaster/src/tabwidget/schemawidget.ui:28
 msgctxt "SchemaWidget|"
 msgid "Table"
 msgstr "Table"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/schemawidget.ui:80
-#: /home/manu/programmation/dbmaster/src/tabwidget/schemawidget.ui:106
+#: /home/manu/programmation/dbmaster/src/tabwidget/schemawidget.ui:33
+#: /home/manu/programmation/dbmaster/src/tabwidget/schemawidget.ui:59
 msgctxt "SchemaWidget|"
 msgid "Column count"
 msgstr "Nombre de colonnes"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/schemawidget.ui:85
-#: /home/manu/programmation/dbmaster/src/tabwidget/schemawidget.ui:111
+#: /home/manu/programmation/dbmaster/src/tabwidget/schemawidget.ui:38
+#: /home/manu/programmation/dbmaster/src/tabwidget/schemawidget.ui:64
 msgctxt "SchemaWidget|"
 msgid "Comment"
 msgstr "Commentaire"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/schemawidget.ui:94
+#: /home/manu/programmation/dbmaster/src/tabwidget/schemawidget.ui:47
 msgctxt "SchemaWidget|"
 msgid "Views"
 msgstr "Vues"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/schemawidget.ui:101
+#: /home/manu/programmation/dbmaster/src/tabwidget/schemawidget.ui:54
 msgctxt "SchemaWidget|"
 msgid "View"
 msgstr "Vue"
+
+#: /home/manu/programmation/dbmaster/src/tabwidget/schemawidget.cpp:70
+msgctxt "SchemaWidget|"
+msgid "Name"
+msgstr "Nom"
 
 #: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:35
 msgctxt "ResultView|"
@@ -1153,18 +1148,18 @@ msgid "Fetching..."
 msgstr "Exécution..."
 
 #: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:146
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:303
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:301
 msgctxt "ResultView|"
 msgid "Apply"
 msgstr "Appliquer"
 
 #: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:148
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:305
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:303
 msgctxt "ResultView|"
 msgid "Cancel"
 msgstr "Annuler"
 
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:351
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:349
 #, qt-format
 msgctxt "ResultView|"
 msgid "Page %1/%2"
@@ -1962,22 +1957,22 @@ msgctxt "PsqlConfig|"
 msgid "Hide information_schema"
 msgstr "Masquer information_schema"
 
-#: /home/manu/programmation/dbmaster/src/widgets/resultviewtable.cpp:102
+#: /home/manu/programmation/dbmaster/src/widgets/resultviewtable.cpp:130
 msgctxt "ResultViewTable|"
 msgid "Details"
 msgstr "Détails"
 
-#: /home/manu/programmation/dbmaster/src/widgets/resultviewtable.cpp:106
+#: /home/manu/programmation/dbmaster/src/widgets/resultviewtable.cpp:134
 msgctxt "ResultViewTable|"
 msgid "Alternate row colors"
 msgstr "Alterner les lignes"
 
-#: /home/manu/programmation/dbmaster/src/widgets/resultviewtable.cpp:113
+#: /home/manu/programmation/dbmaster/src/widgets/resultviewtable.cpp:141
 msgctxt "ResultViewTable|"
 msgid "Copy"
 msgstr "Copier"
 
-#: /home/manu/programmation/dbmaster/src/widgets/resultviewtable.cpp:117
+#: /home/manu/programmation/dbmaster/src/widgets/resultviewtable.cpp:145
 msgctxt "ResultViewTable|"
 msgid "Export"
 msgstr "Exporter"

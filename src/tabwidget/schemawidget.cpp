@@ -10,6 +10,8 @@ SchemaWidget::SchemaWidget(QString schema, int idx, QWidget *parent)
   : AbstractTabWidget(parent) {
   setupUi(this);
 
+  setupProperties();
+
   this->m_schema = schema;
   this->dbIdx = idx;
   this->m_db = DbManager::db(idx);
@@ -37,7 +39,7 @@ void SchemaWidget::on_tableTree_itemDoubleClicked(QTreeWidgetItem *item,
 
 void SchemaWidget::reload() {
   SqlSchema s = DbManager::schema(dbIdx, m_schema);
-  schemaEdit->setText(s.name);
+  nameProperty->setText(s.name);
 
   prefix = s.defaultSchema ? "" : s.name;
 
@@ -58,4 +60,14 @@ void SchemaWidget::reload() {
       viewTree->addTopLevelItem(it);
     }
   }
+}
+
+void SchemaWidget::setupProperties() {
+  m_properties = new QStandardItemModel(this);
+
+  nameProperty = new QStandardItem();
+  QList<QStandardItem*> l;
+  l << new QStandardItem(tr("Name")) << nameProperty;
+
+  m_properties->appendRow(l);
 }

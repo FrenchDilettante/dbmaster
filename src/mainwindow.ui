@@ -304,13 +304,13 @@
       <number>8</number>
      </property>
      <item row="0" column="0">
-      <widget class="QTreeView" name="propTree">
+      <widget class="QTreeView" name="propList">
        <property name="alternatingRowColors">
         <bool>true</bool>
        </property>
-       <attribute name="headerDefaultSectionSize">
-        <number>0</number>
-       </attribute>
+       <property name="headerHidden">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
     </layout>

@@ -5,6 +5,8 @@
 
 #include "ui_schemawidget.h"
 
+#include <QStandardItemModel>
+
 class SchemaWidget : public AbstractTabWidget, private Ui::SchemaWidget {
 Q_OBJECT
 public:
@@ -12,15 +14,20 @@ public:
 
   QIcon icon();
   QString id();
+  QStandardItemModel* properties() { return m_properties; };
 
 public slots:
   void reload();
 
 private:
-  int dbIdx;
-  QSqlDatabase m_db;
-  QString m_schema;
-  QString prefix;
+  void setupProperties();
+
+  int                 dbIdx;
+  QSqlDatabase        m_db;
+  QStandardItem*      nameProperty;
+  QStandardItemModel* m_properties;
+  QString             m_schema;
+  QString             prefix;
 
 private slots:
   void on_tableTree_itemDoubleClicked(QTreeWidgetItem *item, int col);
