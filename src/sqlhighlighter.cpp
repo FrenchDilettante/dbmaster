@@ -172,8 +172,7 @@ void SqlHighlighter::reloadColors()
 }
 
 void SqlHighlighter::reloadContext(QStringList tables,
-                                   QMultiMap<QString, QString>fields)
-{
+                                   QMultiMap<QString, QString>fields) {
   contextRules.clear();
   HighlightRule r;
   foreach( QString t, tables )
@@ -188,8 +187,7 @@ void SqlHighlighter::reloadContext(QStringList tables,
   QStringList l = fields.values();
   l.removeDuplicates();
 
-  foreach( QString f, l )
-  {
+  foreach (QString f, l) {
     r.pattern = QRegExp( "\\b" + f + "\\b" );
     r.format = Config::shFormat["ctxt_field"];
     r.format.setForeground( Config::shColor["ctxt_field"] );

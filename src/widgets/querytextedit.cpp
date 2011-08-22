@@ -186,9 +186,8 @@ void QueryTextEdit::reloadCompleter()
 }
 
 void QueryTextEdit::reloadContext(QStringList tables,
-                                  QMultiMap<QString, QString> fields)
-{
-  if(!Config::editorSemantic)
+                                  QMultiMap<QString, QString> fields) {
+  if (!Config::editorSemantic)
     return;
 
   this->tables = tables;
@@ -208,8 +207,9 @@ void QueryTextEdit::reloadContext(QStringList tables,
   items.removeDuplicates();
 
   QMap<QString, QString> m;
-  foreach(QString i, items)
+  foreach (QString i, items) {
     m.insert(i.toLower(), i);
+  }
 
   items = m.values();
   completerContextModel->setStringList(items);

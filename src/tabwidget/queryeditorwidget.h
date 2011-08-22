@@ -20,8 +20,7 @@
 
 #include "ui_queryeditorwidgetclass.h"
 
-class QueryEditorWidget: public AbstractTabWidget, Ui::QueryEditorWidgetClass
-{
+class QueryEditorWidget: public AbstractTabWidget, Ui::QueryEditorWidgetClass {
 Q_OBJECT
 public:
   QueryEditorWidget( QWidget* = 0 );
@@ -82,11 +81,8 @@ private:
   QFileSystemWatcher   *watcher;
 
 private slots:
-  void acceptToken();
   void checkDbOpen();
   void onFileChanged(QString path);
-  void rejectToken();
-  void startToken();
   void validate();
 };
 

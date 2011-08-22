@@ -676,9 +676,9 @@ void DbManagerPrivate::terminate()
 }
 
 void DbManagerPrivate::toggle(int idx) {
-  if (idx < 0 || idx >= m_connections.size()) {
-    throw "Bad index";
-  }
+  checkDbIndex(idx);
+
+  DbManager::lastIndex = idx;
 
   switch (m_connections[idx].status) {
   case Closed:

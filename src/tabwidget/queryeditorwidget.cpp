@@ -30,14 +30,7 @@ QueryEditorWidget::QueryEditorWidget(QWidget *parent)
 
   model       = new QSqlQueryModel(this);
   shortModel  = new QStandardItemModel(this);
-//  oldToken    = NULL;
   watcher     = new QFileSystemWatcher(this);
-}
-
-void QueryEditorWidget::acceptToken()
-{
-  debugText->append(tr("<b>[%1]</b>Query pending")
-                    .arg(QTime::currentTime().toString()));
 }
 
 AbstractTabWidget::Actions QueryEditorWidget::availableActions()
@@ -55,18 +48,22 @@ AbstractTabWidget::Actions QueryEditorWidget::availableActions()
 }
 
 void QueryEditorWidget::checkDbOpen() {
-  DbManager::lastIndex = dbChooser->currentIndex();
+  int dbIdx = dbChooser->currentIndex();
+  bool isOpen = DbManager::isOpen(dbIdx);
 
-  QSqlDatabase db = DbManager::db(dbChooser->currentIndex());
+  DbManager::lastIndex = dbIdx;
 
-  runButton->setEnabled(db.isOpen());
+  QSqlDatabase db = DbManager::db(dbIdx);
+
+  runButton->setEnabled(isOpen);
 
   // Vieux hack tout moisi
-  if(!db.isOpen() || db.driverName().startsWith("QOCI"))
+  if(!isOpen || db.driverName().startsWith("QOCI"))
     return;
 
   QMultiMap<QString, QString> fields;
   QSqlRecord r;
+  db.open();
   QStringList tables = db.tables();
   foreach (QString t, tables)   {
     r = db.record(t);
@@ -75,6 +72,8 @@ void QueryEditorWidget::checkDbOpen() {
   }
 
   editor->reloadContext(tables, fields);
+  db.close();
+  QSqlDatabase::removeDatabase(db.connectionName());
 }
 
 void QueryEditorWidget::closeEvent(QCloseEvent *event) {
@@ -207,44 +206,33 @@ void QueryEditorWidget::paste() {
   editor->paste();
 }
 
-void QueryEditorWidget::print()
-{
+void QueryEditorWidget::print() {
   QPainter painter;
   painter.begin(&m_printer);
   editor->document()->drawContents(&painter);
   painter.end();
 }
 
-QPrinter *QueryEditorWidget::printer()
-{
+QPrinter *QueryEditorWidget::printer() {
   return &m_printer;
 }
 
-void QueryEditorWidget::redo()
-{
+void QueryEditorWidget::redo() {
   editor->redo();
 }
 
-void QueryEditorWidget::refresh()
-{
+void QueryEditorWidget::refresh() {
   checkDbOpen();
 }
 
-void QueryEditorWidget::rejectToken()
-{
-
-}
-
-void QueryEditorWidget::reload()
-{
+void QueryEditorWidget::reload() {
   runQuery();
 }
 
 /**
  * Called after open(QString)
  */
-void QueryEditorWidget::reloadFile()
-{
+void QueryEditorWidget::reloadFile() {
   if(!confirmClose())
     return;
 
@@ -310,8 +298,7 @@ void QueryEditorWidget::runQuery() {
 /**
  * @returns false in case of error
  */
-bool QueryEditorWidget::save()
-{
+bool QueryEditorWidget::save() {
   if(isSaved())
     return true;
 
@@ -438,12 +425,7 @@ void QueryEditorWidget::showEvent(QShowEvent *event) {
   editor->setFocus();
 }
 
-void QueryEditorWidget::startToken()
-{
-}
-
-QString QueryEditorWidget::title()
-{
+QString QueryEditorWidget::title() {
   QString t;
   if(!filePath.isEmpty())
     t = QFileInfo(filePath).fileName();
@@ -453,8 +435,7 @@ QString QueryEditorWidget::title()
   return t;
 }
 
-QTextEdit* QueryEditorWidget::textEdit()
-{
+QTextEdit* QueryEditorWidget::textEdit() {
   return editor;
 }
 
