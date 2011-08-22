@@ -95,6 +95,7 @@ signals:
 private:
   void                    checkDbIndex(int idx);
   QStandardItem*          columnsItem(QList<SqlColumn> columns);
+  QStandardItem*          constraintsItem(QList<SqlConstraint> columns);
   QString                 dbToolTip(QSqlDatabase db);
   int                     parentIdx(QModelIndex index);
   void                    setupModels();

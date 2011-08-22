@@ -188,6 +188,21 @@ QStandardItem* DbManagerPrivate::columnsItem(QList<SqlColumn> columns) {
   return cItem;
 }
 
+QStandardItem* DbManagerPrivate::constraintsItem(QList<SqlConstraint> constraints) {
+  QStandardItem *cItem =
+      new QStandardItem(IconManager::get("folder_constraints"),
+                        tr("Constraints (%1)")
+                        .arg(constraints.size()));
+
+  foreach (SqlConstraint c, constraints) {
+    QStandardItem *i = new QStandardItem();
+    i->setText(c.name);
+    cItem->appendRow(i);
+  }
+
+  return cItem;
+}
+
 QString DbManagerPrivate::dbTitle(QSqlDatabase db) {
   QString title;
   QString simplifiedName = QFileInfo(db.databaseName()).fileName();
@@ -360,6 +375,7 @@ void DbManagerPrivate::refreshModelIndex(QModelIndex index) {
 
   case DbManager::TableItem:
     toAppend << columnsItem(wrapper->columns(index.data().toString()));
+    toAppend << constraintsItem(wrapper->constraints(index.data().toString()));
     break;
 
   default:
@@ -697,9 +713,7 @@ void DbManagerPrivate::toggle(int idx) {
 }
 
 void DbManagerPrivate::update(int idx, QString alias) {
-  if (idx < 0 || idx >= m_connections.size()) {
-    throw "Bad index";
-  }
+  checkDbIndex(idx);
 
   m_connections[idx].alias = alias;
   m_connections[idx].item->setText(alias);
