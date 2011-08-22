@@ -137,4 +137,27 @@ void TableWidget::validate() {
     }
     columnsTree->addTopLevelItem(it);
   }
+
+  constraintsTree->clear();
+  foreach (SqlConstraint c, tableInfo.constraints) {
+    QStringList cons;
+    cons << c.name;
+    switch (c.type) {
+    case PrimaryKey:
+      cons << tr("Primary key");
+      break;
+
+    case ForeignKey:
+      cons << tr("Foreign key");
+      break;
+
+    case Unique:
+      cons << tr("Unique");
+      break;
+    }
+
+    QTreeWidgetItem *it = new QTreeWidgetItem(cons);
+    it->setIcon(0, IconManager::get("key"));
+    constraintsTree->addTopLevelItem(it);
+  }
 }

@@ -44,6 +44,11 @@ struct SqlColumn {
   QString comment;
 };
 
+struct SqlConstraint {
+  QString name;
+  ConstraintType type;
+};
+
 struct SqlIndex {
   QString name;
   QList<SqlColumn> columns;
@@ -55,15 +60,10 @@ struct SqlTable {
   QString name;
   int columnCount;
   QList<SqlColumn> columns;
+  QList<SqlConstraint> constraints;
   QString owner;
   TableType type;
   QString comment;
-};
-
-struct SqlConstraint {
-  QString name;
-  SqlTable table;
-  ConstraintType type;
 };
 
 struct SqlSchema {
