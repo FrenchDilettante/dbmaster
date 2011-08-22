@@ -21,6 +21,10 @@ QList<SqlColumn> SqliteWrapper::columns(QString table) {
 
   sql += "PRAGMA TABLE_INFO('" + table + "')";
 
+  if (!m_db.isOpen()) {
+    m_db.open();
+  }
+
   QSqlQuery query(m_db);
   if (!query.exec(sql)) {
     qDebug() << query.lastError().text();
@@ -37,6 +41,9 @@ QList<SqlColumn> SqliteWrapper::columns(QString table) {
 
     cols << c;
   }
+
+  query.clear();
+  m_db.close();
 
   return cols;
 }
@@ -57,6 +64,10 @@ SqlTable SqliteWrapper::table(QString t) {
 
   sql += "PRAGMA TABLE_INFO('" + t + "')";
 
+  if (!m_db.isOpen()) {
+    m_db.open();
+  }
+
   QSqlQuery query(m_db);
   if (!query.exec(sql)) {
     qDebug() << query.lastError().text();
@@ -73,6 +84,9 @@ SqlTable SqliteWrapper::table(QString t) {
 
     table.columns << c;
   }
+
+  query.clear();
+  m_db.close();
 
   return table;
 }
@@ -104,7 +118,9 @@ QList<SqlTable> SqliteWrapper::tables() {
     tables << t;
   }
 
+  query.clear();
   m_db.close();
+
   return tables;
 }
 
