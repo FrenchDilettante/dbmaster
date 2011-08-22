@@ -236,6 +236,8 @@ SqlTable MysqlWrapper::table(QString t) {
     }
   }
 
+  table.constraints = constraints(table.name);
+
   m_db.close();
   return table;
 }
