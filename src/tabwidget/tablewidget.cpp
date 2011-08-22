@@ -142,22 +142,28 @@ void TableWidget::validate() {
   foreach (SqlConstraint c, tableInfo.constraints) {
     QStringList cons;
     cons << c.name;
+
+    QIcon i;
     switch (c.type) {
     case PrimaryKey:
       cons << tr("Primary key");
+      i = IconManager::get("key");
       break;
 
     case ForeignKey:
       cons << tr("Foreign key");
+      i = IconManager::get("foreign-key");
       break;
 
     case Unique:
       cons << tr("Unique");
+      i = IconManager::get("key");
       break;
     }
 
     QTreeWidgetItem *it = new QTreeWidgetItem(cons);
-    it->setIcon(0, IconManager::get("key"));
+    it->setIcon(0, i);
+
     constraintsTree->addTopLevelItem(it);
   }
 }

@@ -197,7 +197,17 @@ QStandardItem* DbManagerPrivate::constraintsItem(QList<SqlConstraint> constraint
   foreach (SqlConstraint c, constraints) {
     QStandardItem *i = new QStandardItem();
     i->setText(c.name);
-    i->setIcon(IconManager::get("key"));
+    switch (c.type) {
+    case PrimaryKey:
+      i->setIcon(IconManager::get("key"));
+      break;
+    case ForeignKey:
+      i->setIcon(IconManager::get("foreign-key"));
+      break;
+    case Unique:
+      i->setIcon(IconManager::get("key"));
+      break;
+    }
     cItem->appendRow(i);
   }
 

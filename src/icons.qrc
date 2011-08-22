@@ -55,5 +55,6 @@
         <file>img/database_lightning.png</file>
         <file>img/database_refresh.png</file>
         <file>img/key.png</file>
+        <file>img/foreign-key.png</file>
     </qresource>
 </RCC>
