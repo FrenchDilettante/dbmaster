@@ -197,6 +197,7 @@ QStandardItem* DbManagerPrivate::constraintsItem(QList<SqlConstraint> constraint
   foreach (SqlConstraint c, constraints) {
     QStandardItem *i = new QStandardItem();
     i->setText(c.name);
+    i->setIcon(IconManager::get("key"));
     cItem->appendRow(i);
   }
 

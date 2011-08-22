@@ -54,5 +54,6 @@
         <file>img/database_go.png</file>
         <file>img/database_lightning.png</file>
         <file>img/database_refresh.png</file>
+        <file>img/key.png</file>
     </qresource>
 </RCC>
