@@ -176,6 +176,7 @@ void QueryEditorWidget::keyPressEvent(QKeyEvent *event) {
   if (event->key() == Qt::Key_Escape) {
     // Appui touche échap = masque le panel de résultat
     tabWidget->hide();
+    consoleButton->setChecked(false);
     resultButton->setChecked(false);
   } else {
     QWidget::keyPressEvent(event);
@@ -282,10 +283,9 @@ void QueryEditorWidget::run() {
 }
 
 void QueryEditorWidget::runQuery() {
-
-  resultButton->setChecked(true);
+  consoleButton->setChecked(true);
+  resultButton->setChecked(false);
   tabWidget->setVisible(true);
-  tabWidget->setTabEnabled(1, false);
   tabWidget->setCurrentIndex(0);
   debugText->clear();
   runButton->setEnabled(false);
@@ -397,12 +397,21 @@ void QueryEditorWidget::setupWidgets() {
   statusBar->setSizeGripEnabled(false);
   gridLayout->addWidget(statusBar, gridLayout->rowCount(), 0, 1, -1);
 
+  statusBar->addPermanentWidget(new QLabel(tr("Display"), statusBar));
+
   resultButton = new QToolButton(this);
-  resultButton->setText(tr("Display result"));
+  resultButton->setText(tr("result"));
   resultButton->setCheckable(true);
   statusBar->addPermanentWidget(resultButton);
   connect(resultButton, SIGNAL(clicked(bool)),
-          tabWidget, SLOT(setVisible(bool)));
+          this, SLOT(showResult(bool)));
+
+  consoleButton = new QToolButton(this);
+  consoleButton->setText(tr("console"));
+  consoleButton->setCheckable(true);
+  statusBar->addPermanentWidget(consoleButton);
+  connect(consoleButton, SIGNAL(clicked(bool)),
+          this, SLOT(showConsole(bool)));
 
   optionsMenu = new QMenu(this);
   optionsMenu->addAction(actionEnqueue);
@@ -421,8 +430,28 @@ void QueryEditorWidget::setupWidgets() {
   refresh();
 }
 
+void QueryEditorWidget::showConsole(bool show) {
+  resultButton->setChecked(false);
+  if (show) {
+    tabWidget->show();
+    tabWidget->setCurrentIndex(0);
+  } else {
+    tabWidget->hide();
+  }
+}
+
 void QueryEditorWidget::showEvent(QShowEvent *event) {
   editor->setFocus();
+}
+
+void QueryEditorWidget::showResult(bool show) {
+  consoleButton->setChecked(false);
+  if (show) {
+    tabWidget->show();
+    tabWidget->setCurrentIndex(1);
+  } else {
+    tabWidget->hide();
+  }
 }
 
 QString QueryEditorWidget::title() {
@@ -459,13 +488,12 @@ void QueryEditorWidget::validate() {
   QString                 logMsg;
   QMap<QString, QVariant> logData;
 
-  tabWidget->setTabEnabled(1, false);
-
   switch (query.lastError().type()) {
   case QSqlError::NoError:
     tabView->setQuery(model);
     tabWidget->setCurrentIndex(1);
-    tabWidget->setTabEnabled(1, true);
+    consoleButton->setChecked(false);
+    resultButton->setChecked(true);
 
     if(actionClearOnSuccess->isChecked())
       editor->clear();

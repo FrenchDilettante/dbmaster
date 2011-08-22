@@ -49,6 +49,8 @@ public slots:
   void runQuery();
   bool save();
   void selectAll();
+  void showConsole(bool show);
+  void showResult(bool show);
   void undo();
   void upperCase();
 
@@ -74,6 +76,7 @@ private:
   int                   oldCount;
   QMenu                *optionsMenu;
   int                   page;
+  QToolButton*          consoleButton;
   QToolButton*          resultButton;
   QSqlQuery             query;
   QStandardItemModel   *shortModel;
