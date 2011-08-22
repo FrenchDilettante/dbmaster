@@ -21,6 +21,7 @@ public:
 
   // Fonctions de SqlWrapper
   QList<SqlColumn> columns(QString table);
+  QList<SqlConstraint> constraints(QString table);
   WrapperFeatures features();
   SqlWrapper* newInstance(QSqlDatabase db);
   QString driver() { return "QMYSQL"; };

@@ -93,6 +93,53 @@ QList<SqlColumn> MysqlWrapper::columns(QString table) {
   return cols;
 }
 
+QList<SqlConstraint> MysqlWrapper::constraints(QString table) {
+  QList<SqlConstraint> cons;
+
+  QString sql;
+
+  // Récupération des colonnes
+
+  sql += "SELECT C.CONSTRAINT_NAME, C.CONSTRAINT_TYPE ";
+  sql += "FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS C ";
+  sql +=   "INNER JOIN INFORMATION_SCHEMA.TABLES T ";
+  sql +=   "ON C.TABLE_NAME = T.TABLE_NAME ";
+  sql +=     "AND C.TABLE_SCHEMA = T.TABLE_SCHEMA ";
+  sql += "WHERE C.TABLE_SCHEMA='" + m_db.databaseName() + "' ";
+  sql += "AND C.TABLE_NAME='" + table + "' ";
+
+  sql += "ORDER BY CONSTRAINT_NAME";
+
+  if (!m_db.isOpen()) {
+    m_db.open();
+  }
+
+  QSqlQuery query(m_db);
+  if (!query.exec(sql)) {
+    qDebug() << query.lastError().text();
+    m_db.close();
+    return cons;
+  }
+
+  while (query.next()) {
+    SqlConstraint c;
+    c.name = query.value(0).toString();
+    QString ty = query.value(1).toString();
+    if (ty == "PRIMARY KEY") {
+      c.type = PrimaryKey;
+    } else if (ty == "FOREIGN KEY") {
+      c.type = ForeignKey;
+    } else {
+      c.type = Unique;
+    }
+
+    cons << c;
+  }
+
+  m_db.close();
+  return cons;
+}
+
 SqlWrapper::WrapperFeatures MysqlWrapper::features() {
   return BasicFeatures | ODBC;
 }

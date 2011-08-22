@@ -44,11 +44,18 @@ public:
 
   virtual QList<SqlColumn> columns(QString table) { return QList<SqlColumn>(); };
 
+  virtual QList<SqlConstraint> constraints(QString table) { return QList<SqlConstraint>(); };
+
   virtual QString driver() =0;
   virtual QString driverName() { return ""; };
   virtual QString driverIconCode() { return ""; };
 
   virtual WrapperFeatures features() =0;
+
+  /**
+   * Liste des index pour une table donnée.
+   */
+  virtual QList<SqlIndex> indexes(QString table) { return QList<SqlIndex>(); };
 
   virtual bool isIndexed() { return true; };
   virtual bool isRemote() { return true; };
