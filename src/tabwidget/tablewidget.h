@@ -28,7 +28,6 @@ Q_OBJECT
 public:
   TableWidget(QWidget* =0);
   TableWidget(QString table, int idx, QWidget *parent =0);
-  ~TableWidget();
 
   QIcon     icon();
   QString   id();
@@ -42,6 +41,7 @@ signals:
   void ready();
 
 protected:
+  void      closeEvent(QCloseEvent *event);
   void      run();
   void      setupWidgets();
 

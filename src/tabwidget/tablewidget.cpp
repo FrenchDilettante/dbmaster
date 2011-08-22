@@ -29,10 +29,10 @@ TableWidget::TableWidget(QString table, int idx, QWidget *parent)
   setTable(idx, table);
 }
 
-TableWidget::~TableWidget() {
-  if (db.isOpen()) {
-    db.close();
-  }
+void TableWidget::closeEvent(QCloseEvent *event) {
+  db.close();
+  QSqlDatabase::removeDatabase(db.connectionName());
+  event->accept();
 }
 
 QIcon TableWidget::icon()
