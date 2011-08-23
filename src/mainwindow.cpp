@@ -181,6 +181,7 @@ void MainWindow::closeEvent(QCloseEvent *event) {
 
   // Positionnement de la toolbar principale
   s.setValue("maintoolbar_area", toolBarArea(mainToolBar));
+  s.setValue("dbtoolbar_area", toolBarArea(dbToolBar));
 
   s.endGroup();
 
@@ -655,6 +656,7 @@ void MainWindow::setupWidgets()
 
   dockWidget->setVisible(s.value("maindock_visible", true).toBool());
 
+  addToolBar((Qt::ToolBarArea) s.value("dbtoolbar_area", 4).toInt(), dbToolBar);
   addToolBar((Qt::ToolBarArea) s.value("maintoolbar_area", 4).toInt(),
              mainToolBar);
 
