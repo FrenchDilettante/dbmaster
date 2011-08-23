@@ -46,8 +46,7 @@ MainWindow::MainWindow(QWidget *parent)
   setupConnections();
 }
 
-MainWindow::~MainWindow()
-{
+MainWindow::~MainWindow() {
 }
 
 /**
@@ -203,11 +202,11 @@ void MainWindow::closeEvent(QCloseEvent *event) {
   }
   s.endArray();
 
-  // on prend le soin de fermer toutes les connexions
-  DbManager::closeAll();
-
   // et d'enregistrer les plugins
   PluginManager::save();
+
+  // on prend le soin de fermer toutes les connexions
+  DbManager::closeAll();
 
   event->accept();
 }

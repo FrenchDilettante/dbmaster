@@ -319,7 +319,7 @@ void DbManagerPrivate::open(int idx, QString pswd) {
   m_connections[idx].status = Connecting;
   m_connections[idx].item->setIcon(IconManager::get("database_lightning"));
   m_connections[idx].db.open();
-  m_connections[idx].status = Open;
+  m_connections[idx].status = m_connections[idx].db.isOpen() ? Open : Closed;
 
   refreshModelItem(idx);
 }

@@ -77,21 +77,24 @@ void QueryEditorWidget::checkDbOpen() {
 }
 
 void QueryEditorWidget::closeEvent(QCloseEvent *event) {
-  if(isSaved())
+  if (isSaved()) {
     event->accept();
-  else {
-    if(confirmClose())
+  } else {
+    if (confirmClose()) {
       event->accept();
-    else
+    } else {
       event->ignore();
+    }
+  }
+
+  if (event->isAccepted()) {
+    query.clear();
   }
 }
 
-bool QueryEditorWidget::confirmClose()
-{
+bool QueryEditorWidget::confirmClose() {
   // check if it's saved or not
-  if(!isSaved())
-  {
+  if (!isSaved()) {
     int ret = QMessageBox::warning(
         this,
         tr( "DbMaster" ),
@@ -99,8 +102,7 @@ bool QueryEditorWidget::confirmClose()
         QMessageBox::Cancel | QMessageBox::Save | QMessageBox::Discard,
         QMessageBox::Cancel);
 
-    switch(ret)
-    {
+    switch(ret) {
     case QMessageBox::Cancel:
       return false;
 

@@ -107,7 +107,7 @@ int DbTreeView::currentDbIdx() {
     return -1;
   }
 
-  return selectedIndexes().at(0).row();
+  return parentIdx(selectedIndexes().at(0));
 }
 
 void DbTreeView::editCurrent() {
