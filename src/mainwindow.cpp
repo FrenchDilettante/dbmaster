@@ -180,6 +180,14 @@ void MainWindow::closeEvent(QCloseEvent *event) {
     s.setValue(settingsName+"_floating", dock->isFloating());
     s.setValue(settingsName+"_position", dock->pos());
     s.setValue(settingsName+"_size", dock->size());
+    QString stack;
+    foreach (QDockWidget *d, tabifiedDockWidgets(dock)) {
+      stack += dockMap.key(d) + ",";
+    }
+    if (stack.length() > 0) {
+      stack.remove(stack.length() - 1, 1);
+    }
+    s.setValue(settingsName+"_stack", stack);
   }
 
   // Positionnement de la toolbar principale
@@ -656,6 +664,11 @@ void MainWindow::setupWidgets() {
     }
 
     dock->setVisible(s.value(settingsName+"_visible", true).toBool());
+
+    QStringList stack = s.value(settingsName+"_stack", "").toString().split(",");
+    foreach (QString s, stack) {
+      tabifyDockWidget(dock, dockMap[s]);
+    }
   }
 
   // Position des toolbar
