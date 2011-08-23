@@ -35,20 +35,17 @@ void TableWidget::closeEvent(QCloseEvent *event) {
   event->accept();
 }
 
-QIcon TableWidget::icon()
-{
+QIcon TableWidget::icon() {
   return IconManager::get("table");
 }
 
-QString TableWidget::id()
-{
+QString TableWidget::id() {
   return QString("t %1 on %2")
       .arg(m_table)
       .arg(db.connectionName().split("_")[0]);
 }
 
-void TableWidget::refresh()
-{
+void TableWidget::refresh() {
   if(!db.isOpen())
     emit closeRequested();
 }
