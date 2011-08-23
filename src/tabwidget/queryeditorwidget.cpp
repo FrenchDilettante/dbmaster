@@ -402,6 +402,7 @@ void QueryEditorWidget::setupWidgets() {
   resultButton = new QToolButton(this);
   resultButton->setText(tr("result"));
   resultButton->setCheckable(true);
+  resultButton->setEnabled(false);
   statusBar->addPermanentWidget(resultButton);
   connect(resultButton, SIGNAL(clicked(bool)),
           this, SLOT(showResult(bool)));
@@ -493,6 +494,7 @@ void QueryEditorWidget::validate() {
     tabView->setQuery(model);
     tabWidget->setCurrentIndex(1);
     consoleButton->setChecked(false);
+    resultButton->setEnabled(true);
     resultButton->setChecked(true);
 
     if(actionClearOnSuccess->isChecked())
@@ -515,6 +517,11 @@ void QueryEditorWidget::validate() {
     break;
 
   default:
+    tabWidget->setCurrentIndex(0);
+    consoleButton->setChecked(true);
+    resultButton->setChecked(false);
+    resultButton->setEnabled(false);
+
     statusBar->showMessage(tr("Unable to run query"));
 
     debugText->append(QString("<b>[%1]</b>%2")
