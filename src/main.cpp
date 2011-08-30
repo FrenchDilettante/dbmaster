@@ -20,10 +20,9 @@
 #include "tabwidget/abstracttabwidget.h"
 #include "widgets/querytextedit.h"
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
   QApplication::setApplicationName("dbmaster");
-  QApplication::setApplicationVersion("0.8");
+  QApplication::setApplicationVersion("0.8.1");
   QApplication::setOrganizationDomain("dbmaster.org");
   QApplication a(argc, argv);
 

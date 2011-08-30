@@ -1111,54 +1111,54 @@ msgctxt "ResultView|"
 msgid "Show"
 msgstr "Montrer"
 
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:240
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:243
 msgctxt "ResultView|"
 msgid "results per page"
 msgstr "résultats par page"
 
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:263
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:266
 msgctxt "ResultView|"
 msgid "Add a row"
 msgstr "Ajouter une ligne"
 
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:266
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:269
 msgctxt "ResultView|"
 msgid "+"
 msgstr "+"
 
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:282
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:285
 msgctxt "ResultView|"
 msgid "Delete row(s)"
 msgstr "Supprimer une ligne"
 
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:285
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:288
 msgctxt "ResultView|"
 msgid "-"
 msgstr "-"
 
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:340
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.ui:343
 msgctxt "ResultView|"
 msgid "Fetching..."
 msgstr "Exécution..."
 
 #: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:151
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:320
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:321
 msgctxt "ResultView|"
 msgid "Apply"
 msgstr "Appliquer"
 
 #: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:153
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:322
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:323
 msgctxt "ResultView|"
 msgid "Cancel"
 msgstr "Annuler"
 
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:259
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:260
 msgctxt "ResultView|"
 msgid "Error"
 msgstr "Erreur"
 
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:260
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:261
 #, qt-format
 msgctxt "ResultView|"
 msgid ""
@@ -1168,7 +1168,7 @@ msgstr ""
 "Impossible d'ouvrir la table. Erreur retournée :\n"
 "%1"
 
-#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:365
+#: /home/manu/programmation/dbmaster/src/widgets/resultview.cpp:369
 #, qt-format
 msgctxt "ResultView|"
 msgid "Page %1/%2"
@@ -1751,43 +1751,33 @@ msgctxt "PluginManagerPrivate|"
 msgid "Version"
 msgstr "Version"
 
-#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:109
-msgctxt "PluginManagerPrivate|"
-msgid "Add a plugin"
-msgstr "Ajouter un plugin"
-
-#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:110
-msgctxt "PluginManagerPrivate|"
-msgid "This plugin is already registered"
-msgstr "Ce plugin est déjà présent"
-
-#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:119
+#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:123
 msgctxt "PluginManagerPrivate|"
 msgid "Other"
 msgstr "Autre"
 
-#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:122
+#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:126
 msgctxt "PluginManagerPrivate|"
 msgid "Export engine"
 msgstr "Moteur d'export"
 
-#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:124
+#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:128
 msgctxt "PluginManagerPrivate|"
 msgid "SQL Wrapper"
 msgstr "Adaptateur SQL"
 
-#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:148
-#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:153
+#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:152
+#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:157
 msgctxt "PluginManagerPrivate|"
 msgid "Incorrect plugin file"
 msgstr "Fichier de plugin incorrect"
 
-#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:149
+#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:153
 msgctxt "PluginManagerPrivate|"
 msgid "This file contains no DbMaster plugin."
 msgstr "Ce fichier ne contient aucun plugin."
 
-#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:154
+#: /home/manu/programmation/dbmaster/src/plugins/pluginmanager.cpp:158
 msgctxt "PluginManagerPrivate|"
 msgid "Unable to load the plugin. Specified error : \n"
 msgstr "Impossible de charger le plugin. Erreur retournée :\n"
@@ -1901,43 +1891,43 @@ msgctxt "TableWidget|"
 msgid "No"
 msgstr "Non"
 
-#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:70
+#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:71
 msgctxt "DbTreeView|"
 msgid "Disconnect"
 msgstr "Déconnecter"
 
-#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:73
-#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:276
+#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:74
+#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:290
 msgctxt "DbTreeView|"
 msgid "Connect"
 msgstr "Connecter"
 
-#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:218
+#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:232
 msgctxt "DbTreeView|"
 msgid "Cannot remove"
 msgstr "Impossible de supprimer"
 
-#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:219
+#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:233
 msgctxt "DbTreeView|"
 msgid "You must close the database before remove it."
 msgstr "Vous devez fermer la connexion avant de la supprimer."
 
-#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:257
+#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:271
 msgctxt "DbTreeView|"
 msgid "New connection"
 msgstr "Nouvelle connexion"
 
-#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:262
+#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:276
 msgctxt "DbTreeView|"
 msgid "Edit"
 msgstr "Modifier"
 
-#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:266
+#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:280
 msgctxt "DbTreeView|"
 msgid "Refresh"
 msgstr "Rafraîchir"
 
-#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:271
+#: /home/manu/programmation/dbmaster/src/widgets/dbtreeview.cpp:285
 msgctxt "DbTreeView|"
 msgid "Remove"
 msgstr "Supprimer"
@@ -2028,49 +2018,6 @@ msgstr "Copier"
 msgctxt "ResultViewTable|"
 msgid "Export"
 msgstr "Exporter"
-
-#~ msgctxt "PlainTextWizardPage~|"
-#~ msgid "WizardPage"
-#~ msgstr ""
-
-#~ msgctxt "PlainTextWizardPage~|"
-#~ msgid "Details"
-#~ msgstr "Détails"
-
-#~ msgctxt "PlainTextWizardPage~|"
-#~ msgid ""
-#~ "This form fill permit you to specify the way the file will be formatted."
-#~ msgstr ""
-
-#~ msgctxt "PlainTextWizardPage~|"
-#~ msgid "Column"
-#~ msgstr ""
-
-#~ msgctxt "PlainTextWizardPage~|"
-#~ msgid "Character count"
-#~ msgstr ""
-
-#~ msgctxt "PlainTextWizardPage~|"
-#~ msgid "Position in file"
-#~ msgstr ""
-
-#~ msgctxt "PlainTextExportEngine~|"
-#~ msgid "Plain text export engine"
-#~ msgstr ""
-
-#~ msgctxt "PlainTextExportEngine~|"
-#~ msgid "Plain text"
-#~ msgstr ""
-
-#: /home/manu/programmation/dbmaster/plugins/wrappers/db2i/db2iwrapper.h:17
-msgctxt "Db2iWrapper|"
-msgid "DB2 for System i wrapper"
-msgstr "Adaptateur pour DB2 i5"
-
-#: /home/manu/programmation/dbmaster/plugins/wrappers/db2i/db2iwrapper.h:25
-msgctxt "Db2iWrapper|"
-msgid "DB2 for i"
-msgstr "DB2 i5"
 
 #: /home/manu/programmation/dbmaster/plugins/wrappers/sqlite/sqlitewrapper.h:18
 msgctxt "SqliteWrapper|"

@@ -40,6 +40,7 @@ struct SqlColumn {
 
 struct SqlTable {
   QString name;
+  int columnCount;
   QList<SqlColumn> columns;
   QString owner;
   TableType type;
