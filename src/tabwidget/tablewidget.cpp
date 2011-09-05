@@ -101,6 +101,9 @@ void TableWidget::setupWidgets() {
   connect(tableView, SIGNAL(reloadRequested()), this, SLOT(reload()));
 
   connect(this, SIGNAL(ready()), this, SLOT(validate()));
+
+  structureTabWidget->setTabIcon(0, IconManager::get("column"));
+  structureTabWidget->setTabIcon(1, IconManager::get("key"));
 }
 
 void TableWidget::showError(QSqlError err) {

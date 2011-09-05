@@ -35,14 +35,14 @@
         <number>4</number>
        </property>
        <item row="0" column="0">
-        <widget class="QTabWidget" name="tabWidget_2">
+        <widget class="QTabWidget" name="structureTabWidget">
          <property name="tabPosition">
           <enum>QTabWidget::South</enum>
          </property>
          <property name="currentIndex">
           <number>0</number>
          </property>
-         <widget class="QWidget" name="tab_5">
+         <widget class="QWidget" name="columnsPage">
           <attribute name="title">
            <string>Columns</string>
           </attribute>
@@ -78,7 +78,7 @@
            </item>
           </layout>
          </widget>
-         <widget class="QWidget" name="tab_6">
+         <widget class="QWidget" name="constraintsPage">
           <attribute name="title">
            <string>Constraints</string>
           </attribute>
