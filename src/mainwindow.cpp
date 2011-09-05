@@ -666,7 +666,9 @@ void MainWindow::setupWidgets() {
 
     QStringList stack = s.value(settingsName+"_stack", "").toString().split(",");
     foreach (QString s, stack) {
-      tabifyDockWidget(dock, dockMap[s]);
+      if (dockMap.contains(s)) {
+        tabifyDockWidget(dock, dockMap[s]);
+      }
     }
   }
 
