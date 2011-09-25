@@ -55,6 +55,9 @@ private:
   static QString lastPath;
   QMap<QRadioButton*, ExportEngine*> formatMap;
   QGridLayout *formatLayout;
+
+private slots:
+  void changeEngine();
 };
 
 
