@@ -16,6 +16,9 @@
   <layout class="QFormLayout" name="formLayout">
    <item row="0" column="0">
     <widget class="QGroupBox" name="queryGroupBox">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="title">
       <string>Export query</string>
      </property>
