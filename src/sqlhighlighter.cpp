@@ -199,43 +199,47 @@ void SqlHighlighter::reloadContext(QStringList tables,
   rehighlight();
 }
 
-void SqlHighlighter::reloadKeywords()
-{
+bool SqlHighlighter::reloadKeywords() {
   basicSqlKeywords.clear();
   sqlFunctions.clear();
   sqlTypes.clear();
 
   QStringList files;
   QString prefix;
+
+  if (QFile::exists("share/sql_basics")) {
+    prefix = "share/";
+  } else {
 #if defined( Q_WS_X11 )
-  prefix = QString( PREFIX ).append( "/share/dbmaster/sqlsyntax/" );
+    prefix = QString( PREFIX ).append( "/share/dbmaster/sqlsyntax/" );
 #endif
 #if defined(Q_WS_WIN)
-  prefix = "share\\sqlsyntax\\";
+    prefix = "share\\sqlsyntax\\";
 #endif
+  }
   files << "sql_basics"
         << "sql_functions"
         << "sql_types";
 
-  for( int i=0; i<files.size(); i++ )
-  {
-    QFile file( files[i].prepend( prefix ) );
-    if( !file.open( QIODevice::ReadOnly | QIODevice::Text ) )
-    {
-      qDebug() << "Cannot open " << file.fileName();
-      return;
+  for (int i=0; i<files.size(); i++) {
+    QFile file(files[i].prepend(prefix));
+    if (!file.open( QIODevice::ReadOnly | QIODevice::Text)) {
+      QMessageBox::critical(NULL,
+                 tr("Missing file"),
+                 tr("%1 cannot be found. You might be missing some keywords.")
+                            .arg(file.fileName()));
+      return false;
     }
 
-    while( !file.atEnd() )
-    {
+    while (!file.atEnd()) {
       QString line = file.readLine();
-      if( line.isEmpty() )
+      if (line.isEmpty()) {
         continue;
+      }
 
       line.remove( "\n" );
 
-      switch( i )
-      {
+      switch (i) {
       case 0:
         basicSqlKeywords << line;
         break;
@@ -251,6 +255,7 @@ void SqlHighlighter::reloadKeywords()
   }
 
   reloadColors();
+  return true;
 }
 
 QStringList SqlHighlighter::sqlFunctionList()
