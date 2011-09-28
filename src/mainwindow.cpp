@@ -679,11 +679,13 @@ void MainWindow::setupWidgets()
 
 #if defined(Q_WS_X11)
   QString lang = QLocale::system().name().left(2).toLower();
-  QString url = QString(QString(PREFIX) + "/share/dbmaster/index_%1.html")
-                  .arg(lang);
+  bool dev = QDir("share/html").exists();
+  QString folder = dev ? "share/html/" : QString(PREFIX) + "/share/dbmaster/";
+  QString url = folder + QString("index_%1.html").arg(lang);
 
-  if(!QFile::exists(url))
-    url = QString(QString(PREFIX) + "/share/dbmaster/index_en.html");
+  if (!QFile::exists(url)) {
+    url = folder + QString("index_en.html");
+  }
 
   textBrowser->setSource(url);
 #endif
