@@ -107,6 +107,26 @@ void EwFirstPage::browse() {
   pathLineEdit->setText(lastPath);
 }
 
+void EwFirstPage::changeEngine() {
+  QRadioButton *btn = dynamic_cast<QRadioButton*>(sender());
+  if (btn == NULL) {
+    return;
+  }
+
+  ExportEngine *engine = formatMap[btn];
+
+  QString path = pathLineEdit->text();
+  foreach (ExportEngine *e, formatMap.values()) {
+    if (path.endsWith(e->extension())) {
+      int right = e->extension().length();
+      path = path.left(path.length() - right);
+      path.append(engine->extension());
+
+      pathLineEdit->setText(path);
+    }
+  }
+}
+
 void EwFirstPage::initializePage() {
   // Nettoyage liste formats
   foreach (QRadioButton *r, formatMap.keys()) {
@@ -137,6 +157,8 @@ void EwFirstPage::initializePage() {
     }
     left = !left;
     formatLayout->addWidget(btn, x, y);
+
+    connect(btn, SIGNAL(clicked()), this, SLOT(changeEngine()));
   }
 }
 

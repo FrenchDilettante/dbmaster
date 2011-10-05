@@ -22,7 +22,7 @@
 
 int main(int argc, char *argv[]) {
   QApplication::setApplicationName("dbmaster");
-  QApplication::setApplicationVersion("0.8.1");
+  QApplication::setApplicationVersion("0.8.2");
   QApplication::setOrganizationDomain("dbmaster.org");
   QApplication a(argc, argv);
 

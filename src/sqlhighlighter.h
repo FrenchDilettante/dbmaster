@@ -27,7 +27,7 @@ public:
   void reloadContext(QStringList tables, QMultiMap<QString, QString> fields);
 
   static void reloadColors();
-  static void reloadKeywords();
+  static bool reloadKeywords();
   static QStringList sqlKeywordList();
   static QStringList sqlFunctionList();
   static QStringList sqlTypeList();
