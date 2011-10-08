@@ -191,6 +191,7 @@ void MainWindow::closeEvent(QCloseEvent *event) {
 
   // Positionnement de la toolbar principale
   s.setValue("maintoolbar_area", toolBarArea(mainToolBar));
+  s.setValue("dbtoolbar_area", toolBarArea(dbToolBar));
 
   s.endGroup();
 
@@ -673,7 +674,7 @@ void MainWindow::setupWidgets() {
   }
 
   // Position des toolbar
-  // FIXME elle est où l'autre toolbar ?
+  addToolBar((Qt::ToolBarArea) s.value("dbtoolbar_area", 4).toInt(), dbToolBar);
   addToolBar((Qt::ToolBarArea) s.value("maintoolbar_area", 4).toInt(),
              mainToolBar);
 
@@ -695,11 +696,13 @@ void MainWindow::setupWidgets() {
   // Page d'accueil
 #if defined(Q_WS_X11)
   QString lang = QLocale::system().name().left(2).toLower();
-  QString url = QString(QString(PREFIX) + "/share/dbmaster/index_%1.html")
-                  .arg(lang);
+  bool dev = QDir("share/html").exists();
+  QString folder = dev ? "share/html/" : QString(PREFIX) + "/share/dbmaster/";
+  QString url = folder + QString("index_%1.html").arg(lang);
 
-  if(!QFile::exists(url))
-    url = QString(QString(PREFIX) + "/share/dbmaster/index_en.html");
+  if (!QFile::exists(url)) {
+    url = folder + QString("index_en.html");
+  }
 
   textBrowser->setSource(url);
 #endif
