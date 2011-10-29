@@ -58,52 +58,52 @@ msgctxt "HtmlWizardPage|"
 msgid "HTML options"
 msgstr "Options HTML"
 
-#: /home/manu/programmation/dbmaster/plugins/exportengines/html/htmlwizardpage.ui:20
+#: /home/manu/programmation/dbmaster/plugins/exportengines/html/htmlwizardpage.ui:23
 msgctxt "HtmlWizardPage|"
 msgid "Export query"
 msgstr "Exporter la requête"
 
-#: /home/manu/programmation/dbmaster/plugins/exportengines/html/htmlwizardpage.ui:32
+#: /home/manu/programmation/dbmaster/plugins/exportengines/html/htmlwizardpage.ui:35
 msgctxt "HtmlWizardPage|"
 msgid "Apply syntax coloring"
 msgstr "Appliquer la coloration syntaxique"
 
-#: /home/manu/programmation/dbmaster/plugins/exportengines/html/htmlwizardpage.ui:42
+#: /home/manu/programmation/dbmaster/plugins/exportengines/html/htmlwizardpage.ui:45
 msgctxt "HtmlWizardPage|"
 msgid "Result"
 msgstr "Résultat"
 
-#: /home/manu/programmation/dbmaster/plugins/exportengines/html/htmlwizardpage.ui:48
+#: /home/manu/programmation/dbmaster/plugins/exportengines/html/htmlwizardpage.ui:51
 msgctxt "HtmlWizardPage|"
 msgid "Whole result"
 msgstr "Résultat entier"
 
-#: /home/manu/programmation/dbmaster/plugins/exportengines/html/htmlwizardpage.ui:58
+#: /home/manu/programmation/dbmaster/plugins/exportengines/html/htmlwizardpage.ui:61
 msgctxt "HtmlWizardPage|"
 msgid "Limit result to"
 msgstr "Limiter le résultat aux"
 
-#: /home/manu/programmation/dbmaster/plugins/exportengines/html/htmlwizardpage.ui:84
+#: /home/manu/programmation/dbmaster/plugins/exportengines/html/htmlwizardpage.ui:87
 msgctxt "HtmlWizardPage|"
 msgid "firsts"
 msgstr "premières"
 
-#: /home/manu/programmation/dbmaster/plugins/exportengines/html/htmlwizardpage.ui:89
+#: /home/manu/programmation/dbmaster/plugins/exportengines/html/htmlwizardpage.ui:92
 msgctxt "HtmlWizardPage|"
 msgid "lasts"
 msgstr "dernières"
 
-#: /home/manu/programmation/dbmaster/plugins/exportengines/html/htmlwizardpage.ui:94
+#: /home/manu/programmation/dbmaster/plugins/exportengines/html/htmlwizardpage.ui:97
 msgctxt "HtmlWizardPage|"
 msgid "firsts & lasts"
 msgstr "premières & dernières"
 
-#: /home/manu/programmation/dbmaster/plugins/exportengines/html/htmlwizardpage.ui:102
+#: /home/manu/programmation/dbmaster/plugins/exportengines/html/htmlwizardpage.ui:105
 msgctxt "HtmlWizardPage|"
 msgid "lines"
 msgstr "lignes"
 
-#: /home/manu/programmation/dbmaster/plugins/exportengines/html/htmlwizardpage.ui:111
+#: /home/manu/programmation/dbmaster/plugins/exportengines/html/htmlwizardpage.ui:114
 msgctxt "HtmlWizardPage|"
 msgid "Print column names"
 msgstr "Inclure les noms de colonne"
@@ -169,7 +169,10 @@ msgstr "Auteurs"
 #| "   - Thibault HANOUT\n"
 #| "\n"
 #| "Translator :\n"
-#| "[fr] - Emmanuel BOURGERIE"
+#| "[fr] - Emmanuel BOURGERIE\n"
+#| "\n"
+#| "Other contributors :\n"
+#| "   - Marion CROISÉ"
 msgctxt "AboutDialog|"
 msgid ""
 "Developpers :\n"
@@ -177,20 +180,14 @@ msgid ""
 "   - Thibault HANOUT\n"
 "\n"
 "Translator :\n"
-"[fr] - Emmanuel BOURGERIE\n"
-"\n"
-"Other contributors :\n"
-"   - Marion CROISÉ"
+"[fr] - Emmanuel BOURGERIE"
 msgstr ""
 "Développeurs :\n"
 "   - Emmanuel BOURGERIE\n"
 "   - Thibault HANOUT\n"
 "\n"
 "Traducteur :\n"
-"[fr] - Emmanuel BOURGERIE\n"
-"\n"
-"Autres contributeurs :\n"
-"   - Marion CROISÉ"
+"[fr] - Emmanuel BOURGERIE"
 
 #: /home/manu/programmation/dbmaster/src/dialogs/aboutdialog.cpp:23
 #, qt-format
@@ -1239,17 +1236,17 @@ msgctxt "EwExportPage|"
 msgid "The export process is finished."
 msgstr "Le processus d'export est terminé."
 
-#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:157
+#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:179
 msgctxt "EwExportPage|"
 msgid "Export running..."
 msgstr "Export en cours..."
 
-#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:179
+#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:201
 msgctxt "EwExportPage|"
 msgid "Openning error"
 msgstr "Erreur d'ouverture"
 
-#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:180
+#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:202
 #, qt-format
 msgctxt "EwExportPage|"
 msgid "Unable to open the file %1."
@@ -1468,17 +1465,17 @@ msgctxt "QObject|"
 msgid "Connection %1 added"
 msgstr "Connexion %1 ajoutée"
 
-#: /home/manu/programmation/dbmaster/src/main.cpp:34
+#: /home/manu/programmation/dbmaster/src/main.cpp:33
 msgctxt "QObject|"
 msgid "Loading translations..."
 msgstr "Chargement des traductions..."
 
-#: /home/manu/programmation/dbmaster/src/main.cpp:69
+#: /home/manu/programmation/dbmaster/src/main.cpp:68
 msgctxt "QObject|"
 msgid "Loading plugins..."
 msgstr "Chargement des plugins..."
 
-#: /home/manu/programmation/dbmaster/src/main.cpp:72
+#: /home/manu/programmation/dbmaster/src/main.cpp:71
 msgctxt "QObject|"
 msgid "Initialization..."
 msgstr "Initialisation..."
@@ -1637,12 +1634,12 @@ msgctxt "MainWindow|"
 msgid "Starting DbMaster"
 msgstr "Démarrage de DbMaster"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:74
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:73
 msgctxt "MainWindow|"
 msgid "Error"
 msgstr "Erreur"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:75
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:74
 #, qt-format
 msgctxt "MainWindow|"
 msgid ""
@@ -1652,34 +1649,34 @@ msgstr ""
 "Impossible de se connecter :\n"
 "%1"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:130
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:129
 msgctxt "MainWindow|"
 msgid "Unsaved files"
 msgstr "Fichiers non enregistrés"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:131
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:130
 msgctxt "MainWindow|"
 msgid "Some files are not saved. Are you sure to want to quit ?"
 msgstr ""
 "Certains fichiers n'ont pas été enregistrés. Êtes-vous sûr de vouloir "
 "quitter ?"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:336
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:344
 msgctxt "MainWindow|"
 msgid "Select a query to open"
 msgstr "Ouvrir une requête"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:338
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:346
 msgctxt "MainWindow|"
 msgid "Query file (*.sql);;All files (*.*)"
 msgstr "Fichier de requête (*.sql);;Tous fichiers (*.*)"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:485
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:493
 msgctxt "MainWindow|"
 msgid "No recent file"
 msgstr "Pas de fichier récent"
 
-#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:487
+#: /home/manu/programmation/dbmaster/src/mainwindow.cpp:495
 msgctxt "MainWindow|"
 msgid "Clear"
 msgstr "Effacer"
@@ -1735,17 +1732,17 @@ msgctxt "PluginManagerPrivate|"
 msgid "Unable to load the plugin. Specified error : \n"
 msgstr "Impossible de charger le plugin. Erreur retournée :\n"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:97
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:125
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:247
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:308
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:320
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:100
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:127
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:249
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:310
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:322
 msgctxt "QueryEditorWidget|"
 msgid "DbMaster"
 msgstr "DbMaster"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:98
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:120
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:101
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:122
 msgctxt "QueryEditorWidget|"
 msgid ""
 "Warning ! All your modifications will be lost.\n"
@@ -1754,7 +1751,7 @@ msgstr ""
 "Attention ! Toutes les modifications seront perdues.\n"
 "Voulez-vous enregistrer ?"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:122
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:124
 #, qt-format
 msgctxt "QueryEditorWidget|"
 msgid ""
@@ -1764,65 +1761,65 @@ msgstr ""
 "Attention ! %1 a été modifié.\n"
 "Voulez-vous l'enregistrer ?"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:248
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:250
 msgctxt "QueryEditorWidget|"
 msgid "Unable to open the file !"
 msgstr "Impossible d'ouvrir le fichier !"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:293
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:295
 msgctxt "QueryEditorWidget|"
 msgid "Running..."
 msgstr "Exécution..."
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:309
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:311
 msgctxt "QueryEditorWidget|"
 msgid "Query file (*.sql);;All files (*.*)"
 msgstr "Fichier de requête (*.sql);;Tous fichiers (*.*)"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:320
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:322
 msgctxt "QueryEditorWidget|"
 msgid "Unable to save the file !"
 msgstr "Impossible d'enregistrer le fichier !"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:400
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:402
 msgctxt "QueryEditorWidget|"
 msgid "Display"
 msgstr "Afficher"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:403
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:405
 msgctxt "QueryEditorWidget|"
 msgid "result"
 msgstr "résultat"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:410
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:413
 msgctxt "QueryEditorWidget|"
 msgid "console"
 msgstr "console"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:462
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:465
 msgctxt "QueryEditorWidget|"
 msgid "Query editor"
 msgstr "Éditeur de requêtes"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:518
+#: /home/manu/programmation/dbmaster/src/tabwidget/queryeditorwidget.cpp:527
 msgctxt "QueryEditorWidget|"
 msgid "Unable to run query"
 msgstr "Impossible d'exécuter la requête"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/tablewidget.cpp:71
+#: /home/manu/programmation/dbmaster/src/tabwidget/tablewidget.cpp:68
 #: /home/manu/programmation/dbmaster/src/tabwidget/tablewidget.cpp:111
 msgctxt "TableWidget|"
 msgid "Error"
 msgstr "Erreur"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/tablewidget.cpp:72
+#: /home/manu/programmation/dbmaster/src/tabwidget/tablewidget.cpp:69
 #, qt-format
 #| msgid "Unable to open the table %1.\n"
 msgctxt "TableWidget|"
 msgid "Unable to open the table %1. "
 msgstr "Impossible d'ouvrir la table %1."
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/tablewidget.cpp:73
+#: /home/manu/programmation/dbmaster/src/tabwidget/tablewidget.cpp:70
 msgctxt "TableWidget|"
 msgid "Check you have the necessary permissions."
 msgstr "Vérifiez que vous avez les permissions nécessaires."
@@ -1925,32 +1922,37 @@ msgstr "HTML"
 
 #: /home/manu/programmation/dbmaster/src/tabwidget/tablewidgetclass.ui:31
 msgctxt "TableWidgetClass|"
+msgid "Structure"
+msgstr ""
+
+#: /home/manu/programmation/dbmaster/src/tabwidget/tablewidgetclass.ui:47
+msgctxt "TableWidgetClass|"
 msgid "Columns"
 msgstr "Colonnes"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/tablewidgetclass.ui:43
-#: /home/manu/programmation/dbmaster/src/tabwidget/tablewidgetclass.ui:79
+#: /home/manu/programmation/dbmaster/src/tabwidget/tablewidgetclass.ui:59
+#: /home/manu/programmation/dbmaster/src/tabwidget/tablewidgetclass.ui:95
 msgctxt "TableWidgetClass|"
 msgid "Type"
 msgstr "Type"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/tablewidgetclass.ui:48
+#: /home/manu/programmation/dbmaster/src/tabwidget/tablewidgetclass.ui:64
 msgctxt "TableWidgetClass|"
 msgid "Permits null"
 msgstr "Permet null"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/tablewidgetclass.ui:53
+#: /home/manu/programmation/dbmaster/src/tabwidget/tablewidgetclass.ui:69
 msgctxt "TableWidgetClass|"
 msgid "Default"
 msgstr "Valeur par défaut"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/tablewidgetclass.ui:58
-#: /home/manu/programmation/dbmaster/src/tabwidget/tablewidgetclass.ui:84
+#: /home/manu/programmation/dbmaster/src/tabwidget/tablewidgetclass.ui:74
+#: /home/manu/programmation/dbmaster/src/tabwidget/tablewidgetclass.ui:100
 msgctxt "TableWidgetClass|"
 msgid "Comment"
 msgstr "Commentaire"
 
-#: /home/manu/programmation/dbmaster/src/tabwidget/tablewidgetclass.ui:67
+#: /home/manu/programmation/dbmaster/src/tabwidget/tablewidgetclass.ui:83
 msgctxt "TableWidgetClass|"
 msgid "Constraints"
 msgstr "Contraintes"
@@ -2000,3 +2002,14 @@ msgstr "Exporter"
 msgctxt "SqliteWrapper|"
 msgid "SQLite wrapper"
 msgstr "Adaptateur SQLite"
+
+#: /home/manu/programmation/dbmaster/src/sqlhighlighter.cpp:226
+msgctxt "SqlHighlighter|"
+msgid "Missing file"
+msgstr ""
+
+#: /home/manu/programmation/dbmaster/src/sqlhighlighter.cpp:227
+#, qt-format
+msgctxt "SqlHighlighter|"
+msgid "%1 cannot be found. You might be missing some keywords."
+msgstr ""
