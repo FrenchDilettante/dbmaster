@@ -4,6 +4,7 @@
 *.so
 doc/*/html
 dbmaster-*.*
+src/.cccc
 src/bin
 src/debug
 src/install
