@@ -58,52 +58,52 @@ msgctxt "HtmlWizardPage|"
 msgid "HTML options"
 msgstr "Options HTML"
 
-#: /home/manu/programmation/dbmaster/plugins/exportengines/html/htmlwizardpage.ui:20
+#: /home/manu/programmation/dbmaster/plugins/exportengines/html/htmlwizardpage.ui:23
 msgctxt "HtmlWizardPage|"
 msgid "Export query"
 msgstr "Exporter la requête"
 
-#: /home/manu/programmation/dbmaster/plugins/exportengines/html/htmlwizardpage.ui:32
+#: /home/manu/programmation/dbmaster/plugins/exportengines/html/htmlwizardpage.ui:35
 msgctxt "HtmlWizardPage|"
 msgid "Apply syntax coloring"
 msgstr "Appliquer la coloration syntaxique"
 
-#: /home/manu/programmation/dbmaster/plugins/exportengines/html/htmlwizardpage.ui:42
+#: /home/manu/programmation/dbmaster/plugins/exportengines/html/htmlwizardpage.ui:45
 msgctxt "HtmlWizardPage|"
 msgid "Result"
 msgstr "Résultat"
 
-#: /home/manu/programmation/dbmaster/plugins/exportengines/html/htmlwizardpage.ui:48
+#: /home/manu/programmation/dbmaster/plugins/exportengines/html/htmlwizardpage.ui:51
 msgctxt "HtmlWizardPage|"
 msgid "Whole result"
 msgstr "Résultat entier"
 
-#: /home/manu/programmation/dbmaster/plugins/exportengines/html/htmlwizardpage.ui:58
+#: /home/manu/programmation/dbmaster/plugins/exportengines/html/htmlwizardpage.ui:61
 msgctxt "HtmlWizardPage|"
 msgid "Limit result to"
 msgstr "Limiter le résultat aux"
 
-#: /home/manu/programmation/dbmaster/plugins/exportengines/html/htmlwizardpage.ui:84
+#: /home/manu/programmation/dbmaster/plugins/exportengines/html/htmlwizardpage.ui:87
 msgctxt "HtmlWizardPage|"
 msgid "firsts"
 msgstr "premières"
 
-#: /home/manu/programmation/dbmaster/plugins/exportengines/html/htmlwizardpage.ui:89
+#: /home/manu/programmation/dbmaster/plugins/exportengines/html/htmlwizardpage.ui:92
 msgctxt "HtmlWizardPage|"
 msgid "lasts"
 msgstr "dernières"
 
-#: /home/manu/programmation/dbmaster/plugins/exportengines/html/htmlwizardpage.ui:94
+#: /home/manu/programmation/dbmaster/plugins/exportengines/html/htmlwizardpage.ui:97
 msgctxt "HtmlWizardPage|"
 msgid "firsts & lasts"
 msgstr "premières & dernières"
 
-#: /home/manu/programmation/dbmaster/plugins/exportengines/html/htmlwizardpage.ui:102
+#: /home/manu/programmation/dbmaster/plugins/exportengines/html/htmlwizardpage.ui:105
 msgctxt "HtmlWizardPage|"
 msgid "lines"
 msgstr "lignes"
 
-#: /home/manu/programmation/dbmaster/plugins/exportengines/html/htmlwizardpage.ui:111
+#: /home/manu/programmation/dbmaster/plugins/exportengines/html/htmlwizardpage.ui:114
 msgctxt "HtmlWizardPage|"
 msgid "Print column names"
 msgstr "Inclure les noms de colonne"
@@ -169,7 +169,10 @@ msgstr "Auteurs"
 #| "   - Thibault HANOUT\n"
 #| "\n"
 #| "Translator :\n"
-#| "[fr] - Emmanuel BOURGERIE"
+#| "[fr] - Emmanuel BOURGERIE\n"
+#| "\n"
+#| "Other contributors :\n"
+#| "   - Marion CROISÉ"
 msgctxt "AboutDialog|"
 msgid ""
 "Developpers :\n"
@@ -177,20 +180,14 @@ msgid ""
 "   - Thibault HANOUT\n"
 "\n"
 "Translator :\n"
-"[fr] - Emmanuel BOURGERIE\n"
-"\n"
-"Other contributors :\n"
-"   - Marion CROISÉ"
+"[fr] - Emmanuel BOURGERIE"
 msgstr ""
 "Développeurs :\n"
 "   - Emmanuel BOURGERIE\n"
 "   - Thibault HANOUT\n"
 "\n"
 "Traducteur :\n"
-"[fr] - Emmanuel BOURGERIE\n"
-"\n"
-"Autres contributeurs :\n"
-"   - Marion CROISÉ"
+"[fr] - Emmanuel BOURGERIE"
 
 #: /home/manu/programmation/dbmaster/src/dialogs/aboutdialog.cpp:23
 #, qt-format
@@ -1260,18 +1257,18 @@ msgctxt "EwExportPage|"
 msgid "The export process is finished."
 msgstr "Le processus d'export est terminé."
 
-#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:175
-#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:186
+#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:197
+#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:208
 msgctxt "EwExportPage|"
 msgid "Export running..."
 msgstr "Export en cours..."
 
-#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:209
+#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:231
 msgctxt "EwExportPage|"
 msgid "Openning error"
 msgstr "Erreur d'ouverture"
 
-#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:210
+#: /home/manu/programmation/dbmaster/src/wizards/exportwizard.cpp:232
 #, qt-format
 msgctxt "EwExportPage|"
 msgid "Unable to open the file %1."
