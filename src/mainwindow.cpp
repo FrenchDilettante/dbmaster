@@ -156,16 +156,15 @@ void MainWindow::closeEvent(QCloseEvent *event) {
   // sauvegarde des préférences de la fenêtre
   QSettings s;
   s.beginGroup("mainwindow");
+  s.setValue("position", pos());
   if(windowState().testFlag(Qt::WindowMaximized))
   {
     // fenêtre maximisée
     s.setValue("maximized", true);
     s.remove("size");
-    s.remove("position");
   } else {
     // fenêtre non maximisée : on stocke position + taille
     s.setValue("size", size());
-    s.setValue("position", pos());
     s.remove("maximized");
   }
 
