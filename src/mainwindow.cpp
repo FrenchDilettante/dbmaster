@@ -157,8 +157,7 @@ void MainWindow::closeEvent(QCloseEvent *event) {
   QSettings s;
   s.beginGroup("mainwindow");
   s.setValue("position", pos());
-  if(windowState().testFlag(Qt::WindowMaximized))
-  {
+  if (windowState().testFlag(Qt::WindowMaximized)) {
     // fenêtre maximisée
     s.setValue("maximized", true);
     s.remove("size");
@@ -601,8 +600,20 @@ void MainWindow::setupConnections()
   connect(tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
 }
 
-void MainWindow::setupWidgets()
-{
+void MainWindow::setupDocks(QSettings *s) {
+  // Console dock
+  logDock->setVisible(false);
+  QAction *logAct = logDock->toggleViewAction();
+  menuPanels->addAction(logAct);
+
+  QToolButton *logBtn = new QToolButton(this);
+  logBtn->setAutoRaise(true);
+  logBtn->setDefaultAction(logAct);
+
+  QMainWindow::statusBar()->addWidget(logBtn);
+}
+
+void MainWindow::setupWidgets() {
   aboutDial     = new AboutDialog(this);
   confDial      = new ConfigDialog(this);
   logDial       = LogDialog::instance();
@@ -654,6 +665,8 @@ void MainWindow::setupWidgets()
   }
 
   dockWidget->setVisible(s.value("maindock_visible", true).toBool());
+
+  setupDocks(&s);
 
   addToolBar((Qt::ToolBarArea) s.value("dbtoolbar_area", 4).toInt(), dbToolBar);
   addToolBar((Qt::ToolBarArea) s.value("maintoolbar_area", 4).toInt(),

@@ -58,6 +58,7 @@ private:
   void                closeEvent(QCloseEvent*);
   AbstractTabWidget*  currentTab();
   void                setupConnections();
+  void                setupDocks(QSettings *s);
   void                setupWidgets();
 
   AboutDialog        *aboutDial;
