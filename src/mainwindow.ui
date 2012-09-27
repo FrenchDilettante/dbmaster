@@ -117,7 +117,6 @@
     <addaction name="actionDbManager"/>
     <addaction name="separator"/>
     <addaction name="actionPlugins"/>
-    <addaction name="actionLogs"/>
     <addaction name="actionPreferences"/>
    </widget>
    <widget class="QMenu" name="menu_Edit">
@@ -448,11 +447,6 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+A</string>
-   </property>
-  </action>
-  <action name="actionLogs">
-   <property name="text">
-    <string>Logs</string>
    </property>
   </action>
   <action name="actionAbout">

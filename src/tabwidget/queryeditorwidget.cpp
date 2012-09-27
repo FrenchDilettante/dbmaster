@@ -14,9 +14,9 @@
 #include "../dbmanager.h"
 #include "../iconmanager.h"
 #include "../mainwindow.h"
-#include "../dialogs/logdialog.h"
 #include "../query/queryscheduler.h"
 #include "../query/querytoken.h"
+#include "../tools/logger.h"
 #include "../widgets/resultview.h"
 
 #include "queryeditorwidget.h"
@@ -513,20 +513,19 @@ void QueryEditorWidget::validateToken(QSqlError err) {
 //      delete oldToken;
 //    }
 
-    statusBar->showMessage(
-        tr("Query executed with success in %2secs (%1 lines returned)")
+    logMsg = tr("Query executed with success in %2secs (%1 lines returned)")
         .arg(token->model()->rowCount())
-        .arg(token->duration()));
+        .arg(token->duration());
 
-    logMsg = tr("Query executed with success");
-    logData["query"] = token->query();
-    LogDialog::instance()->append(logMsg, logData);
+    statusBar->showMessage(logMsg);
 
     debugText->append(QString("<b>[%1]</b>%2")
                       .arg(QTime::currentTime().toString())
-                      .arg(tr("Query executed with success in %2secs (%1 lines returned)")
-                           .arg(token->model()->rowCount())
-                           .arg(token->duration())));
+                      .arg(logMsg));
+
+    logMsg += QString("<br /><span style=\"color: blue\">%1</span>")
+        .arg(token->query().replace("\n", " "));
+    Logger::instance->log(logMsg);
     break;
 
   default:

@@ -3,7 +3,6 @@
 
 #include <QDateTime>
 #include <QObject>
-#include <QSqlQuery>
 #include <QTextBrowser>
 
 class Logger : public QObject {
@@ -19,7 +18,6 @@ signals:
   
 public slots:
   void log(QString text);
-  void log(QSqlQuery *query);
 
 private:
   QTextBrowser *output;

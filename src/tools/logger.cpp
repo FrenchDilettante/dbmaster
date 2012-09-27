@@ -8,10 +8,6 @@ Logger::Logger(QObject *parent)
   output = NULL;
 }
 
-void Logger::log(QSqlQuery *query) {
-
-}
-
 void Logger::log(QString text) {
   if (output == NULL) {
     return;
@@ -19,11 +15,9 @@ void Logger::log(QString text) {
 
   QDateTime dt = QDateTime::currentDateTime();
 
-  QString out = "[%t] %x";
+  QString out = "<b>[%1]</b> %2";
 
-  output->append(out
-                 .replace("%t", dt.time().toString(Qt::DefaultLocaleShortDate))
-                 .replace("%x", text));
+  output->append(out.arg(dt.time().toString()).arg(text));
 
   emit entryAdded(dt, text);
 }

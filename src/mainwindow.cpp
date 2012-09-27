@@ -45,7 +45,7 @@ MainWindow::MainWindow(QWidget *parent)
 
   setupWidgets();
   Logger::instance->setTextBrowser(logBrowser);
-  LogDialog::instance()->append(tr("Starting DbMaster"));
+  Logger::instance->log(tr("Starting DbMaster"));
   setupConnections();
 }
 
@@ -549,7 +549,6 @@ void MainWindow::setupConnections()
   connect(actionEditConnection,SIGNAL(triggered()), dbTreeView,    SLOT(editCurrent()));
   connect(actionLeftPanel,    SIGNAL(triggered()),  this,          SLOT(toggleLeftPanel()));
   connect(actionLowerCase,    SIGNAL(triggered()),  this,          SLOT(lowerCase()));
-  connect(actionLogs,         SIGNAL(triggered()),  logDial,       SLOT(exec()));
   connect(actionNewQuery,     SIGNAL(triggered()),  this,          SLOT(newQuery()));
   connect(actionNextTab,      SIGNAL(triggered()),  this,          SLOT(nextTab()));
   connect(actionOpenQuery,    SIGNAL(triggered()),  this,          SLOT(openQuery()));
@@ -589,8 +588,6 @@ void MainWindow::setupConnections()
    * Dialogs
    */
   connect(dbWizard, SIGNAL(accepted()), this, SLOT(reloadDbList()));
-  connect(logDial,  SIGNAL(event(QString)),
-          QMainWindow::statusBar(), SLOT(showMessage(QString)));
 
   connect(QueryScheduler::instance(), SIGNAL(countChanged(int)),
           this, SLOT(setQueryCount(int)));
@@ -606,11 +603,18 @@ void MainWindow::setupDocks(QSettings *s) {
   // Console dock
   logDock->setVisible(false);
   QAction *logAct = logDock->toggleViewAction();
+  logAct->setIcon(IconManager::get("console"));
   menuPanels->addAction(logAct);
+
+  QFont f("Monospace");
+  f.setStyleHint(QFont::TypeWriter);
+  logBrowser->setFont(f);
 
   QToolButton *logBtn = new QToolButton(this);
   logBtn->setAutoRaise(true);
   logBtn->setDefaultAction(logAct);
+  logBtn->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+  logBtn->setIconSize(QSize(16, 16));
 
   QMainWindow::statusBar()->addWidget(logBtn);
 }
@@ -618,7 +622,6 @@ void MainWindow::setupDocks(QSettings *s) {
 void MainWindow::setupWidgets() {
   aboutDial     = new AboutDialog(this);
   confDial      = new ConfigDialog(this);
-  logDial       = LogDialog::instance();
   searchDialog  = new SearchDialog(this);
   //printDialog = new QPrintDialog(this);
 
