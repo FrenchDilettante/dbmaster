@@ -18,6 +18,7 @@
 #include "plugins/pluginmanager.h"
 #include "sqlhighlighter.h"
 #include "tabwidget/abstracttabwidget.h"
+#include "tools/logger.h"
 #include "widgets/querytextedit.h"
 
 int main(int argc, char *argv[]) {
@@ -28,6 +29,8 @@ int main(int argc, char *argv[]) {
 
   QSplashScreen splash(QPixmap(":/img/splash.png"));
   splash.show();
+
+  Logger *logger = new Logger;
 
   // Loading translations
   splash.showMessage(QObject::tr("Loading translations..."), Qt::AlignBottom);

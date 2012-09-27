@@ -35,7 +35,8 @@ SOURCES += main.cpp \
     widgets/colorbutton.cpp \
     tabwidget/schemawidget.cpp \
     dialogs/blobdialog.cpp \
-    widgets/resultviewtable.cpp
+    widgets/resultviewtable.cpp \
+    tools/logger.cpp
 HEADERS += mainwindow.h \
     dbmanager.h \
     tabwidget/tablewidget.h \
@@ -69,7 +70,8 @@ HEADERS += mainwindow.h \
     db_enum.h \
     tabwidget/schemawidget.h \
     dialogs/blobdialog.h \
-    widgets/resultviewtable.h
+    widgets/resultviewtable.h \
+    tools/logger.h
 FORMS += mainwindow.ui \
     dialogs/dbdialog.ui \
     tabwidget/queryeditorwidgetclass.ui \

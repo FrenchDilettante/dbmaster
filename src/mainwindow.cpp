@@ -23,6 +23,7 @@
 #include "tabwidget/queryeditorwidget.h"
 #include "tabwidget/schemawidget.h"
 #include "tabwidget/tablewidget.h"
+#include "tools/logger.h"
 #include "widgets/dbtreeview.h"
 
 #include <QDesktopServices>
@@ -43,6 +44,7 @@ MainWindow::MainWindow(QWidget *parent)
   lastPath  = QDir::homePath();
 
   setupWidgets();
+  Logger::instance->setTextBrowser(logBrowser);
   LogDialog::instance()->append(tr("Starting DbMaster"));
   setupConnections();
 }
