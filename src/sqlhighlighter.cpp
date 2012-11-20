@@ -207,8 +207,8 @@ bool SqlHighlighter::reloadKeywords() {
   QStringList files;
   QString prefix;
 
-  if (QFile::exists("share/sql_basics")) {
-    prefix = "share/";
+  if (QFile::exists("../../dbmaster/src/share/sql_basics")) {
+    prefix = "../../dbmaster/src/share/";
   } else {
 #if defined( Q_WS_X11 )
     prefix = QString( PREFIX ).append( "/share/dbmaster/sqlsyntax/" );

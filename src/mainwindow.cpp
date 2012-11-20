@@ -678,8 +678,8 @@ void MainWindow::setupWidgets()
 
 #if defined(Q_WS_X11)
   QString lang = QLocale::system().name().left(2).toLower();
-  bool dev = QDir("share/html").exists();
-  QString folder = dev ? "share/html/" : QString(PREFIX) + "/share/dbmaster/";
+  QDir d = QDir("../../dbmaster/src/share/html");
+  QString folder = d.exists() ? d.absolutePath() + "/" : QString(PREFIX) + "/share/dbmaster/";
   QString url = folder + QString("index_%1.html").arg(lang);
 
   if (!QFile::exists(url)) {

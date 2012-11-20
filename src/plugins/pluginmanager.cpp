@@ -110,7 +110,6 @@ QList<QFileInfo> PluginManagerPrivate::loadFolder(QDir dir, QStringList filter, 
 
   if (recursive) {
     foreach (QString s, dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot)) {
-      qDebug() << dir.absolutePath() + "/" + s;
       plugins << loadFolder(QDir(dir.absolutePath() + "/" + s), filter, true);
     }
   }

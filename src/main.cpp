@@ -48,7 +48,7 @@ int main(int argc, char *argv[]) {
   QString path;
   /* on teste d'abord si le .qm est dans le dossier courant -> alors on est en
    * dev, on le charge, sinon il est dans le répertoire d'installation. */
-  path = QDir::currentPath() + QString("/../tr/%1.qm").arg(lang);
+  path = QString("../../dbmaster/tr/%1.qm").arg(lang);
   if (!QFile::exists(path))
     path = transdir.append("/%1.qm").arg(lang);
   translator.load(path);
