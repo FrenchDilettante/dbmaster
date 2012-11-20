@@ -756,10 +756,10 @@ QStandardItem *DbManagerPrivate::tablesItem(QList<SqlTable> tables,
       } else {
         i->setData(QString(schema + "." + table.name), Qt::ToolTipRole);
       }
-      i->appendRow(new QStandardItem(IconManager::get("view-refresh"), ""));
-//      if (table.columns.size() > 0) {
-//        i->appendRow(columnsItem(table.columns));
-//      }
+//      i->appendRow(new QStandardItem(IconManager::get("view-refresh"), ""));
+      if (table.columns.size() > 0) {
+        i->appendRow(columnsItem(table.columns));
+      }
       tablesItem->appendRow(i);
     }
   }

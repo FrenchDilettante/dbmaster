@@ -44,6 +44,7 @@ public slots:
   void save();
 
 private:
+  QList<QFileInfo> loadFolder(QDir dir, QStringList filter, bool recursive = false);
   QStandardItemModel             *m_model;
   QList<QObject*>                 m_plugins;
   QMap<QObject*, QStandardItem*>  pluginsMap;

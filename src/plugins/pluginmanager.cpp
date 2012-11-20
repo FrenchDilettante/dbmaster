@@ -77,19 +77,18 @@ QList<ExportEngine*> PluginManagerPrivate::exportEngines() {
 void PluginManagerPrivate::init() {
 
   // Grâce au filtre, on va lister les fichiers présents au démarrage
-  QString filter;
+  QStringList filter;
 #ifdef Q_OS_LINUX
-  filter = "*.so";
+  filter << "*.so";
 #else
-  filter = "*.dll";
+  filter << "*.dll";
 #endif
 
   QFileInfoList pluginsInFolder;
 #ifdef Q_OS_LINUX
-  pluginsInFolder = QDir().entryInfoList(QStringList(filter));
+  pluginsInFolder = loadFolder(QDir("../plugins"), filter, true);
   if (pluginsInFolder.size() == 0) {
-    pluginsInFolder = QDir(QString(PREFIX) + "/share/dbmaster/plugins")
-                          .entryInfoList(QStringList(filter));
+    pluginsInFolder = loadFolder(QDir(QString(PREFIX) + "/share/dbmaster/plugins"), filter);
   }
 #else
   pluginsInFolder = QDir("plugins").entryInfoList(QStringList(filter));
@@ -102,6 +101,21 @@ void PluginManagerPrivate::init() {
       registerPlugin(p);
     }
   }
+}
+
+QList<QFileInfo> PluginManagerPrivate::loadFolder(QDir dir, QStringList filter, bool recursive) {
+  QList<QFileInfo> plugins;
+
+  plugins = dir.entryInfoList(filter);
+
+  if (recursive) {
+    foreach (QString s, dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot)) {
+      qDebug() << dir.absolutePath() + "/" + s;
+      plugins << loadFolder(QDir(dir.absolutePath() + "/" + s), filter, true);
+    }
+  }
+
+  return plugins;
 }
 
 void PluginManagerPrivate::registerPlugin(QObject *plugin) {
