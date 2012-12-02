@@ -15,7 +15,6 @@
 #include "iconmanager.h"
 #include "mainwindow.h"
 
-#include "dialogs/logdialog.h"
 #include "plugins/pluginmanager.h"
 #include "tabwidget/abstracttabwidget.h"
 
@@ -100,8 +99,6 @@ int DbManagerPrivate::addDatabase(QString driver, QString host, QString user,
             d->userName() == db.userName() &&
             d->password() == db.password() &&
             d->databaseName() == db.databaseName()) {
-      LogDialog::instance()->append(
-              QObject::tr("Attempting to add an existing connection."));
       return indexOf(d);
     }
   }
@@ -141,8 +138,6 @@ int DbManagerPrivate::addDatabase(QString driver, QString host, QString user,
 
   if (save) {
     saveList();
-    LogDialog::instance()->append(QObject::tr("Connection %1 added")
-            .arg(title));
   }
 
   return dbList.size() - 1;

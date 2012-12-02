@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>840</width>
-    <height>590</height>
+    <width>841</width>
+    <height>586</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -106,7 +106,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>840</width>
+     <width>841</width>
      <height>21</height>
     </rect>
    </property>
@@ -117,7 +117,6 @@
     <addaction name="actionDbManager"/>
     <addaction name="separator"/>
     <addaction name="actionPlugins"/>
-    <addaction name="actionLogs"/>
     <addaction name="actionPreferences"/>
    </widget>
    <widget class="QMenu" name="menu_Edit">
@@ -290,6 +289,44 @@
    <addaction name="separator"/>
    <addaction name="actionRefreshConnection"/>
   </widget>
+  <widget class="QDockWidget" name="logDock">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="windowIcon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/img/console.png</normaloff>:/img/console.png</iconset>
+   </property>
+   <property name="windowTitle">
+    <string>Console</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>8</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_2">
+    <layout class="QGridLayout" name="gridLayout_3">
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
+      <number>8</number>
+     </property>
+     <item row="0" column="0">
+      <widget class="QTextBrowser" name="logBrowser">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
   <action name="actionAddDb">
    <property name="text">
     <string>Connection</string>
@@ -410,11 +447,6 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+A</string>
-   </property>
-  </action>
-  <action name="actionLogs">
-   <property name="text">
-    <string>Logs</string>
    </property>
   </action>
   <action name="actionAbout">

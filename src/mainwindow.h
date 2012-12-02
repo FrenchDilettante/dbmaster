@@ -16,7 +16,6 @@
 #include "dialogs/aboutdialog.h"
 #include "dialogs/configdialog.h"
 #include "dialogs/dbdialog.h"
-#include "dialogs/logdialog.h"
 #include "dialogs/searchdialog.h"
 #include "ui_mainwindow.h"
 #include "plugins/plugindialog.h"
@@ -58,12 +57,12 @@ private:
   void                closeEvent(QCloseEvent*);
   AbstractTabWidget*  currentTab();
   void                setupConnections();
+  void                setupDocks(QSettings *s);
   void                setupWidgets();
 
   AboutDialog        *aboutDial;
   QMap<AbstractTabWidget::Action, QAction*> actionMap;
   ConfigDialog       *confDial;
-  LogDialog          *logDial;
   QString             lastPath;
   SearchDialog       *searchDialog;
   QLabel             *queriesStatusLabel;

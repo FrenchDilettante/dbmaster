@@ -14,9 +14,9 @@
 #include "../dbmanager.h"
 #include "../iconmanager.h"
 #include "../mainwindow.h"
-#include "../dialogs/logdialog.h"
 #include "../query/queryscheduler.h"
 #include "../query/querytoken.h"
+#include "../tools/logger.h"
 #include "../widgets/resultview.h"
 
 #include "queryeditorwidget.h"
@@ -44,10 +44,7 @@ QueryEditorWidget::~QueryEditorWidget()
   }
 }
 
-void QueryEditorWidget::acceptToken()
-{
-  debugText->append(tr("<b>[%1]</b>Query pending")
-                    .arg(QTime::currentTime().toString()));
+void QueryEditorWidget::acceptToken() {
 }
 
 AbstractTabWidget::Actions QueryEditorWidget::availableActions()
@@ -193,7 +190,7 @@ bool QueryEditorWidget::isSaved() {
 void QueryEditorWidget::keyPressEvent(QKeyEvent *event) {
   if (event->key() == Qt::Key_Escape) {
     // Appui touche échap = masque le panel de résultat
-    tabWidget->hide();
+    tabView->hide();
     resultButton->setChecked(false);
   } else {
     QWidget::keyPressEvent(event);
@@ -314,10 +311,6 @@ void QueryEditorWidget::reloadFile()
 void QueryEditorWidget::run() {
 
   resultButton->setChecked(true);
-  tabWidget->setVisible(true);
-  tabWidget->setTabEnabled(1, false);
-  tabWidget->setCurrentIndex(0);
-  debugText->clear();
   runButton->setEnabled(false);
 
   statusBar->showMessage(tr("Running..."));
@@ -423,7 +416,7 @@ void QueryEditorWidget::setupConnections() {
 void QueryEditorWidget::setupWidgets() {
   editor->setFont(Config::editorFont);
 
-  tabWidget->setVisible(false);
+  tabView->hide();
 
   statusBar = new QStatusBar(this);
   statusBar->setSizeGripEnabled(false);
@@ -434,7 +427,7 @@ void QueryEditorWidget::setupWidgets() {
   resultButton->setCheckable(true);
   statusBar->addPermanentWidget(resultButton);
   connect(resultButton, SIGNAL(clicked(bool)),
-          tabWidget, SLOT(setVisible(bool)));
+          tabView, SLOT(setVisible(bool)));
 
   optionsMenu = new QMenu(this);
   optionsMenu->addAction(actionEnqueue);
@@ -496,13 +489,12 @@ void QueryEditorWidget::upperCase() {
 void QueryEditorWidget::validateToken(QSqlError err) {
   QString                 logMsg;
   QMap<QString, QVariant> logData;
-  tabWidget->setTabEnabled(1, false);
+  tabView->hide();
   switch(err.type())
   {
   case QSqlError::NoError:
     tabView->setToken(token);
-    tabWidget->setCurrentIndex(1);
-    tabWidget->setTabEnabled(1, true);
+    tabView->show();
 
     if(actionClearOnSuccess->isChecked())
       editor->clear();
@@ -513,28 +505,25 @@ void QueryEditorWidget::validateToken(QSqlError err) {
 //      delete oldToken;
 //    }
 
-    statusBar->showMessage(
-        tr("Query executed with success in %2secs (%1 lines returned)")
+    logMsg = tr("Query executed with success in %2secs (%1 lines returned)")
         .arg(token->model()->rowCount())
-        .arg(token->duration()));
+        .arg(token->duration());
 
-    logMsg = tr("Query executed with success");
-    logData["query"] = token->query();
-    LogDialog::instance()->append(logMsg, logData);
+    statusBar->showMessage(logMsg);
 
-    debugText->append(QString("<b>[%1]</b>%2")
-                      .arg(QTime::currentTime().toString())
-                      .arg(tr("Query executed with success in %2secs (%1 lines returned)")
-                           .arg(token->model()->rowCount())
-                           .arg(token->duration())));
+    logMsg += QString("<br /><span style=\"color: blue\">%1</span>")
+        .arg(token->query().replace("\n", " "));
+    Logger::instance->log(logMsg);
     break;
 
   default:
+    /*
     statusBar->showMessage(tr("Unable to run query"));
 
     debugText->append(QString("<b>[%1]</b>%2")
                       .arg(QTime::currentTime().toString())
                       .arg(err.text()));
+                      */
     break;
   }
 

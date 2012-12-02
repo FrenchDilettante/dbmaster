@@ -15,7 +15,6 @@ SOURCES += main.cpp \
     dialogs/configdialog.cpp \
     widgets/dbcombobox.cpp \
     sqlhighlighter.cpp \
-    dialogs/logdialog.cpp \
     dialogs/aboutdialog.cpp \
     wizards/newdbwizard.cpp \
     config.cpp \
@@ -35,7 +34,8 @@ SOURCES += main.cpp \
     widgets/colorbutton.cpp \
     tabwidget/schemawidget.cpp \
     dialogs/blobdialog.cpp \
-    widgets/resultviewtable.cpp
+    widgets/resultviewtable.cpp \
+    tools/logger.cpp
 HEADERS += mainwindow.h \
     dbmanager.h \
     tabwidget/tablewidget.h \
@@ -45,7 +45,6 @@ HEADERS += mainwindow.h \
     dialogs/configdialog.h \
     widgets/dbcombobox.h \
     sqlhighlighter.h \
-    dialogs/logdialog.h \
     dialogs/aboutdialog.h \
     wizards/newdbwizard.h \
     config.h \
@@ -69,13 +68,13 @@ HEADERS += mainwindow.h \
     db_enum.h \
     tabwidget/schemawidget.h \
     dialogs/blobdialog.h \
-    widgets/resultviewtable.h
+    widgets/resultviewtable.h \
+    tools/logger.h
 FORMS += mainwindow.ui \
     dialogs/dbdialog.ui \
     tabwidget/queryeditorwidgetclass.ui \
     tabwidget/tablewidgetclass.ui \
     dialogs/configdialogclass.ui \
-    dialogs/logdialogclass.ui \
     dialogs/aboutdialog.ui \
     wizards/newdbwizard.ui \
     wizards/ndw_firstpage.ui \
