@@ -17,8 +17,7 @@
 
 #include "ui_logdialogclass.h"
 
-class LogDialog : public QDialog, Ui::LogDialogClass
-{
+class LogDialog : public QDialog, Ui::LogDialogClass {
 Q_OBJECT
 public:
   LogDialog(QWidget *parent=0);

@@ -26,27 +26,18 @@ QMap<QString,QTextCharFormat> Config::shFormat;
 QStringList     Config::shGroupList;
 int             Config::editorTabSize   = 4;
 
-void Config::init()
-{
+void Config::init() {
   shGroupList << "sql_basics" << "sql_functions" << "sql_types" << "strings"
       << "numbers" << "comments" << "ctxt_table" << "ctxt_field";
 
   reload();
 }
 
-void Config::reload()
-{
+void Config::reload() {
   QSettings s;
-  if(!s.contains("default_database"))
-  {
-    // Test version < 0.8
-    QSettings s_0_7("dbmaster.sourceforge.net", "dbmaster");
-    if (s_0_7.contains("default_database")) {
-      import_0_7();
-    } else {
-      QWizard *wizard = new FirstLaunchWizard;
-      wizard->exec();
-    }
+  if (!s.contains("default_database")) {
+    QWizard *wizard = new FirstLaunchWizard;
+    wizard->exec();
     save();
   }
 
@@ -61,8 +52,9 @@ void Config::reload()
   editorTabSize     = s.value("tabsize").toInt();
   editorEncoding    = s.value("encoding").toString();
   editorFont.setFamily(s.value("font_name").toString());
-  if(s.value("font_size").toInt() > 0)
+  if (s.value("font_size").toInt() > 0) {
     editorFont.setPointSize(s.value("font_size").toInt());
+  }
   editorSemantic    = s.value("semantic").toBool();
   s.endGroup();
 
@@ -70,18 +62,18 @@ void Config::reload()
    * Syntax highlighting properties
    */
   int max = s.beginReadArray("highlighting");
-  for(int i=0; i<max; i++)
-  {
+  for (int i=0; i<max; i++) {
     s.setArrayIndex(i);
     QString group = s.value("groupname").toString();
     QColor c;
     c.setNamedColor(s.value("color").toString());
     shColor[group] = c;
     QTextCharFormat f;
-    if(s.value("bold").toBool())
+    if (s.value("bold").toBool()) {
       f.setFontWeight(QFont::Bold);
-    else
+    } else {
       f.setFontWeight(QFont::Normal);
+    }
     f.setFontItalic(s.value("italic").toBool());
     shFormat[group] = f;
   }
@@ -89,8 +81,7 @@ void Config::reload()
   s.endArray();
 }
 
-void Config::save()
-{
+void Config::save() {
   QSettings s;
 
   s.setValue("default_database", defaultDriver);
@@ -110,8 +101,7 @@ void Config::save()
 
   QStringListIterator it( shGroupList );
   QString name;
-  for( int i=0; it.hasNext(); i++ )
-  {
+  for (int i=0; it.hasNext(); i++) {
     name = it.next();
 
     s.setArrayIndex(i);
@@ -124,44 +114,4 @@ void Config::save()
   s.endArray();
 
   s.sync();
-}
-
-void Config::import_0_7() {
-  QSettings sold("dbmaster.sourceforge.net", "dbmaster");
-  defaultDriver = sold.value("default_database").toString();
-
-  /*
-   * Editor's properties
-   */
-  sold.beginGroup("editor");
-  editorAutoSave = sold.value("autosave").toBool();
-  compCharCount = sold.value("comp_count").toInt();
-  editorEncoding = sold.value("encoding").toString();
-  editorFont.setFamily(sold.value("font_name").toString());
-  if(sold.value("font_size").toInt() > 0)
-    editorFont.setPointSize(sold.value("font_size").toInt());
-  editorSemantic = sold.value("semantic").toBool();
-  sold.endGroup();
-
-  /*
-   * Syntax highlighting properties
-   */
-  int max = sold.beginReadArray("highlighting");
-  for(int i=0; i<max; i++)
-  {
-    sold.setArrayIndex(i);
-    QString group = sold.value("groupname").toString();
-    QColor c;
-    c.setNamedColor(sold.value("color").toString());
-    shColor[group] = c;
-    QTextCharFormat f;
-    if(sold.value("bold").toBool())
-      f.setFontWeight(QFont::Bold);
-    else
-      f.setFontWeight(QFont::Normal);
-    f.setFontItalic(sold.value("italic").toBool());
-    shFormat[group] = f;
-  }
-
-  sold.endArray();
 }

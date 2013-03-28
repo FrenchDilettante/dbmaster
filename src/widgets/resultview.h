@@ -31,8 +31,7 @@
  * contextuel pour l'export et l'ajout/suppression de lignes dans les tables.
  * Prend en charge les jetons de requête et les tables.
  */
-class ResultView : public QWidget, Ui::ResultView
-{
+class ResultView : public QWidget, Ui::ResultView {
 Q_OBJECT
 public:
   enum Mode {

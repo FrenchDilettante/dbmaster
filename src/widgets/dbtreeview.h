@@ -19,8 +19,7 @@
 #include <QtGui>
 #include <QtSql>
 
-class DbTreeView : public QTreeView
-{
+class DbTreeView : public QTreeView {
 Q_OBJECT
 public:
   DbTreeView(QWidget *parent = 0);

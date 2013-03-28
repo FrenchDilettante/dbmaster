@@ -31,8 +31,7 @@ NewDbWizard  *MainWindow::dbWizard;
 PluginDialog *MainWindow::pluginDialog;
 
 MainWindow::MainWindow(QWidget *parent)
-  : QMainWindow(parent)
-{
+  : QMainWindow(parent) {
   dbDialog      = new DbDialog(this);
   dbWizard      = new NewDbWizard(this);
   pluginDialog  = new PluginDialog(this);
@@ -46,41 +45,40 @@ MainWindow::MainWindow(QWidget *parent)
   setupConnections();
 }
 
-MainWindow::~MainWindow()
-{
+MainWindow::~MainWindow() {
 }
 
 /**
  * Ajoute le nom de fichier passé en paramètre à la liste des fichiers récents.
  */
-void MainWindow::addRecentFile(QString file)
-{
-  if(recentFiles.indexOf(file) >= 0)
+void MainWindow::addRecentFile(QString file) {
+  if (recentFiles.indexOf(file) >= 0) {
     recentFiles.removeAt(recentFiles.indexOf(file));
+  }
 
   recentFiles.insert(0, file);
-  while(recentFiles.size() > 10)
+  while (recentFiles.size() > 10) {
     recentFiles.removeLast();
+  }
   refreshRecent();
 }
 
 /**
  * Lorsqu'une connexion change de statut, on contrôle s'il y a des erreurs.
  */
-void MainWindow::checkDb(QSqlDatabase *db)
-{
-  if(db->isOpenError() && db->lastError().type() != QSqlError::NoError)
+void MainWindow::checkDb(QSqlDatabase *db) {
+  if (db->isOpenError() && db->lastError().type() != QSqlError::NoError) {
     QMessageBox::critical(this,
                           tr("Error"),
                           tr("Unable to connect :\n%1")
                           .arg(db->lastError().text()));
+  }
 }
 
 /**
  * Efface l'historique des fichiers récents
  */
-void MainWindow::clearRecent()
-{
+void MainWindow::clearRecent() {
   recentFiles.clear();
   refreshRecent();
 }
@@ -97,32 +95,25 @@ void MainWindow::closeEvent(QCloseEvent *event) {
   int n = 0;
 
   // vérifie s'il y a 0, 1 ou plus onglets non enregistrés
-  for(int i = 0; i < tabWidget->count() && saved < 2; i++)
-  {
-    if(!((AbstractTabWidget*)(tabWidget->widget(i)))->isSaved())
-    {
+  for (int i = 0; i < tabWidget->count() && saved < 2; i++) {
+    if (!((AbstractTabWidget*)(tabWidget->widget(i)))->isSaved()) {
       n = i;
       saved++;
     }
   }
 
-  if(saved == 0) {
-
+  if (saved == 0) {
     // tous les onglets sont prêts à être fermés
     event->accept();
-
-  } else if(saved == 1) {
-
+  } else if (saved == 1) {
     // un seul onglet n'est pas enregistré
-    if(((AbstractTabWidget*) tabWidget->widget(n))->confirmClose()) {
+    if (((AbstractTabWidget*) tabWidget->widget(n))->confirmClose()) {
       event->accept();
     } else {
       event->ignore();
       return;
     }
-
   } else {
-
     // plus d'un onglet n'est pas enregistré
 
     // demande de confirmation de confirmation
@@ -132,11 +123,10 @@ void MainWindow::closeEvent(QCloseEvent *event) {
              QMessageBox::SaveAll | QMessageBox::Discard | QMessageBox::Cancel,
              QMessageBox::SaveAll );
 
-    switch(ret)
-    {
+    switch(ret) {
     case QMessageBox::SaveAll:
       // on sauvegarde tout
-      for(int i=0; i<tabWidget->count(); i++) {
+      for (int i=0; i<tabWidget->count(); i++) {
         ((AbstractTabWidget*) tabWidget->widget(i))->save();
       }
       break;
@@ -156,8 +146,7 @@ void MainWindow::closeEvent(QCloseEvent *event) {
   QSettings s;
   s.beginGroup("mainwindow");
   s.setValue("position", pos());
-  if(windowState().testFlag(Qt::WindowMaximized))
-  {
+  if(windowState().testFlag(Qt::WindowMaximized)) {
     // fenêtre maximisée
     s.setValue("maximized", true);
     s.remove("size");
@@ -185,7 +174,7 @@ void MainWindow::closeEvent(QCloseEvent *event) {
 
   // fichiers récents
   s.beginWriteArray("recentfiles", recentFiles.size());
-  for(int i=0; i<recentFiles.size(); i++) {
+  for (int i=0; i<recentFiles.size(); i++) {
     s.setArrayIndex(i);
     s.setValue("entry", recentFiles[i]);
   }
@@ -212,12 +201,14 @@ void MainWindow::closeSender() {
 }
 
 void MainWindow::closeTab(int nb) {
-  if(nb < 0 || nb >= tabWidget->count())
+  if (nb < 0 || nb >= tabWidget->count()) {
     return;
+  }
 
   // don't close the tab if the user cancelled saving
-  if(!tabWidget->widget(nb)->close())
+  if (!tabWidget->widget(nb)->close()) {
     return;
+  }
 
   // then remove the widget
   tabWidget->removeTab(nb);
@@ -229,33 +220,31 @@ void MainWindow::closeTab(int nb) {
   }
 }
 
-void MainWindow::copy()
-{
-  if(currentTab() != 0)
+void MainWindow::copy() {
+  if (currentTab() != 0) {
     currentTab()->copy();
+  }
 }
 
 /**
  * Affiche l'assistant de nouvelle connexion
  */
-void MainWindow::createDatabase()
-{
+void MainWindow::createDatabase() {
   dbWizard->exec();
 }
 
 /**
  * Returns the current tab or NULL.
  */
-AbstractTabWidget* MainWindow::currentTab()
-{
-  if(tabWidget->count() > 0)
+AbstractTabWidget* MainWindow::currentTab() {
+  if (tabWidget->count() > 0) {
     return (AbstractTabWidget*) tabWidget->currentWidget();
-  else
+  } else {
     return NULL;
+  }
 }
 
-void MainWindow::cut()
-{
+void MainWindow::cut() {
   if(currentTab() != 0)
     currentTab()->cut();
 }
@@ -271,8 +260,7 @@ void MainWindow::lowerCase() {
  *
  * @return a new QueryEditorWidget
  */
-QueryEditorWidget* MainWindow::newQuery()
-{
+QueryEditorWidget* MainWindow::newQuery() {
   QueryEditorWidget *w = new QueryEditorWidget();
   tabWidget->addTab(w, w->icon(), w->title());
   tabWidget->setCurrentIndex(tabWidget->count() - 1);
@@ -287,13 +275,13 @@ QueryEditorWidget* MainWindow::newQuery()
   return w;
 }
 
-void MainWindow::nextTab()
-{
+void MainWindow::nextTab() {
   int count = tabWidget->count();
   int index = tabWidget->currentIndex();
 
-  if(count >= 2 && index < count)
+  if (count >= 2 && index < count) {
     tabWidget->setCurrentIndex(index+1);
+  }
 }
 
 void MainWindow::on_actionUserManual_triggered() {
@@ -301,18 +289,15 @@ void MainWindow::on_actionUserManual_triggered() {
         QUrl("http://dbmaster.sourceforge.net/userdoc/0.7/01-a-propos.html"));
 }
 
-void MainWindow::openRecent()
-{
+void MainWindow::openRecent() {
   int index = recentActions.indexOf((QAction*)sender());
-  if(index == -1)
-  {
+  if (index == -1) {
     qDebug() << "Critical error. Please report.";
     return;
   }
 
   QFileInfo info(recentFiles[index]);
-  if(!info.exists())
-  {
+  if (!info.exists()) {
     recentFiles.removeAt(index);
     refreshRecent();
     return;
@@ -326,8 +311,7 @@ void MainWindow::openRecent()
 /**
  * Shows a browser dialog to open a query file
  */
-void MainWindow::openQuery()
-{
+void MainWindow::openQuery() {
   QString f = QFileDialog::getOpenFileName( this,
                            tr( "Select a query to open" ),
                            AbstractTabWidget::lastDir.path(),
@@ -413,26 +397,27 @@ void MainWindow::openTable(QSqlDatabase *db, QString table) {
 }
 
 void MainWindow::paste() {
-  if(currentTab())
+  if (currentTab()) {
     currentTab()->paste();
+  }
 }
 
 void MainWindow::previousTab() {
   int count = tabWidget->count();
   int index = tabWidget->currentIndex();
 
-  if(count >= 2 && index > 0)
+  if (count >= 2 && index > 0) {
     tabWidget->setCurrentIndex(index - 1);
+  }
 }
 
-void MainWindow::print()
-{
-  if (currentTab() && currentTab()->availableActions() && AbstractTabWidget::Print)
-  {
+void MainWindow::print() {
+  if (currentTab() && currentTab()->availableActions() && AbstractTabWidget::Print) {
     QPrinter *printer = currentTab()->printer();
     QPrintDialog *printDialog = new QPrintDialog(printer, this);
-    if(printDialog->exec() == QDialog::Accepted)
+    if (printDialog->exec() == QDialog::Accepted) {
       currentTab()->print();
+    }
   }
 }
 
@@ -460,13 +445,13 @@ void MainWindow::refreshTab() {
   if (currentTab()) {
     AbstractTabWidget::Actions acts;
     acts = currentTab()->availableActions();
-    foreach(AbstractTabWidget::Action a, actionMap.keys())
+    foreach (AbstractTabWidget::Action a, actionMap.keys()) {
       actionMap[a]->setEnabled(acts.testFlag(a));
+    }
   }
 }
 
-void MainWindow::refreshRecent()
-{
+void MainWindow::refreshRecent() {
   for (int i=0; i<10; i++) {
     recentActions[i]->setVisible(i < recentFiles.size());
     if (i<recentFiles.size()) {
@@ -483,8 +468,9 @@ void MainWindow::refreshRecent()
 }
 
 void MainWindow::reloadDbList() {
-  for(int i = 0; i < tabWidget->count(); i++)
+  for (int i = 0; i < tabWidget->count(); i++) {
     ((AbstractTabWidget*)tabWidget->widget(i))->refresh();
+  }
 
   updateDbActions();
 }
@@ -577,8 +563,7 @@ void MainWindow::setupConnections() {
   connect(tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
 }
 
-void MainWindow::setupWidgets()
-{
+void MainWindow::setupWidgets() {
   aboutDial     = new AboutDialog(this);
   confDial      = new ConfigDialog(this);
   logDial       = LogDialog::instance();
@@ -587,8 +572,7 @@ void MainWindow::setupWidgets()
 
   QAction *a;
   recentActions.clear();
-  for(int i=0; i<10; i++)
-  {
+  for (int i=0; i<10; i++) {
     a = new QAction(this);
     a->setVisible(false);
     connect(a, SIGNAL(triggered()), this, SLOT(openRecent()));
@@ -613,12 +597,15 @@ void MainWindow::setupWidgets()
 
   QSettings s;
   s.beginGroup("mainwindow");
-  if(s.contains("size"))
+  if (s.contains("size")) {
     resize(s.value("size").toSize());
-  if(s.contains("position"))
+  }
+  if (s.contains("position")) {
     move(s.value("position").toPoint());
-  if(s.value("maximized", false).toBool())
+  }
+  if (s.value("maximized", false).toBool()) {
     setWindowState(Qt::WindowMaximized);
+  }
 
   addDockWidget((Qt::DockWidgetArea) s.value("maindock_area", 1).toInt(),
                 dockWidget);
@@ -644,8 +631,7 @@ void MainWindow::setupWidgets()
 
   int count = s.beginReadArray("recentfiles");
   recentFiles.clear();
-  for(int i=0; i<count && i<10; i++)
-  {
+  for (int i=0; i<count && i<10; i++) {
     s.setArrayIndex(i);
     recentFiles << s.value("entry").toString();
   }

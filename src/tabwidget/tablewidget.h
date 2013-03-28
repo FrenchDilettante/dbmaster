@@ -19,8 +19,7 @@
 #include "abstracttabwidget.h"
 #include "ui_tablewidgetclass.h"
 
-class TableWidget: public AbstractTabWidget, Ui::TableWidgetClass
-{
+class TableWidget: public AbstractTabWidget, Ui::TableWidgetClass {
 Q_OBJECT
 
 public:

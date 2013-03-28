@@ -24,11 +24,10 @@
 
 #include "ui_queryeditorwidgetclass.h"
 
-class QueryEditorWidget: public AbstractTabWidget, QRunnable, Ui::QueryEditorWidgetClass
-{
+class QueryEditorWidget: public AbstractTabWidget, QRunnable, Ui::QueryEditorWidgetClass {
 Q_OBJECT
 public:
-  QueryEditorWidget( QWidget* = 0 );
+  QueryEditorWidget(QWidget* = 0);
   ~QueryEditorWidget();
 
   Actions       availableActions();
@@ -40,7 +39,7 @@ public:
   // QueryToken   *prepareToken();
   void          print();
   QPrinter     *printer();
-  void          saveAs( QString = QString::null );
+  void          saveAs(QString = QString::null);
   QTextEdit    *textEdit();
   QString       title();
 
@@ -53,7 +52,6 @@ public slots:
   void redo();
   void refresh();
   void reload();
-  void run();
   bool save();
   void selectAll();
   void undo();
@@ -68,6 +66,7 @@ private:
   bool confirmClose();
   void keyPressEvent(QKeyEvent *event);
   void reloadFile();
+  void run();
   void setFilePath(QString);
   void setupConnections();
   void setupWidgets();
@@ -89,8 +88,7 @@ private slots:
   void acceptToken();
   void checkDbOpen();
   void onFileChanged(QString path);
-  void rejectToken();
-  void startToken();
+  void start();
   void validateQuery(QSqlError err);
 };
 

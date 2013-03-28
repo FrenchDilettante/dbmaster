@@ -182,8 +182,9 @@ EwExportPage::EwExportPage(QAbstractItemModel *model, QWizard *parent)
 }
 
 void EwExportPage::checkProgress() {
-  if(!finished)
+  if (!finished) {
     dial->show();
+  }
 }
 
 void EwExportPage::initializePage() {

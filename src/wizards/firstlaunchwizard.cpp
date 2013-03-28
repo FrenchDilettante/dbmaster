@@ -15,9 +15,8 @@
 
 #include "../config.h"
 
-FirstLaunchWizard::FirstLaunchWizard(QWidget *parent) :
-    QWizard(parent)
-{
+FirstLaunchWizard::FirstLaunchWizard(QWidget *parent)
+  : QWizard(parent) {
   setupUi(this);
 
   Config::compCharCount = 3;
@@ -49,8 +48,7 @@ FirstLaunchWizard::FirstLaunchWizard(QWidget *parent) :
   Config::shFormat["ctxt_field"]    = QTextCharFormat();
 }
 
-void FirstLaunchWizard::accept()
-{
+void FirstLaunchWizard::accept() {
   Config::defaultDriver = dbComboBox->currentDriverName();
   Config::save();
 

@@ -24,8 +24,8 @@
 #include <QWidget>
 
 class AbstractTabWidget: public QWidget {
-
 Q_OBJECT
+
 public:
   enum Action {
     CaseLower   = 0x00001,

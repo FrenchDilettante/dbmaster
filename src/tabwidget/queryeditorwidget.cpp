@@ -22,8 +22,7 @@
 #include <QSqlQuery>
 
 QueryEditorWidget::QueryEditorWidget(QWidget *parent)
-  : AbstractTabWidget(parent)
-{
+  : AbstractTabWidget(parent) {
   setupUi(this);
   setupWidgets();
   setupConnections();
@@ -32,79 +31,77 @@ QueryEditorWidget::QueryEditorWidget(QWidget *parent)
 
   model       = new QSqlQueryModel(this);
   shortModel  = new QStandardItemModel(this);
-//  oldToken    = NULL;
-  watcher     = new QFileSystemWatcher(this);
+  // watcher     = new QFileSystemWatcher(this);
 }
 
 QueryEditorWidget::~QueryEditorWidget() {
 }
 
-void QueryEditorWidget::acceptToken()
-{
+void QueryEditorWidget::acceptToken() {
   debugText->append(tr("<b>[%1]</b>Query pending")
                     .arg(QTime::currentTime().toString()));
 }
 
-AbstractTabWidget::Actions QueryEditorWidget::availableActions()
-{
+AbstractTabWidget::Actions QueryEditorWidget::availableActions() {
   Actions ret = baseActions;
-  if(!isSaved())
+  if (!isSaved()) {
     ret |= Save;
+  }
 
-  if(editor->document()->isUndoAvailable())
+  if (editor->document()->isUndoAvailable()) {
     ret |= Undo;
-  if(editor->document()->isRedoAvailable())
+  }
+
+  if (editor->document()->isRedoAvailable()) {
     ret |= Redo;
+  }
 
   return ret;
 }
 
-void QueryEditorWidget::checkDbOpen()
-{
+void QueryEditorWidget::checkDbOpen() {
   DbManager::lastIndex = dbChooser->currentIndex();
 
   QSqlDatabase *db = DbManager::getDatabase(dbChooser->currentIndex());
-  if(db == NULL)
-  {
+  if (db == NULL) {
     runButton->setEnabled(false);
     return;
   }
 
   runButton->setEnabled(db->isOpen());
 
-  if(!db->isOpen() || db->driverName().startsWith("QOCI"))
+  if (!db->isOpen() || db->driverName().startsWith("QOCI")) {
     return;
+  }
 
   QMultiMap<QString, QString> fields;
   QSqlRecord r;
   QStringList tables = db->tables();
-  foreach(QString t, tables)
-  {
+  foreach (QString t, tables) {
     r = db->record(t);
-    for(int i=0; i<r.count(); i++)
+    for (int i=0; i<r.count(); i++) {
       fields.insert(t, r.fieldName(i));
+    }
   }
 
   editor->reloadContext(tables, fields);
 }
 
-void QueryEditorWidget::closeEvent(QCloseEvent *event)
-{
-  if(isSaved())
+void QueryEditorWidget::closeEvent(QCloseEvent *event) {
+  if (isSaved()) {
     event->accept();
-  else {
-    if(confirmClose())
+  } else {
+    if (confirmClose()) {
       event->accept();
-    else
+    } else {
       event->ignore();
+    }
   }
 }
 
-bool QueryEditorWidget::confirmClose()
-{
+bool QueryEditorWidget::confirmClose() {
   // check if it's saved or not
-  if(!isSaved())
-  {
+  if (!isSaved()) {
     int ret = QMessageBox::warning(
         this,
         tr( "DbMaster" ),
@@ -112,8 +109,7 @@ bool QueryEditorWidget::confirmClose()
         QMessageBox::Cancel | QMessageBox::Save | QMessageBox::Discard,
         QMessageBox::Cancel);
 
-    switch(ret)
-    {
+    switch (ret) {
     case QMessageBox::Cancel:
       return false;
 
@@ -125,15 +121,16 @@ bool QueryEditorWidget::confirmClose()
   return true;
 }
 
-int QueryEditorWidget::confirmCloseAll()
-{
-  if(isSaved())
+int QueryEditorWidget::confirmCloseAll() {
+  if (isSaved()) {
     return QMessageBox::Yes;
+  }
 
   QString msg(tr("Warning ! All your modifications will be lost.\nDo you want to save ?"));
-  if(filePath.isNull())
+  if (filePath.isNull()) {
     msg = QString(tr("Warning ! %1 hasn't been saved\nDo you want to save ?"))
                   .arg(filePath);
+  }
 
   int ret = QMessageBox::warning(this, tr("DbMaster"), msg,
                                  QMessageBox::Save    | QMessageBox::SaveAll  |
@@ -144,23 +141,19 @@ int QueryEditorWidget::confirmCloseAll()
   return ret;
 }
 
-void QueryEditorWidget::copy()
-{
+void QueryEditorWidget::copy() {
   editor->copy();
 }
 
-void QueryEditorWidget::cut()
-{
+void QueryEditorWidget::cut() {
   editor->cut();
 }
 
-QString QueryEditorWidget::file()
-{
+QString QueryEditorWidget::file() {
   return filePath;
 }
 
 void QueryEditorWidget::onFileChanged(QString path) {
-
   if (QFile::exists(path)) {
     // Le fichier a été modifié
   } else {
@@ -168,16 +161,15 @@ void QueryEditorWidget::onFileChanged(QString path) {
   }
 }
 
-QIcon QueryEditorWidget::icon()
-{
+QIcon QueryEditorWidget::icon() {
   return IconManager::get("accessories-text-editor");
 }
 
-QString QueryEditorWidget::id()
-{
+QString QueryEditorWidget::id() {
   QString ret = "q";
-  if( !filePath.isEmpty() )
-    ret.append( " %1" ).arg( filePath );
+  if (!filePath.isEmpty()) {
+    ret.append(" %1").arg( filePath );
+  }
   return ret;
 }
 
@@ -196,7 +188,6 @@ void QueryEditorWidget::keyPressEvent(QKeyEvent *event) {
 }
 
 void QueryEditorWidget::lowerCase() {
-
   QTextCursor tc = editor->textCursor();
   if (tc.selectedText().size() > 0) {
     QString txt = tc.selectedText();
@@ -208,7 +199,7 @@ void QueryEditorWidget::lowerCase() {
 }
 
 void QueryEditorWidget::open(QString path) {
-  if(!confirmClose())
+  if (!confirmClose())
     return;
 
   setFilePath(path);
@@ -219,74 +210,42 @@ void QueryEditorWidget::paste() {
   editor->paste();
 }
 
-/*
-QueryToken *QueryEditorWidget::prepareToken()
-{
-  QString qtext = editor->textCursor().selectedText();
-  if(qtext.isEmpty())
-    qtext = editor->toPlainText();
-
-  QueryToken *token =
-      new QueryToken(qtext,
-                     DbManager::getDatabase(dbChooser->currentIndex()),
-                     actionEnqueue->isChecked(),
-                     this);
-
-  connect(token, SIGNAL(accepted()), this, SLOT(acceptToken()));
-  connect(token, SIGNAL(finished(QSqlError)),
-          this, SLOT(validateToken(QSqlError)));
-  connect(token, SIGNAL(rejected()), this, SLOT(rejectToken()));
-  connect(token, SIGNAL(started()), this, SLOT(startToken()));
-  return token;
-}*/
-
-void QueryEditorWidget::print()
-{
+void QueryEditorWidget::print() {
   QPainter painter;
   painter.begin(&m_printer);
   editor->document()->drawContents(&painter);
   painter.end();
 }
 
-QPrinter *QueryEditorWidget::printer()
-{
+QPrinter *QueryEditorWidget::printer() {
   return &m_printer;
 }
 
-void QueryEditorWidget::redo()
-{
+void QueryEditorWidget::redo() {
   editor->redo();
 }
 
-void QueryEditorWidget::refresh()
-{
+void QueryEditorWidget::refresh() {
   checkDbOpen();
 }
 
-void QueryEditorWidget::rejectToken()
-{
-
-}
-
-void QueryEditorWidget::reload()
-{
+void QueryEditorWidget::reload() {
   run();
 }
 
 /**
  * Called after open(QString)
  */
-void QueryEditorWidget::reloadFile()
-{
-  if(!confirmClose())
+void QueryEditorWidget::reloadFile() {
+  if (!confirmClose()) {
     return;
+  }
 
   editor->clear();
 
   // loading the file
   QFile file(filePath);
-  if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
-  {
+  if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
     // OMG ! an error occured
     QMessageBox::critical(this, tr("DbMaster"),
                           tr("Unable to open the file !"),
@@ -294,11 +253,13 @@ void QueryEditorWidget::reloadFile()
     return;
   }
 
-  if(Config::editorEncoding == "latin1")
+  if (Config::editorEncoding == "latin1") {
     editor->append(QString::fromLatin1(file.readAll().data()));
+  }
 
-  if(Config::editorEncoding == "utf8")
+  if (Config::editorEncoding == "utf8") {
     editor->append(QString::fromUtf8(file.readAll().data()));
+  }
 
   file.close();
 
@@ -308,7 +269,6 @@ void QueryEditorWidget::reloadFile()
 }
 
 void QueryEditorWidget::run() {
-
   resultButton->setChecked(true);
   tabWidget->setVisible(true);
   tabWidget->setTabEnabled(1, false);
@@ -319,8 +279,9 @@ void QueryEditorWidget::run() {
   statusBar->showMessage(tr("Running..."));
 
   QString qtext = editor->textCursor().selectedText();
-  if(qtext.isEmpty())
+  if (qtext.isEmpty()) {
     qtext = editor->toPlainText();
+  }
 
   QSqlDatabase* db = DbManager::getDatabase(dbChooser->currentIndex());
   query = QSqlQuery(*db);
@@ -333,13 +294,12 @@ void QueryEditorWidget::run() {
 /**
  * @returns false in case of error
  */
-bool QueryEditorWidget::save()
-{
-  if(isSaved())
+bool QueryEditorWidget::save() {
+  if (isSaved()) {
     return true;
+  }
 
-  if(filePath.isNull())
-  {
+  if (filePath.isNull()) {
     setFilePath(QFileDialog::getSaveFileName(
         this, tr("DbMaster"), lastDir.path(),
         tr("Query file (*.sql);;All files (*.*)")));
@@ -351,14 +311,13 @@ bool QueryEditorWidget::save()
   QFile file(filePath);
   lastDir = filePath;
 
-  if(!file.open(QIODevice::WriteOnly | QIODevice::Text))
-  {
+  if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
     QMessageBox::critical(this, tr("DbMaster"), tr("Unable to save the file !"),
                           QMessageBox::Ok);
     return false;
   }
 
-  editor->setEnabled( false );
+  editor->setEnabled(false);
   setCursor(Qt::BusyCursor);
 
   QTextStream out( &file );
@@ -383,19 +342,16 @@ bool QueryEditorWidget::save()
   return true;
 }
 
-void QueryEditorWidget::saveAs( QString name )
-{
+void QueryEditorWidget::saveAs(QString name) {
   filePath = name;
   save();
 }
 
-void QueryEditorWidget::selectAll()
-{
+void QueryEditorWidget::selectAll() {
   editor->selectAll();
 }
 
-void QueryEditorWidget::setFilePath( QString path )
-{
+void QueryEditorWidget::setFilePath(QString path) {
   watcher->removePath(this->filePath);
   this->filePath = path;
 
@@ -413,7 +369,7 @@ void QueryEditorWidget::setupConnections() {
           this, SLOT(checkDbOpen()));
   connect(tabView, SIGNAL(reloadRequested()), this, SLOT(reload()));
 
-  connect(runButton, SIGNAL(clicked()), this, SLOT(run()));
+  connect(runButton, SIGNAL(clicked()), this, SLOT(start()));
 
   connect(editor->document(), SIGNAL(modificationChanged(bool)),
           this, SIGNAL(modificationChanged(bool)));
@@ -462,12 +418,11 @@ void QueryEditorWidget::showEvent(QShowEvent *event) {
   editor->setFocus();
 }
 
-void QueryEditorWidget::startToken()
-{
+void QueryEditorWidget::start() {
+  QThreadPool::globalInstance()->start(this);
 }
 
-QString QueryEditorWidget::title()
-{
+QString QueryEditorWidget::title() {
   QString t;
   if(!filePath.isEmpty())
     t = QFileInfo(filePath).fileName();
@@ -477,8 +432,7 @@ QString QueryEditorWidget::title()
   return t;
 }
 
-QTextEdit* QueryEditorWidget::textEdit()
-{
+QTextEdit* QueryEditorWidget::textEdit() {
   return editor;
 }
 
@@ -487,7 +441,6 @@ void QueryEditorWidget::undo() {
 }
 
 void QueryEditorWidget::upperCase() {
-
   QTextCursor tc = editor->textCursor();
   if (tc.selectedText().size() > 0) {
     QString txt = tc.selectedText();
@@ -518,53 +471,3 @@ void QueryEditorWidget::validateQuery(QSqlError err) {
 
   runButton->setEnabled(true);
 }
-
-/*
-void QueryEditorWidget::validateToken(QSqlError err) {
-  QString                 logMsg;
-  QMap<QString, QVariant> logData;
-  tabWidget->setTabEnabled(1, false);
-  switch(err.type())
-  {
-  case QSqlError::NoError:
-    tabView->setToken(token);
-    tabWidget->setCurrentIndex(1);
-    tabWidget->setTabEnabled(1, true);
-
-    if(actionClearOnSuccess->isChecked())
-      editor->clear();
-
-//    if(oldToken)
-//    {
-//      oldToken->disconnect();
-//      delete oldToken;
-//    }
-
-    statusBar->showMessage(
-        tr("Query executed with success in %2secs (%1 lines returned)")
-        .arg(token->model()->rowCount())
-        .arg(token->duration()));
-
-    logMsg = tr("Query executed with success");
-    logData["query"] = token->query();
-    LogDialog::instance()->append(logMsg, logData);
-
-    debugText->append(QString("<b>[%1]</b>%2")
-                      .arg(QTime::currentTime().toString())
-                      .arg(tr("Query executed with success in %2secs (%1 lines returned)")
-                           .arg(token->model()->rowCount())
-                           .arg(token->duration())));
-    break;
-
-  default:
-    statusBar->showMessage(tr("Unable to run query"));
-
-    debugText->append(QString("<b>[%1]</b>%2")
-                      .arg(QTime::currentTime().toString())
-                      .arg(err.text()));
-    break;
-  }
-
-  runButton->setEnabled(true);
-}
-*/

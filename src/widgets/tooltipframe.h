@@ -20,8 +20,7 @@
 
 #include "ui_tooltipframe.h"
 
-class TooltipFrame : public QFrame, Ui::TooltipFrame
-{
+class TooltipFrame : public QFrame, Ui::TooltipFrame {
 Q_OBJECT
 public:
   TooltipFrame(QWidget *parent = 0);

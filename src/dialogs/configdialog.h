@@ -19,8 +19,7 @@
 
 #include "ui_configdialogclass.h"
 
-class ConfigDialog: public QDialog, Ui::ConfigDialogClass
-{
+class ConfigDialog: public QDialog, Ui::ConfigDialogClass {
 Q_OBJECT
 public:
   ConfigDialog(QWidget* =0);

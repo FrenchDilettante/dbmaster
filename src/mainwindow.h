@@ -27,8 +27,7 @@
 #include <QMainWindow>
 #include <QWidget>
 
-class MainWindow: public QMainWindow, public Ui::MainWindowClass
-{
+class MainWindow: public QMainWindow, public Ui::MainWindowClass {
 Q_OBJECT
 
 public:

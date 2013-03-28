@@ -16,8 +16,7 @@
 #include <QtGui>
 #include "ui_firstlaunchwizard.h"
 
-class FirstLaunchWizard : public QWizard, Ui::FirstLaunchWizard
-{
+class FirstLaunchWizard : public QWizard, Ui::FirstLaunchWizard {
 Q_OBJECT
 public:
     FirstLaunchWizard(QWidget *parent = 0);

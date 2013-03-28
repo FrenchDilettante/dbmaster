@@ -5,8 +5,7 @@
 #include <QColorDialog>
 #include <QToolButton>
 
-class ColorButton : public QToolButton
-{
+class ColorButton : public QToolButton {
 Q_OBJECT
 public:
   ColorButton(QWidget *parent = 0);
@@ -24,7 +23,6 @@ public slots:
 private:
   QColorDialog *cDialog;
   QColor m_color;
-
 };
 
 #endif // COLORBUTTON_H

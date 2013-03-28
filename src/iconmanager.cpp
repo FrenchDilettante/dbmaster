@@ -40,29 +40,29 @@ QIcon IconManager::customFolder(QIcon over) {
   return QIcon(baseIcon);
 }
 
-QIcon IconManager::get(QString name)
-{
-  if(m_icons.contains(name))
+QIcon IconManager::get(QString name) {
+  if (m_icons.contains(name)) {
     return m_icons[name];
-  if(QIcon::hasThemeIcon(name))
+  }
+  if (QIcon::hasThemeIcon(name)) {
     return QIcon::fromTheme(name);
+  }
 
   return fromRessources(name);
 }
 
-QIcon IconManager::fromRessources(QString name)
-{
+QIcon IconManager::fromRessources(QString name) {
   return QIcon(QString(":/img/%1.png").arg(name));
 }
 
-void IconManager::init()
-{
+void IconManager::init() {
   m_icons["connect_creating"]     = fromRessources("connect_creating");
   m_icons["connect_established"]  = fromRessources("connect_established");
   m_icons["connect_no"]           = fromRessources("connect_no");
 
-  if(QIcon::hasThemeIcon("gtk-preferences"))
+  if (QIcon::hasThemeIcon("gtk-preferences")) {
     m_icons["preferences"] = QIcon::fromTheme("gtk-preferences");
+  }
 
   m_icons["folder_columns"] = customFolder(QIcon(":/img/column.png"));
   m_icons["folder_schemas"] = customFolder(QIcon(":/img/schema.png"));

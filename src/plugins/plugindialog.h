@@ -18,8 +18,7 @@
 #include <QDialog>
 #include <QItemDelegate>
 
-class PluginDialog : public QDialog, Ui::PluginDialog
-{
+class PluginDialog : public QDialog, Ui::PluginDialog {
 Q_OBJECT
 public:
   PluginDialog(QWidget *parent = 0);
