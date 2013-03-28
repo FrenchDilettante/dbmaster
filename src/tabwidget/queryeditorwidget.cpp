@@ -352,7 +352,7 @@ void QueryEditorWidget::selectAll() {
 }
 
 void QueryEditorWidget::setFilePath(QString path) {
-  watcher->removePath(this->filePath);
+  // watcher->removePath(this->filePath);
   this->filePath = path;
 
   if(path.size() > 30)
@@ -360,7 +360,7 @@ void QueryEditorWidget::setFilePath(QString path) {
 
   pathLabel->setText(path);
   if (path.length() > 0) {
-    watcher->addPath(path);
+    // watcher->addPath(path);
   }
 }
 
