@@ -15,11 +15,11 @@
 #include "../iconmanager.h"
 #include "../mainwindow.h"
 #include "../dialogs/logdialog.h"
-#include "../query/queryscheduler.h"
-#include "../query/querytoken.h"
 #include "../widgets/resultview.h"
 
 #include "queryeditorwidget.h"
+
+#include <QSqlQuery>
 
 QueryEditorWidget::QueryEditorWidget(QWidget *parent)
   : AbstractTabWidget(parent)
@@ -28,20 +28,15 @@ QueryEditorWidget::QueryEditorWidget(QWidget *parent)
   setupWidgets();
   setupConnections();
 
+  setAutoDelete(false);
+
   model       = new QSqlQueryModel(this);
   shortModel  = new QStandardItemModel(this);
 //  oldToken    = NULL;
-  token       = NULL;
   watcher     = new QFileSystemWatcher(this);
 }
 
-QueryEditorWidget::~QueryEditorWidget()
-{
-  if(token)
-  {
-    token->disconnect();
-    delete token;
-  }
+QueryEditorWidget::~QueryEditorWidget() {
 }
 
 void QueryEditorWidget::acceptToken()
@@ -224,6 +219,7 @@ void QueryEditorWidget::paste() {
   editor->paste();
 }
 
+/*
 QueryToken *QueryEditorWidget::prepareToken()
 {
   QString qtext = editor->textCursor().selectedText();
@@ -242,7 +238,7 @@ QueryToken *QueryEditorWidget::prepareToken()
   connect(token, SIGNAL(rejected()), this, SLOT(rejectToken()));
   connect(token, SIGNAL(started()), this, SLOT(startToken()));
   return token;
-}
+}*/
 
 void QueryEditorWidget::print()
 {
@@ -322,10 +318,16 @@ void QueryEditorWidget::run() {
 
   statusBar->showMessage(tr("Running..."));
 
-//  oldToken = token;
-  token = prepareToken();
+  QString qtext = editor->textCursor().selectedText();
+  if(qtext.isEmpty())
+    qtext = editor->toPlainText();
 
-  QueryScheduler::enqueue(token);
+  QSqlDatabase* db = DbManager::getDatabase(dbChooser->currentIndex());
+  query = QSqlQuery(*db);
+  query.exec(qtext);
+  model->setQuery(query);
+
+  emit queryFinished(query.lastError());
 }
 
 /**
@@ -416,6 +418,9 @@ void QueryEditorWidget::setupConnections() {
   connect(editor->document(), SIGNAL(modificationChanged(bool)),
           this, SIGNAL(modificationChanged(bool)));
 
+  connect(this, SIGNAL(queryFinished(QSqlError)),
+          this, SLOT(validateQuery(QSqlError)));
+
   // connect(watcher, SIGNAL(fileChanged(QString)),
   //         this, SLOT(onFileChanged(QString)));
 }
@@ -493,6 +498,28 @@ void QueryEditorWidget::upperCase() {
   }
 }
 
+void QueryEditorWidget::validateQuery(QSqlError err) {
+  tabWidget->setTabEnabled(1, false);
+
+  switch(err.type()) {
+  case QSqlError::NoError:
+    tabView->setQuery(model);
+    tabWidget->setCurrentIndex(1);
+    tabWidget->setTabEnabled(1, true);
+    statusBar->showMessage(tr("Query executed with success in %2secs (%1 lines returned)")
+                            .arg(model->rowCount()));
+    break;
+  default:
+    statusBar->showMessage(tr("Unable to run query"));
+    debugText->append(QString("<b>[%1]</b>%2")
+                      .arg(QTime::currentTime().toString())
+                      .arg(err.text()));
+  }
+
+  runButton->setEnabled(true);
+}
+
+/*
 void QueryEditorWidget::validateToken(QSqlError err) {
   QString                 logMsg;
   QMap<QString, QVariant> logData;
@@ -540,3 +567,4 @@ void QueryEditorWidget::validateToken(QSqlError err) {
 
   runButton->setEnabled(true);
 }
+*/

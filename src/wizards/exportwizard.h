@@ -13,22 +13,20 @@
 #ifndef EXPORTWIZARD_H
 #define EXPORTWIZARD_H
 
-#include <QtGui>
-
-#include "../query/querytoken.h"
 #include "../plugins/exportengine.h"
 
 #include "ui_ew_firstpage.h"
 #include "ui_ew_exportpage.h"
 
+#include <QtGui>
+#include <QSqlQueryModel>
+
 class ExportWizard : public QWizard {
 Q_OBJECT
 public:
-  ExportWizard(QueryToken *m_token, QWidget *parent =0);
   ExportWizard(QAbstractItemModel *m_model, QWidget *parent =0);
 
   QAbstractItemModel *m_model;
-  QueryToken *m_token;
 
   ExportEngine *engine() { return m_engine; };
   QAbstractItemModel *model();
@@ -65,7 +63,6 @@ class EwExportPage : public QWizardPage, Ui::EwExportPage, QRunnable
 {
 Q_OBJECT
 public:
-  EwExportPage(QueryToken *token, QWizard *parent =0);
   EwExportPage(QAbstractItemModel *model, QWizard *parent =0);
   //bool isComplete();
   void initializePage();
@@ -83,7 +80,6 @@ private:
   QProgressDialog    *dial;
   bool                finished;
   QAbstractItemModel *model;
-  QueryToken         *token;
 };
 
 #endif // EXPORTWIZARD_H

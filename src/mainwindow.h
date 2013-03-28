@@ -88,7 +88,6 @@ private slots:
   void redo();
   void search();
   void selectAll();
-  void setQueryCount(int count);
   void undo();
   void updateDbActions();
   void upperCase();

@@ -14,15 +14,17 @@
 #define QUERYEDITORWIDGET_H
 
 #include <QtGui>
-#include <QtSql>
-
-#include "../query/querytoken.h"
+#include <QRunnable>
+#include <QSqlError>
+#include <QSqlResult>
+#include <QSqlQuery>
+#include <QSqlQueryModel>
 
 #include "abstracttabwidget.h"
 
 #include "ui_queryeditorwidgetclass.h"
 
-class QueryEditorWidget: public AbstractTabWidget, Ui::QueryEditorWidgetClass
+class QueryEditorWidget: public AbstractTabWidget, QRunnable, Ui::QueryEditorWidgetClass
 {
 Q_OBJECT
 public:
@@ -35,7 +37,7 @@ public:
   QIcon         icon();
   QString       id();
   bool          isSaved();
-  QueryToken   *prepareToken();
+  // QueryToken   *prepareToken();
   void          print();
   QPrinter     *printer();
   void          saveAs( QString = QString::null );
@@ -59,6 +61,7 @@ public slots:
 
 signals:
   void fileChanged(QString);
+  void queryFinished(QSqlError);
 
 private:
   void closeEvent(QCloseEvent *event);
@@ -74,14 +77,12 @@ private:
   QString               filePath;
   QSqlQueryModel       *model;
   int                   oldCount;
-//  QueryToken           *oldToken;
   QMenu                *optionsMenu;
   int                   page;
   QToolButton*          resultButton;
   QSqlQuery             query;
   QStandardItemModel   *shortModel;
   QStatusBar           *statusBar;
-  QueryToken           *token;
   QFileSystemWatcher   *watcher;
 
 private slots:
@@ -90,7 +91,7 @@ private slots:
   void onFileChanged(QString path);
   void rejectToken();
   void startToken();
-  void validateToken(QSqlError err);
+  void validateQuery(QSqlError err);
 };
 
 #endif // QUERYEDITORWIDGET_H

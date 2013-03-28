@@ -14,7 +14,6 @@
 #define RESULTVIEW_H
 
 #include "../dialogs/blobdialog.h"
-#include "../query/querytoken.h"
 #include "../wizards/exportwizard.h"
 #include "ui_resultview.h"
 
@@ -47,8 +46,9 @@ public:
   ResultView(QWidget *parent=0);
   ~ResultView();
 
+  void setQuery(QSqlQueryModel *queryModel);
   bool setTable(QString table, QSqlDatabase *db);
-  void setToken(QueryToken *token);
+  // void setToken(QueryToken *token);
 
   Mode mode()           { return m_mode;    };
   void setMode(Mode m);
@@ -80,7 +80,6 @@ private:
   QStandardItemModel   *shortModel;
   Mode                  m_mode;
   QSqlQueryModel       *model;
-  QueryToken           *m_token;
 
   int                   offset;
 
