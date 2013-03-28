@@ -269,15 +269,6 @@ void QueryEditorWidget::reloadFile() {
 }
 
 void QueryEditorWidget::run() {
-  resultButton->setChecked(true);
-  tabWidget->setVisible(true);
-  tabWidget->setTabEnabled(1, false);
-  tabWidget->setCurrentIndex(0);
-  debugText->clear();
-  runButton->setEnabled(false);
-
-  statusBar->showMessage(tr("Running..."));
-
   QString qtext = editor->textCursor().selectedText();
   if (qtext.isEmpty()) {
     qtext = editor->toPlainText();
@@ -288,7 +279,7 @@ void QueryEditorWidget::run() {
   query.exec(qtext);
   model->setQuery(query);
 
-  emit queryFinished(query.lastError());
+  emit queryFinished();
 }
 
 /**
@@ -374,8 +365,8 @@ void QueryEditorWidget::setupConnections() {
   connect(editor->document(), SIGNAL(modificationChanged(bool)),
           this, SIGNAL(modificationChanged(bool)));
 
-  connect(this, SIGNAL(queryFinished(QSqlError)),
-          this, SLOT(validateQuery(QSqlError)));
+  connect(this, SIGNAL(queryFinished()),
+          this, SLOT(validateQuery()));
 
   // connect(watcher, SIGNAL(fileChanged(QString)),
   //         this, SLOT(onFileChanged(QString)));
@@ -419,6 +410,15 @@ void QueryEditorWidget::showEvent(QShowEvent *event) {
 }
 
 void QueryEditorWidget::start() {
+  resultButton->setChecked(true);
+  tabWidget->setVisible(true);
+  tabWidget->setTabEnabled(1, false);
+  tabWidget->setCurrentIndex(0);
+  debugText->clear();
+  runButton->setEnabled(false);
+
+  statusBar->showMessage(tr("Running..."));
+
   QThreadPool::globalInstance()->start(this);
 }
 
@@ -451,10 +451,10 @@ void QueryEditorWidget::upperCase() {
   }
 }
 
-void QueryEditorWidget::validateQuery(QSqlError err) {
+void QueryEditorWidget::validateQuery() {
   tabWidget->setTabEnabled(1, false);
 
-  switch(err.type()) {
+  switch(query.lastError().type()) {
   case QSqlError::NoError:
     tabView->setQuery(model);
     tabWidget->setCurrentIndex(1);
@@ -462,11 +462,12 @@ void QueryEditorWidget::validateQuery(QSqlError err) {
     statusBar->showMessage(tr("Query executed with success in %2secs (%1 lines returned)")
                             .arg(model->rowCount()));
     break;
+
   default:
     statusBar->showMessage(tr("Unable to run query"));
     debugText->append(QString("<b>[%1]</b>%2")
                       .arg(QTime::currentTime().toString())
-                      .arg(err.text()));
+                      .arg(query.lastError().text()));
   }
 
   runButton->setEnabled(true);

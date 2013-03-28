@@ -36,7 +36,6 @@ public:
   QIcon         icon();
   QString       id();
   bool          isSaved();
-  // QueryToken   *prepareToken();
   void          print();
   QPrinter     *printer();
   void          saveAs(QString = QString::null);
@@ -59,7 +58,7 @@ public slots:
 
 signals:
   void fileChanged(QString);
-  void queryFinished(QSqlError);
+  void queryFinished();
 
 private:
   void closeEvent(QCloseEvent *event);
@@ -89,7 +88,7 @@ private slots:
   void checkDbOpen();
   void onFileChanged(QString path);
   void start();
-  void validateQuery(QSqlError err);
+  void validateQuery();
 };
 
 #endif // QUERYEDITORWIDGET_H
