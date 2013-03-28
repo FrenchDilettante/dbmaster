@@ -436,30 +436,28 @@ void MainWindow::print()
   }
 }
 
-void MainWindow::redo()
-{
-  if(currentTab() != 0)
+void MainWindow::redo() {
+  if (currentTab() != 0) {
     currentTab()->redo();
+  }
 }
 
 /**
  * Called after the tab widget's index changed.
  */
-void MainWindow::refreshTab()
-{
+void MainWindow::refreshTab() {
   AbstractTabWidget *tab = dynamic_cast<AbstractTabWidget*>(sender());
 
-  if(tab)
-  {
+  if (tab) {
     QString text = tab->title();
-    if(!tab->isSaved())
+    if (!tab->isSaved()) {
       text.prepend("* ");
+    }
     tabWidget->setTabText(tabWidget->indexOf(tab), text);
   }
 
   // toolbar's actions
-  if(currentTab())
-  {
+  if (currentTab()) {
     AbstractTabWidget::Actions acts;
     acts = currentTab()->availableActions();
     foreach(AbstractTabWidget::Action a, actionMap.keys())
@@ -469,15 +467,14 @@ void MainWindow::refreshTab()
 
 void MainWindow::refreshRecent()
 {
-  for(int i=0; i<10; i++)
-  {
+  for (int i=0; i<10; i++) {
     recentActions[i]->setVisible(i < recentFiles.size());
-    if(i<recentFiles.size())
+    if (i<recentFiles.size()) {
       recentActions[i]->setText(QFileInfo(recentFiles[i]).fileName());
+    }
   }
 
-  if(recentFiles.size() == 0)
-  {
+  if (recentFiles.size() == 0) {
     actionClearRecent->setText(tr("No recent file"));
   } else {
     actionClearRecent->setText(tr("Clear"));
@@ -492,35 +489,29 @@ void MainWindow::reloadDbList() {
   updateDbActions();
 }
 
-void MainWindow::saveQuery()
-{
+void MainWindow::saveQuery() {
   if(currentTab() != 0)
     currentTab()->save();
 }
 
-void MainWindow::saveQueryAs()
-{
+void MainWindow::saveQueryAs() {
   if(currentTab())
     currentTab()->saveAs();
 }
 
-void MainWindow::search()
-{
-  if(currentTab() && currentTab()->textEdit())
-  {
+void MainWindow::search() {
+  if(currentTab() && currentTab()->textEdit())   {
     searchDialog->setEditor(currentTab()->textEdit());
     searchDialog->show();
   }
 }
 
-void MainWindow::selectAll()
-{
+void MainWindow::selectAll() {
   if(currentTab() != 0)
     currentTab()->selectAll();
 }
 
-void MainWindow::setupConnections()
-{
+void MainWindow::setupConnections() {
   /*
    * Actions
    */
