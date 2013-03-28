@@ -14,6 +14,7 @@
 #include "../iconmanager.h"
 
 #include <QModelIndex>
+#include <QSqlError>
 
 bool ResultView::alternateRows = false;
 QList<ResultView*> ResultView::instances = QList<ResultView*>();
@@ -96,7 +97,7 @@ void ResultView::exportContent()
   if (m_mode == TableMode) {
     exportWizard = new ExportWizard(model, this);
   } else {
-    exportWizard = new ExportWizard(m_token, this);
+    // exportWizard = new ExportWizard(m_token, this);
   }
 
   exportWizard->exec();
@@ -244,6 +245,13 @@ void ResultView::setModel(QSqlQueryModel *model) {
   updateView();
 }
 
+void ResultView::setQuery(QSqlQueryModel *queryModel) {
+  setMode(QueryMode);
+  offset = 0;
+
+  setModel(queryModel);
+}
+
 bool ResultView::setTable(QString table, QSqlDatabase *db) {
   setMode(TableMode);
   this->table->resetColumnSizes();
@@ -264,14 +272,14 @@ bool ResultView::setTable(QString table, QSqlDatabase *db) {
     return false;
   }
 }
-
+/*
 void ResultView::setToken(QueryToken *token) {
   setMode(QueryMode);
   m_token = token;
   offset = 0;
 
   setModel(m_token->model());
-}
+}*/
 
 void ResultView::setupConnections() {
   connect(firstPageButton, SIGNAL(clicked()), this, SLOT(scrollBegin()));

@@ -93,7 +93,7 @@ int DbManagerPrivate::addDatabase(QString driver, QString host, QString user,
   db.setPassword(pswd);
   db.setDatabaseName(dbnm);
 
-  foreach(QSqlDatabase *d, dbList) {
+  foreach (QSqlDatabase *d, dbList) {
     // on contrôle les éventuels doublons
     if (d->hostName() == db.hostName() &&
             d->userName() == db.userName() &&
@@ -211,10 +211,11 @@ QString DbManagerPrivate::dbToolTip(QSqlDatabase *db) {
 
   // Connection's status
   QString stName;
-  if(db->isOpen())
+  if (db->isOpen()) {
     stName = tr("Openned");
-  else
+  } else {
     stName = tr("Closed");
+  }
   ret += defaultLine
          .arg(tr("Status"))
          .arg(stName);
@@ -239,20 +240,18 @@ QString DbManagerPrivate::dbToolTip(QSqlDatabase *db) {
  */
 void DbManagerPrivate::closeAll()
 {
-  if(dbMap.size() == 0)
+  if (dbMap.size() == 0) {
     return;
+  }
 
   closingAll = true;
   closeStack << dbList.toVector();
   // waits until all connections are closed
   bool oneOpenned = true;
-  while(oneOpenned)
-  {
+  while (oneOpenned) {
     oneOpenned = false;
-    foreach(QSqlDatabase *d, dbList)
-    {
-      if(d->isOpen())
-      {
+    foreach (QSqlDatabase *d, dbList) {
+      if (d->isOpen()) {
         oneOpenned = true;
         break;
       }
@@ -261,48 +260,47 @@ void DbManagerPrivate::closeAll()
   dbMap.clear();
 }
 
-QStandardItemModel *DbManagerPrivate::driverModel()
-{
+QStandardItemModel *DbManagerPrivate::driverModel() {
   return m_driverModel;
 }
 
-QString DbManagerPrivate::genConnectionName()
-{
+QString DbManagerPrivate::genConnectionName() {
   nconn++;
   return QString::number(nconn);
 }
 
-QSqlDatabase* DbManagerPrivate::getDatabase(int n)
-{
-  if(dbMap.size() == 0)
+QSqlDatabase* DbManagerPrivate::getDatabase(int n) {
+  if (dbMap.size() == 0) {
     return NULL;
+  }
 
-  if (n < 0)
+  if (n < 0) {
     return dbList.first();
+  }
 
-  if (n >= dbMap.size())
+  if (n >= dbMap.size()) {
     return dbList.last();
+  }
 
   return dbList[n];
 }
 
-QList<QSqlDatabase*> DbManagerPrivate::getDbList()
-{
+QList<QSqlDatabase*> DbManagerPrivate::getDbList() {
   return dbList;
 }
 
-QStringList DbManagerPrivate::getDbNames(bool showHosts)
-{
+QStringList DbManagerPrivate::getDbNames(bool showHosts) {
   QStringList ret;
   QString str;
 
-  foreach(QSqlDatabase *db, dbList)
-  {
+  foreach(QSqlDatabase *db, dbList)   {
     str = db->databaseName();
-    if (str.contains("/"))
+    if (str.contains("/")) {
       str = str.split("/")[str.split("/").size() - 1];
-    if (showHosts && !db->hostName().isEmpty())
+    }
+    if (showHosts && !db->hostName().isEmpty()) {
       str.append(" on ").append(db->hostName());
+    }
 
     ret << str;
   }
@@ -311,53 +309,50 @@ QStringList DbManagerPrivate::getDbNames(bool showHosts)
 }
 
 /// DEPRECATED
-int DbManagerPrivate::indexOf(QSqlDatabase *db)
-{
+int DbManagerPrivate::indexOf(QSqlDatabase *db) {
   return dbList.indexOf(db);
 }
 
-void DbManagerPrivate::init()
-{
+void DbManagerPrivate::init() {
   setupModels();
   openList();
 }
 
-QString DbManagerPrivate::lastError()
-{
+QString DbManagerPrivate::lastError() {
   return lastErr;
 }
 
-void DbManagerPrivate::open(int nb, QString pswd)
-{
+void DbManagerPrivate::open(int nb, QString pswd) {
   open(dbList[nb], pswd);
 }
 
-void DbManagerPrivate::open(QSqlDatabase *db, QString pswd)
-{
-  if(!dbMap.contains(db))
+void DbManagerPrivate::open(QSqlDatabase *db, QString pswd) {
+  if (!dbMap.contains(db)) {
     return;
+  }
 
-  if(!pswd.isNull())
+  if (!pswd.isNull()) {
     db->setPassword(pswd);
+  }
 
   dbMap[db]->setIcon(IconManager::get("database_lightning"));
 
   openStack.push(db);
-  while(closeStack.contains(db))
+  while (closeStack.contains(db)) {
     closeStack.remove(closeStack.indexOf(db));
+  }
 
-  if (!isRunning())
+  if (!isRunning()) {
     start();
+  }
 }
 
-void DbManagerPrivate::openList()
-{
+void DbManagerPrivate::openList() {
   QSettings s;
 
   int size = s.beginReadArray("dblist");
   QString driver, host, user, pswd, name, alias, wrapper;
-  for (int i = 1; i <= size; i++)
-  {
+  for (int i = 1; i <= size; i++) {
     s.setArrayIndex(i);
     driver = s.value("driver").toString();
     host = s.value("hostname").toString();
@@ -373,18 +368,19 @@ void DbManagerPrivate::openList()
 
 QSqlDatabase *DbManagerPrivate::parentDb(QModelIndex index) {
   while (index != QModelIndex()) {
-    if (index.data(Qt::UserRole) == DbManager::DbItem)
+    if (index.data(Qt::UserRole) == DbManager::DbItem) {
       return DbManager::getDatabase(index.row());
+    }
     index = index.parent();
   }
 
   return NULL;
 }
 
-void DbManagerPrivate::refreshModel()
-{
-  foreach(QSqlDatabase *db, dbList)
+void DbManagerPrivate::refreshModel() {
+  foreach (QSqlDatabase *db, dbList) {
     refreshModelItem(db);
+  }
 }
 
 void DbManagerPrivate::refreshModelIndex(QModelIndex index) {
@@ -398,7 +394,6 @@ void DbManagerPrivate::refreshModelIndex(QModelIndex index) {
   }
 
   SqlWrapper *wrapper = dbWrappers.value(parentDb(index), NULL);
-
   if (!wrapper) {
     return;
   }
@@ -429,8 +424,9 @@ void DbManagerPrivate::refreshModelIndex(QModelIndex index) {
  * @bug check indexes
  */
 void DbManagerPrivate::refreshModelItem(QSqlDatabase *db) {
-  if(!dbMap.contains(db))
+  if (!dbMap.contains(db)) {
     return;
+  }
 
   QStandardItem *item = dbMap[db];
   item->setIcon(IconManager::get("database_refresh"));
@@ -439,8 +435,7 @@ void DbManagerPrivate::refreshModelItem(QSqlDatabase *db) {
   QStandardItem *schemaItem = NULL;
 
   QModelIndex index = m_model->indexFromItem(item);
-  if(db->isOpen()) {
-
+  if (db->isOpen()) {
     while (m_model->rowCount(index) > 0) {
       m_model->removeRow(0, index);
     }
@@ -492,23 +487,23 @@ void DbManagerPrivate::refreshModelItem(QSqlDatabase *db) {
 
   } else {
     item->setIcon(IconManager::get("database_connect"));
-    while(m_model->rowCount(index) > 0)
+    while (m_model->rowCount(index) > 0) {
       m_model->removeRow(0, index);
+    }
   }
 }
 
 /**
  * Remove the database at index.
  */
-void DbManagerPrivate::removeDatabase(int index)
-{
+void DbManagerPrivate::removeDatabase(int index) {
   removeDatabase(dbList[index]);
 }
 
-void DbManagerPrivate::removeDatabase(QSqlDatabase *db)
-{
-  if(!dbMap.contains(db))
+void DbManagerPrivate::removeDatabase(QSqlDatabase *db) {
+  if (!dbMap.contains(db)) {
     return;
+  }
 
   close(db);
   m_model->removeRow(dbList.indexOf(db));
@@ -516,30 +511,28 @@ void DbManagerPrivate::removeDatabase(QSqlDatabase *db)
   dbList.removeAll(db);
   saveList();
 
-  if(!isRunning())
+  if (!isRunning()) {
     start();
+  }
 }
 
 /**
  * Thread de gestion des connexions
  */
-void DbManagerPrivate::run()
-{
+void DbManagerPrivate::run() {
   QSqlDatabase *db;
 
-  while(dbList.size() > 0)
-  {
+  while (dbList.size() > 0) {
     // traitement des connexions à ouvrir
-    while(openStack.size() > 0)
-    {
-      foreach(QSqlDatabase *d, closeStack)
-      {
+    while (openStack.size() > 0) {
+      foreach (QSqlDatabase *d, closeStack) {
         // on supprime les doublons éventuels
-        while(openStack.contains(d))
+        while (openStack.contains(d)) {
           openStack.remove(openStack.indexOf(d));
+        }
       }
       db = openStack.pop();
-      if(db->open()) {
+      if (db->open()) {
         emit logMessage(tr("Connected to %1").arg(db->hostName()));
       } else {
         emit logMessage(tr("Unable to connect to %1").arg(db->hostName()));
@@ -551,13 +544,11 @@ void DbManagerPrivate::run()
     }
 
     // traitement des connexions à fermer
-    while(closeStack.size() > 0)
-    {
+    while (closeStack.size() > 0) {
       db = closeStack.pop();
       db->close();
       emit logMessage(tr("Disconnected from %1").arg(db->hostName()));
-      if(!closingAll)
-      {
+      if (!closingAll) {
         emit statusChanged(db);
         if (dbMap.contains(db)) {
           emit statusChanged(dbMap[db]->index());
@@ -565,8 +556,9 @@ void DbManagerPrivate::run()
         refreshModelItem(db);
       }
 
-      if(!dbList.contains(db))
+      if (!dbList.contains(db)) {
         QSqlDatabase::removeDatabase(db->connectionName());
+      }
     }
 
     msleep(10);
@@ -584,8 +576,9 @@ void DbManagerPrivate::saveList() {
     s.setValue("driver", db->driverName());
     s.setValue("hostname", db->hostName());
     s.setValue("username", db->userName());
-    if (!db->password().isNull())
+    if (!db->password().isNull()) {
       s.setValue("password", db->password());
+    }
     s.setValue("database", db->databaseName());
     s.setValue("alias", dbMap[db]->text());
     if (dbWrappers.contains(db) && dbWrappers[db]) {
@@ -638,8 +631,9 @@ void DbManagerPrivate::setAlias(QSqlDatabase *db, QString alias) {
 }
 
 void DbManagerPrivate::setDatabase(int nb, QSqlDatabase db) {
-  if (dbList.size() >= nb)
+  if (dbList.size() >= nb) {
     return;
+  }
 
   QSqlDatabase *newDb = new QSqlDatabase(db);
   QSqlDatabase *oldDb = dbList[nb];
@@ -702,8 +696,9 @@ void DbManagerPrivate::setupModels() {
 }
 
 void DbManagerPrivate::swapDatabase(QSqlDatabase *oldDb, QSqlDatabase *newDb) {
-  if (!dbMap.contains(oldDb))
+  if (!dbMap.contains(oldDb)) {
     return;
+  }
 
   QStandardItem *item = dbMap[oldDb];
   item->setText(QObject::tr("%1 on %2")
@@ -771,7 +766,7 @@ QStandardItem *DbManagerPrivate::viewsItem(QList<SqlTable> tables,
 
   viewsItem->setIcon(IconManager::get("folder_views"));
 
-  foreach(SqlTable table, tables)   {
+  foreach (SqlTable table, tables) {
     if (table.type == ViewTable) {
       QStandardItem *i = new QStandardItem(IconManager::get("table_lightning"),
                                            table.name);
@@ -785,30 +780,26 @@ QStandardItem *DbManagerPrivate::viewsItem(QList<SqlTable> tables,
     }
   }
 
-  viewsItem->setText(tr("Views (%1)")
-                     .arg(viewsItem->rowCount()));
+  viewsItem->setText(tr("Views (%1)").arg(viewsItem->rowCount()));
 
   return viewsItem;
 }
 
-void DbManagerPrivate::terminate()
-{
+void DbManagerPrivate::terminate() {
   closeAll();
 }
 
-void DbManagerPrivate::toggle(QSqlDatabase *db)
-{
-  if(db->isOpen())
+void DbManagerPrivate::toggle(QSqlDatabase *db) {
+  if(db->isOpen()) {
     close(db);
-  else
-  {
+  } else {
     open(db);
     DbManager::lastIndex = indexOf(db);
   }
 }
 
 void DbManagerPrivate::update(QSqlDatabase *db, QString alias) {
-  if(dbList.contains(db)) {
+  if (dbList.contains(db)) {
     dbMap[db]->setText(alias);
     refreshModelItem(db);
 

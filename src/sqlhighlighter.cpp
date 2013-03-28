@@ -30,16 +30,14 @@ QStringList             SqlHighlighter::sqlTypes;
  *   2 : comment
  */
 
-SqlHighlighter::SqlHighlighter( QTextEdit *parent )
-		: QSyntaxHighlighter( parent )
-{
+SqlHighlighter::SqlHighlighter(QTextEdit *parent)
+  : QSyntaxHighlighter(parent) {
   QMap<QString,QColor> colors = Config::shColor;
   QMap<QString,QTextCharFormat> formats = Config::shFormat;
   HighlightRule rule;
 
   // basic SQL syntax
-  foreach( const QString &pattern, basicSqlKeywords )
-  {
+  foreach (const QString &pattern, basicSqlKeywords) {
     rule.format = formats["sql_basics"];
     rule.format.setForeground( colors["sql_basics"] );
     rule.pattern = QRegExp( "\\b" + pattern.toLower() + "\\b" );
@@ -49,8 +47,7 @@ SqlHighlighter::SqlHighlighter( QTextEdit *parent )
   }
 
   // SQL functions
-  foreach( const QString &pattern, sqlFunctions )
-  {
+  foreach (const QString &pattern, sqlFunctions) {
     rule.format = formats["sql_functions"];
     rule.format.setForeground( colors["sql_functions"] );
     rule.pattern = QRegExp( "\\b" + pattern.toLower() + "\\b" );
@@ -60,8 +57,7 @@ SqlHighlighter::SqlHighlighter( QTextEdit *parent )
   }
 
   // SQL types
-  foreach( const QString &pattern, sqlTypes )
-  {
+  foreach(const QString &pattern, sqlTypes) {
     rule.format = formats["sql_types"];
     rule.format.setForeground( colors["sql_types"] );
     rule.pattern = QRegExp( "\\b" + pattern.toLower() + "\\b" );
@@ -92,34 +88,30 @@ SqlHighlighter::SqlHighlighter( QTextEdit *parent )
   endBlockMarkers[1] = QRegExp( "\n" );
 }
 
-void SqlHighlighter::highlightBlock( const QString &block )
-{
-  if( block.isEmpty() || block.isNull() )
+void SqlHighlighter::highlightBlock(const QString &block) {
+  if (block.isEmpty() || block.isNull()) {
     return;
+  }
 
   // keywords
-  foreach( const HighlightRule &rule, highlightingRules )
-  {
-    QRegExp expression( rule.pattern );
-    int index = expression.indexIn( block );
-    while( index >= 0 )
-    {
+  foreach (const HighlightRule &rule, highlightingRules) {
+    QRegExp expression(rule.pattern);
+    int index = expression.indexIn(block);
+    while (index >= 0) {
       int length = expression.matchedLength();
-      setFormat( index, length, rule.format );
-      index = expression.indexIn( block, index + length );
+      setFormat(index, length, rule.format);
+      index = expression.indexIn(block, index + length);
     }
   }
 
   // context
-  foreach( const HighlightRule &rule, contextRules )
-  {
-    QRegExp expression( rule.pattern );
-    int index = expression.indexIn( block );
-    while( index >= 0 )
-    {
+  foreach (const HighlightRule &rule, contextRules) {
+    QRegExp expression(rule.pattern);
+    int index = expression.indexIn(block);
+    while (index >= 0) {
       int length = expression.matchedLength();
-      setFormat( index, length, rule.format );
-      index = expression.indexIn( block, index + length );
+      setFormat(index, length, rule.format);
+      index = expression.indexIn(block, index + length);
     }
   }
 
@@ -133,51 +125,45 @@ void SqlHighlighter::highlightBlock( const QString &block )
   /*
    * Each block category (comments, strings, etc.) will be analysed.
    */
-  for( int s = 0; s < 2; s++ )
-  {
-    if( previousBlockState() != s + 1 )
-      startIndex = block.indexOf( beginBlockMarkers[s] );
+  for (int s = 0; s < 2; s++) {
+    if (previousBlockState() != s + 1) {
+      startIndex = block.indexOf(beginBlockMarkers[s]);
+    }
 
     // if startIndex < 0, it means all blocks have been proceeded
-    while( startIndex >= 0 )
-    {
+    while (startIndex >= 0) {
       // strings have a special case :)
-      if( s == 0 )
-        endBlockMarkers[0] = QRegExp( block.at( startIndex ) );
+      if (s == 0) {
+        endBlockMarkers[0] = QRegExp(block.at(startIndex));
+      }
 
-      int endIndex = block.indexOf( endBlockMarkers[s], startIndex + 1);
+      int endIndex = block.indexOf(endBlockMarkers[s], startIndex + 1);
       int length;
 
       // does the block end anywhere ?
-      if( endIndex == -1 )
-      {
-        setCurrentBlockState( s + 1 );
+      if (endIndex == -1) {
+        setCurrentBlockState(s + 1);
         length = block.length() - startIndex;
-      }
-      else
-      {
+      } else {
         length = endIndex - startIndex + beginBlockMarkers[s].matchedLength();
       }
 
       // applying syntax format
-      setFormat( startIndex, length, blockFormats[s] );
+      setFormat(startIndex, length, blockFormats[s]);
 
-      startIndex = block.indexOf( beginBlockMarkers[s], startIndex + length );
+      startIndex = block.indexOf(beginBlockMarkers[s], startIndex + length);
     }
   }
 }
 
-void SqlHighlighter::reloadColors()
-{
+void SqlHighlighter::reloadColors() {
 }
 
 void SqlHighlighter::reloadContext(QStringList tables,
-                                   QMultiMap<QString, QString>fields)
-{
+                                   QMultiMap<QString, QString>fields) {
   contextRules.clear();
   HighlightRule r;
-  foreach( QString t, tables )
-  {
+  foreach (QString t, tables) {
     r.pattern = QRegExp( "\\b" + t + "\\b" );
     r.format = Config::shFormat["ctxt_table"];
     r.format.setForeground( Config::shColor["ctxt_table"] );
@@ -188,8 +174,7 @@ void SqlHighlighter::reloadContext(QStringList tables,
   QStringList l = fields.values();
   l.removeDuplicates();
 
-  foreach( QString f, l )
-  {
+  foreach (QString f, l) {
     r.pattern = QRegExp( "\\b" + f + "\\b" );
     r.format = Config::shFormat["ctxt_field"];
     r.format.setForeground( Config::shColor["ctxt_field"] );
@@ -258,17 +243,14 @@ bool SqlHighlighter::reloadKeywords() {
   return true;
 }
 
-QStringList SqlHighlighter::sqlFunctionList()
-{
+QStringList SqlHighlighter::sqlFunctionList() {
   return sqlFunctions;
 }
 
-QStringList SqlHighlighter::sqlKeywordList()
-{
+QStringList SqlHighlighter::sqlKeywordList() {
   return basicSqlKeywords;
 }
 
-QStringList SqlHighlighter::sqlTypeList()
-{
+QStringList SqlHighlighter::sqlTypeList() {
   return sqlTypes;
 }

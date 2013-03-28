@@ -17,8 +17,7 @@
 
 #include "../sqlhighlighter.h"
 
-class QueryTextEdit : public QTextEdit
-{
+class QueryTextEdit : public QTextEdit {
 Q_OBJECT
 public:
   QueryTextEdit(QWidget *parent=0);
@@ -46,7 +45,7 @@ private:
 
   QStringListModel *completerContextModel;
   QStringList tables;
-	SqlHighlighter *syntax;
+  SqlHighlighter *syntax;
 
 private slots:
   void cleanTables();

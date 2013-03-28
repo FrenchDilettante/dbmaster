@@ -62,6 +62,9 @@ int main(int argc, char *argv[]) {
 #if defined (Q_WS_X11)
                     QLibraryInfo::location(QLibraryInfo::TranslationsPath));
 #endif
+#if defined (Q_WS_MAC)
+                    QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+#endif
 #if defined (Q_WS_WIN)
                     QDir::currentPath());
 #endif

@@ -23,9 +23,6 @@ SOURCES += main.cpp \
     widgets/resultview.cpp \
     wizards/exportwizard.cpp \
     widgets/dbtreeview.cpp \
-    query/queryscheduler.cpp \
-    query/querythread.cpp \
-    query/querytoken.cpp \
     widgets/tooltipframe.cpp \
     plugins/plugindialog.cpp \
     plugins/pluginmanager.cpp \
@@ -53,9 +50,6 @@ HEADERS += mainwindow.h \
     widgets/resultview.h \
     wizards/exportwizard.h \
     widgets/dbtreeview.h \
-    query/queryscheduler.h \
-    query/querythread.h \
-    query/querytoken.h \
     widgets/tooltipframe.h \
     plugins/sqlwrapper.h \
     plugins/plugindialog.h \
