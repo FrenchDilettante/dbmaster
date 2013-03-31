@@ -162,20 +162,12 @@
     <property name="title">
      <string>&amp;File</string>
     </property>
-    <widget class="QMenu" name="menuNew">
-     <property name="title">
-      <string>&amp;New</string>
-     </property>
-     <addaction name="actionAddDb"/>
-     <addaction name="separator"/>
-     <addaction name="actionNewQuery"/>
-    </widget>
     <widget class="QMenu" name="menuRecent_files">
      <property name="title">
       <string>Recent files</string>
      </property>
     </widget>
-    <addaction name="menuNew"/>
+    <addaction name="actionNewQuery"/>
     <addaction name="actionOpenQuery"/>
     <addaction name="menuRecent_files"/>
     <addaction name="actionSaveQuery"/>
@@ -351,7 +343,10 @@
   </widget>
   <action name="actionAddDb">
    <property name="text">
-    <string>Connection</string>
+    <string>Add connection</string>
+   </property>
+   <property name="toolTip">
+    <string>Add connection</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+A</string>
@@ -359,7 +354,10 @@
   </action>
   <action name="actionNewQuery">
    <property name="text">
-    <string>Query</string>
+    <string>New query</string>
+   </property>
+   <property name="toolTip">
+    <string>New query</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+N</string>
