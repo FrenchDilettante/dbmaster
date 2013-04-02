@@ -379,12 +379,6 @@ void QueryEditorWidget::setupWidgets() {
   connect(resultButton, SIGNAL(clicked(bool)),
           tabView, SLOT(setVisible(bool)));
 
-  optionsMenu = new QMenu(this);
-  optionsMenu->addAction(actionEnqueue);
-  optionsMenu->addAction(actionLogQuery);
-  optionsMenu->addAction(actionClearOnSuccess);
-  toolButton->setMenu(optionsMenu);
-
   baseActions = CaseLower | CaseUpper | Copy | Cut | Paste | Print | SaveAs
               | Search | SelectAll;
 

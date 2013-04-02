@@ -74,7 +74,6 @@ private:
   QString               filePath;
   QSqlQueryModel       *model;
   int                   oldCount;
-  QMenu                *optionsMenu;
   int                   page;
   QToolButton*          resultButton;
   QSqlQuery             query;
