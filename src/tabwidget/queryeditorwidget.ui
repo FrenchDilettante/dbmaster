@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>QueryEditorWidgetClass</class>
- <widget class="QWidget" name="QueryEditorWidgetClass">
+ <class>QueryEditorWidget</class>
+ <widget class="QWidget" name="QueryEditorWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,36 +11,7 @@
    </rect>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0">
-    <widget class="QComboBox" name="dbChooser"/>
-   </item>
-   <item row="0" column="1">
-    <widget class="QLabel" name="pathLabel">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="textInteractionFlags">
-      <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
-     </property>
-    </widget>
-   </item>
    <item row="0" column="2">
-    <widget class="QToolButton" name="toolButton">
-     <property name="text">
-      <string>...</string>
-     </property>
-     <property name="popupMode">
-      <enum>QToolButton::InstantPopup</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="3">
     <widget class="QPushButton" name="runButton">
      <property name="enabled">
       <bool>false</bool>
@@ -63,7 +34,10 @@
      </property>
     </widget>
    </item>
-   <item row="1" column="0" colspan="4">
+   <item row="0" column="0">
+    <widget class="QComboBox" name="dbChooser"/>
+   </item>
+   <item row="1" column="0" colspan="3">
     <widget class="QSplitter" name="splitter">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -86,43 +60,23 @@
      </widget>
     </widget>
    </item>
+   <item row="0" column="1">
+    <widget class="QLabel" name="pathLabel">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="textInteractionFlags">
+      <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+     </property>
+    </widget>
+   </item>
   </layout>
-  <action name="actionEnqueue">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="checked">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Enqueue</string>
-   </property>
-   <property name="toolTip">
-    <string>Puts the query in a threaded queue</string>
-   </property>
-  </action>
-  <action name="actionLogQuery">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="checked">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Log query</string>
-   </property>
-  </action>
-  <action name="actionClearOnSuccess">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Clear if success</string>
-   </property>
-   <property name="toolTip">
-    <string>Clears the query if it is runned with success</string>
-   </property>
-  </action>
  </widget>
  <customwidgets>
   <customwidget>

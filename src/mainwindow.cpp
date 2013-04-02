@@ -168,10 +168,6 @@ void MainWindow::closeEvent(QCloseEvent *event) {
   s.setValue("maindock_position", dockWidget->pos());
   s.setValue("maindock_size", dockWidget->size());
 
-  // Positionnement de la toolbar principale
-  s.setValue("maintoolbar_area", toolBarArea(mainToolBar));
-  s.setValue("dbtoolbar_area", toolBarArea(dbToolBar));
-
   s.endGroup();
 
   // fichiers récents
@@ -638,10 +634,6 @@ void MainWindow::setupWidgets() {
 
   setupDocks(&s);
 
-  addToolBar((Qt::ToolBarArea) s.value("dbtoolbar_area", 4).toInt(), dbToolBar);
-  addToolBar((Qt::ToolBarArea) s.value("maintoolbar_area", 4).toInt(),
-             mainToolBar);
-
   queriesStatusLabel = new QLabel("", this);
   QMainWindow::statusBar()->addPermanentWidget(queriesStatusLabel);
 
@@ -713,6 +705,13 @@ void MainWindow::setupWidgets() {
 
   tooltipButton->setIcon(       IconManager::get("help-faq"));
   tabWidget->setTabIcon(0,      IconManager::get("go-home"));
+
+  addConnectionButton->setDefaultAction(actionAddDb);
+  editConnectionButton->setDefaultAction(actionEditConnection);
+  removeConnectionButton->setDefaultAction(actionRemoveConnection);
+  connectBtn->setDefaultAction(actionConnect);
+  disconnectBtn->setDefaultAction(actionDisconnect);
+  refreshConnectionDb->setDefaultAction(actionRefreshConnection);
 }
 
 void MainWindow::toggleLeftPanel() {
