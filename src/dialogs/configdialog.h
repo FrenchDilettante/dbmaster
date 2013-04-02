@@ -47,7 +47,6 @@ private:
 private slots:
   void handleClick(QAbstractButton *button);
   void refreshSyntaxFont(int index =0);
-  void reloadKeywords(int index);
 
   /**
    * Update the editor's font settings
