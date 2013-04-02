@@ -747,10 +747,10 @@ void MainWindow::updateDbActions() {
   QSqlDatabase *currentDb = dbTreeView->currentDb();
   bool dbOpen = currentDb && currentDb->isOpen();
 
-  actionEditConnection->setEnabled(select);
-  actionRefreshConnection->setEnabled(select);
-  actionRemoveConnection->setEnabled(select && dbOpen);
-  actionConnect->setEnabled(select && dbOpen);
+  actionEditConnection->setEnabled(select && !dbOpen);
+  actionRefreshConnection->setEnabled(true);
+  actionRemoveConnection->setEnabled(select && !dbOpen);
+  actionConnect->setEnabled(select && !dbOpen);
   actionDisconnect->setEnabled(select && dbOpen);
 }
 
