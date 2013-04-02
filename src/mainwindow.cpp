@@ -680,21 +680,15 @@ void MainWindow::setupWidgets() {
 #endif
 
   // loading icons from current theme
-  actionAbout->setIcon(         IconManager::get("help-about"));
   actionAddDb->setIcon(         IconManager::get("database_add"));
-  actionClearRecent->setIcon(   IconManager::get("edit-clear"));
-  actionCloseTab->setIcon(      IconManager::get("window-close"));
   actionConnect->setIcon(       IconManager::get("database_go"));
   actionCopy->setIcon(          IconManager::get("edit-copy"));
   actionCut->setIcon(           IconManager::get("edit-cut"));
   actionDisconnect->setIcon(    IconManager::get("database_connect"));
   actionEditConnection->setIcon(IconManager::get("database_edit"));
-  actionExit->setIcon(          IconManager::get("application-exit"));
   actionNewQuery->setIcon(      IconManager::get("document-new"));
   actionOpenQuery->setIcon(     IconManager::get("document-open"));
   actionPaste->setIcon(         IconManager::get("edit-paste"));
-  actionPlugins->setIcon(       IconManager::get("plugins"));
-  actionPreferences->setIcon(   IconManager::get("preferences"));
   actionPrint->setIcon(         IconManager::get("document-print"));
   actionRedo->setIcon(          IconManager::get("edit-redo"));
   actionRefreshConnection->setIcon(IconManager::get("database_refresh"));
