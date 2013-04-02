@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ConfigDialogClass</class>
- <widget class="QDialog" name="ConfigDialogClass">
+ <class>ConfigDialog</class>
+ <widget class="QDialog" name="ConfigDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -502,14 +502,14 @@ p, li { white-space: pre-wrap; }
  </widget>
  <customwidgets>
   <customwidget>
-   <class>DbComboBox</class>
-   <extends>QComboBox</extends>
-   <header>../src/widgets/dbcombobox.h</header>
-  </customwidget>
-  <customwidget>
    <class>QueryTextEdit</class>
    <extends>QPlainTextEdit</extends>
    <header>../src/widgets/querytextedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>DbComboBox</class>
+   <extends>QComboBox</extends>
+   <header>../src/widgets/dbcombobox.h</header>
   </customwidget>
   <customwidget>
    <class>ColorButton</class>

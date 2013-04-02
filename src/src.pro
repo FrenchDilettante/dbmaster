@@ -66,9 +66,9 @@ HEADERS += mainwindow.h \
     tools/logger.h
 FORMS += mainwindow.ui \
     dialogs/dbdialog.ui \
-    tabwidget/queryeditorwidgetclass.ui \
-    tabwidget/tablewidgetclass.ui \
-    dialogs/configdialogclass.ui \
+    tabwidget/queryeditorwidget.ui \
+    tabwidget/tablewidget.ui \
+    dialogs/configdialog.ui \
     dialogs/aboutdialog.ui \
     wizards/newdbwizard.ui \
     wizards/ndw_firstpage.ui \

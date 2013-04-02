@@ -22,9 +22,9 @@
 
 #include "abstracttabwidget.h"
 
-#include "ui_queryeditorwidgetclass.h"
+#include "ui_queryeditorwidget.h"
 
-class QueryEditorWidget: public AbstractTabWidget, QRunnable, Ui::QueryEditorWidgetClass {
+class QueryEditorWidget: public AbstractTabWidget, QRunnable, Ui::QueryEditorWidget {
 Q_OBJECT
 public:
   QueryEditorWidget(QWidget* = 0);
