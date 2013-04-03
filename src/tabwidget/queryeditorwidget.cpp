@@ -455,6 +455,9 @@ void QueryEditorWidget::validateQuery() {
   default:
     logMsg = tr("Unable to run query");
     statusBar->showMessage(logMsg);
+    logMsg.append(
+          QString("<br /><span style=\"color: red\">%1</span>")
+            .arg(query.lastError().text()));
     break;
   }
 
