@@ -255,7 +255,6 @@ void DbTreeView::setupActions()
 {
   addDbAct = new QAction(this);
   addDbAct->setText(tr("New connection"));
-  addDbAct->setIcon(IconManager::get("database_add"));
   connect(addDbAct, SIGNAL(triggered()), MainWindow::dbWizard, SLOT(exec()));
 
   editDbAct = new QAction(this);
@@ -269,12 +268,10 @@ void DbTreeView::setupActions()
 
   removeDbAct = new QAction(this);
   removeDbAct->setText(tr("Remove"));
-  removeDbAct->setIcon(IconManager::get("list-remove"));
   connect(removeDbAct, SIGNAL(triggered()), this, SLOT(removeCurrent()));
 
   toggleAct = new QAction(this);
   toggleAct->setText(tr("Connect"));
-  toggleAct->setIcon(QIcon(":/img/connect_creating.png"));
   connect(toggleAct, SIGNAL(triggered()), this, SLOT(toggleCurrentDb()));
 
   contextMenu = new QMenu(this);
