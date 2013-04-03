@@ -375,6 +375,7 @@ void QueryEditorWidget::setupWidgets() {
   resultButton = new QToolButton(this);
   resultButton->setText(tr("Display result"));
   resultButton->setCheckable(true);
+  resultButton->setEnabled(false);
   statusBar->addPermanentWidget(resultButton);
   connect(resultButton, SIGNAL(clicked(bool)),
           tabView, SLOT(setVisible(bool)));
@@ -397,6 +398,7 @@ void QueryEditorWidget::showEvent(QShowEvent *event) {
 void QueryEditorWidget::start() {
   resultButton->setChecked(false);
   tabView->setVisible(false);
+  resultButton->setEnabled(false);
   runButton->setEnabled(false);
 
   statusBar->showMessage(tr("Running..."));
@@ -442,8 +444,7 @@ void QueryEditorWidget::validateQuery() {
   case QSqlError::NoError:
     tabView->setQuery(model);
     tabView->setVisible(true);
-    // tabWidget->setCurrentIndex(1);
-    // tabWidget->setTabEnabled(1, true);
+    resultButton->setEnabled(true);
     logMsg = tr("Query executed with success (%1 lines returned)")
         .arg(model->rowCount());
         // .arg(token->duration());
