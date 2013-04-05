@@ -26,6 +26,7 @@ int main(int argc, char *argv[]) {
   QApplication::setApplicationVersion("0.8.2");
   QApplication::setOrganizationDomain("dbmaster.org");
   QApplication a(argc, argv);
+  a.setWindowIcon(QIcon(":/img/dbmaster.png"));
 
   QSplashScreen splash(QPixmap(":/img/splash.png"));
   splash.show();
