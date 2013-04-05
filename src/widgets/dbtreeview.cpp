@@ -13,7 +13,6 @@
 #include "dbtreeview.h"
 
 #include "../dbmanager.h"
-#include "../iconmanager.h"
 #include "../mainwindow.h"
 
 DbTreeView::DbTreeView(QWidget *parent)
@@ -68,10 +67,8 @@ void DbTreeView::contextMenuEvent(QContextMenuEvent *event)
         toggleAct->setVisible(true);
         if(DbManager::getDatabase(index.row())->isOpen()) {
           toggleAct->setText(tr("Disconnect"));
-          toggleAct->setIcon(QIcon(":/img/connect_no.png"));
         } else {
           toggleAct->setText(tr("Connect"));
-          toggleAct->setIcon(QIcon(":/img/connect_creating.png"));
         }
         break;
 
