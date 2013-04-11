@@ -1,7 +1,7 @@
 #include "csvexportengine.h"
 #include "csvwizardpage.h"
 
-#include "../iconmanager.h"
+#include "iconmanager.h"
 
 #include <QDebug>
 #include <QVariant>
@@ -54,4 +54,3 @@ void CsvExportEngine::process(QFile *f) {
   }
 }
 
-Q_EXPORT_PLUGIN2(dbm_csv_exportengine, CsvExportEngine)

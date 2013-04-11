@@ -1,7 +1,7 @@
 #ifndef PLAINTEXTEXPORTENGINE_H
 #define PLAINTEXTEXPORTENGINE_H
 
-#include "exportengine.h"
+#include "../../exportengine.h"
 
 #include <QApplication>
 #include <QObject>

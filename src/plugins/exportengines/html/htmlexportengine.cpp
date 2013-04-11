@@ -59,4 +59,3 @@ void HtmlExportEngine::setModel(QAbstractItemModel *m) {
   ((HtmlWizardPage*) m_wizardPage)->setModel(m);
 }
 
-Q_EXPORT_PLUGIN2(dbm_html_exportengine, HtmlExportEngine)

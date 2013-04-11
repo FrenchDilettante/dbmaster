@@ -1,7 +1,7 @@
 #ifndef MYSQLWRAPPER_H
 #define MYSQLWRAPPER_H
 
-#include "sqlwrapper.h"
+#include "../../sqlwrapper.h"
 
 #include <QCoreApplication>
 

@@ -28,8 +28,6 @@ SqlTable Db2iWrapper::table(QString t) {
 
   QString sql;
 
-  // Récupération des colonnes
-
   sql += "SELECT C.TABLE_NAME, T.TABLE_TYPE, C.COLUMN_NAME, C.COLUMN_TYPE, ";
   sql += "C.IS_NULLABLE, C.COLUMN_DEFAULT, C.ORDINAL_POSITION ";
   sql += "FROM INFORMATION_SCHEMA.COLUMNS C ";
@@ -72,7 +70,6 @@ SqlTable Db2iWrapper::table(QString t) {
   }
 
 
-  // Récupération des clés primaires
 
   sql = "";
   sql += "SELECT COLUMN_NAME ";
@@ -169,7 +166,6 @@ QList<SqlTable> Db2iWrapper::tables() {
     return tables;
   }
 
-  // Récupération des clés primaires
 
   sql = "";
   sql += "SELECT T.TABLE_NAME, COLUMN_NAME ";
@@ -222,5 +218,3 @@ QList<SqlTable> Db2iWrapper::tables() {
 
   return tables;
 }
-
-Q_EXPORT_PLUGIN2(dbm_db2i_wrapper, Db2iWrapper)

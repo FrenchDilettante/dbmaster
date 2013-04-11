@@ -2,7 +2,7 @@
 #define PSQLCONFIG_H
 
 #include "ui_psqlconfig.h"
-#include "plugin.h"
+#include "../../plugin.h"
 
 class PsqlConfig : public QDialog, private Ui::PsqlConfig {
 Q_OBJECT

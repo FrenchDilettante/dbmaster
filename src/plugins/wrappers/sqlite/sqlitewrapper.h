@@ -1,7 +1,7 @@
 #ifndef SQLITEWRAPPER_H
 #define SQLITEWRAPPER_H
 
-#include "sqlwrapper.h"
+#include "../../sqlwrapper.h"
 
 #include <QCoreApplication>
 #include <QObject>

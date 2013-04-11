@@ -1,7 +1,7 @@
 #ifndef HTMLEXPORTENGINE_H
 #define HTMLEXPORTENGINE_H
 
-#include "exportengine.h"
+#include "../../exportengine.h"
 
 #include <QApplication>
 #include <QObject>

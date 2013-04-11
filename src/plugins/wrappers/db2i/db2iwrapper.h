@@ -1,7 +1,7 @@
 #ifndef DB2IWRAPPER_H
 #define DB2IWRAPPER_H
 
-#include "sqlwrapper.h"
+#include "../../sqlwrapper.h"
 
 #include <QCoreApplication>
 

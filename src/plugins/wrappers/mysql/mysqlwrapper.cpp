@@ -217,5 +217,3 @@ QList<SqlTable> MysqlWrapper::tables() {
   }
   return tables;
 }
-
-Q_EXPORT_PLUGIN2(dbm_mysql_wrapper, MysqlWrapper)

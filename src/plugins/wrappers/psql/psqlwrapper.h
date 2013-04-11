@@ -1,7 +1,7 @@
 #ifndef PSQLWRAPPER_H
 #define PSQLWRAPPER_H
 
-#include "sqlwrapper.h"
+#include "../../sqlwrapper.h"
 #include "psqlconfig.h"
 
 #include <QCoreApplication>

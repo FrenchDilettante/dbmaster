@@ -32,7 +32,18 @@ SOURCES += main.cpp \
     tabwidget/schemawidget.cpp \
     dialogs/blobdialog.cpp \
     widgets/resultviewtable.cpp \
-    tools/logger.cpp
+    tools/logger.cpp \
+    plugins/exportengines/csv/csvexportengine.cpp \
+    plugins/exportengines/csv/csvwizardpage.cpp \
+    plugins/exportengines/html/htmlexportengine.cpp \
+    plugins/exportengines/html/htmlwizardpage.cpp \
+    plugins/exportengines/plaintext/plaintextexportengine.cpp \
+    plugins/exportengines/plaintext/plaintextwizardpage.cpp \
+    plugins/wrappers/db2i/db2iwrapper.cpp \
+    plugins/wrappers/mysql/mysqlwrapper.cpp \
+    plugins/wrappers/psql/psqlconfig.cpp \
+    plugins/wrappers/psql/psqlwrapper.cpp \
+    plugins/wrappers/sqlite/sqlitewrapper.cpp
 HEADERS += mainwindow.h \
     dbmanager.h \
     tabwidget/tablewidget.h \
@@ -63,7 +74,18 @@ HEADERS += mainwindow.h \
     tabwidget/schemawidget.h \
     dialogs/blobdialog.h \
     widgets/resultviewtable.h \
-    tools/logger.h
+    tools/logger.h \
+    plugins/exportengines/csv/csvexportengine.h \
+    plugins/exportengines/csv/csvwizardpage.h \
+    plugins/exportengines/html/htmlexportengine.h \
+    plugins/exportengines/html/htmlwizardpage.h \
+    plugins/exportengines/plaintext/plaintextexportengine.h \
+    plugins/exportengines/plaintext/plaintextwizardpage.h \
+    plugins/wrappers/db2i/db2iwrapper.h \
+    plugins/wrappers/mysql/mysqlwrapper.h \
+    plugins/wrappers/psql/psqlconfig.h \
+    plugins/wrappers/psql/psqlwrapper.h \
+    plugins/wrappers/sqlite/sqlitewrapper.h
 FORMS += mainwindow.ui \
     dialogs/dbdialog.ui \
     tabwidget/queryeditorwidget.ui \
@@ -81,7 +103,11 @@ FORMS += mainwindow.ui \
     plugins/plugindialog.ui \
     dialogs/searchdialog.ui \
     tabwidget/schemawidget.ui \
-    dialogs/blobdialog.ui
+    dialogs/blobdialog.ui \
+    plugins/exportengines/csv/csvwizardpage.ui \
+    plugins/exportengines/html/htmlwizardpage.ui \
+    plugins/exportengines/plaintext/plaintextwizardpage.ui \
+    plugins/wrappers/psql/psqlconfig.ui
 RESOURCES += icons.qrc
 
 # ##

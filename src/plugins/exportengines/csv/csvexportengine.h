@@ -1,7 +1,7 @@
 #ifndef CSVEXPORTENGINE_H
 #define CSVEXPORTENGINE_H
 
-#include "exportengine.h"
+#include "../../exportengine.h"
 
 #include <QApplication>
 #include <QObject>

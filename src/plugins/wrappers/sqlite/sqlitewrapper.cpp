@@ -106,4 +106,3 @@ QList<SqlTable> SqliteWrapper::tables() {
   return tables;
 }
 
-Q_EXPORT_PLUGIN2(dbm_sqlite_wrapper, SqliteWrapper)

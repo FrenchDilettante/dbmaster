@@ -465,5 +465,3 @@ QList<SqlTable> PsqlWrapper::tables(QString schema) {
 
   return tables;
 }
-
-Q_EXPORT_PLUGIN2(dbm_psql_wrapper, PsqlWrapper)
