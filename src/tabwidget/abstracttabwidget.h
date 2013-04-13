@@ -59,6 +59,7 @@ public:
 signals:
   void actionAvailable(AbstractTabWidget::Actions);
   void closeRequested();
+  void error();
   void modificationChanged(bool);
   void tableRequested(QSqlDatabase *db, QString table);
 

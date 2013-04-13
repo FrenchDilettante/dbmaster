@@ -459,6 +459,7 @@ void QueryEditorWidget::validateQuery() {
     logMsg.append(
           QString("<br /><span style=\"color: red\">%1</span>")
             .arg(query.lastError().text()));
+    emit error();
     break;
   }
 
