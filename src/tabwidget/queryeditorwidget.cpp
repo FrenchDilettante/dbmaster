@@ -445,6 +445,7 @@ void QueryEditorWidget::validateQuery() {
     tabView->setQuery(model);
     tabView->setVisible(true);
     resultButton->setEnabled(true);
+    resultButton->setChecked(true);
     logMsg = tr("Query executed with success (%1 lines returned)")
         .arg(model->rowCount());
         // .arg(token->duration());
