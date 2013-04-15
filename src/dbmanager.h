@@ -77,7 +77,6 @@ public slots:
   void                    terminate();
 
 signals:
-  void logMessage(QString);
   void statusChanged(QModelIndex);
   void statusChanged(QSqlDatabase*);
 

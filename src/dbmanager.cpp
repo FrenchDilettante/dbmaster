@@ -13,6 +13,7 @@
 #include "dbmanager.h"
 #include "db_enum.h"
 #include "iconmanager.h"
+#include "tools/logger.h"
 #include "mainwindow.h"
 
 #include "plugins/pluginmanager.h"
@@ -533,9 +534,9 @@ void DbManagerPrivate::run() {
       }
       db = openStack.pop();
       if (db->open()) {
-        emit logMessage(tr("Connected to %1").arg(db->hostName()));
+        Logger::instance->log(tr("Connected to %1").arg(alias(db)));
       } else {
-        emit logMessage(tr("Unable to connect to %1").arg(db->hostName()));
+        Logger::instance->log(tr("Unable to connect to %1").arg(alias(db)));
       }
 
       emit statusChanged(db);
@@ -547,7 +548,7 @@ void DbManagerPrivate::run() {
     while (closeStack.size() > 0) {
       db = closeStack.pop();
       db->close();
-      emit logMessage(tr("Disconnected from %1").arg(db->hostName()));
+      Logger::instance->log(tr("Disconnected from %1").arg(alias(db)));
       if (!closingAll) {
         emit statusChanged(db);
         if (dbMap.contains(db)) {
