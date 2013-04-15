@@ -33,7 +33,7 @@
        </size>
       </property>
       <property name="currentRow">
-       <number>-1</number>
+       <number>0</number>
       </property>
       <item>
        <property name="text">
@@ -499,14 +499,14 @@ p, li { white-space: pre-wrap; }
  </widget>
  <customwidgets>
   <customwidget>
-   <class>QueryTextEdit</class>
-   <extends>QPlainTextEdit</extends>
-   <header>../src/widgets/querytextedit.h</header>
-  </customwidget>
-  <customwidget>
    <class>DbComboBox</class>
    <extends>QComboBox</extends>
    <header>../src/widgets/dbcombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QueryTextEdit</class>
+   <extends>QPlainTextEdit</extends>
+   <header>../src/widgets/querytextedit.h</header>
   </customwidget>
   <customwidget>
    <class>ColorButton</class>
