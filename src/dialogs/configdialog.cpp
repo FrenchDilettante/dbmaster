@@ -22,15 +22,13 @@ QMap<QString,QTextCharFormat>   ConfigDialog::shFormat;
 ConfigDialog::ConfigDialog(QWidget *parent)
   : QDialog(parent) {
   setupUi(this);
+  // loading icons from theme
+  setWindowIcon(IconManager::get("preferences"));
 
   setupConnections();
 
-  shListWidget->setCurrentRow(0);
-
   reload();
-
-  // loading icons from theme
-  setWindowIcon(                IconManager::get("preferences"));
+  shListWidget->setCurrentRow(0);
 
   listWidget->takeItem(2);
 }
