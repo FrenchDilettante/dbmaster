@@ -22,8 +22,7 @@
 #include <QTextDocument>
 #include <QTextEdit>
 
-class SearchDialog : public QDialog, private Ui::SearchDialog
-{
+class SearchDialog : public QDialog, private Ui::SearchDialog {
 Q_OBJECT
 public:
   SearchDialog(QWidget *parent = 0);

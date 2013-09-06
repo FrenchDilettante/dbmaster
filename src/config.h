@@ -21,14 +21,11 @@
 #include <QStringListIterator>
 #include <QTextCharFormat>
 
-class Config
-{
+class Config {
 public:
   static void init();
   static void reload();
   static void save();
-
-  static void import_0_7();
 
   static int              compCharCount;
   static QString          defaultDriver;

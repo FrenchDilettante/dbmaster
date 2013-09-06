@@ -12,9 +12,6 @@
         <file>img/db_postgresql.png</file>
         <file>img/edit-paste.png</file>
         <file>img/preferences.png</file>
-        <file>img/button_cancel.png</file>
-        <file>img/application-exit.png</file>
-        <file>img/button_ok.png</file>
         <file>img/previous.png</file>
         <file>img/next.png</file>
         <file>img/document-open.png</file>
@@ -22,10 +19,7 @@
         <file>img/edit-copy.png</file>
         <file>img/edit-cut.png</file>
         <file>img/player_play.png</file>
-        <file>img/run.png</file>
         <file>img/document-new.png</file>
-        <file>img/edit-clear.png</file>
-        <file>img/window-close.png</file>
         <file>img/go-previous.png</file>
         <file>img/go-next.png</file>
         <file>img/go-first.png</file>
@@ -54,5 +48,6 @@
         <file>img/database_go.png</file>
         <file>img/database_lightning.png</file>
         <file>img/database_refresh.png</file>
+        <file>img/console.png</file>
     </qresource>
 </RCC>

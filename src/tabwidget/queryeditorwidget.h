@@ -14,20 +14,20 @@
 #define QUERYEDITORWIDGET_H
 
 #include <QtGui>
-#include <QtSql>
-
-#include "../query/querytoken.h"
+#include <QRunnable>
+#include <QSqlError>
+#include <QSqlResult>
+#include <QSqlQuery>
+#include <QSqlQueryModel>
 
 #include "abstracttabwidget.h"
 
-#include "ui_queryeditorwidgetclass.h"
+#include "ui_queryeditorwidget.h"
 
-class QueryEditorWidget: public AbstractTabWidget, Ui::QueryEditorWidgetClass
-{
+class QueryEditorWidget: public AbstractTabWidget, QRunnable, Ui::QueryEditorWidget {
 Q_OBJECT
 public:
-  QueryEditorWidget( QWidget* = 0 );
-  ~QueryEditorWidget();
+  QueryEditorWidget(QWidget* = 0);
 
   Actions       availableActions();
   int           confirmCloseAll();
@@ -35,10 +35,9 @@ public:
   QIcon         icon();
   QString       id();
   bool          isSaved();
-  QueryToken   *prepareToken();
   void          print();
   QPrinter     *printer();
-  void          saveAs( QString = QString::null );
+  void          saveAs(QString = QString::null);
   QTextEdit    *textEdit();
   QString       title();
 
@@ -51,7 +50,6 @@ public slots:
   void redo();
   void refresh();
   void reload();
-  void run();
   bool save();
   void selectAll();
   void undo();
@@ -59,12 +57,14 @@ public slots:
 
 signals:
   void fileChanged(QString);
+  void queryFinished();
 
 private:
   void closeEvent(QCloseEvent *event);
   bool confirmClose();
   void keyPressEvent(QKeyEvent *event);
   void reloadFile();
+  void run();
   void setFilePath(QString);
   void setupConnections();
   void setupWidgets();
@@ -74,23 +74,18 @@ private:
   QString               filePath;
   QSqlQueryModel       *model;
   int                   oldCount;
-//  QueryToken           *oldToken;
-  QMenu                *optionsMenu;
   int                   page;
   QToolButton*          resultButton;
   QSqlQuery             query;
   QStandardItemModel   *shortModel;
   QStatusBar           *statusBar;
-  QueryToken           *token;
   QFileSystemWatcher   *watcher;
 
 private slots:
-  void acceptToken();
   void checkDbOpen();
   void onFileChanged(QString path);
-  void rejectToken();
-  void startToken();
-  void validateToken(QSqlError err);
+  void start();
+  void validateQuery();
 };
 
 #endif // QUERYEDITORWIDGET_H

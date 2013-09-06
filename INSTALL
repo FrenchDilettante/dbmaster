@@ -1,24 +1,27 @@
-= Requirements =
+Requirements
+============
 
 Needed to compile DbMaster :
   * Qt (>=4.5) with QtSql module
   * make
   * g++
 
-Windows users should download precompiled binaries.
+Windows instructions comming soon.
 
-= Compilation =
+Building
+========
 
 Open a terminal and run :
 
   qmake
   make
 
-When it's finished, you can run dbmaster by typing :
+When it's finished, you can run DbMaster by typing :
 
   ./bin/dbmaster
 
-= Install =
+Install
+=======
 
 Once DbMaster is compiled, just type (as root) the following command :
 

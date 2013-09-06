@@ -18,8 +18,7 @@
 /**
  * Syntax highlighting
  */
-class SqlHighlighter : public QSyntaxHighlighter
-{
+class SqlHighlighter : public QSyntaxHighlighter {
 Q_OBJECT
 public:
   SqlHighlighter(QTextEdit*);
@@ -36,8 +35,7 @@ private:
   /**
     * This struct 
     */
-  struct HighlightRule
-  {
+  struct HighlightRule {
     QRegExp pattern;
     QTextCharFormat format;
   };

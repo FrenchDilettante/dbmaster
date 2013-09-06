@@ -17,10 +17,9 @@
 #include <QtSql>
 
 #include "abstracttabwidget.h"
-#include "ui_tablewidgetclass.h"
+#include "ui_tablewidget.h"
 
-class TableWidget: public AbstractTabWidget, Ui::TableWidgetClass
-{
+class TableWidget: public AbstractTabWidget, Ui::TableWidget {
 Q_OBJECT
 
 public:

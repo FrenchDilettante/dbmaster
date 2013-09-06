@@ -20,27 +20,20 @@ QMap<QString,QColor>            ConfigDialog::shColor;
 QMap<QString,QTextCharFormat>   ConfigDialog::shFormat;
 
 ConfigDialog::ConfigDialog(QWidget *parent)
-  : QDialog(parent)
-{
+  : QDialog(parent) {
   setupUi(this);
+  // loading icons from theme
+  setWindowIcon(IconManager::get("preferences"));
 
   setupConnections();
 
-  shListWidget->setCurrentRow(0);
-
   reload();
-
-  // loading icons from theme
-  setWindowIcon(                IconManager::get("preferences"));
-  listWidget->item(0)->setIcon( IconManager::get("preferences"));
-  listWidget->item(1)->setIcon( IconManager::get("accessories-text-editor"));
-  listWidget->item(2)->setIcon( IconManager::get("plugins"));
+  shListWidget->setCurrentRow(0);
 
   listWidget->takeItem(2);
 }
 
-void ConfigDialog::accept()
-{
+void ConfigDialog::accept() {
   save();
   close();
 }
@@ -48,10 +41,8 @@ void ConfigDialog::accept()
 /**
  * Proceeds a click from the buttonGroup.
  */
-void ConfigDialog::handleClick(QAbstractButton *button)
-{
-  switch(buttonBox->buttonRole(button))
-  {
+void ConfigDialog::handleClick(QAbstractButton *button) {
+  switch (buttonBox->buttonRole(button)) {
   case QDialogButtonBox::AcceptRole:
     accept();
     break;
@@ -72,10 +63,10 @@ void ConfigDialog::handleClick(QAbstractButton *button)
 /**
  * Set the parameters with the current font
  */
-void ConfigDialog::refreshSyntaxFont(int index)
-{
-  if(index == -1 && index >= Config::shGroupList.size())
+void ConfigDialog::refreshSyntaxFont(int index) {
+  if (index == -1 && index >= Config::shGroupList.size()) {
     return;
+  }
 	
   QListWidgetItem *item = shListWidget->item(index);
   QFont font = item->font();
@@ -87,31 +78,31 @@ void ConfigDialog::refreshSyntaxFont(int index)
   shItalicButton->setChecked(font.italic());
 }
 
-void ConfigDialog::reload()
-{
+void ConfigDialog::reload() {
   /*
    * Editor's properties
    */
 
   // Query editor font
-  int index = editorFontCombo->findText( Config::editorFont.family() );
-  if( index != -1 )
-  {
-    editorFontCombo->setCurrentIndex( index );
-    editorFont.setFamily( editorFontCombo->currentText() );
+  int index = editorFontCombo->findText(Config::editorFont.family());
+  if (index != -1) {
+    editorFontCombo->setCurrentIndex(index);
+    editorFont.setFamily(editorFontCombo->currentText());
   }
 
   // Query editor font size
-  if( Config::editorFont.pointSize() > 0 )
+  if (Config::editorFont.pointSize() > 0) {
     editorFontSizeSpin->setValue( Config::editorFont.pointSize() );
+  }
 
-  edAutoSaveCheckBox->setChecked( Config::editorAutoSave );
-  editorSemanticCheckBox->setChecked( Config::editorSemantic );
-  compGroubBox->setChecked( Config::compCharCount > 0 );
-  encodingComboBox->setCurrentIndex( encodingComboBox->findText(
-      Config::editorEncoding ) );
-  if( Config::compCharCount > 0 )
+  edAutoSaveCheckBox->setChecked(Config::editorAutoSave);
+  editorSemanticCheckBox->setChecked(Config::editorSemantic);
+  compGroubBox->setChecked(Config::compCharCount > 0);
+  encodingComboBox->setCurrentIndex(encodingComboBox->findText(
+      Config::editorEncoding));
+  if (Config::compCharCount > 0) {
     acSpinBox->setValue( Config::compCharCount );
+  }
 
   tabsizeSpin->setValue(Config::editorTabSize);
 
@@ -119,16 +110,16 @@ void ConfigDialog::reload()
   /*
    * Syntax highlighting properties
    */
-  QMapIterator<QString, QColor> it( Config::shColor );
-  while( it.hasNext() )
-  {
+  QMapIterator<QString, QColor> it(Config::shColor);
+  while (it.hasNext()) {
     it.next();
     QString key = it.key();
-    int index = Config::shGroupList.indexOf( key );
-    if( index == -1 )
+    int index = Config::shGroupList.indexOf(key);
+    if (index == -1) {
       continue;
+    }
 
-    QListWidgetItem *item = shListWidget->item( index );
+    QListWidgetItem *item = shListWidget->item(index);
 
     // color
     QColor color = it.value();
@@ -140,60 +131,36 @@ void ConfigDialog::reload()
     // font
     QFont font;
     QTextCharFormat format = Config::shFormat[it.key()];
-    font.setBold( format.fontWeight() == QFont::Bold );
-    font.setItalic( format.fontItalic() );
-    font.setUnderline( format.fontUnderline() );
-    item->setFont( font );
+    font.setBold(format.fontWeight() == QFont::Bold);
+    font.setItalic(format.fontItalic());
+    font.setUnderline(format.fontUnderline());
+    item->setFont(font);
   }
 
   /*
    * Reload syntax highlighting preferences
    */
   refreshSyntaxFont();
-  reloadKeywords( 0 );
 }
 
-/**
- * Reloads the keywords list for the selected item
- */
-void ConfigDialog::reloadKeywords(int index)
-{
-  shKeywordsListWidget->clear();
-  switch(index)
-  {
-  case 0:
-    // SQL keywords
-    shKeywordsListWidget->addItems(SqlHighlighter::sqlKeywordList());
-    break;
-  case 1:
-    // SQL functions
-    shKeywordsListWidget->addItems(SqlHighlighter::sqlFunctionList());
-    break;
-  case 2:
-    shKeywordsListWidget->addItems(SqlHighlighter::sqlTypeList());
-    break;
-  }
-}
-
-void ConfigDialog::save()
-{
+void ConfigDialog::save() {
   Config::defaultDriver   = defaultDbCombo->currentDriverName();
   Config::editorAutoSave  = edAutoSaveCheckBox->isChecked();
   Config::editorEncoding  = encodingComboBox->currentText().toLower();
   Config::editorFont      = editorFontCombo->currentFont();
   Config::editorSemantic  = editorSemanticCheckBox->isChecked();
   Config::editorTabSize   = tabsizeSpin->value();
-  if( compGroubBox->isEnabled() )
+  if (compGroubBox->isEnabled()) {
     Config::compCharCount = acSpinBox->value();
-  else
+  } else {
     Config::compCharCount = -1;
+  }
 
 	// Write syntax highlighting preferences
-  QStringListIterator it( Config::shGroupList );
+  QStringListIterator it(Config::shGroupList);
   QString name;
   QListWidgetItem *item;
-  for( int i=0; it.hasNext(); i++ )
-  {
+  for (int i=0; it.hasNext(); i++) {
     name = it.next();
     item = shListWidget->item( i );
 
@@ -224,8 +191,6 @@ void ConfigDialog::setupConnections() {
 
   connect(shListWidget, SIGNAL(currentRowChanged(int)),
           this, SLOT(refreshSyntaxFont(int)));
-  connect(shListWidget, SIGNAL(currentRowChanged(int)),
-          this, SLOT(reloadKeywords(int)));
 }
 
 void ConfigDialog::updateEditorFont() {
@@ -238,10 +203,12 @@ void ConfigDialog::updateEditorFont() {
 void ConfigDialog::updateSyntaxFont() {
   QListWidgetItem *item = shListWidget->currentItem();
   QFont font;
-  if(shBoldButton->isChecked())
+  if (shBoldButton->isChecked()) {
     font.setWeight(QFont::Bold);
-  if(shItalicButton->isChecked())
+  }
+  if (shItalicButton->isChecked()) {
     font.setItalic(true);
+  }
   item->setFont(font);
 
   item->setForeground(shColorButton->color());

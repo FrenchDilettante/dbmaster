@@ -27,8 +27,7 @@
  * Classe interne, singleton de DbManager.
  * ! À ne pas appeler en direct !
  */
-class DbManagerPrivate : public QThread
-{
+class DbManagerPrivate : public QThread {
 Q_OBJECT
 public:
   DbManagerPrivate();
@@ -78,7 +77,6 @@ public slots:
   void                    terminate();
 
 signals:
-  void logMessage(QString);
   void statusChanged(QModelIndex);
   void statusChanged(QSqlDatabase*);
 
@@ -114,8 +112,7 @@ private:
 /**
  * Classe statique pour l'accès aux connexions.
  */
-class DbManager
-{
+class DbManager {
 public:
   enum ItemTypes {
     DbItem,

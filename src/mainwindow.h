@@ -16,7 +16,6 @@
 #include "dialogs/aboutdialog.h"
 #include "dialogs/configdialog.h"
 #include "dialogs/dbdialog.h"
-#include "dialogs/logdialog.h"
 #include "dialogs/searchdialog.h"
 #include "ui_mainwindow.h"
 #include "plugins/plugindialog.h"
@@ -27,8 +26,7 @@
 #include <QMainWindow>
 #include <QWidget>
 
-class MainWindow: public QMainWindow, public Ui::MainWindowClass
-{
+class MainWindow: public QMainWindow, public Ui::MainWindowClass {
 Q_OBJECT
 
 public:
@@ -58,12 +56,12 @@ private:
   void                closeEvent(QCloseEvent*);
   AbstractTabWidget*  currentTab();
   void                setupConnections();
+  void                setupDocks(QSettings *s);
   void                setupWidgets();
 
   AboutDialog        *aboutDial;
   QMap<AbstractTabWidget::Action, QAction*> actionMap;
   ConfigDialog       *confDial;
-  LogDialog          *logDial;
   QString             lastPath;
   SearchDialog       *searchDialog;
   QLabel             *queriesStatusLabel;
@@ -88,7 +86,6 @@ private slots:
   void redo();
   void search();
   void selectAll();
-  void setQueryCount(int count);
   void undo();
   void updateDbActions();
   void upperCase();

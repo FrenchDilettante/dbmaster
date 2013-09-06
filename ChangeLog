@@ -1,3 +1,15 @@
+= 0.9 =
+
+== Highlights ==
+
+  * Console tab for logging
+  * MacOS compatibility
+
+== Improvements
+
+  * Code cleanup
+  * UI reviewed to be simpler
+
 = 0.8 =
 
 == Highligths ==

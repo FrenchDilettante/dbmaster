@@ -17,10 +17,9 @@
 
 #include "../sqlhighlighter.h"
 
-#include "ui_configdialogclass.h"
+#include "ui_configdialog.h"
 
-class ConfigDialog: public QDialog, Ui::ConfigDialogClass
-{
+class ConfigDialog: public QDialog, Ui::ConfigDialog {
 Q_OBJECT
 public:
   ConfigDialog(QWidget* =0);
@@ -48,7 +47,6 @@ private:
 private slots:
   void handleClick(QAbstractButton *button);
   void refreshSyntaxFont(int index =0);
-  void reloadKeywords(int index);
 
   /**
    * Update the editor's font settings
