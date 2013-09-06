@@ -162,3 +162,7 @@ unix:!macx {
     icon.files = img/dbmaster.png
     INSTALLS += icon
 }
+
+macx {
+    TARGET = DbMaster
+}
