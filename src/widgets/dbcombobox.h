@@ -15,13 +15,12 @@
 
 #include <QtGui>
 
-class DbComboBox : public QComboBox
-{
+class DbComboBox : public QComboBox {
 Q_OBJECT
 public:
-	DbComboBox(QWidget* =0);
+  DbComboBox(QWidget* =0);
 
-	QString currentDriverName();
+  QString currentDriverName();
   void setCurrentDriver(QString);
 
 

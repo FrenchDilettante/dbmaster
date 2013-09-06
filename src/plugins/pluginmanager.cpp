@@ -14,6 +14,15 @@
 #include "exportengine.h"
 #include "sqlwrapper.h"
 
+#include "exportengines/csv/csvexportengine.h"
+#include "exportengines/html/htmlexportengine.h"
+#include "exportengines/plaintext/plaintextexportengine.h"
+
+#include "wrappers/db2i/db2iwrapper.h"
+#include "wrappers/mysql/mysqlwrapper.h"
+#include "wrappers/psql/psqlwrapper.h"
+#include "wrappers/sqlite/sqlitewrapper.h"
+
 /*
  * PluginManagerPrivate
  */
@@ -101,6 +110,15 @@ void PluginManagerPrivate::init() {
       registerPlugin(p);
     }
   }
+
+  registerPlugin(new CsvExportEngine());
+  registerPlugin(new HtmlExportEngine());
+  registerPlugin(new PlainTextExportEngine());
+
+  registerPlugin(new Db2iWrapper());
+  registerPlugin(new MysqlWrapper());
+  registerPlugin(new PsqlWrapper());
+  registerPlugin(new SqliteWrapper());
 }
 
 QList<QFileInfo> PluginManagerPrivate::loadFolder(QDir dir, QStringList filter, bool recursive) {

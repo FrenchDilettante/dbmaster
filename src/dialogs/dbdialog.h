@@ -22,12 +22,10 @@
 #include <QSqlDatabase>
 #include <QWidget>
 
-class DbDialog: public QDialog, private Ui::DbDialog
-{
+class DbDialog: public QDialog, private Ui::DbDialog {
 Q_OBJECT
 public:
   DbDialog(QWidget* =0);
-
 
 public slots:
   void setDatabase(QModelIndex index);
@@ -39,10 +37,7 @@ private:
   void setupWidgets();
 
   NewDbWizard *addWzd;
-  // link to the current db
   QSqlDatabase *db;
-  // current db's id
-  int id;
   bool aliasOnCurrent;
 
 private slots:

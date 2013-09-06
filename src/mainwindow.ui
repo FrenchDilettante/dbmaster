@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>840</width>
-    <height>590</height>
+    <width>841</width>
+    <height>586</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -106,7 +106,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>840</width>
+     <width>841</width>
      <height>21</height>
     </rect>
    </property>
@@ -117,7 +117,6 @@
     <addaction name="actionDbManager"/>
     <addaction name="separator"/>
     <addaction name="actionPlugins"/>
-    <addaction name="actionLogs"/>
     <addaction name="actionPreferences"/>
    </widget>
    <widget class="QMenu" name="menu_Edit">
@@ -154,20 +153,12 @@
     <property name="title">
      <string>&amp;File</string>
     </property>
-    <widget class="QMenu" name="menuNew">
-     <property name="title">
-      <string>&amp;New</string>
-     </property>
-     <addaction name="actionAddDb"/>
-     <addaction name="separator"/>
-     <addaction name="actionNewQuery"/>
-    </widget>
     <widget class="QMenu" name="menuRecent_files">
      <property name="title">
       <string>Recent files</string>
      </property>
     </widget>
-    <addaction name="menuNew"/>
+    <addaction name="actionNewQuery"/>
     <addaction name="actionOpenQuery"/>
     <addaction name="menuRecent_files"/>
     <addaction name="actionSaveQuery"/>
@@ -216,6 +207,75 @@
       <number>8</number>
      </property>
      <item row="0" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <property name="spacing">
+        <number>2</number>
+       </property>
+       <item>
+        <widget class="QToolButton" name="addConnectionButton">
+         <property name="autoRaise">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="editConnectionButton">
+         <property name="autoRaise">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="removeConnectionButton">
+         <property name="autoRaise">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="Line" name="line">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="connectBtn">
+         <property name="autoRaise">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="disconnectBtn">
+         <property name="autoRaise">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QToolButton" name="refreshConnectionDb">
+         <property name="autoRaise">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="2" column="0">
       <widget class="DbTreeView" name="dbTreeView">
        <property name="selectionMode">
         <enum>QAbstractItemView::ExtendedSelection</enum>
@@ -265,34 +325,50 @@
    <addaction name="separator"/>
    <addaction name="actionSearch"/>
   </widget>
-  <widget class="QToolBar" name="dbToolBar">
+  <widget class="QDockWidget" name="logDock">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="windowIcon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/img/console.png</normaloff>:/img/console.png</iconset>
+   </property>
    <property name="windowTitle">
-    <string>Connection toolbar</string>
+    <string>Console</string>
    </property>
-   <property name="iconSize">
-    <size>
-     <width>18</width>
-     <height>18</height>
-    </size>
-   </property>
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
+   <attribute name="dockWidgetArea">
+    <number>8</number>
    </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-   <addaction name="actionAddDb"/>
-   <addaction name="actionEditConnection"/>
-   <addaction name="actionRemoveConnection"/>
-   <addaction name="separator"/>
-   <addaction name="actionConnect"/>
-   <addaction name="actionDisconnect"/>
-   <addaction name="separator"/>
-   <addaction name="actionRefreshConnection"/>
+   <widget class="QWidget" name="dockWidgetContents_2">
+    <layout class="QGridLayout" name="gridLayout_3">
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
+      <number>8</number>
+     </property>
+     <item row="0" column="0">
+      <widget class="QTextBrowser" name="logBrowser">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
   </widget>
   <action name="actionAddDb">
    <property name="text">
-    <string>Connection</string>
+    <string>Add connection</string>
+   </property>
+   <property name="toolTip">
+    <string>Add connection</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+A</string>
@@ -300,7 +376,10 @@
   </action>
   <action name="actionNewQuery">
    <property name="text">
-    <string>Query</string>
+    <string>New query</string>
+   </property>
+   <property name="toolTip">
+    <string>New query</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+N</string>
@@ -410,11 +489,6 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+A</string>
-   </property>
-  </action>
-  <action name="actionLogs">
-   <property name="text">
-    <string>Logs</string>
    </property>
   </action>
   <action name="actionAbout">
@@ -572,9 +646,6 @@
    </property>
   </action>
   <action name="actionRefreshConnection">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
    <property name="text">
     <string>Refresh</string>
    </property>

@@ -15,7 +15,6 @@ SOURCES += main.cpp \
     dialogs/configdialog.cpp \
     widgets/dbcombobox.cpp \
     sqlhighlighter.cpp \
-    dialogs/logdialog.cpp \
     dialogs/aboutdialog.cpp \
     wizards/newdbwizard.cpp \
     config.cpp \
@@ -24,9 +23,6 @@ SOURCES += main.cpp \
     widgets/resultview.cpp \
     wizards/exportwizard.cpp \
     widgets/dbtreeview.cpp \
-    query/queryscheduler.cpp \
-    query/querythread.cpp \
-    query/querytoken.cpp \
     widgets/tooltipframe.cpp \
     plugins/plugindialog.cpp \
     plugins/pluginmanager.cpp \
@@ -35,7 +31,19 @@ SOURCES += main.cpp \
     widgets/colorbutton.cpp \
     tabwidget/schemawidget.cpp \
     dialogs/blobdialog.cpp \
-    widgets/resultviewtable.cpp
+    widgets/resultviewtable.cpp \
+    tools/logger.cpp \
+    plugins/exportengines/csv/csvexportengine.cpp \
+    plugins/exportengines/csv/csvwizardpage.cpp \
+    plugins/exportengines/html/htmlexportengine.cpp \
+    plugins/exportengines/html/htmlwizardpage.cpp \
+    plugins/exportengines/plaintext/plaintextexportengine.cpp \
+    plugins/exportengines/plaintext/plaintextwizardpage.cpp \
+    plugins/wrappers/db2i/db2iwrapper.cpp \
+    plugins/wrappers/mysql/mysqlwrapper.cpp \
+    plugins/wrappers/psql/psqlconfig.cpp \
+    plugins/wrappers/psql/psqlwrapper.cpp \
+    plugins/wrappers/sqlite/sqlitewrapper.cpp
 HEADERS += mainwindow.h \
     dbmanager.h \
     tabwidget/tablewidget.h \
@@ -45,7 +53,6 @@ HEADERS += mainwindow.h \
     dialogs/configdialog.h \
     widgets/dbcombobox.h \
     sqlhighlighter.h \
-    dialogs/logdialog.h \
     dialogs/aboutdialog.h \
     wizards/newdbwizard.h \
     config.h \
@@ -54,9 +61,6 @@ HEADERS += mainwindow.h \
     widgets/resultview.h \
     wizards/exportwizard.h \
     widgets/dbtreeview.h \
-    query/queryscheduler.h \
-    query/querythread.h \
-    query/querytoken.h \
     widgets/tooltipframe.h \
     plugins/sqlwrapper.h \
     plugins/plugindialog.h \
@@ -69,13 +73,24 @@ HEADERS += mainwindow.h \
     db_enum.h \
     tabwidget/schemawidget.h \
     dialogs/blobdialog.h \
-    widgets/resultviewtable.h
+    widgets/resultviewtable.h \
+    tools/logger.h \
+    plugins/exportengines/csv/csvexportengine.h \
+    plugins/exportengines/csv/csvwizardpage.h \
+    plugins/exportengines/html/htmlexportengine.h \
+    plugins/exportengines/html/htmlwizardpage.h \
+    plugins/exportengines/plaintext/plaintextexportengine.h \
+    plugins/exportengines/plaintext/plaintextwizardpage.h \
+    plugins/wrappers/db2i/db2iwrapper.h \
+    plugins/wrappers/mysql/mysqlwrapper.h \
+    plugins/wrappers/psql/psqlconfig.h \
+    plugins/wrappers/psql/psqlwrapper.h \
+    plugins/wrappers/sqlite/sqlitewrapper.h
 FORMS += mainwindow.ui \
     dialogs/dbdialog.ui \
-    tabwidget/queryeditorwidgetclass.ui \
-    tabwidget/tablewidgetclass.ui \
-    dialogs/configdialogclass.ui \
-    dialogs/logdialogclass.ui \
+    tabwidget/queryeditorwidget.ui \
+    tabwidget/tablewidget.ui \
+    dialogs/configdialog.ui \
     dialogs/aboutdialog.ui \
     wizards/newdbwizard.ui \
     wizards/ndw_firstpage.ui \
@@ -88,7 +103,11 @@ FORMS += mainwindow.ui \
     plugins/plugindialog.ui \
     dialogs/searchdialog.ui \
     tabwidget/schemawidget.ui \
-    dialogs/blobdialog.ui
+    dialogs/blobdialog.ui \
+    plugins/exportengines/csv/csvwizardpage.ui \
+    plugins/exportengines/html/htmlwizardpage.ui \
+    plugins/exportengines/plaintext/plaintextwizardpage.ui \
+    plugins/wrappers/psql/psqlconfig.ui
 RESOURCES += icons.qrc
 
 # ##

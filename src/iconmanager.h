@@ -17,8 +17,7 @@
 #include <QMap>
 #include <QString>
 
-class IconManager
-{
+class IconManager {
 public:
   static QIcon get(QString name);
   static void init();

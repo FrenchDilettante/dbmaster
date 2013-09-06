@@ -16,25 +16,11 @@
 #include "../plugins/exportengine.h"
 #include "../plugins/pluginmanager.h"
 
-ExportWizard::ExportWizard(QueryToken *token, QWidget *parent)
-  : QWizard(parent) {
-  setWindowTitle(tr("Export"));
-
-  this->m_model = NULL;
-  this->m_token = token;
-
-  setWindowIcon(IconManager::get("filesaveas"));
-
-  setPage(0, new EwFirstPage(this));
-  setPage(2, new EwExportPage(m_token, this));
-}
-
 ExportWizard::ExportWizard(QAbstractItemModel *model, QWidget *parent)
   : QWizard(parent) {
   setWindowTitle(tr("Export"));
 
   this->m_model = model;
-  this->m_token = NULL;
 
   setWindowIcon(IconManager::get("filesaveas"));
 
@@ -43,11 +29,7 @@ ExportWizard::ExportWizard(QAbstractItemModel *model, QWidget *parent)
 }
 
 QAbstractItemModel* ExportWizard::model() {
-  if (m_token) {
-    return m_token->model();
-  } else {
-    return m_model;
-  }
+  return m_model;
 }
 
 void ExportWizard::setEngine(ExportEngine *e) {
@@ -189,17 +171,6 @@ bool EwFirstPage::validatePage() {
 /**
  * Export page
  */
-EwExportPage::EwExportPage(QueryToken *token, QWizard *parent)
-  : QWizardPage(parent) {
-  setupUi(this);
-
-  dial = new QProgressDialog(this);
-  dial->setWindowTitle(tr("Export running..."));
-
-  this->model = token->model();
-  this->token = token;
-}
-
 EwExportPage::EwExportPage(QAbstractItemModel *model, QWizard *parent)
   : QWizardPage(parent) {
   setupUi(this);
@@ -208,12 +179,12 @@ EwExportPage::EwExportPage(QAbstractItemModel *model, QWizard *parent)
   dial->setWindowTitle(tr("Export running..."));
 
   this->model = model;
-  this->token = NULL;
 }
 
 void EwExportPage::checkProgress() {
-  if(!finished)
+  if (!finished) {
     dial->show();
+  }
 }
 
 void EwExportPage::initializePage() {

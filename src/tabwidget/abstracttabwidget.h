@@ -24,8 +24,8 @@
 #include <QWidget>
 
 class AbstractTabWidget: public QWidget {
-
 Q_OBJECT
+
 public:
   enum Action {
     CaseLower   = 0x00001,
@@ -59,6 +59,7 @@ public:
 signals:
   void actionAvailable(AbstractTabWidget::Actions);
   void closeRequested();
+  void error();
   void modificationChanged(bool);
   void tableRequested(QSqlDatabase *db, QString table);
 

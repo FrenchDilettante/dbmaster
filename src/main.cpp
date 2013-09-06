@@ -18,17 +18,20 @@
 #include "plugins/pluginmanager.h"
 #include "sqlhighlighter.h"
 #include "tabwidget/abstracttabwidget.h"
+#include "tools/logger.h"
 #include "widgets/querytextedit.h"
 
 int main(int argc, char *argv[]) {
   QApplication::setApplicationName("dbmaster");
-  QApplication::setApplicationVersion("0.8.2");
+  QApplication::setApplicationVersion("0.9.0");
   QApplication::setOrganizationDomain("dbmaster.org");
   QApplication a(argc, argv);
   a.setWindowIcon(QIcon(":/img/dbmaster.png"));
 
   QSplashScreen splash(QPixmap(":/img/splash.png"));
   splash.show();
+
+  Logger *logger = new Logger;
 
   // Loading translations
   splash.showMessage(QObject::tr("Loading translations..."), Qt::AlignBottom);
