@@ -12,13 +12,24 @@
 #include <QThread>
 
 /**
- * Classe interne, singleton de DbManager.
- * ! À ne pas appeler en direct !
+ * Manages the connexion pool
+ *
+ * @author manudwarf
  */
-class DbManagerPrivate : public QThread {
+class DbManager : public QThread {
 Q_OBJECT
 public:
-  DbManagerPrivate();
+  enum ItemTypes {
+    DbItem,
+    DisplayItem,
+    FieldItem,
+    SchemaItem,
+    SysTableItem,
+    TableItem,
+    ViewItem
+  };
+
+  DbManager();
 
   int                     addDatabase(QString driver, QString host,
                                       QString user, QString pswd, QString dbnm,
@@ -37,7 +48,6 @@ public:
   QList<QSqlDatabase*>    getDbList();
   QStringList             getDbNames(bool);
   int                     indexOf(QSqlDatabase *db);
-  void                    init();
   QString                 lastError();
   QStandardItemModel*     model()     { return m_model;   };
   void                    open(int, QString=QString::null);
@@ -56,7 +66,11 @@ public:
   void                    toggle(QSqlDatabase *db);
   void                    update(QSqlDatabase *db, QString alias);
 
+  int lastIndex = 0;
+
   static QString          dbTitle(QSqlDatabase *db);
+  static void             init();
+  static DbManager       *instance;
 
 public slots:
   void                    refreshModel();
@@ -95,63 +109,6 @@ private:
   QStack<QSqlDatabase*>   closeStack;
   QStack<QSqlDatabase*>   openStack;
 
-};
-
-/**
- * Classe statique pour l'accès aux connexions.
- */
-class DbManager {
-public:
-  enum ItemTypes {
-    DbItem,
-    DisplayItem,
-    FieldItem,
-    SchemaItem,
-    SysTableItem,
-    TableItem,
-    ViewItem
-  };
-
-  static int            addDatabase(QString driver, QString host, QString user,
-                                    QString pswd, QString dbnm, QString alias,
-                                    bool usesOdbc =false);
-  static int            addDatabase(QString driver, QString host, QString user,
-                                    QString dbnm, QString alias,
-                                    bool usesOdbc =false);
-  static QString        alias(QSqlDatabase *db);
-  static void           close(QSqlDatabase *db);
-  static void           closeAll();
-  static QString        dbTitle(QSqlDatabase *db);
-  static QStandardItemModel*
-                        driverModel();
-  static QString        genConnectionName();
-  static QSqlDatabase*
-                        getDatabase(int n);
-  static QList<QSqlDatabase*>
-                        getDbList();
-  static QStringList    getDbNames(bool);
-  static void           init();
-  static DbManagerPrivate *instance()   { return m_instance;    };
-  static int            lastIndex;
-  static QStandardItemModel*
-                        model()     { return m_instance->model();   };
-  static void           open(int, QString=QString::null);
-  static void           open(QSqlDatabase *db, QString pswd=QString::null);
-  static void           openList();
-  static void           refreshModelIndex(QModelIndex index);
-  static void           refreshModelItem(QSqlDatabase *db);
-  static void           removeDatabase(int);
-  static void           saveList();
-  static SqlSchema      schema(QSqlDatabase *db, QString schema);
-  static void           setAlias(QSqlDatabase *db, QString alias);
-  static void           setDatabase(int, QSqlDatabase);
-  static SqlTable       table(QSqlDatabase *db, QString tbl);
-  static void           terminate();
-  static void           toggle(QSqlDatabase *db);
-  static void           update(QSqlDatabase *db, QString alias);
-
-private:
-  static DbManagerPrivate *m_instance;
 };
 
 #endif // DBMANAGER_H

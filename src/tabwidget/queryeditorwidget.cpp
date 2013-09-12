@@ -40,9 +40,9 @@ AbstractTabWidget::Actions QueryEditorWidget::availableActions() {
 }
 
 void QueryEditorWidget::checkDbOpen() {
-  DbManager::lastIndex = dbChooser->currentIndex();
+  DbManager::instance->lastIndex = dbChooser->currentIndex();
 
-  QSqlDatabase *db = DbManager::getDatabase(dbChooser->currentIndex());
+  QSqlDatabase *db = DbManager::instance->getDatabase(dbChooser->currentIndex());
   if (db == NULL) {
     runButton->setEnabled(false);
     return;
@@ -254,7 +254,7 @@ void QueryEditorWidget::run() {
     qtext = editor->toPlainText();
   }
 
-  QSqlDatabase* db = DbManager::getDatabase(dbChooser->currentIndex());
+  QSqlDatabase* db = DbManager::instance->getDatabase(dbChooser->currentIndex());
   query = QSqlQuery(*db);
   query.exec(qtext);
   model->setQuery(query);
@@ -371,8 +371,8 @@ void QueryEditorWidget::setupWidgets() {
   baseActions = CaseLower | CaseUpper | Copy | Cut | Paste | Print | SaveAs
               | Search | SelectAll;
 
-  dbChooser->setModel(DbManager::model());
-  dbChooser->setCurrentIndex(DbManager::lastIndex);
+  dbChooser->setModel(DbManager::instance->model());
+  dbChooser->setCurrentIndex(DbManager::instance->lastIndex);
 
   runButton->setIcon(IconManager::get("player_play"));
 

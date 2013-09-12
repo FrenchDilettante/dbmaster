@@ -36,13 +36,13 @@ TooltipFrame::TooltipFrame(QWidget *parent)
 
 void TooltipFrame::showTooltip() {
   int index;
-  if(tooltips.size() > 1)
-  {
-    do
+  if (tooltips.size() > 1) {
+    do {
         index = rand() % tooltips.size();
-    while(index == currentIndex);
-  } else
+    } while (index == currentIndex);
+  } else {
     index = 0;
+  }
 
   currentIndex = index;
   textBrowser->setText(tooltips[index]);

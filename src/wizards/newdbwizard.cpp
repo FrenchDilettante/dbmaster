@@ -20,22 +20,18 @@ NewDbWizard::NewDbWizard(QWidget *parent)
 }
 
 void NewDbWizard::accept() {
-  if(field("savepswd").toBool()) {
-    DbManager::addDatabase(field("driver").toString(),
-                           field("host").toString(),
-                           field("user").toString(),
-                           field("pswd").toString(),
-                           field("name").toString(),
-                           field("alias").toString(),
-                           field("usesOdbc").toBool());
-  } else {
-    DbManager::addDatabase(field("driver").toString(),
-                           field("host").toString(),
-                           field("user").toString(),
-                           field("name").toString(),
-                           field("alias").toString(),
-                           field("usesOdbc").toBool());
+  QString password = QString::null;
+  if (field("savepswd").toBool()) {
+    password = field("pswd").toString();
   }
+
+  DbManager::instance->addDatabase(field("driver").toString(),
+                         field("host").toString(),
+                         field("user").toString(),
+                         password,
+                         field("name").toString(),
+                         field("alias").toString(),
+                         field("usesOdbc").toBool());
 
   emit(accepted());
   close();

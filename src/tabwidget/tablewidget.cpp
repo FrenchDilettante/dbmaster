@@ -58,7 +58,7 @@ void TableWidget::reload() {
     emit closeRequested();
   } else {
     columnsTree->clear();
-    SqlTable table = DbManager::table(m_db, m_table);
+    SqlTable table = DbManager::instance->table(m_db, m_table);
     foreach (SqlColumn c, table.columns) {
       QStringList cols;
       cols << c.name

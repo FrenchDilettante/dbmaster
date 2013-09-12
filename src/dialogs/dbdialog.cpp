@@ -25,7 +25,7 @@ void DbDialog::accept() {
 
 void DbDialog::apply() {
   if(db->isOpen()) {
-    DbManager::setAlias(db, aliasEdit->text());
+    DbManager::instance->setAlias(db, aliasEdit->text());
     return;
   }
 
@@ -33,7 +33,7 @@ void DbDialog::apply() {
   db->setUserName(userEdit->text());
   db->setPassword(passEdit->text());
   db->setDatabaseName(dbEdit->text());
-  DbManager::update(db, aliasEdit->text());
+  DbManager::instance->update(db, aliasEdit->text());
 }
 
 void DbDialog::refresh(QModelIndex index) {
@@ -46,13 +46,13 @@ void DbDialog::refresh(QModelIndex index) {
  * Re-fills all fields and enables/disables widgets
  */
 void DbDialog::reload() {
-  bool emptyList = DbManager::getDbList().size() == 0;
+  bool emptyList = DbManager::instance->getDbList().size() == 0;
   bool selected = !emptyList
                   && dbListView->selectionModel()->selection().size() > 0;
   bool open = selected && db->isOpen();
 
   aliasOnCurrent = selected &&
-      (DbManager::alias(db) != DbManager::dbTitle(db));
+      (DbManager::instance->alias(db) != DbManager::instance->dbTitle(db));
 
   groupBox->setEnabled(selected && !open);
   toggleButton->setEnabled(selected);
@@ -66,14 +66,14 @@ void DbDialog::reload() {
     toggleButton->setText(tr("Connect"));
   }
 
-  if (DbManager::getDbList().size() > 0 && db) {
+  if (DbManager::instance->getDbList().size() > 0 && db) {
     hostEdit->setText(db->hostName());
     userEdit->setText(db->userName());
     saveCheckBox->setChecked(!open && !db->password().isEmpty());
     passEdit->setText(db->password());
     dbTypeComboBox->setCurrentDriver(db->driverName());
     dbEdit->setText(db->databaseName());
-    aliasEdit->setText(DbManager::alias(db));
+    aliasEdit->setText(DbManager::instance->alias(db));
   }
 
   dbBrowseButton->setVisible(false);
@@ -82,14 +82,14 @@ void DbDialog::reload() {
 
 void DbDialog::removeCurrent() {
   int index = dbListView->currentIndex().row();
-  if(DbManager::getDatabase(index)->isOpen()) {
+  if (DbManager::instance->getDatabase(index)->isOpen()) {
     QMessageBox::critical(this,
                           tr("Cannot remove"),
                           tr("You must close the connexion before remove it.")
                           );
     return;
   }
-  DbManager::removeDatabase(index);
+  DbManager::instance->removeDatabase(index);
   reload();
 }
 
@@ -100,7 +100,7 @@ void DbDialog::setDatabase(QModelIndex index)
 {
   QItemSelectionModel *m = dbListView->selectionModel();
   m->setCurrentIndex(index, QItemSelectionModel::ClearAndSelect);
-  db = DbManager::getDatabase(index.row());
+  db = DbManager::instance->getDatabase(index.row());
 
   reload();
 }
@@ -124,7 +124,7 @@ void DbDialog::setupConnections()
   connect(dbListView, SIGNAL(clicked(QModelIndex)),
           this, SLOT(setDatabase(QModelIndex)));
 
-  connect(DbManager::instance(), SIGNAL(statusChanged(QModelIndex)),
+  connect(DbManager::instance, SIGNAL(statusChanged(QModelIndex)),
           this, SLOT(refresh(QModelIndex)));
 }
 
@@ -132,7 +132,7 @@ void DbDialog::setupWidgets()
 {
   addWzd = new NewDbWizard(this);
   dbBrowseButton->setVisible(false);
-  dbListView->setModel(DbManager::model());
+  dbListView->setModel(DbManager::instance->model());
 
   QCompleter *c = new QCompleter(QStringList("localhost"), this);
   c->setCompletionMode(QCompleter::InlineCompletion);
@@ -174,7 +174,7 @@ void DbDialog::testConnection() {
 }
 
 void DbDialog::toggleConnection() {
-  DbManager::toggle(DbManager::getDatabase(
+  DbManager::instance->toggle(DbManager::instance->getDatabase(
       dbListView->selectionModel()->selectedIndexes()[0].row()));
 }
 

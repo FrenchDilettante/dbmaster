@@ -43,6 +43,7 @@ public slots:
 private:
   void                closeEvent(QCloseEvent*);
   AbstractTabWidget*  currentTab();
+  void                saveSettings();
   void                setupConnections();
   void                setupDocks(QSettings *s);
   void                setupWidgets();

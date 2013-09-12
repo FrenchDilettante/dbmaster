@@ -7,7 +7,7 @@
 DbComboBox::DbComboBox(QWidget *parent)
   : QComboBox(parent)
 {
-  setModel(DbManager::driverModel());
+  setModel(DbManager::instance->driverModel());
   setCurrentDriver(Config::defaultDriver);
 }
 
