@@ -532,7 +532,7 @@ void DbManager::run() {
 
       emit statusChanged(db);
       emit statusChanged(dbMap[db]->index());
-      refreshModelItem(db);
+      // refreshModelItem(db);
     }
 
     // traitement des connexions à fermer
@@ -545,7 +545,7 @@ void DbManager::run() {
         if (dbMap.contains(db)) {
           emit statusChanged(dbMap[db]->index());
         }
-        refreshModelItem(db);
+        // refreshModelItem(db);
       }
 
       if (!dbList.contains(db)) {
@@ -634,8 +634,8 @@ void DbManager::setDatabase(int nb, QSqlDatabase db) {
 }
 
 void DbManager::setupConnections() {
-//  connect(this, SIGNAL(statusChanged(QSqlDatabase*)),
-//          this, SLOT(refreshModelItem(QSqlDatabase*)));
+  connect(this, SIGNAL(statusChanged(QSqlDatabase*)),
+          this, SLOT(refreshModelItem(QSqlDatabase*)));
 }
 
 void DbManager::setupModels() {
