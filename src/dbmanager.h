@@ -37,7 +37,7 @@ public:
                                       bool save =true);
   int                     addDatabase(QString driver, QString host,
                                       QString user, QString pswd, QString dbnm,
-                                      QString alias, QString wrapper,
+                                      QString alias, QString wrapperName,
                                       bool save =true);
   QString                 alias(QSqlDatabase *db);
   void                    close(QSqlDatabase *db);
@@ -57,7 +57,7 @@ public:
   void                    removeDatabase(QSqlDatabase *db);
   void                    run();
   void                    saveList();
-  SqlSchema               schema(QSqlDatabase *db, QString sch);
+  SqlSchema               schema(QSqlDatabase *db, QString schemaName);
   void                    setAlias(QSqlDatabase *db, QString alias);
   void                    setDatabase(int, QSqlDatabase);
   void                    swapDatabase(QSqlDatabase *oldDb,
@@ -66,7 +66,7 @@ public:
   void                    toggle(QSqlDatabase *db);
   void                    update(QSqlDatabase *db, QString alias);
 
-  int lastIndex = 0;
+  int lastUsedDbIndex = 0;
 
   static QString          dbTitle(QSqlDatabase *db);
   static void             init();

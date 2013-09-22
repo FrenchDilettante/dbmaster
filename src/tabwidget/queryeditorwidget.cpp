@@ -40,7 +40,7 @@ AbstractTabWidget::Actions QueryEditorWidget::availableActions() {
 }
 
 void QueryEditorWidget::checkDbOpen() {
-  DbManager::instance->lastIndex = dbChooser->currentIndex();
+  DbManager::instance->lastUsedDbIndex = dbChooser->currentIndex();
 
   QSqlDatabase *db = DbManager::instance->getDatabase(dbChooser->currentIndex());
   if (db == NULL) {
@@ -372,7 +372,7 @@ void QueryEditorWidget::setupWidgets() {
               | Search | SelectAll;
 
   dbChooser->setModel(DbManager::instance->model());
-  dbChooser->setCurrentIndex(DbManager::instance->lastIndex);
+  dbChooser->setCurrentIndex(DbManager::instance->lastUsedDbIndex);
 
   runButton->setIcon(IconManager::get("player_play"));
 

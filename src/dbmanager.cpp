@@ -21,65 +21,34 @@ DbManager::DbManager()
   openList();
 }
 
-/**
- * Ajoute une base au pool de connexions.
- *
- * @param driver
- *    Voir doc Qt
- * @param host
- *    Hôte distant ou local
- * @param user
- *    Nom d'utilisateur
- * @param pswd
- *    Mot de passe
- * @param dbnm
- *    Base de données
- * @param alias
- *    Nom à afficher
- * @param usesOdbc
- *    Utilise (ou non) ODBC
- * @param save
- *    Déclenche l'enregistrement de la liste ou non
- */
 int DbManager::addDatabase(QString driver, QString host, QString user,
                                   QString pswd, QString dbnm, QString alias,
                                   bool usesOdbc, bool save) {
-  // On détermine si un adaptateur est disponible...
   SqlWrapper *wrapper = PluginManager::availableWrapper(driver);
-  // ... avant d'inscrire le driver en ODBC (voir assistant d'ajout)
   if (usesOdbc) {
     driver = "QODBC";
   }
 
+  // need to store what plugin what used
   QString plid = wrapper ? wrapper->plid() : "";
-
-  // On continue avec la procédure classique
   return addDatabase(driver, host, user, pswd, dbnm, alias, plid, save);
 }
 
 /**
- * Ajoute une base au pool de connexions.
- *
+ * @brief DbManager::addDatabase
  * @param driver
- *    Voir doc Qt
  * @param host
- *    Hôte distant ou local
  * @param user
- *    Nom d'utilisateur
  * @param pswd
- *    Mot de passe
  * @param dbnm
- *    Base de données
  * @param alias
- *    Nom à afficher
- * @param wrapper
- *    Nom (PLID) de l'adaptateur SQL à utiliser
+ * @param wrapperName
  * @param save
- *    Déclenche l'enregistrement de la liste ou non
+ * @return the index of the added db OR if the db already exists, its index
  */
 int DbManager::addDatabase(QString driver, QString host, QString user,
                                   QString pswd, QString dbnm, QString alias,
-                                  QString wrapper, bool save) {
+                                  QString wrapperName, bool save) {
   QSqlDatabase db = QSqlDatabase::addDatabase(driver, genConnectionName());
   db.setHostName(host);
   db.setUserName(user);
@@ -87,7 +56,7 @@ int DbManager::addDatabase(QString driver, QString host, QString user,
   db.setDatabaseName(dbnm);
 
   foreach (QSqlDatabase *d, dbList) {
-    // on contrôle les éventuels doublons
+    // checking for doubles
     if (d->hostName() == db.hostName() &&
             d->userName() == db.userName() &&
             d->password() == db.password() &&
@@ -98,12 +67,14 @@ int DbManager::addDatabase(QString driver, QString host, QString user,
 
   QSqlDatabase *newDb = new QSqlDatabase(db);
   dbList.append(newDb);
+
   QString title;
   if (alias.isEmpty()) {
     title = dbTitle(newDb);
   } else {
     title = alias;
   }
+
   dbMap[newDb] = new QStandardItem(title);
   dbMap[newDb]->setEditable(false);
 
@@ -111,22 +82,24 @@ int DbManager::addDatabase(QString driver, QString host, QString user,
   dbMap[newDb]->setIcon(IconManager::get("database_connect"));
   dbMap[newDb]->setToolTip(dbToolTip(newDb));
 
-  QList<QStandardItem*> l;
-  l << dbMap[newDb];
-  l << new QStandardItem(driverIcon[driver], "");
-  l[1]->setSelectable(false);
+  QList<QStandardItem*> uiItemList;
+  // name
+  uiItemList << dbMap[newDb];
+  // icon (= DBMS icon)
+  uiItemList << new QStandardItem(driverIcon[driver], "");
+  uiItemList[1]->setSelectable(false);
 
-  m_model->appendRow(l);
+  m_model->appendRow(uiItemList);
 
-  SqlWrapper *w = NULL;
-  if (wrapper.length() > 0) {
-    w = PluginManager::wrapper(wrapper);
+  SqlWrapper *wrapper = NULL;
+  if (wrapperName.length() > 0) {
+    wrapper = PluginManager::wrapper(wrapperName);
   } else if (!driver.startsWith("QODBC")) {
-    w = PluginManager::availableWrapper(driver);
+    wrapper = PluginManager::availableWrapper(driver);
   }
 
-  if (w) {
-    dbWrappers[newDb] = w->newInstance(newDb);
+  if (wrapper) {
+    dbWrappers[newDb] = wrapper->newInstance(newDb);
   }
 
   if (save) {
@@ -509,20 +482,22 @@ void DbManager::removeDatabase(QSqlDatabase *db) {
 }
 
 /**
- * Thread de gestion des connexions
+ * Connexion pool thread.
+ * @todo find a better way to proceed...
  */
 void DbManager::run() {
   QSqlDatabase *db;
 
   while (dbList.size() > 0) {
-    // traitement des connexions à ouvrir
+    // connections to open stack
     while (openStack.size() > 0) {
+      // check for doubles
       foreach (QSqlDatabase *d, closeStack) {
-        // on supprime les doublons éventuels
         while (openStack.contains(d)) {
           openStack.remove(openStack.indexOf(d));
         }
       }
+
       db = openStack.pop();
       if (db->open()) {
         Logger::instance->log(tr("Connected to %1").arg(alias(db)));
@@ -532,20 +507,21 @@ void DbManager::run() {
 
       emit statusChanged(db);
       emit statusChanged(dbMap[db]->index());
-      // refreshModelItem(db);
     }
 
-    // traitement des connexions à fermer
+    // connections to close stack
     while (closeStack.size() > 0) {
       db = closeStack.pop();
       db->close();
+
       Logger::instance->log(tr("Disconnected from %1").arg(alias(db)));
+
+      // don't emit signal when closing the application
       if (!closingAll) {
         emit statusChanged(db);
         if (dbMap.contains(db)) {
           emit statusChanged(dbMap[db]->index());
         }
-        // refreshModelItem(db);
       }
 
       if (!dbList.contains(db)) {
@@ -581,15 +557,12 @@ void DbManager::saveList() {
   s.sync();
 }
 
-/**
- * Extrait les informations d'un schéma particulier
- */
-SqlSchema DbManager::schema(QSqlDatabase *db, QString sch) {
+SqlSchema DbManager::schema(QSqlDatabase *db, QString schemaName) {
   if (!dbWrappers[db] || !(dbWrappers[db]->features() & SqlWrapper::Schemas)) {
     return SqlSchema();
   }
 
-  SqlSchema schema = dbWrappers[db]->schema(sch);
+  SqlSchema schema = dbWrappers[db]->schema(schemaName);
 
   return schema;
 }
@@ -606,9 +579,6 @@ QStandardItem* DbManager::schemaItem(SqlSchema schema) {
   }
 
   sitem->appendRow(new QStandardItem(IconManager::get("view-refresh"), ""));
-
-//  sitem->appendRow(tablesItem(schema.tables, prefix));
-//  sitem->appendRow(viewsItem(schema.tables, prefix));
 
   return sitem;
 }
@@ -786,7 +756,7 @@ void DbManager::toggle(QSqlDatabase *db) {
     close(db);
   } else {
     open(db);
-    DbManager::lastIndex = indexOf(db);
+    DbManager::lastUsedDbIndex = indexOf(db);
   }
 }
 
