@@ -165,4 +165,5 @@ unix:!macx {
 
 macx {
     TARGET = DbMaster
+    ICON = ../dist/dbmaster.icns
 }
