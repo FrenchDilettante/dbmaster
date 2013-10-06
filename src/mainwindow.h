@@ -12,6 +12,7 @@
 
 #include <QSqlDatabase>
 #include <QMainWindow>
+#include <QUrl>
 #include <QWidget>
 
 class MainWindow: public QMainWindow, public Ui::MainWindowClass {
@@ -68,6 +69,7 @@ private slots:
   void lowerCase();
   void nextTab();
   void on_actionUserManual_triggered();
+  void openHomepageLink(QUrl url);
   void openRecent();
   void paste();
   void previousTab();

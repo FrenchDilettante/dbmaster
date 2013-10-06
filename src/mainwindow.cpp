@@ -224,6 +224,10 @@ void MainWindow::on_actionUserManual_triggered() {
         QUrl("http://dbmaster.sourceforge.net/userdoc/0.7/01-a-propos.html"));
 }
 
+void MainWindow::openHomepageLink(QUrl url) {
+  QDesktopServices::openUrl(url);
+}
+
 void MainWindow::openRecent() {
   int index = recentActions.indexOf((QAction*)sender());
   if (index == -1) {
@@ -530,6 +534,8 @@ void MainWindow::setupConnections() {
    */
   connect(tabWidget, SIGNAL(currentChanged(int)), this, SLOT(refreshTab()));
   connect(tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
+
+  connect(homepageView, SIGNAL(linkClicked(QUrl)), this, SLOT(openHomepageLink(QUrl)));
 }
 
 void MainWindow::setupDocks(QSettings *s) {
