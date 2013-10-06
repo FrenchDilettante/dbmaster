@@ -178,21 +178,14 @@ bool SqlHighlighter::reloadKeywords() {
   sqlTypes.clear();
 
   QStringList files;
-  QString prefix = ":/syntax/";
 
   files << "sql_basics"
         << "sql_functions"
         << "sql_types";
 
   for (int i=0; i<files.size(); i++) {
-    QFile file(files[i].prepend(prefix));
-    if (!file.open( QIODevice::ReadOnly | QIODevice::Text)) {
-      QMessageBox::critical(NULL,
-                 tr("Missing file"),
-                 tr("%1 cannot be found. You might be missing some keywords.")
-                            .arg(file.fileName()));
-      return false;
-    }
+    QFile file(files[i].prepend(":/syntax/"));
+    file.open(QIODevice::ReadOnly | QIODevice::Text);
 
     while (!file.atEnd()) {
       QString line = file.readLine();
