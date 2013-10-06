@@ -219,11 +219,6 @@ void MainWindow::nextTab() {
   }
 }
 
-void MainWindow::on_actionUserManual_triggered() {
-  QDesktopServices::openUrl(
-        QUrl("http://dbmaster.sourceforge.net/userdoc/0.7/01-a-propos.html"));
-}
-
 void MainWindow::openHomepageLink(QUrl url) {
   QDesktopServices::openUrl(url);
 }

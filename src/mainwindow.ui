@@ -149,7 +149,6 @@
     <property name="title">
      <string>&amp;Help</string>
     </property>
-    <addaction name="actionUserManual"/>
     <addaction name="actionAbout"/>
    </widget>
    <widget class="QMenu" name="menuFile">
@@ -575,11 +574,6 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+F</string>
-   </property>
-  </action>
-  <action name="actionUserManual">
-   <property name="text">
-    <string>User manual</string>
    </property>
   </action>
   <action name="actionUpperCase">

@@ -68,7 +68,6 @@ private slots:
   void cut();
   void lowerCase();
   void nextTab();
-  void on_actionUserManual_triggered();
   void openHomepageLink(QUrl url);
   void openRecent();
   void paste();
