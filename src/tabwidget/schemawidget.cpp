@@ -35,7 +35,7 @@ void SchemaWidget::on_tableTree_itemDoubleClicked(QTreeWidgetItem *item,
 }
 
 void SchemaWidget::reload() {
-  SqlSchema s = DbManager::schema(m_db, m_schema);
+  SqlSchema s = DbManager::instance->schema(m_db, m_schema);
   schemaEdit->setText(s.name);
 
   prefix = s.defaultSchema ? "" : s.name;

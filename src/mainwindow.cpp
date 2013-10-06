@@ -1,15 +1,3 @@
-/*
- * This program is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation; version 3 of the License.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- */
-
-
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -51,7 +39,7 @@ MainWindow::~MainWindow() {
 }
 
 /**
- * Ajoute le nom de fichier passé en paramètre à la liste des fichiers récents.
+ * Add the filename in the Recent files menu action
  */
 void MainWindow::addRecentFile(QString file) {
   if (recentFiles.indexOf(file) >= 0) {
@@ -66,7 +54,7 @@ void MainWindow::addRecentFile(QString file) {
 }
 
 /**
- * Lorsqu'une connexion change de statut, on contrôle s'il y a des erreurs.
+ * @deprecated should be done in the DbManager with Logger
  */
 void MainWindow::checkDb(QSqlDatabase *db) {
   if (db->isOpenError() && db->lastError().type() != QSqlError::NoError) {
@@ -77,64 +65,51 @@ void MainWindow::checkDb(QSqlDatabase *db) {
   }
 }
 
-/**
- * Efface l'historique des fichiers récents
- */
 void MainWindow::clearRecent() {
   recentFiles.clear();
   refreshRecent();
 }
 
-/**
- * Intercepte l'événement de fermeture pour contrôler que tous les onglets ont
- * été enregistrés. Montre une fenêtre de dialogue le cas échéant.
- */
 void MainWindow::closeEvent(QCloseEvent *event) {
-  /// nombre d'onglets à fermer
-  int saved = 0;
+  int tabsToCloseCount = 0;
+  int lastUnsavedTab = 0;
 
-  /// pour des raisons pratiques, stocke le dernier onglet non enregistré
-  int n = 0;
-
-  // vérifie s'il y a 0, 1 ou plus onglets non enregistrés
-  for (int i = 0; i < tabWidget->count() && saved < 2; i++) {
+  for (int i = 0; i < tabWidget->count() && tabsToCloseCount < 2; i++) {
     if (!((AbstractTabWidget*)(tabWidget->widget(i)))->isSaved()) {
-      n = i;
-      saved++;
+      lastUnsavedTab = i;
+      tabsToCloseCount++;
     }
   }
 
-  if (saved == 0) {
-    // tous les onglets sont prêts à être fermés
+  switch(tabsToCloseCount) {
+  case 0:
     event->accept();
-  } else if (saved == 1) {
-    // un seul onglet n'est pas enregistré
-    if (((AbstractTabWidget*) tabWidget->widget(n))->confirmClose()) {
+    break;
+
+  case 1:
+    if (((AbstractTabWidget*) tabWidget->widget(lastUnsavedTab))->confirmClose()) {
       event->accept();
     } else {
       event->ignore();
       return;
     }
-  } else {
-    // plus d'un onglet n'est pas enregistré
+    break;
 
-    // demande de confirmation de confirmation
+  default:
     int ret = QMessageBox::warning(this,
              tr("Unsaved files"),
              tr("Some files are not saved. Are you sure to want to quit ?"),
              QMessageBox::SaveAll | QMessageBox::Discard | QMessageBox::Cancel,
              QMessageBox::SaveAll );
 
-    switch(ret) {
+    switch (ret) {
     case QMessageBox::SaveAll:
-      // on sauvegarde tout
       for (int i=0; i<tabWidget->count(); i++) {
         ((AbstractTabWidget*) tabWidget->widget(i))->save();
       }
       break;
 
     case QMessageBox::Discard:
-      // on ignore : rien à faire, les onglets seront détruits à la fermeture
       break;
 
     default:
@@ -143,46 +118,6 @@ void MainWindow::closeEvent(QCloseEvent *event) {
       return;
     }
   }
-
-  // sauvegarde des préférences de la fenêtre
-  QSettings s;
-  s.beginGroup("mainwindow");
-  s.setValue("position", pos());
-  if (windowState().testFlag(Qt::WindowMaximized)) {
-    // fenêtre maximisée
-    s.setValue("maximized", true);
-    s.remove("size");
-  } else {
-    // fenêtre non maximisée : on stocke position + taille
-    s.setValue("size", size());
-    s.remove("maximized");
-  }
-
-  // tooltips activés ou non
-  s.setValue("tooltips", tooltipButton->isChecked());
-
-  // où se situe le dock de connexion
-  s.setValue("maindock_visible", dockWidget->isVisible());
-  s.setValue("maindock_area", dockWidgetArea(dockWidget));
-  s.setValue("maindock_floating", dockWidget->isFloating());
-  s.setValue("maindock_position", dockWidget->pos());
-  s.setValue("maindock_size", dockWidget->size());
-
-  s.endGroup();
-
-  // fichiers récents
-  s.beginWriteArray("recentfiles", recentFiles.size());
-  for (int i=0; i<recentFiles.size(); i++) {
-    s.setArrayIndex(i);
-    s.setValue("entry", recentFiles[i]);
-  }
-  s.endArray();
-
-  // on prend le soin de fermer toutes les connexions
-  DbManager::closeAll();
-
-  // et d'enregistrer les plugins
-  PluginManager::save();
 
   event->accept();
 }
@@ -193,6 +128,7 @@ void MainWindow::closeCurrentTab() {
 
 void MainWindow::closeSender() {
   QWidget *w = dynamic_cast<QWidget*>(sender());
+
   if (w && tabWidget->indexOf(w) > -1) {
     tabWidget->removeTab(tabWidget->indexOf(w));
   }
@@ -474,6 +410,43 @@ void MainWindow::reloadDbList() {
   updateDbActions();
 }
 
+void MainWindow::saveSettings() {
+  QSettings s;
+  s.beginGroup("mainwindow");
+  s.setValue("position", pos());
+
+  if (windowState().testFlag(Qt::WindowMaximized)) {
+    s.setValue("maximized", true);
+    s.remove("size");
+  } else {
+    s.setValue("size", size());
+    s.remove("maximized");
+  }
+
+  s.setValue("tooltips", tooltipButton->isChecked());
+
+  s.setValue("maindock_visible", dockWidget->isVisible());
+  s.setValue("maindock_area", dockWidgetArea(dockWidget));
+  s.setValue("maindock_floating", dockWidget->isFloating());
+  s.setValue("maindock_position", dockWidget->pos());
+  s.setValue("maindock_size", dockWidget->size());
+
+  s.endGroup();
+
+  s.beginWriteArray("recentfiles", recentFiles.size());
+  for (int i=0; i<recentFiles.size(); i++) {
+    s.setArrayIndex(i);
+    s.setValue("entry", recentFiles[i]);
+  }
+  s.endArray();
+
+  // on prend le soin de fermer toutes les connexions
+  DbManager::instance->closeAll();
+
+  // et d'enregistrer les plugins
+  PluginManager::save();
+}
+
 void MainWindow::saveQuery() {
   if(currentTab() != 0)
     currentTab()->save();
@@ -542,9 +515,9 @@ void MainWindow::setupConnections() {
   /*
    * DbManager
    */
-  connect(DbManager::instance(), SIGNAL(statusChanged(QSqlDatabase*)),
+  connect(DbManager::instance, SIGNAL(statusChanged(QSqlDatabase*)),
           this, SLOT(checkDb(QSqlDatabase*)));
-  connect(DbManager::model(), SIGNAL(dataChanged(QModelIndex,QModelIndex)),
+  connect(DbManager::instance->model(), SIGNAL(dataChanged(QModelIndex,QModelIndex)),
           this, SLOT(reloadDbList()));
 
   /*

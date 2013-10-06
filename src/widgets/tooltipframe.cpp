@@ -1,15 +1,3 @@
-/*
- * This program is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation; version 3 of the License.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- */
-
-
 #include "tooltipframe.h"
 #include "ui_tooltipframe.h"
 
@@ -26,8 +14,7 @@ TooltipFrame::TooltipFrame(QWidget *parent)
         << tr("Press Ctrl+Espace in the query editor to display the completer.")
         << tr("While a query is executed, you can edit an another one.")
         << tr("You can export a table or a query's content in a CSV file by right-clicking on the spreadsheet.")
-        << tr("While it is connected, a database cannot be edited.")
-        << tr("All queries are logged. Check them out in Tools - Logs.")
+        << tr("All queries are logged. Check them out in the Console tab.")
         << tr("DbMaster is a free software developped by volunteers. Join the community and help us making it better !")
         << tr("Move from a tab to another by pressing Alt+Left/Right.")
         << tr("Name your connections with an alias to avoid blanks.")
@@ -49,13 +36,13 @@ TooltipFrame::TooltipFrame(QWidget *parent)
 
 void TooltipFrame::showTooltip() {
   int index;
-  if(tooltips.size() > 1)
-  {
-    do
+  if (tooltips.size() > 1) {
+    do {
         index = rand() % tooltips.size();
-    while(index == currentIndex);
-  } else
+    } while (index == currentIndex);
+  } else {
     index = 0;
+  }
 
   currentIndex = index;
   textBrowser->setText(tooltips[index]);

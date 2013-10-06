@@ -1,15 +1,3 @@
-/*
- * This program is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation; version 3 of the License.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- */
-
-
 #include "dbtreeview.h"
 
 #include "../dbmanager.h"
@@ -18,7 +6,7 @@
 DbTreeView::DbTreeView(QWidget *parent)
   : QTreeView(parent)
 {
-  model = DbManager::model();
+  model = DbManager::instance->model();
   connect(model, SIGNAL(dataChanged(QModelIndex,QModelIndex)),
           this, SLOT(on_model_dataChanged(QModelIndex,QModelIndex)));
   setModel(model);
@@ -39,14 +27,14 @@ void DbTreeView::addDatabase()
 void DbTreeView::connectCurrent() {
   QSqlDatabase *db = currentDb();
   if (db && !db->isOpen()) {
-    DbManager::open(db);
+    DbManager::instance->open(db);
   }
 }
 
 void DbTreeView::disconnectCurrent() {
   QSqlDatabase *db = currentDb();
   if (db && db->isOpen()) {
-    DbManager::close(db);
+    DbManager::instance->close(db);
   }
 }
 
@@ -65,7 +53,7 @@ void DbTreeView::contextMenuEvent(QContextMenuEvent *event)
         editDbAct->setVisible(true);
         removeDbAct->setVisible(true);
         toggleAct->setVisible(true);
-        if(DbManager::getDatabase(index.row())->isOpen()) {
+        if (DbManager::instance->getDatabase(index.row())->isOpen()) {
           toggleAct->setText(tr("Disconnect"));
         } else {
           toggleAct->setText(tr("Connect"));
@@ -186,7 +174,7 @@ void DbTreeView::mousePressEvent(QMouseEvent *event) {
 
 void DbTreeView::onItemExpanded(const QModelIndex &index) {
   if (index.data(Qt::UserRole).canConvert(QVariant::Int)) {
-    DbManager::refreshModelIndex(index);
+    DbManager::instance->refreshModelIndex(index);
   }
 }
 
@@ -210,35 +198,34 @@ void DbTreeView::removeCurrent() {
     while (index.parent() != QModelIndex()) {
       index = index.parent();
     }
-    if (DbManager::getDatabase(index.row())->isOpen()) {
+    if (DbManager::instance->getDatabase(index.row())->isOpen()) {
       QMessageBox::warning(this,
                            tr("Cannot remove"),
                            tr("You must close the database before remove it."));
       return;
     }
 
-    DbManager::removeDatabase(index.row());
+    DbManager::instance->removeDatabase(index.row());
   }
 }
 
-QSqlDatabase *DbTreeView::parentDb(QModelIndex index)
-{
-  while(index != QModelIndex())
-  {
-    if(index.data(Qt::UserRole) == DbManager::DbItem)
-      return DbManager::getDatabase(index.row());
+QSqlDatabase *DbTreeView::parentDb(QModelIndex index) {
+  while(index != QModelIndex()) {
+    if (index.data(Qt::UserRole) == DbManager::DbItem) {
+      return DbManager::instance->getDatabase(index.row());
+    }
     index = index.parent();
   }
 
   return NULL;
 }
 
-void DbTreeView::refreshCurrent()
-{
-  if (selectedIndexes().size() == 0)
+void DbTreeView::refreshCurrent() {
+  if (selectedIndexes().size() == 0) {
     return;
+  }
 
-  DbManager::refreshModelItem(parentDb(selectedIndexes()[0]));
+  DbManager::instance->refreshModelItem(parentDb(selectedIndexes()[0]));
 }
 
 void DbTreeView::selectionChanged(const QItemSelection &selected,
@@ -279,10 +266,9 @@ void DbTreeView::setupActions()
   contextMenu->addAction(removeDbAct);
 }
 
-void DbTreeView::toggleCurrentDb()
-{
-  if(selectedIndexes().size() == 1) {
+void DbTreeView::toggleCurrentDb() {
+  if (selectedIndexes().size() == 1) {
     QModelIndex index = selectedIndexes()[0];
-    DbManager::toggle(DbManager::getDatabase(index.row()));
+    DbManager::instance->toggle(DbManager::instance->getDatabase(index.row()));
   }
 }

@@ -1,15 +1,3 @@
-/*
- * This program is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation; version 3 of the License.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- */
-
-
 #include "newdbwizard.h"
 
 #include "../config.h"
@@ -32,22 +20,18 @@ NewDbWizard::NewDbWizard(QWidget *parent)
 }
 
 void NewDbWizard::accept() {
-  if(field("savepswd").toBool()) {
-    DbManager::addDatabase(field("driver").toString(),
-                           field("host").toString(),
-                           field("user").toString(),
-                           field("pswd").toString(),
-                           field("name").toString(),
-                           field("alias").toString(),
-                           field("usesOdbc").toBool());
-  } else {
-    DbManager::addDatabase(field("driver").toString(),
-                           field("host").toString(),
-                           field("user").toString(),
-                           field("name").toString(),
-                           field("alias").toString(),
-                           field("usesOdbc").toBool());
+  QString password = QString::null;
+  if (field("savepswd").toBool()) {
+    password = field("pswd").toString();
   }
+
+  DbManager::instance->addDatabase(field("driver").toString(),
+                         field("host").toString(),
+                         field("user").toString(),
+                         password,
+                         field("name").toString(),
+                         field("alias").toString(),
+                         field("usesOdbc").toBool());
 
   emit(accepted());
   close();

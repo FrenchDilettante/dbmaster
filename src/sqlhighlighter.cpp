@@ -1,15 +1,3 @@
-/*
- * This program is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation; version 3 of the License.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- */
-
-
 #include "sqlhighlighter.h"
 
 #include "config.h"
@@ -190,31 +178,14 @@ bool SqlHighlighter::reloadKeywords() {
   sqlTypes.clear();
 
   QStringList files;
-  QString prefix;
 
-  if (QFile::exists("../../dbmaster/src/share/sql_basics")) {
-    prefix = "../../dbmaster/src/share/";
-  } else {
-#if defined( Q_WS_X11 )
-    prefix = QString( PREFIX ).append( "/share/dbmaster/sqlsyntax/" );
-#endif
-#if defined(Q_WS_WIN)
-    prefix = "share\\sqlsyntax\\";
-#endif
-  }
   files << "sql_basics"
         << "sql_functions"
         << "sql_types";
 
   for (int i=0; i<files.size(); i++) {
-    QFile file(files[i].prepend(prefix));
-    if (!file.open( QIODevice::ReadOnly | QIODevice::Text)) {
-      QMessageBox::critical(NULL,
-                 tr("Missing file"),
-                 tr("%1 cannot be found. You might be missing some keywords.")
-                            .arg(file.fileName()));
-      return false;
-    }
+    QFile file(files[i].prepend(":/syntax/"));
+    file.open(QIODevice::ReadOnly | QIODevice::Text);
 
     while (!file.atEnd()) {
       QString line = file.readLine();

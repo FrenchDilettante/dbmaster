@@ -1,15 +1,3 @@
-/*
- * This program is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation; version 3 of the License.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- */
-
-
 #include "dbmanager.h"
 #include "db_enum.h"
 #include "iconmanager.h"
@@ -19,7 +7,9 @@
 #include "plugins/pluginmanager.h"
 #include "tabwidget/abstracttabwidget.h"
 
-DbManagerPrivate::DbManagerPrivate()
+DbManager* DbManager::instance;
+
+DbManager::DbManager()
   : QThread() {
   closingAll = false;
   nconn = 0;
@@ -27,67 +17,38 @@ DbManagerPrivate::DbManagerPrivate()
   m_model = new QStandardItemModel(this);
 
   setupConnections();
+  setupModels();
+  openList();
 }
 
-/**
- * Ajoute une base au pool de connexions.
- *
- * @param driver
- *    Voir doc Qt
- * @param host
- *    Hôte distant ou local
- * @param user
- *    Nom d'utilisateur
- * @param pswd
- *    Mot de passe
- * @param dbnm
- *    Base de données
- * @param alias
- *    Nom à afficher
- * @param usesOdbc
- *    Utilise (ou non) ODBC
- * @param save
- *    Déclenche l'enregistrement de la liste ou non
- */
-int DbManagerPrivate::addDatabase(QString driver, QString host, QString user,
+int DbManager::addDatabase(QString driver, QString host, QString user,
                                   QString pswd, QString dbnm, QString alias,
                                   bool usesOdbc, bool save) {
-  // On détermine si un adaptateur est disponible...
   SqlWrapper *wrapper = PluginManager::availableWrapper(driver);
-  // ... avant d'inscrire le driver en ODBC (voir assistant d'ajout)
   if (usesOdbc) {
     driver = "QODBC";
   }
 
+  // need to store what plugin what used
   QString plid = wrapper ? wrapper->plid() : "";
-
-  // On continue avec la procédure classique
   return addDatabase(driver, host, user, pswd, dbnm, alias, plid, save);
 }
 
 /**
- * Ajoute une base au pool de connexions.
- *
+ * @brief DbManager::addDatabase
  * @param driver
- *    Voir doc Qt
  * @param host
- *    Hôte distant ou local
  * @param user
- *    Nom d'utilisateur
  * @param pswd
- *    Mot de passe
  * @param dbnm
- *    Base de données
  * @param alias
- *    Nom à afficher
- * @param wrapper
- *    Nom (PLID) de l'adaptateur SQL à utiliser
+ * @param wrapperName
  * @param save
- *    Déclenche l'enregistrement de la liste ou non
+ * @return the index of the added db OR if the db already exists, its index
  */
-int DbManagerPrivate::addDatabase(QString driver, QString host, QString user,
+int DbManager::addDatabase(QString driver, QString host, QString user,
                                   QString pswd, QString dbnm, QString alias,
-                                  QString wrapper, bool save) {
+                                  QString wrapperName, bool save) {
   QSqlDatabase db = QSqlDatabase::addDatabase(driver, genConnectionName());
   db.setHostName(host);
   db.setUserName(user);
@@ -95,7 +56,7 @@ int DbManagerPrivate::addDatabase(QString driver, QString host, QString user,
   db.setDatabaseName(dbnm);
 
   foreach (QSqlDatabase *d, dbList) {
-    // on contrôle les éventuels doublons
+    // checking for doubles
     if (d->hostName() == db.hostName() &&
             d->userName() == db.userName() &&
             d->password() == db.password() &&
@@ -106,12 +67,14 @@ int DbManagerPrivate::addDatabase(QString driver, QString host, QString user,
 
   QSqlDatabase *newDb = new QSqlDatabase(db);
   dbList.append(newDb);
+
   QString title;
   if (alias.isEmpty()) {
     title = dbTitle(newDb);
   } else {
     title = alias;
   }
+
   dbMap[newDb] = new QStandardItem(title);
   dbMap[newDb]->setEditable(false);
 
@@ -119,22 +82,24 @@ int DbManagerPrivate::addDatabase(QString driver, QString host, QString user,
   dbMap[newDb]->setIcon(IconManager::get("database_connect"));
   dbMap[newDb]->setToolTip(dbToolTip(newDb));
 
-  QList<QStandardItem*> l;
-  l << dbMap[newDb];
-  l << new QStandardItem(driverIcon[driver], "");
-  l[1]->setSelectable(false);
+  QList<QStandardItem*> uiItemList;
+  // name
+  uiItemList << dbMap[newDb];
+  // icon (= DBMS icon)
+  uiItemList << new QStandardItem(driverIcon[driver], "");
+  uiItemList[1]->setSelectable(false);
 
-  m_model->appendRow(l);
+  m_model->appendRow(uiItemList);
 
-  SqlWrapper *w = NULL;
-  if (wrapper.length() > 0) {
-    w = PluginManager::wrapper(wrapper);
+  SqlWrapper *wrapper = NULL;
+  if (wrapperName.length() > 0) {
+    wrapper = PluginManager::wrapper(wrapperName);
   } else if (!driver.startsWith("QODBC")) {
-    w = PluginManager::availableWrapper(driver);
+    wrapper = PluginManager::availableWrapper(driver);
   }
 
-  if (w) {
-    dbWrappers[newDb] = w->newInstance(newDb);
+  if (wrapper) {
+    dbWrappers[newDb] = wrapper->newInstance(newDb);
   }
 
   if (save) {
@@ -144,7 +109,7 @@ int DbManagerPrivate::addDatabase(QString driver, QString host, QString user,
   return dbList.size() - 1;
 }
 
-QString DbManagerPrivate::alias(QSqlDatabase *db) {
+QString DbManager::alias(QSqlDatabase *db) {
   if (dbMap.contains(db)) {
     return dbMap[db]->text();
   } else {
@@ -152,7 +117,7 @@ QString DbManagerPrivate::alias(QSqlDatabase *db) {
   }
 }
 
-void DbManagerPrivate::close(QSqlDatabase* db) {
+void DbManager::close(QSqlDatabase* db) {
   if (!dbList.contains(db))
     return;
 
@@ -162,7 +127,7 @@ void DbManagerPrivate::close(QSqlDatabase* db) {
     start();
 }
 
-QStandardItem* DbManagerPrivate::columnsItem(QList<SqlColumn> columns) {
+QStandardItem* DbManager::columnsItem(QList<SqlColumn> columns) {
   QStandardItem *cItem =
       new QStandardItem(IconManager::get("folder_columns"),
                         tr("Columns (%1)")
@@ -182,7 +147,7 @@ QStandardItem* DbManagerPrivate::columnsItem(QList<SqlColumn> columns) {
   return cItem;
 }
 
-QString DbManagerPrivate::dbTitle(QSqlDatabase *db) {
+QString DbManager::dbTitle(QSqlDatabase *db) {
   QString title;
   QString simplifiedName = QFileInfo(db->databaseName()).fileName();
   if (simplifiedName.length() == 0) {
@@ -199,7 +164,7 @@ QString DbManagerPrivate::dbTitle(QSqlDatabase *db) {
 /**
  * Returns a rich-texted tooltip for the database.
  */
-QString DbManagerPrivate::dbToolTip(QSqlDatabase *db) {
+QString DbManager::dbToolTip(QSqlDatabase *db) {
   QString ret;
 
   ret += tr("%1 on %2").prepend("<h3>").append("</h3>")
@@ -239,7 +204,7 @@ QString DbManagerPrivate::dbToolTip(QSqlDatabase *db) {
 /**
  * Closes DbManager.
  */
-void DbManagerPrivate::closeAll()
+void DbManager::closeAll()
 {
   if (dbMap.size() == 0) {
     return;
@@ -261,16 +226,16 @@ void DbManagerPrivate::closeAll()
   dbMap.clear();
 }
 
-QStandardItemModel *DbManagerPrivate::driverModel() {
+QStandardItemModel *DbManager::driverModel() {
   return m_driverModel;
 }
 
-QString DbManagerPrivate::genConnectionName() {
+QString DbManager::genConnectionName() {
   nconn++;
   return QString::number(nconn);
 }
 
-QSqlDatabase* DbManagerPrivate::getDatabase(int n) {
+QSqlDatabase* DbManager::getDatabase(int n) {
   if (dbMap.size() == 0) {
     return NULL;
   }
@@ -286,11 +251,11 @@ QSqlDatabase* DbManagerPrivate::getDatabase(int n) {
   return dbList[n];
 }
 
-QList<QSqlDatabase*> DbManagerPrivate::getDbList() {
+QList<QSqlDatabase*> DbManager::getDbList() {
   return dbList;
 }
 
-QStringList DbManagerPrivate::getDbNames(bool showHosts) {
+QStringList DbManager::getDbNames(bool showHosts) {
   QStringList ret;
   QString str;
 
@@ -310,24 +275,23 @@ QStringList DbManagerPrivate::getDbNames(bool showHosts) {
 }
 
 /// DEPRECATED
-int DbManagerPrivate::indexOf(QSqlDatabase *db) {
+int DbManager::indexOf(QSqlDatabase *db) {
   return dbList.indexOf(db);
 }
 
-void DbManagerPrivate::init() {
-  setupModels();
-  openList();
+void DbManager::init() {
+  instance = new DbManager();
 }
 
-QString DbManagerPrivate::lastError() {
+QString DbManager::lastError() {
   return lastErr;
 }
 
-void DbManagerPrivate::open(int nb, QString pswd) {
+void DbManager::open(int nb, QString pswd) {
   open(dbList[nb], pswd);
 }
 
-void DbManagerPrivate::open(QSqlDatabase *db, QString pswd) {
+void DbManager::open(QSqlDatabase *db, QString pswd) {
   if (!dbMap.contains(db)) {
     return;
   }
@@ -348,7 +312,7 @@ void DbManagerPrivate::open(QSqlDatabase *db, QString pswd) {
   }
 }
 
-void DbManagerPrivate::openList() {
+void DbManager::openList() {
   QSettings s;
 
   int size = s.beginReadArray("dblist");
@@ -367,7 +331,7 @@ void DbManagerPrivate::openList() {
   s.endArray();
 }
 
-QSqlDatabase *DbManagerPrivate::parentDb(QModelIndex index) {
+QSqlDatabase *DbManager::parentDb(QModelIndex index) {
   while (index != QModelIndex()) {
     if (index.data(Qt::UserRole) == DbManager::DbItem) {
       return DbManager::getDatabase(index.row());
@@ -378,13 +342,13 @@ QSqlDatabase *DbManagerPrivate::parentDb(QModelIndex index) {
   return NULL;
 }
 
-void DbManagerPrivate::refreshModel() {
+void DbManager::refreshModel() {
   foreach (QSqlDatabase *db, dbList) {
     refreshModelItem(db);
   }
 }
 
-void DbManagerPrivate::refreshModelIndex(QModelIndex index) {
+void DbManager::refreshModelIndex(QModelIndex index) {
   if (!index.data(Qt::UserRole).canConvert(QVariant::Int)) {
     return;
   }
@@ -424,7 +388,7 @@ void DbManagerPrivate::refreshModelIndex(QModelIndex index) {
 /**
  * @bug check indexes
  */
-void DbManagerPrivate::refreshModelItem(QSqlDatabase *db) {
+void DbManager::refreshModelItem(QSqlDatabase *db) {
   if (!dbMap.contains(db)) {
     return;
   }
@@ -497,11 +461,11 @@ void DbManagerPrivate::refreshModelItem(QSqlDatabase *db) {
 /**
  * Remove the database at index.
  */
-void DbManagerPrivate::removeDatabase(int index) {
+void DbManager::removeDatabase(int index) {
   removeDatabase(dbList[index]);
 }
 
-void DbManagerPrivate::removeDatabase(QSqlDatabase *db) {
+void DbManager::removeDatabase(QSqlDatabase *db) {
   if (!dbMap.contains(db)) {
     return;
   }
@@ -518,20 +482,22 @@ void DbManagerPrivate::removeDatabase(QSqlDatabase *db) {
 }
 
 /**
- * Thread de gestion des connexions
+ * Connexion pool thread.
+ * @todo find a better way to proceed...
  */
-void DbManagerPrivate::run() {
+void DbManager::run() {
   QSqlDatabase *db;
 
   while (dbList.size() > 0) {
-    // traitement des connexions à ouvrir
+    // connections to open stack
     while (openStack.size() > 0) {
+      // check for doubles
       foreach (QSqlDatabase *d, closeStack) {
-        // on supprime les doublons éventuels
         while (openStack.contains(d)) {
           openStack.remove(openStack.indexOf(d));
         }
       }
+
       db = openStack.pop();
       if (db->open()) {
         Logger::instance->log(tr("Connected to %1").arg(alias(db)));
@@ -541,20 +507,21 @@ void DbManagerPrivate::run() {
 
       emit statusChanged(db);
       emit statusChanged(dbMap[db]->index());
-      refreshModelItem(db);
     }
 
-    // traitement des connexions à fermer
+    // connections to close stack
     while (closeStack.size() > 0) {
       db = closeStack.pop();
       db->close();
+
       Logger::instance->log(tr("Disconnected from %1").arg(alias(db)));
+
+      // don't emit signal when closing the application
       if (!closingAll) {
         emit statusChanged(db);
         if (dbMap.contains(db)) {
           emit statusChanged(dbMap[db]->index());
         }
-        refreshModelItem(db);
       }
 
       if (!dbList.contains(db)) {
@@ -566,7 +533,7 @@ void DbManagerPrivate::run() {
   }
 }
 
-void DbManagerPrivate::saveList() {
+void DbManager::saveList() {
   QSettings s;
   s.beginWriteArray("dblist", dbMap.size());
 
@@ -590,20 +557,17 @@ void DbManagerPrivate::saveList() {
   s.sync();
 }
 
-/**
- * Extrait les informations d'un schéma particulier
- */
-SqlSchema DbManagerPrivate::schema(QSqlDatabase *db, QString sch) {
+SqlSchema DbManager::schema(QSqlDatabase *db, QString schemaName) {
   if (!dbWrappers[db] || !(dbWrappers[db]->features() & SqlWrapper::Schemas)) {
     return SqlSchema();
   }
 
-  SqlSchema schema = dbWrappers[db]->schema(sch);
+  SqlSchema schema = dbWrappers[db]->schema(schemaName);
 
   return schema;
 }
 
-QStandardItem* DbManagerPrivate::schemaItem(SqlSchema schema) {
+QStandardItem* DbManager::schemaItem(SqlSchema schema) {
   QStandardItem *sitem = new QStandardItem(schema.name);
   sitem->setIcon(IconManager::get("schema"));
   sitem->setData(schema.name, Qt::ToolTipRole);
@@ -616,13 +580,10 @@ QStandardItem* DbManagerPrivate::schemaItem(SqlSchema schema) {
 
   sitem->appendRow(new QStandardItem(IconManager::get("view-refresh"), ""));
 
-//  sitem->appendRow(tablesItem(schema.tables, prefix));
-//  sitem->appendRow(viewsItem(schema.tables, prefix));
-
   return sitem;
 }
 
-void DbManagerPrivate::setAlias(QSqlDatabase *db, QString alias) {
+void DbManager::setAlias(QSqlDatabase *db, QString alias) {
   if (!dbList.contains(db)) {
     return;
   }
@@ -631,7 +592,7 @@ void DbManagerPrivate::setAlias(QSqlDatabase *db, QString alias) {
   saveList();
 }
 
-void DbManagerPrivate::setDatabase(int nb, QSqlDatabase db) {
+void DbManager::setDatabase(int nb, QSqlDatabase db) {
   if (dbList.size() >= nb) {
     return;
   }
@@ -642,12 +603,12 @@ void DbManagerPrivate::setDatabase(int nb, QSqlDatabase db) {
   swapDatabase(oldDb, newDb);
 }
 
-void DbManagerPrivate::setupConnections() {
-//  connect(this, SIGNAL(statusChanged(QSqlDatabase*)),
-//          this, SLOT(refreshModelItem(QSqlDatabase*)));
+void DbManager::setupConnections() {
+  connect(this, SIGNAL(statusChanged(QSqlDatabase*)),
+          this, SLOT(refreshModelItem(QSqlDatabase*)));
 }
 
-void DbManagerPrivate::setupModels() {
+void DbManager::setupModels() {
   m_driverModel->setHorizontalHeaderItem(0, new QStandardItem(tr("Driver")));
 
   driverAlias["QDB2"]     = tr("DB2");
@@ -696,7 +657,7 @@ void DbManagerPrivate::setupModels() {
   m_model->setHorizontalHeaderItem(0, new QStandardItem(tr("Database")));
 }
 
-void DbManagerPrivate::swapDatabase(QSqlDatabase *oldDb, QSqlDatabase *newDb) {
+void DbManager::swapDatabase(QSqlDatabase *oldDb, QSqlDatabase *newDb) {
   if (!dbMap.contains(oldDb)) {
     return;
   }
@@ -713,7 +674,7 @@ void DbManagerPrivate::swapDatabase(QSqlDatabase *oldDb, QSqlDatabase *newDb) {
   saveList();
 }
 
-SqlTable DbManagerPrivate::table(QSqlDatabase *db, QString tbl) {
+SqlTable DbManager::table(QSqlDatabase *db, QString tbl) {
   SqlTable table;
 
   if (dbWrappers[db]) {
@@ -732,7 +693,7 @@ SqlTable DbManagerPrivate::table(QSqlDatabase *db, QString tbl) {
   return table;
 }
 
-QStandardItem *DbManagerPrivate::tablesItem(QList<SqlTable> tables,
+QStandardItem *DbManager::tablesItem(QList<SqlTable> tables,
                                             QString schema) {
   QStandardItem *tablesItem = new QStandardItem();
   tablesItem->setIcon(IconManager::get("folder_tables"));
@@ -761,7 +722,7 @@ QStandardItem *DbManagerPrivate::tablesItem(QList<SqlTable> tables,
   return tablesItem;
 }
 
-QStandardItem *DbManagerPrivate::viewsItem(QList<SqlTable> tables,
+QStandardItem *DbManager::viewsItem(QList<SqlTable> tables,
                                            QString schema) {
   QStandardItem *viewsItem = new QStandardItem();
 
@@ -786,142 +747,24 @@ QStandardItem *DbManagerPrivate::viewsItem(QList<SqlTable> tables,
   return viewsItem;
 }
 
-void DbManagerPrivate::terminate() {
+void DbManager::terminate() {
   closeAll();
 }
 
-void DbManagerPrivate::toggle(QSqlDatabase *db) {
+void DbManager::toggle(QSqlDatabase *db) {
   if(db->isOpen()) {
     close(db);
   } else {
     open(db);
-    DbManager::lastIndex = indexOf(db);
+    DbManager::lastUsedDbIndex = indexOf(db);
   }
 }
 
-void DbManagerPrivate::update(QSqlDatabase *db, QString alias) {
+void DbManager::update(QSqlDatabase *db, QString alias) {
   if (dbList.contains(db)) {
     dbMap[db]->setText(alias);
     refreshModelItem(db);
 
     saveList();
   }
-}
-
-/*
- * DbManager
- */
-
-// intialize static members
-DbManagerPrivate   *DbManager::m_instance = new DbManagerPrivate();
-int                 DbManager::lastIndex  = 0;
-
-int DbManager::addDatabase(QString driver, QString host, QString user,
-                           QString pswd, QString dbnm, QString alias,
-                           bool usesOdbc) {
-  return
-      m_instance->addDatabase(driver, host, user, pswd, dbnm, alias, usesOdbc);
-}
-
-int DbManager::addDatabase(QString driver, QString host, QString user,
-                           QString dbnm, QString alias, bool usesOdbc) {
-  return addDatabase(driver, host, user, QString::null, dbnm, alias, usesOdbc);
-}
-
-QString DbManager::alias(QSqlDatabase *db) {
-  /// @todo check null
-  return m_instance->alias(db);
-}
-
-void DbManager::close(QSqlDatabase *db) {
-  m_instance->close(db);
-}
-
-void DbManager::closeAll() {
-  m_instance->closeAll();
-}
-
-QString DbManager::dbTitle(QSqlDatabase *db) {
-  /// @todo check null
-  return DbManagerPrivate::dbTitle(db);
-}
-
-QStandardItemModel *DbManager::driverModel() {
-  return m_instance->driverModel();
-}
-
-QString DbManager::genConnectionName() {
-  return m_instance->genConnectionName();
-}
-
-QSqlDatabase* DbManager::getDatabase(int n) {
-  return m_instance->getDatabase(n);
-}
-
-QList<QSqlDatabase*> DbManager::getDbList() {
-  return m_instance->getDbList();
-}
-
-QStringList DbManager::getDbNames(bool showHosts) {
-  return m_instance->getDbNames(showHosts);
-}
-
-void DbManager::init() {
-  m_instance->init();
-}
-
-void DbManager::open(int nb, QString pswd) {
-  m_instance->open(nb, pswd);
-}
-
-void DbManager::open(QSqlDatabase *db, QString pswd) {
-  m_instance->open(db, pswd);
-}
-
-void DbManager::openList() {
-  m_instance->openList();
-}
-
-void DbManager::refreshModelIndex(QModelIndex index) {
-  m_instance->refreshModelIndex(index);
-}
-
-void DbManager::refreshModelItem(QSqlDatabase *db) {
-  m_instance->refreshModelItem(db);
-}
-
-void DbManager::removeDatabase(int index) {
-  m_instance->removeDatabase(index);
-}
-
-void DbManager::saveList() {
-  m_instance->saveList();
-}
-
-SqlSchema DbManager::schema(QSqlDatabase *db, QString schema) {
-  return m_instance->schema(db, schema);
-}
-
-void DbManager::setAlias(QSqlDatabase *db, QString alias) {
-  m_instance->setAlias(db, alias);
-}
-
-void DbManager::setDatabase(int nb, QSqlDatabase db) {
-  m_instance->setDatabase(nb, db);
-}
-
-SqlTable DbManager::table(QSqlDatabase *db, QString tbl) {
-  return m_instance->table(db, tbl);
-}
-
-void DbManager::terminate() {
-  m_instance->terminate();
-}
-
-void DbManager::toggle(QSqlDatabase *db) {
-  m_instance->toggle(db);
-}
-
-void DbManager::update(QSqlDatabase *db, QString alias) {
-  m_instance->update(db, alias);
 }

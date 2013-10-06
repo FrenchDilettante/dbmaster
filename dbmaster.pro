@@ -3,5 +3,5 @@
 ###########################
 
 TEMPLATE=subdirs
-SUBDIRS=src plugins
+SUBDIRS=src
 TRANSLATIONS += tr/fr_FR.po
