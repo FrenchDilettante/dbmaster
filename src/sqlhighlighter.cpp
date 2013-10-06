@@ -178,18 +178,8 @@ bool SqlHighlighter::reloadKeywords() {
   sqlTypes.clear();
 
   QStringList files;
-  QString prefix;
+  QString prefix = ":/syntax/";
 
-  if (QFile::exists("../../dbmaster/src/share/sql_basics")) {
-    prefix = "../../dbmaster/src/share/";
-  } else {
-#if defined( Q_WS_X11 )
-    prefix = QString( PREFIX ).append( "/share/dbmaster/sqlsyntax/" );
-#endif
-#if defined(Q_WS_WIN)
-    prefix = "share\\sqlsyntax\\";
-#endif
-  }
   files << "sql_basics"
         << "sql_functions"
         << "sql_types";

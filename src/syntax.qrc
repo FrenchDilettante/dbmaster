@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>syntax/sql_basics</file>
+        <file>syntax/sql_functions</file>
+        <file>syntax/sql_operators</file>
+        <file>syntax/sql_types</file>
+    </qresource>
+</RCC>

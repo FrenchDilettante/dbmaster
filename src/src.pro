@@ -108,7 +108,8 @@ FORMS += mainwindow.ui \
     plugins/exportengines/html/htmlwizardpage.ui \
     plugins/exportengines/plaintext/plaintextwizardpage.ui \
     plugins/wrappers/psql/psqlconfig.ui
-RESOURCES += icons.qrc
+RESOURCES += icons.qrc \
+    syntax.qrc
 
 # ##
 # Common
