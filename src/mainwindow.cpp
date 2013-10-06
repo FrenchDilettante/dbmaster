@@ -624,34 +624,7 @@ void MainWindow::setupWidgets() {
   s.endArray();
   refreshRecent();
 
-#if defined(Q_WS_X11)
-  QString lang = QLocale::system().name().left(2).toLower();
-  QDir d = QDir("../../dbmaster/src/share/html");
-  QString folder = d.exists() ? d.absolutePath() + "/" : QString(PREFIX) + "/share/dbmaster/";
-  QString url = folder + QString("index_%1.html").arg(lang);
-
-  if (!QFile::exists(url)) {
-    url = folder + QString("index_en.html");
-  }
-
-  textBrowser->setSource(url);
-#elif defined(Q_WS_WIN)
-  QString lang = QLocale::system().name().left(2).toLower();
-  QString url = QString("share\\index_%1.html").arg(lang);
-
-  if(!QFile::exists(url))
-    url = QString("share\\index_en.html");
-
-  textBrowser->setSource(url);
-#else
-  QString lang = QLocale::system().name().left(2).toLower();
-  QString url = QString("share/html/index_%1.html").arg(lang);
-
-  if(!QFile::exists(url))
-    url = QString("share/html/index_en.html");
-
-  textBrowser->setSource(url);
-#endif
+  homepageView->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
 
   // loading icons from current theme
   actionAddDb->setIcon(         IconManager::get("database_add"));

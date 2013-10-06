@@ -2,7 +2,7 @@
 # Project created by QtCreator 2009-06-01T16:44:04
 # -------------------------------------------------
 
-QT += sql
+QT += sql webkit
 TARGET = dbmaster
 TEMPLATE = app
 SOURCES += main.cpp \

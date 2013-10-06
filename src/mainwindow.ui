@@ -42,23 +42,6 @@
         <property name="spacing">
          <number>0</number>
         </property>
-        <item row="0" column="0" colspan="2">
-         <widget class="QTextBrowser" name="textBrowser">
-          <property name="openExternalLinks">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0" colspan="2">
-         <widget class="TooltipFrame" name="tooltipFrame">
-          <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
-          </property>
-         </widget>
-        </item>
         <item row="2" column="0">
          <spacer name="horizontalSpacer">
           <property name="orientation">
@@ -95,6 +78,26 @@
           </property>
          </widget>
         </item>
+        <item row="1" column="0" colspan="2">
+         <widget class="TooltipFrame" name="tooltipFrame">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_5"/>
+         </widget>
+        </item>
+        <item row="0" column="0" colspan="2">
+         <widget class="QWebView" name="homepageView">
+          <property name="url">
+           <url>
+            <string>http://static.dbmaster-project.org/0.9/</string>
+           </url>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
      </widget>
@@ -107,7 +110,7 @@
      <x>0</x>
      <y>0</y>
      <width>841</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuTools">
@@ -656,6 +659,11 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
+  <customwidget>
+   <class>QWebView</class>
+   <extends>QWidget</extends>
+   <header>QtWebKit/QWebView</header>
+  </customwidget>
   <customwidget>
    <class>AbstractTabWidget</class>
    <extends>QWidget</extends>
