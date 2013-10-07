@@ -114,18 +114,7 @@ RESOURCES += icons.qrc \
 # ##
 # Common
 trs.files = ../tr/fr_FR.qm
-sqlsyntax.files = share/sql_basics \
-    share/sql_functions \
-    share/sql_operators \
-    share/sql_types
-share.files = share/prefs.xml \
-    share/html/back.png \
-    share/html/dbmaster.png \
-    share/html/index_en.html \
-    share/html/index_fr.html \
-    share/html/main.css \
-    share/html/rightarrow.png \
-    img/dbmaster.png
+share.files = img/dbmaster.png
 
 # ##
 # MS Windows
@@ -136,8 +125,6 @@ win32: {
     INSTALLS = target
     trs.path = $${PREFIX}\\share\\tr
     INSTALLS += trs
-    sqlsyntax.path = $${PREFIX}\\share\\sqlsyntax
-    INSTALLS += sqlsyntax
     share.path = $${PREFIX}\\share
     INSTALLS += share
 }
@@ -145,15 +132,13 @@ win32: {
 # ##
 # All unix-like
 unix:!macx { 
-    isEmpty( PREFIX ):PREFIX = /usr
+    isEmpty( PREFIX ):PREFIX = /usr/local
     isEmpty( DESKTOPDIR ):DESKTOPDIR = $${PREFIX}/share/applications
     DEFINES += PREFIX=\\\"$${PREFIX}\\\"
     target.path = $${PREFIX}/bin
     INSTALLS = target
     trs.path = $${PREFIX}/share/dbmaster/tr
     INSTALLS += trs
-    sqlsyntax.path = $${PREFIX}/share/dbmaster/sqlsyntax
-    INSTALLS += sqlsyntax
     share.path = $${PREFIX}/share/dbmaster
     INSTALLS += share
     desktop.path = $${PREFIX}/share/applications
