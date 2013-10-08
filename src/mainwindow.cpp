@@ -83,13 +83,10 @@ void MainWindow::closeEvent(QCloseEvent *event) {
 
   switch(tabsToCloseCount) {
   case 0:
-    event->accept();
     break;
 
   case 1:
-    if (((AbstractTabWidget*) tabWidget->widget(lastUnsavedTab))->confirmClose()) {
-      event->accept();
-    } else {
+    if (!((AbstractTabWidget*) tabWidget->widget(lastUnsavedTab))->confirmClose()) {
       event->ignore();
       return;
     }
@@ -119,6 +116,7 @@ void MainWindow::closeEvent(QCloseEvent *event) {
     }
   }
 
+  saveSettings();
   event->accept();
 }
 
