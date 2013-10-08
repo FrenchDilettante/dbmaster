@@ -12,12 +12,11 @@
 class ExportWizard : public QWizard {
 Q_OBJECT
 public:
-  ExportWizard(QAbstractItemModel *m_model, QWidget *parent =0);
+  ExportWizard(QAbstractItemModel *model, QWidget *parent =0);
 
-  QAbstractItemModel *m_model;
+  QAbstractItemModel *model;
 
   ExportEngine *engine() { return m_engine; };
-  QAbstractItemModel *model();
   void setEngine(ExportEngine *e);
 
 private:
