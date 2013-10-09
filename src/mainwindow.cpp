@@ -530,6 +530,7 @@ void MainWindow::setupConnections() {
   connect(tabWidget, SIGNAL(currentChanged(int)), this, SLOT(refreshTab()));
   connect(tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
 
+  connect(clearLogsButton, SIGNAL(clicked()), logBrowser, SLOT(clear()));
   connect(homepageView, SIGNAL(linkClicked(QUrl)), this, SLOT(openHomepageLink(QUrl)));
 }
 
@@ -645,6 +646,7 @@ void MainWindow::setupWidgets() {
   actionSearch->setIcon(        IconManager::get("edit-find"));
   actionUndo->setIcon(          IconManager::get("edit-undo"));
 
+  clearLogsButton->setIcon(     IconManager::get("edit-clear"));
   tooltipButton->setIcon(       IconManager::get("help-faq"));
   tabWidget->setTabIcon(0,      IconManager::get("go-home"));
 

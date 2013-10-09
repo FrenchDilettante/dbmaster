@@ -49,5 +49,6 @@
         <file>img/database_lightning.png</file>
         <file>img/database_refresh.png</file>
         <file>img/console.png</file>
+        <file>img/edit-clear.png</file>
     </qresource>
 </RCC>
