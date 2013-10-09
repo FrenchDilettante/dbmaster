@@ -212,17 +212,6 @@ void DbManager::closeAll()
 
   closingAll = true;
   closeStack << dbList.toVector();
-  // waits until all connections are closed
-  bool oneOpenned = true;
-  while (oneOpenned) {
-    oneOpenned = false;
-    foreach (QSqlDatabase *d, dbList) {
-      if (d->isOpen()) {
-        oneOpenned = true;
-        break;
-      }
-    }
-  }
   dbMap.clear();
 }
 
