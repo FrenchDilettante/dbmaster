@@ -212,6 +212,7 @@ QList<SqlTable> MysqlWrapper::tables() {
     t.name = query.value(0).toString();
     t.type = query.value(1).toString().toLower() == "base table"
         ? Table : ViewTable;
+    t.columns = columns(t.name);
 
     tables << t;
   }

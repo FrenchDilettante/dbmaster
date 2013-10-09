@@ -459,6 +459,7 @@ QList<SqlTable> PsqlWrapper::tables(QString schema) {
     } else if (query.value(2).toString() == "VIEW") {
       t.type = ViewTable;
     }
+    t.columns = columns(t.name);
 
     tables << t;
   }

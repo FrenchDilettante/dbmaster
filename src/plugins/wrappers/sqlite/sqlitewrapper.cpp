@@ -100,6 +100,7 @@ QList<SqlTable> SqliteWrapper::tables() {
   while (query.next()) {
     t.name = query.value(0).toString();
     t.type = query.value(1).toString() == "table" ? Table : ViewTable;
+    t.columns = columns(t.name);
     tables << t;
   }
 
