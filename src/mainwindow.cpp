@@ -672,6 +672,7 @@ void MainWindow::updateDbActions() {
   actionRemoveConnection->setEnabled(select && !dbOpen);
   actionConnect->setEnabled(select && !dbOpen);
   actionDisconnect->setEnabled(select && dbOpen);
+  actionRefreshConnection->setEnabled(select);
 }
 
 void MainWindow::upperCase() {

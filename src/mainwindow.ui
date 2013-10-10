@@ -663,6 +663,9 @@
    </property>
   </action>
   <action name="actionRefreshConnection">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Refresh</string>
    </property>
