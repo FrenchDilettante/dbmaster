@@ -439,9 +439,6 @@ void MainWindow::saveSettings() {
 
   // on prend le soin de fermer toutes les connexions
   DbManager::instance->closeAll();
-
-  // et d'enregistrer les plugins
-  PluginManager::save();
 }
 
 void MainWindow::saveQuery() {
