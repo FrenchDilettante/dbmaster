@@ -31,6 +31,8 @@ public:
 
   virtual QList<SqlColumn> columns(QString table) { return QList<SqlColumn>(); };
 
+  virtual QList<SqlConstraint> constraints(QString table) { return QList<SqlConstraint>(); };
+
   virtual QString driver() =0;
   virtual QString driverName() { return ""; };
   virtual QString driverIconCode() { return ""; };

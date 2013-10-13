@@ -17,6 +17,12 @@ enum ColumnFamily {
   Varchar
 };
 
+enum ConstraintType {
+  ForeignKey,
+  PrimaryKey,
+  Unique
+};
+
 enum TableType {
   Table,
   ViewTable,
@@ -36,6 +42,11 @@ struct SqlColumn {
   bool permitsNull;
   QVariant defaultValue;
   QString comment;
+};
+
+struct SqlConstraint {
+  QString name;
+  ConstraintType type;
 };
 
 struct SqlTable {

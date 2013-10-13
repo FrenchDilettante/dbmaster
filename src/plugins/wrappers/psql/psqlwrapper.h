@@ -6,6 +6,7 @@
 
 #include <QCoreApplication>
 #include <QObject>
+#include <QList>
 
 class PsqlWrapper : public QObject, public SqlWrapper {
 Q_OBJECT
@@ -40,6 +41,8 @@ signals:
 public slots:
 
 private:
+  QList<QString> primaryKeys(QString table, QString schema =QString::null);
+
   PsqlConfig* m_configDialog;
 
 };

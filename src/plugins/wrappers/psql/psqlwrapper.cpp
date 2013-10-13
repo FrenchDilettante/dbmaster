@@ -62,23 +62,9 @@ QList<SqlColumn> PsqlWrapper::columns(QString table) {
 
   // Récupération des clés primaires
 
-  sql = "";
+  QList<QString> pks = primaryKeys(table);
 
-  sql += "SELECT COLUMN_NAME ";
-  sql += "FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE U ";
-  sql += "INNER JOIN INFORMATION_SCHEMA.TABLE_CONSTRAINTS T ";
-  sql += "USING (TABLE_CATALOG, TABLE_SCHEMA, TABLE_NAME, CONSTRAINT_NAME) ";
-  sql += "WHERE T.CONSTRAINT_CATALOG = '" + m_db->databaseName() + "' ";
-  sql +=   "AND U.TABLE_NAME = '" + table + "' ";
-  sql +=   "AND CONSTRAINT_TYPE = 'PRIMARY KEY' ";
-
-  if (!query.exec(sql)) {
-    qDebug() << query.lastError().text();
-    return cols;
-  }
-
-  while (query.next()) {
-    QString column = query.value(0).toString();
+  foreach (QString column, pks) {
     int position = -1;
     for (int i=0; i<cols.size(); i++) {
       if (cols[i].name == column) {
@@ -101,6 +87,36 @@ SqlWrapper::WrapperFeatures PsqlWrapper::features() {
 
 SqlWrapper* PsqlWrapper::newInstance(QSqlDatabase *db) {
   return new PsqlWrapper(db);
+}
+
+QList<QString> PsqlWrapper::primaryKeys(QString table, QString schema) {
+
+  QString sql = "";
+
+  sql += "SELECT COLUMN_NAME ";
+  sql += "FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE U ";
+  sql += "INNER JOIN INFORMATION_SCHEMA.TABLE_CONSTRAINTS T ";
+  sql += "USING (TABLE_CATALOG, TABLE_SCHEMA, TABLE_NAME, CONSTRAINT_NAME) ";
+  sql += "WHERE T.CONSTRAINT_CATALOG = '" + m_db->databaseName() + "' ";
+  if (!schema.isNull()) {
+    sql +=   "AND U.TABLE_SCHEMA = '" + schema + "' ";
+  }
+  sql +=   "AND U.TABLE_NAME = '" + table + "' ";
+  sql +=   "AND CONSTRAINT_TYPE = 'PRIMARY KEY' ";
+
+  QSqlQuery query(*m_db);
+  QList<QString> pks;
+
+  if (!query.exec(sql)) {
+    qDebug() << query.lastError().text();
+    return pks;
+  }
+
+  while (query.next()) {
+    pks << query.value(0).toString();
+  }
+
+  return pks;
 }
 
 void PsqlWrapper::save() {
@@ -395,24 +411,9 @@ SqlTable PsqlWrapper::table(QString t) {
 
   // Récupération des clés primaires
 
-  sql = "";
+  QList<QString> pks = primaryKeys(t, sch);
 
-  sql += "SELECT COLUMN_NAME ";
-  sql += "FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE U ";
-  sql += "INNER JOIN INFORMATION_SCHEMA.TABLE_CONSTRAINTS T ";
-  sql += "USING (TABLE_CATALOG, TABLE_SCHEMA, TABLE_NAME, CONSTRAINT_NAME) ";
-  sql += "WHERE T.CONSTRAINT_CATALOG = '" + m_db->databaseName() + "' ";
-  sql +=   "AND U.TABLE_SCHEMA = '" + sch + "' ";
-  sql +=   "AND U.TABLE_NAME = '" + t + "' ";
-  sql +=   "AND CONSTRAINT_TYPE = 'PRIMARY KEY' ";
-
-  if (!query.exec(sql)) {
-    qDebug() << query.lastError().text();
-    return table;
-  }
-
-  while (query.next()) {
-    QString column = query.value(0).toString();
+  foreach (QString column, pks) {
     int position = -1;
     for (int i=0; i<table.columns.size(); i++) {
       if (table.columns[i].name == column) {
