@@ -44,9 +44,20 @@ public slots:
 private:
   void                closeEvent(QCloseEvent*);
   AbstractTabWidget*  currentTab();
+  void                loadSettings(QSettings* s);
+  void                removeRecentFile(QString file);
   void                saveSettings();
+  void                setupActionMap();
   void                setupConnections();
+  void                setupDbActions();
+  void                setupDialogs();
   void                setupDocks(QSettings *s);
+  void                setupHomepage();
+  void                setupIcons();
+  QToolButton*        setupLogButton(QAction* logAct);
+  void                setupQueriesStatusLabel();
+  void                setupRecentFiles(QSettings* s);
+  void                setupTooltips(QSettings* s);
   void                setupWidgets();
 
   AboutDialog        *aboutDial;
@@ -74,12 +85,12 @@ private slots:
   void previousTab();
   void print();
   void redo();
+  void refreshTabActions();
   void search();
   void selectAll();
   void undo();
   void updateDbActions();
   void upperCase();
-  void userManual();
 };
 
 #endif // MAINWINDOW_H

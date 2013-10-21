@@ -102,11 +102,6 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
-          <property name="url">
-           <url>
-            <string>http://static.dbmaster-project.org/0.9/</string>
-           </url>
-          </property>
          </widget>
         </item>
        </layout>
