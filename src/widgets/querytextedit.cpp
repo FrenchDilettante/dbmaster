@@ -5,6 +5,9 @@
 
 #include "../config.h"
 
+#include <QKeyEvent>
+#include <QScrollBar>
+
 QueryTextEdit::QueryTextEdit(QWidget *parent)
     : QTextEdit(parent)
 {

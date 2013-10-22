@@ -11,6 +11,8 @@
 #include "wrappers/psql/psqlwrapper.h"
 #include "wrappers/sqlite/sqlitewrapper.h"
 
+#include <QMessageBox>
+
 /*
  * PluginManagerPrivate
  */

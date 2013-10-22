@@ -4,6 +4,8 @@
 
 #include "dbdialog.h"
 
+#include <QCompleter>
+#include <QFileInfo>
 #include <QMessageBox>
 
 DbDialog::DbDialog(QWidget *parent)

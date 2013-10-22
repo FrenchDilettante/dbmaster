@@ -1,4 +1,3 @@
-#include <QtGui/QApplication>
 #include "config.h"
 #include "dbmanager.h"
 #include "iconmanager.h"
@@ -8,6 +7,9 @@
 #include "tabwidget/abstracttabwidget.h"
 #include "tools/logger.h"
 #include "widgets/querytextedit.h"
+
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QSplashScreen>
 
 int main(int argc, char *argv[]) {
   QApplication::setApplicationName("dbmaster");
@@ -45,18 +47,14 @@ int main(int argc, char *argv[]) {
     path = transdir.append("/%1.qm").arg(lang);
   translator.load(path);
   a.installTranslator(&translator);
+
+  path = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
+#if defined (Q_WS_WIN)
+  path = QDir::currentPath();
+#endif
   
   QTranslator qtTranslator;
-  qtTranslator.load("qt_" + lang,
-#if defined (Q_WS_X11)
-                    QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-#endif
-#if defined (Q_WS_MAC)
-                    QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-#endif
-#if defined (Q_WS_WIN)
-                    QDir::currentPath());
-#endif
+  qtTranslator.load("qt_" + lang, path);
   a.installTranslator(&qtTranslator);
 
   // Ajout des plugins

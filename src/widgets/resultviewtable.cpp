@@ -3,6 +3,7 @@
 #include <QClipboard>
 #include <QContextMenuEvent>
 #include <QDebug>
+#include <QMimeData>
 
 ResultViewTable::ResultViewTable(QWidget *parent)
   : QTableView(parent) {
