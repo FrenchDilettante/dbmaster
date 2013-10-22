@@ -11,7 +11,7 @@ DbTreeView::DbTreeView(QWidget *parent)
           this, SLOT(on_model_dataChanged(QModelIndex,QModelIndex)));
   setModel(model);
 
-  header()->setResizeMode(0, QHeaderView::Stretch);
+  header()->setSectionResizeMode(0, QHeaderView::Stretch);
 
   connect(this, SIGNAL(expanded(QModelIndex)),
           this, SLOT(onItemExpanded(QModelIndex)));

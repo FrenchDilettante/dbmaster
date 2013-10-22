@@ -14,6 +14,8 @@
 #include "widgets/dbtreeview.h"
 
 #include <QDesktopServices>
+#include <QFileDialog>
+#include <QPrintDialog>
 
 DbDialog     *MainWindow::dbDialog;
 NewDbWizard  *MainWindow::dbWizard;

@@ -8,10 +8,10 @@ PluginDialog::PluginDialog(QWidget *parent)
 
   pluginTree->setModel(PluginManager::model());
 
-  pluginTree->header()->setResizeMode(0, QHeaderView::Stretch);
-  pluginTree->header()->setResizeMode(1, QHeaderView::ResizeToContents);
-  pluginTree->header()->setResizeMode(2, QHeaderView::ResizeToContents);
-  pluginTree->header()->setResizeMode(3, QHeaderView::ResizeToContents);
+  pluginTree->header()->setSectionResizeMode(0, QHeaderView::Stretch);
+  pluginTree->header()->setSectionResizeMode(1, QHeaderView::ResizeToContents);
+  pluginTree->header()->setSectionResizeMode(2, QHeaderView::ResizeToContents);
+  pluginTree->header()->setSectionResizeMode(3, QHeaderView::ResizeToContents);
 }
 
 void PluginDialog::on_configButton_clicked() {

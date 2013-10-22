@@ -4,6 +4,11 @@
 #include "../plugins/exportengine.h"
 #include "../plugins/pluginmanager.h"
 
+#include <QCompleter>
+#include <QDirModel>
+#include <QFileDialog>
+#include <QMessageBox>
+
 ExportWizard::ExportWizard(QAbstractItemModel *model, QWidget *parent)
   : QWizard(parent) {
   setWindowTitle(tr("Export"));

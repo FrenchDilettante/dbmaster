@@ -2,8 +2,11 @@
 
 #include "../iconmanager.h"
 
+#include <QMessageBox>
 #include <QModelIndex>
+#include <QScrollBar>
 #include <QSqlError>
+#include <math.h>
 
 bool ResultView::alternateRows = false;
 QList<ResultView*> ResultView::instances = QList<ResultView*>();

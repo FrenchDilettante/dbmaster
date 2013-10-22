@@ -6,8 +6,10 @@
 #include "ui_ew_firstpage.h"
 #include "ui_ew_exportpage.h"
 
-#include <QtGui>
+#include <QRunnable>
 #include <QSqlQueryModel>
+#include <QtWidgets/QRadioButton>
+#include <QtWidgets/QProgressDialog>
 
 class ExportWizard : public QWizard {
 Q_OBJECT
@@ -47,8 +49,7 @@ private slots:
 };
 
 
-class EwExportPage : public QWizardPage, Ui::EwExportPage, QRunnable
-{
+class EwExportPage : public QWizardPage, Ui::EwExportPage, QRunnable {
 Q_OBJECT
 public:
   EwExportPage(QAbstractItemModel *model, QWizard *parent =0);

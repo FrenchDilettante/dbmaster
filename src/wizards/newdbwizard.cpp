@@ -6,6 +6,9 @@
 #include "../plugins/pluginmanager.h"
 #include "../plugins/sqlwrapper.h"
 
+#include <QCompleter>
+#include <QFileDialog>
+#include <QMessageBox>
 #include <QSqlDatabase>
 
 /*

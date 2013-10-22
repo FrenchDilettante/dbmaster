@@ -7,6 +7,7 @@
 #include <QSqlResult>
 #include <QSqlQuery>
 #include <QSqlQueryModel>
+#include <QStatusBar>
 
 #include "abstracttabwidget.h"
 

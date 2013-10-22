@@ -1,9 +1,10 @@
 #ifndef QUERYTEXTEDIT_H
 #define QUERYTEXTEDIT_H
 
-#include <QtGui>
-
 #include "../sqlhighlighter.h"
+
+#include <QCompleter>
+#include <QStringListModel>
 
 class QueryTextEdit : public QTextEdit {
 Q_OBJECT

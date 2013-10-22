@@ -1,7 +1,7 @@
 #ifndef DBCOMBOBOX_H
 #define DBCOMBOBOX_H
 
-#include <QtGui>
+#include <QtWidgets/QComboBox>
 
 class DbComboBox : public QComboBox {
 Q_OBJECT
