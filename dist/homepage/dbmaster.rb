@@ -1,15 +1,21 @@
 require 'rubygems'
 
 require 'json'
-require "net/http"
+require 'net/http'
 require 'sinatra'
-require "uri"
+require 'uri'
 
 get '/' do
+  @notifyVersion = false
+  unless params[:version].nil?
+    @latestVersion = latest
+    @notifyVersion = (@latestVersion != params[:version])
+  end
+  
   erb :index
 end
 
-get "/latest" do
+def latest
   uri = URI.parse "https://api.github.com/repos/manudwarf/dbmaster/tags"
   http = Net::HTTP.new uri.host, uri.port
   http.use_ssl = true
@@ -18,11 +24,14 @@ get "/latest" do
 
   tagList = JSON.parse response.body
 
-  versionRegex = /v[\d\.]+/
+  versionRegex = /\Av([\d|\.]+)\z/
 
-  tagList.each do |tag|
-    puts versionRegex.match tag["name"]
-  end
+  latest = nil
+  i = 0
+  begin
+    latest = versionRegex.match tagList[i]["name"]
+    i += 1
+  end while latest.nil?
 
-  "yolo"
+  latest[1]
 end

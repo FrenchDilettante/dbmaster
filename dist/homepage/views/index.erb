@@ -51,12 +51,26 @@
       font-size: 23px;
       margin-top: 15px;
     }
+
+    .version-notification {
+      background: #1787d9;
+      color: white;
+      text-align: center;
+    }
+
+    .version-notification a {
+      color: inherit;
+    }
     </style>
 
     <meta charset="utf-8" />
   </head>
 
   <body>
+    <% if @notifyVersion %>
+      <div class="version-notification">Version <a href="http://sourceforge.net/projects/dbmaster/files/DbMaster/"><%= @latestVersion %></a> available.</div>
+    <% end %>
+
     <div id="header">
       <h1><span>Db</span>Master</h1>
 
