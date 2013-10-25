@@ -11,11 +11,9 @@ public:
 
   void initializePage();
   void reload();
-  void setModel(QAbstractItemModel* model) { this->model = model; };
   void updatePreview();
 
 private:
-  QAbstractItemModel* model;
 };
 
 #endif // PLAINTEXTWIZARDPAGE_H

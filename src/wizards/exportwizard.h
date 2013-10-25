@@ -14,12 +14,14 @@
 class ExportWizard : public QWizard {
 Q_OBJECT
 public:
-  ExportWizard(QAbstractItemModel *model, QWidget *parent =0);
+  ExportWizard(QWidget *parent =0);
 
   QAbstractItemModel *model;
 
   ExportEngine *engine() { return m_engine; };
   void setEngine(ExportEngine *e);
+
+  void setModel(QAbstractItemModel* model);
 
 private:
   ExportEngine *m_engine;
@@ -51,7 +53,7 @@ private slots:
 class EwExportPage : public QWizardPage, Ui::EwExportPage, QRunnable {
 Q_OBJECT
 public:
-  EwExportPage(QAbstractItemModel *model, QWizard *parent =0);
+  EwExportPage(QWizard *parent =0);
   //bool isComplete();
   void initializePage();
 
@@ -67,7 +69,6 @@ private slots:
 private:
   QProgressDialog    *dial;
   bool                finished;
-  QAbstractItemModel *model;
 };
 
 #endif // EXPORTWIZARD_H

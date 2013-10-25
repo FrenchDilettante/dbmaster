@@ -1,5 +1,7 @@
 #include "plaintextwizardpage.h"
 
+#include "wizards/exportwizard.h"
+
 PlainTextWizardPage::PlainTextWizardPage()
   : QWizardPage() {
   setupUi(this);
@@ -11,6 +13,8 @@ void PlainTextWizardPage::initializePage() {
 
 void PlainTextWizardPage::reload() {
   columnsTree->clear();
+
+  QAbstractItemModel* model = ((ExportWizard*) wizard())->model;
 
   for (int i=0; i<model->columnCount(); i++) {
     QStringList item;
@@ -24,8 +28,10 @@ void PlainTextWizardPage::reload() {
 }
 
 void PlainTextWizardPage::updatePreview() {
+  /*
   int nb = model->rowCount() < 5 ? model->rowCount() : 5;
   for (int i=0; i<nb; i++) {
     //
   }
+  */
 }
