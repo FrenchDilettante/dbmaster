@@ -13,7 +13,7 @@
     #footer, #header {
       box-sizing: border-box;
       font-family: "Source Code Pro", monospace;
-      padding: 0 125px;
+      padding: 0 0 0 125px;
     }
 
     #footer {
@@ -54,12 +54,18 @@
 
     .version-notification {
       background: #1787d9;
+      border-radius: 2px;
+      box-shadow: 0 2px 0 #75c3fb;
+      box-sizing: border-box;
       color: white;
+      display: block;
+      font-family: sans-serif;
+      font-size: 11pt;
+      margin-left: 40px;
+      padding: 12px 18px;
       text-align: center;
-    }
-
-    .version-notification a {
-      color: inherit;
+      text-decoration: none;
+      width: 200px;
     }
     </style>
 
@@ -67,9 +73,6 @@
   </head>
 
   <body>
-    <% if @notifyVersion %>
-      <div class="version-notification">Version <a href="http://sourceforge.net/projects/dbmaster/files/DbMaster/"><%= @latestVersion %></a> available.</div>
-    <% end %>
 
     <div id="header">
       <h1><span>Db</span>Master</h1>
@@ -77,6 +80,10 @@
       <p class="subtitle">Open-source SQL tool</p>
 
       <a href="https://github.com/manudwarf/dbmaster"><img style="position: absolute; top: 0; right: 0; border: 0;" src="forkme.png" alt="Fork me on GitHub"></a>
+      
+      <% if @notifyVersion %>
+        <a href="http://dbmaster-project.org/download/" class="version-notification">Version <%= @latestVersion %> available</a>
+      <% end %>
     </div>
 
     

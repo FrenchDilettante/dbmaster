@@ -3,6 +3,7 @@ require 'rubygems'
 require 'json'
 require 'net/http'
 require 'sinatra'
+require 'sinatra/memcache'
 require 'uri'
 
 get '/' do
