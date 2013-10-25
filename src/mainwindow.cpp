@@ -83,13 +83,10 @@ void MainWindow::closeEvent(QCloseEvent *event) {
 
   switch(tabsToCloseCount) {
   case 0:
-    event->accept();
     break;
 
   case 1:
-    if (((AbstractTabWidget*) tabWidget->widget(lastUnsavedTab))->confirmClose()) {
-      event->accept();
-    } else {
+    if (!((AbstractTabWidget*) tabWidget->widget(lastUnsavedTab))->confirmClose()) {
       event->ignore();
       return;
     }
@@ -119,6 +116,7 @@ void MainWindow::closeEvent(QCloseEvent *event) {
     }
   }
 
+  saveSettings();
   event->accept();
 }
 
@@ -459,9 +457,6 @@ void MainWindow::saveSettings() {
 
   // on prend le soin de fermer toutes les connexions
   DbManager::instance->closeAll();
-
-  // et d'enregistrer les plugins
-  PluginManager::save();
 }
 
 void MainWindow::saveQuery() {
@@ -719,6 +714,7 @@ void MainWindow::updateDbActions() {
   actionRemoveConnection->setEnabled(select && !dbOpen);
   actionConnect->setEnabled(select && !dbOpen);
   actionDisconnect->setEnabled(select && dbOpen);
+  actionRefreshConnection->setEnabled(select);
 }
 
 void MainWindow::upperCase() {

@@ -13,16 +13,12 @@ ExportWizard::ExportWizard(QAbstractItemModel *model, QWidget *parent)
   : QWizard(parent) {
   setWindowTitle(tr("Export"));
 
-  this->m_model = model;
+  this->model = model;
 
   setWindowIcon(IconManager::get("filesaveas"));
 
   setPage(0, new EwFirstPage(this));
-  setPage(2, new EwExportPage(m_model, this));
-}
-
-QAbstractItemModel* ExportWizard::model() {
-  return m_model;
+  setPage(2, new EwExportPage(this->model, this));
 }
 
 void ExportWizard::setEngine(ExportEngine *e) {
@@ -32,7 +28,7 @@ void ExportWizard::setEngine(ExportEngine *e) {
       removePage(1);
     }
     e->setWizard(this);
-    e->setModel(model());
+    e->setModel(model);
     setPage(1, e->wizardPage());
   }
 }

@@ -35,6 +35,6 @@ protected:
   QWizardPage *m_wizardPage;
 };
 
-Q_DECLARE_INTERFACE(ExportEngine, "dbmaster.ExportEngine/0.8")
+Q_DECLARE_INTERFACE(ExportEngine, "dbmaster.ExportEngine")
 
 #endif // EXPORTENGINE_H

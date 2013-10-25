@@ -44,8 +44,10 @@ void DbTreeView::contextMenuEvent(QContextMenuEvent *event)
   editDbAct->setVisible(false);
   removeDbAct->setVisible(false);
   toggleAct->setVisible(false);
+  refreshAct->setEnabled(false);
 
   if(selectedIndexes().size() == 1) {
+    refreshAct->setEnabled(true);
     QModelIndex index = selectedIndexes()[0];
     if (index.data(Qt::UserRole).canConvert(QVariant::Int)) {
       switch(index.data(Qt::UserRole).toInt()) {
