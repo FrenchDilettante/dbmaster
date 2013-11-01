@@ -1,9 +1,3 @@
-= 0.10 =
-
-== Improvements ==
-
-  * Clear logs button
-
 = 0.9 =
 
 == Highlights ==
@@ -15,6 +9,7 @@
 
   * Code cleanup
   * UI reviewed to be simpler
+  * Clear logs button
 
 = 0.8 =
 
