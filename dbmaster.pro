@@ -4,4 +4,4 @@
 
 TEMPLATE=subdirs
 SUBDIRS=src
-TRANSLATIONS += tr/fr_FR.po
+TRANSLATIONS += tr/fr.po

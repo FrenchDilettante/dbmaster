@@ -28,15 +28,15 @@ int main(int argc, char *argv[]) {
 
   QTranslator translator;
   // getting the current locale
-  QString lang = QLocale::system().name();
-  QString transdir;
+  QString lang = QLocale::system().name().left(2);
+  QString transdir = ".";
 #if defined(Q_WS_X11)
   // for *nix
   transdir = QString(PREFIX).append("/share/dbmaster/tr");
 #endif
 
-#if defined(Q_WS_WIN)
-  transdir = "share/tr";
+#if defined(Q_OS_MAC)
+  transdir = "DbMaster.app/Contents/MacOS";
 #endif
 
   QString path;
@@ -45,6 +45,7 @@ int main(int argc, char *argv[]) {
   path = QString("../../dbmaster/tr/%1.qm").arg(lang);
   if (!QFile::exists(path))
     path = transdir.append("/%1.qm").arg(lang);
+  qDebug() << QString("Loaded %1 translation file").arg(path);
   translator.load(path);
   a.installTranslator(&translator);
 
