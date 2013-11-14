@@ -240,7 +240,7 @@ void ResultView::setQuery(QSqlQueryModel *queryModel) {
   setModel(queryModel);
 }
 
-bool ResultView::setTable(QString table, QSqlDatabase *db) {
+void ResultView::setTable(QString table, QSqlDatabase *db) {
   setMode(TableMode);
   this->table->resetColumnSizes();
 
@@ -248,16 +248,15 @@ bool ResultView::setTable(QString table, QSqlDatabase *db) {
   m->setTable(table);
   m->setEditStrategy(QSqlTableModel::OnManualSubmit);
   m->select();
-  if(m->lastError().type() == QSqlError::NoError)   {
+  if (m->lastError().type() == QSqlError::NoError) {
     setModel(m);
-    return true;
+    emit structureChanged();
   } else {
     QMessageBox::critical(this,
                           tr("Error"),
                           tr("Unable to open the table. Returned error :\n%1")
                           .arg(m->lastError().text()),
                           QMessageBox::Ok);
-    return false;
   }
 }
 /*

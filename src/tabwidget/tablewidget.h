@@ -1,9 +1,6 @@
 #ifndef TABLEWIDGET_H
 #define TABLEWIDGET_H
 
-#include <QtGui>
-#include <QtSql>
-
 #include "abstracttabwidget.h"
 #include "ui_tablewidget.h"
 
@@ -21,12 +18,15 @@ public:
   void      setTable( QString, QSqlDatabase* );
   QString   table();
 
-protected:
+private:
   void      setupWidgets();
 
   QSqlDatabase *m_db;
   QString m_table;
   QSqlTableModel *model;
+
+private slots:
+  void refreshStructure();
 };
 
 #endif // TABLEWIDGET_H

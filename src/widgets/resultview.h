@@ -14,11 +14,6 @@
 #include <QStandardItemModel>
 #include <QWidget>
 
-/**
- * Fournit un paliatif à QTableView en ajoutant une pagination, un menu
- * contextuel pour l'export et l'ajout/suppression de lignes dans les tables.
- * Prend en charge les jetons de requête et les tables.
- */
 class ResultView : public QWidget, Ui::ResultView {
 Q_OBJECT
 public:
@@ -34,8 +29,7 @@ public:
   ~ResultView();
 
   void setQuery(QSqlQueryModel *queryModel);
-  bool setTable(QString table, QSqlDatabase *db);
-  // void setToken(QueryToken *token);
+  void setTable(QString table, QSqlDatabase *db);
 
   Mode mode()           { return m_mode;    };
   void setMode(Mode m);
@@ -44,6 +38,7 @@ public:
 
 signals:
   void reloadRequested();
+  void structureChanged();
 
 public slots:
   void resizeColumnsToContents();
