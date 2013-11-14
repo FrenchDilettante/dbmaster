@@ -2,6 +2,7 @@
 #define TABLEWIDGET_H
 
 #include "abstracttabwidget.h"
+#include "resultview/tabledataprovider.h"
 #include "ui_tablewidget.h"
 
 class TableWidget: public AbstractTabWidget, Ui::TableWidget {
@@ -22,6 +23,7 @@ private:
   void      setupWidgets();
 
   QSqlDatabase *m_db;
+  TableDataProvider* dataProvider;
   QString m_table;
   QSqlTableModel *model;
 

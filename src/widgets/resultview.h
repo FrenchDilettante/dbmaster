@@ -2,6 +2,7 @@
 #define RESULTVIEW_H
 
 #include "../dialogs/blobdialog.h"
+#include "../resultview/dataprovider.h"
 #include "../wizards/exportwizard.h"
 #include "ui_resultview.h"
 
@@ -17,9 +18,11 @@
 class ResultView : public QWidget, Ui::ResultView {
 Q_OBJECT
 public:
+  /*
   enum Mode {
     QueryMode, TableMode
   };
+  */
 
   enum Action {
     Browse, Update, Insert
@@ -28,6 +31,9 @@ public:
   ResultView(QWidget *parent=0);
   ~ResultView();
 
+  void setDataProvider(DataProvider* dataProvider);
+
+  /*
   void setQuery(QSqlQueryModel *queryModel);
   void setTable(QString table, QSqlDatabase *db);
 
@@ -35,12 +41,14 @@ public:
   void setMode(Mode m);
 
   Q_PROPERTY(Mode mode READ mode WRITE setMode)
+  */
 
 signals:
   void reloadRequested();
   void structureChanged();
 
 public slots:
+  void reload();
   void resizeColumnsToContents();
   void resizeRowsToContents();
   void setAlternatingRowColors(bool enable, bool loop =true);
@@ -51,17 +59,18 @@ public slots:
   void sort(int col);
 
 private:
-  void setModel(QSqlQueryModel *model);
+  // void setModel(QSqlQueryModel *model);
   void setupConnections();
 
   Action                currentAction;
   QPair<int, Qt::SortOrder> currentSorting;
+  DataProvider* dataProvider;
   ExportWizard         *exportWizard;
   QMap<int, QSqlRecord> modifiedRecords;
   int                   lastEditedRow;
   QStandardItemModel   *shortModel;
-  Mode                  m_mode;
-  QSqlQueryModel       *model;
+  // Mode                  m_mode;
+  // QSqlQueryModel       *model;
 
   int                   offset;
 

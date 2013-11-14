@@ -431,7 +431,7 @@ void QueryEditorWidget::validateQuery() {
 
   switch(query.lastError().type()) {
   case QSqlError::NoError:
-    tabView->setQuery(model);
+    // tabView->setQuery(model);
     tabView->setVisible(true);
     resultButton->setEnabled(true);
     resultButton->setChecked(true);
