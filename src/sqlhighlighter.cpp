@@ -2,6 +2,8 @@
 
 #include "config.h"
 
+#include <QFile>
+
 QVector<SqlHighlighter::HighlightRule>
                         SqlHighlighter::highlightingRules;
 QStringList             SqlHighlighter::basicSqlKeywords;

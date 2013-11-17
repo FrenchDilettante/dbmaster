@@ -2,8 +2,11 @@
 
 #include "../iconmanager.h"
 
+#include <QMessageBox>
 #include <QModelIndex>
+#include <QScrollBar>
 #include <QSqlError>
+#include <math.h>
 
 bool ResultView::alternateRows = false;
 QList<ResultView*> ResultView::instances = QList<ResultView*>();
@@ -14,6 +17,8 @@ ResultView::ResultView(QWidget *parent)
   // Sincèrement, un jour, il faudra se poser la question de l'utilité de la
   // ligne suivante :
   table->setModel(0);
+
+  exportWizard = new ExportWizard(this);
 
   // Par défaut, on visualise
   currentAction = Browse;
@@ -74,21 +79,15 @@ void ResultView::apply() {
   updateView();
 }
 
-void ResultView::exportContent()
-{
+void ResultView::exportContent() {
   if (model == 0)
     return;
 
-  if (model->columnCount() == 0 || model->rowCount() == 0)
+  if (model->columnCount() == 0 || model->rowCount() == 0) {
     return;
-
-//  exportWizard = new ExportWizard(model, this);
-  if (m_mode == TableMode) {
-    exportWizard = new ExportWizard(model, this);
-  } else {
-    // exportWizard = new ExportWizard(m_token, this);
   }
 
+  exportWizard->setModel(model);
   exportWizard->exec();
 }
 

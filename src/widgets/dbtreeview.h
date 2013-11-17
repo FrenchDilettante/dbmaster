@@ -4,8 +4,7 @@
 #include "../dialogs/dbdialog.h"
 #include "../wizards/newdbwizard.h"
 
-#include <QtGui>
-#include <QtSql>
+#include <QtWidgets/QTreeView>
 
 class DbTreeView : public QTreeView {
 Q_OBJECT

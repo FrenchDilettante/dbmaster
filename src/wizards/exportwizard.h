@@ -6,19 +6,22 @@
 #include "ui_ew_firstpage.h"
 #include "ui_ew_exportpage.h"
 
-#include <QtGui>
+#include <QRunnable>
 #include <QSqlQueryModel>
+#include <QtWidgets/QRadioButton>
+#include <QtWidgets/QProgressDialog>
 
 class ExportWizard : public QWizard {
 Q_OBJECT
 public:
-  ExportWizard(QAbstractItemModel *m_model, QWidget *parent =0);
+  ExportWizard(QWidget *parent =0);
 
-  QAbstractItemModel *m_model;
+  QAbstractItemModel *model;
 
   ExportEngine *engine() { return m_engine; };
-  QAbstractItemModel *model();
   void setEngine(ExportEngine *e);
+
+  void setModel(QAbstractItemModel* model);
 
 private:
   ExportEngine *m_engine;
@@ -47,11 +50,10 @@ private slots:
 };
 
 
-class EwExportPage : public QWizardPage, Ui::EwExportPage, QRunnable
-{
+class EwExportPage : public QWizardPage, Ui::EwExportPage, QRunnable {
 Q_OBJECT
 public:
-  EwExportPage(QAbstractItemModel *model, QWizard *parent =0);
+  EwExportPage(QWizard *parent =0);
   //bool isComplete();
   void initializePage();
 
@@ -67,7 +69,6 @@ private slots:
 private:
   QProgressDialog    *dial;
   bool                finished;
-  QAbstractItemModel *model;
 };
 
 #endif // EXPORTWIZARD_H

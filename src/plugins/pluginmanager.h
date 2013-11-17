@@ -18,7 +18,6 @@ public:
   void          add(QString path);
   SqlWrapper*   availableWrapper(QString driver);
   QList<ExportEngine*> exportEngines();
-  QObject*      load(QFileInfo path);
   QObject*      plugin(QString plid);
   void          registerPlugin(QObject *toPlugin);
   SqlWrapper*   wrapper(QString plid);
@@ -29,10 +28,8 @@ public:
 
 public slots:
   void init();
-  void save();
 
 private:
-  QList<QFileInfo> loadFolder(QDir dir, QStringList filter, bool recursive = false);
   QStandardItemModel             *m_model;
   QList<QObject*>                 m_plugins;
   QMap<QObject*, QStandardItem*>  pluginsMap;
@@ -45,10 +42,7 @@ public:
   static void init();
   static QStandardItemModel *model()    { return instance->model();   };
   static Plugin *plugin(QString plid);
-  static QString pluginDirectory();
   static QObject* pluginObject(QString plid);
-  static void registerPlugin(QObject *p);
-  static void save();
   static SqlWrapper *wrapper(QString plid);
   static QList<SqlWrapper*> wrappers();
 

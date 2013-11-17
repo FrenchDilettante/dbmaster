@@ -24,7 +24,7 @@ void CsvExportEngine::process(QFile *f) {
       columns << model->headerData( i, Qt::Horizontal ).toString()
                   .prepend( del ).append( del );
 
-    f->write(columns.join(sep).append(sep).toAscii());
+    f->write(columns.join(sep).append(sep).toLatin1());
     f->write("\n");
   }
 
@@ -45,7 +45,7 @@ void CsvExportEngine::process(QFile *f) {
       idx = model->index(y, x);
       if (idx.data().canConvert(QVariant::String)) {
         QString data = idx.data().toString().replace(del, escape);
-        f->write(data.prepend(del).append(del + sep).toAscii());
+        f->write(data.prepend(del).append(del + sep).toLatin1());
       }
     }
     f->write("\n");

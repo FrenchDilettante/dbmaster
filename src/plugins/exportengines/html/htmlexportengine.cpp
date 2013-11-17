@@ -27,7 +27,7 @@ void HtmlExportEngine::process(QFile *f) {
   f->write("<tr>");
   for(int i=0; i<model->columnCount(); i++) {
     f->write(model->headerData(i, Qt::Horizontal).toString()
-            .prepend("<th>").append("</th>").toAscii());
+            .prepend("<th>").append("</th>").toLatin1());
   }
 
   f->write("</tr>\n");
@@ -43,7 +43,7 @@ void HtmlExportEngine::process(QFile *f) {
       if(idx.data().canConvert(QVariant::String))
         f->write(idx.data().toString()
                 .prepend("<td>").append("</td>")
-                .toAscii());
+                .toLatin1());
     }
     f->write("</tr>\n");
 

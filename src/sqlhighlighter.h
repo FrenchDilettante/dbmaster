@@ -1,7 +1,8 @@
 #ifndef SQLHIGHLIGHTER_H
 #define SQLHIGHLIGHTER_H
 
-#include <QtGui>
+#include <QSyntaxHighlighter>
+#include <QtWidgets/QTextEdit>
 
 /**
  * Syntax highlighting

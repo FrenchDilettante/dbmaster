@@ -4,20 +4,19 @@
 #include "../plugins/exportengine.h"
 #include "../plugins/pluginmanager.h"
 
-ExportWizard::ExportWizard(QAbstractItemModel *model, QWidget *parent)
+#include <QCompleter>
+#include <QDirModel>
+#include <QFileDialog>
+#include <QMessageBox>
+
+ExportWizard::ExportWizard(QWidget *parent)
   : QWizard(parent) {
   setWindowTitle(tr("Export"));
-
-  this->m_model = model;
 
   setWindowIcon(IconManager::get("filesaveas"));
 
   setPage(0, new EwFirstPage(this));
-  setPage(2, new EwExportPage(m_model, this));
-}
-
-QAbstractItemModel* ExportWizard::model() {
-  return m_model;
+  setPage(2, new EwExportPage(this));
 }
 
 void ExportWizard::setEngine(ExportEngine *e) {
@@ -27,9 +26,13 @@ void ExportWizard::setEngine(ExportEngine *e) {
       removePage(1);
     }
     e->setWizard(this);
-    e->setModel(model());
+    e->setModel(model);
     setPage(1, e->wizardPage());
   }
+}
+
+void ExportWizard::setModel(QAbstractItemModel *model) {
+  this->model = model;
 }
 
 /**
@@ -159,14 +162,12 @@ bool EwFirstPage::validatePage() {
 /**
  * Export page
  */
-EwExportPage::EwExportPage(QAbstractItemModel *model, QWizard *parent)
+EwExportPage::EwExportPage(QWizard *parent)
   : QWizardPage(parent) {
   setupUi(this);
 
   dial = new QProgressDialog(this);
   dial->setWindowTitle(tr("Export running..."));
-
-  this->model = model;
 }
 
 void EwExportPage::checkProgress() {
@@ -177,7 +178,7 @@ void EwExportPage::checkProgress() {
 
 void EwExportPage::initializePage() {
   finished = false;
-  dial->setMaximum(model->rowCount()-1);
+  dial->setMaximum(((ExportWizard*) wizard())->model->rowCount()-1);
   connect(this, SIGNAL(progress(int)), dial, SLOT(setValue(int)));
   QTimer::singleShot(1000, this, SLOT(checkProgress()));
   run();

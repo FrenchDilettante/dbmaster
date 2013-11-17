@@ -32,13 +32,16 @@ public:
   Q_DECLARE_FLAGS(Actions, Action)
 
   AbstractTabWidget(QWidget *parent =0);
+  QString displayTitle();
+
+  static QDir       lastDir;
+
   virtual Actions   availableActions(){ return 0x0; };
   virtual bool      confirmClose()    { return true; };
   virtual int       confirmCloseAll() { return QMessageBox::Save; };
   virtual QIcon     icon()            { return QIcon(); };
   virtual QString   id()              { return QString::null; };
   virtual bool      isSaved()         { return true; };
-  static QDir       lastDir;
   virtual void      print()           {};
   virtual QPrinter *printer()         { return NULL; };
   virtual QTextEdit* textEdit()       { return NULL; };

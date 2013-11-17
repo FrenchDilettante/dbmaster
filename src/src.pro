@@ -2,7 +2,7 @@
 # Project created by QtCreator 2009-06-01T16:44:04
 # -------------------------------------------------
 
-QT += sql webkit
+QT += printsupport sql widgets webkitwidgets
 TARGET = dbmaster
 TEMPLATE = app
 SOURCES += main.cpp \

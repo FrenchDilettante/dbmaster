@@ -11,7 +11,7 @@ DbTreeView::DbTreeView(QWidget *parent)
           this, SLOT(on_model_dataChanged(QModelIndex,QModelIndex)));
   setModel(model);
 
-  header()->setResizeMode(0, QHeaderView::Stretch);
+  header()->setSectionResizeMode(0, QHeaderView::Stretch);
 
   connect(this, SIGNAL(expanded(QModelIndex)),
           this, SLOT(onItemExpanded(QModelIndex)));
@@ -44,8 +44,10 @@ void DbTreeView::contextMenuEvent(QContextMenuEvent *event)
   editDbAct->setVisible(false);
   removeDbAct->setVisible(false);
   toggleAct->setVisible(false);
+  refreshAct->setEnabled(false);
 
   if(selectedIndexes().size() == 1) {
+    refreshAct->setEnabled(true);
     QModelIndex index = selectedIndexes()[0];
     if (index.data(Qt::UserRole).canConvert(QVariant::Int)) {
       switch(index.data(Qt::UserRole).toInt()) {

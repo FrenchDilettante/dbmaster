@@ -7,6 +7,7 @@
 
 #include "queryeditorwidget.h"
 
+#include <QFileDialog>
 #include <QSqlQuery>
 
 QueryEditorWidget::QueryEditorWidget(QWidget *parent)

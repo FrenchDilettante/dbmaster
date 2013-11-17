@@ -86,11 +86,11 @@ void TableWidget::setTable( QString table, QSqlDatabase *db )
 }
 
 void TableWidget::setupWidgets() {
-  columnsTree->header()->setResizeMode(0, QHeaderView::ResizeToContents);
-  columnsTree->header()->setResizeMode(1, QHeaderView::ResizeToContents);
-  columnsTree->header()->setResizeMode(2, QHeaderView::ResizeToContents);
-  columnsTree->header()->setResizeMode(3, QHeaderView::ResizeToContents);
-  columnsTree->header()->setResizeMode(4, QHeaderView::Stretch);
+  columnsTree->header()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
+  columnsTree->header()->setSectionResizeMode(1, QHeaderView::ResizeToContents);
+  columnsTree->header()->setSectionResizeMode(2, QHeaderView::ResizeToContents);
+  columnsTree->header()->setSectionResizeMode(3, QHeaderView::ResizeToContents);
+  columnsTree->header()->setSectionResizeMode(4, QHeaderView::Stretch);
 
   connect(tableView, SIGNAL(reloadRequested()), this, SLOT(reload()));
 }

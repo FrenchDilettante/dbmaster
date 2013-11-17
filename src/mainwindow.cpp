@@ -14,6 +14,8 @@
 #include "widgets/dbtreeview.h"
 
 #include <QDesktopServices>
+#include <QFileDialog>
+#include <QPrintDialog>
 
 DbDialog     *MainWindow::dbDialog;
 NewDbWizard  *MainWindow::dbWizard;
@@ -42,9 +44,7 @@ MainWindow::~MainWindow() {
  * Add the filename in the Recent files menu action
  */
 void MainWindow::addRecentFile(QString file) {
-  if (recentFiles.indexOf(file) >= 0) {
-    recentFiles.removeAt(recentFiles.indexOf(file));
-  }
+  removeRecentFile(file);
 
   recentFiles.insert(0, file);
   while (recentFiles.size() > 10) {
@@ -83,13 +83,10 @@ void MainWindow::closeEvent(QCloseEvent *event) {
 
   switch(tabsToCloseCount) {
   case 0:
-    event->accept();
     break;
 
   case 1:
-    if (((AbstractTabWidget*) tabWidget->widget(lastUnsavedTab))->confirmClose()) {
-      event->accept();
-    } else {
+    if (!((AbstractTabWidget*) tabWidget->widget(lastUnsavedTab))->confirmClose()) {
       event->ignore();
       return;
     }
@@ -119,6 +116,7 @@ void MainWindow::closeEvent(QCloseEvent *event) {
     }
   }
 
+  saveSettings();
   event->accept();
 }
 
@@ -181,6 +179,18 @@ AbstractTabWidget* MainWindow::currentTab() {
 void MainWindow::cut() {
   if(currentTab() != 0)
     currentTab()->cut();
+}
+
+void MainWindow::loadSettings(QSettings *s) {
+  if (s->contains("size")) {
+    resize(s->value("size").toSize());
+  }
+  if (s->contains("position")) {
+    move(s->value("position").toPoint());
+  }
+  if (s->value("maximized", false).toBool()) {
+    setWindowState(Qt::WindowMaximized);
+  }
 }
 
 void MainWindow::lowerCase() {
@@ -368,14 +378,13 @@ void MainWindow::refreshTab() {
   AbstractTabWidget *tab = dynamic_cast<AbstractTabWidget*>(sender());
 
   if (tab) {
-    QString text = tab->title();
-    if (!tab->isSaved()) {
-      text.prepend("* ");
-    }
-    tabWidget->setTabText(tabWidget->indexOf(tab), text);
+    tabWidget->setTabText(tabWidget->indexOf(tab), tab->displayTitle());
   }
 
-  // toolbar's actions
+  refreshTabActions();
+}
+
+void MainWindow::refreshTabActions() {
   if (currentTab()) {
     AbstractTabWidget::Actions acts;
     acts = currentTab()->availableActions();
@@ -395,10 +404,11 @@ void MainWindow::refreshRecent() {
 
   if (recentFiles.size() == 0) {
     actionClearRecent->setText(tr("No recent file"));
+    actionClearRecent->setEnabled(false);
   } else {
     actionClearRecent->setText(tr("Clear"));
+    actionClearRecent->setEnabled(true);
   }
-  actionClearRecent->setEnabled(!recentFiles.size() == 0);
 }
 
 void MainWindow::reloadDbList() {
@@ -407,6 +417,12 @@ void MainWindow::reloadDbList() {
   }
 
   updateDbActions();
+}
+
+void MainWindow::removeRecentFile(QString file) {
+  if (recentFiles.indexOf(file) >= 0) {
+    recentFiles.removeAt(recentFiles.indexOf(file));
+  }
 }
 
 void MainWindow::saveSettings() {
@@ -441,9 +457,6 @@ void MainWindow::saveSettings() {
 
   // on prend le soin de fermer toutes les connexions
   DbManager::instance->closeAll();
-
-  // et d'enregistrer les plugins
-  PluginManager::save();
 }
 
 void MainWindow::saveQuery() {
@@ -466,6 +479,21 @@ void MainWindow::search() {
 void MainWindow::selectAll() {
   if(currentTab() != 0)
     currentTab()->selectAll();
+}
+
+void MainWindow::setupActionMap() {
+  actionMap[AbstractTabWidget::CaseLower]   = actionLowerCase;
+  actionMap[AbstractTabWidget::CaseUpper]   = actionUpperCase;
+  actionMap[AbstractTabWidget::Copy]        = actionCopy;
+  actionMap[AbstractTabWidget::Cut]         = actionCut;
+  actionMap[AbstractTabWidget::Paste]       = actionPaste;
+  actionMap[AbstractTabWidget::Print]       = actionPrint;
+  actionMap[AbstractTabWidget::Redo]        = actionRedo;
+  actionMap[AbstractTabWidget::Save]        = actionSaveQuery;
+  actionMap[AbstractTabWidget::SaveAs]      = actionSaveQueryAs;
+  actionMap[AbstractTabWidget::Search]      = actionSearch;
+  actionMap[AbstractTabWidget::SelectAll]   = actionSelect_all;
+  actionMap[AbstractTabWidget::Undo]        = actionUndo;
 }
 
 void MainWindow::setupConnections() {
@@ -534,7 +562,34 @@ void MainWindow::setupConnections() {
   connect(homepageView, SIGNAL(linkClicked(QUrl)), this, SLOT(openHomepageLink(QUrl)));
 }
 
+void MainWindow::setupDialogs() {
+  aboutDial     = new AboutDialog(this);
+  confDial      = new ConfigDialog(this);
+  searchDialog  = new SearchDialog(this);
+  //printDialog = new QPrintDialog(this);
+}
+
+void MainWindow::setupDbActions() {
+  addConnectionButton->setDefaultAction(actionAddDb);
+  editConnectionButton->setDefaultAction(actionEditConnection);
+  removeConnectionButton->setDefaultAction(actionRemoveConnection);
+  connectBtn->setDefaultAction(actionConnect);
+  disconnectBtn->setDefaultAction(actionDisconnect);
+  refreshConnectionDb->setDefaultAction(actionRefreshConnection);
+}
+
 void MainWindow::setupDocks(QSettings *s) {
+  addDockWidget((Qt::DockWidgetArea) s->value("maindock_area", 1).toInt(),
+                dockWidget);
+  dockWidget->setFloating(s->value("maindock_floating", false).toBool());
+  dockWidget->move(s->value("maindock_position").toPoint());
+
+  if (s->contains("maindock_size")) {
+    dockWidget->resize(s->value("maindock_size").toSize());
+  }
+
+  dockWidget->setVisible(s->value("maindock_visible", true).toBool());
+
   // Console dock
   logDock->setVisible(false);
   QAction *logAct = logDock->toggleViewAction();
@@ -545,90 +600,16 @@ void MainWindow::setupDocks(QSettings *s) {
   f.setStyleHint(QFont::TypeWriter);
   logBrowser->setFont(f);
 
-  QToolButton *logBtn = new QToolButton(this);
-  logBtn->setAutoRaise(true);
-  logBtn->setDefaultAction(logAct);
-  logBtn->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
-  logBtn->setIconSize(QSize(16, 16));
-
-  QMainWindow::statusBar()->addWidget(logBtn);
+  QToolButton* logButton = setupLogButton(logAct);
+  QMainWindow::statusBar()->addWidget(logButton);
 }
 
-void MainWindow::setupWidgets() {
-  aboutDial     = new AboutDialog(this);
-  confDial      = new ConfigDialog(this);
-  searchDialog  = new SearchDialog(this);
-  //printDialog = new QPrintDialog(this);
-
-  QAction *a;
-  recentActions.clear();
-  for (int i=0; i<10; i++) {
-    a = new QAction(this);
-    a->setVisible(false);
-    connect(a, SIGNAL(triggered()), this, SLOT(openRecent()));
-    recentActions << a;
-  }
-  menuRecent_files->addActions(recentActions);
-  menuRecent_files->addSeparator();
-  menuRecent_files->addAction(actionClearRecent);
-
-  actionMap[AbstractTabWidget::CaseLower]   = actionLowerCase;
-  actionMap[AbstractTabWidget::CaseUpper]   = actionUpperCase;
-  actionMap[AbstractTabWidget::Copy]        = actionCopy;
-  actionMap[AbstractTabWidget::Cut]         = actionCut;
-  actionMap[AbstractTabWidget::Paste]       = actionPaste;
-  actionMap[AbstractTabWidget::Print]       = actionPrint;
-  actionMap[AbstractTabWidget::Redo]        = actionRedo;
-  actionMap[AbstractTabWidget::Save]        = actionSaveQuery;
-  actionMap[AbstractTabWidget::SaveAs]      = actionSaveQueryAs;
-  actionMap[AbstractTabWidget::Search]      = actionSearch;
-  actionMap[AbstractTabWidget::SelectAll]   = actionSelect_all;
-  actionMap[AbstractTabWidget::Undo]        = actionUndo;
-
-  QSettings s;
-  s.beginGroup("mainwindow");
-  if (s.contains("size")) {
-    resize(s.value("size").toSize());
-  }
-  if (s.contains("position")) {
-    move(s.value("position").toPoint());
-  }
-  if (s.value("maximized", false).toBool()) {
-    setWindowState(Qt::WindowMaximized);
-  }
-
-  addDockWidget((Qt::DockWidgetArea) s.value("maindock_area", 1).toInt(),
-                dockWidget);
-  dockWidget->setFloating(s.value("maindock_floating", false).toBool());
-  dockWidget->move(s.value("maindock_position").toPoint());
-
-  if (s.contains("maindock_size")) {
-    dockWidget->resize(s.value("maindock_size").toSize());
-  }
-
-  dockWidget->setVisible(s.value("maindock_visible", true).toBool());
-
-  setupDocks(&s);
-
-  queriesStatusLabel = new QLabel("", this);
-  QMainWindow::statusBar()->addPermanentWidget(queriesStatusLabel);
-
-  tooltipButton->setChecked(s.value("tooltips", true).toBool());
-  tooltipFrame->setVisible(s.value("tooltips", true).toBool());
-  s.endGroup();
-
-  int count = s.beginReadArray("recentfiles");
-  recentFiles.clear();
-  for (int i=0; i<count && i<10; i++) {
-    s.setArrayIndex(i);
-    recentFiles << s.value("entry").toString();
-  }
-  s.endArray();
-  refreshRecent();
-
+void MainWindow::setupHomepage() {
+  homepageView->setUrl(QUrl("http://static.dbmaster-project.org/0.9/"));
   homepageView->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
+}
 
-  // loading icons from current theme
+void MainWindow::setupIcons() {
   actionAddDb->setIcon(         IconManager::get("database_add"));
   actionConnect->setIcon(       IconManager::get("database_go"));
   actionCopy->setIcon(          IconManager::get("edit-copy"));
@@ -649,13 +630,70 @@ void MainWindow::setupWidgets() {
   clearLogsButton->setIcon(     IconManager::get("edit-clear"));
   tooltipButton->setIcon(       IconManager::get("help-faq"));
   tabWidget->setTabIcon(0,      IconManager::get("go-home"));
+}
 
-  addConnectionButton->setDefaultAction(actionAddDb);
-  editConnectionButton->setDefaultAction(actionEditConnection);
-  removeConnectionButton->setDefaultAction(actionRemoveConnection);
-  connectBtn->setDefaultAction(actionConnect);
-  disconnectBtn->setDefaultAction(actionDisconnect);
-  refreshConnectionDb->setDefaultAction(actionRefreshConnection);
+QToolButton* MainWindow::setupLogButton(QAction *logAct) {
+  QToolButton *logButton = new QToolButton(this);
+  logButton->setAutoRaise(true);
+  logButton->setDefaultAction(logAct);
+  logButton->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+  logButton->setIconSize(QSize(16, 16));
+  return logButton;
+}
+
+void MainWindow::setupQueriesStatusLabel() {
+  queriesStatusLabel = new QLabel("", this);
+  QMainWindow::statusBar()->addPermanentWidget(queriesStatusLabel);
+}
+
+void MainWindow::setupRecentFiles(QSettings *s) {
+  QAction *a;
+  recentActions.clear();
+  for (int i=0; i<10; i++) {
+    a = new QAction(this);
+    a->setVisible(false);
+    connect(a, SIGNAL(triggered()), this, SLOT(openRecent()));
+    recentActions << a;
+  }
+  menuRecent_files->addActions(recentActions);
+  menuRecent_files->addSeparator();
+  menuRecent_files->addAction(actionClearRecent);
+
+  int count = s->beginReadArray("recentfiles");
+  recentFiles.clear();
+  for (int i=0; i<count && i<10; i++) {
+    s->setArrayIndex(i);
+    recentFiles << s->value("entry").toString();
+  }
+  s->endArray();
+
+  refreshRecent();
+}
+
+void MainWindow::setupTooltips(QSettings *s) {
+  tooltipButton->setChecked(s->value("tooltips", true).toBool());
+  tooltipFrame->setVisible(s->value("tooltips", true).toBool());
+}
+
+void MainWindow::setupWidgets() {
+  setupActionMap();
+  setupDialogs();
+
+  QSettings s;
+  s.beginGroup("mainwindow");
+
+  loadSettings(&s);
+  setupDocks(&s);
+  setupTooltips(&s);
+
+  s.endGroup();
+
+  setupRecentFiles(&s);
+
+  setupDbActions();
+  setupHomepage();
+  setupIcons();
+  setupQueriesStatusLabel();
 }
 
 void MainWindow::toggleLeftPanel() {
@@ -676,25 +714,11 @@ void MainWindow::updateDbActions() {
   actionRemoveConnection->setEnabled(select && !dbOpen);
   actionConnect->setEnabled(select && !dbOpen);
   actionDisconnect->setEnabled(select && dbOpen);
+  actionRefreshConnection->setEnabled(select);
 }
 
 void MainWindow::upperCase() {
   if (currentTab() != 0) {
     currentTab()->upperCase();
   }
-}
-
-/**
- * Ouvre la doc. utilisateur
- */
-void MainWindow::userManual() {
-  QString url = "";
-#if defined(Q_WS_X11)
-  QString lang = QLocale::system().name().left(2).toLower();
-  url = QString("share/doc/%1/index.html").arg(lang);
-
-  if(!QFile::exists(url))
-    url = QString(QString(PREFIX) + "/share/en/index.html");
-#endif
-  QDesktopServices::openUrl(url);
 }
