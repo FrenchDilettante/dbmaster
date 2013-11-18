@@ -2,6 +2,7 @@
 
 #include "../iconmanager.h"
 
+#include <QDebug>
 #include <QMessageBox>
 #include <QModelIndex>
 #include <QScrollBar>
@@ -196,8 +197,9 @@ void ResultView::setAlternatingRowColors(bool enable, bool loop) {
   }
 }
 
-void ResultView::setDataProvider(DataProvider *dataProvider) {
+void ResultView::setDataProvider(DataProvider* dataProvider) {
   this->dataProvider = dataProvider;
+  /*
 
   offset = 0;
 
@@ -211,6 +213,7 @@ void ResultView::setDataProvider(DataProvider *dataProvider) {
 
   table->resetColumnSizes();
   updateView();
+  */
 }
 
 /*

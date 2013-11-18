@@ -12,14 +12,17 @@
 
 QueryEditorWidget::QueryEditorWidget(QWidget *parent)
   : AbstractTabWidget(parent) {
+  dataProvider = new QueryDataProvider(this);
+  tabView->setDataProvider(dataProvider);
+  model = new QSqlQueryModel(this);
+  shortModel = new QStandardItemModel(this);
+
   setupUi(this);
   setupWidgets();
   setupConnections();
 
-  setAutoDelete(false);
+  // setAutoDelete(false);
 
-  model       = new QSqlQueryModel(this);
-  shortModel  = new QStandardItemModel(this);
   // watcher     = new QFileSystemWatcher(this);
 }
 
@@ -126,6 +129,10 @@ void QueryEditorWidget::copy() {
   editor->copy();
 }
 
+QSqlDatabase* QueryEditorWidget::currentDb() {
+  return DbManager::instance->getDatabase(dbChooser->currentIndex());
+}
+
 void QueryEditorWidget::cut() {
   editor->cut();
 }
@@ -211,7 +218,7 @@ void QueryEditorWidget::refresh() {
 }
 
 void QueryEditorWidget::reload() {
-  run();
+  tabView->reload();
 }
 
 /**
@@ -249,6 +256,16 @@ void QueryEditorWidget::reloadFile() {
   emit fileChanged(filePath);
 }
 
+QString QueryEditorWidget::queryText() {
+  QString qtext = editor->textCursor().selectedText();
+  if (qtext.isEmpty()) {
+    qtext = editor->toPlainText();
+  }
+
+  return qtext;
+}
+
+/*
 void QueryEditorWidget::run() {
   QString qtext = editor->textCursor().selectedText();
   if (qtext.isEmpty()) {
@@ -262,6 +279,7 @@ void QueryEditorWidget::run() {
 
   emit queryFinished();
 }
+*/
 
 /**
  * @returns false in case of error
@@ -345,7 +363,7 @@ void QueryEditorWidget::setupConnections() {
   connect(editor->document(), SIGNAL(modificationChanged(bool)),
           this, SIGNAL(modificationChanged(bool)));
 
-  connect(this, SIGNAL(queryFinished()),
+  connect(dataProvider, SIGNAL(complete()),
           this, SLOT(validateQuery()));
 
   // connect(watcher, SIGNAL(fileChanged(QString)),
@@ -392,7 +410,8 @@ void QueryEditorWidget::start() {
 
   statusBar->showMessage(tr("Running..."));
 
-  QThreadPool::globalInstance()->start(this);
+  dataProvider->setQuery(queryText(), *currentDb());
+  tabView->reload();
 }
 
 QString QueryEditorWidget::title() {

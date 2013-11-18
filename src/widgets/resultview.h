@@ -64,7 +64,7 @@ private:
 
   Action                currentAction;
   QPair<int, Qt::SortOrder> currentSorting;
-  DataProvider* dataProvider;
+  DataProvider* dataProvider =0;
   ExportWizard         *exportWizard;
   QMap<int, QSqlRecord> modifiedRecords;
   int                   lastEditedRow;

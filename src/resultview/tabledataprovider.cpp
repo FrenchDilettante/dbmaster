@@ -8,6 +8,8 @@ TableDataProvider::TableDataProvider(QString table, QSqlDatabase *db, QObject *p
   m_model = new QSqlTableModel(this, *db);
   m_model->setEditStrategy(QSqlTableModel::OnManualSubmit);
   m_model->setTable(table);
+
+  setParent(parent);
 }
 
 void TableDataProvider::run() {

@@ -1,6 +1,11 @@
 #ifndef QUERYEDITORWIDGET_H
 #define QUERYEDITORWIDGET_H
 
+#include "abstracttabwidget.h"
+#include "resultview/querydataprovider.h"
+
+#include "ui_queryeditorwidget.h"
+
 #include <QtGui>
 #include <QRunnable>
 #include <QSqlError>
@@ -9,11 +14,7 @@
 #include <QSqlQueryModel>
 #include <QStatusBar>
 
-#include "abstracttabwidget.h"
-
-#include "ui_queryeditorwidget.h"
-
-class QueryEditorWidget: public AbstractTabWidget, QRunnable, Ui::QueryEditorWidget {
+class QueryEditorWidget: public AbstractTabWidget, Ui::QueryEditorWidget {
 Q_OBJECT
 public:
   QueryEditorWidget(QWidget* = 0);
@@ -46,20 +47,21 @@ public slots:
 
 signals:
   void fileChanged(QString);
-  void queryFinished();
 
 private:
   void closeEvent(QCloseEvent *event);
   bool confirmClose();
+  QSqlDatabase* currentDb();
   void keyPressEvent(QKeyEvent *event);
+  QString queryText();
   void reloadFile();
-  void run();
   void setFilePath(QString);
   void setupConnections();
   void setupWidgets();
   void showEvent(QShowEvent *event);
 
   Actions               baseActions;
+  QueryDataProvider* dataProvider;
   QString               filePath;
   QSqlQueryModel       *model;
   int                   oldCount;
