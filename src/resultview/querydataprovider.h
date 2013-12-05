@@ -11,6 +11,7 @@ public:
   explicit QueryDataProvider(QObject *parent = 0);
 
   bool isReadOnly() { return true; };
+  QSqlError lastError();
   QSqlQueryModel* model() { return m_model; };
 
   void setQuery(QString query, QSqlDatabase db);

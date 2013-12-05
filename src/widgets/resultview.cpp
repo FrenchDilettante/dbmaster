@@ -199,7 +199,6 @@ void ResultView::setAlternatingRowColors(bool enable, bool loop) {
 
 void ResultView::setDataProvider(DataProvider* dataProvider) {
   this->dataProvider = dataProvider;
-  /*
 
   offset = 0;
 
@@ -211,9 +210,9 @@ void ResultView::setDataProvider(DataProvider* dataProvider) {
   deleteButton->setVisible(!readOnly);
   table->setSortingEnabled(!readOnly);
 
-  table->resetColumnSizes();
   updateView();
-  */
+
+  connect(dataProvider, SIGNAL(complete()), this, SLOT(updateView()));
 }
 
 /*
@@ -294,6 +293,8 @@ void ResultView::updateItem(QStandardItem *item) {
  * Mise à jour pagination
  */
 void ResultView::updateView() {
+  table->resetColumnSizes();
+
   int hpos = table->horizontalScrollBar()->value();
   int vpos = table->verticalScrollBar()->value();
 

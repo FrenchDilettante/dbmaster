@@ -11,10 +11,12 @@ public:
   virtual QSqlQueryModel* model() =0;
 
   virtual bool isReadOnly() =0;
+  virtual QSqlError lastError() =0;
 
 signals:
   void complete();
-  void error(QSqlError);
+  void error();
+  void success();
 
 public slots:
 

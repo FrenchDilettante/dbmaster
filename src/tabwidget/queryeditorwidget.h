@@ -6,8 +6,6 @@
 
 #include "ui_queryeditorwidget.h"
 
-#include <QtGui>
-#include <QRunnable>
 #include <QSqlError>
 #include <QSqlResult>
 #include <QSqlQuery>
@@ -63,20 +61,19 @@ private:
   Actions               baseActions;
   QueryDataProvider* dataProvider;
   QString               filePath;
-  QSqlQueryModel       *model;
   int                   oldCount;
   int                   page;
   QToolButton*          resultButton;
-  QSqlQuery             query;
-  QStandardItemModel   *shortModel;
   QStatusBar           *statusBar;
-  QFileSystemWatcher   *watcher;
+  // QFileSystemWatcher   *watcher;
 
 private slots:
   void checkDbOpen();
   void onFileChanged(QString path);
+  void queryError();
+  void querySuccess();
   void start();
-  void validateQuery();
+  // void validateQuery();
 };
 
 #endif // QUERYEDITORWIDGET_H

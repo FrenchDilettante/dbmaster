@@ -7,16 +7,20 @@ TableDataProvider::TableDataProvider(QString table, QSqlDatabase *db, QObject *p
 
   m_model = new QSqlTableModel(this, *db);
   m_model->setEditStrategy(QSqlTableModel::OnManualSubmit);
-  m_model->setTable(table);
 
   setParent(parent);
 }
 
+QSqlError TableDataProvider::lastError() {
+  return m_model->lastError();
+}
+
 void TableDataProvider::run() {
+  m_model->setTable(table);
   if (m_model->select()) {
     emit complete();
   } else {
-    emit error(m_model->lastError());
+    emit error();
   }
 }
 

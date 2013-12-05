@@ -11,6 +11,7 @@ public:
   explicit TableDataProvider(QString table, QSqlDatabase *db, QObject *parent = 0);
 
   bool isReadOnly() { return false; };
+  QSqlError lastError();
   QSqlQueryModel* model() { return m_model; };
 
 signals:

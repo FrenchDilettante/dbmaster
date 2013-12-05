@@ -12,13 +12,12 @@
 
 QueryEditorWidget::QueryEditorWidget(QWidget *parent)
   : AbstractTabWidget(parent) {
-  dataProvider = new QueryDataProvider(this);
-  tabView->setDataProvider(dataProvider);
-  model = new QSqlQueryModel(this);
-  shortModel = new QStandardItemModel(this);
-
   setupUi(this);
   setupWidgets();
+
+  dataProvider = new QueryDataProvider(this);
+  tabView->setDataProvider(dataProvider);
+
   setupConnections();
 
   // setAutoDelete(false);
@@ -256,6 +255,23 @@ void QueryEditorWidget::reloadFile() {
   emit fileChanged(filePath);
 }
 
+void QueryEditorWidget::queryError() {
+  statusBar->showMessage(tr("Unable to run query"));
+  runButton->setEnabled(true);
+}
+
+void QueryEditorWidget::querySuccess() {
+  tabView->setVisible(true);
+  resultButton->setEnabled(true);
+  resultButton->setChecked(true);
+
+  QString logMsg = tr("Query executed with success (%1 lines returned)")
+      .arg(dataProvider->model()->rowCount());
+  statusBar->showMessage(logMsg);
+
+  runButton->setEnabled(true);
+}
+
 QString QueryEditorWidget::queryText() {
   QString qtext = editor->textCursor().selectedText();
   if (qtext.isEmpty()) {
@@ -363,8 +379,10 @@ void QueryEditorWidget::setupConnections() {
   connect(editor->document(), SIGNAL(modificationChanged(bool)),
           this, SIGNAL(modificationChanged(bool)));
 
-  connect(dataProvider, SIGNAL(complete()),
-          this, SLOT(validateQuery()));
+  connect(dataProvider, SIGNAL(error()),
+          this, SLOT(queryError()));
+  connect(dataProvider, SIGNAL(success()),
+          this, SLOT(querySuccess()));
 
   // connect(watcher, SIGNAL(fileChanged(QString)),
   //         this, SLOT(onFileChanged(QString)));
@@ -411,6 +429,7 @@ void QueryEditorWidget::start() {
   statusBar->showMessage(tr("Running..."));
 
   dataProvider->setQuery(queryText(), *currentDb());
+  dataProvider->start();
   tabView->reload();
 }
 
@@ -443,31 +462,17 @@ void QueryEditorWidget::upperCase() {
   }
 }
 
+/*
 void QueryEditorWidget::validateQuery() {
   // tabWidget->setTabEnabled(1, false);
 
   QString logMsg;
 
-  switch(query.lastError().type()) {
+  switch (dataProvider->lastError().type()) {
   case QSqlError::NoError:
-    // tabView->setQuery(model);
-    tabView->setVisible(true);
-    resultButton->setEnabled(true);
-    resultButton->setChecked(true);
-    logMsg = tr("Query executed with success (%1 lines returned)")
-        .arg(model->rowCount());
-        // .arg(token->duration());
-
-    statusBar->showMessage(logMsg);
     break;
 
   default:
-    logMsg = tr("Unable to run query");
-    statusBar->showMessage(logMsg);
-    logMsg.append(
-          QString("<br /><span style=\"color: red\">%1</span>")
-            .arg(query.lastError().text()));
-    emit error();
     break;
   }
 
@@ -477,4 +482,4 @@ void QueryEditorWidget::validateQuery() {
   Logger::instance->log(logMsg);
 
   runButton->setEnabled(true);
-}
+}*/
