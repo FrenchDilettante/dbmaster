@@ -7,6 +7,8 @@
 
 #include "queryeditorwidget.h"
 
+#include <QDateTime>
+#include <QDebug>
 #include <QFileDialog>
 #include <QSqlQuery>
 
@@ -430,7 +432,7 @@ void QueryEditorWidget::start() {
 
   dataProvider->setQuery(queryText(), *currentDb());
   dataProvider->start();
-  tabView->reload();
+  // tabView->reload();
 }
 
 QString QueryEditorWidget::title() {

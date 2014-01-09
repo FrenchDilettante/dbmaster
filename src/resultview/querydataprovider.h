@@ -24,8 +24,9 @@ protected:
   void run();
 
 private:
+  QSqlDatabase db;
   QSqlQueryModel* m_model;
-  QSqlQuery query;
+  QString query;
 
 };
 

@@ -2,7 +2,6 @@
 
 #include "../iconmanager.h"
 
-#include <QDebug>
 #include <QMessageBox>
 #include <QModelIndex>
 #include <QScrollBar>

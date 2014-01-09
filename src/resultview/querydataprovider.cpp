@@ -13,7 +13,7 @@ QSqlError QueryDataProvider::lastError() {
 }
 
 void QueryDataProvider::run() {
-  m_model->setQuery(query);
+  m_model->setQuery(query, db);
   QString logMsg;
 
   if (m_model->lastError().type() == QSqlError::NoError) {
@@ -27,12 +27,13 @@ void QueryDataProvider::run() {
 
     logMsg.append(
           QString("<br /><span style=\"color: blue\">%1</span>")
-            .arg(query.lastQuery().replace("\n", " ")));
+            .arg(query.replace("\n", " ")));
     Logger::instance->log(logMsg);
   }
   emit complete();
 }
 
 void QueryDataProvider::setQuery(QString query, QSqlDatabase db) {
-  this->query = QSqlQuery(query, db);
+  this->db = db;
+  this->query = query;
 }
