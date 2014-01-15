@@ -80,6 +80,13 @@ void QueryEditorWidget::closeEvent(QCloseEvent *event) {
   }
 }
 
+void QueryEditorWidget::commit() {
+  if (currentDb()->commit()) {
+    commitButton->hide();
+    rollbackButton->hide();
+  }
+}
+
 bool QueryEditorWidget::confirmClose() {
   // check if it's saved or not
   if (!isSaved()) {
@@ -124,6 +131,10 @@ int QueryEditorWidget::confirmCloseAll() {
 
 void QueryEditorWidget::copy() {
   editor->copy();
+}
+
+QSqlDatabase* QueryEditorWidget::currentDb() {
+  return DbManager::instance->getDatabase(dbChooser->currentIndex());
 }
 
 void QueryEditorWidget::cut() {
@@ -249,6 +260,13 @@ void QueryEditorWidget::reloadFile() {
   emit fileChanged(filePath);
 }
 
+void QueryEditorWidget::rollback() {
+  if (currentDb()->rollback()) {
+    commitButton->hide();
+    rollbackButton->hide();
+  }
+}
+
 void QueryEditorWidget::run() {
   QString qtext = editor->textCursor().selectedText();
   if (qtext.isEmpty()) {
@@ -345,6 +363,10 @@ void QueryEditorWidget::setupConnections() {
   connect(editor->document(), SIGNAL(modificationChanged(bool)),
           this, SIGNAL(modificationChanged(bool)));
 
+  connect(commitButton, SIGNAL(clicked()), this, SLOT(commit()));
+  connect(rollbackButton, SIGNAL(clicked()), this, SLOT(rollback()));
+  connect(transactionButton, SIGNAL(clicked()), this, SLOT(startTransaction()));
+
   connect(this, SIGNAL(queryFinished()),
           this, SLOT(validateQuery()));
 
@@ -393,6 +415,13 @@ void QueryEditorWidget::start() {
   statusBar->showMessage(tr("Running..."));
 
   QThreadPool::globalInstance()->start(this);
+}
+
+void QueryEditorWidget::startTransaction() {
+  if (currentDb()->transaction()) {
+    commitButton->show();
+    rollbackButton->show();
+  }
 }
 
 QString QueryEditorWidget::title() {

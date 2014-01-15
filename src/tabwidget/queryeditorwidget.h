@@ -50,6 +50,7 @@ signals:
 
 private:
   void closeEvent(QCloseEvent *event);
+  QSqlDatabase* currentDb();
   bool confirmClose();
   void keyPressEvent(QKeyEvent *event);
   void reloadFile();
@@ -72,8 +73,11 @@ private:
 
 private slots:
   void checkDbOpen();
+  void commit();
   void onFileChanged(QString path);
+  void rollback();
   void start();
+  void startTransaction();
   void validateQuery();
 };
 
