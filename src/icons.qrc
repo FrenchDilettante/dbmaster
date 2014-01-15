@@ -50,5 +50,8 @@
         <file>img/database_refresh.png</file>
         <file>img/console.png</file>
         <file>img/edit-clear.png</file>
+        <file>img/transaction-commit.png</file>
+        <file>img/transaction-rollback.png</file>
+        <file>img/transaction-start.png</file>
     </qresource>
 </RCC>

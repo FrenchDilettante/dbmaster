@@ -84,6 +84,7 @@ void QueryEditorWidget::commit() {
   if (currentDb()->commit()) {
     commitButton->hide();
     rollbackButton->hide();
+    transactionButton->show();
   }
 }
 
@@ -264,6 +265,7 @@ void QueryEditorWidget::rollback() {
   if (currentDb()->rollback()) {
     commitButton->hide();
     rollbackButton->hide();
+    transactionButton->show();
   }
 }
 
@@ -399,6 +401,14 @@ void QueryEditorWidget::setupWidgets() {
 
   runButton->setIcon(IconManager::get("player_play"));
 
+  commitButton->setIcon(IconManager::get("transaction-commit"));
+  commitButton->hide();
+
+  rollbackButton->setIcon(IconManager::get("transaction-rollback"));
+  rollbackButton->hide();
+
+  transactionButton->setIcon(IconManager::get("transaction-start"));
+
   refresh();
 }
 
@@ -421,6 +431,7 @@ void QueryEditorWidget::startTransaction() {
   if (currentDb()->transaction()) {
     commitButton->show();
     rollbackButton->show();
+    transactionButton->hide();
   }
 }
 

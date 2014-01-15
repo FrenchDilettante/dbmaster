@@ -11,14 +11,7 @@
    </rect>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="4">
-    <widget class="Line" name="line">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0" colspan="7">
+   <item row="1" column="0" colspan="6">
     <widget class="QSplitter" name="splitter">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -41,7 +34,7 @@
      </widget>
     </widget>
    </item>
-   <item row="0" column="6">
+   <item row="0" column="5">
     <widget class="QPushButton" name="runButton">
      <property name="enabled">
       <bool>false</bool>
@@ -64,17 +57,7 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="3">
-    <widget class="QToolButton" name="rollbackButton">
-     <property name="toolTip">
-      <string>Rollback transaction</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="5">
+   <item row="0" column="4">
     <widget class="QToolButton" name="transactionButton">
      <property name="text">
       <string/>
@@ -97,6 +80,16 @@
      </property>
      <property name="textInteractionFlags">
       <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="3">
+    <widget class="QToolButton" name="rollbackButton">
+     <property name="toolTip">
+      <string>Rollback transaction</string>
+     </property>
+     <property name="text">
+      <string/>
      </property>
     </widget>
    </item>
