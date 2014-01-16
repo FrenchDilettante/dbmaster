@@ -212,6 +212,7 @@ QueryEditorWidget* MainWindow::newQuery() {
   connect(w, SIGNAL(actionAvailable(AbstractTabWidget::Actions)),
           this, SLOT(refreshTab()));
   connect(w, SIGNAL(error()), logDock, SLOT(show()));
+  connect(w, SIGNAL(success()), logDock, SLOT(hide()));
   connect(w, SIGNAL(fileChanged(QString)), this, SLOT(addRecentFile(QString)));
   connect(w, SIGNAL(modificationChanged(bool)), this, SLOT(refreshTab()));
   connect(w, SIGNAL(tableRequested(QSqlDatabase*,QString)),

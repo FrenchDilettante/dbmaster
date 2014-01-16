@@ -440,6 +440,7 @@ void QueryEditorWidget::validateQuery() {
         // .arg(token->duration());
 
     statusBar->showMessage(logMsg);
+    emit success();
     break;
 
   default:
