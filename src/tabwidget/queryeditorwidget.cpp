@@ -43,29 +43,17 @@ AbstractTabWidget::Actions QueryEditorWidget::availableActions() {
 void QueryEditorWidget::checkDbOpen() {
   DbManager::instance->lastUsedDbIndex = dbChooser->currentIndex();
 
-  QSqlDatabase *db = DbManager::instance->getDatabase(dbChooser->currentIndex());
+  QSqlDatabase *db = currentDb();
   if (db == NULL) {
     runButton->setEnabled(false);
     return;
   }
 
+  updateTransactionButtons(db);
+
   runButton->setEnabled(db->isOpen());
 
-  if (!db->isOpen() || db->driverName().startsWith("QOCI")) {
-    return;
-  }
-
-  QMultiMap<QString, QString> fields;
-  QSqlRecord r;
-  QStringList tables = db->tables();
-  foreach (QString t, tables) {
-    r = db->record(t);
-    for (int i=0; i<r.count(); i++) {
-      fields.insert(t, r.fieldName(i));
-    }
-  }
-
-  editor->reloadContext(tables, fields);
+  reloadContext(db);
 }
 
 void QueryEditorWidget::closeEvent(QCloseEvent *event) {
@@ -85,6 +73,7 @@ void QueryEditorWidget::commit() {
     commitButton->hide();
     rollbackButton->hide();
     transactionButton->show();
+    dbChooser->setEnabled(true);
   }
 }
 
@@ -226,9 +215,24 @@ void QueryEditorWidget::reload() {
   run();
 }
 
-/**
- * Called after open(QString)
- */
+void QueryEditorWidget::reloadContext(QSqlDatabase *db) {
+  if (!db->isOpen() || db->driverName().startsWith("QOCI")) {
+    return;
+  }
+
+  QMultiMap<QString, QString> fields;
+  QSqlRecord r;
+  QStringList tables = db->tables();
+  foreach (QString t, tables) {
+    r = db->record(t);
+    for (int i=0; i<r.count(); i++) {
+      fields.insert(t, r.fieldName(i));
+    }
+  }
+
+  editor->reloadContext(tables, fields);
+}
+
 void QueryEditorWidget::reloadFile() {
   if (!confirmClose()) {
     return;
@@ -266,6 +270,7 @@ void QueryEditorWidget::rollback() {
     commitButton->hide();
     rollbackButton->hide();
     transactionButton->show();
+    dbChooser->setEnabled(true);
   }
 }
 
@@ -401,14 +406,6 @@ void QueryEditorWidget::setupWidgets() {
 
   runButton->setIcon(IconManager::get("player_play"));
 
-  commitButton->setIcon(IconManager::get("transaction-commit"));
-  commitButton->hide();
-
-  rollbackButton->setIcon(IconManager::get("transaction-rollback"));
-  rollbackButton->hide();
-
-  transactionButton->setIcon(IconManager::get("transaction-start"));
-
   refresh();
 }
 
@@ -432,6 +429,7 @@ void QueryEditorWidget::startTransaction() {
     commitButton->show();
     rollbackButton->show();
     transactionButton->hide();
+    dbChooser->setEnabled(false);
   }
 }
 
@@ -451,6 +449,22 @@ QTextEdit* QueryEditorWidget::textEdit() {
 
 void QueryEditorWidget::undo() {
   editor->undo();
+}
+
+void QueryEditorWidget::updateTransactionButtons(QSqlDatabase *db) {
+  commitButton->setIcon(IconManager::get("transaction-commit"));
+  commitButton->hide();
+
+  rollbackButton->setIcon(IconManager::get("transaction-rollback"));
+  rollbackButton->hide();
+
+  transactionButton->setIcon(IconManager::get("transaction-start"));
+
+  if (!db->driver()->hasFeature(QSqlDriver::Transactions)) {
+    transactionButton->hide();
+  }
+
+  transactionButton->setEnabled(db->isOpen());
 }
 
 void QueryEditorWidget::upperCase() {

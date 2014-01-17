@@ -53,12 +53,14 @@ private:
   QSqlDatabase* currentDb();
   bool confirmClose();
   void keyPressEvent(QKeyEvent *event);
+  void reloadContext(QSqlDatabase* db);
   void reloadFile();
   void run();
   void setFilePath(QString);
   void setupConnections();
   void setupWidgets();
   void showEvent(QShowEvent *event);
+  void updateTransactionButtons(QSqlDatabase* db);
 
   Actions               baseActions;
   QString               filePath;
