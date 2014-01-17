@@ -606,7 +606,8 @@ void MainWindow::setupDocks(QSettings *s) {
 }
 
 void MainWindow::setupHomepage() {
-  homepageView->setUrl(QUrl("http://static.dbmaster-project.org/0.9/"));
+  QString url("http://static.dbmaster-project.org/0.9/?version=%1");
+  homepageView->setUrl(url.arg(QApplication::applicationVersion()));
   homepageView->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
 }
 
