@@ -48,15 +48,17 @@ signals:
 
 private:
   void closeEvent(QCloseEvent *event);
-  bool confirmClose();
   QSqlDatabase* currentDb();
+  bool confirmClose();
   void keyPressEvent(QKeyEvent *event);
   QString queryText();
+  void reloadContext(QSqlDatabase* db);
   void reloadFile();
   void setFilePath(QString);
   void setupConnections();
   void setupWidgets();
   void showEvent(QShowEvent *event);
+  void updateTransactionButtons(QSqlDatabase* db);
 
   Actions               baseActions;
   QueryDataProvider* dataProvider;
@@ -69,10 +71,13 @@ private:
 
 private slots:
   void checkDbOpen();
+  void commit();
   void onFileChanged(QString path);
   void queryError();
   void querySuccess();
+  void rollback();
   void start();
+  void startTransaction();
   // void validateQuery();
 };
 

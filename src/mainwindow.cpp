@@ -212,6 +212,7 @@ QueryEditorWidget* MainWindow::newQuery() {
   connect(w, SIGNAL(actionAvailable(AbstractTabWidget::Actions)),
           this, SLOT(refreshTab()));
   connect(w, SIGNAL(error()), logDock, SLOT(show()));
+  connect(w, SIGNAL(success()), logDock, SLOT(hide()));
   connect(w, SIGNAL(fileChanged(QString)), this, SLOT(addRecentFile(QString)));
   connect(w, SIGNAL(modificationChanged(bool)), this, SLOT(refreshTab()));
   connect(w, SIGNAL(tableRequested(QSqlDatabase*,QString)),
@@ -605,7 +606,8 @@ void MainWindow::setupDocks(QSettings *s) {
 }
 
 void MainWindow::setupHomepage() {
-  homepageView->setUrl(QUrl("http://static.dbmaster-project.org/0.9/"));
+  QString url("http://static.dbmaster-project.org/0.9/?version=%1");
+  homepageView->setUrl(url.arg(QApplication::applicationVersion()));
   homepageView->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
 }
 

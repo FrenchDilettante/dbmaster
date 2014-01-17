@@ -52,6 +52,7 @@ signals:
   void closeRequested();
   void error();
   void modificationChanged(bool);
+  void success();
   void tableRequested(QSqlDatabase *db, QString table);
 
 public slots:
