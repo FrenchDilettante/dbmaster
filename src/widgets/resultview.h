@@ -18,12 +18,6 @@
 class ResultView : public QWidget, Ui::ResultView {
 Q_OBJECT
 public:
-  /*
-  enum Mode {
-    QueryMode, TableMode
-  };
-  */
-
   enum Action {
     Browse, Update, Insert
   };
@@ -32,16 +26,6 @@ public:
   ~ResultView();
 
   void setDataProvider(DataProvider* dataProvider);
-
-  /*
-  void setQuery(QSqlQueryModel *queryModel);
-  void setTable(QString table, QSqlDatabase *db);
-
-  Mode mode()           { return m_mode;    };
-  void setMode(Mode m);
-
-  Q_PROPERTY(Mode mode READ mode WRITE setMode)
-  */
 
 signals:
   void reloadRequested();
@@ -59,8 +43,16 @@ public slots:
   void sort(int col);
 
 private:
-  // void setModel(QSqlQueryModel *model);
+  void checkReadOnly();
+  int endIndex(int start, QSqlQueryModel* model);
+  void setupButtons();
   void setupConnections();
+  int startIndex(QSqlQueryModel* model);
+  void updatePageCount(int start, int end, QSqlQueryModel *model);
+  void updateVerticalLabels(int start, int end);
+  void updateViewHeader(QSqlQueryModel *model);
+  QStandardItem* viewItem(QVariant value);
+  QList<QStandardItem*> viewRow(int rowIdx, QSqlQueryModel *model);
 
   Action                currentAction;
   QPair<int, Qt::SortOrder> currentSorting;
@@ -69,8 +61,6 @@ private:
   QMap<int, QSqlRecord> modifiedRecords;
   int                   lastEditedRow;
   QStandardItemModel   *shortModel;
-  // Mode                  m_mode;
-  // QSqlQueryModel       *model;
 
   int                   offset;
 
