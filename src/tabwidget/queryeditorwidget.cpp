@@ -7,6 +7,8 @@
 
 #include "queryeditorwidget.h"
 
+#include <QDateTime>
+#include <QDebug>
 #include <QFileDialog>
 #include <QSqlQuery>
 
@@ -14,12 +16,14 @@ QueryEditorWidget::QueryEditorWidget(QWidget *parent)
   : AbstractTabWidget(parent) {
   setupUi(this);
   setupWidgets();
+
+  dataProvider = new QueryDataProvider(this);
+  tabView->setDataProvider(dataProvider);
+
   setupConnections();
 
-  setAutoDelete(false);
+  // setAutoDelete(false);
 
-  model       = new QSqlQueryModel(this);
-  shortModel  = new QStandardItemModel(this);
   // watcher     = new QFileSystemWatcher(this);
 }
 
@@ -212,7 +216,7 @@ void QueryEditorWidget::refresh() {
 }
 
 void QueryEditorWidget::reload() {
-  run();
+  tabView->reload();
 }
 
 void QueryEditorWidget::reloadContext(QSqlDatabase *db) {
@@ -265,6 +269,33 @@ void QueryEditorWidget::reloadFile() {
   emit fileChanged(filePath);
 }
 
+void QueryEditorWidget::queryError() {
+  statusBar->showMessage(tr("Unable to run query"));
+  runButton->setEnabled(true);
+}
+
+void QueryEditorWidget::querySuccess() {
+  tabView->setVisible(true);
+  resultButton->setEnabled(true);
+  resultButton->setChecked(true);
+
+  QString logMsg = tr("Query executed with success (%1 lines returned)")
+      .arg(dataProvider->model()->rowCount());
+  statusBar->showMessage(logMsg);
+
+  runButton->setEnabled(true);
+  emit success();
+}
+
+QString QueryEditorWidget::queryText() {
+  QString qtext = editor->textCursor().selectedText();
+  if (qtext.isEmpty()) {
+    qtext = editor->toPlainText();
+  }
+
+  return qtext;
+}
+
 void QueryEditorWidget::rollback() {
   if (currentDb()->rollback()) {
     commitButton->hide();
@@ -274,6 +305,7 @@ void QueryEditorWidget::rollback() {
   }
 }
 
+/*
 void QueryEditorWidget::run() {
   QString qtext = editor->textCursor().selectedText();
   if (qtext.isEmpty()) {
@@ -287,6 +319,7 @@ void QueryEditorWidget::run() {
 
   emit queryFinished();
 }
+*/
 
 /**
  * @returns false in case of error
@@ -374,8 +407,10 @@ void QueryEditorWidget::setupConnections() {
   connect(rollbackButton, SIGNAL(clicked()), this, SLOT(rollback()));
   connect(transactionButton, SIGNAL(clicked()), this, SLOT(startTransaction()));
 
-  connect(this, SIGNAL(queryFinished()),
-          this, SLOT(validateQuery()));
+  connect(dataProvider, SIGNAL(error()),
+          this, SLOT(queryError()));
+  connect(dataProvider, SIGNAL(success()),
+          this, SLOT(querySuccess()));
 
   // connect(watcher, SIGNAL(fileChanged(QString)),
   //         this, SLOT(onFileChanged(QString)));
@@ -421,7 +456,9 @@ void QueryEditorWidget::start() {
 
   statusBar->showMessage(tr("Running..."));
 
-  QThreadPool::globalInstance()->start(this);
+  dataProvider->setQuery(queryText(), *currentDb());
+  dataProvider->start();
+  // tabView->reload();
 }
 
 void QueryEditorWidget::startTransaction() {
@@ -478,13 +515,16 @@ void QueryEditorWidget::upperCase() {
   }
 }
 
+/*
 void QueryEditorWidget::validateQuery() {
   // tabWidget->setTabEnabled(1, false);
 
   QString logMsg;
 
-  switch(query.lastError().type()) {
+  switch (dataProvider->lastError().type()) {
   case QSqlError::NoError:
+<<<<<<< HEAD
+=======
     tabView->setQuery(model);
     tabView->setVisible(true);
     resultButton->setEnabled(true);
@@ -494,16 +534,10 @@ void QueryEditorWidget::validateQuery() {
         // .arg(token->duration());
 
     statusBar->showMessage(logMsg);
-    emit success();
+>>>>>>> next
     break;
 
   default:
-    logMsg = tr("Unable to run query");
-    statusBar->showMessage(logMsg);
-    logMsg.append(
-          QString("<br /><span style=\"color: red\">%1</span>")
-            .arg(query.lastError().text()));
-    emit error();
     break;
   }
 
@@ -513,4 +547,4 @@ void QueryEditorWidget::validateQuery() {
   Logger::instance->log(logMsg);
 
   runButton->setEnabled(true);
-}
+}*/

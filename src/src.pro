@@ -43,7 +43,10 @@ SOURCES += main.cpp \
     plugins/wrappers/mysql/mysqlwrapper.cpp \
     plugins/wrappers/psql/psqlconfig.cpp \
     plugins/wrappers/psql/psqlwrapper.cpp \
-    plugins/wrappers/sqlite/sqlitewrapper.cpp
+    plugins/wrappers/sqlite/sqlitewrapper.cpp \
+    resultview/dataprovider.cpp \
+    resultview/tabledataprovider.cpp \
+    resultview/querydataprovider.cpp
 HEADERS += mainwindow.h \
     dbmanager.h \
     tabwidget/tablewidget.h \
@@ -85,7 +88,10 @@ HEADERS += mainwindow.h \
     plugins/wrappers/mysql/mysqlwrapper.h \
     plugins/wrappers/psql/psqlconfig.h \
     plugins/wrappers/psql/psqlwrapper.h \
-    plugins/wrappers/sqlite/sqlitewrapper.h
+    plugins/wrappers/sqlite/sqlitewrapper.h \
+    resultview/dataprovider.h \
+    resultview/tabledataprovider.h \
+    resultview/querydataprovider.h
 FORMS += mainwindow.ui \
     dialogs/dbdialog.ui \
     tabwidget/queryeditorwidget.ui \

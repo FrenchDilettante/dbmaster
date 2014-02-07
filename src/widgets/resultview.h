@@ -2,6 +2,7 @@
 #define RESULTVIEW_H
 
 #include "../dialogs/blobdialog.h"
+#include "../resultview/dataprovider.h"
 #include "../wizards/exportwizard.h"
 #include "ui_resultview.h"
 
@@ -14,18 +15,9 @@
 #include <QStandardItemModel>
 #include <QWidget>
 
-/**
- * Fournit un paliatif à QTableView en ajoutant une pagination, un menu
- * contextuel pour l'export et l'ajout/suppression de lignes dans les tables.
- * Prend en charge les jetons de requête et les tables.
- */
 class ResultView : public QWidget, Ui::ResultView {
 Q_OBJECT
 public:
-  enum Mode {
-    QueryMode, TableMode
-  };
-
   enum Action {
     Browse, Update, Insert
   };
@@ -33,19 +25,14 @@ public:
   ResultView(QWidget *parent=0);
   ~ResultView();
 
-  void setQuery(QSqlQueryModel *queryModel);
-  bool setTable(QString table, QSqlDatabase *db);
-  // void setToken(QueryToken *token);
-
-  Mode mode()           { return m_mode;    };
-  void setMode(Mode m);
-
-  Q_PROPERTY(Mode mode READ mode WRITE setMode)
+  void setDataProvider(DataProvider* dataProvider);
 
 signals:
   void reloadRequested();
+  void structureChanged();
 
 public slots:
+  void reload();
   void resizeColumnsToContents();
   void resizeRowsToContents();
   void setAlternatingRowColors(bool enable, bool loop =true);
@@ -56,17 +43,24 @@ public slots:
   void sort(int col);
 
 private:
-  void setModel(QSqlQueryModel *model);
+  void checkReadOnly();
+  int endIndex(int start, QSqlQueryModel* model);
+  void setupButtons();
   void setupConnections();
+  int startIndex(QSqlQueryModel* model);
+  void updatePageCount(int start, int end, QSqlQueryModel *model);
+  void updateVerticalLabels(int start, int end);
+  void updateViewHeader(QSqlQueryModel *model);
+  QStandardItem* viewItem(QVariant value);
+  QList<QStandardItem*> viewRow(int rowIdx, QSqlQueryModel *model);
 
   Action                currentAction;
   QPair<int, Qt::SortOrder> currentSorting;
+  DataProvider* dataProvider =0;
   ExportWizard         *exportWizard;
   QMap<int, QSqlRecord> modifiedRecords;
   int                   lastEditedRow;
   QStandardItemModel   *shortModel;
-  Mode                  m_mode;
-  QSqlQueryModel       *model;
 
   int                   offset;
 

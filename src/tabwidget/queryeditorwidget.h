@@ -1,19 +1,18 @@
 #ifndef QUERYEDITORWIDGET_H
 #define QUERYEDITORWIDGET_H
 
-#include <QtGui>
-#include <QRunnable>
+#include "abstracttabwidget.h"
+#include "resultview/querydataprovider.h"
+
+#include "ui_queryeditorwidget.h"
+
 #include <QSqlError>
 #include <QSqlResult>
 #include <QSqlQuery>
 #include <QSqlQueryModel>
 #include <QStatusBar>
 
-#include "abstracttabwidget.h"
-
-#include "ui_queryeditorwidget.h"
-
-class QueryEditorWidget: public AbstractTabWidget, QRunnable, Ui::QueryEditorWidget {
+class QueryEditorWidget: public AbstractTabWidget, Ui::QueryEditorWidget {
 Q_OBJECT
 public:
   QueryEditorWidget(QWidget* = 0);
@@ -46,16 +45,15 @@ public slots:
 
 signals:
   void fileChanged(QString);
-  void queryFinished();
 
 private:
   void closeEvent(QCloseEvent *event);
   QSqlDatabase* currentDb();
   bool confirmClose();
   void keyPressEvent(QKeyEvent *event);
+  QString queryText();
   void reloadContext(QSqlDatabase* db);
   void reloadFile();
-  void run();
   void setFilePath(QString);
   void setupConnections();
   void setupWidgets();
@@ -63,24 +61,24 @@ private:
   void updateTransactionButtons(QSqlDatabase* db);
 
   Actions               baseActions;
+  QueryDataProvider* dataProvider;
   QString               filePath;
-  QSqlQueryModel       *model;
   int                   oldCount;
   int                   page;
   QToolButton*          resultButton;
-  QSqlQuery             query;
-  QStandardItemModel   *shortModel;
   QStatusBar           *statusBar;
-  QFileSystemWatcher   *watcher;
+  // QFileSystemWatcher   *watcher;
 
 private slots:
   void checkDbOpen();
   void commit();
   void onFileChanged(QString path);
+  void queryError();
+  void querySuccess();
   void rollback();
   void start();
   void startTransaction();
-  void validateQuery();
+  // void validateQuery();
 };
 
 #endif // QUERYEDITORWIDGET_H

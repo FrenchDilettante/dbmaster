@@ -14,40 +14,19 @@ QList<ResultView*> ResultView::instances = QList<ResultView*>();
 ResultView::ResultView(QWidget *parent)
   : QWidget(parent) {
   setupUi(this);
-  // Sincèrement, un jour, il faudra se poser la question de l'utilité de la
-  // ligne suivante :
-  table->setModel(0);
 
   exportWizard = new ExportWizard(this);
 
-  // Par défaut, on visualise
   currentAction = Browse;
-  // Aucun tri
   currentSorting = QPair<int, Qt::SortOrder>(-1, Qt::AscendingOrder);
-  // Nécessaire pour la synchronisation sur l'option d'alternance des lignes
   instances << this;
-  // On commence à la première ligne
   offset = 0;
-  // Purement arbitraire, j'avoue
-  m_mode = QueryMode;
   shortModel = new QStandardItemModel(this);
   table->setModel(shortModel);
   table->setAlternatingRowColors(alternateRows);
 
-//  setupMenus();
+  setupButtons();
   setupConnections();
-
-  // loading icons from theme
-  firstPageButton->setIcon(IconManager::get("go-first"));
-  lastPageButton->setIcon(IconManager::get("go-last"));
-  nextPageButton->setIcon(IconManager::get("go-next"));
-  prevPageButton->setIcon(IconManager::get("go-previous"));
-  reloadButton->setIcon(IconManager::get("view-refresh"));
-  insertButton->setIcon(IconManager::get("list-add"));
-  deleteButton->setIcon(IconManager::get("list-remove"));
-
-  insertButton->setVisible(false);
-  deleteButton->setVisible(false);
 }
 
 ResultView::~ResultView() {
@@ -62,7 +41,7 @@ void ResultView::apply() {
   insertButton->setIcon(IconManager::get("list-add"));
   deleteButton->setIcon(IconManager::get("list-remove"));
 
-  QSqlTableModel *tmodel = (QSqlTableModel*) model;
+  QSqlTableModel *tmodel = (QSqlTableModel*) dataProvider->model();
 
   foreach (int row, modifiedRecords.keys()) {
     tmodel->setRecord(row, modifiedRecords[row]);
@@ -79,9 +58,28 @@ void ResultView::apply() {
   updateView();
 }
 
+void ResultView::checkReadOnly() {
+  if (!dataProvider->isReadOnly()) {
+    table->horizontalHeader()->setSortIndicatorShown(true);
+    table->horizontalHeader()->setSortIndicator(currentSorting.first,
+                                                currentSorting.second);
+  }
+}
+
+int ResultView::endIndex(int start, QSqlQueryModel *model) {
+  int end = start + resultSpinBox->value();
+  if (end > model->rowCount()) {
+    end = model->rowCount();
+  }
+  return end;
+}
+
 void ResultView::exportContent() {
-  if (model == 0)
+  if (!dataProvider) {
     return;
+  }
+
+  QSqlQueryModel* model = dataProvider->model();
 
   if (model->columnCount() == 0 || model->rowCount() == 0) {
     return;
@@ -97,10 +95,11 @@ void ResultView::exportContent() {
  */
 void ResultView::on_deleteButton_clicked()
 {
-  if(m_mode != TableMode)
+  if (dataProvider->isReadOnly()) {
     return;
+  }
 
-  QSqlTableModel *tmodel = (QSqlTableModel*) model;
+  QSqlTableModel *tmodel = (QSqlTableModel*) dataProvider->model();
 
   if (currentAction != Browse) {
     // Annulation de l'opération en cours
@@ -112,11 +111,13 @@ void ResultView::on_deleteButton_clicked()
   } else {
     // suppression des lignes sélectionnées
     QSet<int> rows;
-    foreach(QModelIndex i, table->selectionModel()->selectedIndexes())
+    foreach (QModelIndex i, table->selectionModel()->selectedIndexes()) {
       rows << (i.row() + offset);
+    }
 
-    foreach(int r, rows)
-      model->removeRow(r);
+    foreach (int r, rows) {
+      tmodel->removeRow(r);
+    }
 
     tmodel->submitAll();
   }
@@ -128,10 +129,10 @@ void ResultView::on_deleteButton_clicked()
  * Clic sur le bouton d'insertion : peut passer en mode insertion ou valider un
  * ajout/modif.
  */
-void ResultView::on_insertButton_clicked()
-{
-  if(m_mode != TableMode)
+void ResultView::on_insertButton_clicked() {
+  if (dataProvider->isReadOnly()) {
     return;
+  }
 
   if (currentAction == Insert || currentAction == Update) {
     apply();
@@ -141,7 +142,7 @@ void ResultView::on_insertButton_clicked()
     deleteButton->setIcon(QIcon());
     deleteButton->setText(tr("Cancel"));
 
-    model->insertRow(model->rowCount());
+    dataProvider->model()->insertRow(dataProvider->model()->rowCount());
     currentAction = Insert;
     updateView();
     table->scrollToBottom();
@@ -150,16 +151,11 @@ void ResultView::on_insertButton_clicked()
 }
 
 void ResultView::on_reloadButton_clicked() {
-  switch (m_mode) {
-  case QueryMode:
-    emit reloadRequested();
-    break;
+  dataProvider->start();
+}
 
-  case TableMode:
-    ((QSqlTableModel*) model)->select();
-    updateView();
-    break;
-  }
+void ResultView::reload() {
+  dataProvider->start();
 }
 
 void ResultView::resizeColumnsToContents() {
@@ -182,7 +178,7 @@ void ResultView::scrollDown() {
 
 void ResultView::scrollEnd() {
   double last;
-  modf(model->rowCount() / resultSpinBox->value(), &last);
+  modf(dataProvider->model()->rowCount() / resultSpinBox->value(), &last);
 
   offset = last * resultSpinBox->value();
   updateView();
@@ -206,68 +202,36 @@ void ResultView::setAlternatingRowColors(bool enable, bool loop) {
   }
 }
 
-void ResultView::setMode(Mode m) {
-  m_mode = m;
+void ResultView::setDataProvider(DataProvider* dataProvider) {
+  this->dataProvider = dataProvider;
+
+  offset = 0;
+
   reloadButton->setEnabled(true);
   resultSpinBox->setEnabled(true);
 
-  switch(m_mode) {
-  case QueryMode:
-    insertButton->setVisible(false);
-    deleteButton->setVisible(false);
-    table->setSortingEnabled(false);
-    break;
-
-  case TableMode:
-    insertButton->setVisible(true);
-    deleteButton->setVisible(true);
-    table->setSortingEnabled(true);
-    break;
-  }
-}
-
-void ResultView::setModel(QSqlQueryModel *model) {
-  this->model = model;
-  table->resetColumnSizes();
+  bool readOnly = dataProvider->isReadOnly();
+  insertButton->setVisible(!readOnly);
+  deleteButton->setVisible(!readOnly);
+  table->setSortingEnabled(!readOnly);
 
   updateView();
+
+  connect(dataProvider, SIGNAL(complete()), this, SLOT(updateView()));
 }
 
-void ResultView::setQuery(QSqlQueryModel *queryModel) {
-  setMode(QueryMode);
-  offset = 0;
+void ResultView::setupButtons() {
+  firstPageButton->setIcon(IconManager::get("go-first"));
+  lastPageButton->setIcon(IconManager::get("go-last"));
+  nextPageButton->setIcon(IconManager::get("go-next"));
+  prevPageButton->setIcon(IconManager::get("go-previous"));
+  reloadButton->setIcon(IconManager::get("view-refresh"));
+  insertButton->setIcon(IconManager::get("list-add"));
+  deleteButton->setIcon(IconManager::get("list-remove"));
 
-  setModel(queryModel);
+  insertButton->setVisible(false);
+  deleteButton->setVisible(false);
 }
-
-bool ResultView::setTable(QString table, QSqlDatabase *db) {
-  setMode(TableMode);
-  this->table->resetColumnSizes();
-
-  QSqlTableModel *m = new QSqlTableModel(this, *db);
-  m->setTable(table);
-  m->setEditStrategy(QSqlTableModel::OnManualSubmit);
-  m->select();
-  if(m->lastError().type() == QSqlError::NoError)   {
-    setModel(m);
-    return true;
-  } else {
-    QMessageBox::critical(this,
-                          tr("Error"),
-                          tr("Unable to open the table. Returned error :\n%1")
-                          .arg(m->lastError().text()),
-                          QMessageBox::Ok);
-    return false;
-  }
-}
-/*
-void ResultView::setToken(QueryToken *token) {
-  setMode(QueryMode);
-  m_token = token;
-  offset = 0;
-
-  setModel(m_token->model());
-}*/
 
 void ResultView::setupConnections() {
   connect(firstPageButton, SIGNAL(clicked()), this, SLOT(scrollBegin()));
@@ -289,7 +253,7 @@ void ResultView::setupConnections() {
 }
 
 void ResultView::sort(int col) {
-  if (m_mode == QueryMode) {
+  if (dataProvider->isReadOnly()) {
     return;
   }
 
@@ -302,8 +266,17 @@ void ResultView::sort(int col) {
   } else {
     currentSorting = QPair<int, Qt::SortOrder>(col, Qt::AscendingOrder);
   }
-  model->sort(currentSorting.first, currentSorting.second);
+  dataProvider->model()->sort(currentSorting.first, currentSorting.second);
   updateView();
+}
+
+int ResultView::startIndex(QSqlQueryModel *model) {
+  int start = offset;
+  if (start > model->rowCount())
+    start = model->rowCount() - resultSpinBox->value();
+  if (start < 0)
+    start = 0;
+  return start;
 }
 
 /**
@@ -324,101 +297,94 @@ void ResultView::updateItem(QStandardItem *item) {
   if (modifiedRecords.contains(row)) {
     record = modifiedRecords[row];
   } else {
-    record = model->record(row);
+    record = dataProvider->model()->record(row);
   }
   record.setValue(item->column(), item->data(Qt::DisplayRole));
   modifiedRecords[row] = record;
 }
 
-/**
- * Mise à jour pagination
- */
+void ResultView::updatePageCount(int start, int end, QSqlQueryModel* model) {
+  double page, maxpage;
+  modf(start / resultSpinBox->value(), &page);
+  modf(model->rowCount() / resultSpinBox->value(), &maxpage);
+  pageLabel->setText(tr("Page %1/%2").arg(page+1).arg(maxpage+1));
+
+  firstPageButton->setEnabled(start > 0);
+  prevPageButton->setEnabled(start > 0);
+  nextPageButton->setEnabled(end < model->rowCount());
+  lastPageButton->setEnabled(end < model->rowCount());
+}
+
+void ResultView::updateVerticalLabels(int start, int end) {
+  QStringList vlabels;
+  for (int i=start; i<end; i++) {
+    vlabels << QString::number(i+1);
+  }
+  if (currentAction == Insert) {
+    vlabels.removeLast();
+    vlabels << "*";
+  }
+  shortModel->setVerticalHeaderLabels(vlabels);
+}
+
 void ResultView::updateView() {
+  table->resetColumnSizes();
+
   int hpos = table->horizontalScrollBar()->value();
   int vpos = table->verticalScrollBar()->value();
 
   shortModel->clear();
 
-  if (!model) {
+  if (!dataProvider) {
     return;
   }
 
-  for(int i=0; i<model->columnCount(); i++)
-    shortModel->setHorizontalHeaderItem(i, new QStandardItem(
-        model->headerData(i, Qt::Horizontal).toString()));
+  QSqlQueryModel* model = dataProvider->model();
 
-  if(model->rowCount() == 0)
+  updateViewHeader(model);
+
+  if (model->rowCount() == 0)
     return;
 
-  // 1ère ligne à afficher
-  int startIndex;
-  startIndex = offset;
-  if (startIndex > model->rowCount())
-    startIndex = model->rowCount() - resultSpinBox->value();
-  if (startIndex < 0)
-    startIndex = 0;
+  int start = startIndex(model);
+  int end = endIndex(start, model);
 
-  // Page en cours, nb de page
-  double page, maxpage;
-  modf(startIndex / resultSpinBox->value(), &page);
-  modf(model->rowCount() / resultSpinBox->value(), &maxpage);
-  pageLabel->setText(tr("Page %1/%2")
-                     .arg(page+1)
-                     .arg(maxpage+1));
+  updatePageCount(start, end, model);
 
-  // dernière ligne à afficher
-  int endIndex;
-  endIndex = startIndex + resultSpinBox->value();
-  if (endIndex > model->rowCount())
-    endIndex = model->rowCount();
-
-  firstPageButton->setEnabled(startIndex > 0);
-  prevPageButton->setEnabled(startIndex > 0);
-  nextPageButton->setEnabled(endIndex < model->rowCount());
-  lastPageButton->setEnabled(endIndex < model->rowCount());
-
-  QStandardItem *item;
-  QStringList vlabels;
-  QSqlRecord r;
-  QList<QStandardItem*> row;
-  for(int i=startIndex; i<endIndex; i++) {
-    row.clear();
-    r = model->record(i);
-    for(int j=0; j<model->columnCount(); j++) {
-      item = new QStandardItem();
-//      if (r.value(j).canConvert(QVariant::String)
-//          && r.value(j).toString().length() > 50) {
-//        QString val = r.value(j).toString();
-//        // BLOB
-//        item->setData(val.left(47).append("..."), Qt::DisplayRole);
-//        item->setData(val, Qt::ToolTipRole);
-//        item->setEditable(false);
-//        item->setData(true, Qt::UserRole);
-//      } else {
-        item->setData(r.value(j), Qt::DisplayRole);
-        item->setData(false, Qt::UserRole);
-//      }
-      item->setEditable(m_mode == TableMode);
-      row << item;
-    }
-    shortModel->appendRow(row);
-    vlabels << QString::number(i+1);
+  for (int i=start; i<end; i++) {
+    shortModel->appendRow(viewRow(i, model));
   }
-  if(currentAction == Insert) {
-    vlabels.removeLast();
-    vlabels << "*";
-  }
-  shortModel->setVerticalHeaderLabels(vlabels);
+  updateVerticalLabels(start, end);
 
   resizeColumnsToContents();
   resizeRowsToContents();
 
-  if (m_mode == TableMode) {
-    table->horizontalHeader()->setSortIndicatorShown(true);
-    table->horizontalHeader()->setSortIndicator(currentSorting.first,
-                                                currentSorting.second);
-  }
+  checkReadOnly();
 
   table->horizontalScrollBar()->setValue(hpos);
   table->verticalScrollBar()->setValue(vpos);
+}
+
+void ResultView::updateViewHeader(QSqlQueryModel *model) {
+  for (int i=0; i<model->columnCount(); i++) {
+    shortModel->setHorizontalHeaderItem(i, new QStandardItem(
+        model->headerData(i, Qt::Horizontal).toString()));
+  }
+}
+
+QStandardItem* ResultView::viewItem(QVariant value) {
+  QStandardItem* item = new QStandardItem();
+  item->setData(value, Qt::DisplayRole);
+  item->setData(false, Qt::UserRole);
+  item->setEditable(!dataProvider->isReadOnly());
+  return item;
+}
+
+QList<QStandardItem*> ResultView::viewRow(int rowIdx, QSqlQueryModel *model) {
+  QList<QStandardItem*> row;
+  QSqlRecord r = model->record(rowIdx);
+  for (int j=0; j<model->columnCount(); j++) {
+    row << viewItem(r.value(j));
+  }
+  return row;
 }

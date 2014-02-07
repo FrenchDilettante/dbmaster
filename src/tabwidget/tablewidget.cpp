@@ -38,51 +38,36 @@ void TableWidget::refresh()
     emit closeRequested();
 }
 
-void TableWidget::reload() {
-  if(!m_db->isOpen())
-    return;
-
-  if(!m_db->tables(QSql::Tables).contains(m_table)
-    && !m_db->tables(QSql::Views).contains(m_table)
-    && !m_db->tables(QSql::SystemTables).contains(m_table))   {
-    QMessageBox::critical(this,
-                          tr("Error"),
-                          tr("Unable to open the table %1. ").append(
-                            tr("Check you have the necessary permissions."))
-                          .arg(m_table));
-    emit closeRequested();
-    return;
-  }
-
-  if (!tableView->setTable(m_table, m_db)) {
-    emit closeRequested();
-  } else {
-    columnsTree->clear();
-    SqlTable table = DbManager::instance->table(m_db, m_table);
-    foreach (SqlColumn c, table.columns) {
-      QStringList cols;
-      cols << c.name
-           << c.type.name
-           << ( c.permitsNull ? tr("Yes") : tr("No") )
-           << c.defaultValue.toString()
-           << c.comment;
-      QTreeWidgetItem *it = new QTreeWidgetItem(cols);
-      if (c.primaryKey) {
-        it->setIcon(0, IconManager::get("column_key"));
-      } else {
-        it->setIcon(0, IconManager::get("column"));
-      }
-      columnsTree->addTopLevelItem(it);
+void TableWidget::refreshStructure() {
+  columnsTree->clear();
+  SqlTable table = DbManager::instance->table(m_db, m_table);
+  foreach (SqlColumn c, table.columns) {
+    QStringList cols;
+    cols << c.name
+         << c.type.name
+         << ( c.permitsNull ? tr("Yes") : tr("No") )
+         << c.defaultValue.toString()
+         << c.comment;
+    QTreeWidgetItem *it = new QTreeWidgetItem(cols);
+    if (c.primaryKey) {
+      it->setIcon(0, IconManager::get("column_key"));
+    } else {
+      it->setIcon(0, IconManager::get("column"));
     }
+    columnsTree->addTopLevelItem(it);
   }
 }
 
-void TableWidget::setTable( QString table, QSqlDatabase *db )
-{
+void TableWidget::reload() {
+  tableView->reload();
+}
+
+void TableWidget::setTable(QString table, QSqlDatabase *db) {
   this->m_table = table;
   this->m_db = db;
 
-//  reload();
+  dataProvider = new TableDataProvider(table, db, this);
+  tableView->setDataProvider(dataProvider);
 }
 
 void TableWidget::setupWidgets() {
@@ -93,6 +78,7 @@ void TableWidget::setupWidgets() {
   columnsTree->header()->setSectionResizeMode(4, QHeaderView::Stretch);
 
   connect(tableView, SIGNAL(reloadRequested()), this, SLOT(reload()));
+  connect(tableView, SIGNAL(structureChanged()), this, SLOT(refreshStructure()));
 }
 
 QString TableWidget::table()
