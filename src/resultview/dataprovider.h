@@ -10,7 +10,6 @@ class DataProvider : public QThread {
 public:
   virtual QSqlQueryModel* model() =0;
 
-  virtual bool acceptsFilter() = 0;
   virtual bool isReadOnly() =0;
   virtual QSqlError lastError() =0;
 

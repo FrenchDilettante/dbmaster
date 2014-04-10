@@ -14,15 +14,15 @@ public:
   TableWidget(QWidget* =0);
   TableWidget(QString table, QSqlDatabase *db, QWidget *parent =0);
 
-  QIcon     icon();
-  QString   id();
-  void      refresh();
-  void      reload();
-  void      setTable( QString, QSqlDatabase* );
-  QString   table();
+  QIcon icon();
+  QString id();
+  void refresh();
+  void reload();
+  void setTable( QString, QSqlDatabase* );
+  QString table();
 
 private:
-  void      setupWidgets();
+  void setupWidgets();
 
   QSqlDatabase *m_db;
   TableDataProvider* dataProvider;

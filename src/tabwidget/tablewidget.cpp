@@ -76,6 +76,12 @@ void TableWidget::setupWidgets() {
   connect(pagination, SIGNAL(reload()), this, SLOT(reload()));
 
   tableView->setPagination(pagination);
+
+  insertButton->setIcon(IconManager::get("list-add"));
+  deleteButton->setIcon(IconManager::get("list-remove"));
+
+  connect(insertButton, SIGNAL(clicked()), tableView, SLOT(insertRow()));
+  connect(deleteButton, SIGNAL(clicked()), tableView, SLOT(deleteRow()));
 }
 
 QString TableWidget::table() {

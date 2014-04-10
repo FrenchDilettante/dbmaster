@@ -26,6 +26,8 @@ signals:
 
 public slots:
   void copy();
+  void deleteRow();
+  void insertRow();
   void resetColumnSizes();
   void resizeColumnsToContents();
 

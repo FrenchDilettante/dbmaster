@@ -10,7 +10,6 @@ Q_OBJECT
 public:
   explicit TableDataProvider(QString table, QSqlDatabase *db, QObject *parent = 0);
 
-  bool acceptsFilter() { return true; };
   bool isReadOnly() { return false; };
   QSqlError lastError();
   QSqlQueryModel* model() { return m_model; };

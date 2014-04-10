@@ -6,6 +6,7 @@
 #include <QMimeData>
 #include <QScrollBar>
 #include <QSqlRecord>
+#include <QSqlTableModel>
 
 ResultViewTable::ResultViewTable(QWidget *parent)
   : QTableView(parent) {
@@ -72,6 +73,20 @@ void ResultViewTable::copy() {
   QApplication::clipboard()->setMimeData(mime);
 }
 
+void ResultViewTable::deleteRow() {
+  QSet<int> rows;
+  foreach (QModelIndex i, selectionModel()->selectedIndexes()) {
+    rows << (i.row() + page * rowsPerPage);
+  }
+
+  foreach (int r, rows) {
+    dataProvider->model()->removeRow(r);
+  }
+
+  ((QSqlTableModel*) dataProvider->model())->submitAll();
+  updateView();
+}
+
 int ResultViewTable::endIndex(int start) {
   int end = start + rowsPerPage;
   if (end > dataProvider->model()->rowCount()) {
@@ -83,6 +98,10 @@ int ResultViewTable::endIndex(int start) {
 void ResultViewTable::firstPage() {
   page = 0;
   updateView();
+}
+
+void ResultViewTable::insertRow() {
+
 }
 
 void ResultViewTable::lastPage() {

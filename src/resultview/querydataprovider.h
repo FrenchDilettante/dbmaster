@@ -10,7 +10,6 @@ Q_OBJECT
 public:
   explicit QueryDataProvider(QObject *parent = 0);
 
-  bool acceptsFilter() { return false; };
   bool isReadOnly() { return true; };
   QSqlError lastError();
   QSqlQueryModel* model() { return m_model; };
