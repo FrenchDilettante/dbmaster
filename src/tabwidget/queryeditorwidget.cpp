@@ -3,7 +3,6 @@
 #include "../iconmanager.h"
 #include "../mainwindow.h"
 #include "../tools/logger.h"
-#include "../widgets/resultview.h"
 
 #include "queryeditorwidget.h"
 
@@ -11,6 +10,7 @@
 #include <QDebug>
 #include <QFileDialog>
 #include <QSqlQuery>
+#include <QSqlRecord>
 
 QueryEditorWidget::QueryEditorWidget(QWidget *parent)
   : AbstractTabWidget(parent) {
@@ -18,7 +18,7 @@ QueryEditorWidget::QueryEditorWidget(QWidget *parent)
   setupWidgets();
 
   dataProvider = new QueryDataProvider(this);
-  tabView->setDataProvider(dataProvider);
+  tableView->setDataProvider(dataProvider);
 
   setupConnections();
 
@@ -165,8 +165,7 @@ bool QueryEditorWidget::isSaved() {
 
 void QueryEditorWidget::keyPressEvent(QKeyEvent *event) {
   if (event->key() == Qt::Key_Escape) {
-    // Appui touche échap = masque le panel de résultat
-    tabView->hide();
+    tableContainer->hide();
     resultButton->setChecked(false);
   } else {
     QWidget::keyPressEvent(event);
@@ -216,7 +215,8 @@ void QueryEditorWidget::refresh() {
 }
 
 void QueryEditorWidget::reload() {
-  tabView->reload();
+  dataProvider->start();
+  // tableView->updateView();
 }
 
 void QueryEditorWidget::reloadContext(QSqlDatabase *db) {
@@ -275,7 +275,7 @@ void QueryEditorWidget::queryError() {
 }
 
 void QueryEditorWidget::querySuccess() {
-  tabView->setVisible(true);
+  tableContainer->setVisible(true);
   resultButton->setEnabled(true);
   resultButton->setChecked(true);
 
@@ -396,7 +396,7 @@ void QueryEditorWidget::setFilePath(QString path) {
 void QueryEditorWidget::setupConnections() {
   connect(dbChooser, SIGNAL(currentIndexChanged(int)),
           this, SLOT(checkDbOpen()));
-  connect(tabView, SIGNAL(reloadRequested()), this, SLOT(reload()));
+  connect(pagination, SIGNAL(reload()), this, SLOT(reload()));
 
   connect(runButton, SIGNAL(clicked()), this, SLOT(start()));
 
@@ -419,7 +419,8 @@ void QueryEditorWidget::setupConnections() {
 void QueryEditorWidget::setupWidgets() {
   editor->setFont(Config::editorFont);
 
-  tabView->hide();
+  tableContainer->hide();
+  tableView->setPagination(pagination);
 
   statusBar = new QStatusBar(this);
   statusBar->setSizeGripEnabled(false);
@@ -431,7 +432,7 @@ void QueryEditorWidget::setupWidgets() {
   resultButton->setEnabled(false);
   statusBar->addPermanentWidget(resultButton);
   connect(resultButton, SIGNAL(clicked(bool)),
-          tabView, SLOT(setVisible(bool)));
+          tableView, SLOT(setVisible(bool)));
 
   baseActions = CaseLower | CaseUpper | Copy | Cut | Paste | Print | SaveAs
               | Search | SelectAll;
@@ -450,7 +451,7 @@ void QueryEditorWidget::showEvent(QShowEvent *event) {
 
 void QueryEditorWidget::start() {
   resultButton->setChecked(false);
-  tabView->setVisible(false);
+  tableContainer->setVisible(false);
   resultButton->setEnabled(false);
   runButton->setEnabled(false);
 

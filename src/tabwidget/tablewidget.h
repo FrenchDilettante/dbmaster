@@ -5,6 +5,8 @@
 #include "resultview/tabledataprovider.h"
 #include "ui_tablewidget.h"
 
+#include <QStandardItemModel>
+
 class TableWidget: public AbstractTabWidget, Ui::TableWidget {
 Q_OBJECT
 

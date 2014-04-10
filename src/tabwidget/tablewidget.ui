@@ -21,8 +21,75 @@
        <string>Data</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout">
+       <item row="1" column="0">
+        <widget class="ResultViewTable" name="tableView">
+         <property name="sortingEnabled">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
        <item row="0" column="0">
-        <widget class="ResultView" name="tableView" native="true"/>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="PaginationWidget" name="pagination" native="true"/>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QToolButton" name="insertButton">
+           <property name="text">
+            <string>...</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QToolButton" name="removeButton">
+           <property name="text">
+            <string>...</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>0</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLabel" name="label">
+           <property name="text">
+            <string>WHERE</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="filterEdit"/>
+         </item>
+        </layout>
        </item>
       </layout>
      </widget>
@@ -68,9 +135,14 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>ResultView</class>
+   <class>ResultViewTable</class>
+   <extends>QTableView</extends>
+   <header>resultview/resultviewtable.h</header>
+  </customwidget>
+  <customwidget>
+   <class>PaginationWidget</class>
    <extends>QWidget</extends>
-   <header>../src/widgets/resultview.h</header>
+   <header>resultview/paginationwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

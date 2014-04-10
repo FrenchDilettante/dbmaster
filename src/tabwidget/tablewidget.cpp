@@ -3,8 +3,7 @@
 #include "tablewidget.h"
 
 TableWidget::TableWidget(QWidget *parent)
-  : AbstractTabWidget(parent)
-{
+  : AbstractTabWidget(parent) {
   setupUi(this);
 
   setupWidgets();
@@ -13,29 +12,26 @@ TableWidget::TableWidget(QWidget *parent)
 }
 
 TableWidget::TableWidget(QString table, QSqlDatabase *db, QWidget *parent)
-  : AbstractTabWidget(parent)
-{
+  : AbstractTabWidget(parent) {
   setupUi(this);
   setupWidgets();
   setTable(table, db);
 }
 
-QIcon TableWidget::icon()
-{
+QIcon TableWidget::icon() {
   return IconManager::get("table");
 }
 
-QString TableWidget::id()
-{
+QString TableWidget::id() {
   return QString("t %1 on %2")
       .arg(m_table)
       .arg(m_db->connectionName());
 }
 
-void TableWidget::refresh()
-{
-  if(!m_db->isOpen())
+void TableWidget::refresh() {
+  if (!m_db->isOpen()) {
     emit closeRequested();
+  }
 }
 
 void TableWidget::refreshStructure() {
@@ -59,7 +55,7 @@ void TableWidget::refreshStructure() {
 }
 
 void TableWidget::reload() {
-  tableView->reload();
+  dataProvider->start();
 }
 
 void TableWidget::setTable(QString table, QSqlDatabase *db) {
@@ -77,11 +73,11 @@ void TableWidget::setupWidgets() {
   columnsTree->header()->setSectionResizeMode(3, QHeaderView::ResizeToContents);
   columnsTree->header()->setSectionResizeMode(4, QHeaderView::Stretch);
 
-  connect(tableView, SIGNAL(reloadRequested()), this, SLOT(reload()));
-  connect(tableView, SIGNAL(structureChanged()), this, SLOT(refreshStructure()));
+  connect(pagination, SIGNAL(reload()), this, SLOT(reload()));
+
+  tableView->setPagination(pagination);
 }
 
-QString TableWidget::table()
-{
+QString TableWidget::table() {
   return m_table;
 }
