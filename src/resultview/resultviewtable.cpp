@@ -3,6 +3,7 @@
 #include <QClipboard>
 #include <QContextMenuEvent>
 #include <QDebug>
+#include <QMessageBox>
 #include <QMimeData>
 #include <QScrollBar>
 #include <QSqlRecord>
@@ -19,6 +20,29 @@ ResultViewTable::ResultViewTable(QWidget *parent)
 
   setupMenus();
   setupConnections();
+}
+
+void ResultViewTable::commit() {
+  showInsertRow = false;
+
+  if (modifiedRecords.size() == 0) {
+    return;
+  }
+
+  QSqlTableModel *tmodel = (QSqlTableModel*) dataProvider->model();
+
+  foreach (int row, modifiedRecords.keys()) {
+    tmodel->setRecord(row, modifiedRecords[row]);
+  }
+
+  modifiedRecords.clear();
+
+  if (!tmodel->submitAll()) {
+    QMessageBox::critical(this, "Error", tmodel->lastError().text());
+  }
+
+  tmodel->select();
+  updateView();
 }
 
 void ResultViewTable::contextMenuEvent(QContextMenuEvent *event) {
@@ -101,7 +125,10 @@ void ResultViewTable::firstPage() {
 }
 
 void ResultViewTable::insertRow() {
-
+  dataProvider->model()->insertRow(dataProvider->model()->rowCount());
+  showInsertRow = true;
+  updateView();
+  scrollToBottom();
 }
 
 void ResultViewTable::lastPage() {
@@ -163,6 +190,12 @@ void ResultViewTable::resizeColumnsToContents() {
   }
 }
 
+void ResultViewTable::rollback() {
+  showInsertRow = false;
+  ((QSqlTableModel*) dataProvider->model())->revertAll();
+  updateView();
+}
+
 void ResultViewTable::selectionChanged(const QItemSelection &selected,
                                        const QItemSelection &deselected) {
   QTableView::selectionChanged(selected, deselected);
@@ -210,6 +243,8 @@ void ResultViewTable::setupConnections() {
   connect(actionCopy, SIGNAL(triggered()), this, SLOT(copy()));
   connect(actionDetails, SIGNAL(triggered()), this, SLOT(showBlob()));
   connect(actionExport, SIGNAL(triggered()), this, SIGNAL(exportRequested()));
+  connect(shortModel, SIGNAL(itemChanged(QStandardItem*)),
+          this, SLOT(updateItem(QStandardItem*)));
 }
 
 void ResultViewTable::setupMenus() {
@@ -256,6 +291,19 @@ int ResultViewTable::startIndex() {
   }
   return start;
 }
+void ResultViewTable::updateItem(QStandardItem *item) {
+  emit editRequested(true);
+
+  QSqlRecord record;
+  int row = item->row() + page * rowsPerPage;
+  if (modifiedRecords.contains(row)) {
+    record = modifiedRecords[row];
+  } else {
+    record = dataProvider->model()->record(row);
+  }
+  record.setValue(item->column(), item->data(Qt::DisplayRole));
+  modifiedRecords[row] = record;
+}
 
 void ResultViewTable::updatePagination() {
   pagination->setPage(page, (int) dataProvider->model()->rowCount() / rowsPerPage);
@@ -268,12 +316,12 @@ void ResultViewTable::updateVerticalLabels(int start, int end) {
   for (int i=start; i<end; i++) {
     vlabels << QString::number(i+1);
   }
-  /*
-  if (currentAction == Insert) {
+
+  if (showInsertRow) {
     vlabels.removeLast();
     vlabels << "*";
   }
-  */
+
   shortModel->setVerticalHeaderLabels(vlabels);
 }
 

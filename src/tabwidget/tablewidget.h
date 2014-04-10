@@ -22,6 +22,7 @@ public:
   QString table();
 
 private:
+  void setupConnections();
   void setupWidgets();
 
   QSqlDatabase *m_db;
@@ -30,7 +31,11 @@ private:
   QSqlTableModel *model;
 
 private slots:
+  void commit();
+  void insertRow();
   void refreshStructure();
+  void rollback();
+  void setCommitRollbackButtonsEnabled(bool enabled);
 };
 
 #endif // TABLEWIDGET_H

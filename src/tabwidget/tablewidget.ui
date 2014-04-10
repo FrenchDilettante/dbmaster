@@ -56,6 +56,20 @@
           <widget class="QToolButton" name="deleteButton"/>
          </item>
          <item>
+          <widget class="QToolButton" name="commitButton">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QToolButton" name="rollbackButton">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
           <spacer name="horizontalSpacer">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>

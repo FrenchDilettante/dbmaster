@@ -15,7 +15,14 @@ TableWidget::TableWidget(QString table, QSqlDatabase *db, QWidget *parent)
   : AbstractTabWidget(parent) {
   setupUi(this);
   setupWidgets();
+  setupConnections();
   setTable(table, db);
+}
+
+void TableWidget::commit() {
+  setCommitRollbackButtonsEnabled(false);
+
+  tableView->commit();
 }
 
 QIcon TableWidget::icon() {
@@ -26,6 +33,12 @@ QString TableWidget::id() {
   return QString("t %1 on %2")
       .arg(m_table)
       .arg(m_db->connectionName());
+}
+
+void TableWidget::insertRow() {
+  setCommitRollbackButtonsEnabled(true);
+
+  tableView->insertRow();
 }
 
 void TableWidget::refresh() {
@@ -58,12 +71,37 @@ void TableWidget::reload() {
   dataProvider->start();
 }
 
+void TableWidget::rollback() {
+  setCommitRollbackButtonsEnabled(false);
+
+  tableView->rollback();
+}
+
+void TableWidget::setCommitRollbackButtonsEnabled(bool enabled) {
+  insertButton->setEnabled(!enabled);
+  deleteButton->setEnabled(!enabled);
+  commitButton->setEnabled(enabled);
+  rollbackButton->setEnabled(enabled);
+}
+
 void TableWidget::setTable(QString table, QSqlDatabase *db) {
   this->m_table = table;
   this->m_db = db;
 
   dataProvider = new TableDataProvider(table, db, this);
   tableView->setDataProvider(dataProvider);
+}
+
+void TableWidget::setupConnections() {
+  connect(pagination, SIGNAL(reload()), this, SLOT(reload()));
+
+  connect(tableView, SIGNAL(editRequested(bool)),
+          this, SLOT(setCommitRollbackButtonsEnabled(bool)));
+
+  connect(insertButton, SIGNAL(clicked()), this, SLOT(insertRow()));
+  connect(deleteButton, SIGNAL(clicked()), tableView, SLOT(deleteRow()));
+  connect(commitButton, SIGNAL(clicked()), this, SLOT(commit()));
+  connect(rollbackButton, SIGNAL(clicked()), this, SLOT(rollback()));
 }
 
 void TableWidget::setupWidgets() {
@@ -73,15 +111,12 @@ void TableWidget::setupWidgets() {
   columnsTree->header()->setSectionResizeMode(3, QHeaderView::ResizeToContents);
   columnsTree->header()->setSectionResizeMode(4, QHeaderView::Stretch);
 
-  connect(pagination, SIGNAL(reload()), this, SLOT(reload()));
-
   tableView->setPagination(pagination);
 
   insertButton->setIcon(IconManager::get("list-add"));
   deleteButton->setIcon(IconManager::get("list-remove"));
-
-  connect(insertButton, SIGNAL(clicked()), tableView, SLOT(insertRow()));
-  connect(deleteButton, SIGNAL(clicked()), tableView, SLOT(deleteRow()));
+  commitButton->setIcon(IconManager::get("transaction-commit"));
+  rollbackButton->setIcon(IconManager::get("transaction-rollback"));
 }
 
 QString TableWidget::table() {

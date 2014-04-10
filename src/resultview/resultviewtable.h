@@ -7,6 +7,7 @@
 #include "resultview/paginationwidget.h"
 
 #include <QMenu>
+#include <QSqlRecord>
 #include <QStandardItemModel>
 #include <QTableView>
 
@@ -21,15 +22,18 @@ public:
 
 signals:
   void alternateRowsRequested(bool);
+  void editRequested(bool);
   void exportRequested();
   void rowLeaved(int);
 
 public slots:
+  void commit();
   void copy();
   void deleteRow();
   void insertRow();
   void resetColumnSizes();
   void resizeColumnsToContents();
+  void rollback();
 
   void firstPage();
   void lastPage();
@@ -63,7 +67,9 @@ private:
   QMenu* contextMenu;
   int currentEditedRow;
   DataProvider* dataProvider =0;
+  QMap<int, QSqlRecord> modifiedRecords;
   QStandardItemModel *shortModel;
+  bool showInsertRow = false;
 
   PaginationWidget* pagination;
   int page = 0;
@@ -71,6 +77,7 @@ private:
 
 private slots:
   void showBlob();
+  void updateItem(QStandardItem *item);
   void updateView();
 };
 
