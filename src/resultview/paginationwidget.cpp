@@ -87,12 +87,12 @@ void PaginationWidget::setupWidgets() {
   lastPageButton = genButton(tr("Last page"), "go-last");
   layout->addWidget(lastPageButton);
 
-  layout->addSpacing(20);
+  layout->addSpacing(10);
 
   reloadButton = genButton(tr("Reload"), "view-refresh");
   layout->addWidget(reloadButton);
 
-  layout->addSpacing(20);
+  layout->addSpacing(10);
 
   layout->addWidget(genLabel(tr("Show")));
   layout->addWidget(resultSpinBox);
