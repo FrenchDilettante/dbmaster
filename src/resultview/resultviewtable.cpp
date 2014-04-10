@@ -241,6 +241,7 @@ int ResultViewTable::startIndex() {
 void ResultViewTable::updatePagination() {
   pagination->setPage(page, (int) dataProvider->model()->rowCount() / rowsPerPage);
   pagination->setRowsPerPage(rowsPerPage);
+  pagination->setReloadEnabled(true);
 }
 
 void ResultViewTable::updateVerticalLabels(int start, int end) {
@@ -258,7 +259,6 @@ void ResultViewTable::updateVerticalLabels(int start, int end) {
 }
 
 void ResultViewTable::updateView() {
-  updatePagination();
   resetColumnSizes();
 
   int hpos = horizontalScrollBar()->value();
@@ -270,6 +270,7 @@ void ResultViewTable::updateView() {
     return;
   }
 
+  updatePagination();
   updateViewHeader();
 
   if (dataProvider->model()->rowCount() == 0) {

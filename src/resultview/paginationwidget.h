@@ -13,6 +13,7 @@ public:
   explicit PaginationWidget(QWidget *parent = 0);
 
   void setPage(int page, int pageCount);
+  void setReloadEnabled(bool enable);
   void setRowsPerPage(int rows);
 
 signals:
@@ -20,6 +21,7 @@ signals:
   void last();
   void next();
   void previous();
+  void reload();
 
 public slots:
 
@@ -41,6 +43,8 @@ private:
   QToolButton* prevPageButton;
   QToolButton* nextPageButton;
   QToolButton* lastPageButton;
+
+  QToolButton* reloadButton;
 
   QSpinBox* resultSpinBox;
 

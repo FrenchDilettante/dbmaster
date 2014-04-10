@@ -41,6 +41,10 @@ void PaginationWidget::setPage(int page, int pageCount) {
   pageLabel->setText(genPageCount(page, pageCount));
 }
 
+void PaginationWidget::setReloadEnabled(bool enable) {
+  reloadButton->setEnabled(enable);
+}
+
 void PaginationWidget::setRowsPerPage(int rows) {
   resultSpinBox->setValue(rows);
 }
@@ -50,6 +54,7 @@ void PaginationWidget::setupConnections() {
   connect(prevPageButton, SIGNAL(clicked()), this, SIGNAL(previous()));
   connect(nextPageButton, SIGNAL(clicked()), this, SIGNAL(next()));
   connect(lastPageButton, SIGNAL(clicked()), this, SIGNAL(last()));
+  connect(reloadButton, SIGNAL(clicked()), this, SIGNAL(reload()));
 }
 
 void PaginationWidget::setupWidgets() {
@@ -81,6 +86,11 @@ void PaginationWidget::setupWidgets() {
   layout->addWidget(nextPageButton);
   lastPageButton = genButton(tr("Last page"), "go-last");
   layout->addWidget(lastPageButton);
+
+  layout->addSpacing(20);
+
+  reloadButton = genButton(tr("Reload"), "view-refresh");
+  layout->addWidget(reloadButton);
 
   layout->addSpacing(20);
 
