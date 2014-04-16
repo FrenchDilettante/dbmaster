@@ -10,7 +10,7 @@
     <height>436</height>
    </rect>
   </property>
-  <layout class="QGridLayout" name="gridLayout_4">
+  <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
     <widget class="QComboBox" name="dbChooser"/>
    </item>
@@ -103,7 +103,7 @@
       </property>
      </widget>
      <widget class="QWidget" name="tableContainer" native="true">
-      <layout class="QGridLayout" name="gridLayout">
+      <layout class="QGridLayout" name="tableLayout">
        <property name="leftMargin">
         <number>0</number>
        </property>

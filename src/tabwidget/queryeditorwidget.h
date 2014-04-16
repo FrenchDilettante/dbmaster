@@ -61,6 +61,7 @@ private:
   void updateTransactionButtons(QSqlDatabase* db);
 
   Actions               baseActions;
+  QLabel* cursorPositionLabel;
   QueryDataProvider* dataProvider;
   QString               filePath;
   int                   oldCount;
@@ -78,7 +79,7 @@ private slots:
   void rollback();
   void start();
   void startTransaction();
-  // void validateQuery();
+  void updateCursorPosition();
 };
 
 #endif // QUERYEDITORWIDGET_H

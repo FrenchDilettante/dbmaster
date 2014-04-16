@@ -212,6 +212,7 @@ void QueryEditorWidget::redo() {
 
 void QueryEditorWidget::refresh() {
   checkDbOpen();
+  updateCursorPosition();
 }
 
 void QueryEditorWidget::reload() {
@@ -402,6 +403,8 @@ void QueryEditorWidget::setupConnections() {
 
   connect(editor->document(), SIGNAL(modificationChanged(bool)),
           this, SIGNAL(modificationChanged(bool)));
+  connect(editor, SIGNAL(cursorPositionChanged()),
+          this, SLOT(updateCursorPosition()));
 
   connect(commitButton, SIGNAL(clicked()), this, SLOT(commit()));
   connect(rollbackButton, SIGNAL(clicked()), this, SLOT(rollback()));
@@ -430,7 +433,6 @@ void QueryEditorWidget::setupWidgets() {
   resultButton->setText(tr("Display result"));
   resultButton->setCheckable(true);
   resultButton->setEnabled(false);
-  statusBar->addPermanentWidget(resultButton);
   connect(resultButton, SIGNAL(clicked(bool)),
           tableView, SLOT(setVisible(bool)));
 
@@ -441,6 +443,12 @@ void QueryEditorWidget::setupWidgets() {
   dbChooser->setCurrentIndex(DbManager::instance->lastUsedDbIndex);
 
   runButton->setIcon(IconManager::get("player_play"));
+
+  cursorPositionLabel = new QLabel(this);
+
+
+  statusBar->addPermanentWidget(cursorPositionLabel);
+  statusBar->addPermanentWidget(resultButton);
 
   refresh();
 }
@@ -516,36 +524,6 @@ void QueryEditorWidget::upperCase() {
   }
 }
 
-/*
-void QueryEditorWidget::validateQuery() {
-  // tabWidget->setTabEnabled(1, false);
-
-  QString logMsg;
-
-  switch (dataProvider->lastError().type()) {
-  case QSqlError::NoError:
-<<<<<<< HEAD
-=======
-    tabView->setQuery(model);
-    tabView->setVisible(true);
-    resultButton->setEnabled(true);
-    resultButton->setChecked(true);
-    logMsg = tr("Query executed with success (%1 lines returned)")
-        .arg(model->rowCount());
-        // .arg(token->duration());
-
-    statusBar->showMessage(logMsg);
->>>>>>> next
-    break;
-
-  default:
-    break;
-  }
-
-  logMsg.append(
-        QString("<br /><span style=\"color: blue\">%1</span>")
-          .arg(query.lastQuery().replace("\n", " ")));
-  Logger::instance->log(logMsg);
-
-  runButton->setEnabled(true);
-}*/
+void QueryEditorWidget::updateCursorPosition() {
+  cursorPositionLabel->setText(tr("Line: %1, Col: %2").arg(editor->textCursor().blockNumber()+1).arg(editor->textCursor().columnNumber()+1));
+}
