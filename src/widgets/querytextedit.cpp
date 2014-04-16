@@ -7,6 +7,7 @@
 
 #include <QKeyEvent>
 #include <QScrollBar>
+#include <QTextDocumentFragment>
 
 QueryTextEdit::QueryTextEdit(QWidget *parent)
     : QTextEdit(parent)
@@ -37,13 +38,23 @@ void QueryTextEdit::focusInEvent(QFocusEvent *e)
   QTextEdit::focusInEvent(e);
 }
 
-void QueryTextEdit::keyPressEvent(QKeyEvent *event)
-{
-  if(Config::compCharCount == -1)
+void QueryTextEdit::keyPressEvent(QKeyEvent *event) {
+  if (event->key() == Qt::Key_Tab) {
+    if (event->modifiers() && Qt::ShiftModifier) {
+      tabUnindent();
+    } else {
+      tabIndent();
+    }
+    event->accept();
     return;
+  }
+
+  if(Config::compCharCount == -1) {
+    return;
+  }
 
   // If the completer is actually shown, it handles some keys
-  if(completer->popup()->isVisible()) {
+  if (completer->popup()->isVisible()) {
     switch(event->key()) {
     case Qt::Key_Enter:
     case Qt::Key_Return:
@@ -252,6 +263,38 @@ void QueryTextEdit::setupCompleter()
   completer->setModel(completerContextModel);
 
   reloadContext(QStringList(), QMultiMap<QString, QString>());
+}
+
+void QueryTextEdit::tabIndent() {
+  QTextCursor cur = textCursor();
+  QString text;
+
+  if (cur.hasSelection()) {
+    int start = cur.selectionStart();
+    int end = cur.selectionEnd();
+    cur.setPosition(start);
+    cur.movePosition(QTextCursor::StartOfLine);
+    cur.setPosition(end, QTextCursor::KeepAnchor);
+    start = cur.selectionStart();
+    text = cur.selection().toPlainText();
+    int idx = -1;
+
+    do {
+      text.insert(idx+1, indent);
+      idx = text.indexOf("\n", idx+1);
+    } while (idx > 0);
+
+    cur.insertText(text);
+    cur.setPosition(start);
+    cur.setPosition(start + text.length(), QTextCursor::KeepAnchor);
+    setTextCursor(cur);
+  } else {
+    cur.insertText(indent);
+  }
+}
+
+void QueryTextEdit::tabUnindent() {
+
 }
 
 QString QueryTextEdit::textUnderCursor() const
