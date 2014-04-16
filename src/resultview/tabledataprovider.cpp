@@ -17,11 +17,17 @@ QSqlError TableDataProvider::lastError() {
 
 void TableDataProvider::run() {
   m_model->setTable(table);
+  m_model->setFilter(filter);
   if (m_model->select()) {
     emit complete();
   } else {
     emit error();
   }
+}
+
+void TableDataProvider::setFilter(QString filter) {
+  this->filter = filter;
+  start();
 }
 
 /*

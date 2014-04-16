@@ -25,6 +25,10 @@ void TableWidget::commit() {
   tableView->commit();
 }
 
+void TableWidget::handleError() {
+  // TODO
+}
+
 QIcon TableWidget::icon() {
   return IconManager::get("table");
 }
@@ -90,6 +94,7 @@ void TableWidget::setTable(QString table, QSqlDatabase *db) {
 
   dataProvider = new TableDataProvider(table, db, this);
   tableView->setDataProvider(dataProvider);
+  connect(dataProvider, SIGNAL(error()), this, SLOT(handleError()));
 }
 
 void TableWidget::setupConnections() {
@@ -102,6 +107,8 @@ void TableWidget::setupConnections() {
   connect(deleteButton, SIGNAL(clicked()), tableView, SLOT(deleteRow()));
   connect(commitButton, SIGNAL(clicked()), this, SLOT(commit()));
   connect(rollbackButton, SIGNAL(clicked()), this, SLOT(rollback()));
+
+  connect(filterEdit, SIGNAL(editingFinished()), this, SLOT(updateFilter()));
 }
 
 void TableWidget::setupWidgets() {
@@ -121,4 +128,8 @@ void TableWidget::setupWidgets() {
 
 QString TableWidget::table() {
   return m_table;
+}
+
+void TableWidget::updateFilter() {
+  dataProvider->setFilter(filterEdit->text());
 }

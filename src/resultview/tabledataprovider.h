@@ -13,6 +13,7 @@ public:
   bool isReadOnly() { return false; };
   QSqlError lastError();
   QSqlQueryModel* model() { return m_model; };
+  void setFilter(QString filter);
 
 signals:
 
@@ -23,6 +24,7 @@ protected:
 
 private:
   QSqlDatabase* db;
+  QString filter = "";
   QSqlTableModel* m_model;
   QString table;
 

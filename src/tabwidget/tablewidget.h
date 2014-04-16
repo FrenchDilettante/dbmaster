@@ -32,10 +32,12 @@ private:
 
 private slots:
   void commit();
+  void handleError();
   void insertRow();
   void refreshStructure();
   void rollback();
   void setCommitRollbackButtonsEnabled(bool enabled);
+  void updateFilter();
 };
 
 #endif // TABLEWIDGET_H
