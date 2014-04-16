@@ -25,10 +25,6 @@ void TableWidget::commit() {
   tableView->commit();
 }
 
-void TableWidget::handleError() {
-  // TODO
-}
-
 QIcon TableWidget::icon() {
   return IconManager::get("table");
 }
@@ -94,7 +90,6 @@ void TableWidget::setTable(QString table, QSqlDatabase *db) {
 
   dataProvider = new TableDataProvider(table, db, this);
   tableView->setDataProvider(dataProvider);
-  connect(dataProvider, SIGNAL(error()), this, SLOT(handleError()));
 }
 
 void TableWidget::setupConnections() {

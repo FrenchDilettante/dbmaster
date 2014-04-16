@@ -553,6 +553,8 @@ void MainWindow::setupConnections() {
    */
   connect(dbWizard, SIGNAL(accepted()), this, SLOT(reloadDbList()));
 
+  connect(Logger::instance, SIGNAL(error()), logDock, SLOT(show()));
+
   /*
    * Tab widget
    */

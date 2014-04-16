@@ -21,3 +21,8 @@ void Logger::log(QString text) {
 
   emit entryAdded(dt, text);
 }
+
+void Logger::logError(QString text) {
+  log(QString("<span style=\"color: red\">%1</span>").arg(text));
+  emit error();
+}
