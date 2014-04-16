@@ -40,11 +40,13 @@ void QueryTextEdit::focusInEvent(QFocusEvent *e)
 
 void QueryTextEdit::keyPressEvent(QKeyEvent *event) {
   if (event->key() == Qt::Key_Tab) {
-    if (event->modifiers() && Qt::ShiftModifier) {
-      tabUnindent();
-    } else {
-      tabIndent();
-    }
+    tabIndent();
+    event->accept();
+    return;
+  }
+
+  if (event->key() == Qt::Key_Backtab) {
+    tabUnindent();
     event->accept();
     return;
   }
@@ -294,7 +296,37 @@ void QueryTextEdit::tabIndent() {
 }
 
 void QueryTextEdit::tabUnindent() {
+  QTextCursor cur = textCursor();
+  QString text;
 
+  if (cur.hasSelection()) {
+    int start = cur.selectionStart();
+    int end = cur.selectionEnd();
+    cur.setPosition(start);
+    cur.movePosition(QTextCursor::StartOfLine);
+    cur.setPosition(end, QTextCursor::KeepAnchor);
+    start = cur.selectionStart();
+    text = cur.selection().toPlainText();
+    int idx = -1;
+
+    do {
+      if (text.mid(idx+1, indent.length()) == indent) {
+        text.remove(idx+1, indent.length());
+      }
+      idx = text.indexOf("\n", idx+1);
+    } while (idx > 0);
+
+    cur.insertText(text);
+    cur.setPosition(start);
+    cur.setPosition(start + text.length(), QTextCursor::KeepAnchor);
+    setTextCursor(cur);
+  } else {
+    cur.movePosition(QTextCursor::StartOfLine);
+    cur.movePosition(QTextCursor::Right, QTextCursor::KeepAnchor, indent.length());
+    if (cur.selection().toPlainText() == indent) {
+      cur.removeSelectedText();
+    }
+  }
 }
 
 QString QueryTextEdit::textUnderCursor() const
