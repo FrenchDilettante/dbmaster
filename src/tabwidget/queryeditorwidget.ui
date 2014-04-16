@@ -38,6 +38,9 @@
      <property name="text">
       <string/>
      </property>
+     <property name="autoRaise">
+      <bool>true</bool>
+     </property>
     </widget>
    </item>
    <item row="0" column="3">
@@ -47,6 +50,9 @@
      </property>
      <property name="text">
       <string/>
+     </property>
+     <property name="autoRaise">
+      <bool>true</bool>
      </property>
     </widget>
    </item>
@@ -137,11 +143,6 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>QueryTextEdit</class>
-   <extends>QPlainTextEdit</extends>
-   <header>../src/widgets/querytextedit.h</header>
-  </customwidget>
-  <customwidget>
    <class>ResultViewTable</class>
    <extends>QTableView</extends>
    <header>resultview/resultviewtable.h</header>
@@ -151,6 +152,11 @@
    <extends>QWidget</extends>
    <header>resultview/paginationwidget.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>QueryTextEdit</class>
+   <extends>QPlainTextEdit</extends>
+   <header>../src/widgets/querytextedit.h</header>
   </customwidget>
  </customwidgets>
  <resources>
