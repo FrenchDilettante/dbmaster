@@ -7,6 +7,8 @@
 #include "plugins/pluginmanager.h"
 #include "tabwidget/abstracttabwidget.h"
 
+#include <QSqlRecord>
+
 DbManager* DbManager::instance;
 
 DbManager::DbManager()
