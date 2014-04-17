@@ -125,7 +125,7 @@
      <x>0</x>
      <y>0</y>
      <width>841</width>
-     <height>29</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuTools">
@@ -197,9 +197,21 @@
      </property>
      <addaction name="actionLeftPanel"/>
     </widget>
+    <widget class="QMenu" name="menuIndentation">
+     <property name="title">
+      <string>Indentation</string>
+     </property>
+     <addaction name="actionIndentUsingSpaces"/>
+     <addaction name="separator"/>
+     <addaction name="actionTabWidth_2"/>
+     <addaction name="actionTabWidth_4"/>
+     <addaction name="actionTabWidth_8"/>
+    </widget>
     <addaction name="menuPanels"/>
     <addaction name="actionPreviousTab"/>
     <addaction name="actionNextTab"/>
+    <addaction name="separator"/>
+    <addaction name="menuIndentation"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menu_Edit"/>
@@ -686,6 +698,38 @@
    </property>
    <property name="shortcut">
     <string>Shift+F5</string>
+   </property>
+  </action>
+  <action name="actionIndentUsingSpaces">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Indent using spaces</string>
+   </property>
+  </action>
+  <action name="actionTabWidth_2">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Tab width: 2</string>
+   </property>
+  </action>
+  <action name="actionTabWidth_4">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Tab width: 4</string>
+   </property>
+  </action>
+  <action name="actionTabWidth_8">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Tab width: 8</string>
    </property>
   </action>
  </widget>
