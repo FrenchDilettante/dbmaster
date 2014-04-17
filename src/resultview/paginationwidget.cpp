@@ -70,6 +70,9 @@ void PaginationWidget::setupWidgets() {
   resultSpinBox->setValue(30);
 
   layout = new QHBoxLayout(this);
+  QMargins margins = layout->contentsMargins();
+  margins.setLeft(0);
+  layout->setContentsMargins(margins);
   layout->setSpacing(0);
   setLayout(layout);
   setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);

@@ -434,7 +434,7 @@ void QueryEditorWidget::setupWidgets() {
   resultButton->setCheckable(true);
   resultButton->setEnabled(false);
   connect(resultButton, SIGNAL(clicked(bool)),
-          tableView, SLOT(setVisible(bool)));
+          tableContainer, SLOT(setVisible(bool)));
 
   baseActions = CaseLower | CaseUpper | Copy | Cut | Paste | Print | SaveAs
               | Search | SelectAll;
