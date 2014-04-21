@@ -2,7 +2,7 @@
 # Project created by QtCreator 2009-06-01T16:44:04
 # -------------------------------------------------
 
-QT += printsupport sql widgets webkitwidgets
+QT += printsupport sql widgets
 TARGET = dbmaster
 TEMPLATE = app
 SOURCES += main.cpp \
@@ -22,7 +22,6 @@ SOURCES += main.cpp \
     wizards/firstlaunchwizard.cpp \
     wizards/exportwizard.cpp \
     widgets/dbtreeview.cpp \
-    widgets/tooltipframe.cpp \
     plugins/plugindialog.cpp \
     plugins/pluginmanager.cpp \
     iconmanager.cpp \
@@ -63,7 +62,6 @@ HEADERS += mainwindow.h \
     wizards/firstlaunchwizard.h \
     wizards/exportwizard.h \
     widgets/dbtreeview.h \
-    widgets/tooltipframe.h \
     plugins/sqlwrapper.h \
     plugins/plugindialog.h \
     plugins/plugin.h \
@@ -104,7 +102,6 @@ FORMS += mainwindow.ui \
     wizards/firstlaunchwizard.ui \
     wizards/ew_firstpage.ui \
     wizards/ew_exportpage.ui \
-    widgets/tooltipframe.ui \
     plugins/plugindialog.ui \
     dialogs/searchdialog.ui \
     tabwidget/schemawidget.ui \
