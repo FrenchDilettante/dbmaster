@@ -46,7 +46,8 @@ SOURCES += main.cpp \
     resultview/dataprovider.cpp \
     resultview/tabledataprovider.cpp \
     resultview/querydataprovider.cpp \
-    resultview/paginationwidget.cpp
+    resultview/paginationwidget.cpp \
+    resultview/sqlitemdelegate.cpp
 HEADERS += mainwindow.h \
     dbmanager.h \
     tabwidget/tablewidget.h \
@@ -91,7 +92,8 @@ HEADERS += mainwindow.h \
     resultview/dataprovider.h \
     resultview/tabledataprovider.h \
     resultview/querydataprovider.h \
-    resultview/paginationwidget.h
+    resultview/paginationwidget.h \
+    resultview/sqlitemdelegate.h
 FORMS += mainwindow.ui \
     dialogs/dbdialog.ui \
     tabwidget/queryeditorwidget.ui \

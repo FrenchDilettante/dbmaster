@@ -5,6 +5,7 @@
 #include "../dialogs/blobdialog.h"
 #include "resultview/dataprovider.h"
 #include "resultview/paginationwidget.h"
+#include "resultview/sqlitemdelegate.h"
 
 #include <QMenu>
 #include <QSqlRecord>
@@ -67,6 +68,7 @@ private:
   QMenu* contextMenu;
   int currentEditedRow;
   DataProvider* dataProvider =0;
+  SqlItemDelegate* sqlItemDelegate;
   QMap<int, QSqlRecord> modifiedRecords;
   QStandardItemModel *shortModel;
   bool showInsertRow = false;

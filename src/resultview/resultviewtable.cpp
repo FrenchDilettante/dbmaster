@@ -17,6 +17,8 @@ ResultViewTable::ResultViewTable(QWidget *parent)
   blobDialog = new BlobDialog(this);
   shortModel = new QStandardItemModel(this);
   setModel(shortModel);
+  sqlItemDelegate = new SqlItemDelegate(this);
+  setItemDelegate(sqlItemDelegate);
 
   setupMenus();
   setupConnections();
