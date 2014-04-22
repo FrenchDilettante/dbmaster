@@ -17,12 +17,10 @@ Q_OBJECT
 public:
   ResultViewTable(QWidget *parent = 0);
 
-  void setAlternatingRowColors(bool enable);
   void setDataProvider(DataProvider* dataProvider);
   void setPagination(PaginationWidget* pagination);
 
 signals:
-  void alternateRowsRequested(bool);
   void editRequested(bool);
   void exportRequested();
   void rowLeaved(int);
@@ -58,7 +56,6 @@ private:
   QStandardItem* viewItem(QVariant value);
   QList<QStandardItem*> viewRow(int rowIdx);
 
-  QAction* actionAlternateColor;
   QAction* actionCopy;
   QAction* actionDetails;
   QAction* actionExport;

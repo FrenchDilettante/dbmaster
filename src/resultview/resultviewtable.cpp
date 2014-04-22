@@ -215,12 +215,6 @@ void ResultViewTable::selectionChanged(const QItemSelection &selected,
   }
 }
 
-void ResultViewTable::setAlternatingRowColors(bool enable) {
-   actionAlternateColor->setChecked(enable);
-
-   QTableView::setAlternatingRowColors(enable);
-}
-
 void ResultViewTable::setDataProvider(DataProvider *dataProvider) {
   this->dataProvider = dataProvider;
 
@@ -240,8 +234,6 @@ void ResultViewTable::setPagination(PaginationWidget *pagination) {
 }
 
 void ResultViewTable::setupConnections() {
-  connect(actionAlternateColor, SIGNAL(toggled(bool)),
-          this, SIGNAL(alternateRowsRequested(bool)));
   connect(actionCopy, SIGNAL(triggered()), this, SLOT(copy()));
   connect(actionDetails, SIGNAL(triggered()), this, SLOT(showBlob()));
   connect(actionExport, SIGNAL(triggered()), this, SIGNAL(exportRequested()));
@@ -255,13 +247,6 @@ void ResultViewTable::setupMenus() {
   actionDetails = new QAction(tr("Details"), this);
   actionDetails->setEnabled(false);
   contextMenu->addAction(actionDetails);
-
-  actionAlternateColor = new QAction(tr("Alternate row colors"), this);
-  actionAlternateColor->setCheckable(true);
-  actionAlternateColor->setChecked(false);
-  contextMenu->addAction(actionAlternateColor);
-
-  contextMenu->addSeparator();
 
   actionCopy = new QAction(tr("Copy"), this);
   actionCopy->setIcon(IconManager::get("edit-copy"));

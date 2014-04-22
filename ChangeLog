@@ -4,11 +4,13 @@
 
   * Transaction support
   * Simple table filter
+  * Homepage removed
 
 == Improvements ==
 
   * Display column/line in editor's status bar
   * Display "null" in result view
+
 
 = 0.9 =
 
