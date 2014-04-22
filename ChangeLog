@@ -1,3 +1,15 @@
+= 0.10 =
+
+== Highlights ==
+
+  * Transaction support
+  * Simple table filter
+
+== Improvements ==
+
+  * Display column/line in editor's status bar
+  * Display "null" in result view
+
 = 0.9 =
 
 == Highlights ==
