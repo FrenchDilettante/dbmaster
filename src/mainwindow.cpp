@@ -439,8 +439,6 @@ void MainWindow::saveSettings() {
     s.remove("maximized");
   }
 
-  s.setValue("tooltips", tooltipButton->isChecked());
-
   s.setValue("maindock_visible", dockWidget->isVisible());
   s.setValue("maindock_area", dockWidgetArea(dockWidget));
   s.setValue("maindock_floating", dockWidget->isFloating());
@@ -562,7 +560,6 @@ void MainWindow::setupConnections() {
   connect(tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
 
   connect(clearLogsButton, SIGNAL(clicked()), logBrowser, SLOT(clear()));
-  connect(homepageView, SIGNAL(linkClicked(QUrl)), this, SLOT(openHomepageLink(QUrl)));
 }
 
 void MainWindow::setupDialogs() {
@@ -607,12 +604,6 @@ void MainWindow::setupDocks(QSettings *s) {
   QMainWindow::statusBar()->addWidget(logButton);
 }
 
-void MainWindow::setupHomepage() {
-  QString url("http://static.dbmaster-project.org/0.9/?version=%1");
-  homepageView->setUrl(url.arg(QApplication::applicationVersion()));
-  homepageView->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
-}
-
 void MainWindow::setupIcons() {
   actionAddDb->setIcon(         IconManager::get("database_add"));
   actionConnect->setIcon(       IconManager::get("database_go"));
@@ -632,7 +623,6 @@ void MainWindow::setupIcons() {
   actionUndo->setIcon(          IconManager::get("edit-undo"));
 
   clearLogsButton->setIcon(     IconManager::get("edit-clear"));
-  tooltipButton->setIcon(       IconManager::get("help-faq"));
   tabWidget->setTabIcon(0,      IconManager::get("go-home"));
 }
 
@@ -674,11 +664,6 @@ void MainWindow::setupRecentFiles(QSettings *s) {
   refreshRecent();
 }
 
-void MainWindow::setupTooltips(QSettings *s) {
-  tooltipButton->setChecked(s->value("tooltips", true).toBool());
-  tooltipFrame->setVisible(s->value("tooltips", true).toBool());
-}
-
 void MainWindow::setupWidgets() {
   setupActionMap();
   setupDialogs();
@@ -688,14 +673,12 @@ void MainWindow::setupWidgets() {
 
   loadSettings(&s);
   setupDocks(&s);
-  setupTooltips(&s);
 
   s.endGroup();
 
   setupRecentFiles(&s);
 
   setupDbActions();
-  setupHomepage();
   setupIcons();
   setupQueriesStatusLabel();
 }

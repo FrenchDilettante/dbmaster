@@ -52,12 +52,10 @@ private:
   void                setupDbActions();
   void                setupDialogs();
   void                setupDocks(QSettings *s);
-  void                setupHomepage();
   void                setupIcons();
   QToolButton*        setupLogButton(QAction* logAct);
   void                setupQueriesStatusLabel();
   void                setupRecentFiles(QSettings* s);
-  void                setupTooltips(QSettings* s);
   void                setupWidgets();
 
   AboutDialog        *aboutDial;
