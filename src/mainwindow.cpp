@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include "config.h"
 #include "dbmanager.h"
 #include "iconmanager.h"
 
@@ -19,12 +20,14 @@
 
 DbDialog     *MainWindow::dbDialog;
 NewDbWizard  *MainWindow::dbWizard;
+MainWindow* MainWindow::instance;
 PluginDialog *MainWindow::pluginDialog;
 
 MainWindow::MainWindow(QWidget *parent)
   : QMainWindow(parent) {
   dbDialog      = new DbDialog(this);
   dbWizard      = new NewDbWizard(this);
+  instance = this;
   pluginDialog  = new PluginDialog(this);
 
   setupUi(this);
@@ -509,6 +512,7 @@ void MainWindow::setupConnections() {
   connect(actionDbManager,    SIGNAL(triggered()),  dbDialog,      SLOT(exec()));
   connect(actionDisconnect,   SIGNAL(triggered()),  dbTreeView,    SLOT(disconnectCurrent()));
   connect(actionEditConnection,SIGNAL(triggered()), dbTreeView,    SLOT(editCurrent()));
+  connect(actionIndentUsingSpaces, SIGNAL(triggered(bool)), this,  SLOT(setIndentationSpaces(bool)));
   connect(actionLeftPanel,    SIGNAL(triggered()),  this,          SLOT(toggleLeftPanel()));
   connect(actionLowerCase,    SIGNAL(triggered()),  this,          SLOT(lowerCase()));
   connect(actionNewQuery,     SIGNAL(triggered()),  this,          SLOT(newQuery()));
@@ -526,6 +530,9 @@ void MainWindow::setupConnections() {
   connect(actionSaveQueryAs,  SIGNAL(triggered()),  this,          SLOT(saveQueryAs()));
   connect(actionSearch,       SIGNAL(triggered()),  this,          SLOT(search()));
   connect(actionSelect_all,   SIGNAL(triggered()),  this,          SLOT(selectAll()));
+  connect(actionTabWidth_2,   SIGNAL(triggered()),  this,          SLOT(setIndentation2Spaces()));
+  connect(actionTabWidth_4,   SIGNAL(triggered()),  this,          SLOT(setIndentation4Spaces()));
+  connect(actionTabWidth_8,   SIGNAL(triggered()),  this,          SLOT(setIndentation8Spaces()));
   connect(actionUndo,         SIGNAL(triggered()),  this,          SLOT(undo()));
   connect(actionUpperCase,    SIGNAL(triggered()),  this,          SLOT(upperCase()));
 
@@ -702,6 +709,52 @@ void MainWindow::updateDbActions() {
   actionConnect->setEnabled(select && !dbOpen);
   actionDisconnect->setEnabled(select && dbOpen);
   actionRefreshConnection->setEnabled(select);
+}
+
+void MainWindow::setIndentation2Spaces() {
+  actionTabWidth_4->setChecked(false);
+  actionTabWidth_8->setChecked(false);
+
+  Config::editorIndentation = "  ";
+  Config::editorTabSize = 2;
+  Config::save();
+  emit indentationChanged();
+}
+
+void MainWindow::setIndentation4Spaces() {
+  actionTabWidth_2->setChecked(false);
+  actionTabWidth_8->setChecked(false);
+
+  Config::editorIndentation = "    ";
+  Config::editorTabSize = 4;
+  Config::save();
+  emit indentationChanged();
+}
+
+void MainWindow::setIndentation8Spaces() {
+  actionTabWidth_2->setChecked(false);
+  actionTabWidth_4->setChecked(false);
+
+  Config::editorIndentation = "        ";
+  Config::editorTabSize = 8;
+  Config::save();
+  emit indentationChanged();
+}
+
+void MainWindow::setIndentationSpaces(bool enabled) {
+  if (!enabled) {
+    Config::editorIndentation = "\t";
+  } else {
+    if (actionTabWidth_2->isChecked()) {
+      Config::editorIndentation = "  ";
+    } else if (actionTabWidth_8->isChecked()) {
+      Config::editorIndentation = "        ";
+    } else {
+      Config::editorIndentation = "    ";
+    }
+  }
+  Config::save();
+  emit indentationChanged();
 }
 
 void MainWindow::upperCase() {

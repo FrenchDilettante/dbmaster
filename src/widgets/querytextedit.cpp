@@ -4,6 +4,7 @@
 #include "querytextedit.h"
 
 #include "../config.h"
+#include "mainwindow.h"
 
 #include <QKeyEvent>
 #include <QScrollBar>
@@ -14,17 +15,16 @@ QueryTextEdit::QueryTextEdit(QWidget *parent)
 {
   syntax = new SqlHighlighter(this);
 
+  connect(MainWindow::instance, SIGNAL(indentationChanged()),
+          this, SLOT(updateTabSize()));
+
   setupCompleter();
 
   QFont f = Config::editorFont;
   f.setPointSize(Config::editorFont.pointSize());
   setFont(Config::editorFont);
   setFontPointSize(Config::editorFont.pointSize());
-  QFontMetrics metrics(f);
-  setTabStopWidth(Config::editorTabSize * metrics.width(' '));
-//  setOpenExternalLinks(true);
-//  setOpenLinks(true);
-//  setReadOnly(false);
+  updateTabSize();
 }
 
 void QueryTextEdit::cleanTables()
@@ -269,6 +269,7 @@ void QueryTextEdit::setupCompleter()
 
 void QueryTextEdit::tabIndent() {
   QTextCursor cur = textCursor();
+  QString indent = Config::editorIndentation;
   QString text;
 
   if (cur.hasSelection()) {
@@ -297,6 +298,7 @@ void QueryTextEdit::tabIndent() {
 
 void QueryTextEdit::tabUnindent() {
   QTextCursor cur = textCursor();
+  QString indent = Config::editorIndentation;
   QString text;
 
   if (cur.hasSelection()) {
@@ -334,4 +336,9 @@ QString QueryTextEdit::textUnderCursor() const
   QTextCursor tc = textCursor();
   tc.select( QTextCursor::WordUnderCursor );
   return tc.selectedText();
+}
+
+void QueryTextEdit::updateTabSize() {
+  QFontMetrics metrics(font());
+  setTabStopWidth(Config::editorTabSize * metrics.width(' '));
 }

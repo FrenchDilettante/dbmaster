@@ -20,6 +20,7 @@ public:
   static QFont            editorFont;
   static bool             editorAutoSave;
   static QString          editorEncoding;
+  static QString editorIndentation;
   static bool             editorSemantic;
   static QMap<QString,QColor> shColor;
   static QMap<QString,QTextCharFormat> shFormat;

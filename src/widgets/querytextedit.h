@@ -26,7 +26,6 @@ private:
   QCompleter *completer;
 
   QStringListModel *completerContextModel;
-  QString indent = "    ";
   QStringList tables;
   SqlHighlighter *syntax;
 
@@ -36,6 +35,7 @@ private slots:
   void scanTables();
   void tabIndent();
   void tabUnindent();
+  void updateTabSize();
 };
 
 #endif // QUERYTEXTEDIT_H

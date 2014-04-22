@@ -8,6 +8,7 @@ QString         Config::defaultDriver   = "";
 bool            Config::editorAutoSave  = false;
 QString         Config::editorEncoding  = "utf8";
 QFont           Config::editorFont;
+QString Config::editorIndentation = "\t";
 bool            Config::editorSemantic  = true;
 QMap<QString,QColor> Config::shColor;
 QMap<QString,QTextCharFormat> Config::shFormat;

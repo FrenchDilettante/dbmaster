@@ -24,7 +24,11 @@ public:
 
   static DbDialog      *dbDialog;
   static NewDbWizard   *dbWizard;
+  static MainWindow* instance;
   static PluginDialog  *pluginDialog;
+
+signals:
+  void indentationChanged();
 
 public slots:
   void addRecentFile(QString file);
@@ -86,6 +90,10 @@ private slots:
   void refreshTabActions();
   void search();
   void selectAll();
+  void setIndentation2Spaces();
+  void setIndentation4Spaces();
+  void setIndentation8Spaces();
+  void setIndentationSpaces(bool enabled);
   void undo();
   void updateDbActions();
   void upperCase();
