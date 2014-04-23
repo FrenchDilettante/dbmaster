@@ -14,6 +14,7 @@ QMap<QString,QColor> Config::shColor;
 QMap<QString,QTextCharFormat> Config::shFormat;
 QStringList     Config::shGroupList;
 int             Config::editorTabSize   = 4;
+bool Config::editorTabUseSpaces = false;
 
 void Config::init() {
   shGroupList << "sql_basics" << "sql_functions" << "sql_types" << "strings"
@@ -39,11 +40,13 @@ void Config::reload() {
   editorAutoSave    = s.value("autosave").toBool();
   compCharCount     = s.value("comp_count").toInt();
   editorTabSize     = s.value("tabsize").toInt();
+  editorTabUseSpaces = s.value("tabusespaces").toBool();
   editorEncoding    = s.value("encoding").toString();
   editorFont.setFamily(s.value("font_name").toString());
   if (s.value("font_size").toInt() > 0) {
     editorFont.setPointSize(s.value("font_size").toInt());
   }
+  updateIndentation(false);
   editorSemantic    = s.value("semantic").toBool();
   s.endGroup();
 
@@ -81,6 +84,7 @@ void Config::save() {
   s.setValue("autosave", editorAutoSave);
   s.setValue("comp_count", compCharCount);
   s.setValue("tabsize", editorTabSize);
+  s.setValue("tabusespaces", editorTabUseSpaces);
   s.setValue("encoding", editorEncoding);
   s.setValue("semantic", editorSemantic);
   s.endGroup();
@@ -103,4 +107,27 @@ void Config::save() {
   s.endArray();
 
   s.sync();
+}
+
+QString Config::updateIndentation(bool saveSettings) {
+  if (editorTabUseSpaces) {
+    switch (editorTabSize) {
+    case 2:
+      editorIndentation = "  ";
+      break;
+    case 4:
+      editorIndentation = "    ";
+      break;
+    case 8:
+      editorIndentation = "        ";
+      break;
+    }
+  } else {
+    editorIndentation = "\t";
+  }
+
+  if (saveSettings) {
+    save();
+  }
+  return editorIndentation;
 }

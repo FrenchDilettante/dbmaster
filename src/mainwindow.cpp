@@ -194,6 +194,11 @@ void MainWindow::loadSettings(QSettings *s) {
   if (s->value("maximized", false).toBool()) {
     setWindowState(Qt::WindowMaximized);
   }
+
+  actionIndentUsingSpaces->setChecked(Config::editorTabUseSpaces);
+  actionTabWidth_2->setChecked(Config::editorTabSize == 2);
+  actionTabWidth_4->setChecked(Config::editorTabSize == 4);
+  actionTabWidth_8->setChecked(Config::editorTabSize == 8);
 }
 
 void MainWindow::lowerCase() {
@@ -715,9 +720,8 @@ void MainWindow::setIndentation2Spaces() {
   actionTabWidth_4->setChecked(false);
   actionTabWidth_8->setChecked(false);
 
-  Config::editorIndentation = "  ";
   Config::editorTabSize = 2;
-  Config::save();
+  Config::updateIndentation();
   emit indentationChanged();
 }
 
@@ -725,9 +729,8 @@ void MainWindow::setIndentation4Spaces() {
   actionTabWidth_2->setChecked(false);
   actionTabWidth_8->setChecked(false);
 
-  Config::editorIndentation = "    ";
   Config::editorTabSize = 4;
-  Config::save();
+  Config::updateIndentation();
   emit indentationChanged();
 }
 
@@ -735,25 +738,14 @@ void MainWindow::setIndentation8Spaces() {
   actionTabWidth_2->setChecked(false);
   actionTabWidth_4->setChecked(false);
 
-  Config::editorIndentation = "        ";
   Config::editorTabSize = 8;
-  Config::save();
+  Config::editorIndentation = "        ";
   emit indentationChanged();
 }
 
 void MainWindow::setIndentationSpaces(bool enabled) {
-  if (!enabled) {
-    Config::editorIndentation = "\t";
-  } else {
-    if (actionTabWidth_2->isChecked()) {
-      Config::editorIndentation = "  ";
-    } else if (actionTabWidth_8->isChecked()) {
-      Config::editorIndentation = "        ";
-    } else {
-      Config::editorIndentation = "    ";
-    }
-  }
-  Config::save();
+  Config::editorTabUseSpaces = enabled;
+  Config::updateIndentation();
   emit indentationChanged();
 }
 

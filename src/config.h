@@ -14,6 +14,7 @@ public:
   static void init();
   static void reload();
   static void save();
+  static QString updateIndentation(bool saveSettings=true);
 
   static int              compCharCount;
   static QString          defaultDriver;
@@ -26,6 +27,7 @@ public:
   static QMap<QString,QTextCharFormat> shFormat;
   static QStringList      shGroupList;
   static int              editorTabSize;
+  static bool editorTabUseSpaces;
 };
 
 #endif // CONFIG_H
