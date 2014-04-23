@@ -10,6 +10,7 @@
 
   * Display column/line in editor's status bar
   * Display "null" in result view
+  * Auto-select current query
 
 
 = 0.9 =

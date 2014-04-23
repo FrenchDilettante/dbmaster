@@ -289,12 +289,24 @@ void QueryEditorWidget::querySuccess() {
 }
 
 QString QueryEditorWidget::queryText() {
-  QString qtext = editor->textCursor().selectedText();
-  if (qtext.isEmpty()) {
-    qtext = editor->toPlainText();
+  QTextCursor tc = editor->textCursor();
+  QString qtext = tc.selectedText();
+  if (!qtext.isEmpty()) {
+    return qtext;
   }
 
-  return qtext;
+  qtext = editor->toPlainText();
+  tc.movePosition(QTextCursor::StartOfLine);
+
+  if (qtext.contains(";")) {
+    int start = qtext.lastIndexOf(";", tc.position());
+    int end = qtext.indexOf(";", tc.position());
+    start = start < -1 ? 0 : start+1;
+    end = end < -1 ? qtext.length()-1 : end;
+    return qtext.mid(start, end-start);
+  } else {
+    return qtext;
+  }
 }
 
 void QueryEditorWidget::rollback() {

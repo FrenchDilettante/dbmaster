@@ -2,6 +2,8 @@
 
 #include "tools/logger.h"
 
+#include <QDebug>
+
 QueryDataProvider::QueryDataProvider(QObject *parent) {
   m_model = new QSqlQueryModel();
 
@@ -14,7 +16,7 @@ QSqlError QueryDataProvider::lastError() {
 
 void QueryDataProvider::run() {
   m_model->setQuery(query, db);
-  QString logMsg;
+  qDebug() << query;
 
   if (m_model->lastError().type() == QSqlError::NoError) {
     emit success();
