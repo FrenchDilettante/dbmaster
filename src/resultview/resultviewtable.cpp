@@ -248,6 +248,12 @@ void ResultViewTable::setPagination(PaginationWidget *pagination) {
   connect(this->pagination, SIGNAL(previous()), this, SLOT(previousPage()));
   connect(this->pagination, SIGNAL(next()), this, SLOT(nextPage()));
   connect(this->pagination, SIGNAL(last()), this, SLOT(lastPage()));
+  connect(this->pagination, SIGNAL(rowsPerPageChanged(int)), this, SLOT(setRowsPerPage(int)));
+}
+
+void ResultViewTable::setRowsPerPage(int rpp) {
+  this->rowsPerPage = rpp;
+  updateView();
 }
 
 void ResultViewTable::setupConnections() {

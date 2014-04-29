@@ -22,6 +22,7 @@ signals:
   void next();
   void previous();
   void reload();
+  void rowsPerPageChanged(int);
 
 public slots:
 

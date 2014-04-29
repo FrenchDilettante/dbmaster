@@ -55,6 +55,8 @@ void PaginationWidget::setupConnections() {
   connect(nextPageButton, SIGNAL(clicked()), this, SIGNAL(next()));
   connect(lastPageButton, SIGNAL(clicked()), this, SIGNAL(last()));
   connect(reloadButton, SIGNAL(clicked()), this, SIGNAL(reload()));
+  connect(resultSpinBox, SIGNAL(valueChanged(int)),
+          this, SIGNAL(rowsPerPageChanged(int)));
 }
 
 void PaginationWidget::setupWidgets() {
@@ -62,7 +64,7 @@ void PaginationWidget::setupWidgets() {
   pageLabel = genLabel(genPageCount(-1, -1));
 
   resultSpinBox = new QSpinBox(this);
-  resultSpinBox->setEnabled(false);
+  // resultSpinBox->setEnabled(false);
   resultSpinBox->setMaximumHeight(20);
   resultSpinBox->setMinimum(10);
   resultSpinBox->setMaximum(200);

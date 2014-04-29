@@ -34,6 +34,7 @@ public slots:
   void resetColumnSizes();
   void resizeColumnsToContents();
   void rollback();
+  void setRowsPerPage(int rpp);
 
   void firstPage();
   void lastPage();
