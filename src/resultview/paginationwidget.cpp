@@ -73,7 +73,7 @@ void PaginationWidget::setupWidgets() {
   QMargins margins = layout->contentsMargins();
   margins.setLeft(0);
   layout->setContentsMargins(margins);
-  layout->setSpacing(0);
+  layout->setSpacing(2);
   setLayout(layout);
   setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
 
