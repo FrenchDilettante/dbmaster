@@ -3,6 +3,7 @@
 
 #include "../iconmanager.h"
 #include "../dialogs/blobdialog.h"
+#include "wizards/exportwizard.h"
 #include "resultview/dataprovider.h"
 #include "resultview/paginationwidget.h"
 #include "resultview/sqlitemdelegate.h"
@@ -22,13 +23,13 @@ public:
 
 signals:
   void editRequested(bool);
-  void exportRequested();
   void rowLeaved(int);
 
 public slots:
   void commit();
   void copy();
   void deleteRow();
+  void exportContent();
   void insertRow();
   void resetColumnSizes();
   void resizeColumnsToContents();
@@ -65,6 +66,7 @@ private:
   QMenu* contextMenu;
   int currentEditedRow;
   DataProvider* dataProvider =0;
+  ExportWizard* exportWizard;
   SqlItemDelegate* sqlItemDelegate;
   QMap<int, QSqlRecord> modifiedRecords;
   QStandardItemModel *shortModel;

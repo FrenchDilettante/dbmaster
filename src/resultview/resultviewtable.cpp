@@ -15,8 +15,12 @@ ResultViewTable::ResultViewTable(QWidget *parent)
   setModel(0);
 
   blobDialog = new BlobDialog(this);
+
+  exportWizard = new ExportWizard(this);
+
   shortModel = new QStandardItemModel(this);
   setModel(shortModel);
+
   sqlItemDelegate = new SqlItemDelegate(this);
   setItemDelegate(sqlItemDelegate);
 
@@ -119,6 +123,19 @@ int ResultViewTable::endIndex(int start) {
     end = dataProvider->model()->rowCount();
   }
   return end;
+}
+
+void ResultViewTable::exportContent() {
+  if (dataProvider == 0) {
+     return;
+  }
+
+   if (dataProvider->model()->columnCount() == 0 || dataProvider->model()->rowCount() == 0) {
+     return;
+   }
+
+   exportWizard->setModel(dataProvider->model());
+   exportWizard->exec();
 }
 
 void ResultViewTable::firstPage() {
@@ -236,7 +253,7 @@ void ResultViewTable::setPagination(PaginationWidget *pagination) {
 void ResultViewTable::setupConnections() {
   connect(actionCopy, SIGNAL(triggered()), this, SLOT(copy()));
   connect(actionDetails, SIGNAL(triggered()), this, SLOT(showBlob()));
-  connect(actionExport, SIGNAL(triggered()), this, SIGNAL(exportRequested()));
+  connect(actionExport, SIGNAL(triggered()), this, SLOT(exportContent()));
   connect(shortModel, SIGNAL(itemChanged(QStandardItem*)),
           this, SLOT(updateItem(QStandardItem*)));
 }
