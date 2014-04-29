@@ -90,6 +90,7 @@ void TableWidget::setTable(QString table, QSqlDatabase *db) {
 
   dataProvider = new TableDataProvider(table, db, this);
   tableView->setDataProvider(dataProvider);
+  refreshStructure();
 }
 
 void TableWidget::setupConnections() {
