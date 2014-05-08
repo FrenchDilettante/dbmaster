@@ -39,82 +39,6 @@
       <property name="movable">
        <bool>true</bool>
       </property>
-      <widget class="AbstractTabWidget" name="hometab">
-       <attribute name="icon">
-        <iconset>
-         <normaloff>:/img/folder_home.png</normaloff>:/img/folder_home.png</iconset>
-       </attribute>
-       <attribute name="title">
-        <string>Welcome</string>
-       </attribute>
-       <layout class="QGridLayout" name="gridLayout_4">
-        <property name="spacing">
-         <number>0</number>
-        </property>
-        <item row="2" column="0">
-         <spacer name="horizontalSpacer">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="2" column="1">
-         <widget class="QPushButton" name="tooltipButton">
-          <property name="text">
-           <string>Did you know ?</string>
-          </property>
-          <property name="icon">
-           <iconset>
-            <normaloff>:/img/info.png</normaloff>:/img/info.png</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>16</width>
-            <height>16</height>
-           </size>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0" colspan="2">
-         <widget class="TooltipFrame" name="tooltipFrame">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="0" colspan="2">
-         <widget class="QWebView" name="homepageView" native="true">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
      </widget>
     </item>
    </layout>
@@ -125,7 +49,7 @@
      <x>0</x>
      <y>0</y>
      <width>841</width>
-     <height>29</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuTools">
@@ -197,9 +121,21 @@
      </property>
      <addaction name="actionLeftPanel"/>
     </widget>
+    <widget class="QMenu" name="menuIndentation">
+     <property name="title">
+      <string>Indentation</string>
+     </property>
+     <addaction name="actionIndentUsingSpaces"/>
+     <addaction name="separator"/>
+     <addaction name="actionTabWidth_2"/>
+     <addaction name="actionTabWidth_4"/>
+     <addaction name="actionTabWidth_8"/>
+    </widget>
     <addaction name="menuPanels"/>
     <addaction name="actionPreviousTab"/>
     <addaction name="actionNextTab"/>
+    <addaction name="separator"/>
+    <addaction name="menuIndentation"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menu_Edit"/>
@@ -688,30 +624,48 @@
     <string>Shift+F5</string>
    </property>
   </action>
+  <action name="actionIndentUsingSpaces">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Indent using spaces</string>
+   </property>
+  </action>
+  <action name="actionTabWidth_2">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Tab width: 2</string>
+   </property>
+  </action>
+  <action name="actionTabWidth_4">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Tab width: 4</string>
+   </property>
+  </action>
+  <action name="actionTabWidth_8">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Tab width: 8</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>QWebView</class>
-   <extends>QWidget</extends>
-   <header>QtWebKit/QWebView</header>
-  </customwidget>
-  <customwidget>
-   <class>AbstractTabWidget</class>
-   <extends>QWidget</extends>
-   <header>../src/tabwidget/abstracttabwidget.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>DbTreeView</class>
    <extends>QTreeView</extends>
    <header>../src/widgets/dbtreeview.h</header>
-  </customwidget>
-  <customwidget>
-   <class>TooltipFrame</class>
-   <extends>QFrame</extends>
-   <header>../src/widgets/tooltipframe.h</header>
-   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>
@@ -731,22 +685,6 @@
     <hint type="destinationlabel">
      <x>352</x>
      <y>212</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>tooltipButton</sender>
-   <signal>clicked(bool)</signal>
-   <receiver>tooltipFrame</receiver>
-   <slot>setVisible(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>755</x>
-     <y>534</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>559</x>
-     <y>514</y>
     </hint>
    </hints>
   </connection>

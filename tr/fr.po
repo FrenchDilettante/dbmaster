@@ -8,137 +8,137 @@ msgstr ""
 "X-Source-Language: C\n"
 "X-Qt-Contexts: true\n"
 
-#: /home/manu/code/dbmaster/src/plugins/exportengines/csv/csvwizardpage.ui:14
+#: /Users/newuser/code/dbmaster/src/plugins/exportengines/csv/csvwizardpage.ui:14
 msgctxt "CsvWizardPage|"
 msgid "CSV parameters"
 msgstr "Paramètres CSV"
 
-#: /home/manu/code/dbmaster/src/plugins/exportengines/csv/csvwizardpage.ui:17
+#: /Users/newuser/code/dbmaster/src/plugins/exportengines/csv/csvwizardpage.ui:17
 msgctxt "CsvWizardPage|"
 msgid "These options are optionnal"
 msgstr "Ces paramètres sont optionnels"
 
-#: /home/manu/code/dbmaster/src/plugins/exportengines/csv/csvwizardpage.ui:31
+#: /Users/newuser/code/dbmaster/src/plugins/exportengines/csv/csvwizardpage.ui:31
 msgctxt "CsvWizardPage|"
 msgid "Se&parator"
 msgstr "Sé&parateur"
 
-#: /home/manu/code/dbmaster/src/plugins/exportengines/csv/csvwizardpage.ui:53
+#: /Users/newuser/code/dbmaster/src/plugins/exportengines/csv/csvwizardpage.ui:53
 msgctxt "CsvWizardPage|"
 msgid ";"
 msgstr ";"
 
-#: /home/manu/code/dbmaster/src/plugins/exportengines/csv/csvwizardpage.ui:60
+#: /Users/newuser/code/dbmaster/src/plugins/exportengines/csv/csvwizardpage.ui:60
 msgctxt "CsvWizardPage|"
 msgid "Delimiter"
 msgstr "Délimiteur"
 
-#: /home/manu/code/dbmaster/src/plugins/exportengines/csv/csvwizardpage.ui:79
+#: /Users/newuser/code/dbmaster/src/plugins/exportengines/csv/csvwizardpage.ui:79
 msgctxt "CsvWizardPage|"
 msgid "\""
 msgstr "\""
 
-#: /home/manu/code/dbmaster/src/plugins/exportengines/csv/csvwizardpage.ui:94
+#: /Users/newuser/code/dbmaster/src/plugins/exportengines/csv/csvwizardpage.ui:94
 msgctxt "CsvWizardPage|"
 msgid "Write &headers"
 msgstr "Écrire les en-&têtes"
 
-#: /home/manu/code/dbmaster/src/plugins/exportengines/csv/csvexportengine.h:17
+#: /Users/newuser/code/dbmaster/src/plugins/exportengines/csv/csvexportengine.h:17
 msgctxt "CsvExportEngine|"
 msgid "CSV export engine"
 msgstr "Moteur d'export CSV"
 
-#: /home/manu/code/dbmaster/src/plugins/exportengines/csv/csvexportengine.h:23
+#: /Users/newuser/code/dbmaster/src/plugins/exportengines/csv/csvexportengine.h:23
 msgctxt "CsvExportEngine|"
 msgid "CSV"
 msgstr "CSV"
 
-#: /home/manu/code/dbmaster/src/plugins/exportengines/html/htmlwizardpage.ui:14
+#: /Users/newuser/code/dbmaster/src/plugins/exportengines/html/htmlwizardpage.ui:14
 msgctxt "HtmlWizardPage|"
 msgid "HTML options"
 msgstr "Options HTML"
 
-#: /home/manu/code/dbmaster/src/plugins/exportengines/html/htmlwizardpage.ui:23
+#: /Users/newuser/code/dbmaster/src/plugins/exportengines/html/htmlwizardpage.ui:23
 msgctxt "HtmlWizardPage|"
 msgid "Export query"
 msgstr "Exporter la requête"
 
-#: /home/manu/code/dbmaster/src/plugins/exportengines/html/htmlwizardpage.ui:35
+#: /Users/newuser/code/dbmaster/src/plugins/exportengines/html/htmlwizardpage.ui:35
 msgctxt "HtmlWizardPage|"
 msgid "Apply syntax coloring"
 msgstr "Appliquer la coloration syntaxique"
 
-#: /home/manu/code/dbmaster/src/plugins/exportengines/html/htmlwizardpage.ui:45
+#: /Users/newuser/code/dbmaster/src/plugins/exportengines/html/htmlwizardpage.ui:45
 msgctxt "HtmlWizardPage|"
 msgid "Result"
 msgstr "Résultat"
 
-#: /home/manu/code/dbmaster/src/plugins/exportengines/html/htmlwizardpage.ui:51
+#: /Users/newuser/code/dbmaster/src/plugins/exportengines/html/htmlwizardpage.ui:51
 msgctxt "HtmlWizardPage|"
 msgid "Whole result"
 msgstr "Résultat entier"
 
-#: /home/manu/code/dbmaster/src/plugins/exportengines/html/htmlwizardpage.ui:61
+#: /Users/newuser/code/dbmaster/src/plugins/exportengines/html/htmlwizardpage.ui:61
 msgctxt "HtmlWizardPage|"
 msgid "Limit result to"
 msgstr "Limiter le résultat aux"
 
-#: /home/manu/code/dbmaster/src/plugins/exportengines/html/htmlwizardpage.ui:87
+#: /Users/newuser/code/dbmaster/src/plugins/exportengines/html/htmlwizardpage.ui:87
 msgctxt "HtmlWizardPage|"
 msgid "firsts"
 msgstr "premières"
 
-#: /home/manu/code/dbmaster/src/plugins/exportengines/html/htmlwizardpage.ui:92
+#: /Users/newuser/code/dbmaster/src/plugins/exportengines/html/htmlwizardpage.ui:92
 msgctxt "HtmlWizardPage|"
 msgid "lasts"
 msgstr "dernières"
 
-#: /home/manu/code/dbmaster/src/plugins/exportengines/html/htmlwizardpage.ui:97
+#: /Users/newuser/code/dbmaster/src/plugins/exportengines/html/htmlwizardpage.ui:97
 msgctxt "HtmlWizardPage|"
 msgid "firsts & lasts"
 msgstr "premières & dernières"
 
-#: /home/manu/code/dbmaster/src/plugins/exportengines/html/htmlwizardpage.ui:105
+#: /Users/newuser/code/dbmaster/src/plugins/exportengines/html/htmlwizardpage.ui:105
 msgctxt "HtmlWizardPage|"
 msgid "lines"
 msgstr "lignes"
 
-#: /home/manu/code/dbmaster/src/plugins/exportengines/html/htmlwizardpage.ui:114
+#: /Users/newuser/code/dbmaster/src/plugins/exportengines/html/htmlwizardpage.ui:114
 msgctxt "HtmlWizardPage|"
 msgid "Print column names"
 msgstr "Inclure les noms de colonne"
 
-#: /home/manu/code/dbmaster/src/plugins/exportengines/html/htmlexportengine.h:17
+#: /Users/newuser/code/dbmaster/src/plugins/exportengines/html/htmlexportengine.h:17
 msgctxt "HtmlExportEngine|"
 msgid "HTML export engine"
 msgstr "Moteur d'export HTML"
 
-#: /home/manu/code/dbmaster/src/plugins/exportengines/html/htmlexportengine.h:23
+#: /Users/newuser/code/dbmaster/src/plugins/exportengines/html/htmlexportengine.h:23
 msgctxt "HtmlExportEngine|"
 msgid "HTML"
 msgstr "HTML"
 
-#: /home/manu/code/dbmaster/src/plugins/wrappers/mysql/mysqlwrapper.h:18
+#: /Users/newuser/code/dbmaster/src/plugins/wrappers/mysql/mysqlwrapper.h:18
 msgctxt "MysqlWrapper|"
 msgid "MySQL wrapper"
 msgstr "Adaptateur MySQL"
 
-#: /home/manu/code/dbmaster/src/plugins/wrappers/psql/psqlwrapper.h:19
+#: /Users/newuser/code/dbmaster/src/plugins/wrappers/psql/psqlwrapper.h:19
 msgctxt "PsqlWrapper|"
 msgid "PostgreSQL wrapper"
 msgstr "Adaptateur PostreSQL"
 
-#: /home/manu/code/dbmaster/src/dialogs/aboutdialog.ui:14
+#: /Users/newuser/code/dbmaster/src/dialogs/aboutdialog.ui:14
 msgctxt "AboutDialog|"
 msgid "About DbMaster"
 msgstr "À propos de DbMaster"
 
-#: /home/manu/code/dbmaster/src/dialogs/aboutdialog.ui:20
+#: /Users/newuser/code/dbmaster/src/dialogs/aboutdialog.ui:20
 msgctxt "AboutDialog|"
 msgid "DbMaster"
 msgstr "DbMaster"
 
-#: /home/manu/code/dbmaster/src/dialogs/aboutdialog.ui:37
+#: /Users/newuser/code/dbmaster/src/dialogs/aboutdialog.ui:37
 msgctxt "AboutDialog|"
 msgid ""
 "<html><head/><body><p>DbMaster is a database management tool, delivered "
@@ -151,7 +151,7 @@ msgstr ""
 "style=\" text-decoration: underline; color:#0000ff;\">licence Apache "
 "2.0</span></a>.</p></body></html>"
 
-#: /home/manu/code/dbmaster/src/dialogs/aboutdialog.ui:86
+#: /Users/newuser/code/dbmaster/src/dialogs/aboutdialog.ui:86
 #| msgid ""
 #| "Developers :\n"
 #| "   - Emmanuel BOURGERIE\n"
@@ -175,1151 +175,695 @@ msgstr ""
 "Traducteur :\n"
 "[fr] - Emmanuel BOURGERIE"
 
-#~ msgctxt "AboutDialog|"
-#~ msgid "DbMaster 0.6"
-#~ msgstr "DbMaster 0.6"
-
-#: /home/manu/code/dbmaster/src/dialogs/aboutdialog.ui:31
+#: /Users/newuser/code/dbmaster/src/dialogs/aboutdialog.ui:31
 msgctxt "AboutDialog|"
 msgid "Project"
 msgstr "Projet"
 
-#~ msgctxt "AboutDialog|"
-#~ msgid ""
-#~ "DbMaster is a database management tool. It is delivered under the GNU "
-#~ "GPLv3 licence."
-#~ msgstr ""
-#~ "DbMaster est un logiciel de gestion de bases de données. Il est fourni "
-#~ "sous licence GNU GPLv3."
-
-#~ msgctxt "AboutDialog|"
-#~ msgid "Licence"
-#~ msgstr "Licence"
-
-#: /home/manu/code/dbmaster/src/dialogs/aboutdialog.ui:80
+#: /Users/newuser/code/dbmaster/src/dialogs/aboutdialog.ui:80
 msgctxt "AboutDialog|"
 msgid "Authors"
 msgstr "Auteurs"
 
-#| msgid ""
-#| "Developpers :\n"
-#| "   - Emmanuel BOURGERIE\n"
-#| "   - Thibault HANOUT\n"
-#| "\n"
-#| "Translator :\n"
-#| "[fr] - Emmanuel BOURGERIE\n"
-#| "\n"
-#| "Other contributors :\n"
-#| "   - Marion CROISÉ"
-#~ msgctxt "AboutDialog|"
-#~ msgid ""
-#~ "Developpers :\n"
-#~ "   - Emmanuel BOURGERIE\n"
-#~ "   - Thibault HANOUT\n"
-#~ "\n"
-#~ "Translator :\n"
-#~ "[fr] - Emmanuel BOURGERIE"
-#~ msgstr ""
-#~ "Développeurs :\n"
-#~ "   - Emmanuel BOURGERIE\n"
-#~ "   - Thibault HANOUT\n"
-#~ "\n"
-#~ "Traducteur :\n"
-#~ "[fr] - Emmanuel BOURGERIE"
-
-#: /home/manu/code/dbmaster/src/dialogs/aboutdialog.cpp:11
+#: /Users/newuser/code/dbmaster/src/dialogs/aboutdialog.cpp:11
 #, qt-format
 msgctxt "AboutDialog|"
 msgid "Compiled with Qt %1"
 msgstr "Compilé avec Qt %1"
 
-#: /home/manu/code/dbmaster/src/dialogs/aboutdialog.cpp:12
+#: /Users/newuser/code/dbmaster/src/dialogs/aboutdialog.cpp:12
 #, qt-format
 msgctxt "AboutDialog|"
 msgid "DbMaster %1"
 msgstr "DbMaster %1"
 
-#~ msgctxt "ConfigDialogClass|"
-#~ msgid "DbMaster - Preferences"
-#~ msgstr "DbMaster - Préférences"
-
-#~ msgctxt "ConfigDialogClass|"
-#~ msgid "General"
-#~ msgstr "Général"
-
-#~ msgctxt "ConfigDialogClass|"
-#~ msgid "Query editor"
-#~ msgstr "Éditeur de requêtes"
-
-#~ msgctxt "ConfigDialogClass|"
-#~ msgid "Plugins"
-#~ msgstr "Plugins"
-
-#~ msgctxt "ConfigDialogClass|"
-#~ msgid "Default driver"
-#~ msgstr "Driver par défaut"
-
-#~ msgctxt "ConfigDialogClass|"
-#~ msgid "Save query before execute it"
-#~ msgstr "Enregistrer la requête avant de l'exécuter"
-
-#~ msgctxt "ConfigDialogClass|"
-#~ msgid "Enable semantic analysis"
-#~ msgstr "Activer l'analyse sémantique"
-
-#~ msgctxt "ConfigDialogClass|"
-#~ msgid "Default encoding"
-#~ msgstr "Encodage par défaut"
-
-#~ msgctxt "ConfigDialogClass|"
-#~ msgid "latin1"
-#~ msgstr "latin1"
-
-#~ msgctxt "ConfigDialogClass|"
-#~ msgid "utf8"
-#~ msgstr "utf8"
-
-#~ msgctxt "ConfigDialogClass|"
-#~ msgid "Font && Size"
-#~ msgstr "Police && taille"
-
-#~ msgctxt "ConfigDialogClass|"
-#~ msgid "Editor's font"
-#~ msgstr "Police de l'éditeur"
-
-#~ msgctxt "ConfigDialogClass|"
-#~ msgid "&Font"
-#~ msgstr "&Police"
-
-#~ msgctxt "ConfigDialogClass|"
-#~ msgid "S&ize"
-#~ msgstr "Ta&ille"
-
-#~ msgctxt "ConfigDialogClass|"
-#~ msgid "T&ab size"
-#~ msgstr "T&aille des tabulations"
-
-#~ msgctxt "ConfigDialogClass|"
-#~ msgid "You can type some text here :"
-#~ msgstr "Vous pouvez tester les paramètres ici :"
-
-#~ msgctxt "ConfigDialogClass|"
-#~ msgid "Syntax highlighting"
-#~ msgstr "Coloration syntaxique"
-
-#~ msgctxt "ConfigDialogClass|"
-#~ msgid "Enable Syntax highlighting"
-#~ msgstr "Activer la coloration syntaxique"
-
-#~ msgctxt "ConfigDialogClass|"
-#~ msgid "Basic SQL keywords"
-#~ msgstr "Mots clés SQL"
-
-#~ msgctxt "ConfigDialogClass|"
-#~ msgid "SQL functions"
-#~ msgstr "Fonctions SQL"
-
-#~ msgctxt "ConfigDialogClass|"
-#~ msgid "SQL types"
-#~ msgstr "Types SQL"
-
-#~ msgctxt "ConfigDialogClass|"
-#~ msgid "Strings"
-#~ msgstr "Chaînes"
-
-#~ msgctxt "ConfigDialogClass|"
-#~ msgid "Numbers"
-#~ msgstr "Nombres"
-
-#~ msgctxt "ConfigDialogClass|"
-#~ msgid "Comments"
-#~ msgstr "Commentaires"
-
-#~ msgctxt "ConfigDialogClass|"
-#~ msgid "Table name"
-#~ msgstr "Nom de table"
-
-#~ msgctxt "ConfigDialogClass|"
-#~ msgid "Field name"
-#~ msgstr "Nom de colonne"
-
-#~ msgctxt "ConfigDialogClass|"
-#~ msgid "Color"
-#~ msgstr "Couleur"
-
-#~ msgctxt "ConfigDialogClass|"
-#~ msgid "Bold"
-#~ msgstr "Gras"
-
-#~ msgctxt "ConfigDialogClass|"
-#~ msgid "Italic"
-#~ msgstr "Italique"
-
-#~ msgctxt "ConfigDialogClass|"
-#~ msgid "Auto-completion"
-#~ msgstr "Auto-complément"
-
-#~ msgctxt "ConfigDialogClass|"
-#~ msgid "Enable auto-completion"
-#~ msgstr "Activer l'auto-complément"
-
-#~ msgctxt "ConfigDialogClass|"
-#~ msgid "Show completion popup after"
-#~ msgstr "Afficher le complément après"
-
-#~ msgctxt "ConfigDialogClass|"
-#~ msgid "characters"
-#~ msgstr "caractères"
-
-#~ msgctxt "ConfigDialogClass|"
-#~ msgid ""
-#~ "<b>Warning !</b> All modifications concerning the editor will work after "
-#~ "restarting DbMaster."
-#~ msgstr ""
-#~ "<b>Attention ! </b> Toute modification concernant l'éditeur ne sera prise "
-#~ "en compte qu'après avoir redémarré DbMaster."
-
-#: /home/manu/code/dbmaster/src/dialogs/dbdialog.ui:17
+#: /Users/newuser/code/dbmaster/src/dialogs/dbdialog.ui:17
 msgctxt "DbDialog|"
 msgid "Connection Manager"
 msgstr "Gestionnaire de connexions"
 
-#: /home/manu/code/dbmaster/src/dialogs/dbdialog.ui:26
+#: /Users/newuser/code/dbmaster/src/dialogs/dbdialog.ui:26
 msgctxt "DbDialog|"
 msgid "Clic on a connection to edit it"
 msgstr "Cliquer sur une connexion pour l'éditer"
 
-#: /home/manu/code/dbmaster/src/dialogs/dbdialog.ui:44
+#: /Users/newuser/code/dbmaster/src/dialogs/dbdialog.ui:44
 msgctxt "DbDialog|"
 msgid "Connection settings"
 msgstr "Paramètres de connexion"
 
-#: /home/manu/code/dbmaster/src/dialogs/dbdialog.ui:50
+#: /Users/newuser/code/dbmaster/src/dialogs/dbdialog.ui:50
 msgctxt "DbDialog|"
 msgid "Host"
 msgstr "Hôte"
 
-#: /home/manu/code/dbmaster/src/dialogs/dbdialog.ui:63
+#: /Users/newuser/code/dbmaster/src/dialogs/dbdialog.ui:63
 msgctxt "DbDialog|"
 msgid "Username"
 msgstr "Nom d'utilisateur"
 
-#: /home/manu/code/dbmaster/src/dialogs/dbdialog.ui:76
+#: /Users/newuser/code/dbmaster/src/dialogs/dbdialog.ui:76
 msgctxt "DbDialog|"
 msgid "Save password"
 msgstr "Enregistrer le mot de passe"
 
-#: /home/manu/code/dbmaster/src/dialogs/dbdialog.ui:86
+#: /Users/newuser/code/dbmaster/src/dialogs/dbdialog.ui:86
 msgctxt "DbDialog|"
 msgid "Password"
 msgstr "Mot de passe"
 
-#: /home/manu/code/dbmaster/src/dialogs/dbdialog.ui:103
+#: /Users/newuser/code/dbmaster/src/dialogs/dbdialog.ui:103
 msgctxt "DbDialog|"
 msgid "Database"
 msgstr "Base de données"
 
-#: /home/manu/code/dbmaster/src/dialogs/dbdialog.ui:115
+#: /Users/newuser/code/dbmaster/src/dialogs/dbdialog.ui:115
 msgctxt "DbDialog|"
 msgid "..."
 msgstr "..."
 
-#: /home/manu/code/dbmaster/src/dialogs/dbdialog.ui:124
+#: /Users/newuser/code/dbmaster/src/dialogs/dbdialog.ui:124
 msgctxt "DbDialog|"
 msgid "Database type"
 msgstr "Driver"
 
-#: /home/manu/code/dbmaster/src/dialogs/dbdialog.ui:138
+#: /Users/newuser/code/dbmaster/src/dialogs/dbdialog.ui:138
 msgctxt "DbDialog|"
 msgid "Test connection"
 msgstr "Tester la connexion"
 
-#: /home/manu/code/dbmaster/src/dialogs/dbdialog.ui:151
+#: /Users/newuser/code/dbmaster/src/dialogs/dbdialog.ui:151
 msgctxt "DbDialog|"
 msgid "<- Clic to test"
 msgstr "<- Cliquer pour tester"
 
-#: /home/manu/code/dbmaster/src/dialogs/dbdialog.ui:179
+#: /Users/newuser/code/dbmaster/src/dialogs/dbdialog.ui:179
 msgctxt "DbDialog|"
 msgid "Alias"
 msgstr "Alias"
 
-#: /home/manu/code/dbmaster/src/dialogs/dbdialog.ui:211
+#: /Users/newuser/code/dbmaster/src/dialogs/dbdialog.ui:211
 msgctxt "DbDialog|"
 msgid "Add"
 msgstr "Ajouter"
 
-#: /home/manu/code/dbmaster/src/dialogs/dbdialog.ui:225
+#: /Users/newuser/code/dbmaster/src/dialogs/dbdialog.ui:225
 msgctxt "DbDialog|"
 msgid "Remove"
 msgstr "Supprimer"
 
-#: /home/manu/code/dbmaster/src/dialogs/dbdialog.ui:235
-#: /home/manu/code/dbmaster/src/dialogs/dbdialog.cpp:66
+#: /Users/newuser/code/dbmaster/src/dialogs/dbdialog.ui:235
+#: /Users/newuser/code/dbmaster/src/dialogs/dbdialog.cpp:68
 msgctxt "DbDialog|"
 msgid "Connect"
 msgstr "Connecter"
 
-#: /home/manu/code/dbmaster/src/dialogs/dbdialog.cpp:63
+#: /Users/newuser/code/dbmaster/src/dialogs/dbdialog.cpp:65
 msgctxt "DbDialog|"
 msgid "Disconnect"
 msgstr "Déconnecter"
 
-#: /home/manu/code/dbmaster/src/dialogs/dbdialog.cpp:80
+#: /Users/newuser/code/dbmaster/src/dialogs/dbdialog.cpp:82
 msgctxt "DbDialog|"
 msgid "<- Click to test"
 msgstr "<- Cliquer pour tester"
 
-#: /home/manu/code/dbmaster/src/dialogs/dbdialog.cpp:87
+#: /Users/newuser/code/dbmaster/src/dialogs/dbdialog.cpp:89
 msgctxt "DbDialog|"
 msgid "Cannot remove"
 msgstr "Impossible de supprimer"
 
-#: /home/manu/code/dbmaster/src/dialogs/dbdialog.cpp:88
+#: /Users/newuser/code/dbmaster/src/dialogs/dbdialog.cpp:90
 msgctxt "DbDialog|"
 msgid "You must close the connexion before remove it."
 msgstr "Vous devez fermer la connexion avant de la supprimer."
 
-#: /home/manu/code/dbmaster/src/dialogs/dbdialog.cpp:163
+#: /Users/newuser/code/dbmaster/src/dialogs/dbdialog.cpp:165
 msgctxt "DbDialog|"
 msgid "Connection succeded"
 msgstr "Connexion réussie"
 
-#: /home/manu/code/dbmaster/src/dialogs/dbdialog.cpp:167
-#: /home/manu/code/dbmaster/src/dialogs/dbdialog.cpp:169
+#: /Users/newuser/code/dbmaster/src/dialogs/dbdialog.cpp:169
+#: /Users/newuser/code/dbmaster/src/dialogs/dbdialog.cpp:171
 msgctxt "DbDialog|"
 msgid "Connection failed"
 msgstr "Connexion échouée"
 
-#: /home/manu/code/dbmaster/src/dialogs/dbdialog.cpp:189
+#: /Users/newuser/code/dbmaster/src/dialogs/dbdialog.cpp:191
 #, qt-format
 msgctxt "DbDialog|"
 msgid "%1 (local)"
 msgstr "%1 (locale)"
 
-#: /home/manu/code/dbmaster/src/dialogs/dbdialog.cpp:191
+#: /Users/newuser/code/dbmaster/src/dialogs/dbdialog.cpp:193
 #, qt-format
 msgctxt "DbDialog|"
 msgid "%1 on %2"
 msgstr "%1 sur %2"
 
-#~ msgctxt "LogDialogClass|"
-#~ msgid "Logs"
-#~ msgstr "Journaux"
-
-#~ msgctxt "LogDialogClass|"
-#~ msgid "F&ilter"
-#~ msgstr "F&iltre"
-
-#~ msgctxt "LogDialogClass|"
-#~ msgid "Time"
-#~ msgstr "Heure"
-
-#~ msgctxt "LogDialogClass|"
-#~ msgid "Message"
-#~ msgstr "Message"
-
-#: /home/manu/code/dbmaster/src/dialogs/searchdialog.ui:14
+#: /Users/newuser/code/dbmaster/src/dialogs/searchdialog.ui:14
 msgctxt "SearchDialog|"
 msgid "Search..."
 msgstr "Rechercher..."
 
-#: /home/manu/code/dbmaster/src/dialogs/searchdialog.ui:20
+#: /Users/newuser/code/dbmaster/src/dialogs/searchdialog.ui:20
 msgctxt "SearchDialog|"
 msgid "&Search"
 msgstr "Re&chercher"
 
-#: /home/manu/code/dbmaster/src/dialogs/searchdialog.ui:50
+#: /Users/newuser/code/dbmaster/src/dialogs/searchdialog.ui:50
 msgctxt "SearchDialog|"
 msgid "R&eplace"
 msgstr "R&emplacer"
 
-#: /home/manu/code/dbmaster/src/dialogs/searchdialog.ui:86
+#: /Users/newuser/code/dbmaster/src/dialogs/searchdialog.ui:86
 msgctxt "SearchDialog|"
 msgid "Search backward"
 msgstr "En arrière"
 
-#: /home/manu/code/dbmaster/src/dialogs/searchdialog.ui:93
+#: /Users/newuser/code/dbmaster/src/dialogs/searchdialog.ui:93
 msgctxt "SearchDialog|"
 msgid "Whole words"
 msgstr "Mots entiers"
 
-#: /home/manu/code/dbmaster/src/dialogs/searchdialog.ui:100
+#: /Users/newuser/code/dbmaster/src/dialogs/searchdialog.ui:100
 msgctxt "SearchDialog|"
 msgid "Use regular e&xpressions"
 msgstr "E&xpressions régulières"
 
-#: /home/manu/code/dbmaster/src/dialogs/searchdialog.ui:107
+#: /Users/newuser/code/dbmaster/src/dialogs/searchdialog.ui:107
 msgctxt "SearchDialog|"
 msgid "Case sensitive"
 msgstr "Sensible à la casse"
 
-#: /home/manu/code/dbmaster/src/dialogs/searchdialog.cpp:67
+#: /Users/newuser/code/dbmaster/src/dialogs/searchdialog.cpp:57
 msgctxt "SearchDialog|"
 msgid "Search has reached the end of the document."
 msgstr "La recherche a atteint la fin du document."
 
-#: /home/manu/code/dbmaster/src/dialogs/searchdialog.cpp:84
+#: /Users/newuser/code/dbmaster/src/dialogs/searchdialog.cpp:71
 msgctxt "SearchDialog|"
 msgid "Search"
 msgstr "Rechercher"
 
-#: /home/manu/code/dbmaster/src/dialogs/searchdialog.cpp:86
+#: /Users/newuser/code/dbmaster/src/dialogs/searchdialog.cpp:74
 msgctxt "SearchDialog|"
 msgid "Replace"
 msgstr "Remplacer"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:14
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:14
 msgctxt "MainWindowClass|"
 msgid "DbMaster"
 msgstr "DbMaster"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:48
-msgctxt "MainWindowClass|"
-msgid "Welcome"
-msgstr "Bienvenue"
-
-#: /home/manu/code/dbmaster/src/mainwindow.ui:70
-msgctxt "MainWindowClass|"
-msgid "Did you know ?"
-msgstr "Le saviez-vous ?"
-
-#: /home/manu/code/dbmaster/src/mainwindow.ui:116
-msgctxt "MainWindowClass|"
-msgid "http://static.dbmaster-project.org/0.9/"
-msgstr "http://static.dbmaster-project.org/0.9/"
-
-#: /home/manu/code/dbmaster/src/mainwindow.ui:138
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:57
 msgctxt "MainWindowClass|"
 msgid "&Tools"
 msgstr "&Outils"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:147
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:66
 msgctxt "MainWindowClass|"
 msgid "&Edit"
 msgstr "É&dition"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:151
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:70
 #| msgid "Case"
 msgctxt "MainWindowClass|"
 msgid "C&ase"
 msgstr "C&asse"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:170
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:89
 msgctxt "MainWindowClass|"
 msgid "&Help"
 msgstr "Aid&e"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:176
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:95
 msgctxt "MainWindowClass|"
 msgid "&File"
 msgstr "&Fichier"
 
-#~ msgctxt "MainWindowClass|"
-#~ msgid "&New"
-#~ msgstr "&Nouvelle"
-
-#: /home/manu/code/dbmaster/src/mainwindow.ui:180
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:99
 msgctxt "MainWindowClass|"
 msgid "Recent files"
 msgstr "Fichiers récents"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:197
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:116
 msgctxt "MainWindowClass|"
 msgid "&View"
 msgstr "&Affichage"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:201
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:120
 #| msgid "Panels"
 msgctxt "MainWindowClass|"
 msgid "&Panels"
 msgstr "&Panneaux"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:362
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:126
+msgctxt "MainWindowClass|"
+msgid "Indentation"
+msgstr "Indentation"
+
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:293
 msgctxt "MainWindowClass|"
 msgid "Console"
 msgstr "Console"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:390
-#: /home/manu/code/dbmaster/src/mainwindow.ui:393
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:344
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:347
 msgctxt "MainWindowClass|"
 msgid "Add connection"
 msgstr "Nouvelle connexion"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:401
-#: /home/manu/code/dbmaster/src/mainwindow.ui:404
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:355
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:358
 msgctxt "MainWindowClass|"
 msgid "New query"
 msgstr "Nouvelle requête"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:542
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:496
 msgctxt "MainWindowClass|"
 msgid "Connections"
 msgstr "Connexions"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:321
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:252
 msgctxt "MainWindowClass|"
 msgid "Main toolbar"
 msgstr "Barre d'outils principale"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:218
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:149
 msgctxt "MainWindowClass|"
 msgid "Connections panel"
 msgstr "Panneau de connexions"
 
-#| msgid "toolBar"
-#~ msgctxt "MainWindowClass|"
-#~ msgid "Connection toolbar"
-#~ msgstr "Barre d'outils des connexions"
-
-#~ msgctxt "MainWindowClass|"
-#~ msgid "Connection"
-#~ msgstr "Connexion"
-
-#: /home/manu/code/dbmaster/src/mainwindow.ui:396
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:350
 msgctxt "MainWindowClass|"
 msgid "Ctrl+Shift+A"
 msgstr "Ctrl+Shift+A"
 
-#~ msgctxt "MainWindowClass|"
-#~ msgid "Query"
-#~ msgstr "Requête"
-
-#: /home/manu/code/dbmaster/src/mainwindow.ui:407
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:361
 msgctxt "MainWindowClass|"
 msgid "Ctrl+N"
 msgstr "Ctrl+N"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:412
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:366
 msgctxt "MainWindowClass|"
 msgid "&Open"
 msgstr "&Ouvrir"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:415
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:369
 msgctxt "MainWindowClass|"
 msgid "Ctrl+O"
 msgstr "Ctrl+O"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:423
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:377
 msgctxt "MainWindowClass|"
 msgid "Save"
 msgstr "Enregistrer"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:426
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:380
 msgctxt "MainWindowClass|"
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:434
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:388
 msgctxt "MainWindowClass|"
 msgid "Save as"
 msgstr "Enregistrer sous"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:439
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:393
 msgctxt "MainWindowClass|"
 msgid "E&xit"
 msgstr "&Quitter"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:442
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:396
 msgctxt "MainWindowClass|"
 msgid "Ctrl+Q"
 msgstr "Ctrl+Q"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:447
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:401
 msgctxt "MainWindowClass|"
 msgid "Preferences"
 msgstr "Préférences"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:455
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:409
 msgctxt "MainWindowClass|"
 msgid "&Undo"
 msgstr "Ann&uler"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:458
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:412
 msgctxt "MainWindowClass|"
 msgid "Ctrl+Z"
 msgstr "Ctrl+Z"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:466
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:420
 msgctxt "MainWindowClass|"
 msgid "&Redo"
 msgstr "&Refaire"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:469
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:423
 msgctxt "MainWindowClass|"
 msgid "Ctrl+Shift+Z"
 msgstr "Ctrl+Shift+Z"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:477
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:431
 msgctxt "MainWindowClass|"
 msgid "&Cut"
 msgstr "&Couper"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:480
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:434
 msgctxt "MainWindowClass|"
 msgid "Ctrl+X"
 msgstr "Ctrl+X"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:488
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:442
 msgctxt "MainWindowClass|"
 msgid "C&opy"
 msgstr "C&opier"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:491
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:445
 msgctxt "MainWindowClass|"
 msgid "Ctrl+C"
 msgstr "Ctrl+C"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:499
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:453
 msgctxt "MainWindowClass|"
 msgid "&Paste"
 msgstr "Co&ller"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:502
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:456
 msgctxt "MainWindowClass|"
 msgid "Ctrl+V"
 msgstr "Ctrl+V"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:510
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:464
 #| msgid "Select all"
 msgctxt "MainWindowClass|"
 msgid "Se&lect all"
 msgstr "Tout sé&lectionner"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:513
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:467
 msgctxt "MainWindowClass|"
 msgid "Ctrl+A"
 msgstr "Ctrl+A"
 
-#~ msgctxt "MainWindowClass|"
-#~ msgid "Logs"
-#~ msgstr "Journaux"
-
-#: /home/manu/code/dbmaster/src/mainwindow.ui:518
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:472
 msgctxt "MainWindowClass|"
 msgid "About DbMaster"
 msgstr "À propos de DbMaster"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:523
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:477
 msgctxt "MainWindowClass|"
 msgid "Connection manager"
 msgstr "Gestionnaire de connexions"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:528
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:482
 msgctxt "MainWindowClass|"
 msgid "Close"
 msgstr "Fermer"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:531
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:485
 msgctxt "MainWindowClass|"
 msgid "Close the current tab"
 msgstr "Ferme l'onglet courant"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:534
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:488
 msgctxt "MainWindowClass|"
 msgid "Ctrl+W"
 msgstr "Ctrl+W"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:545
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:499
 msgctxt "MainWindowClass|"
 msgid "F9"
 msgstr "F9"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:550
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:504
 msgctxt "MainWindowClass|"
 msgid "Clear"
 msgstr "Effacer"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:553
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:507
 msgctxt "MainWindowClass|"
 msgid "Clear recent files"
 msgstr "Efface la liste des fichiers récents"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:561
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:515
 msgctxt "MainWindowClass|"
 msgid "Print"
 msgstr "Imprimer"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:564
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:518
 msgctxt "MainWindowClass|"
 msgid "Ctrl+P"
 msgstr "Ctrl+P"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:569
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:523
 msgctxt "MainWindowClass|"
 msgid "Plugins"
 msgstr "Plugins"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:574
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:528
 #| msgid "Next tab"
 msgctxt "MainWindowClass|"
 msgid "Ne&xt tab"
 msgstr "Onglet suivant"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:577
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:531
 msgctxt "MainWindowClass|"
 msgid "Alt+Right"
 msgstr "Alt+Droite"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:585
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:539
 msgctxt "MainWindowClass|"
 msgid "Alt+Left"
 msgstr "Alt+Gauche"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:632
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:586
 msgctxt "MainWindowClass|"
 msgid "Edit"
 msgstr "Modifier"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:635
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:589
 msgctxt "MainWindowClass|"
 msgid "Edit the connection in the manager"
 msgstr "Modifier la connexion dans le gestionnaire"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:643
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:597
 msgctxt "MainWindowClass|"
 msgid "Remove"
 msgstr "Supprimer"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:646
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:600
 #| msgid "Remove current connection"
 msgctxt "MainWindowClass|"
 msgid "Remove connection"
 msgstr "Supprimer la connexion"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:654
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:608
 msgctxt "MainWindowClass|"
 msgid "Connect"
 msgstr "Connecter"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:662
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:616
 msgctxt "MainWindowClass|"
 msgid "Disconnect"
 msgstr "Déconnecter"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:670
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:621
 msgctxt "MainWindowClass|"
 msgid "Refresh"
 msgstr "Rafraîchir"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:673
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:624
 msgctxt "MainWindowClass|"
 msgid "Shift+F5"
 msgstr "Shift+F5"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:582
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:632
+msgctxt "MainWindowClass|"
+msgid "Indent using spaces"
+msgstr "Indenter avec des espaces"
+
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:640
+msgctxt "MainWindowClass|"
+msgid "Tab width: 2"
+msgstr ""
+
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:651
+msgctxt "MainWindowClass|"
+msgid "Tab width: 4"
+msgstr ""
+
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:659
+msgctxt "MainWindowClass|"
+msgid "Tab width: 8"
+msgstr ""
+
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:536
 #| msgid "Previous tab"
 msgctxt "MainWindowClass|"
 msgid "Previous t&ab"
 msgstr "Ongle&t précédent"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:593
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:547
 #| msgid "Search"
 msgctxt "MainWindowClass|"
 msgid "&Search"
 msgstr "Rechercher"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:596
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:550
 msgctxt "MainWindowClass|"
 msgid "Ctrl+F"
 msgstr "Ctrl+F"
 
-#~ msgctxt "MainWindowClass|"
-#~ msgid "User manual"
-#~ msgstr "Documentation"
-
-#: /home/manu/code/dbmaster/src/mainwindow.ui:604
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:558
 msgctxt "MainWindowClass|"
 msgid "Upper"
 msgstr "Majuscule"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:607
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:561
 msgctxt "MainWindowClass|"
 msgid "Change the selection case to upper"
 msgstr "Passe la sélection en majuscule"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:610
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:564
 msgctxt "MainWindowClass|"
 msgid "Ctrl+Shift+U"
 msgstr "Ctrl+Shift+U"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:618
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:572
 msgctxt "MainWindowClass|"
 msgid "Lower"
 msgstr "Minuscule"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:621
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:575
 msgctxt "MainWindowClass|"
 msgid "Change the selection case to lower"
 msgstr "Passe la sélection en minuscule"
 
-#: /home/manu/code/dbmaster/src/mainwindow.ui:624
+#: /Users/newuser/code/dbmaster/src/mainwindow.ui:578
 msgctxt "MainWindowClass|"
 msgid "Ctrl+Shift+L"
 msgstr "Ctrl+Shift+L"
 
-#: /home/manu/code/dbmaster/src/plugins/plugindialog.ui:14
+#: /Users/newuser/code/dbmaster/src/plugins/plugindialog.ui:14
 msgctxt "PluginDialog|"
 msgid "Plugin center"
 msgstr "Gestion des plugins"
 
-#: /home/manu/code/dbmaster/src/plugins/plugindialog.ui:43
+#: /Users/newuser/code/dbmaster/src/plugins/plugindialog.ui:43
 msgctxt "PluginDialog|"
 msgid "Configure"
 msgstr "Configurer"
 
-#~ msgctxt "QueryEditorWidgetClass|"
-#~ msgid "R&un"
-#~ msgstr "Éxéc&uter"
-
-#~ msgctxt "QueryEditorWidgetClass|"
-#~ msgid "F5"
-#~ msgstr "F5"
-
-#~ msgctxt "QueryEditorWidgetClass|"
-#~ msgid "Debug"
-#~ msgstr "Débogage"
-
-#~ msgctxt "QueryEditorWidgetClass|"
-#~ msgid "Result"
-#~ msgstr "Résultat"
-
-#~ msgctxt "QueryEditorWidgetClass|"
-#~ msgid "..."
-#~ msgstr "..."
-
-#~ msgctxt "QueryEditorWidgetClass|"
-#~ msgid "Enqueue"
-#~ msgstr "Mettre en attente"
-
-#~ msgctxt "QueryEditorWidgetClass|"
-#~ msgid "Puts the query in a threaded queue"
-#~ msgstr "Mets la requête dans une pile threadée"
-
-#~ msgctxt "QueryEditorWidgetClass|"
-#~ msgid "Log query"
-#~ msgstr "Inscrire dans le journal"
-
-#~ msgctxt "QueryEditorWidgetClass|"
-#~ msgid "Clear if success"
-#~ msgstr "Effacer en cas de succès"
-
-#~ msgctxt "QueryEditorWidgetClass|"
-#~ msgid "Clears the query if it is runned with success"
-#~ msgstr "Efface la requête si elle est exécutée avec succès"
-
-#: /home/manu/code/dbmaster/src/tabwidget/schemawidget.ui:21
+#: /Users/newuser/code/dbmaster/src/tabwidget/schemawidget.ui:21
 msgctxt "SchemaWidget|"
 msgid "Informations"
 msgstr "Informations"
 
-#: /home/manu/code/dbmaster/src/tabwidget/schemawidget.ui:45
+#: /Users/newuser/code/dbmaster/src/tabwidget/schemawidget.ui:45
 msgctxt "SchemaWidget|"
 msgid "Schema"
 msgstr "Schéma"
 
-#: /home/manu/code/dbmaster/src/tabwidget/schemawidget.ui:68
+#: /Users/newuser/code/dbmaster/src/tabwidget/schemawidget.ui:68
 msgctxt "SchemaWidget|"
 msgid "Tables"
 msgstr "Tables"
 
-#: /home/manu/code/dbmaster/src/tabwidget/schemawidget.ui:75
+#: /Users/newuser/code/dbmaster/src/tabwidget/schemawidget.ui:75
 msgctxt "SchemaWidget|"
 msgid "Table"
 msgstr "Table"
 
-#: /home/manu/code/dbmaster/src/tabwidget/schemawidget.ui:80
-#: /home/manu/code/dbmaster/src/tabwidget/schemawidget.ui:106
+#: /Users/newuser/code/dbmaster/src/tabwidget/schemawidget.ui:80
+#: /Users/newuser/code/dbmaster/src/tabwidget/schemawidget.ui:106
 msgctxt "SchemaWidget|"
 msgid "Column count"
 msgstr "Nombre de colonnes"
 
-#: /home/manu/code/dbmaster/src/tabwidget/schemawidget.ui:85
-#: /home/manu/code/dbmaster/src/tabwidget/schemawidget.ui:111
+#: /Users/newuser/code/dbmaster/src/tabwidget/schemawidget.ui:85
+#: /Users/newuser/code/dbmaster/src/tabwidget/schemawidget.ui:111
 msgctxt "SchemaWidget|"
 msgid "Comment"
 msgstr "Commentaire"
 
-#: /home/manu/code/dbmaster/src/tabwidget/schemawidget.ui:94
+#: /Users/newuser/code/dbmaster/src/tabwidget/schemawidget.ui:94
 msgctxt "SchemaWidget|"
 msgid "Views"
 msgstr "Vues"
 
-#: /home/manu/code/dbmaster/src/tabwidget/schemawidget.ui:101
+#: /Users/newuser/code/dbmaster/src/tabwidget/schemawidget.ui:101
 msgctxt "SchemaWidget|"
 msgid "View"
 msgstr "Vue"
 
-#: /home/manu/code/dbmaster/src/widgets/resultview.ui:35
-msgctxt "ResultView|"
-msgid "Page 0/0"
-msgstr "Page 0/0"
-
-#: /home/manu/code/dbmaster/src/widgets/resultview.ui:61
-msgctxt "ResultView|"
-msgid "First page"
-msgstr "Première page"
-
-#: /home/manu/code/dbmaster/src/widgets/resultview.ui:64
-msgctxt "ResultView|"
-msgid "<<"
-msgstr "<<"
-
-#: /home/manu/code/dbmaster/src/widgets/resultview.ui:87
-msgctxt "ResultView|"
-msgid "Previous page"
-msgstr "Page précédente"
-
-#: /home/manu/code/dbmaster/src/widgets/resultview.ui:90
-msgctxt "ResultView|"
-msgid "<"
-msgstr "<"
-
-#: /home/manu/code/dbmaster/src/widgets/resultview.ui:113
-msgctxt "ResultView|"
-msgid "Next page"
-msgstr "Page suivante"
-
-#: /home/manu/code/dbmaster/src/widgets/resultview.ui:116
-msgctxt "ResultView|"
-msgid ">"
-msgstr ">"
-
-#: /home/manu/code/dbmaster/src/widgets/resultview.ui:139
-msgctxt "ResultView|"
-msgid "Last page"
-msgstr "Dernière page"
-
-#: /home/manu/code/dbmaster/src/widgets/resultview.ui:142
-msgctxt "ResultView|"
-msgid ">>"
-msgstr ">>"
-
-#: /home/manu/code/dbmaster/src/widgets/resultview.ui:172
-msgctxt "ResultView|"
-msgid "Reload"
-msgstr "Recharger"
-
-#: /home/manu/code/dbmaster/src/widgets/resultview.ui:175
-msgctxt "ResultView|"
-msgid "..."
-msgstr "..."
-
-#: /home/manu/code/dbmaster/src/widgets/resultview.ui:211
-msgctxt "ResultView|"
-msgid "Show"
-msgstr "Montrer"
-
-#: /home/manu/code/dbmaster/src/widgets/resultview.ui:243
-msgctxt "ResultView|"
-msgid "results per page"
-msgstr "résultats par page"
-
-#: /home/manu/code/dbmaster/src/widgets/resultview.ui:266
-msgctxt "ResultView|"
-msgid "Add a row"
-msgstr "Ajouter une ligne"
-
-#: /home/manu/code/dbmaster/src/widgets/resultview.ui:269
-msgctxt "ResultView|"
-msgid "+"
-msgstr "+"
-
-#: /home/manu/code/dbmaster/src/widgets/resultview.ui:285
-msgctxt "ResultView|"
-msgid "Delete row(s)"
-msgstr "Supprimer une ligne"
-
-#: /home/manu/code/dbmaster/src/widgets/resultview.ui:288
-msgctxt "ResultView|"
-msgid "-"
-msgstr "-"
-
-#: /home/manu/code/dbmaster/src/widgets/resultview.ui:343
-msgctxt "ResultView|"
-msgid "Fetching..."
-msgstr "Exécution..."
-
-#: /home/manu/code/dbmaster/src/widgets/resultview.cpp:141
-#: /home/manu/code/dbmaster/src/widgets/resultview.cpp:318
-msgctxt "ResultView|"
-msgid "Apply"
-msgstr "Appliquer"
-
-#: /home/manu/code/dbmaster/src/widgets/resultview.cpp:143
-#: /home/manu/code/dbmaster/src/widgets/resultview.cpp:320
-msgctxt "ResultView|"
-msgid "Cancel"
-msgstr "Annuler"
-
-#: /home/manu/code/dbmaster/src/widgets/resultview.cpp:257
-msgctxt "ResultView|"
-msgid "Error"
-msgstr "Erreur"
-
-#: /home/manu/code/dbmaster/src/widgets/resultview.cpp:258
-#, qt-format
-msgctxt "ResultView|"
-msgid ""
-"Unable to open the table. Returned error :\n"
-"%1"
-msgstr ""
-"Impossible d'ouvrir la table. Erreur retournée :\n"
-"%1"
-
-#: /home/manu/code/dbmaster/src/widgets/resultview.cpp:366
-#, qt-format
-msgctxt "ResultView|"
-msgid "Page %1/%2"
-msgstr "Page %1/%2"
-
-#: /home/manu/code/dbmaster/src/widgets/tooltipframe.ui:29
-msgctxt "TooltipFrame|"
-msgid "Did you know ?"
-msgstr "Le saviez-vous ?"
-
-#: /home/manu/code/dbmaster/src/widgets/tooltipframe.cpp:14
-msgctxt "TooltipFrame|"
-msgid "Press Ctrl+Espace in the query editor to display the completer."
-msgstr ""
-"Pressez Ctrl+Espace dans l'éditeur de requête pour afficher "
-"l'auto-complément."
-
-#: /home/manu/code/dbmaster/src/widgets/tooltipframe.cpp:15
-msgctxt "TooltipFrame|"
-msgid "While a query is executed, you can edit an another one."
-msgstr "Pendant qu'une requête s'exécute, vous pouvez en éditer une autre."
-
-#: /home/manu/code/dbmaster/src/widgets/tooltipframe.cpp:16
-msgctxt "TooltipFrame|"
-msgid ""
-"You can export a table or a query's content in a CSV file by right-clicking "
-"on the spreadsheet."
-msgstr ""
-"Vous pouvez exporter le contenu d'une table ou d'une requête dans un fichier "
-"CSV en cliquant sur le tableau."
-
-#~ msgctxt "TooltipFrame|"
-#~ msgid "While it is connected, a database cannot be edited."
-#~ msgstr "Tout pendant qu'elle est active, une connexion ne peut être éditée."
-
-#~ msgctxt "TooltipFrame|"
-#~ msgid "All queries are logged. Check them out in Tools - Logs."
-#~ msgstr ""
-#~ "Toutes les requêtes sont journalisées. Vous pouvez les consulter dans "
-#~ "Outils - Journaux."
-
-#: /home/manu/code/dbmaster/src/widgets/tooltipframe.cpp:17
-msgctxt "TooltipFrame|"
-msgid "All queries are logged. Check them out in the Console tab."
-msgstr "Toutes les requêtes sont affichées dans l'onglet Console."
-
-#: /home/manu/code/dbmaster/src/widgets/tooltipframe.cpp:18
-msgctxt "TooltipFrame|"
-msgid ""
-"DbMaster is a free software developped by volunteers. Join the community and "
-"help us making it better !"
-msgstr ""
-"DbMaster est un logiciel libre développé bénévolement. Rejoignez la "
-"communauté et aidez-nous à le rendre meilleur !"
-
-#: /home/manu/code/dbmaster/src/widgets/tooltipframe.cpp:19
-msgctxt "TooltipFrame|"
-msgid "Move from a tab to another by pressing Alt+Left/Right."
-msgstr "Déplacez-vous d'un onglet à l'autre en appuyant sur Alt+Gauche/Droite."
-
-#: /home/manu/code/dbmaster/src/widgets/tooltipframe.cpp:20
-#| msgid ""
-#| "Name your connections with an alias so your connection panel will be more "
-#| "meanfull."
-msgctxt "TooltipFrame|"
-msgid "Name your connections with an alias to avoid blanks."
-msgstr "Nommez vos connexions avec un alias pour éviter les trous de mémoire."
-
-#: /home/manu/code/dbmaster/src/widgets/tooltipframe.cpp:21
-msgctxt "TooltipFrame|"
-msgid ""
-"You like having a good-looking code ? In the Edit menu, case can be modified."
-msgstr ""
-"Vous aimez avoir un beau code ? Dans le menu Édition, la casse peut être "
-"modifiée."
-
-#: /home/manu/code/dbmaster/src/widgets/tooltipframe.cpp:22
-msgctxt "TooltipFrame|"
-msgid ""
-"'want to prove to your teacher that your query works ? Right-clic on the "
-"result, and export it in HTML or CSV."
-msgstr ""
-"Vous voulez prouver à votre professeur que votre requête fonctionne ? "
-"Clic-droit sur le résultat, et exportez-la en HTML ou CSV."
-
-#: /home/manu/code/dbmaster/src/wizards/ew_exportpage.ui:14
+#: /Users/newuser/code/dbmaster/src/wizards/ew_exportpage.ui:14
 msgctxt "EwExportPage|"
 msgid "Export complete"
 msgstr "Export fini"
 
-#: /home/manu/code/dbmaster/src/wizards/ew_exportpage.ui:17
+#: /Users/newuser/code/dbmaster/src/wizards/ew_exportpage.ui:17
 msgctxt "EwExportPage|"
 msgid "The export process is finished."
 msgstr "Le processus d'export est terminé."
 
-#: /home/manu/code/dbmaster/src/wizards/exportwizard.cpp:163
+#: /Users/newuser/code/dbmaster/src/wizards/exportwizard.cpp:170
 msgctxt "EwExportPage|"
 msgid "Export running..."
 msgstr "Export en cours..."
 
-#: /home/manu/code/dbmaster/src/wizards/exportwizard.cpp:186
+#: /Users/newuser/code/dbmaster/src/wizards/exportwizard.cpp:191
 msgctxt "EwExportPage|"
 msgid "Openning error"
 msgstr "Erreur d'ouverture"
 
-#: /home/manu/code/dbmaster/src/wizards/exportwizard.cpp:187
+#: /Users/newuser/code/dbmaster/src/wizards/exportwizard.cpp:192
 #, qt-format
 msgctxt "EwExportPage|"
 msgid "Unable to open the file %1."
 msgstr "Impossible d'ouvrir %1."
 
-#: /home/manu/code/dbmaster/src/wizards/ew_firstpage.ui:14
+#: /Users/newuser/code/dbmaster/src/wizards/ew_firstpage.ui:14
 msgctxt "EwFirstPage|"
 msgid "Format & options"
 msgstr "Format & options"
 
-#: /home/manu/code/dbmaster/src/wizards/ew_firstpage.ui:17
+#: /Users/newuser/code/dbmaster/src/wizards/ew_firstpage.ui:17
 msgctxt "EwFirstPage|"
 msgid "Choose the export format and path"
 msgstr "Choisir le format d'export et le chemin"
 
-#: /home/manu/code/dbmaster/src/wizards/ew_firstpage.ui:29
+#: /Users/newuser/code/dbmaster/src/wizards/ew_firstpage.ui:29
 msgctxt "EwFirstPage|"
 msgid "Path :"
 msgstr "Chemin :"
 
-#: /home/manu/code/dbmaster/src/wizards/ew_firstpage.ui:41
+#: /Users/newuser/code/dbmaster/src/wizards/ew_firstpage.ui:41
 msgctxt "EwFirstPage|"
 msgid "..."
 msgstr "..."
 
-#: /home/manu/code/dbmaster/src/wizards/ew_firstpage.ui:50
+#: /Users/newuser/code/dbmaster/src/wizards/ew_firstpage.ui:50
 msgctxt "EwFirstPage|"
 msgid "Format"
 msgstr "Format"
 
-#: /home/manu/code/dbmaster/src/wizards/exportwizard.cpp:60
+#: /Users/newuser/code/dbmaster/src/wizards/exportwizard.cpp:67
 msgctxt "EwFirstPage|"
 msgid "Output file"
 msgstr "Fichier de sortie"
 
-#: /home/manu/code/dbmaster/src/wizards/firstlaunchwizard.ui:14
+#: /Users/newuser/code/dbmaster/src/wizards/firstlaunchwizard.ui:14
 msgctxt "FirstLaunchWizard|"
 msgid "Welcome on DbMaster !"
 msgstr "Bienvenue sur DbMaster !"
 
-#: /home/manu/code/dbmaster/src/wizards/firstlaunchwizard.ui:18
+#: /Users/newuser/code/dbmaster/src/wizards/firstlaunchwizard.ui:18
 msgctxt "FirstLaunchWizard|"
 msgid "Welcome !"
 msgstr "Bienvenue !"
 
-#: /home/manu/code/dbmaster/src/wizards/firstlaunchwizard.ui:24
+#: /Users/newuser/code/dbmaster/src/wizards/firstlaunchwizard.ui:24
 msgctxt "FirstLaunchWizard|"
 msgid ""
 "DbMaster is a database management software.\n"
@@ -1332,12 +876,12 @@ msgstr ""
 "Comme vous exécutez DbMaster pour la première fois, vous devez fournir "
 "certaines informations. Cliquez sur Suivant pour continuer."
 
-#: /home/manu/code/dbmaster/src/wizards/firstlaunchwizard.ui:37
+#: /Users/newuser/code/dbmaster/src/wizards/firstlaunchwizard.ui:37
 msgctxt "FirstLaunchWizard|"
 msgid "Default database software"
 msgstr "SGBD par défaut"
 
-#: /home/manu/code/dbmaster/src/wizards/firstlaunchwizard.ui:40
+#: /Users/newuser/code/dbmaster/src/wizards/firstlaunchwizard.ui:40
 msgctxt "FirstLaunchWizard|"
 msgid ""
 "When you add a new database, DbMaster selects the default DBMS. You can "
@@ -1346,469 +890,334 @@ msgstr ""
 "Quand vous ajoutez une connexion, DbMaster propose le SGBD par défaut. Vous "
 "pourrez le changer dans la fenêtre de configuration."
 
-#: /home/manu/code/dbmaster/src/wizards/firstlaunchwizard.ui:55
+#: /Users/newuser/code/dbmaster/src/wizards/firstlaunchwizard.ui:55
 msgctxt "FirstLaunchWizard|"
 msgid "First, please select the default DBMS DbMaster will use :"
 msgstr "Tout d'abord sélectionner le SGBD que DbMaster utilisera par défaut :"
 
-#: /home/manu/code/dbmaster/src/wizards/firstlaunchwizard.ui:69
+#: /Users/newuser/code/dbmaster/src/wizards/firstlaunchwizard.ui:69
 msgctxt "FirstLaunchWizard|"
 msgid "DbMaster is ready"
 msgstr "DbMaster est prêt"
 
-#: /home/manu/code/dbmaster/src/wizards/firstlaunchwizard.ui:72
+#: /Users/newuser/code/dbmaster/src/wizards/firstlaunchwizard.ui:72
 msgctxt "FirstLaunchWizard|"
 msgid "Congratulations ! Now you can click on Finish to use DbMaster."
 msgstr ""
 "Félicitations ! Vous pouvez maintenant cliquer sur Finir pour utiliser "
 "DbMaster."
 
-#: /home/manu/code/dbmaster/src/wizards/ndw_firstpage.ui:14
+#: /Users/newuser/code/dbmaster/src/wizards/ndw_firstpage.ui:14
 msgctxt "NdwFirstPage|"
 msgid "DBMS information"
 msgstr "Informations du SGBD"
 
-#: /home/manu/code/dbmaster/src/wizards/ndw_firstpage.ui:17
+#: /Users/newuser/code/dbmaster/src/wizards/ndw_firstpage.ui:17
 msgctxt "NdwFirstPage|"
 msgid "Please fill the DBMS information"
 msgstr "Veuillez remplir les informations du SGBD"
 
-#: /home/manu/code/dbmaster/src/wizards/ndw_firstpage.ui:32
+#: /Users/newuser/code/dbmaster/src/wizards/ndw_firstpage.ui:32
 msgctxt "NdwFirstPage|"
 msgid "DBMS"
 msgstr "SGBD"
 
-#: /home/manu/code/dbmaster/src/wizards/ndw_firstpage.ui:48
+#: /Users/newuser/code/dbmaster/src/wizards/ndw_firstpage.ui:48
 msgctxt "NdwFirstPage|"
 msgid "Host IP or DNS adress"
 msgstr "Adresse IP ou DNS de l'hôte"
 
-#: /home/manu/code/dbmaster/src/wizards/ndw_firstpage.ui:58
+#: /Users/newuser/code/dbmaster/src/wizards/ndw_firstpage.ui:58
 msgctxt "NdwFirstPage|"
 msgid "Use ODBC"
 msgstr "Utiliser ODBC"
 
-#: /home/manu/code/dbmaster/src/wizards/newdbwizard.cpp:56
+#: /Users/newuser/code/dbmaster/src/wizards/newdbwizard.cpp:59
 msgctxt "NdwFirstPage|"
 msgid "You have no ODBC driver installed."
 msgstr "Vous n'avez aucun driver ODBC d'installé."
 
-#: /home/manu/code/dbmaster/src/wizards/ndw_secondpage.ui:14
+#: /Users/newuser/code/dbmaster/src/wizards/ndw_secondpage.ui:14
 msgctxt "NdwSecondPage|"
 msgid "Database informations"
 msgstr "Informations de connexion"
 
-#: /home/manu/code/dbmaster/src/wizards/ndw_secondpage.ui:17
+#: /Users/newuser/code/dbmaster/src/wizards/ndw_secondpage.ui:17
 msgctxt "NdwSecondPage|"
 msgid "Database name and authentication"
 msgstr "Nom de la base de données et authentification"
 
-#: /home/manu/code/dbmaster/src/wizards/ndw_secondpage.ui:29
+#: /Users/newuser/code/dbmaster/src/wizards/ndw_secondpage.ui:29
 msgctxt "NdwSecondPage|"
 msgid "Database"
 msgstr "Base de données"
 
-#: /home/manu/code/dbmaster/src/wizards/ndw_secondpage.ui:41
+#: /Users/newuser/code/dbmaster/src/wizards/ndw_secondpage.ui:41
 msgctxt "NdwSecondPage|"
 msgid "..."
 msgstr "..."
 
-#: /home/manu/code/dbmaster/src/wizards/ndw_secondpage.ui:56
+#: /Users/newuser/code/dbmaster/src/wizards/ndw_secondpage.ui:56
 msgctxt "NdwSecondPage|"
 msgid "Username"
 msgstr "Nom d'utilisateur"
 
-#: /home/manu/code/dbmaster/src/wizards/ndw_secondpage.ui:66
+#: /Users/newuser/code/dbmaster/src/wizards/ndw_secondpage.ui:66
 msgctxt "NdwSecondPage|"
 msgid "Remember password"
 msgstr "Enregistrer le mot de passe"
 
-#: /home/manu/code/dbmaster/src/wizards/ndw_secondpage.ui:82
+#: /Users/newuser/code/dbmaster/src/wizards/ndw_secondpage.ui:82
 msgctxt "NdwSecondPage|"
 msgid "Password"
 msgstr "Mot de passe"
 
-#: /home/manu/code/dbmaster/src/wizards/ndw_secondpage.ui:102
+#: /Users/newuser/code/dbmaster/src/wizards/ndw_secondpage.ui:102
 msgctxt "NdwSecondPage|"
 msgid "Test connection"
 msgstr "Tester la connexion"
 
-#: /home/manu/code/dbmaster/src/wizards/ndw_secondpage.ui:115
+#: /Users/newuser/code/dbmaster/src/wizards/ndw_secondpage.ui:115
 msgctxt "NdwSecondPage|"
 msgid "<- Clic to test"
 msgstr "<- Cliquer pour tester"
 
-#: /home/manu/code/dbmaster/src/wizards/ndw_secondpage.ui:122
+#: /Users/newuser/code/dbmaster/src/wizards/ndw_secondpage.ui:122
 msgctxt "NdwSecondPage|"
 msgid "Alias"
 msgstr "Alias"
 
-#: /home/manu/code/dbmaster/src/wizards/newdbwizard.cpp:141
+#: /Users/newuser/code/dbmaster/src/wizards/newdbwizard.cpp:144
 msgctxt "NdwSecondPage|"
 msgid "Open Database"
 msgstr "Ouvrir la base de données"
 
-#: /home/manu/code/dbmaster/src/wizards/newdbwizard.cpp:143
+#: /Users/newuser/code/dbmaster/src/wizards/newdbwizard.cpp:146
 msgctxt "NdwSecondPage|"
 msgid "Database file (*.*)"
 msgstr "Fichier de base de données (*.*)"
 
-#: /home/manu/code/dbmaster/src/wizards/newdbwizard.cpp:164
+#: /Users/newuser/code/dbmaster/src/wizards/newdbwizard.cpp:167
 msgctxt "NdwSecondPage|"
 msgid "Connection succeded"
 msgstr "Connexion réussie"
 
-#: /home/manu/code/dbmaster/src/wizards/newdbwizard.cpp:166
-#: /home/manu/code/dbmaster/src/wizards/newdbwizard.cpp:168
+#: /Users/newuser/code/dbmaster/src/wizards/newdbwizard.cpp:169
+#: /Users/newuser/code/dbmaster/src/wizards/newdbwizard.cpp:171
 msgctxt "NdwSecondPage|"
 msgid "Connection failed"
 msgstr "Connexion échouée"
 
-#: /home/manu/code/dbmaster/src/wizards/newdbwizard.cpp:182
+#: /Users/newuser/code/dbmaster/src/wizards/newdbwizard.cpp:185
 #, qt-format
 msgctxt "NdwSecondPage|"
 msgid "%1 (local)"
 msgstr "%1 (locale)"
 
-#: /home/manu/code/dbmaster/src/wizards/newdbwizard.cpp:184
+#: /Users/newuser/code/dbmaster/src/wizards/newdbwizard.cpp:187
 #, qt-format
 msgctxt "NdwSecondPage|"
 msgid "%1 on %2"
 msgstr "%1 sur %2"
 
-#: /home/manu/code/dbmaster/src/wizards/newdbwizard.ui:14
+#: /Users/newuser/code/dbmaster/src/wizards/newdbwizard.ui:14
 msgctxt "NewDbWizard|"
 msgid "Add a connection"
 msgstr "Ajouter une connexion"
 
-#~ msgctxt "QObject|"
-#~ msgid "Attempting to add an existing connection."
-#~ msgstr "Tentative d'ajouter une connexion déjà présente."
-
-#, qt-format
-#~ msgctxt "QObject|"
-#~ msgid "Connection %1 added"
-#~ msgstr "Connexion %1 ajoutée"
-
-#: /home/manu/code/dbmaster/src/dbmanager.cpp:666
+#: /Users/newuser/code/dbmaster/src/dbmanager.cpp:657
 #, qt-format
 msgctxt "QObject|"
 msgid "%1 on %2"
 msgstr "%1 sur %2"
 
-#: /home/manu/code/dbmaster/src/main.cpp:25
+#: /Users/newuser/code/dbmaster/src/main.cpp:27
 msgctxt "QObject|"
 msgid "Loading translations..."
 msgstr "Chargement des traductions..."
 
-#: /home/manu/code/dbmaster/src/main.cpp:63
+#: /Users/newuser/code/dbmaster/src/main.cpp:62
 msgctxt "QObject|"
 msgid "Loading plugins..."
 msgstr "Chargement des plugins..."
 
-#: /home/manu/code/dbmaster/src/main.cpp:66
+#: /Users/newuser/code/dbmaster/src/main.cpp:65
 msgctxt "QObject|"
 msgid "Initialization..."
 msgstr "Initialisation..."
 
-#, qt-format
-#~ msgctxt "DbManagerPrivate|"
-#~ msgid "Columns (%1)"
-#~ msgstr "Colonnes (%1)"
-
-#, qt-format
-#~ msgctxt "DbManagerPrivate|"
-#~ msgid "%1 (local)"
-#~ msgstr "%1 (locale)"
-
-#, qt-format
-#~ msgctxt "DbManagerPrivate|"
-#~ msgid "%1 on %2"
-#~ msgstr "%1 sur %2"
-
-#~ msgctxt "DbManagerPrivate|"
-#~ msgid "Openned"
-#~ msgstr "Ouverte"
-
-#~ msgctxt "DbManagerPrivate|"
-#~ msgid "Closed"
-#~ msgstr "Fermée"
-
-#~ msgctxt "DbManagerPrivate|"
-#~ msgid "Status"
-#~ msgstr "Statut"
-
-#~ msgctxt "DbManagerPrivate|"
-#~ msgid "DBMS"
-#~ msgstr "SGBD"
-
-#, qt-format
-#~ msgctxt "DbManagerPrivate|"
-#~ msgid "Generic (%1)"
-#~ msgstr "Générique (%1)"
-
-#~ msgctxt "DbManagerPrivate|"
-#~ msgid "Host"
-#~ msgstr "Hôte"
-
-#, qt-format
-#~ msgctxt "DbManagerPrivate|"
-#~ msgid "Schemas (%1)"
-#~ msgstr "Schémas (%1)"
-
-#, qt-format
-#~ msgctxt "DbManagerPrivate|"
-#~ msgid "Connected to %1"
-#~ msgstr "Connecté à %1"
-
-#, qt-format
-#~ msgctxt "DbManagerPrivate|"
-#~ msgid "Unable to connect to %1"
-#~ msgstr "Impossible de se connecter à %1"
-
-#, qt-format
-#~ msgctxt "DbManagerPrivate|"
-#~ msgid "Disconnected from %1"
-#~ msgstr "Déconnecté de %1"
-
-#~ msgctxt "DbManagerPrivate|"
-#~ msgid "Driver"
-#~ msgstr "Pilote"
-
-#~ msgctxt "DbManagerPrivate|"
-#~ msgid "DB2"
-#~ msgstr "DB2"
-
-#~ msgctxt "DbManagerPrivate|"
-#~ msgid "Interbase/Firebird"
-#~ msgstr "Interbase/Firebird"
-
-#~ msgctxt "DbManagerPrivate|"
-#~ msgid "MySql"
-#~ msgstr "MySql"
-
-#~ msgctxt "DbManagerPrivate|"
-#~ msgid "MySql 3"
-#~ msgstr "MySql 3"
-
-#~ msgctxt "DbManagerPrivate|"
-#~ msgid "Oracle"
-#~ msgstr "Oracle"
-
-#~ msgctxt "DbManagerPrivate|"
-#~ msgid "Oracle 8"
-#~ msgstr "Oracle 8"
-
-#~ msgctxt "DbManagerPrivate|"
-#~ msgid "Generic (ODBC)"
-#~ msgstr "Générique (ODBC)"
-
-#~ msgctxt "DbManagerPrivate|"
-#~ msgid "Generic (ODBC 3)"
-#~ msgstr "Générique (ODBC 3)"
-
-#~ msgctxt "DbManagerPrivate|"
-#~ msgid "PostGreSQL"
-#~ msgstr "PostGreSQL"
-
-#~ msgctxt "DbManagerPrivate|"
-#~ msgid "PostGreSQL 7"
-#~ msgstr "PostGreSQL 7"
-
-#~ msgctxt "DbManagerPrivate|"
-#~ msgid "SQLite"
-#~ msgstr "SQLite"
-
-#~ msgctxt "DbManagerPrivate|"
-#~ msgid "SQLite 2"
-#~ msgstr "SQLite 2"
-
-#~ msgctxt "DbManagerPrivate|"
-#~ msgid "Database"
-#~ msgstr "Base de données"
-
-#, qt-format
-#~ msgctxt "DbManagerPrivate|"
-#~ msgid "Tables (%1)"
-#~ msgstr "Tables (%1)"
-
-#, qt-format
-#~ msgctxt "DbManagerPrivate|"
-#~ msgid "Views (%1)"
-#~ msgstr "Vues (%1)"
-
-#: /home/manu/code/dbmaster/src/dialogs/configdialog.cpp:117
+#: /Users/newuser/code/dbmaster/src/dialogs/configdialog.cpp:117
 msgctxt "ConfigDialog|"
 msgid "Invalid color"
 msgstr "Couleur invalide"
 
-#: /home/manu/code/dbmaster/src/dialogs/configdialog.ui:14
+#: /Users/newuser/code/dbmaster/src/dialogs/configdialog.ui:14
 msgctxt "ConfigDialog|"
 msgid "DbMaster - Preferences"
 msgstr "DbMaster - Préférences"
 
-#: /home/manu/code/dbmaster/src/dialogs/configdialog.ui:46
-#: /home/manu/code/dbmaster/src/dialogs/configdialog.ui:117
+#: /Users/newuser/code/dbmaster/src/dialogs/configdialog.ui:46
+#: /Users/newuser/code/dbmaster/src/dialogs/configdialog.ui:117
 msgctxt "ConfigDialog|"
 msgid "General"
 msgstr "Général"
 
-#: /home/manu/code/dbmaster/src/dialogs/configdialog.ui:55
+#: /Users/newuser/code/dbmaster/src/dialogs/configdialog.ui:55
 msgctxt "ConfigDialog|"
 msgid "Query editor"
 msgstr "Éditeur de requêtes"
 
-#: /home/manu/code/dbmaster/src/dialogs/configdialog.ui:64
+#: /Users/newuser/code/dbmaster/src/dialogs/configdialog.ui:64
 msgctxt "ConfigDialog|"
 msgid "Plugins"
 msgstr "Plugins"
 
-#: /home/manu/code/dbmaster/src/dialogs/configdialog.ui:92
+#: /Users/newuser/code/dbmaster/src/dialogs/configdialog.ui:92
 msgctxt "ConfigDialog|"
 msgid "Default driver"
 msgstr "Driver par défaut"
 
-#: /home/manu/code/dbmaster/src/dialogs/configdialog.ui:123
+#: /Users/newuser/code/dbmaster/src/dialogs/configdialog.ui:123
 msgctxt "ConfigDialog|"
 msgid "Save query before execute it"
 msgstr "Enregistrer la requête avant de l'exécuter"
 
-#: /home/manu/code/dbmaster/src/dialogs/configdialog.ui:130
+#: /Users/newuser/code/dbmaster/src/dialogs/configdialog.ui:130
 msgctxt "ConfigDialog|"
 msgid "Enable semantic analysis"
 msgstr "Activer l'analyse sémantique"
 
-#: /home/manu/code/dbmaster/src/dialogs/configdialog.ui:140
+#: /Users/newuser/code/dbmaster/src/dialogs/configdialog.ui:140
 msgctxt "ConfigDialog|"
 msgid "Default encoding"
 msgstr "Encodage par défaut"
 
-#: /home/manu/code/dbmaster/src/dialogs/configdialog.ui:157
+#: /Users/newuser/code/dbmaster/src/dialogs/configdialog.ui:157
 msgctxt "ConfigDialog|"
 msgid "latin1"
 msgstr "latin1"
 
-#: /home/manu/code/dbmaster/src/dialogs/configdialog.ui:162
+#: /Users/newuser/code/dbmaster/src/dialogs/configdialog.ui:162
 msgctxt "ConfigDialog|"
 msgid "utf8"
 msgstr "utf8"
 
-#: /home/manu/code/dbmaster/src/dialogs/configdialog.ui:171
+#: /Users/newuser/code/dbmaster/src/dialogs/configdialog.ui:171
 msgctxt "ConfigDialog|"
 msgid "Font && Size"
 msgstr "Police && taille"
 
-#: /home/manu/code/dbmaster/src/dialogs/configdialog.ui:177
+#: /Users/newuser/code/dbmaster/src/dialogs/configdialog.ui:177
 msgctxt "ConfigDialog|"
 msgid "Editor's font"
 msgstr "Police de l'éditeur"
 
-#: /home/manu/code/dbmaster/src/dialogs/configdialog.ui:189
+#: /Users/newuser/code/dbmaster/src/dialogs/configdialog.ui:189
 msgctxt "ConfigDialog|"
 msgid "&Font"
 msgstr "&Police"
 
-#: /home/manu/code/dbmaster/src/dialogs/configdialog.ui:215
+#: /Users/newuser/code/dbmaster/src/dialogs/configdialog.ui:215
 msgctxt "ConfigDialog|"
 msgid "S&ize"
 msgstr "Ta&ille"
 
-#: /home/manu/code/dbmaster/src/dialogs/configdialog.ui:235
+#: /Users/newuser/code/dbmaster/src/dialogs/configdialog.ui:235
 msgctxt "ConfigDialog|"
 msgid "T&ab size"
 msgstr "T&aille des tabulations"
 
-#: /home/manu/code/dbmaster/src/dialogs/configdialog.ui:267
+#: /Users/newuser/code/dbmaster/src/dialogs/configdialog.ui:267
 msgctxt "ConfigDialog|"
 msgid "You can type some text here :"
 msgstr "Vous pouvez tester les paramètres ici :"
 
-#: /home/manu/code/dbmaster/src/dialogs/configdialog.ui:289
+#: /Users/newuser/code/dbmaster/src/dialogs/configdialog.ui:289
 msgctxt "ConfigDialog|"
 msgid "Syntax highlighting"
 msgstr "Coloration syntaxique"
 
-#: /home/manu/code/dbmaster/src/dialogs/configdialog.ui:295
+#: /Users/newuser/code/dbmaster/src/dialogs/configdialog.ui:295
 msgctxt "ConfigDialog|"
 msgid "Enable Syntax highlighting"
 msgstr "Activer la coloration syntaxique"
 
-#: /home/manu/code/dbmaster/src/dialogs/configdialog.ui:308
+#: /Users/newuser/code/dbmaster/src/dialogs/configdialog.ui:308
 msgctxt "ConfigDialog|"
 msgid "Basic SQL keywords"
 msgstr "Mots clés SQL"
 
-#: /home/manu/code/dbmaster/src/dialogs/configdialog.ui:313
+#: /Users/newuser/code/dbmaster/src/dialogs/configdialog.ui:313
 msgctxt "ConfigDialog|"
 msgid "SQL functions"
 msgstr "Fonctions SQL"
 
-#: /home/manu/code/dbmaster/src/dialogs/configdialog.ui:318
+#: /Users/newuser/code/dbmaster/src/dialogs/configdialog.ui:318
 msgctxt "ConfigDialog|"
 msgid "SQL types"
 msgstr "Types SQL"
 
-#: /home/manu/code/dbmaster/src/dialogs/configdialog.ui:323
+#: /Users/newuser/code/dbmaster/src/dialogs/configdialog.ui:323
 msgctxt "ConfigDialog|"
 msgid "Strings"
 msgstr "Chaînes"
 
-#: /home/manu/code/dbmaster/src/dialogs/configdialog.ui:328
+#: /Users/newuser/code/dbmaster/src/dialogs/configdialog.ui:328
 msgctxt "ConfigDialog|"
 msgid "Numbers"
 msgstr "Nombres"
 
-#: /home/manu/code/dbmaster/src/dialogs/configdialog.ui:333
+#: /Users/newuser/code/dbmaster/src/dialogs/configdialog.ui:333
 msgctxt "ConfigDialog|"
 msgid "Comments"
 msgstr "Commentaires"
 
-#: /home/manu/code/dbmaster/src/dialogs/configdialog.ui:338
+#: /Users/newuser/code/dbmaster/src/dialogs/configdialog.ui:338
 msgctxt "ConfigDialog|"
 msgid "Table name"
 msgstr "Nom de table"
 
-#: /home/manu/code/dbmaster/src/dialogs/configdialog.ui:343
+#: /Users/newuser/code/dbmaster/src/dialogs/configdialog.ui:343
 msgctxt "ConfigDialog|"
 msgid "Field name"
 msgstr "Nom de colonne"
 
-#: /home/manu/code/dbmaster/src/dialogs/configdialog.ui:363
+#: /Users/newuser/code/dbmaster/src/dialogs/configdialog.ui:363
 msgctxt "ConfigDialog|"
 msgid "Color"
 msgstr "Couleur"
 
-#: /home/manu/code/dbmaster/src/dialogs/configdialog.ui:376
+#: /Users/newuser/code/dbmaster/src/dialogs/configdialog.ui:376
 msgctxt "ConfigDialog|"
 msgid "Bold"
 msgstr "Gras"
 
-#: /home/manu/code/dbmaster/src/dialogs/configdialog.ui:388
+#: /Users/newuser/code/dbmaster/src/dialogs/configdialog.ui:388
 msgctxt "ConfigDialog|"
 msgid "Italic"
 msgstr "Italique"
 
-#: /home/manu/code/dbmaster/src/dialogs/configdialog.ui:422
+#: /Users/newuser/code/dbmaster/src/dialogs/configdialog.ui:422
 msgctxt "ConfigDialog|"
 msgid "Auto-completion"
 msgstr "Auto-complément"
 
-#: /home/manu/code/dbmaster/src/dialogs/configdialog.ui:428
+#: /Users/newuser/code/dbmaster/src/dialogs/configdialog.ui:428
 msgctxt "ConfigDialog|"
 msgid "Enable auto-completion"
 msgstr "Activer l'auto-complément"
 
-#: /home/manu/code/dbmaster/src/dialogs/configdialog.ui:443
+#: /Users/newuser/code/dbmaster/src/dialogs/configdialog.ui:443
 msgctxt "ConfigDialog|"
 msgid "Show completion popup after"
 msgstr "Afficher le complément après"
 
-#: /home/manu/code/dbmaster/src/dialogs/configdialog.ui:468
+#: /Users/newuser/code/dbmaster/src/dialogs/configdialog.ui:468
 msgctxt "ConfigDialog|"
 msgid "characters"
 msgstr "caractères"
 
-#: /home/manu/code/dbmaster/src/dialogs/configdialog.ui:484
+#: /Users/newuser/code/dbmaster/src/dialogs/configdialog.ui:484
 msgctxt "ConfigDialog|"
 msgid ""
 "<b>Warning !</b> All modifications concerning the editor will work after "
@@ -1817,17 +1226,17 @@ msgstr ""
 "<b>Attention ! </b> Toute modification concernant l'éditeur ne sera prise en "
 "compte qu'après avoir redémarré DbMaster."
 
-#: /home/manu/code/dbmaster/src/mainwindow.cpp:34
+#: /Users/newuser/code/dbmaster/src/mainwindow.cpp:39
 msgctxt "MainWindow|"
 msgid "Starting DbMaster"
 msgstr "Démarrage de DbMaster"
 
-#: /home/manu/code/dbmaster/src/mainwindow.cpp:62
+#: /Users/newuser/code/dbmaster/src/mainwindow.cpp:65
 msgctxt "MainWindow|"
 msgid "Error"
 msgstr "Erreur"
 
-#: /home/manu/code/dbmaster/src/mainwindow.cpp:63
+#: /Users/newuser/code/dbmaster/src/mainwindow.cpp:66
 #, qt-format
 msgctxt "MainWindow|"
 msgid ""
@@ -1837,110 +1246,84 @@ msgstr ""
 "Impossible de se connecter :\n"
 "%1"
 
-#: /home/manu/code/dbmaster/src/mainwindow.cpp:97
+#: /Users/newuser/code/dbmaster/src/mainwindow.cpp:100
 msgctxt "MainWindow|"
 msgid "Unsaved files"
 msgstr "Fichiers non enregistrés"
 
-#: /home/manu/code/dbmaster/src/mainwindow.cpp:98
+#: /Users/newuser/code/dbmaster/src/mainwindow.cpp:101
 msgctxt "MainWindow|"
 msgid "Some files are not saved. Are you sure to want to quit ?"
 msgstr ""
 "Certains fichiers n'ont pas été enregistrés. Êtes-vous sûr de vouloir "
 "quitter ?"
 
-#: /home/manu/code/dbmaster/src/mainwindow.cpp:248
+#: /Users/newuser/code/dbmaster/src/mainwindow.cpp:269
 msgctxt "MainWindow|"
 msgid "Select a query to open"
 msgstr "Ouvrir une requête"
 
-#: /home/manu/code/dbmaster/src/mainwindow.cpp:250
+#: /Users/newuser/code/dbmaster/src/mainwindow.cpp:271
 msgctxt "MainWindow|"
 msgid "Query file (*.sql);;All files (*.*)"
 msgstr "Fichier de requête (*.sql);;Tous fichiers (*.*)"
 
-#: /home/manu/code/dbmaster/src/mainwindow.cpp:395
+#: /Users/newuser/code/dbmaster/src/mainwindow.cpp:415
 msgctxt "MainWindow|"
 msgid "No recent file"
 msgstr "Pas de fichier récent"
 
-#: /home/manu/code/dbmaster/src/mainwindow.cpp:397
+#: /Users/newuser/code/dbmaster/src/mainwindow.cpp:418
 msgctxt "MainWindow|"
 msgid "Clear"
 msgstr "Effacer"
 
-#, qt-format
-#~ msgctxt "MainWindow|"
-#~ msgid "%1 queries pending..."
-#~ msgstr "%1 requête en attente..."
-
-#: /home/manu/code/dbmaster/src/plugins/pluginmanager.cpp:34
+#: /Users/newuser/code/dbmaster/src/plugins/pluginmanager.cpp:36
 msgctxt "PluginManagerPrivate|"
 msgid "Plugin"
 msgstr "Plugin"
 
-#: /home/manu/code/dbmaster/src/plugins/pluginmanager.cpp:34
+#: /Users/newuser/code/dbmaster/src/plugins/pluginmanager.cpp:36
 msgctxt "PluginManagerPrivate|"
 msgid "Type"
 msgstr "Type"
 
-#: /home/manu/code/dbmaster/src/plugins/pluginmanager.cpp:34
+#: /Users/newuser/code/dbmaster/src/plugins/pluginmanager.cpp:36
 msgctxt "PluginManagerPrivate|"
 msgid "Vendor"
 msgstr "Fournisseur"
 
-#: /home/manu/code/dbmaster/src/plugins/pluginmanager.cpp:34
+#: /Users/newuser/code/dbmaster/src/plugins/pluginmanager.cpp:36
 msgctxt "PluginManagerPrivate|"
 msgid "Version"
 msgstr "Version"
 
-#: /home/manu/code/dbmaster/src/plugins/pluginmanager.cpp:142
+#: /Users/newuser/code/dbmaster/src/plugins/pluginmanager.cpp:94
 msgctxt "PluginManagerPrivate|"
 msgid "Other"
 msgstr "Autre"
 
-#: /home/manu/code/dbmaster/src/plugins/pluginmanager.cpp:145
+#: /Users/newuser/code/dbmaster/src/plugins/pluginmanager.cpp:97
 msgctxt "PluginManagerPrivate|"
 msgid "Export engine"
 msgstr "Moteur d'export"
 
-#: /home/manu/code/dbmaster/src/plugins/pluginmanager.cpp:147
+#: /Users/newuser/code/dbmaster/src/plugins/pluginmanager.cpp:99
 msgctxt "PluginManagerPrivate|"
 msgid "SQL Wrapper"
 msgstr "Adaptateur SQL"
 
-#: /home/manu/code/dbmaster/src/plugins/pluginmanager.cpp:171
-#: /home/manu/code/dbmaster/src/plugins/pluginmanager.cpp:176
-msgctxt "PluginManagerPrivate|"
-msgid "Incorrect plugin file"
-msgstr "Fichier de plugin incorrect"
-
-#: /home/manu/code/dbmaster/src/plugins/pluginmanager.cpp:172
-msgctxt "PluginManagerPrivate|"
-msgid "This file contains no DbMaster plugin."
-msgstr "Ce fichier ne contient aucun plugin."
-
-#: /home/manu/code/dbmaster/src/plugins/pluginmanager.cpp:177
-msgctxt "PluginManagerPrivate|"
-msgid "Unable to load the plugin. Specified error : \n"
-msgstr "Impossible de charger le plugin. Erreur retournée :\n"
-
-#, qt-format
-#~ msgctxt "QueryEditorWidget|"
-#~ msgid "<b>[%1]</b>Query pending"
-#~ msgstr "<b>[%1]</b>Requête en attente"
-
-#: /home/manu/code/dbmaster/src/tabwidget/queryeditorwidget.cpp:87
-#: /home/manu/code/dbmaster/src/tabwidget/queryeditorwidget.cpp:115
-#: /home/manu/code/dbmaster/src/tabwidget/queryeditorwidget.cpp:230
-#: /home/manu/code/dbmaster/src/tabwidget/queryeditorwidget.cpp:275
-#: /home/manu/code/dbmaster/src/tabwidget/queryeditorwidget.cpp:286
+#: /Users/newuser/code/dbmaster/src/tabwidget/queryeditorwidget.cpp:89
+#: /Users/newuser/code/dbmaster/src/tabwidget/queryeditorwidget.cpp:117
+#: /Users/newuser/code/dbmaster/src/tabwidget/queryeditorwidget.cpp:252
+#: /Users/newuser/code/dbmaster/src/tabwidget/queryeditorwidget.cpp:347
+#: /Users/newuser/code/dbmaster/src/tabwidget/queryeditorwidget.cpp:358
 msgctxt "QueryEditorWidget|"
 msgid "DbMaster"
 msgstr "DbMaster"
 
-#: /home/manu/code/dbmaster/src/tabwidget/queryeditorwidget.cpp:88
-#: /home/manu/code/dbmaster/src/tabwidget/queryeditorwidget.cpp:109
+#: /Users/newuser/code/dbmaster/src/tabwidget/queryeditorwidget.cpp:90
+#: /Users/newuser/code/dbmaster/src/tabwidget/queryeditorwidget.cpp:111
 msgctxt "QueryEditorWidget|"
 msgid ""
 "Warning ! All your modifications will be lost.\n"
@@ -1949,7 +1332,7 @@ msgstr ""
 "Attention ! Toutes les modifications seront perdues.\n"
 "Voulez-vous enregistrer ?"
 
-#: /home/manu/code/dbmaster/src/tabwidget/queryeditorwidget.cpp:111
+#: /Users/newuser/code/dbmaster/src/tabwidget/queryeditorwidget.cpp:113
 #, qt-format
 msgctxt "QueryEditorWidget|"
 msgid ""
@@ -1959,452 +1342,459 @@ msgstr ""
 "Attention ! %1 a été modifié.\n"
 "Voulez-vous l'enregistrer ?"
 
-#: /home/manu/code/dbmaster/src/tabwidget/queryeditorwidget.cpp:231
+#: /Users/newuser/code/dbmaster/src/tabwidget/queryeditorwidget.cpp:253
 msgctxt "QueryEditorWidget|"
 msgid "Unable to open the file !"
 msgstr "Impossible d'ouvrir le fichier !"
 
-#: /home/manu/code/dbmaster/src/tabwidget/queryeditorwidget.cpp:392
+#: /Users/newuser/code/dbmaster/src/tabwidget/queryeditorwidget.cpp:478
 msgctxt "QueryEditorWidget|"
 msgid "Running..."
 msgstr "Exécution..."
 
-#: /home/manu/code/dbmaster/src/tabwidget/queryeditorwidget.cpp:437
+#: /Users/newuser/code/dbmaster/src/tabwidget/queryeditorwidget.cpp:540
+#, qt-format
+msgctxt "QueryEditorWidget|"
+msgid "Line: %1, Col: %2"
+msgstr "Ligne : %1, Col : %2"
+
+#: /Users/newuser/code/dbmaster/src/tabwidget/queryeditorwidget.cpp:283
 #, qt-format
 msgctxt "QueryEditorWidget|"
 msgid "Query executed with success (%1 lines returned)"
 msgstr "Requête exécutée avec succès en (%1 lignes retournées)"
 
-#: /home/manu/code/dbmaster/src/tabwidget/queryeditorwidget.cpp:276
+#: /Users/newuser/code/dbmaster/src/tabwidget/queryeditorwidget.cpp:348
 msgctxt "QueryEditorWidget|"
 msgid "Query file (*.sql);;All files (*.*)"
 msgstr "Fichier de requête (*.sql);;Tous fichiers (*.*)"
 
-#: /home/manu/code/dbmaster/src/tabwidget/queryeditorwidget.cpp:286
+#: /Users/newuser/code/dbmaster/src/tabwidget/queryeditorwidget.cpp:358
 msgctxt "QueryEditorWidget|"
 msgid "Unable to save the file !"
 msgstr "Impossible d'enregistrer le fichier !"
 
-#: /home/manu/code/dbmaster/src/tabwidget/queryeditorwidget.cpp:364
+#: /Users/newuser/code/dbmaster/src/tabwidget/queryeditorwidget.cpp:445
 msgctxt "QueryEditorWidget|"
 msgid "Display result"
 msgstr "Afficher le résultat"
 
-#: /home/manu/code/dbmaster/src/tabwidget/queryeditorwidget.cpp:402
+#: /Users/newuser/code/dbmaster/src/tabwidget/queryeditorwidget.cpp:499
 msgctxt "QueryEditorWidget|"
 msgid "Query editor"
 msgstr "Éditeur de requêtes"
 
-#, qt-format
-#~ msgctxt "QueryEditorWidget|"
-#~ msgid "Query executed with success in %2secs (%1 lines returned)"
-#~ msgstr "Requête exécutée avec succès en %2secs (%1 lignes retournées)"
-
-#~ msgctxt "QueryEditorWidget|"
-#~ msgid "Query executed with success"
-#~ msgstr "Requête exécutée avec succès"
-
-#: /home/manu/code/dbmaster/src/tabwidget/queryeditorwidget.cpp:445
+#: /Users/newuser/code/dbmaster/src/tabwidget/queryeditorwidget.cpp:274
 msgctxt "QueryEditorWidget|"
 msgid "Unable to run query"
 msgstr "Impossible d'exécuter la requête"
 
-#: /home/manu/code/dbmaster/src/tabwidget/queryeditorwidget.ui:20
+#: /Users/newuser/code/dbmaster/src/tabwidget/queryeditorwidget.ui:41
+msgctxt "QueryEditorWidget|"
+msgid "Commit transaction"
+msgstr ""
+
+#: /Users/newuser/code/dbmaster/src/tabwidget/queryeditorwidget.ui:54
+msgctxt "QueryEditorWidget|"
+msgid "Rollback transaction"
+msgstr ""
+
+#: /Users/newuser/code/dbmaster/src/tabwidget/queryeditorwidget.ui:96
 msgctxt "QueryEditorWidget|"
 msgid "R&un"
 msgstr "Éxéc&uter"
 
-#: /home/manu/code/dbmaster/src/tabwidget/queryeditorwidget.ui:33
+#: /Users/newuser/code/dbmaster/src/tabwidget/queryeditorwidget.ui:109
 msgctxt "QueryEditorWidget|"
 msgid "F5"
 msgstr "F5"
 
-#: /home/manu/code/dbmaster/src/tabwidget/tablewidget.cpp:49
-msgctxt "TableWidget|"
-msgid "Error"
-msgstr "Erreur"
-
-#: /home/manu/code/dbmaster/src/tabwidget/tablewidget.cpp:50
-#, qt-format
-#| msgid "Unable to open the table %1.\n"
-msgctxt "TableWidget|"
-msgid "Unable to open the table %1. "
-msgstr "Impossible d'ouvrir la table %1."
-
-#: /home/manu/code/dbmaster/src/tabwidget/tablewidget.cpp:51
-msgctxt "TableWidget|"
-msgid "Check you have the necessary permissions."
-msgstr "Vérifiez que vous avez les permissions nécessaires."
-
-#: /home/manu/code/dbmaster/src/tabwidget/tablewidget.cpp:66
+#: /Users/newuser/code/dbmaster/src/tabwidget/tablewidget.cpp:57
 msgctxt "TableWidget|"
 msgid "Yes"
 msgstr "Oui"
 
-#: /home/manu/code/dbmaster/src/tabwidget/tablewidget.cpp:66
+#: /Users/newuser/code/dbmaster/src/tabwidget/tablewidget.cpp:57
 msgctxt "TableWidget|"
 msgid "No"
 msgstr "Non"
 
-#: /home/manu/code/dbmaster/src/tabwidget/tablewidget.ui:21
+#: /Users/newuser/code/dbmaster/src/tabwidget/tablewidget.ui:21
 msgctxt "TableWidget|"
 msgid "Data"
 msgstr "Données"
 
-#: /home/manu/code/dbmaster/src/tabwidget/tablewidget.ui:31
+#: /Users/newuser/code/dbmaster/src/tabwidget/tablewidget.ui:108
+msgctxt "TableWidget|"
+msgid "WHERE"
+msgstr "WHERE"
+
+#: /Users/newuser/code/dbmaster/src/tabwidget/tablewidget.ui:121
 msgctxt "TableWidget|"
 msgid "Columns"
 msgstr "Colonnes"
 
-#: /home/manu/code/dbmaster/src/tabwidget/tablewidget.ui:43
+#: /Users/newuser/code/dbmaster/src/tabwidget/tablewidget.ui:133
 msgctxt "TableWidget|"
 msgid "Type"
 msgstr "Type"
 
-#: /home/manu/code/dbmaster/src/tabwidget/tablewidget.ui:48
+#: /Users/newuser/code/dbmaster/src/tabwidget/tablewidget.ui:138
 msgctxt "TableWidget|"
 msgid "Permits null"
 msgstr "Permet null"
 
-#: /home/manu/code/dbmaster/src/tabwidget/tablewidget.ui:53
+#: /Users/newuser/code/dbmaster/src/tabwidget/tablewidget.ui:143
 msgctxt "TableWidget|"
 msgid "Default"
 msgstr "Valeur par défaut"
 
-#: /home/manu/code/dbmaster/src/tabwidget/tablewidget.ui:58
+#: /Users/newuser/code/dbmaster/src/tabwidget/tablewidget.ui:148
 msgctxt "TableWidget|"
 msgid "Comment"
 msgstr "Commentaire"
 
-#: /home/manu/code/dbmaster/src/widgets/dbtreeview.cpp:59
+#: /Users/newuser/code/dbmaster/src/widgets/dbtreeview.cpp:59
 msgctxt "DbTreeView|"
 msgid "Disconnect"
 msgstr "Déconnecter"
 
-#: /home/manu/code/dbmaster/src/widgets/dbtreeview.cpp:61
-#: /home/manu/code/dbmaster/src/widgets/dbtreeview.cpp:260
+#: /Users/newuser/code/dbmaster/src/widgets/dbtreeview.cpp:61
+#: /Users/newuser/code/dbmaster/src/widgets/dbtreeview.cpp:260
 msgctxt "DbTreeView|"
 msgid "Connect"
 msgstr "Connecter"
 
-#: /home/manu/code/dbmaster/src/widgets/dbtreeview.cpp:205
+#: /Users/newuser/code/dbmaster/src/widgets/dbtreeview.cpp:205
 msgctxt "DbTreeView|"
 msgid "Cannot remove"
 msgstr "Impossible de supprimer"
 
-#: /home/manu/code/dbmaster/src/widgets/dbtreeview.cpp:206
+#: /Users/newuser/code/dbmaster/src/widgets/dbtreeview.cpp:206
 msgctxt "DbTreeView|"
 msgid "You must close the database before remove it."
 msgstr "Vous devez fermer la connexion avant de la supprimer."
 
-#: /home/manu/code/dbmaster/src/widgets/dbtreeview.cpp:243
+#: /Users/newuser/code/dbmaster/src/widgets/dbtreeview.cpp:243
 msgctxt "DbTreeView|"
 msgid "New connection"
 msgstr "Nouvelle connexion"
 
-#: /home/manu/code/dbmaster/src/widgets/dbtreeview.cpp:247
+#: /Users/newuser/code/dbmaster/src/widgets/dbtreeview.cpp:247
 msgctxt "DbTreeView|"
 msgid "Edit"
 msgstr "Modifier"
 
-#: /home/manu/code/dbmaster/src/widgets/dbtreeview.cpp:251
+#: /Users/newuser/code/dbmaster/src/widgets/dbtreeview.cpp:251
 msgctxt "DbTreeView|"
 msgid "Refresh"
 msgstr "Rafraîchir"
 
-#: /home/manu/code/dbmaster/src/widgets/dbtreeview.cpp:256
+#: /Users/newuser/code/dbmaster/src/widgets/dbtreeview.cpp:256
 msgctxt "DbTreeView|"
 msgid "Remove"
 msgstr "Supprimer"
 
-#: /home/manu/code/dbmaster/src/wizards/exportwizard.cpp:9
+#: /Users/newuser/code/dbmaster/src/wizards/exportwizard.cpp:14
 msgctxt "ExportWizard|"
 msgid "Export"
 msgstr "Exporter"
 
-#: /home/manu/code/dbmaster/src/dialogs/blobdialog.ui:14
+#: /Users/newuser/code/dbmaster/src/dialogs/blobdialog.ui:14
 msgctxt "BlobDialog|"
 msgid "Blob viewer"
 msgstr "Afficher un blob"
 
-#: /home/manu/code/dbmaster/src/dialogs/blobdialog.ui:24
+#: /Users/newuser/code/dbmaster/src/dialogs/blobdialog.ui:24
 msgctxt "BlobDialog|"
 msgid "Text"
 msgstr "Texte"
 
-#: /home/manu/code/dbmaster/src/dialogs/blobdialog.ui:38
+#: /Users/newuser/code/dbmaster/src/dialogs/blobdialog.ui:38
 msgctxt "BlobDialog|"
 msgid "HTML"
 msgstr "HTML"
 
-#~ msgctxt "TableWidgetClass|"
-#~ msgid "Columns"
-#~ msgstr "Colonnes"
-
-#~ msgctxt "TableWidgetClass|"
-#~ msgid "Type"
-#~ msgstr "Type"
-
-#~ msgctxt "TableWidgetClass|"
-#~ msgid "Permits null"
-#~ msgstr "Permet null"
-
-#~ msgctxt "TableWidgetClass|"
-#~ msgid "Default"
-#~ msgstr "Valeur par défaut"
-
-#~ msgctxt "TableWidgetClass|"
-#~ msgid "Comment"
-#~ msgstr "Commentaire"
-
-#~ msgctxt "TableWidgetClass|"
-#~ msgid "Data"
-#~ msgstr "Données"
-
-#: /home/manu/code/dbmaster/src/plugins/wrappers/psql/psqlconfig.ui:14
+#: /Users/newuser/code/dbmaster/src/plugins/wrappers/psql/psqlconfig.ui:14
 msgctxt "PsqlConfig|"
 msgid "PostgreSQL options"
 msgstr "Options PostgreSQL"
 
-#: /home/manu/code/dbmaster/src/plugins/wrappers/psql/psqlconfig.ui:25
+#: /Users/newuser/code/dbmaster/src/plugins/wrappers/psql/psqlconfig.ui:25
 msgctxt "PsqlConfig|"
 msgid "Hide pg_catalog schema"
 msgstr "Masquer le schéma pg_catalog"
 
-#: /home/manu/code/dbmaster/src/plugins/wrappers/psql/psqlconfig.ui:32
+#: /Users/newuser/code/dbmaster/src/plugins/wrappers/psql/psqlconfig.ui:32
 #| msgid "Hide INFORMATION_SCHEMA"
 msgctxt "PsqlConfig|"
 msgid "Hide information_schema"
 msgstr "Masquer information_schema"
 
-#: /home/manu/code/dbmaster/src/widgets/resultviewtable.cpp:130
+#: /Users/newuser/code/dbmaster/src/resultview/resultviewtable.cpp:264
 msgctxt "ResultViewTable|"
 msgid "Details"
 msgstr "Détails"
 
-#: /home/manu/code/dbmaster/src/widgets/resultviewtable.cpp:134
-msgctxt "ResultViewTable|"
-msgid "Alternate row colors"
-msgstr "Alterner les lignes"
-
-#: /home/manu/code/dbmaster/src/widgets/resultviewtable.cpp:141
+#: /Users/newuser/code/dbmaster/src/resultview/resultviewtable.cpp:268
 msgctxt "ResultViewTable|"
 msgid "Copy"
 msgstr "Copier"
 
-#: /home/manu/code/dbmaster/src/widgets/resultviewtable.cpp:145
+#: /Users/newuser/code/dbmaster/src/resultview/resultviewtable.cpp:272
 msgctxt "ResultViewTable|"
 msgid "Export"
 msgstr "Exporter"
 
-#: /home/manu/code/dbmaster/src/plugins/wrappers/sqlite/sqlitewrapper.h:18
+#: /Users/newuser/code/dbmaster/src/plugins/wrappers/sqlite/sqlitewrapper.h:18
 msgctxt "SqliteWrapper|"
 msgid "SQLite wrapper"
 msgstr "Adaptateur SQLite"
 
-#: /home/manu/code/dbmaster/src/plugins/exportengines/plaintext/plaintextwizardpage.ui:14
+#: /Users/newuser/code/dbmaster/src/plugins/exportengines/plaintext/plaintextwizardpage.ui:14
 msgctxt "PlainTextWizardPage|"
 msgid "WizardPage"
 msgstr ""
 
-#: /home/manu/code/dbmaster/src/plugins/exportengines/plaintext/plaintextwizardpage.ui:17
+#: /Users/newuser/code/dbmaster/src/plugins/exportengines/plaintext/plaintextwizardpage.ui:17
 msgctxt "PlainTextWizardPage|"
 msgid "Details"
 msgstr "Détails"
 
-#: /home/manu/code/dbmaster/src/plugins/exportengines/plaintext/plaintextwizardpage.ui:20
+#: /Users/newuser/code/dbmaster/src/plugins/exportengines/plaintext/plaintextwizardpage.ui:20
 msgctxt "PlainTextWizardPage|"
 msgid ""
 "This form fill permit you to specify the way the file will be formatted."
 msgstr ""
 
-#: /home/manu/code/dbmaster/src/plugins/exportengines/plaintext/plaintextwizardpage.ui:27
+#: /Users/newuser/code/dbmaster/src/plugins/exportengines/plaintext/plaintextwizardpage.ui:27
 msgctxt "PlainTextWizardPage|"
 msgid "Column"
 msgstr ""
 
-#: /home/manu/code/dbmaster/src/plugins/exportengines/plaintext/plaintextwizardpage.ui:32
+#: /Users/newuser/code/dbmaster/src/plugins/exportengines/plaintext/plaintextwizardpage.ui:32
 msgctxt "PlainTextWizardPage|"
 msgid "Character count"
 msgstr ""
 
-#: /home/manu/code/dbmaster/src/plugins/exportengines/plaintext/plaintextwizardpage.ui:37
+#: /Users/newuser/code/dbmaster/src/plugins/exportengines/plaintext/plaintextwizardpage.ui:37
 msgctxt "PlainTextWizardPage|"
 msgid "Position in file"
 msgstr ""
 
-#: /home/manu/code/dbmaster/src/dbmanager.cpp:133
+#: /Users/newuser/code/dbmaster/src/dbmanager.cpp:135
 #, qt-format
 msgctxt "DbManager|"
 msgid "Columns (%1)"
 msgstr "Colonnes (%1)"
 
-#: /home/manu/code/dbmaster/src/dbmanager.cpp:157
+#: /Users/newuser/code/dbmaster/src/dbmanager.cpp:159
 #, qt-format
 msgctxt "DbManager|"
 msgid "%1 (local)"
 msgstr "%1 (locale)"
 
-#: /home/manu/code/dbmaster/src/dbmanager.cpp:159
-#: /home/manu/code/dbmaster/src/dbmanager.cpp:170
+#: /Users/newuser/code/dbmaster/src/dbmanager.cpp:161
+#: /Users/newuser/code/dbmaster/src/dbmanager.cpp:172
 #, qt-format
 msgctxt "DbManager|"
 msgid "%1 on %2"
 msgstr "%1 sur %2"
 
-#: /home/manu/code/dbmaster/src/dbmanager.cpp:181
+#: /Users/newuser/code/dbmaster/src/dbmanager.cpp:183
 msgctxt "DbManager|"
 msgid "Openned"
 msgstr "Ouverte"
 
-#: /home/manu/code/dbmaster/src/dbmanager.cpp:183
+#: /Users/newuser/code/dbmaster/src/dbmanager.cpp:185
 msgctxt "DbManager|"
 msgid "Closed"
 msgstr "Fermée"
 
-#: /home/manu/code/dbmaster/src/dbmanager.cpp:186
+#: /Users/newuser/code/dbmaster/src/dbmanager.cpp:188
 msgctxt "DbManager|"
 msgid "Status"
 msgstr "Statut"
 
-#: /home/manu/code/dbmaster/src/dbmanager.cpp:191
+#: /Users/newuser/code/dbmaster/src/dbmanager.cpp:193
 msgctxt "DbManager|"
 msgid "DBMS"
 msgstr "SGBD"
 
-#: /home/manu/code/dbmaster/src/dbmanager.cpp:193
+#: /Users/newuser/code/dbmaster/src/dbmanager.cpp:195
 #, qt-format
 msgctxt "DbManager|"
 msgid "Generic (%1)"
 msgstr "Générique (%1)"
 
-#: /home/manu/code/dbmaster/src/dbmanager.cpp:197
+#: /Users/newuser/code/dbmaster/src/dbmanager.cpp:199
 msgctxt "DbManager|"
 msgid "Host"
 msgstr "Hôte"
 
-#: /home/manu/code/dbmaster/src/dbmanager.cpp:414
+#: /Users/newuser/code/dbmaster/src/dbmanager.cpp:405
 #, qt-format
 msgctxt "DbManager|"
 msgid "Schemas (%1)"
 msgstr "Schémas (%1)"
 
-#: /home/manu/code/dbmaster/src/dbmanager.cpp:503
+#: /Users/newuser/code/dbmaster/src/dbmanager.cpp:494
 #, qt-format
 msgctxt "DbManager|"
 msgid "Connected to %1"
 msgstr "Connecté à %1"
 
-#: /home/manu/code/dbmaster/src/dbmanager.cpp:505
+#: /Users/newuser/code/dbmaster/src/dbmanager.cpp:496
 #, qt-format
 msgctxt "DbManager|"
 msgid "Unable to connect to %1"
 msgstr "Impossible de se connecter à %1"
 
-#: /home/manu/code/dbmaster/src/dbmanager.cpp:517
+#: /Users/newuser/code/dbmaster/src/dbmanager.cpp:508
 #, qt-format
 msgctxt "DbManager|"
 msgid "Disconnected from %1"
 msgstr "Déconnecté de %1"
 
-#: /home/manu/code/dbmaster/src/dbmanager.cpp:612
+#: /Users/newuser/code/dbmaster/src/dbmanager.cpp:603
 msgctxt "DbManager|"
 msgid "Driver"
 msgstr "Pilote"
 
-#: /home/manu/code/dbmaster/src/dbmanager.cpp:614
+#: /Users/newuser/code/dbmaster/src/dbmanager.cpp:605
 msgctxt "DbManager|"
 msgid "DB2"
 msgstr "DB2"
 
-#: /home/manu/code/dbmaster/src/dbmanager.cpp:615
+#: /Users/newuser/code/dbmaster/src/dbmanager.cpp:606
 msgctxt "DbManager|"
 msgid "Interbase/Firebird"
 msgstr "Interbase/Firebird"
 
-#: /home/manu/code/dbmaster/src/dbmanager.cpp:616
+#: /Users/newuser/code/dbmaster/src/dbmanager.cpp:607
 msgctxt "DbManager|"
 msgid "MySql"
 msgstr "MySql"
 
-#: /home/manu/code/dbmaster/src/dbmanager.cpp:617
+#: /Users/newuser/code/dbmaster/src/dbmanager.cpp:608
 msgctxt "DbManager|"
 msgid "MySql 3"
 msgstr "MySql 3"
 
-#: /home/manu/code/dbmaster/src/dbmanager.cpp:618
+#: /Users/newuser/code/dbmaster/src/dbmanager.cpp:609
 msgctxt "DbManager|"
 msgid "Oracle"
 msgstr "Oracle"
 
-#: /home/manu/code/dbmaster/src/dbmanager.cpp:619
+#: /Users/newuser/code/dbmaster/src/dbmanager.cpp:610
 msgctxt "DbManager|"
 msgid "Oracle 8"
 msgstr "Oracle 8"
 
-#: /home/manu/code/dbmaster/src/dbmanager.cpp:620
+#: /Users/newuser/code/dbmaster/src/dbmanager.cpp:611
 msgctxt "DbManager|"
 msgid "Generic (ODBC)"
 msgstr "Générique (ODBC)"
 
-#: /home/manu/code/dbmaster/src/dbmanager.cpp:621
+#: /Users/newuser/code/dbmaster/src/dbmanager.cpp:612
 msgctxt "DbManager|"
 msgid "Generic (ODBC 3)"
 msgstr "Générique (ODBC 3)"
 
-#: /home/manu/code/dbmaster/src/dbmanager.cpp:622
+#: /Users/newuser/code/dbmaster/src/dbmanager.cpp:613
 msgctxt "DbManager|"
 msgid "PostGreSQL"
 msgstr "PostGreSQL"
 
-#: /home/manu/code/dbmaster/src/dbmanager.cpp:623
+#: /Users/newuser/code/dbmaster/src/dbmanager.cpp:614
 msgctxt "DbManager|"
 msgid "PostGreSQL 7"
 msgstr "PostGreSQL 7"
 
-#: /home/manu/code/dbmaster/src/dbmanager.cpp:624
+#: /Users/newuser/code/dbmaster/src/dbmanager.cpp:615
 msgctxt "DbManager|"
 msgid "SQLite"
 msgstr "SQLite"
 
-#: /home/manu/code/dbmaster/src/dbmanager.cpp:625
+#: /Users/newuser/code/dbmaster/src/dbmanager.cpp:616
 msgctxt "DbManager|"
 msgid "SQLite 2"
 msgstr "SQLite 2"
 
-#: /home/manu/code/dbmaster/src/dbmanager.cpp:657
+#: /Users/newuser/code/dbmaster/src/dbmanager.cpp:648
 msgctxt "DbManager|"
 msgid "Database"
 msgstr "Base de données"
 
-#: /home/manu/code/dbmaster/src/dbmanager.cpp:719
+#: /Users/newuser/code/dbmaster/src/dbmanager.cpp:710
 #, qt-format
 msgctxt "DbManager|"
 msgid "Tables (%1)"
 msgstr "Tables (%1)"
 
-#: /home/manu/code/dbmaster/src/dbmanager.cpp:745
+#: /Users/newuser/code/dbmaster/src/dbmanager.cpp:736
 #, qt-format
 msgctxt "DbManager|"
 msgid "Views (%1)"
 msgstr "Vues (%1)"
 
-#: /home/manu/code/dbmaster/src/plugins/exportengines/plaintext/plaintextexportengine.h:17
+#: /Users/newuser/code/dbmaster/src/plugins/exportengines/plaintext/plaintextexportengine.h:17
 msgctxt "PlainTextExportEngine|"
 msgid "Plain text export engine"
 msgstr ""
 
-#: /home/manu/code/dbmaster/src/plugins/exportengines/plaintext/plaintextexportengine.h:23
+#: /Users/newuser/code/dbmaster/src/plugins/exportengines/plaintext/plaintextexportengine.h:23
 msgctxt "PlainTextExportEngine|"
 msgid "Plain text"
 msgstr ""
 
-#: /home/manu/code/dbmaster/src/plugins/wrappers/db2i/db2iwrapper.h:17
+#: /Users/newuser/code/dbmaster/src/plugins/wrappers/db2i/db2iwrapper.h:17
 msgctxt "Db2iWrapper|"
 msgid "DB2 for System i wrapper"
 msgstr ""
 
-#: /home/manu/code/dbmaster/src/plugins/wrappers/db2i/db2iwrapper.h:25
+#: /Users/newuser/code/dbmaster/src/plugins/wrappers/db2i/db2iwrapper.h:25
 msgctxt "Db2iWrapper|"
 msgid "DB2 for i"
 msgstr ""
+
+#: /Users/newuser/code/dbmaster/src/resultview/paginationwidget.cpp:29
+#, qt-format
+msgctxt "PaginationWidget|"
+msgid "Page %1/%2"
+msgstr "Page %1/%2"
+
+#: /Users/newuser/code/dbmaster/src/resultview/paginationwidget.cpp:84
+msgctxt "PaginationWidget|"
+msgid "First page"
+msgstr "Première page"
+
+#: /Users/newuser/code/dbmaster/src/resultview/paginationwidget.cpp:86
+msgctxt "PaginationWidget|"
+msgid "Previous page"
+msgstr "Page précédente"
+
+#: /Users/newuser/code/dbmaster/src/resultview/paginationwidget.cpp:88
+msgctxt "PaginationWidget|"
+msgid "Next page"
+msgstr "Page suivante"
+
+#: /Users/newuser/code/dbmaster/src/resultview/paginationwidget.cpp:90
+msgctxt "PaginationWidget|"
+msgid "Last page"
+msgstr "Dernière page"
+
+#: /Users/newuser/code/dbmaster/src/resultview/paginationwidget.cpp:95
+msgctxt "PaginationWidget|"
+msgid "Reload"
+msgstr "Recharger"
+
+#: /Users/newuser/code/dbmaster/src/resultview/paginationwidget.cpp:100
+msgctxt "PaginationWidget|"
+msgid "Show"
+msgstr "Montrer"
+
+#: /Users/newuser/code/dbmaster/src/resultview/paginationwidget.cpp:102
+msgctxt "PaginationWidget|"
+msgid "results"
+msgstr "lignes"

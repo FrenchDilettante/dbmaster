@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include "config.h"
 #include "dbmanager.h"
 #include "iconmanager.h"
 
@@ -19,12 +20,14 @@
 
 DbDialog     *MainWindow::dbDialog;
 NewDbWizard  *MainWindow::dbWizard;
+MainWindow* MainWindow::instance;
 PluginDialog *MainWindow::pluginDialog;
 
 MainWindow::MainWindow(QWidget *parent)
   : QMainWindow(parent) {
   dbDialog      = new DbDialog(this);
   dbWizard      = new NewDbWizard(this);
+  instance = this;
   pluginDialog  = new PluginDialog(this);
 
   setupUi(this);
@@ -191,6 +194,11 @@ void MainWindow::loadSettings(QSettings *s) {
   if (s->value("maximized", false).toBool()) {
     setWindowState(Qt::WindowMaximized);
   }
+
+  actionIndentUsingSpaces->setChecked(Config::editorTabUseSpaces);
+  actionTabWidth_2->setChecked(Config::editorTabSize == 2);
+  actionTabWidth_4->setChecked(Config::editorTabSize == 4);
+  actionTabWidth_8->setChecked(Config::editorTabSize == 8);
 }
 
 void MainWindow::lowerCase() {
@@ -212,6 +220,7 @@ QueryEditorWidget* MainWindow::newQuery() {
   connect(w, SIGNAL(actionAvailable(AbstractTabWidget::Actions)),
           this, SLOT(refreshTab()));
   connect(w, SIGNAL(error()), logDock, SLOT(show()));
+  connect(w, SIGNAL(success()), logDock, SLOT(hide()));
   connect(w, SIGNAL(fileChanged(QString)), this, SLOT(addRecentFile(QString)));
   connect(w, SIGNAL(modificationChanged(bool)), this, SLOT(refreshTab()));
   connect(w, SIGNAL(tableRequested(QSqlDatabase*,QString)),
@@ -438,8 +447,6 @@ void MainWindow::saveSettings() {
     s.remove("maximized");
   }
 
-  s.setValue("tooltips", tooltipButton->isChecked());
-
   s.setValue("maindock_visible", dockWidget->isVisible());
   s.setValue("maindock_area", dockWidgetArea(dockWidget));
   s.setValue("maindock_floating", dockWidget->isFloating());
@@ -510,6 +517,7 @@ void MainWindow::setupConnections() {
   connect(actionDbManager,    SIGNAL(triggered()),  dbDialog,      SLOT(exec()));
   connect(actionDisconnect,   SIGNAL(triggered()),  dbTreeView,    SLOT(disconnectCurrent()));
   connect(actionEditConnection,SIGNAL(triggered()), dbTreeView,    SLOT(editCurrent()));
+  connect(actionIndentUsingSpaces, SIGNAL(triggered(bool)), this,  SLOT(setIndentationSpaces(bool)));
   connect(actionLeftPanel,    SIGNAL(triggered()),  this,          SLOT(toggleLeftPanel()));
   connect(actionLowerCase,    SIGNAL(triggered()),  this,          SLOT(lowerCase()));
   connect(actionNewQuery,     SIGNAL(triggered()),  this,          SLOT(newQuery()));
@@ -527,6 +535,9 @@ void MainWindow::setupConnections() {
   connect(actionSaveQueryAs,  SIGNAL(triggered()),  this,          SLOT(saveQueryAs()));
   connect(actionSearch,       SIGNAL(triggered()),  this,          SLOT(search()));
   connect(actionSelect_all,   SIGNAL(triggered()),  this,          SLOT(selectAll()));
+  connect(actionTabWidth_2,   SIGNAL(triggered()),  this,          SLOT(setIndentation2Spaces()));
+  connect(actionTabWidth_4,   SIGNAL(triggered()),  this,          SLOT(setIndentation4Spaces()));
+  connect(actionTabWidth_8,   SIGNAL(triggered()),  this,          SLOT(setIndentation8Spaces()));
   connect(actionUndo,         SIGNAL(triggered()),  this,          SLOT(undo()));
   connect(actionUpperCase,    SIGNAL(triggered()),  this,          SLOT(upperCase()));
 
@@ -552,6 +563,8 @@ void MainWindow::setupConnections() {
    */
   connect(dbWizard, SIGNAL(accepted()), this, SLOT(reloadDbList()));
 
+  connect(Logger::instance, SIGNAL(error()), logDock, SLOT(show()));
+
   /*
    * Tab widget
    */
@@ -559,7 +572,6 @@ void MainWindow::setupConnections() {
   connect(tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
 
   connect(clearLogsButton, SIGNAL(clicked()), logBrowser, SLOT(clear()));
-  connect(homepageView, SIGNAL(linkClicked(QUrl)), this, SLOT(openHomepageLink(QUrl)));
 }
 
 void MainWindow::setupDialogs() {
@@ -604,11 +616,6 @@ void MainWindow::setupDocks(QSettings *s) {
   QMainWindow::statusBar()->addWidget(logButton);
 }
 
-void MainWindow::setupHomepage() {
-  homepageView->setUrl(QUrl("http://static.dbmaster-project.org/0.9/"));
-  homepageView->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
-}
-
 void MainWindow::setupIcons() {
   actionAddDb->setIcon(         IconManager::get("database_add"));
   actionConnect->setIcon(       IconManager::get("database_go"));
@@ -628,7 +635,6 @@ void MainWindow::setupIcons() {
   actionUndo->setIcon(          IconManager::get("edit-undo"));
 
   clearLogsButton->setIcon(     IconManager::get("edit-clear"));
-  tooltipButton->setIcon(       IconManager::get("help-faq"));
   tabWidget->setTabIcon(0,      IconManager::get("go-home"));
 }
 
@@ -670,11 +676,6 @@ void MainWindow::setupRecentFiles(QSettings *s) {
   refreshRecent();
 }
 
-void MainWindow::setupTooltips(QSettings *s) {
-  tooltipButton->setChecked(s->value("tooltips", true).toBool());
-  tooltipFrame->setVisible(s->value("tooltips", true).toBool());
-}
-
 void MainWindow::setupWidgets() {
   setupActionMap();
   setupDialogs();
@@ -684,14 +685,12 @@ void MainWindow::setupWidgets() {
 
   loadSettings(&s);
   setupDocks(&s);
-  setupTooltips(&s);
 
   s.endGroup();
 
   setupRecentFiles(&s);
 
   setupDbActions();
-  setupHomepage();
   setupIcons();
   setupQueriesStatusLabel();
 }
@@ -715,6 +714,39 @@ void MainWindow::updateDbActions() {
   actionConnect->setEnabled(select && !dbOpen);
   actionDisconnect->setEnabled(select && dbOpen);
   actionRefreshConnection->setEnabled(select);
+}
+
+void MainWindow::setIndentation2Spaces() {
+  actionTabWidth_4->setChecked(false);
+  actionTabWidth_8->setChecked(false);
+
+  Config::editorTabSize = 2;
+  Config::updateIndentation();
+  emit indentationChanged();
+}
+
+void MainWindow::setIndentation4Spaces() {
+  actionTabWidth_2->setChecked(false);
+  actionTabWidth_8->setChecked(false);
+
+  Config::editorTabSize = 4;
+  Config::updateIndentation();
+  emit indentationChanged();
+}
+
+void MainWindow::setIndentation8Spaces() {
+  actionTabWidth_2->setChecked(false);
+  actionTabWidth_4->setChecked(false);
+
+  Config::editorTabSize = 8;
+  Config::editorIndentation = "        ";
+  emit indentationChanged();
+}
+
+void MainWindow::setIndentationSpaces(bool enabled) {
+  Config::editorTabUseSpaces = enabled;
+  Config::updateIndentation();
+  emit indentationChanged();
 }
 
 void MainWindow::upperCase() {

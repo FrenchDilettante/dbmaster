@@ -20,14 +20,7 @@ protected:
 private:
   void focusInEvent(QFocusEvent *e);
   void keyPressEvent(QKeyEvent *e);
-  /**
-   * Defines the completion
-   */
   void setupCompleter();
-
-  /**
-   * @returns the word under the cursor
-   */
   QString textUnderCursor() const;
 
   QCompleter *completer;
@@ -40,6 +33,9 @@ private slots:
   void cleanTables();
   void insertCompletion(QString text);
   void scanTables();
+  void tabIndent();
+  void tabUnindent();
+  void updateTabSize();
 };
 
 #endif // QUERYTEXTEDIT_H

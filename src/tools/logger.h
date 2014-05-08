@@ -12,12 +12,14 @@ public:
   void setTextBrowser(QTextBrowser *output) { this->output = output; };
 
   static Logger *instance;
-  
+
 signals:
   void entryAdded(QDateTime dt, QString entry);
-  
+  void error();
+
 public slots:
   void log(QString text);
+  void logError(QString text);
 
 private:
   QTextBrowser *output;

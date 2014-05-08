@@ -4,14 +4,19 @@
 #include "querytextedit.h"
 
 #include "../config.h"
+#include "mainwindow.h"
 
 #include <QKeyEvent>
 #include <QScrollBar>
+#include <QTextDocumentFragment>
 
 QueryTextEdit::QueryTextEdit(QWidget *parent)
     : QTextEdit(parent)
 {
   syntax = new SqlHighlighter(this);
+
+  connect(MainWindow::instance, SIGNAL(indentationChanged()),
+          this, SLOT(updateTabSize()));
 
   setupCompleter();
 
@@ -19,11 +24,7 @@ QueryTextEdit::QueryTextEdit(QWidget *parent)
   f.setPointSize(Config::editorFont.pointSize());
   setFont(Config::editorFont);
   setFontPointSize(Config::editorFont.pointSize());
-  QFontMetrics metrics(f);
-  setTabStopWidth(Config::editorTabSize * metrics.width(' '));
-//  setOpenExternalLinks(true);
-//  setOpenLinks(true);
-//  setReadOnly(false);
+  updateTabSize();
 }
 
 void QueryTextEdit::cleanTables()
@@ -37,13 +38,25 @@ void QueryTextEdit::focusInEvent(QFocusEvent *e)
   QTextEdit::focusInEvent(e);
 }
 
-void QueryTextEdit::keyPressEvent(QKeyEvent *event)
-{
-  if(Config::compCharCount == -1)
+void QueryTextEdit::keyPressEvent(QKeyEvent *event) {
+  if (event->key() == Qt::Key_Tab) {
+    tabIndent();
+    event->accept();
     return;
+  }
+
+  if (event->key() == Qt::Key_Backtab) {
+    tabUnindent();
+    event->accept();
+    return;
+  }
+
+  if(Config::compCharCount == -1) {
+    return;
+  }
 
   // If the completer is actually shown, it handles some keys
-  if(completer->popup()->isVisible()) {
+  if (completer->popup()->isVisible()) {
     switch(event->key()) {
     case Qt::Key_Enter:
     case Qt::Key_Return:
@@ -254,9 +267,78 @@ void QueryTextEdit::setupCompleter()
   reloadContext(QStringList(), QMultiMap<QString, QString>());
 }
 
+void QueryTextEdit::tabIndent() {
+  QTextCursor cur = textCursor();
+  QString indent = Config::editorIndentation;
+  QString text;
+
+  if (cur.hasSelection()) {
+    int start = cur.selectionStart();
+    int end = cur.selectionEnd();
+    cur.setPosition(start);
+    cur.movePosition(QTextCursor::StartOfLine);
+    cur.setPosition(end, QTextCursor::KeepAnchor);
+    start = cur.selectionStart();
+    text = cur.selection().toPlainText();
+    int idx = -1;
+
+    do {
+      text.insert(idx+1, indent);
+      idx = text.indexOf("\n", idx+1);
+    } while (idx > 0);
+
+    cur.insertText(text);
+    cur.setPosition(start);
+    cur.setPosition(start + text.length(), QTextCursor::KeepAnchor);
+    setTextCursor(cur);
+  } else {
+    cur.insertText(indent);
+  }
+}
+
+void QueryTextEdit::tabUnindent() {
+  QTextCursor cur = textCursor();
+  QString indent = Config::editorIndentation;
+  QString text;
+
+  if (cur.hasSelection()) {
+    int start = cur.selectionStart();
+    int end = cur.selectionEnd();
+    cur.setPosition(start);
+    cur.movePosition(QTextCursor::StartOfLine);
+    cur.setPosition(end, QTextCursor::KeepAnchor);
+    start = cur.selectionStart();
+    text = cur.selection().toPlainText();
+    int idx = -1;
+
+    do {
+      if (text.mid(idx+1, indent.length()) == indent) {
+        text.remove(idx+1, indent.length());
+      }
+      idx = text.indexOf("\n", idx+1);
+    } while (idx > 0);
+
+    cur.insertText(text);
+    cur.setPosition(start);
+    cur.setPosition(start + text.length(), QTextCursor::KeepAnchor);
+    setTextCursor(cur);
+  } else {
+    cur.movePosition(QTextCursor::StartOfLine);
+    cur.movePosition(QTextCursor::Right, QTextCursor::KeepAnchor, indent.length());
+    if (cur.selection().toPlainText() == indent) {
+      cur.removeSelectedText();
+    }
+  }
+}
+
 QString QueryTextEdit::textUnderCursor() const
 {
   QTextCursor tc = textCursor();
   tc.select( QTextCursor::WordUnderCursor );
   return tc.selectedText();
+}
+
+void QueryTextEdit::updateTabSize() {
+  QFontMetrics metrics(font());
+  setTabStopWidth(Config::editorTabSize * metrics.width(' '));
 }

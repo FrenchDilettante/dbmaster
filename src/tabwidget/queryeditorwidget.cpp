@@ -3,23 +3,27 @@
 #include "../iconmanager.h"
 #include "../mainwindow.h"
 #include "../tools/logger.h"
-#include "../widgets/resultview.h"
 
 #include "queryeditorwidget.h"
 
+#include <QDateTime>
+#include <QDebug>
 #include <QFileDialog>
 #include <QSqlQuery>
+#include <QSqlRecord>
 
 QueryEditorWidget::QueryEditorWidget(QWidget *parent)
   : AbstractTabWidget(parent) {
   setupUi(this);
   setupWidgets();
+
+  dataProvider = new QueryDataProvider(this);
+  tableView->setDataProvider(dataProvider);
+
   setupConnections();
 
-  setAutoDelete(false);
+  // setAutoDelete(false);
 
-  model       = new QSqlQueryModel(this);
-  shortModel  = new QStandardItemModel(this);
   // watcher     = new QFileSystemWatcher(this);
 }
 
@@ -43,29 +47,17 @@ AbstractTabWidget::Actions QueryEditorWidget::availableActions() {
 void QueryEditorWidget::checkDbOpen() {
   DbManager::instance->lastUsedDbIndex = dbChooser->currentIndex();
 
-  QSqlDatabase *db = DbManager::instance->getDatabase(dbChooser->currentIndex());
+  QSqlDatabase *db = currentDb();
   if (db == NULL) {
     runButton->setEnabled(false);
     return;
   }
 
+  updateTransactionButtons(db);
+
   runButton->setEnabled(db->isOpen());
 
-  if (!db->isOpen() || db->driverName().startsWith("QOCI")) {
-    return;
-  }
-
-  QMultiMap<QString, QString> fields;
-  QSqlRecord r;
-  QStringList tables = db->tables();
-  foreach (QString t, tables) {
-    r = db->record(t);
-    for (int i=0; i<r.count(); i++) {
-      fields.insert(t, r.fieldName(i));
-    }
-  }
-
-  editor->reloadContext(tables, fields);
+  reloadContext(db);
 }
 
 void QueryEditorWidget::closeEvent(QCloseEvent *event) {
@@ -77,6 +69,15 @@ void QueryEditorWidget::closeEvent(QCloseEvent *event) {
     } else {
       event->ignore();
     }
+  }
+}
+
+void QueryEditorWidget::commit() {
+  if (currentDb()->commit()) {
+    commitButton->hide();
+    rollbackButton->hide();
+    transactionButton->show();
+    dbChooser->setEnabled(true);
   }
 }
 
@@ -126,6 +127,10 @@ void QueryEditorWidget::copy() {
   editor->copy();
 }
 
+QSqlDatabase* QueryEditorWidget::currentDb() {
+  return DbManager::instance->getDatabase(dbChooser->currentIndex());
+}
+
 void QueryEditorWidget::cut() {
   editor->cut();
 }
@@ -160,8 +165,7 @@ bool QueryEditorWidget::isSaved() {
 
 void QueryEditorWidget::keyPressEvent(QKeyEvent *event) {
   if (event->key() == Qt::Key_Escape) {
-    // Appui touche échap = masque le panel de résultat
-    tabView->hide();
+    tableContainer->hide();
     resultButton->setChecked(false);
   } else {
     QWidget::keyPressEvent(event);
@@ -208,15 +212,32 @@ void QueryEditorWidget::redo() {
 
 void QueryEditorWidget::refresh() {
   checkDbOpen();
+  updateCursorPosition();
 }
 
 void QueryEditorWidget::reload() {
-  run();
+  dataProvider->start();
+  // tableView->updateView();
 }
 
-/**
- * Called after open(QString)
- */
+void QueryEditorWidget::reloadContext(QSqlDatabase *db) {
+  if (!db->isOpen() || db->driverName().startsWith("QOCI")) {
+    return;
+  }
+
+  QMultiMap<QString, QString> fields;
+  QSqlRecord r;
+  QStringList tables = db->tables();
+  foreach (QString t, tables) {
+    r = db->record(t);
+    for (int i=0; i<r.count(); i++) {
+      fields.insert(t, r.fieldName(i));
+    }
+  }
+
+  editor->reloadContext(tables, fields);
+}
+
 void QueryEditorWidget::reloadFile() {
   if (!confirmClose()) {
     return;
@@ -249,6 +270,55 @@ void QueryEditorWidget::reloadFile() {
   emit fileChanged(filePath);
 }
 
+void QueryEditorWidget::queryError() {
+  statusBar->showMessage(tr("Unable to run query"));
+  runButton->setEnabled(true);
+}
+
+void QueryEditorWidget::querySuccess() {
+  tableContainer->setVisible(true);
+  resultButton->setEnabled(true);
+  resultButton->setChecked(true);
+
+  QString logMsg = tr("Query executed with success (%1 lines returned)")
+      .arg(dataProvider->model()->rowCount());
+  statusBar->showMessage(logMsg);
+
+  runButton->setEnabled(true);
+  emit success();
+}
+
+QString QueryEditorWidget::queryText() {
+  QTextCursor tc = editor->textCursor();
+  QString qtext = tc.selectedText();
+  if (!qtext.isEmpty()) {
+    return qtext;
+  }
+
+  qtext = editor->toPlainText();
+  tc.movePosition(QTextCursor::StartOfLine);
+
+  if (qtext.contains(";")) {
+    int start = qtext.lastIndexOf(";", tc.position());
+    int end = qtext.indexOf(";", tc.position());
+    start = start < -1 ? 0 : start+1;
+    end = end < -1 ? qtext.length()-1 : end;
+    return qtext.mid(start, end-start);
+  } else {
+    return qtext;
+  }
+}
+
+void QueryEditorWidget::rollback() {
+  if (currentDb()->rollback()) {
+    commitButton->hide();
+    rollbackButton->hide();
+    transactionButton->show();
+    dbChooser->setEnabled(true);
+  }
+}
+
+/*
 void QueryEditorWidget::run() {
   QString qtext = editor->textCursor().selectedText();
   if (qtext.isEmpty()) {
@@ -262,6 +332,7 @@ void QueryEditorWidget::run() {
 
   emit queryFinished();
 }
+*/
 
 /**
  * @returns false in case of error
@@ -338,15 +409,23 @@ void QueryEditorWidget::setFilePath(QString path) {
 void QueryEditorWidget::setupConnections() {
   connect(dbChooser, SIGNAL(currentIndexChanged(int)),
           this, SLOT(checkDbOpen()));
-  connect(tabView, SIGNAL(reloadRequested()), this, SLOT(reload()));
+  connect(pagination, SIGNAL(reload()), this, SLOT(reload()));
 
   connect(runButton, SIGNAL(clicked()), this, SLOT(start()));
 
   connect(editor->document(), SIGNAL(modificationChanged(bool)),
           this, SIGNAL(modificationChanged(bool)));
+  connect(editor, SIGNAL(cursorPositionChanged()),
+          this, SLOT(updateCursorPosition()));
 
-  connect(this, SIGNAL(queryFinished()),
-          this, SLOT(validateQuery()));
+  connect(commitButton, SIGNAL(clicked()), this, SLOT(commit()));
+  connect(rollbackButton, SIGNAL(clicked()), this, SLOT(rollback()));
+  connect(transactionButton, SIGNAL(clicked()), this, SLOT(startTransaction()));
+
+  connect(dataProvider, SIGNAL(error()),
+          this, SLOT(queryError()));
+  connect(dataProvider, SIGNAL(success()),
+          this, SLOT(querySuccess()));
 
   // connect(watcher, SIGNAL(fileChanged(QString)),
   //         this, SLOT(onFileChanged(QString)));
@@ -355,7 +434,8 @@ void QueryEditorWidget::setupConnections() {
 void QueryEditorWidget::setupWidgets() {
   editor->setFont(Config::editorFont);
 
-  tabView->hide();
+  tableContainer->hide();
+  tableView->setPagination(pagination);
 
   statusBar = new QStatusBar(this);
   statusBar->setSizeGripEnabled(false);
@@ -365,9 +445,8 @@ void QueryEditorWidget::setupWidgets() {
   resultButton->setText(tr("Display result"));
   resultButton->setCheckable(true);
   resultButton->setEnabled(false);
-  statusBar->addPermanentWidget(resultButton);
   connect(resultButton, SIGNAL(clicked(bool)),
-          tabView, SLOT(setVisible(bool)));
+          tableContainer, SLOT(setVisible(bool)));
 
   baseActions = CaseLower | CaseUpper | Copy | Cut | Paste | Print | SaveAs
               | Search | SelectAll;
@@ -376,6 +455,12 @@ void QueryEditorWidget::setupWidgets() {
   dbChooser->setCurrentIndex(DbManager::instance->lastUsedDbIndex);
 
   runButton->setIcon(IconManager::get("player_play"));
+
+  cursorPositionLabel = new QLabel(this);
+
+
+  statusBar->addPermanentWidget(cursorPositionLabel);
+  statusBar->addPermanentWidget(resultButton);
 
   refresh();
 }
@@ -386,13 +471,24 @@ void QueryEditorWidget::showEvent(QShowEvent *event) {
 
 void QueryEditorWidget::start() {
   resultButton->setChecked(false);
-  tabView->setVisible(false);
+  tableContainer->setVisible(false);
   resultButton->setEnabled(false);
   runButton->setEnabled(false);
 
   statusBar->showMessage(tr("Running..."));
 
-  QThreadPool::globalInstance()->start(this);
+  dataProvider->setQuery(queryText(), *currentDb());
+  dataProvider->start();
+  // tabView->reload();
+}
+
+void QueryEditorWidget::startTransaction() {
+  if (currentDb()->transaction()) {
+    commitButton->show();
+    rollbackButton->show();
+    transactionButton->hide();
+    dbChooser->setEnabled(false);
+  }
 }
 
 QString QueryEditorWidget::title() {
@@ -413,6 +509,22 @@ void QueryEditorWidget::undo() {
   editor->undo();
 }
 
+void QueryEditorWidget::updateTransactionButtons(QSqlDatabase *db) {
+  commitButton->setIcon(IconManager::get("transaction-commit"));
+  commitButton->hide();
+
+  rollbackButton->setIcon(IconManager::get("transaction-rollback"));
+  rollbackButton->hide();
+
+  transactionButton->setIcon(IconManager::get("transaction-start"));
+
+  if (!db->driver()->hasFeature(QSqlDriver::Transactions)) {
+    transactionButton->hide();
+  }
+
+  transactionButton->setEnabled(db->isOpen());
+}
+
 void QueryEditorWidget::upperCase() {
   QTextCursor tc = editor->textCursor();
   if (tc.selectedText().size() > 0) {
@@ -424,38 +536,6 @@ void QueryEditorWidget::upperCase() {
   }
 }
 
-void QueryEditorWidget::validateQuery() {
-  // tabWidget->setTabEnabled(1, false);
-
-  QString logMsg;
-
-  switch(query.lastError().type()) {
-  case QSqlError::NoError:
-    tabView->setQuery(model);
-    tabView->setVisible(true);
-    resultButton->setEnabled(true);
-    resultButton->setChecked(true);
-    logMsg = tr("Query executed with success (%1 lines returned)")
-        .arg(model->rowCount());
-        // .arg(token->duration());
-
-    statusBar->showMessage(logMsg);
-    break;
-
-  default:
-    logMsg = tr("Unable to run query");
-    statusBar->showMessage(logMsg);
-    logMsg.append(
-          QString("<br /><span style=\"color: red\">%1</span>")
-            .arg(query.lastError().text()));
-    emit error();
-    break;
-  }
-
-  logMsg.append(
-        QString("<br /><span style=\"color: blue\">%1</span>")
-          .arg(query.lastQuery().replace("\n", " ")));
-  Logger::instance->log(logMsg);
-
-  runButton->setEnabled(true);
+void QueryEditorWidget::updateCursorPosition() {
+  cursorPositionLabel->setText(tr("Line: %1, Col: %2").arg(editor->textCursor().blockNumber()+1).arg(editor->textCursor().columnNumber()+1));
 }

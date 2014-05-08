@@ -2,7 +2,7 @@
 # Project created by QtCreator 2009-06-01T16:44:04
 # -------------------------------------------------
 
-QT += printsupport sql widgets webkitwidgets
+QT += printsupport sql widgets
 TARGET = dbmaster
 TEMPLATE = app
 SOURCES += main.cpp \
@@ -20,10 +20,8 @@ SOURCES += main.cpp \
     config.cpp \
     widgets/querytextedit.cpp \
     wizards/firstlaunchwizard.cpp \
-    widgets/resultview.cpp \
     wizards/exportwizard.cpp \
     widgets/dbtreeview.cpp \
-    widgets/tooltipframe.cpp \
     plugins/plugindialog.cpp \
     plugins/pluginmanager.cpp \
     iconmanager.cpp \
@@ -31,7 +29,7 @@ SOURCES += main.cpp \
     widgets/colorbutton.cpp \
     tabwidget/schemawidget.cpp \
     dialogs/blobdialog.cpp \
-    widgets/resultviewtable.cpp \
+    resultview/resultviewtable.cpp \
     tools/logger.cpp \
     plugins/exportengines/csv/csvexportengine.cpp \
     plugins/exportengines/csv/csvwizardpage.cpp \
@@ -43,7 +41,12 @@ SOURCES += main.cpp \
     plugins/wrappers/mysql/mysqlwrapper.cpp \
     plugins/wrappers/psql/psqlconfig.cpp \
     plugins/wrappers/psql/psqlwrapper.cpp \
-    plugins/wrappers/sqlite/sqlitewrapper.cpp
+    plugins/wrappers/sqlite/sqlitewrapper.cpp \
+    resultview/dataprovider.cpp \
+    resultview/tabledataprovider.cpp \
+    resultview/querydataprovider.cpp \
+    resultview/paginationwidget.cpp \
+    resultview/sqlitemdelegate.cpp
 HEADERS += mainwindow.h \
     dbmanager.h \
     tabwidget/tablewidget.h \
@@ -58,10 +61,8 @@ HEADERS += mainwindow.h \
     config.h \
     widgets/querytextedit.h \
     wizards/firstlaunchwizard.h \
-    widgets/resultview.h \
     wizards/exportwizard.h \
     widgets/dbtreeview.h \
-    widgets/tooltipframe.h \
     plugins/sqlwrapper.h \
     plugins/plugindialog.h \
     plugins/plugin.h \
@@ -73,7 +74,7 @@ HEADERS += mainwindow.h \
     db_enum.h \
     tabwidget/schemawidget.h \
     dialogs/blobdialog.h \
-    widgets/resultviewtable.h \
+    resultview/resultviewtable.h \
     tools/logger.h \
     plugins/exportengines/csv/csvexportengine.h \
     plugins/exportengines/csv/csvwizardpage.h \
@@ -85,7 +86,12 @@ HEADERS += mainwindow.h \
     plugins/wrappers/mysql/mysqlwrapper.h \
     plugins/wrappers/psql/psqlconfig.h \
     plugins/wrappers/psql/psqlwrapper.h \
-    plugins/wrappers/sqlite/sqlitewrapper.h
+    plugins/wrappers/sqlite/sqlitewrapper.h \
+    resultview/dataprovider.h \
+    resultview/tabledataprovider.h \
+    resultview/querydataprovider.h \
+    resultview/paginationwidget.h \
+    resultview/sqlitemdelegate.h
 FORMS += mainwindow.ui \
     dialogs/dbdialog.ui \
     tabwidget/queryeditorwidget.ui \
@@ -98,8 +104,6 @@ FORMS += mainwindow.ui \
     wizards/firstlaunchwizard.ui \
     wizards/ew_firstpage.ui \
     wizards/ew_exportpage.ui \
-    widgets/resultview.ui \
-    widgets/tooltipframe.ui \
     plugins/plugindialog.ui \
     dialogs/searchdialog.ui \
     tabwidget/schemawidget.ui \
