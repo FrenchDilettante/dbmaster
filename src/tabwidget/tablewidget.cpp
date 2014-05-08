@@ -1,3 +1,4 @@
+#include "config.h"
 #include "../dbmanager.h"
 #include "../iconmanager.h"
 #include "tablewidget.h"
@@ -120,6 +121,8 @@ void TableWidget::setupWidgets() {
   deleteButton->setIcon(IconManager::get("list-remove"));
   commitButton->setIcon(IconManager::get("transaction-commit"));
   rollbackButton->setIcon(IconManager::get("transaction-rollback"));
+
+  filterEdit->setFont(Config::editorFont);
 }
 
 QString TableWidget::table() {
