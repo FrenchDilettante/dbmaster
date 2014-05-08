@@ -14,6 +14,9 @@ ResultViewTable::ResultViewTable(QWidget *parent)
   currentEditedRow = -1;
   setModel(0);
 
+  setHorizontalScrollMode(QAbstractItemView::ScrollPerPixel);
+  setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
+
   blobDialog = new BlobDialog(this);
 
   exportWizard = new ExportWizard(this);
