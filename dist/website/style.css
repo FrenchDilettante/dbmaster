@@ -1,0 +1,157 @@
+body {
+  color: #000c1a;
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+  line-height: 140%;
+  margin: 0;
+}
+
+.row {
+  margin: 0 auto;
+  width: 960px;
+}
+
+a {
+  color: #11549f;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #1f75d4;
+}
+
+.footer-wrapper {
+  background: #eaeff4;
+  margin-top: 35px;
+  padding: 20px 0 35px;
+}
+
+.footer {
+  color: #5c6172;
+  font-size: 0.9em;
+  text-align: center;
+}
+
+.footer a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.front-wrapper {
+  background: #20578b;
+  color: white;
+  margin-bottom: 30px;
+  padding: 55px 0 40px;
+}
+
+.front-features {
+  margin-top: 50px;
+}
+
+.front-features .feature {
+  width: 33%;
+}
+
+.front-features .feature p {
+  margin-top: 7px;
+}
+
+.front-intro-description {
+  margin-top: 30px;
+  width: 40%;
+}
+
+.front-intro-description h1 {
+  font-size: 22pt;
+}
+
+.front-intro-description p {
+  font-size: 13pt;
+  margin: 25px 0 25px;
+}
+
+.front-intro-download {
+  background: #223;
+  border: none;
+  border-radius: 2px;
+  color: #aef;
+  display: inline-block;
+  font-size: 14pt;
+  margin-top: 7px;
+  margin-left: 10px;
+  padding: 12px 15px 14px;
+}
+
+.front-intro-download small {
+  color: white;
+  font-size: 10pt;
+}
+
+.main-col {
+  margin-bottom: 20px;
+  width: 66%;
+}
+
+.main-news {
+  width: 33%;
+}
+
+.main-news h2 {
+  margin-bottom: 16px;
+}
+
+.main-news .post-date {
+  color: #7c848e;
+  font-size: 0.9em;
+}
+
+.main-news .post-link {
+  margin-bottom: 8px;
+}
+
+.front-screenshot {
+  background: url('http://dbmaster-project.org/wp-content/uploads/sites/3/2013/09/Screenshot-081013-210514.png') top center;
+  background-size: cover;
+  box-shadow: 0 2px 5px #182643;
+  height: 280px;
+  width: 60%;
+}
+
+h1, h2 {
+  font-weight: 300;
+  word-spacing: 2px;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  color: #45566c;
+  padding: 15px 0;
+}
+
+.header a {
+  color: inherit;
+}
+
+.header-nav .brand,
+.header-nav ul {
+  float: left;
+  list-style: none;
+}
+
+.header-nav .brand {
+  font-size: 22px;
+  margin-right: 14px;
+}
+
+.header-nav li {
+  float: left;
+  font-size: 14px;
+  padding: 2px 12px;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
