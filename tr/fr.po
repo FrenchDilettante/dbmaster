@@ -686,17 +686,17 @@ msgstr "Indenter avec des espaces"
 #: /Users/newuser/code/dbmaster/src/mainwindow.ui:640
 msgctxt "MainWindowClass|"
 msgid "Tab width: 2"
-msgstr ""
+msgstr "Tabulations: 2"
 
 #: /Users/newuser/code/dbmaster/src/mainwindow.ui:651
 msgctxt "MainWindowClass|"
 msgid "Tab width: 4"
-msgstr ""
+msgstr "Tabulations: 4"
 
 #: /Users/newuser/code/dbmaster/src/mainwindow.ui:659
 msgctxt "MainWindowClass|"
 msgid "Tab width: 8"
-msgstr ""
+msgstr "Tabulations: 8"
 
 #: /Users/newuser/code/dbmaster/src/mainwindow.ui:536
 #| msgid "Previous tab"
@@ -1392,12 +1392,12 @@ msgstr "Impossible d'exécuter la requête"
 #: /Users/newuser/code/dbmaster/src/tabwidget/queryeditorwidget.ui:41
 msgctxt "QueryEditorWidget|"
 msgid "Commit transaction"
-msgstr ""
+msgstr "Valider la transaction"
 
 #: /Users/newuser/code/dbmaster/src/tabwidget/queryeditorwidget.ui:54
 msgctxt "QueryEditorWidget|"
 msgid "Rollback transaction"
-msgstr ""
+msgstr "Annuler la transaction"
 
 #: /Users/newuser/code/dbmaster/src/tabwidget/queryeditorwidget.ui:96
 msgctxt "QueryEditorWidget|"
