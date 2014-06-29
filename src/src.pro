@@ -19,7 +19,6 @@ SOURCES += main.cpp \
     wizards/newdbwizard.cpp \
     config.cpp \
     widgets/querytextedit.cpp \
-    wizards/firstlaunchwizard.cpp \
     wizards/exportwizard.cpp \
     widgets/dbtreeview.cpp \
     plugins/plugindialog.cpp \
@@ -60,7 +59,6 @@ HEADERS += mainwindow.h \
     wizards/newdbwizard.h \
     config.h \
     widgets/querytextedit.h \
-    wizards/firstlaunchwizard.h \
     wizards/exportwizard.h \
     widgets/dbtreeview.h \
     plugins/sqlwrapper.h \
@@ -101,7 +99,6 @@ FORMS += mainwindow.ui \
     wizards/newdbwizard.ui \
     wizards/ndw_firstpage.ui \
     wizards/ndw_secondpage.ui \
-    wizards/firstlaunchwizard.ui \
     wizards/ew_firstpage.ui \
     wizards/ew_exportpage.ui \
     plugins/plugindialog.ui \

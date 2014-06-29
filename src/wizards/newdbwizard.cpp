@@ -28,6 +28,8 @@ void NewDbWizard::accept() {
     password = field("pswd").toString();
   }
 
+  Config::defaultDriver = field("driver").toString();
+
   DbManager::instance->addDatabase(field("driver").toString(),
                          field("host").toString(),
                          field("user").toString(),

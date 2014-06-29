@@ -132,7 +132,6 @@ void ConfigDialog::reload() {
 }
 
 void ConfigDialog::save() {
-  Config::defaultDriver   = defaultDbCombo->currentDriverName();
   Config::editorAutoSave  = edAutoSaveCheckBox->isChecked();
   Config::editorEncoding  = encodingComboBox->currentText().toLower();
   Config::editorFont      = editorFontCombo->currentFont();
