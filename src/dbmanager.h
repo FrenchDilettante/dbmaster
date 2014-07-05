@@ -73,6 +73,7 @@ public slots:
   void                    refreshModel();
   void                    refreshModelIndex(QModelIndex index);
   void                    refreshModelItem(QSqlDatabase *db);
+  void refreshModelItem(Connection* connection);
 
 signals:
   void statusChanged(QModelIndex);

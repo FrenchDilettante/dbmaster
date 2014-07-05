@@ -377,6 +377,10 @@ void DbManager::refreshModelIndex(QModelIndex index) {
   it->appendRows(toAppend);
 }
 
+void DbManager::refreshModelItem(Connection *connection) {
+  return refreshModelItem(connection->db());
+}
+
 /**
  * @bug check indexes
  */

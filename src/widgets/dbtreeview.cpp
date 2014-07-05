@@ -98,7 +98,7 @@ QSqlDatabase* DbTreeView::currentDb() {
     return NULL;
   }
 
-  return parentDb(selectedIndexes()[0]);
+  return parentConnection(selectedIndexes()[0])->db();
 }
 
 void DbTreeView::editCurrent() {
@@ -114,7 +114,7 @@ void DbTreeView::editCurrent() {
 
 bool DbTreeView::isDbSelected() {
   if (selectedIndexes().size() == 1) {
-    return parentDb(selectedIndexes()[0]);
+    return parentConnection(selectedIndexes()[0]);
   } else {
     return false;
   }
@@ -142,7 +142,7 @@ void DbTreeView::mouseDoubleClickEvent(QMouseEvent *event) {
         break;
 
       case DbManager::SchemaItem:
-        emit schemaSelected(parentDb(index),
+        emit schemaSelected(parentConnection(index)->db(),
                             index.data(Qt::ToolTipRole).toString());
         break;
 
@@ -153,7 +153,7 @@ void DbTreeView::mouseDoubleClickEvent(QMouseEvent *event) {
         if (table.startsWith("public.")) {
           table = table.mid(7);
         }
-        emit tableSelected(parentDb(index), table);
+        emit tableSelected(parentConnection(index)->db(), table);
         break;
 
       case DbManager::DisplayItem:
@@ -185,8 +185,8 @@ void DbTreeView::onItemExpanded(const QModelIndex &index) {
  */
 void DbTreeView::on_model_dataChanged(const QModelIndex &topLeft,
                                       const QModelIndex &bottomRight) {
-  QSqlDatabase *_db = parentDb(topLeft);
-  if (_db && _db->isOpen()) {
+  Connection* connection = parentConnection(topLeft);
+  if (connection && connection->db()->isOpen()) {
     expand(topLeft);
   }
 }
@@ -211,10 +211,10 @@ void DbTreeView::removeCurrent() {
   }
 }
 
-QSqlDatabase *DbTreeView::parentDb(QModelIndex index) {
-  while(index != QModelIndex()) {
+Connection* DbTreeView::parentConnection(QModelIndex index) {
+  while (index != QModelIndex()) {
     if (index.data(Qt::UserRole) == DbManager::DbItem) {
-      return DbManager::instance->getDatabase(index.row());
+      return DbManager::instance->connections()[index.row()];
     }
     index = index.parent();
   }
@@ -227,7 +227,7 @@ void DbTreeView::refreshCurrent() {
     return;
   }
 
-  DbManager::instance->refreshModelItem(parentDb(selectedIndexes()[0]));
+  DbManager::instance->refreshModelItem(parentConnection(selectedIndexes()[0]));
 }
 
 void DbTreeView::selectionChanged(const QItemSelection &selected,
