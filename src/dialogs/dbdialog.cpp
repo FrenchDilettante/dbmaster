@@ -48,7 +48,7 @@ void DbDialog::refresh(QModelIndex index) {
  * Re-fills all fields and enables/disables widgets
  */
 void DbDialog::reload() {
-  bool emptyList = DbManager::instance->getDbList().size() == 0;
+  bool emptyList = DbManager::instance->connections().isEmpty();
   bool selected = !emptyList
                   && dbListView->selectionModel()->selection().size() > 0;
   bool open = selected && db->isOpen();
@@ -68,7 +68,7 @@ void DbDialog::reload() {
     toggleButton->setText(tr("Connect"));
   }
 
-  if (DbManager::instance->getDbList().size() > 0 && db) {
+  if (!DbManager::instance->connections().isEmpty() && db) {
     hostEdit->setText(db->hostName());
     userEdit->setText(db->userName());
     saveCheckBox->setChecked(!open && !db->password().isEmpty());

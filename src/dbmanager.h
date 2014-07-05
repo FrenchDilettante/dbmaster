@@ -1,6 +1,7 @@
 #ifndef DBMANAGER_H
 #define DBMANAGER_H
 
+#include "db/connection.h"
 #include "plugins/sqlwrapper.h"
 
 #include <QList>
@@ -16,7 +17,7 @@
  *
  * @author manudwarf
  */
-class DbManager : public QThread {
+class DbManager : public QObject {
 Q_OBJECT
 public:
   enum ItemTypes {
@@ -40,28 +41,24 @@ public:
                                       QString alias, QString wrapperName,
                                       bool save =true);
   QString                 alias(QSqlDatabase *db);
+  void close(Connection* connection);
   void                    close(QSqlDatabase *db);
   void                    closeAll();
+  QList<Connection*> connections();
   QStandardItemModel     *driverModel();
   QString                 genConnectionName();
   QSqlDatabase*           getDatabase(int n);
-  QList<QSqlDatabase*>    getDbList();
   QStringList             getDbNames(bool);
-  int                     indexOf(QSqlDatabase *db);
   QString                 lastError();
-  QStandardItemModel*     model()     { return m_model;   };
-  void                    open(int, QString=QString::null);
+  QStandardItemModel*     model();
+  void open(Connection* connection, QString password=QString::null);
   void                    open(QSqlDatabase *db, QString pswd=QString::null);
   void                    openList();
   void                    removeDatabase(int);
-  void                    removeDatabase(QSqlDatabase *db);
-  void                    run();
+  void removeDatabase(Connection* connection);
   void                    saveList();
   SqlSchema               schema(QSqlDatabase *db, QString schemaName);
   void                    setAlias(QSqlDatabase *db, QString alias);
-  void                    setDatabase(int, QSqlDatabase);
-  void                    swapDatabase(QSqlDatabase *oldDb,
-                                       QSqlDatabase *newDb);
   SqlTable                table(QSqlDatabase *db, QString tbl);
   void                    toggle(QSqlDatabase *db);
   void                    update(QSqlDatabase *db, QString alias);
@@ -76,7 +73,6 @@ public slots:
   void                    refreshModel();
   void                    refreshModelIndex(QModelIndex index);
   void                    refreshModelItem(QSqlDatabase *db);
-  void                    terminate();
 
 signals:
   void statusChanged(QModelIndex);
@@ -98,8 +94,8 @@ private:
   QMap<QString, QIcon>    driverIcon;
 
   bool                    closingAll;
+  QList<Connection*> m_connections;
   QStandardItemModel     *m_driverModel;
-  QList<QSqlDatabase*>    dbList;
   QMap<QSqlDatabase*, QStandardItem*> dbMap;
   QMap<QSqlDatabase*, SqlWrapper*> dbWrappers;
   QStandardItemModel     *m_model;
