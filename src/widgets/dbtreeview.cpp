@@ -107,7 +107,7 @@ void DbTreeView::editCurrent() {
     while (index.parent() != QModelIndex()) {
       index = index.parent();
     }
-    MainWindow::dbDialog->setDatabase(index);
+    MainWindow::dbDialog->setConnection(index);
     MainWindow::dbDialog->exec();
   }
 }

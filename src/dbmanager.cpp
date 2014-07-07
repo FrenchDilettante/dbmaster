@@ -526,17 +526,6 @@ QStandardItem* DbManager::schemaItem(SqlSchema schema) {
   return sitem;
 }
 
-void DbManager::setAlias(QSqlDatabase *db, QString alias) {
-  foreach (Connection* connection, m_connections) {
-    if (connection->db() == db) {
-      connection->setAlias(alias);
-      dbMap[connection->db()]->setText(alias);
-      saveList();
-      return;
-    }
-  }
-}
-
 void DbManager::setupConnections() {
   connect(this, SIGNAL(statusChanged(QSqlDatabase*)),
           this, SLOT(refreshModelItem(QSqlDatabase*)));
@@ -679,16 +668,11 @@ void DbManager::toggle(QSqlDatabase *db) {
   }
 }
 
-void DbManager::update(QSqlDatabase *db, QString alias) {
-  foreach (Connection* c, m_connections) {
-    if (c->db() == db) {
-      c->setAlias(alias);
-      dbMap[db]->setText(alias);
-      refreshModelItem(db);
+void DbManager::update(Connection *connection, QString alias) {
+  dbMap[connection->db()]->setText(alias);
+  refreshModelItem(connection);
 
-      saveList();
-    }
-  }
+  saveList();
 }
 
 /*

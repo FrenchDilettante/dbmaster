@@ -58,10 +58,9 @@ public:
   void removeDatabase(Connection* connection);
   void                    saveList();
   SqlSchema               schema(QSqlDatabase *db, QString schemaName);
-  void                    setAlias(QSqlDatabase *db, QString alias);
   SqlTable                table(QSqlDatabase *db, QString tbl);
   void                    toggle(QSqlDatabase *db);
-  void                    update(QSqlDatabase *db, QString alias);
+  void                    update(Connection* connection, QString alias);
 
   int lastUsedDbIndex = 0;
 

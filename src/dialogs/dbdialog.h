@@ -3,7 +3,8 @@
 
 #include "ui_dbdialog.h"
 
-#include "../wizards/newdbwizard.h"
+#include "db/connection.h"
+#include "wizards/newdbwizard.h"
 
 #include <QDialog>
 #include <QModelIndex>
@@ -16,7 +17,7 @@ public:
   DbDialog(QWidget* =0);
 
 public slots:
-  void setDatabase(QModelIndex index);
+  void setConnection(QModelIndex index);
 
 signals:
 
@@ -25,7 +26,7 @@ private:
   void setupWidgets();
 
   NewDbWizard *addWzd;
-  QSqlDatabase *db;
+  Connection* connection;
   bool aliasOnCurrent;
 
 private slots:
