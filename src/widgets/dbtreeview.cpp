@@ -25,16 +25,16 @@ void DbTreeView::addDatabase()
 }
 
 void DbTreeView::connectCurrent() {
-  QSqlDatabase *db = currentDb();
-  if (db && !db->isOpen()) {
-    DbManager::instance->open(db);
+  Connection* connection = currentConnection();
+  if (connection && !connection->db()->isOpen()) {
+    DbManager::instance->open(connection);
   }
 }
 
 void DbTreeView::disconnectCurrent() {
-  QSqlDatabase *db = currentDb();
-  if (db && db->isOpen()) {
-    DbManager::instance->close(db);
+  Connection* connection = currentConnection();
+  if (connection && connection->db()->isOpen()) {
+    DbManager::instance->close(connection);
   }
 }
 
@@ -55,7 +55,7 @@ void DbTreeView::contextMenuEvent(QContextMenuEvent *event)
         editDbAct->setVisible(true);
         removeDbAct->setVisible(true);
         toggleAct->setVisible(true);
-        if (DbManager::instance->getDatabase(index.row())->isOpen()) {
+        if (DbManager::instance->connections()[index.row()]->db()->isOpen()) {
           toggleAct->setText(tr("Disconnect"));
         } else {
           toggleAct->setText(tr("Connect"));
@@ -91,6 +91,14 @@ void DbTreeView::contextMenuEvent(QContextMenuEvent *event)
   }
 
   event->accept();
+}
+
+Connection* DbTreeView::currentConnection() {
+  if (selectedIndexes().size() != 1) {
+    return NULL;
+  }
+
+  return parentConnection(selectedIndexes()[0]);
 }
 
 QSqlDatabase* DbTreeView::currentDb() {
@@ -200,7 +208,7 @@ void DbTreeView::removeCurrent() {
     while (index.parent() != QModelIndex()) {
       index = index.parent();
     }
-    if (DbManager::instance->getDatabase(index.row())->isOpen()) {
+    if (DbManager::instance->connections()[index.row()]->db()->isOpen()) {
       QMessageBox::warning(this,
                            tr("Cannot remove"),
                            tr("You must close the database before remove it."));
@@ -271,6 +279,6 @@ void DbTreeView::setupActions()
 void DbTreeView::toggleCurrentDb() {
   if (selectedIndexes().size() == 1) {
     QModelIndex index = selectedIndexes()[0];
-    DbManager::instance->toggle(DbManager::instance->getDatabase(index.row()));
+    DbManager::instance->connections()[index.row()]->toggle();
   }
 }

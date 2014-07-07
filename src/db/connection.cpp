@@ -1,5 +1,6 @@
 #include "connection.h"
 
+#include "dbmanager.h"
 #include "tools/logger.h"
 
 Connection::Connection(QSqlDatabase *db, QString alias, QObject *parent)
@@ -10,7 +11,6 @@ Connection::Connection(QSqlDatabase *db, QString alias, QObject *parent)
 
 void Connection::close() {
   m_db->close();
-  //QSqlDatabase::removeDatabase(m_db->connectionName());
 
   Logger::instance->log(tr("Disconnected from %1").arg(m_alias));
 
@@ -29,6 +29,14 @@ void Connection::open(QString password) {
   }
 
   emit opened();
+}
+
+void Connection::toggle() {
+  if (m_db->isOpen()) {
+    DbManager::instance->close(this);
+  } else {
+    DbManager::instance->open(this);
+  }
 }
 
 /*

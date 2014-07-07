@@ -40,9 +40,7 @@ public:
                                       QString user, QString pswd, QString dbnm,
                                       QString alias, QString wrapperName,
                                       bool save =true);
-  QString                 alias(QSqlDatabase *db);
   void close(Connection* connection);
-  void                    close(QSqlDatabase *db);
   void                    closeAll();
   QList<Connection*> connections();
   QStandardItemModel     *driverModel();
@@ -52,14 +50,12 @@ public:
   QString                 lastError();
   QStandardItemModel*     model();
   void open(Connection* connection, QString password=QString::null);
-  void                    open(QSqlDatabase *db, QString pswd=QString::null);
   void                    openList();
   void                    removeDatabase(int);
   void removeDatabase(Connection* connection);
   void                    saveList();
   SqlSchema               schema(QSqlDatabase *db, QString schemaName);
   SqlTable                table(QSqlDatabase *db, QString tbl);
-  void                    toggle(QSqlDatabase *db);
   void                    update(Connection* connection, QString alias);
 
   int lastUsedDbIndex = 0;

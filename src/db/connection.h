@@ -21,6 +21,7 @@ signals:
 public slots:
   void close();
   void open(QString password=QString::null);
+  void toggle();
 
 private:
   QString m_alias;

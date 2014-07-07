@@ -78,7 +78,7 @@ void DbDialog::reload() {
     passEdit->setText(db->password());
     dbTypeComboBox->setCurrentDriver(db->driverName());
     dbEdit->setText(db->databaseName());
-    aliasEdit->setText(DbManager::instance->alias(db));
+    aliasEdit->setText(connection->alias());
   }
 
   dbBrowseButton->setVisible(false);
@@ -87,7 +87,7 @@ void DbDialog::reload() {
 
 void DbDialog::removeCurrent() {
   int index = dbListView->currentIndex().row();
-  if (DbManager::instance->getDatabase(index)->isOpen()) {
+  if (DbManager::instance->connections()[index]->db()->isOpen()) {
     QMessageBox::critical(this,
                           tr("Cannot remove"),
                           tr("You must close the connexion before remove it.")
@@ -175,8 +175,8 @@ void DbDialog::testConnection() {
 }
 
 void DbDialog::toggleConnection() {
-  DbManager::instance->toggle(DbManager::instance->getDatabase(
-      dbListView->selectionModel()->selectedIndexes()[0].row()));
+  int index = dbListView->selectionModel()->selectedIndexes()[0].row();
+  DbManager::instance->connections()[index]->toggle();
 }
 
 void DbDialog::updateAlias() {

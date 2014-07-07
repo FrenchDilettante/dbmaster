@@ -113,14 +113,6 @@ int DbManager::addDatabase(QString driver, QString host, QString user,
   return m_connections.size() - 1;
 }
 
-QString DbManager::alias(QSqlDatabase *db) {
-  if (dbMap.contains(db)) {
-    return dbMap[db]->text();
-  } else {
-    return "";
-  }
-}
-
 void DbManager::close(Connection *connection) {
   connection->close();
   QSqlDatabase* db = connection->db();
@@ -132,17 +124,8 @@ void DbManager::close(Connection *connection) {
       emit statusChanged(dbMap[db]->index());
     }
   }
-}
 
-/**
- * @todo REMOVE
- */
-void DbManager::close(QSqlDatabase *db) {
-  foreach (Connection* c, m_connections) {
-    if (c->db() == db) {
-      close(c);
-    }
-  }
+  lastUsedDbIndex = m_connections.indexOf(connection);
 }
 
 QStandardItem* DbManager::columnsItem(QList<SqlColumn> columns) {
@@ -293,15 +276,8 @@ void DbManager::open(Connection *connection, QString password) {
 
   emit statusChanged(db);
   emit statusChanged(dbMap[db]->index());
-}
 
-void DbManager::open(QSqlDatabase *db, QString pswd) {
-  foreach (Connection* c, m_connections) {
-    if (c->db() == db) {
-      open(c, pswd);
-      return;
-    }
-  }
+  lastUsedDbIndex = m_connections.indexOf(connection);
 }
 
 void DbManager::openList() {
@@ -651,21 +627,6 @@ QStandardItem *DbManager::viewsItem(QList<SqlTable> tables,
   viewsItem->setText(tr("Views (%1)").arg(viewsItem->rowCount()));
 
   return viewsItem;
-}
-
-void DbManager::toggle(QSqlDatabase *db) {
-  for (int i=0; i<m_connections.length(); i++) {
-    Connection* connection = m_connections[i];
-    if (connection->db() == db) {
-      if(db->isOpen()) {
-        close(connection);
-      } else {
-        open(connection);
-        DbManager::lastUsedDbIndex = i;
-      }
-      return;
-    }
-  }
 }
 
 void DbManager::update(Connection *connection, QString alias) {
