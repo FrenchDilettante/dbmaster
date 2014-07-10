@@ -72,7 +72,6 @@ private:
   QStringList         recentFiles;
 
 private slots:
-  void checkDb(QSqlDatabase *db);
   void clearRecent();
   void closeCurrentTab();
   void closeSender();

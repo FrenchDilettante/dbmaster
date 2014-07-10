@@ -27,14 +27,14 @@ void DbTreeView::addDatabase()
 void DbTreeView::connectCurrent() {
   Connection* connection = currentConnection();
   if (connection && !connection->db()->isOpen()) {
-    DbManager::instance->open(connection);
+    connection->open();
   }
 }
 
 void DbTreeView::disconnectCurrent() {
   Connection* connection = currentConnection();
   if (connection && connection->db()->isOpen()) {
-    DbManager::instance->close(connection);
+    connection->close();
   }
 }
 

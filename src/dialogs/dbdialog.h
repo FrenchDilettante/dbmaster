@@ -32,7 +32,7 @@ private:
 private slots:
   void accept();
   void apply();
-  void refresh(QModelIndex index);
+  void refresh();
   void reload();
   void removeCurrent();
   void testConnection();

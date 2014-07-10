@@ -7,6 +7,9 @@ Connection::Connection(QSqlDatabase *db, QString alias, QObject *parent)
   : QObject(parent) {
   m_alias = alias;
   m_db = db;
+
+  connect(this, SIGNAL(closed()), this, SIGNAL(changed()));
+  connect(this, SIGNAL(opened()), this, SIGNAL(changed()));
 }
 
 void Connection::close() {
@@ -25,7 +28,7 @@ void Connection::open(QString password) {
   if (m_db->open()) {
     Logger::instance->log(tr("Connected to %1").arg(m_alias));
   } else {
-    Logger::instance->log(tr("Unable to connect to %1").arg(m_alias));
+    Logger::instance->logError(tr("Unable to connect to %1").arg(m_alias));
   }
 
   emit opened();
@@ -33,9 +36,9 @@ void Connection::open(QString password) {
 
 void Connection::toggle() {
   if (m_db->isOpen()) {
-    DbManager::instance->close(this);
+    close();
   } else {
-    DbManager::instance->open(this);
+    open();
   }
 }
 

@@ -14,14 +14,15 @@ public:
 
   void setAlias(QString alias);
 
-signals:
-  void closed();
-  void opened();
-
 public slots:
   void close();
   void open(QString password=QString::null);
   void toggle();
+
+signals:
+  void changed();
+  void closed();
+  void opened();
 
 private:
   QString m_alias;

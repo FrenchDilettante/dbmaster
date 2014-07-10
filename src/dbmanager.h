@@ -40,16 +40,13 @@ public:
                                       QString user, QString pswd, QString dbnm,
                                       QString alias, QString wrapperName,
                                       bool save =true);
-  void close(Connection* connection);
   void                    closeAll();
   QList<Connection*> connections();
   QStandardItemModel     *driverModel();
   QString                 genConnectionName();
-  QSqlDatabase*           getDatabase(int n);
   QStringList             getDbNames(bool);
   QString                 lastError();
   QStandardItemModel*     model();
-  void open(Connection* connection, QString password=QString::null);
   void                    openList();
   void                    removeDatabase(int);
   void removeDatabase(Connection* connection);
@@ -58,7 +55,7 @@ public:
   SqlTable                table(QSqlDatabase *db, QString tbl);
   void                    update(Connection* connection, QString alias);
 
-  int lastUsedDbIndex = 0;
+  int lastUsedDbIndex;
 
   static QString          dbTitle(QSqlDatabase *db);
   static void             init();
@@ -69,10 +66,6 @@ public slots:
   void                    refreshModelIndex(QModelIndex index);
   void                    refreshModelItem(QSqlDatabase *db);
   void refreshModelItem(Connection* connection);
-
-signals:
-  void statusChanged(QModelIndex);
-  void statusChanged(QSqlDatabase*);
 
 private:
   QStandardItem*          columnsItem(QList<SqlColumn> columns);
@@ -100,6 +93,10 @@ private:
 
   QStack<QSqlDatabase*>   closeStack;
   QStack<QSqlDatabase*>   openStack;
+
+private slots:
+  void refreshModelItem();
+  void updateLastDbIndex();
 
 };
 

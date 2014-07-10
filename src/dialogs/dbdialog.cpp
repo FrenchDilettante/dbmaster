@@ -36,8 +36,8 @@ void DbDialog::apply() {
   DbManager::instance->update(connection, aliasEdit->text());
 }
 
-void DbDialog::refresh(QModelIndex index) {
-  if(dbListView->selectionModel()->selectedRows().contains(index)) {
+void DbDialog::refresh() {
+  if (sender() == connection) {
     reload();
   }
 }
@@ -99,9 +99,14 @@ void DbDialog::removeCurrent() {
 }
 
 void DbDialog::setConnection(QModelIndex index) {
+  if (connection != NULL) {
+    disconnect(connection);
+  }
   QItemSelectionModel *m = dbListView->selectionModel();
   m->setCurrentIndex(index, QItemSelectionModel::ClearAndSelect);
   connection = DbManager::instance->connections()[index.row()];
+
+  connect(connection, SIGNAL(changed()), this, SLOT(refresh()));
 
   reload();
 }
@@ -124,9 +129,6 @@ void DbDialog::setupConnections()
   // list view
   connect(dbListView, SIGNAL(clicked(QModelIndex)),
           this, SLOT(setConnection(QModelIndex)));
-
-  connect(DbManager::instance, SIGNAL(statusChanged(QModelIndex)),
-          this, SLOT(refresh(QModelIndex)));
 }
 
 void DbDialog::setupWidgets()

@@ -18,6 +18,8 @@ DbManager::DbManager()
   m_driverModel = new QStandardItemModel(this);
   m_model = new QStandardItemModel(this);
 
+  lastUsedDbIndex = 0;
+
   setupConnections();
   setupModels();
   openList();
@@ -70,6 +72,7 @@ int DbManager::addDatabase(QString driver, QString host, QString user,
 
   QSqlDatabase* newDb = new QSqlDatabase(db);
   Connection* connection = new Connection(newDb, alias, this);
+  connect(connection, SIGNAL(changed()), this, SLOT(refreshModelItem()));
   m_connections.append(connection);
 
   QString title;
@@ -111,21 +114,6 @@ int DbManager::addDatabase(QString driver, QString host, QString user,
   }
 
   return m_connections.size() - 1;
-}
-
-void DbManager::close(Connection *connection) {
-  connection->close();
-  QSqlDatabase* db = connection->db();
-
-  // don't emit signal when closing the application
-  if (!closingAll) {
-    emit statusChanged(db);
-    if (dbMap.contains(db)) {
-      emit statusChanged(dbMap[db]->index());
-    }
-  }
-
-  lastUsedDbIndex = m_connections.indexOf(connection);
 }
 
 QStandardItem* DbManager::columnsItem(QList<SqlColumn> columns) {
@@ -213,7 +201,7 @@ void DbManager::closeAll()
 
   closingAll = true;
   foreach (Connection* c, m_connections) {
-    close(c);
+    c->close();
   }
 
   dbMap.clear();
@@ -226,14 +214,6 @@ QStandardItemModel *DbManager::driverModel() {
 QString DbManager::genConnectionName() {
   nconn++;
   return QString::number(nconn);
-}
-
-QSqlDatabase* DbManager::getDatabase(int n) {
-  if (dbMap.size() == 0) {
-    return NULL;
-  }
-
-  return m_connections[n]->db();
 }
 
 QStringList DbManager::getDbNames(bool showHosts) {
@@ -264,22 +244,6 @@ QString DbManager::lastError() {
   return lastErr;
 }
 
-void DbManager::open(Connection *connection, QString password) {
-  QSqlDatabase* db = connection->db();
-  if (!dbMap.contains(db)) {
-    return;
-  }
-
-  dbMap[db]->setIcon(IconManager::get("database_lightning"));
-
-  connection->open(password);
-
-  emit statusChanged(db);
-  emit statusChanged(dbMap[db]->index());
-
-  lastUsedDbIndex = m_connections.indexOf(connection);
-}
-
 void DbManager::openList() {
   QSettings s;
 
@@ -302,7 +266,7 @@ void DbManager::openList() {
 QSqlDatabase *DbManager::parentDb(QModelIndex index) {
   while (index != QModelIndex()) {
     if (index.data(Qt::UserRole) == DbManager::DbItem) {
-      return DbManager::getDatabase(index.row());
+      return m_connections[index.row()]->db();
     }
     index = index.parent();
   }
@@ -312,7 +276,7 @@ QSqlDatabase *DbManager::parentDb(QModelIndex index) {
 
 void DbManager::refreshModel() {
   foreach (Connection* c, m_connections) {
-    refreshModelItem(c->db());
+    refreshModelItem(c);
   }
 }
 
@@ -353,8 +317,12 @@ void DbManager::refreshModelIndex(QModelIndex index) {
   it->appendRows(toAppend);
 }
 
+void DbManager::refreshModelItem() {
+  refreshModelItem(((Connection*) sender()));
+}
+
 void DbManager::refreshModelItem(Connection *connection) {
-  return refreshModelItem(connection->db());
+  refreshModelItem(connection->db());
 }
 
 /**
@@ -443,7 +411,7 @@ void DbManager::removeDatabase(Connection *connection) {
     return;
   }
 
-  close(connection);
+  connection->close();
   m_model->removeRow(m_connections.indexOf(connection));
   dbMap.remove(db);
   m_connections.removeAll(connection);
@@ -503,8 +471,6 @@ QStandardItem* DbManager::schemaItem(SqlSchema schema) {
 }
 
 void DbManager::setupConnections() {
-  connect(this, SIGNAL(statusChanged(QSqlDatabase*)),
-          this, SLOT(refreshModelItem(QSqlDatabase*)));
 }
 
 void DbManager::setupModels() {
@@ -634,6 +600,10 @@ void DbManager::update(Connection *connection, QString alias) {
   refreshModelItem(connection);
 
   saveList();
+}
+
+void DbManager::updateLastDbIndex() {
+  lastUsedDbIndex = m_connections.indexOf(((Connection*) sender()));
 }
 
 /*
