@@ -125,41 +125,7 @@
        <string/>
       </property>
      </widget>
-     <widget class="QWidget" name="tableContainer" native="true">
-      <layout class="QGridLayout" name="tableLayout">
-       <property name="leftMargin">
-        <number>0</number>
-       </property>
-       <property name="topMargin">
-        <number>0</number>
-       </property>
-       <property name="rightMargin">
-        <number>0</number>
-       </property>
-       <property name="bottomMargin">
-        <number>0</number>
-       </property>
-       <item row="0" column="0">
-        <widget class="PaginationWidget" name="pagination" native="true"/>
-       </item>
-       <item row="0" column="1">
-        <spacer name="horizontalSpacer">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>550</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="1" column="0" colspan="2">
-        <widget class="ResultViewTable" name="tableView"/>
-       </item>
-      </layout>
-     </widget>
+     <widget class="ResultViewTable" name="tableView"/>
     </widget>
    </item>
   </layout>
@@ -174,12 +140,6 @@
    <class>ResultViewTable</class>
    <extends>QTableView</extends>
    <header>resultview/resultviewtable.h</header>
-  </customwidget>
-  <customwidget>
-   <class>PaginationWidget</class>
-   <extends>QWidget</extends>
-   <header>resultview/paginationwidget.h</header>
-   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>

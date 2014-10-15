@@ -244,21 +244,6 @@ void ResultViewTable::setDataProvider(DataProvider *dataProvider) {
   connect(dataProvider, SIGNAL(complete()), this, SLOT(updateView()));
 }
 
-void ResultViewTable::setPagination(PaginationWidget *pagination) {
-  this->pagination = pagination;
-
-  connect(this->pagination, SIGNAL(first()), this, SLOT(firstPage()));
-  connect(this->pagination, SIGNAL(previous()), this, SLOT(previousPage()));
-  connect(this->pagination, SIGNAL(next()), this, SLOT(nextPage()));
-  connect(this->pagination, SIGNAL(last()), this, SLOT(lastPage()));
-  connect(this->pagination, SIGNAL(rowsPerPageChanged(int)), this, SLOT(setRowsPerPage(int)));
-}
-
-void ResultViewTable::setRowsPerPage(int rpp) {
-  this->rowsPerPage = rpp;
-  updateView();
-}
-
 void ResultViewTable::setupConnections() {
   connect(actionCopy, SIGNAL(triggered()), this, SLOT(copy()));
   connect(actionDetails, SIGNAL(triggered()), this, SLOT(showBlob()));
@@ -318,12 +303,6 @@ void ResultViewTable::updateItem(QStandardItem *item) {
   modifiedRecords[row] = record;
 }
 
-void ResultViewTable::updatePagination() {
-  pagination->setPage(page, (int) dataProvider->model()->rowCount() / rowsPerPage);
-  pagination->setRowsPerPage(rowsPerPage);
-  pagination->setReloadEnabled(true);
-}
-
 void ResultViewTable::updateVerticalLabels(int start, int end) {
   QStringList vlabels;
   for (int i=start; i<end; i++) {
@@ -350,7 +329,6 @@ void ResultViewTable::updateView() {
     return;
   }
 
-  updatePagination();
   updateViewHeader();
 
   if (dataProvider->model()->rowCount() == 0) {

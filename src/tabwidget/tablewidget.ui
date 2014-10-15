@@ -34,25 +34,6 @@
           <number>2</number>
          </property>
          <item>
-          <widget class="PaginationWidget" name="pagination" native="true"/>
-         </item>
-         <item>
-          <spacer name="horizontalSpacer_2">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Fixed</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>10</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
           <widget class="QToolButton" name="insertButton">
            <property name="autoRaise">
             <bool>true</bool>
@@ -161,12 +142,6 @@
    <class>ResultViewTable</class>
    <extends>QTableView</extends>
    <header>resultview/resultviewtable.h</header>
-  </customwidget>
-  <customwidget>
-   <class>PaginationWidget</class>
-   <extends>QWidget</extends>
-   <header>resultview/paginationwidget.h</header>
-   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

@@ -95,8 +95,6 @@ void TableWidget::setTable(QString table, QSqlDatabase *db) {
 }
 
 void TableWidget::setupConnections() {
-  connect(pagination, SIGNAL(reload()), this, SLOT(reload()));
-
   connect(tableView, SIGNAL(editRequested(bool)),
           this, SLOT(setCommitRollbackButtonsEnabled(bool)));
 
@@ -114,8 +112,6 @@ void TableWidget::setupWidgets() {
   columnsTree->header()->setSectionResizeMode(2, QHeaderView::ResizeToContents);
   columnsTree->header()->setSectionResizeMode(3, QHeaderView::ResizeToContents);
   columnsTree->header()->setSectionResizeMode(4, QHeaderView::Stretch);
-
-  tableView->setPagination(pagination);
 
   insertButton->setIcon(IconManager::get("list-add"));
   deleteButton->setIcon(IconManager::get("list-remove"));

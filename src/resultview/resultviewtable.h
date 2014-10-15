@@ -19,7 +19,6 @@ public:
   ResultViewTable(QWidget *parent = 0);
 
   void setDataProvider(DataProvider* dataProvider);
-  void setPagination(PaginationWidget* pagination);
 
 signals:
   void editRequested(bool);
@@ -34,7 +33,6 @@ public slots:
   void resetColumnSizes();
   void resizeColumnsToContents();
   void rollback();
-  void setRowsPerPage(int rpp);
 
   void firstPage();
   void lastPage();
@@ -52,7 +50,6 @@ private:
   void setupConnections();
   void setupMenus();
   int startIndex();
-  void updatePagination();
   void updateVerticalLabels(int start, int end);
   void updateViewHeader();
   QStandardItem* viewItem(QVariant value);
@@ -73,7 +70,6 @@ private:
   QStandardItemModel *shortModel;
   bool showInsertRow = false;
 
-  PaginationWidget* pagination;
   int page = 0;
   int rowsPerPage = 20;
 

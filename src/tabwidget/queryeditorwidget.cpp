@@ -165,7 +165,7 @@ bool QueryEditorWidget::isSaved() {
 
 void QueryEditorWidget::keyPressEvent(QKeyEvent *event) {
   if (event->key() == Qt::Key_Escape) {
-    tableContainer->hide();
+    tableView->hide();
     resultButton->setChecked(false);
   } else {
     QWidget::keyPressEvent(event);
@@ -276,7 +276,7 @@ void QueryEditorWidget::queryError() {
 }
 
 void QueryEditorWidget::querySuccess() {
-  tableContainer->setVisible(true);
+  tableView->setVisible(true);
   resultButton->setEnabled(true);
   resultButton->setChecked(true);
 
@@ -409,7 +409,6 @@ void QueryEditorWidget::setFilePath(QString path) {
 void QueryEditorWidget::setupConnections() {
   connect(dbChooser, SIGNAL(currentIndexChanged(int)),
           this, SLOT(checkDbOpen()));
-  connect(pagination, SIGNAL(reload()), this, SLOT(reload()));
 
   connect(runButton, SIGNAL(clicked()), this, SLOT(start()));
 
@@ -434,8 +433,7 @@ void QueryEditorWidget::setupConnections() {
 void QueryEditorWidget::setupWidgets() {
   editor->setFont(Config::editorFont);
 
-  tableContainer->hide();
-  tableView->setPagination(pagination);
+  tableView->hide();
 
   statusBar = new QStatusBar(this);
   statusBar->setSizeGripEnabled(false);
@@ -446,7 +444,7 @@ void QueryEditorWidget::setupWidgets() {
   resultButton->setCheckable(true);
   resultButton->setEnabled(false);
   connect(resultButton, SIGNAL(clicked(bool)),
-          tableContainer, SLOT(setVisible(bool)));
+          tableView, SLOT(setVisible(bool)));
 
   baseActions = CaseLower | CaseUpper | Copy | Cut | Paste | Print | SaveAs
               | Search | SelectAll;
@@ -471,7 +469,7 @@ void QueryEditorWidget::showEvent(QShowEvent *event) {
 
 void QueryEditorWidget::start() {
   resultButton->setChecked(false);
-  tableContainer->setVisible(false);
+  tableView->setVisible(false);
   resultButton->setEnabled(false);
   runButton->setEnabled(false);
 
