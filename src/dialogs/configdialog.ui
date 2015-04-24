@@ -43,25 +43,11 @@
       </property>
       <item>
        <property name="text">
-        <string>General</string>
-       </property>
-       <property name="icon">
-        <iconset>
-         <normaloff>:/img/configure.png</normaloff>:/img/configure.png</iconset>
-       </property>
-      </item>
-      <item>
-       <property name="text">
         <string>Query editor</string>
        </property>
        <property name="icon">
         <iconset>
          <normaloff>:/img/edit.png</normaloff>:/img/edit.png</iconset>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Plugins</string>
        </property>
       </item>
      </widget>
@@ -75,36 +61,6 @@
       <property name="currentIndex">
        <number>0</number>
       </property>
-      <widget class="QWidget" name="page">
-       <layout class="QFormLayout" name="formLayout">
-        <property name="fieldGrowthPolicy">
-         <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-        </property>
-        <item row="0" column="0">
-         <widget class="QLabel" name="label">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Default driver</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="DbComboBox" name="defaultDbCombo">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
       <widget class="QWidget" name="page_3">
        <layout class="QGridLayout" name="gridLayout_3">
         <item row="0" column="1">
@@ -490,7 +446,6 @@ p, li { white-space: pre-wrap; }
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="page_2"/>
      </widget>
     </widget>
    </item>
@@ -504,11 +459,6 @@ p, li { white-space: pre-wrap; }
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>DbComboBox</class>
-   <extends>QComboBox</extends>
-   <header>../src/widgets/dbcombobox.h</header>
-  </customwidget>
   <customwidget>
    <class>QueryTextEdit</class>
    <extends>QPlainTextEdit</extends>

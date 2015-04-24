@@ -12,6 +12,7 @@
 class Config {
 public:
   static void init();
+  static void loadDefaults();
   static void reload();
   static void save();
   static QString updateIndentation(bool saveSettings=true);

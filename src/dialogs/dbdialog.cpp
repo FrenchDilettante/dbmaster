@@ -14,7 +14,7 @@ DbDialog::DbDialog(QWidget *parent)
   setupWidgets();
   setupConnections();
 
-  db = NULL;
+  connection = NULL;
   reload();
 }
 
@@ -26,20 +26,18 @@ void DbDialog::accept() {
 }
 
 void DbDialog::apply() {
-  if(db->isOpen()) {
-    DbManager::instance->setAlias(db, aliasEdit->text());
-    return;
-  }
-
+  QSqlDatabase* db = connection->db();
   db->setHostName(hostEdit->text());
   db->setUserName(userEdit->text());
   db->setPassword(passEdit->text());
   db->setDatabaseName(dbEdit->text());
-  DbManager::instance->update(db, aliasEdit->text());
+  connection->setAlias(aliasEdit->text());
+
+  DbManager::instance->update(connection, aliasEdit->text());
 }
 
-void DbDialog::refresh(QModelIndex index) {
-  if(dbListView->selectionModel()->selectedRows().contains(index)) {
+void DbDialog::refresh() {
+  if (sender() == connection) {
     reload();
   }
 }
@@ -48,13 +46,18 @@ void DbDialog::refresh(QModelIndex index) {
  * Re-fills all fields and enables/disables widgets
  */
 void DbDialog::reload() {
-  bool emptyList = DbManager::instance->getDbList().size() == 0;
+  if (connection == NULL) {
+    return;
+  }
+
+  QSqlDatabase* db = connection->db();
+  bool emptyList = DbManager::instance->connections().isEmpty();
   bool selected = !emptyList
                   && dbListView->selectionModel()->selection().size() > 0;
   bool open = selected && db->isOpen();
 
   aliasOnCurrent = selected &&
-      (DbManager::instance->alias(db) != DbManager::instance->dbTitle(db));
+      (connection->alias() != DbManager::instance->dbTitle(db));
 
   groupBox->setEnabled(selected && !open);
   toggleButton->setEnabled(selected);
@@ -68,14 +71,14 @@ void DbDialog::reload() {
     toggleButton->setText(tr("Connect"));
   }
 
-  if (DbManager::instance->getDbList().size() > 0 && db) {
+  if (!DbManager::instance->connections().isEmpty() && connection) {
     hostEdit->setText(db->hostName());
     userEdit->setText(db->userName());
     saveCheckBox->setChecked(!open && !db->password().isEmpty());
     passEdit->setText(db->password());
     dbTypeComboBox->setCurrentDriver(db->driverName());
     dbEdit->setText(db->databaseName());
-    aliasEdit->setText(DbManager::instance->alias(db));
+    aliasEdit->setText(connection->alias());
   }
 
   dbBrowseButton->setVisible(false);
@@ -84,7 +87,7 @@ void DbDialog::reload() {
 
 void DbDialog::removeCurrent() {
   int index = dbListView->currentIndex().row();
-  if (DbManager::instance->getDatabase(index)->isOpen()) {
+  if (DbManager::instance->connections()[index]->db()->isOpen()) {
     QMessageBox::critical(this,
                           tr("Cannot remove"),
                           tr("You must close the connexion before remove it.")
@@ -95,14 +98,15 @@ void DbDialog::removeCurrent() {
   reload();
 }
 
-/**
- * Must be called to enter the Edit mode
- */
-void DbDialog::setDatabase(QModelIndex index)
-{
+void DbDialog::setConnection(QModelIndex index) {
+  if (connection != NULL) {
+    disconnect(connection);
+  }
   QItemSelectionModel *m = dbListView->selectionModel();
   m->setCurrentIndex(index, QItemSelectionModel::ClearAndSelect);
-  db = DbManager::instance->getDatabase(index.row());
+  connection = DbManager::instance->connections()[index.row()];
+
+  connect(connection, SIGNAL(changed()), this, SLOT(refresh()));
 
   reload();
 }
@@ -124,10 +128,7 @@ void DbDialog::setupConnections()
 
   // list view
   connect(dbListView, SIGNAL(clicked(QModelIndex)),
-          this, SLOT(setDatabase(QModelIndex)));
-
-  connect(DbManager::instance, SIGNAL(statusChanged(QModelIndex)),
-          this, SLOT(refresh(QModelIndex)));
+          this, SLOT(setConnection(QModelIndex)));
 }
 
 void DbDialog::setupWidgets()
@@ -176,12 +177,12 @@ void DbDialog::testConnection() {
 }
 
 void DbDialog::toggleConnection() {
-  DbManager::instance->toggle(DbManager::instance->getDatabase(
-      dbListView->selectionModel()->selectedIndexes()[0].row()));
+  int index = dbListView->selectionModel()->selectedIndexes()[0].row();
+  DbManager::instance->connections()[index]->toggle();
 }
 
 void DbDialog::updateAlias() {
-  if (!aliasOnCurrent && db != NULL) {
+  if (!aliasOnCurrent && connection != NULL) {
     QString title;
     QString simplifiedName = QFileInfo(dbEdit->text()).fileName();
     if (simplifiedName.length() == 0) {

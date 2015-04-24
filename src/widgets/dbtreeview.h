@@ -1,8 +1,9 @@
 #ifndef DBTREEVIEW_H
 #define DBTREEVIEW_H
 
-#include "../dialogs/dbdialog.h"
-#include "../wizards/newdbwizard.h"
+#include "db/connection.h"
+#include "dialogs/dbdialog.h"
+#include "wizards/newdbwizard.h"
 
 #include <QtWidgets/QTreeView>
 
@@ -11,6 +12,7 @@ Q_OBJECT
 public:
   DbTreeView(QWidget *parent = 0);
 
+  Connection* currentConnection();
   QSqlDatabase *currentDb();
   bool isDbSelected();
 
@@ -29,7 +31,7 @@ private:
   void contextMenuEvent(QContextMenuEvent *event);
   void mouseDoubleClickEvent(QMouseEvent *event);
   void mousePressEvent(QMouseEvent *event);
-  QSqlDatabase *parentDb(QModelIndex index);
+  Connection* parentConnection(QModelIndex index);
   void selectionChanged(const QItemSelection &selected,
                         const QItemSelection &deselected);
   void setupActions();

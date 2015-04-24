@@ -56,18 +56,6 @@ void MainWindow::addRecentFile(QString file) {
   refreshRecent();
 }
 
-/**
- * @deprecated should be done in the DbManager with Logger
- */
-void MainWindow::checkDb(QSqlDatabase *db) {
-  if (db->isOpenError() && db->lastError().type() != QSqlError::NoError) {
-    QMessageBox::critical(this,
-                          tr("Error"),
-                          tr("Unable to connect :\n%1")
-                          .arg(db->lastError().text()));
-  }
-}
-
 void MainWindow::clearRecent() {
   recentFiles.clear();
   refreshRecent();
@@ -553,8 +541,6 @@ void MainWindow::setupConnections() {
   /*
    * DbManager
    */
-  connect(DbManager::instance, SIGNAL(statusChanged(QSqlDatabase*)),
-          this, SLOT(checkDb(QSqlDatabase*)));
   connect(DbManager::instance->model(), SIGNAL(dataChanged(QModelIndex,QModelIndex)),
           this, SLOT(reloadDbList()));
 

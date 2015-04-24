@@ -128,7 +128,7 @@ void QueryEditorWidget::copy() {
 }
 
 QSqlDatabase* QueryEditorWidget::currentDb() {
-  return DbManager::instance->getDatabase(dbChooser->currentIndex());
+  return DbManager::instance->connections()[dbChooser->currentIndex()]->db();
 }
 
 void QueryEditorWidget::cut() {

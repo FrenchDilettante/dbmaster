@@ -19,7 +19,6 @@ SOURCES += main.cpp \
     wizards/newdbwizard.cpp \
     config.cpp \
     widgets/querytextedit.cpp \
-    wizards/firstlaunchwizard.cpp \
     wizards/exportwizard.cpp \
     widgets/dbtreeview.cpp \
     plugins/plugindialog.cpp \
@@ -46,7 +45,8 @@ SOURCES += main.cpp \
     resultview/tabledataprovider.cpp \
     resultview/querydataprovider.cpp \
     resultview/paginationwidget.cpp \
-    resultview/sqlitemdelegate.cpp
+    resultview/sqlitemdelegate.cpp \
+    db/connection.cpp
 HEADERS += mainwindow.h \
     dbmanager.h \
     tabwidget/tablewidget.h \
@@ -60,7 +60,6 @@ HEADERS += mainwindow.h \
     wizards/newdbwizard.h \
     config.h \
     widgets/querytextedit.h \
-    wizards/firstlaunchwizard.h \
     wizards/exportwizard.h \
     widgets/dbtreeview.h \
     plugins/sqlwrapper.h \
@@ -91,7 +90,8 @@ HEADERS += mainwindow.h \
     resultview/tabledataprovider.h \
     resultview/querydataprovider.h \
     resultview/paginationwidget.h \
-    resultview/sqlitemdelegate.h
+    resultview/sqlitemdelegate.h \
+    db/connection.h
 FORMS += mainwindow.ui \
     dialogs/dbdialog.ui \
     tabwidget/queryeditorwidget.ui \
@@ -101,7 +101,6 @@ FORMS += mainwindow.ui \
     wizards/newdbwizard.ui \
     wizards/ndw_firstpage.ui \
     wizards/ndw_secondpage.ui \
-    wizards/firstlaunchwizard.ui \
     wizards/ew_firstpage.ui \
     wizards/ew_exportpage.ui \
     plugins/plugindialog.ui \
